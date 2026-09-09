@@ -9,7 +9,7 @@ export type DisclaimerItem = { heading: string; body: string };
 export const DISCLAIMER_ITEMS: DisclaimerItem[] = [
   {
     heading: 'This is not medical advice',
-    body: 'Gym Hours gives general training suggestions. It is not a doctor, a physio, or a coach who can see you, and nothing in it is medical advice.',
+    body: 'Court Craft gives general training suggestions. It is not a doctor, a physio, or a coach who can see you, and nothing in it is medical advice.',
   },
   {
     heading: 'Check with a doctor first',
@@ -30,7 +30,7 @@ export const DISCLAIMER_ITEMS: DisclaimerItem[] = [
 ];
 
 export const WARRANTY_SUMMARY =
-  'Gym Hours is provided as is, without warranty of any kind. To the fullest extent the law allows, the developer is not liable for any injury, loss or damage arising from your use of the app. If your local law does not allow some of these limits, they apply only as far as it does.';
+  'Court Craft is provided as is, without warranty of any kind. To the fullest extent the law allows, the developer is not liable for any injury, loss or damage arising from your use of the app. If your local law does not allow some of these limits, they apply only as far as it does.';
 
 export const PRIVACY_SUMMARY =
-  'Gym Hours keeps everything on your phone. Your name, answers, workouts and scores never leave the device, are never sent to a server, and are never shared or sold. There are no accounts, no tracking and no advertising. Deleting the app deletes the data with it.';
+  'Court Craft keeps everything on your phone. Your name, answers, workouts and scores never leave the device, are never sent to a server, and are never shared or sold. There are no accounts, no tracking and no advertising. Deleting the app deletes the data with it.';

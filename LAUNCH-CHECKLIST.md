@@ -1,4 +1,4 @@
-# Gym Hours — App Store launch checklist
+# Court Craft — App Store launch checklist
 
 Status as of 9 September 2026. Tick items off in order; the blockers come first.
 

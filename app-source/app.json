@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "Gym Hours",
-    "slug": "gym-hours",
+    "name": "Court Craft",
+    "slug": "court-craft",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.owens.gymhours",
+      "bundleIdentifier": "com.owens.courtcraft",
       "buildNumber": "1"
     },
     "android": {
@@ -23,6 +23,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "scheme": "gymhours"
+    "scheme": "courtcraft"
   }
 }

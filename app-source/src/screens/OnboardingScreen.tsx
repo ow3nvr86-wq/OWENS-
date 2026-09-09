@@ -53,7 +53,7 @@ export default function OnboardingScreen({ onDone }: Props) {
   return (
     <View style={styles.root}>
       <View style={styles.header}>
-        <Text style={styles.brand}>GYM HOURS</Text>
+        <Text style={styles.brand}>COURT CRAFT</Text>
         <Text style={styles.count}>{index + 1}/{QUIZ.length}</Text>
       </View>
 
