@@ -1,0 +1,738 @@
+<title>Drive Time Call Sheet</title>
+<!--
+  Hold this open on your phone while you dial.
+  Replace [YOUR NAME] and [CITY] before your first call.
+  Tally saves in your browser and resets each day.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&display=swap">
+
+<style>
+  :root {
+    --ground:   #0E1013;
+    --panel:    #191C21;
+    --raised:   #21252B;
+    --text:     #EAEBE7;
+    --dim:      #8E938C;
+    --line:     #2B2F36;
+    --signal:   #F2B705;
+    --go:       #58B87C;
+    --stop:     #CF6A52;
+
+    --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --display: "Archivo", "IBM Plex Sans", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  }
+
+  :root[data-theme="light"] {
+    --ground:   #ECEAE4;
+    --panel:    #FFFFFF;
+    --raised:   #F5F3EE;
+    --text:     #14161A;
+    --dim:      #5D6159;
+    --line:     #D6D3CB;
+    --signal:   #A87500;
+    --go:       #2F7B4F;
+    --stop:     #A6402A;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --ground:   #ECEAE4;
+      --panel:    #FFFFFF;
+      --raised:   #F5F3EE;
+      --text:     #14161A;
+      --dim:      #5D6159;
+      --line:     #D6D3CB;
+      --signal:   #A87500;
+      --go:       #2F7B4F;
+      --stop:     #A6402A;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-text-size-adjust: 100%;
+    padding-bottom: 96px;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--signal);
+    outline-offset: 2px;
+  }
+
+  .shell {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  /* ---- header ---- */
+
+  .top {
+    background: var(--panel);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0 10px;
+  }
+
+  .brand {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: -0.015em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .brand::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: var(--signal);
+    transform: skewX(-14deg);
+    flex: none;
+  }
+
+  .window {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--signal);
+    text-align: right;
+    line-height: 1.35;
+  }
+
+  /* ---- tabs ---- */
+
+  .tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border-top: 1px solid var(--line);
+  }
+
+  .tab {
+    appearance: none;
+    border: 0;
+    background: var(--panel);
+    color: var(--dim);
+    font-family: var(--mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    padding: 13px 4px 12px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+  }
+
+  .tab[aria-selected="true"] {
+    color: var(--text);
+    border-bottom-color: var(--signal);
+    background: var(--raised);
+  }
+
+  /* ---- panels ---- */
+
+  .panel { padding: 26px 0 12px; }
+
+  .stagehead {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin: 0 0 14px;
+  }
+
+  h2 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 23px;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+
+  .hint {
+    color: var(--dim);
+    font-size: 15px;
+    margin: 0 0 22px;
+    max-width: 46ch;
+  }
+
+  /* the words you actually say */
+  .say {
+    background: var(--panel);
+    border-left: 4px solid var(--signal);
+    padding: 20px 20px 22px;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(19px, 4.4vw, 23px);
+    line-height: 1.42;
+    letter-spacing: -0.012em;
+    margin: 0 0 16px;
+  }
+
+  .say + .say { margin-top: -4px; }
+
+  .say .fill {
+    color: var(--signal);
+    border-bottom: 2px dotted var(--signal);
+  }
+
+  .say .beat {
+    display: block;
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin: 14px 0 0;
+  }
+
+  .shutup {
+    background: var(--signal);
+    color: #0E1013;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: 0.01em;
+    padding: 16px 20px;
+    margin: 0 0 26px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .shutup span {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    opacity: .78;
+  }
+
+  /* ---- question list ---- */
+
+  ol.qs {
+    list-style: none;
+    counter-reset: q;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--line);
+    border-block: 1px solid var(--line);
+  }
+
+  ol.qs li {
+    counter-increment: q;
+    background: var(--panel);
+    padding: 18px 18px 18px 54px;
+    position: relative;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 17.5px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+
+  ol.qs li::before {
+    content: counter(q);
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--signal);
+  }
+
+  ol.qs li em {
+    display: block;
+    font-family: var(--sans);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14.5px;
+    color: var(--dim);
+    margin-top: 7px;
+    line-height: 1.5;
+  }
+
+  ol.qs li.key { background: var(--raised); }
+
+  /* ---- objections ---- */
+
+  .obj {
+    border-bottom: 1px solid var(--line);
+  }
+  .obj:first-of-type { border-top: 1px solid var(--line); }
+
+  .obj summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 17px 34px 17px 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    position: relative;
+  }
+
+  .obj summary::-webkit-details-marker { display: none; }
+
+  .obj summary::after {
+    content: "+";
+    position: absolute;
+    right: 6px;
+    top: 15px;
+    font-family: var(--mono);
+    font-size: 21px;
+    color: var(--signal);
+    line-height: 1;
+  }
+
+  .obj[open] summary::after { content: "\2212"; }
+
+  .obj .answer {
+    padding: 0 0 20px;
+  }
+
+  .obj .answer p {
+    background: var(--panel);
+    border-left: 4px solid var(--signal);
+    padding: 15px 16px;
+    margin: 0 0 10px;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 1.45;
+  }
+
+  .obj .answer .why {
+    background: none;
+    border: 0;
+    padding: 0;
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 14.5px;
+    color: var(--dim);
+    margin: 0;
+  }
+
+  /* ---- tally bar ---- */
+
+  .tally {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+    z-index: 20;
+  }
+
+  .tallygrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) auto;
+    gap: 8px;
+    align-items: center;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .count {
+    appearance: none;
+    border: 1px solid var(--line);
+    background: var(--raised);
+    color: var(--text);
+    padding: 9px 4px 10px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  .count:active { background: var(--signal); color: #0E1013; }
+
+  .count b {
+    display: block;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 24px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.03em;
+  }
+
+  .count i {
+    display: block;
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-top: 2px;
+  }
+
+  .count.reached b { color: var(--go); }
+  .count.booked b { color: var(--signal); }
+
+  .reset {
+    appearance: none;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--dim);
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 12px 10px;
+    cursor: pointer;
+  }
+  .reset:hover { color: var(--stop); border-color: var(--stop); }
+
+  /* ---- misc ---- */
+
+  .rule {
+    border: 0;
+    border-top: 1px solid var(--line);
+    margin: 26px 0 22px;
+  }
+
+  .callout {
+    background: var(--raised);
+    border: 1px solid var(--line);
+    padding: 16px 18px;
+    font-size: 15px;
+    color: var(--dim);
+    margin: 0 0 20px;
+  }
+
+  .callout strong { color: var(--text); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+
+<header class="top">
+  <div class="shell">
+    <div class="topbar">
+      <div class="brand">Drive Time Call Sheet</div>
+      <div class="window">6:45 – 7:45am<br>4:30 – 6:00pm</div>
+    </div>
+  </div>
+  <div class="shell">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" data-panel="p-open">Open</button>
+      <button class="tab" role="tab" aria-selected="false" data-panel="p-ask">Ask</button>
+      <button class="tab" role="tab" aria-selected="false" data-panel="p-obj">Push&nbsp;back</button>
+      <button class="tab" role="tab" aria-selected="false" data-panel="p-close">Close</button>
+    </div>
+  </div>
+</header>
+
+<main class="shell">
+
+  <!-- ============ OPEN ============ -->
+  <section class="panel" id="p-open" role="tabpanel">
+    <p class="stagehead">First eight seconds</p>
+    <h2>Say this, word for word</h2>
+    <p class="hint">
+      Never open with the word AI. Open with the symptom. Talk faster than feels
+      natural for the first line, then slow down.
+    </p>
+
+    <p class="say">
+      "Hey, is this <span class="fill">[his name]</span>?"
+      <span class="beat">Wait for yes. Use his name once, never again.</span>
+    </p>
+
+    <p class="say">
+      "Good, I'll be quick, I know you're probably driving. I'm
+      <span class="fill">[your name]</span>, I'm local, out of
+      <span class="fill">[city]</span>. I set contractors up so the calls you miss
+      while you're on a job get answered automatically."
+    </p>
+
+    <p class="say">
+      "Quick question and then I'll let you go. How many calls do you figure you
+      miss in a normal week?"
+    </p>
+
+    <div class="shutup">
+      Now stop talking.
+      <span>Count to ten if you have to</span>
+    </div>
+
+    <div class="callout">
+      <strong>Whatever number he says is the sale.</strong> Everyone says a bigger
+      number than they meant to, and hearing themselves say it out loud does more
+      work than anything you could pitch. Do not fill the silence.
+    </div>
+  </section>
+
+  <!-- ============ ASK ============ -->
+  <section class="panel" id="p-ask" role="tabpanel" hidden>
+    <p class="stagehead">Next two minutes</p>
+    <h2>Five questions, in order</h2>
+    <p class="hint">
+      You are not pitching. You are taking notes. Write down his exact words,
+      you will use them later.
+    </p>
+
+    <ol class="qs">
+      <li>
+        "When you miss one, who calls them back, and when?"
+        <em>Usually him, at 9pm, or nobody.</em>
+      </li>
+      <li>
+        "How many bids do you have sitting out right now with no answer?"
+        <em>This one stings. Let it.</em>
+      </li>
+      <li>
+        "What's an average job worth to you?"
+        <em>Multiply it by his missed calls later. Don't do it out loud yet.</em>
+      </li>
+      <li>
+        "What are you using for scheduling and invoicing?"
+        <em>Jobber, ServiceTitan, Housecall Pro, or a paper calendar. Just note it.</em>
+      </li>
+      <li class="key">
+        "What's the part of the week you hate most?"
+        <em>This is the one that sells. Whatever he answers is what you build first. Repeat it back to him before you move on.</em>
+      </li>
+    </ol>
+
+    <hr class="rule">
+
+    <p class="stagehead">If he's engaged, run the demo</p>
+    <p class="say">
+      "Do me a favor. Call <span class="fill">[your demo number]</span> right now
+      and hang up when it rings."
+      <span class="beat">Then say nothing. His phone buzzes in four seconds.</span>
+    </p>
+    <div class="callout">
+      This closes deals that no explanation will. It only works if you built it on
+      your own number first, so build that before you dial anybody.
+    </div>
+  </section>
+
+  <!-- ============ PUSH BACK ============ -->
+  <section class="panel" id="p-obj" role="tabpanel" hidden>
+    <p class="stagehead">Tap the one he says</p>
+    <h2>What to say back</h2>
+    <p class="hint">
+      Never argue. Agree with him first, then ask one more question. The question
+      is what keeps you on the phone.
+    </p>
+
+    <details class="obj">
+      <summary>"Not interested."</summary>
+      <div class="answer">
+        <p>"Totally fair. One thing before I go, and then I'm gone. When you miss a call, who calls them back?"</p>
+        <p class="why">He expected you to push. You didn't, so he answers. Most conversations restart right here.</p>
+      </div>
+    </details>
+
+    <details class="obj">
+      <summary>"I don't have time for this."</summary>
+      <div class="answer">
+        <p>"That's exactly why I called. Thirty seconds. How many calls do you miss in a week?"</p>
+        <p class="why">His objection is your pitch. Say it like you're agreeing with him, because you are.</p>
+      </div>
+    </details>
+
+    <details class="obj">
+      <summary>"How much is it?"</summary>
+      <div class="answer">
+        <p>"$750 to set up, $300 a month to run it. But I don't know yet whether you even need it. How many calls are you missing?"</p>
+        <p class="why">Answer the price instantly and without flinching. Dodging it kills trust. Then get straight back to his problem.</p>
+      </div>
+    </details>
+
+    <details class="obj">
+      <summary>"I already have an answering service."</summary>
+      <div class="answer">
+        <p>"Good, that's more than most guys have. Do they text the customer back in twenty seconds, or do they take a message?"</p>
+        <p class="why">Answering services take messages. Speed is the whole difference and he already knows it.</p>
+      </div>
+    </details>
+
+    <details class="obj">
+      <summary>"My wife answers the phone."</summary>
+      <div class="answer">
+        <p>"Then she's the one I should be talking to. Is she still catching them at seven at night?"</p>
+        <p class="why">Don't fight it. She is a real person doing a real job badly served by a phone. Get her on the line.</p>
+      </div>
+    </details>
+
+    <details class="obj">
+      <summary>"Is this an AI robot thing?"</summary>
+      <div class="answer">
+        <p>"It's a text message. That's it. You tell me the wording, I set it up, it sends when you miss a call. Nothing talks to your customer that you didn't write."</p>
+        <p class="why">He's picturing a robot voice on the phone with his customer. Kill that picture immediately.</p>
+      </div>
+    </details>
+
+    <details class="obj">
+      <summary>"How old are you?"</summary>
+      <div class="answer">
+        <p>"Young enough that this is all I do. Call <span class="fill">[your demo number]</span> right now and hang up, and I'll show you instead of telling you."</p>
+        <p class="why">It will come up. Don't apologize, don't oversell, don't lie. Pivot straight to the demo, because working software settles it and nothing else does.</p>
+      </div>
+    </details>
+
+    <details class="obj">
+      <summary>"Just send me some information."</summary>
+      <div class="answer">
+        <p>"I'll text you the link right now while we're talking. Is this the best number? ... Sent. I'll call you Thursday same time to see what you thought."</p>
+        <p class="why">Send it while he's on the phone, and book the callback before you hang up. "Send me info" with no date is a polite no.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ CLOSE ============ -->
+  <section class="panel" id="p-close" role="tabpanel" hidden>
+    <p class="stagehead">Landing it</p>
+    <h2>Ask for one small thing</h2>
+    <p class="hint">
+      Don't sell him the whole catalog. One system, one price, one date.
+    </p>
+
+    <p class="say">
+      "Here's what I'd do. Pick the thing that's costing you most, and from what
+      you said that's <span class="fill">[his answer to question 5]</span>."
+    </p>
+
+    <p class="say">
+      "I build that one system, it's live in seven days, $750 to set up and $300
+      a month after that. If it isn't working in seven days, you don't pay me the
+      setup fee."
+    </p>
+
+    <p class="say">
+      "Can I call you Thursday, same time, and we'll start?"
+      <span class="beat">Then stop talking again. Same as the opener.</span>
+    </p>
+
+    <hr class="rule">
+
+    <p class="stagehead">Before you hang up, every time</p>
+    <ol class="qs">
+      <li>
+        Book an actual day and time
+        <em>"I'll call you Thursday" is nothing. "Thursday at 6:50" is something.</em>
+      </li>
+      <li>
+        Text him the site link while he's still on the line
+        <em>Confirm out loud that it arrived.</em>
+      </li>
+      <li>
+        Write his answer to question 5 in your sheet
+        <em>Word for word. You will open Thursday's call by repeating it back.</em>
+      </li>
+      <li class="key">
+        Actually call on Thursday
+        <em>Most of your money is in the second and third call. Almost nobody makes them, which is exactly why they work.</em>
+      </li>
+    </ol>
+
+    <div class="callout">
+      <strong>Expect this to be slow.</strong> Out of 120 dials, roughly 30 to 40
+      answer, a dozen or so really talk, six or eight agree to a follow-up, and two
+      or three pay. That is a normal week, not a failure. Track it below so you can
+      see it working before the money shows up.
+    </div>
+  </section>
+
+</main>
+
+<div class="tally">
+  <div class="tallygrid">
+    <button class="count" data-k="dials"><b id="n-dials">0</b><i>Dials</i></button>
+    <button class="count reached" data-k="reached"><b id="n-reached">0</b><i>Talked</i></button>
+    <button class="count booked" data-k="booked"><b id="n-booked">0</b><i>Booked</i></button>
+    <button class="reset" id="reset">Reset<br>day</button>
+  </div>
+</div>
+
+<script>
+  (function () {
+    /* ---- tabs ---- */
+    var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        tabs.forEach(function (t) {
+          t.setAttribute("aria-selected", String(t === tab));
+          document.getElementById(t.dataset.panel).hidden = (t !== tab);
+        });
+        window.scrollTo(0, 0);
+      });
+    });
+
+    /* ---- tally, saved per day ---- */
+    var KEY = "callsheet-tally";
+    var keys = ["dials", "reached", "booked"];
+    var today = new Date().toISOString().slice(0, 10);
+    var state = { day: today, dials: 0, reached: 0, booked: 0 };
+
+    try {
+      var saved = JSON.parse(localStorage.getItem(KEY) || "null");
+      if (saved && saved.day === today) { state = saved; }
+    } catch (e) { /* private window, or storage blocked */ }
+
+    function paint() {
+      keys.forEach(function (k) {
+        document.getElementById("n-" + k).textContent = state[k];
+      });
+    }
+
+    function save() {
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    }
+
+    document.querySelectorAll(".count").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        state[btn.dataset.k] += 1;
+        paint();
+        save();
+      });
+    });
+
+    document.getElementById("reset").addEventListener("click", function () {
+      if (!window.confirm("Reset today's counts to zero?")) { return; }
+      state = { day: today, dials: 0, reached: 0, booked: 0 };
+      paint();
+      save();
+    });
+
+    paint();
+  })();
+</script>
