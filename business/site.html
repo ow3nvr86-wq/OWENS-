@@ -1,0 +1,1128 @@
+<title>Foreman Automations</title>
+<!--
+  ============================================================
+  PLACEHOLDER FIELDS — search for [[ ]] and replace all of them
+  before you send this link to anyone:
+    [[CITY]]  [[PHONE]]  [[EMAIL]]  [[YOUR NAME]]
+  The business name "Foreman Automations" is a placeholder too.
+  Check the name is not already taken in your state before using it.
+  ============================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --paper:      #F1EFE9;
+    --surface:    #FFFFFF;
+    --sunk:       #E7E4DC;
+    --ink:        #1A1B18;
+    --graphite:   #5A5D55;
+    --rule:       #CFCCC3;
+    --rule-hard:  #A5A29A;
+    --signal:     #F2B705;
+    --signal-ink: #7A5800;
+    --signal-wash:#FBEFCC;
+    --invert-bg:  #1A1B18;
+    --invert-fg:  #F1EFE9;
+    --invert-dim: rgba(241, 239, 233, 0.70);
+    --invert-rule:rgba(241, 239, 233, 0.18);
+
+    --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --display: "Archivo", "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+    --measure: 62ch;
+    --pad: clamp(20px, 5vw, 64px);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #16171A;
+      --surface:    #1E2024;
+      --sunk:       #121316;
+      --ink:        #ECEBE6;
+      --graphite:   #9DA098;
+      --rule:       #32343A;
+      --rule-hard:  #4A4D54;
+      --signal:     #F2B705;
+      --signal-ink: #F5C63C;
+      --signal-wash:#2C2513;
+      --invert-bg:  #0D0E10;
+      --invert-fg:  #ECEBE6;
+      --invert-dim: rgba(236, 235, 230, 0.68);
+      --invert-rule:rgba(236, 235, 230, 0.16);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #16171A;
+    --surface:    #1E2024;
+    --sunk:       #121316;
+    --ink:        #ECEBE6;
+    --graphite:   #9DA098;
+    --rule:       #32343A;
+    --rule-hard:  #4A4D54;
+    --signal:     #F2B705;
+    --signal-ink: #F5C63C;
+    --signal-wash:#2C2513;
+    --invert-bg:  #0D0E10;
+    --invert-fg:  #ECEBE6;
+    --invert-dim: rgba(236, 235, 230, 0.68);
+    --invert-rule:rgba(236, 235, 230, 0.16);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--signal);
+    outline-offset: 2px;
+  }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding-inline: var(--pad);
+  }
+
+  /* ---------- title block ---------- */
+
+  .sheet-top {
+    border-bottom: 1px solid var(--rule);
+    background: var(--surface);
+  }
+
+  .markline {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-block: 18px;
+  }
+
+  .mark {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mark .chip {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    background: var(--signal);
+    transform: skewX(-14deg);
+  }
+
+  .mark small {
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--graphite);
+    padding-left: 10px;
+    border-left: 1px solid var(--rule);
+    align-self: center;
+  }
+
+  .titleblock {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    border-top: 1px solid var(--rule);
+  }
+
+  .field {
+    padding: 12px 16px 14px;
+    border-right: 1px solid var(--rule);
+  }
+  .field:last-child { border-right: 0; }
+
+  .field dt {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--graphite);
+    margin: 0 0 3px;
+  }
+
+  .field dd {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+
+  /* ---------- hero ---------- */
+
+  .hero {
+    padding-block: clamp(48px, 8vw, 92px) clamp(40px, 6vw, 72px);
+  }
+
+  .kicker {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--signal-ink);
+    margin: 0 0 22px;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(34px, 6.4vw, 66px);
+    line-height: 1.02;
+    letter-spacing: -0.033em;
+    text-wrap: balance;
+    margin: 0;
+    max-width: 17ch;
+  }
+
+  h1 .under {
+    background-image: linear-gradient(var(--signal), var(--signal));
+    background-repeat: no-repeat;
+    background-size: 100% 0.26em;
+    background-position: 0 88%;
+  }
+
+  .standfirst {
+    max-width: var(--measure);
+    font-size: clamp(17px, 2.1vw, 20px);
+    color: var(--graphite);
+    margin: 28px 0 0;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+    margin-top: 36px;
+  }
+
+  .btn {
+    display: inline-block;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.005em;
+    text-decoration: none;
+    padding: 14px 26px;
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    background: transparent;
+    transition: transform .12s ease, background .12s ease, color .12s ease;
+  }
+
+  .btn-primary {
+    background: var(--signal);
+    border-color: var(--signal);
+    color: #1A1B18;
+  }
+
+  .btn:hover { transform: translateY(-2px); }
+  .btn-ghost:hover { background: var(--ink); color: var(--paper); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn, .row, .tier { transition: none; }
+    .btn:hover { transform: none; }
+  }
+
+  /* ---------- section scaffolding ---------- */
+
+  section { border-top: 1px solid var(--rule); }
+
+  .band {
+    padding-block: clamp(44px, 6vw, 76px);
+  }
+
+  .band-sunk { background: var(--sunk); }
+
+  .sechead {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 34px;
+    flex-wrap: wrap;
+  }
+
+  .sechead .code {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--graphite);
+    white-space: nowrap;
+    padding-top: 6px;
+  }
+
+  h2 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(25px, 3.6vw, 38px);
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .lede {
+    max-width: var(--measure);
+    color: var(--graphite);
+    margin: 0 0 34px;
+  }
+
+  /* ---------- calculator ---------- */
+
+  .calc {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(260px, 0.85fr);
+    gap: 0;
+    border: 1px solid var(--rule-hard);
+    background: var(--surface);
+  }
+
+  @media (max-width: 780px) {
+    .calc { grid-template-columns: 1fr; }
+  }
+
+  .calc-in { padding: clamp(20px, 3vw, 30px); }
+
+  .calc-out {
+    padding: clamp(20px, 3vw, 30px);
+    background: var(--invert-bg);
+    color: var(--invert-fg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .inputrow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 13px;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .inputrow:last-of-type { border-bottom: 0; }
+
+  .inputrow label {
+    font-size: 15px;
+    line-height: 1.35;
+  }
+
+  .inputrow input {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 500;
+    width: 108px;
+    flex: none;
+    padding: 8px 10px;
+    text-align: right;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--rule-hard);
+    border-radius: 0;
+  }
+
+  .outlabel {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: .72;
+    margin: 0 0 10px;
+  }
+
+  .outnum {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(38px, 6vw, 58px);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    font-variant-numeric: tabular-nums;
+    color: var(--signal);
+    margin: 0;
+  }
+
+  .outnote {
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: .78;
+    margin: 18px 0 0;
+    max-width: 34ch;
+  }
+
+  .example-tag {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--signal-ink);
+    background: var(--signal-wash);
+    border: 1px solid var(--signal);
+    padding: 3px 8px;
+    display: inline-block;
+    margin-bottom: 18px;
+  }
+
+  /* ---------- automation line items ---------- */
+
+  .items { border-top: 1px solid var(--rule-hard); }
+
+  .row {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr) 168px;
+    gap: 0 24px;
+    align-items: start;
+    padding-block: 22px;
+    border-bottom: 1px solid var(--rule);
+    transition: background .12s ease;
+  }
+
+  .row:hover { background: var(--surface); }
+
+  @media (max-width: 720px) {
+    .row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .row .saves { text-align: left; }
+  }
+
+  .row .code {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--signal-ink);
+    padding-top: 4px;
+  }
+
+  .row h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: -0.015em;
+    margin: 0 0 6px;
+  }
+
+  .row p {
+    margin: 0;
+    color: var(--graphite);
+    font-size: 15.5px;
+    max-width: 56ch;
+  }
+
+  .row .saves {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--ink);
+    text-align: right;
+    padding-top: 4px;
+  }
+
+  .row .saves span {
+    display: block;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--graphite);
+    margin-bottom: 2px;
+  }
+
+  /* ---------- sequence ---------- */
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .step {
+    background: var(--paper);
+    padding: 24px 22px 26px;
+  }
+
+  .step .n {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--signal-ink);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .step h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: -0.012em;
+    margin: 0 0 8px;
+  }
+
+  .step p {
+    margin: 0;
+    font-size: 14.5px;
+    color: var(--graphite);
+  }
+
+  /* ---------- pricing bid sheet ---------- */
+
+  .bid {
+    border: 1px solid var(--rule-hard);
+    background: var(--surface);
+  }
+
+  .tier {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) 190px 150px;
+    gap: 0 28px;
+    align-items: center;
+    padding: 26px clamp(18px, 3vw, 30px);
+    border-bottom: 1px solid var(--rule);
+    transition: background .12s ease;
+  }
+  .tier:last-child { border-bottom: 0; }
+  .tier:hover { background: var(--sunk); }
+
+  .tier-pick {
+    box-shadow: inset 4px 0 0 var(--signal);
+  }
+
+  @media (max-width: 860px) {
+    .tier {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .tier .price { text-align: left; }
+  }
+
+  .tier .name {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 21px;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--signal);
+    color: #1A1B18;
+    padding: 3px 7px;
+  }
+
+  .tier .desc {
+    margin: 0;
+    font-size: 15px;
+    color: var(--graphite);
+    max-width: 48ch;
+  }
+
+  .price {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .price .big {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 27px;
+    letter-spacing: -0.03em;
+    display: block;
+    line-height: 1.1;
+  }
+
+  .price .sub {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--graphite);
+    display: block;
+    margin-top: 3px;
+  }
+
+  .tier .act {
+    text-align: right;
+  }
+
+  @media (max-width: 860px) {
+    .tier .act { text-align: left; }
+  }
+
+  .minibtn {
+    display: inline-block;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 13.5px;
+    text-decoration: none;
+    padding: 10px 18px;
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .minibtn:hover { background: var(--ink); color: var(--paper); }
+
+  .fineprint {
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.65;
+    color: var(--graphite);
+    margin: 20px 0 0;
+    max-width: 68ch;
+  }
+
+  /* ---------- two column notes ---------- */
+
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: clamp(24px, 4vw, 52px);
+  }
+
+  .note h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: -0.012em;
+    margin: 0 0 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .note ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .note li {
+    padding: 10px 0 10px 22px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 15px;
+    position: relative;
+    color: var(--graphite);
+  }
+
+  .note li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 18px;
+    width: 9px;
+    height: 2px;
+    background: var(--signal);
+  }
+
+  .note li strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ---------- contact ---------- */
+
+  .contact {
+    background: var(--invert-bg);
+    color: var(--invert-fg);
+  }
+
+  .contact h2 { color: var(--invert-fg); }
+
+  .contact .lede { color: var(--invert-dim); }
+
+  .contact .sechead .code { color: var(--signal); }
+
+  .lines {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--invert-rule);
+    border: 1px solid var(--invert-rule);
+    margin-top: 8px;
+  }
+
+  .line {
+    background: var(--invert-bg);
+    padding: 20px 22px 22px;
+  }
+
+  .line dt {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-bottom: 6px;
+  }
+
+  .line dd {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(17px, 2.2vw, 21px);
+    letter-spacing: -0.02em;
+    word-break: break-word;
+  }
+
+  .line dd a {
+    color: var(--invert-fg);
+    text-decoration: none;
+    border-bottom: 2px solid var(--signal);
+  }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-block: 26px 34px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    color: var(--graphite);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+</style>
+
+<header class="sheet-top">
+  <div class="wrap">
+    <div class="markline">
+      <div class="mark">
+        <span class="chip" aria-hidden="true"></span>
+        Foreman Automations
+        <small>Built for contractors</small>
+      </div>
+      <a class="minibtn" href="#book">Book a 15-minute call</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <dl class="titleblock">
+      <div class="field"><dt>Service area</dt><dd>[[CITY]] and 40 miles</dd></div>
+      <div class="field"><dt>Built for</dt><dd>5 to 50 employees</dd></div>
+      <div class="field"><dt>First system live</dt><dd>7 days</dd></div>
+      <div class="field"><dt>Contract</dt><dd>Month to month</dd></div>
+    </dl>
+  </div>
+</header>
+
+<main>
+
+  <div class="wrap hero">
+    <p class="kicker">Answering machines don't sell jobs</p>
+    <h1>Every missed call is a job your <span class="under">competitor</span> just booked.</h1>
+    <p class="standfirst">
+      You're on a roof, under a sink, or halfway through a bid. The phone rings and rings.
+      We build the systems that catch those calls, chase your open quotes, and write up
+      the paperwork you keep meaning to do at nine at night. You keep running the crew.
+    </p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#book">Book a 15-minute call</a>
+      <a class="btn btn-ghost" href="#build">See what we build</a>
+    </div>
+  </div>
+
+  <section class="band band-sunk">
+    <div class="wrap">
+      <div class="sechead">
+        <span class="code">01 / The math</span>
+        <h2>What the missed calls are worth</h2>
+      </div>
+      <p class="lede">
+        Put your own numbers in. Most contractors have never added this up, which is
+        exactly why it keeps happening.
+      </p>
+
+      <span class="example-tag">Starting figures are an example — change them</span>
+
+      <div class="calc">
+        <div class="calc-in">
+          <div class="inputrow">
+            <label for="calls">Calls you miss in a normal week</label>
+            <input id="calls" type="number" min="0" max="200" step="1" value="9">
+          </div>
+          <div class="inputrow">
+            <label for="close">Of the ones you call back, how many book (%)</label>
+            <input id="close" type="number" min="0" max="100" step="1" value="35">
+          </div>
+          <div class="inputrow">
+            <label for="job">Your average job, in dollars</label>
+            <input id="job" type="number" min="0" max="1000000" step="50" value="2400">
+          </div>
+          <div class="inputrow">
+            <label for="recover">Share of missed calls a text-back recovers (%)</label>
+            <input id="recover" type="number" min="0" max="100" step="1" value="40">
+          </div>
+        </div>
+        <div class="calc-out">
+          <p class="outlabel">Recoverable per year</p>
+          <p class="outnum" id="result">$157,248</p>
+          <p class="outnote" id="resultnote">
+            That's <strong>66 jobs</strong> a year that already called you once and
+            never heard back.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="build">
+    <div class="wrap">
+      <div class="sechead">
+        <span class="code">02 / Catalog</span>
+        <h2>What we actually build</h2>
+      </div>
+      <p class="lede">
+        No dashboards you'll never open. Each of these is one specific job that used to
+        need a person, running by itself in the background. Pick the ones that hurt.
+      </p>
+
+      <div class="items">
+
+        <div class="row">
+          <div class="code">AUT-01</div>
+          <div>
+            <h3>Missed-call text back</h3>
+            <p>
+              The second a call goes unanswered, the caller gets a text from your number
+              asking what they need and when. Their reply lands in one place with the job
+              already summarized. Nobody sits in voicemail.
+            </p>
+          </div>
+          <div class="saves"><span>Replaces</span>Calling back at 8pm, or not at all</div>
+        </div>
+
+        <div class="row">
+          <div class="code">AUT-02</div>
+          <div>
+            <h3>Quote follow-up that doesn't quit</h3>
+            <p>
+              Every bid you send gets chased on day two, day six, and day twelve, in your
+              voice, until they answer yes or no. Stops the moment they reply. Most
+              contractors follow up once and call it dead.
+            </p>
+          </div>
+          <div class="saves"><span>Replaces</span>The sticky note on your dash</div>
+        </div>
+
+        <div class="row">
+          <div class="code">AUT-03</div>
+          <div>
+            <h3>Voice note to estimate</h3>
+            <p>
+              Walk the job and talk into your phone the way you already do. Fifteen minutes
+              later a line-item estimate is drafted off your own price book, ready for you
+              to correct and send. You are checking numbers, not typing them.
+            </p>
+          </div>
+          <div class="saves"><span>Replaces</span>2 to 4 hours a week at the kitchen table</div>
+        </div>
+
+        <div class="row">
+          <div class="code">AUT-04</div>
+          <div>
+            <h3>Change orders in writing, same day</h3>
+            <p>
+              Text a sentence about what the customer added. It comes back as a numbered
+              change order with the price, emailed for signature before the crew touches
+              it. Verbal change orders are how contractors work for free.
+            </p>
+          </div>
+          <div class="saves"><span>Replaces</span>The argument at final invoice</div>
+        </div>
+
+        <div class="row">
+          <div class="code">AUT-05</div>
+          <div>
+            <h3>Sub and supplier paperwork chase</h3>
+            <p>
+              Tracks every certificate of insurance, W-9, and lien waiver you're holding,
+              and emails the sub three weeks before theirs expires. Keeps chasing until
+              the document lands.
+            </p>
+          </div>
+          <div class="saves"><span>Replaces</span>A spreadsheet nobody updates</div>
+        </div>
+
+        <div class="row">
+          <div class="code">AUT-06</div>
+          <div>
+            <h3>Daily job report from site photos</h3>
+            <p>
+              The crew dumps photos in a shared folder. Each evening the customer gets a
+              short progress note written from those photos, and you get a copy filed
+              against the job. Ends the "what happened today" phone calls.
+            </p>
+          </div>
+          <div class="saves"><span>Replaces</span>Nightly update calls</div>
+        </div>
+
+        <div class="row">
+          <div class="code">AUT-07</div>
+          <div>
+            <h3>Invoice chasing on a ladder</h3>
+            <p>
+              Polite reminder at day 7, firmer at 21, final notice at 35, each one pulling
+              the real balance. It stops the day they pay. You never have to be the one
+              who brings it up.
+            </p>
+          </div>
+          <div class="saves"><span>Replaces</span>Awkward phone calls about money</div>
+        </div>
+
+        <div class="row">
+          <div class="code">AUT-08</div>
+          <div>
+            <h3>Review requests on closeout</h3>
+            <p>
+              When a job is marked complete, the customer gets a review link while they're
+              still happy with you. More Google reviews is the cheapest way to move up the
+              local map results.
+            </p>
+          </div>
+          <div class="saves"><span>Replaces</span>Remembering to ask</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-sunk">
+    <div class="wrap">
+      <div class="sechead">
+        <span class="code">03 / Sequence</span>
+        <h2>How the first month goes</h2>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <span class="n">STEP 1</span>
+          <h3>Ride-along call</h3>
+          <p>
+            Fifteen minutes on the phone. You walk me through a normal Tuesday and where
+            the day falls apart. No slides, no pitch deck.
+          </p>
+        </div>
+        <div class="step">
+          <span class="n">STEP 2</span>
+          <h3>One system, built</h3>
+          <p>
+            I pick the single automation with the clearest payback and build it against
+            the tools you already run. Live within seven days.
+          </p>
+        </div>
+        <div class="step">
+          <span class="n">STEP 3</span>
+          <h3>Two weeks of watching</h3>
+          <p>
+            I sit on it while it runs, fix the wording, catch the edge cases. You tell me
+            what sounds wrong and I change it that day.
+          </p>
+        </div>
+        <div class="step">
+          <span class="n">STEP 4</span>
+          <h3>Add the next one</h3>
+          <p>
+            Once the first system is paying for itself we do the next. One at a time.
+            Nothing gets added that you can't point at and explain.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sechead">
+        <span class="code">04 / Rates</span>
+        <h2>Pricing</h2>
+      </div>
+      <p class="lede">
+        A build fee to get it running, then a flat monthly to keep it running, watched,
+        and fixed. Month to month. Cancel with thirty days and the systems stay yours.
+      </p>
+
+      <div class="bid">
+
+        <div class="tier">
+          <div>
+            <p class="name">Pilot</p>
+            <p class="desc">
+              One automation, chosen on the first call. Built and live in seven days. This
+              is the honest way to find out whether any of this works for you.
+            </p>
+          </div>
+          <div class="price">
+            <span class="big">$750</span>
+            <span class="sub">build, then $300/mo</span>
+          </div>
+          <div class="act"><a class="minibtn" href="#book">Start here</a></div>
+        </div>
+
+        <div class="tier tier-pick">
+          <div>
+            <p class="name">Operator <span class="tag">Most take this</span></p>
+            <p class="desc">
+              Three automations working together, wired into your job software and your
+              phone number. Monthly report showing what each one caught. Changes included.
+            </p>
+          </div>
+          <div class="price">
+            <span class="big">$2,400</span>
+            <span class="sub">build, then $600/mo</span>
+          </div>
+          <div class="act"><a class="minibtn" href="#book">Book a call</a></div>
+        </div>
+
+        <div class="tier">
+          <div>
+            <p class="name">Full desk</p>
+            <p class="desc">
+              The whole catalog plus anything custom your shop needs. I'm on your phone
+              during business hours and everything gets rebuilt as your process changes.
+            </p>
+          </div>
+          <div class="price">
+            <span class="big">$5,000</span>
+            <span class="sub">build, then $1,100/mo</span>
+          </div>
+          <div class="act"><a class="minibtn" href="#book">Book a call</a></div>
+        </div>
+
+      </div>
+
+      <p class="fineprint">
+        The build fee covers setup and the first two weeks of corrections. Monthly covers
+        hosting, message costs, monitoring, and changes you ask for. If the Pilot system
+        isn't live and working in seven days, you don't pay the build fee.
+      </p>
+    </div>
+  </section>
+
+  <section class="band band-sunk">
+    <div class="wrap">
+      <div class="cols">
+        <div class="note">
+          <h3>What you get that software won't give you</h3>
+          <ul>
+            <li><strong>One person, on the phone.</strong> Not a ticket queue in another time zone.</li>
+            <li><strong>It runs on your tools.</strong> Whatever you already use for jobs, invoices, and calls.</li>
+            <li><strong>Every message sounds like you.</strong> Written from how you already talk to customers, then corrected until it's right.</li>
+            <li><strong>You can turn any of it off.</strong> One text to me and it stops.</li>
+          </ul>
+        </div>
+        <div class="note">
+          <h3>What I don't do</h3>
+          <ul>
+            <li><strong>No website rebuilds.</strong> Plenty of people do that. It isn't this.</li>
+            <li><strong>No robots talking to your customers.</strong> Everything that goes out is something you approved the wording of.</li>
+            <li><strong>No long contracts.</strong> Thirty days' notice, any time, no exit fee.</li>
+            <li><strong>No replacing your people.</strong> This takes the paperwork off them, not their job.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band contact" id="book">
+    <div class="wrap">
+      <div class="sechead">
+        <span class="code">05 / Contact</span>
+        <h2>Fifteen minutes, and I'll tell you which one to fix first</h2>
+      </div>
+      <p class="lede">
+        Call or text. If I'm on another call I'll get back to you the same day, which
+        given what this page is about, is the least I could do.
+      </p>
+
+      <dl class="lines">
+        <div class="line">
+          <dt>Call or text</dt>
+          <dd><a href="tel:[[PHONE]]">[[PHONE]]</a></dd>
+        </div>
+        <div class="line">
+          <dt>Email</dt>
+          <dd><a href="mailto:[[EMAIL]]">[[EMAIL]]</a></dd>
+        </div>
+        <div class="line">
+          <dt>Ask for</dt>
+          <dd>[[YOUR NAME]]</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span>Foreman Automations &middot; [[CITY]]</span>
+  <span>Systems for contractors who'd rather be on site</span>
+</footer>
+
+<script>
+  (function () {
+    var ids = ["calls", "close", "job", "recover"];
+    var out = document.getElementById("result");
+    var note = document.getElementById("resultnote");
+
+    function num(id) {
+      var v = parseFloat(document.getElementById(id).value);
+      return isFinite(v) && v > 0 ? v : 0;
+    }
+
+    function money(n) {
+      return "$" + Math.round(n).toLocaleString("en-US");
+    }
+
+    function update() {
+      var weeklyMissed = num("calls");
+      var closeRate = Math.min(num("close"), 100) / 100;
+      var jobValue = num("job");
+      var recovery = Math.min(num("recover"), 100) / 100;
+
+      var jobsPerYear = weeklyMissed * 52 * recovery * closeRate;
+      var dollars = jobsPerYear * jobValue;
+
+      out.textContent = money(dollars);
+      note.innerHTML =
+        "That's <strong>" + Math.round(jobsPerYear) + " jobs</strong> a year that " +
+        "already called you once and never heard back.";
+    }
+
+    ids.forEach(function (id) {
+      document.getElementById(id).addEventListener("input", update);
+    });
+
+    update();
+  })();
+</script>
