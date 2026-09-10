@@ -39,3 +39,18 @@ export const saveProfile = (p: Profile) => writeJSON(KEYS.profile, p);
 
 export const loadAccepted = () => readJSON<string | null>(KEYS.accepted, null);
 export const saveAccepted = (version: string) => writeJSON(KEYS.accepted, version);
+
+/** One completed training day. cycle counts how many times the routine has been finished. */
+export type LogEntry = { date: string; day: number; cycle: number };
+
+export const loadLog = () => readJSON<LogEntry[]>(KEYS.log, []);
+export const saveLog = (log: LogEntry[]) => writeJSON(KEYS.log, log);
+
+export const loadCycle = () => readJSON<number>(KEYS.cycle, 0);
+export const saveCycle = (cycle: number) => writeJSON(KEYS.cycle, cycle);
+
+export const todayKey = () => new Date().toISOString().slice(0, 10);
+
+export function isDayComplete(log: LogEntry[], day: number, cycle: number): boolean {
+  return log.some((e) => e.day === day && e.cycle === cycle);
+}

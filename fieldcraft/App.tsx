@@ -6,13 +6,14 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import DisclaimerScreen from './src/screens/DisclaimerScreen';
 import OnboardingScreen from './src/screens/OnboardingScreen';
 import DrillsScreen from './src/screens/DrillsScreen';
+import PlanScreen from './src/screens/PlanScreen';
 import { DISCLAIMER_VERSION } from './src/content/disclaimer';
 import {
   Profile, loadAccepted, loadProfile, saveAccepted, saveProfile,
 } from './src/storage';
 import { theme } from './src/theme';
 
-type Stage = 'loading' | 'disclaimer' | 'onboarding' | 'home';
+type Stage = 'loading' | 'disclaimer' | 'onboarding' | 'home' | 'library';
 
 export default function App() {
   const [stage, setStage] = useState<Stage>('loading');
@@ -51,7 +52,12 @@ export default function App() {
         )}
         {stage === 'disclaimer' && <DisclaimerScreen onAccept={acceptDisclaimer} />}
         {stage === 'onboarding' && <OnboardingScreen onDone={finishOnboarding} />}
-        {stage === 'home' && profile && <DrillsScreen profile={profile} />}
+        {stage === 'home' && profile && (
+          <PlanScreen profile={profile} onOpenLibrary={() => setStage('library')} />
+        )}
+        {stage === 'library' && profile && (
+          <DrillsScreen profile={profile} onBack={() => setStage('home')} />
+        )}
       </SafeAreaView>
     </SafeAreaProvider>
   );

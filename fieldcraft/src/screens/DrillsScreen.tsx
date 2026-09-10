@@ -5,7 +5,7 @@ import { QUIZ } from '../content/quiz';
 import { Profile } from '../storage';
 import { theme } from '../theme';
 
-type Props = { profile: Profile };
+type Props = { profile: Profile; onBack: () => void };
 
 // How much kit each level unlocks. A player with a field and weights can run
 // everything below it; someone with only open space cannot run ball drills.
@@ -15,7 +15,7 @@ const FOCUS_LABELS = Object.fromEntries(
   (QUIZ.find((s) => s.key === 'focus')?.options ?? []).map((o) => [o.value, o.label]),
 ) as Record<string, string>;
 
-export default function DrillsScreen({ profile }: Props) {
+export default function DrillsScreen({ profile, onBack }: Props) {
   const chosenFocus = Array.isArray(profile.focus) ? (profile.focus as string[]) : [];
   const [filter, setFilter] = useState<string>(chosenFocus[0] ?? 'all');
   const [open, setOpen] = useState<string | null>(null);
@@ -45,7 +45,12 @@ export default function DrillsScreen({ profile }: Props) {
     <View style={styles.root}>
       <View style={styles.header}>
         <Text style={styles.brand}>FIELDCRAFT</Text>
-        <Text style={styles.count}>{shown.length} drills</Text>
+        <View style={styles.headerRight}>
+          <Text style={styles.count}>{shown.length} drills</Text>
+          <TouchableOpacity onPress={onBack} accessibilityRole="button" hitSlop={12}>
+            <Text style={styles.headerLink}>Plan</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.tabRow}>
@@ -118,6 +123,8 @@ const styles = StyleSheet.create({
   },
   brand: { fontSize: 13, fontWeight: '800', letterSpacing: 2, color: theme.fg },
   count: { fontSize: 13, fontWeight: '700', color: theme.muted },
+  headerRight: { flexDirection: 'row', alignItems: 'center', gap: 14 },
+  headerLink: { fontSize: 14, fontWeight: '700', color: theme.fg },
   tabRow: { ...wrap, flexGrow: 0, paddingHorizontal: 18, paddingTop: 14 },
   tab: {
     paddingHorizontal: 14, paddingVertical: 8, marginHorizontal: 5,
