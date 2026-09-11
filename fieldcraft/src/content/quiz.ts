@@ -81,6 +81,7 @@ export const QUIZ: QuizStep[] = [
       { value: 4, label: '4 days' },
       { value: 5, label: '5 days' },
       { value: 6, label: '6 days', hint: 'One full rest day' },
+      { value: 7, label: '7 days', hint: 'Every day, no rest day' },
     ],
   },
   {

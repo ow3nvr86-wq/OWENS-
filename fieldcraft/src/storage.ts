@@ -61,3 +61,12 @@ export type Agreement = { version: string; acceptedAt: string; name?: string };
 
 export const loadAgreement = () => readJSON<Agreement | null>(KEYS.agreement, null);
 export const saveAgreement = (a: Agreement) => writeJSON(KEYS.agreement, a);
+
+/** Wipes everything this app has stored on the device. */
+export async function resetAll(): Promise<void> {
+  try {
+    for (const key of Object.values(KEYS)) await AsyncStorage.removeItem(key);
+  } catch {
+    // Nothing to do; the app simply keeps whatever it could not clear.
+  }
+}

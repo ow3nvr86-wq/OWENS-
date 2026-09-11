@@ -37,6 +37,27 @@ const DARK = {
   ink: '#1f1f1c', onInk: '#f7f7f4', onInkMuted: 'rgba(247,247,244,0.60)',
 };
 
+/** Any hue on the wheel, tuned so it stays readable in each mode. */
+export function hueToHex(hue: number, dark: boolean): string {
+  const h = ((hue % 360) + 360) % 360;
+  // Light mode wants a deeper colour behind white text; dark mode a brighter one.
+  const sat = dark ? 0.72 : 0.62;
+  const light = dark ? 0.66 : 0.38;
+  return hslToHex(h, sat, light);
+}
+
+function hslToHex(h: number, s: number, l: number): string {
+  const c = (1 - Math.abs(2 * l - 1)) * s;
+  const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+  const m = l - c / 2;
+  const [r, g, b] =
+    h < 60 ? [c, x, 0] : h < 120 ? [x, c, 0] : h < 180 ? [0, c, x]
+    : h < 240 ? [0, x, c] : h < 300 ? [x, 0, c] : [c, 0, x];
+  const to = (v: number) =>
+    Math.round((v + m) * 255).toString(16).padStart(2, '0');
+  return `#${to(r)}${to(g)}${to(b)}`;
+}
+
 /** White text on a mid-dark accent, near-black on a light one. */
 function onAccentFor(hex: string): string {
   const n = hex.replace('#', '');
@@ -45,10 +66,11 @@ function onAccentFor(hex: string): string {
   return lum > 0.55 ? '#141413' : '#ffffff';
 }
 
-export function buildPalette(dark: boolean, accentId: AccentId): Palette {
+export function buildPalette(dark: boolean, accentId: AccentId, customHue: number | null): Palette {
   const base = dark ? DARK : LIGHT;
   const accentDef = ACCENTS.find((a) => a.id === accentId) ?? ACCENTS[0];
-  const accent = dark ? accentDef.dark : accentDef.light;
+  const accent =
+    customHue === null ? (dark ? accentDef.dark : accentDef.light) : hueToHex(customHue, dark);
   return {
     ...base,
     accent,
@@ -61,12 +83,17 @@ type ThemeState = {
   palette: Palette;
   mode: Mode;
   accent: AccentId;
+  /** Null when one of the preset accents is in use. */
+  customHue: number | null;
   isDark: boolean;
   setMode: (m: Mode) => void;
   setAccent: (a: AccentId) => void;
+  setCustomHue: (h: number | null) => void;
 };
 
 const PREFS_KEY = 'fieldcraft:appearance';
+
+type Saved = { mode?: Mode; accent?: AccentId; customHue?: number | null };
 
 const ThemeContext = createContext<ThemeState | null>(null);
 
@@ -74,22 +101,32 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const system = useColorScheme();
   const [mode, setModeState] = useState<Mode>('system');
   const [accent, setAccentState] = useState<AccentId>('grass');
+  const [customHue, setCustomHueState] = useState<number | null>(null);
 
   useEffect(() => {
     (async () => {
-      const saved = await readJSON<{ mode?: Mode; accent?: AccentId }>(PREFS_KEY, {});
+      const saved = await readJSON<Saved>(PREFS_KEY, {});
       if (saved.mode) setModeState(saved.mode);
       if (saved.accent) setAccentState(saved.accent);
+      if (typeof saved.customHue === 'number') setCustomHueState(saved.customHue);
     })();
   }, []);
 
   const isDark = mode === 'system' ? system === 'dark' : mode === 'dark';
-  const palette = useMemo(() => buildPalette(isDark, accent), [isDark, accent]);
+  const palette = useMemo(
+    () => buildPalette(isDark, accent, customHue),
+    [isDark, accent, customHue],
+  );
+
+  const persist = (next: Saved) =>
+    writeJSON(PREFS_KEY, { mode, accent, customHue, ...next });
 
   const value: ThemeState = {
-    palette, mode, accent, isDark,
-    setMode: (m) => { setModeState(m); writeJSON(PREFS_KEY, { mode: m, accent }); },
-    setAccent: (a) => { setAccentState(a); writeJSON(PREFS_KEY, { mode, accent: a }); },
+    palette, mode, accent, customHue, isDark,
+    setMode: (m) => { setModeState(m); persist({ mode: m }); },
+    // Picking a preset clears any custom hue, so the swatch you tapped is what you get.
+    setAccent: (a) => { setAccentState(a); setCustomHueState(null); persist({ accent: a, customHue: null }); },
+    setCustomHue: (h) => { setCustomHueState(h); persist({ customHue: h }); },
   };
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

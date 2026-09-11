@@ -100,6 +100,7 @@ function Shell() {
             name={typeof profile.name === 'string' ? profile.name : undefined}
             onReadSafety={() => setRereadSafety(true)}
             onRedoSetup={() => setGate('onboarding')}
+            onReset={() => { setProfile(null); setTab('plan'); setGate('disclaimer'); }}
           />
         )}
       </View>
