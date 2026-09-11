@@ -1,6 +1,6 @@
 // All persistence is local to the device. Nothing here talks to a network.
-// Key names are kept identical to the original build so existing installs
-// keep their profile, log and purchase state.
+// Key names are the ones the shipped build already uses. Renaming them would
+// discard every existing install's profile, training log and purchase state.
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -13,6 +13,7 @@ export const KEYS = {
   banked: 'courtready:banked',
   accepted: 'courtready:accepted',
   entitlement: 'courtready:entitlement',
+  agreement: 'courtready:agreement',
 } as const;
 
 export async function readJSON<T>(key: string, fallback: T): Promise<T> {
@@ -39,3 +40,33 @@ export const saveProfile = (p: Profile) => writeJSON(KEYS.profile, p);
 
 export const loadAccepted = () => readJSON<string | null>(KEYS.accepted, null);
 export const saveAccepted = (version: string) => writeJSON(KEYS.accepted, version);
+
+/** One completed training day. cycle counts how many times the routine has been finished. */
+export type LogEntry = { date: string; day: number; cycle: number };
+
+export const loadLog = () => readJSON<LogEntry[]>(KEYS.log, []);
+export const saveLog = (log: LogEntry[]) => writeJSON(KEYS.log, log);
+
+export const loadCycle = () => readJSON<number>(KEYS.cycle, 0);
+export const saveCycle = (cycle: number) => writeJSON(KEYS.cycle, cycle);
+
+export const todayKey = () => new Date().toISOString().slice(0, 10);
+
+export function isDayComplete(log: LogEntry[], day: number, cycle: number): boolean {
+  return log.some((e) => e.day === day && e.cycle === cycle);
+}
+
+/** Recorded when the player accepts the injury acknowledgement. */
+export type Agreement = { version: string; acceptedAt: string; name?: string };
+
+export const loadAgreement = () => readJSON<Agreement | null>(KEYS.agreement, null);
+export const saveAgreement = (a: Agreement) => writeJSON(KEYS.agreement, a);
+
+/** Wipes everything this app has stored on the device. */
+export async function resetAll(): Promise<void> {
+  try {
+    for (const key of Object.values(KEYS)) await AsyncStorage.removeItem(key);
+  } catch {
+    // Nothing to do; the app simply keeps whatever it could not clear.
+  }
+}

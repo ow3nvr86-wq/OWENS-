@@ -4,11 +4,13 @@ import {
 } from 'react-native';
 import { QUIZ, QuizOption } from '../content/quiz';
 import { Profile } from '../storage';
-import { theme } from '../theme';
+import { Palette, useTheme } from '../theme';
 
 type Props = { onDone: (profile: Profile) => void };
 
 export default function OnboardingScreen({ onDone }: Props) {
+  const { palette } = useTheme();
+  const styles = useMemo(() => makeStyles(palette), [palette]);
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Profile>({});
   const step = QUIZ[index];
@@ -71,7 +73,7 @@ export default function OnboardingScreen({ onDone }: Props) {
           <TextInput
             style={styles.input}
             placeholder={step.placeholder}
-            placeholderTextColor={theme.muted}
+            placeholderTextColor={palette.faint}
             value={typeof current === 'string' ? current : ''}
             onChangeText={(text) => setAnswers((p) => ({ ...p, [step.key]: text }))}
             autoFocus
@@ -112,38 +114,39 @@ export default function OnboardingScreen({ onDone }: Props) {
 
 const wrap = { maxWidth: 560, width: '100%', alignSelf: 'center' } as const;
 
-const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: theme.bg },
+const makeStyles = (p: Palette) =>
+  StyleSheet.create({
+  root: { flex: 1, backgroundColor: p.bg },
   header: {
     ...wrap, flexDirection: 'row', justifyContent: 'space-between',
     alignItems: 'center', paddingHorizontal: 24, paddingTop: 24,
   },
-  brand: { fontSize: 13, fontWeight: '800', letterSpacing: 2, color: theme.fg },
-  count: { fontSize: 13, fontWeight: '700', color: theme.muted },
+  brand: { fontSize: 13, fontWeight: '800', letterSpacing: 2, color: p.fg },
+  count: { fontSize: 13, fontWeight: '700', color: p.muted },
   progress: { ...wrap, flexDirection: 'row', gap: 6, paddingHorizontal: 24, paddingTop: 14 },
-  tick: { flex: 1, height: 5, borderRadius: 3, backgroundColor: theme.fill },
-  tickOn: { backgroundColor: theme.accent },
+  tick: { flex: 1, height: 5, borderRadius: 3, backgroundColor: p.raised },
+  tickOn: { backgroundColor: p.accent },
   scroll: { ...wrap, padding: 24 },
-  prompt: { fontSize: 30, fontWeight: '800', color: theme.fg, letterSpacing: -0.5, marginTop: 22 },
-  hint: { fontSize: 14, color: theme.muted, marginTop: 8, lineHeight: 20 },
+  prompt: { fontSize: 30, fontWeight: '800', color: p.fg, letterSpacing: -0.5, marginTop: 22 },
+  hint: { fontSize: 14, color: p.muted, marginTop: 8, lineHeight: 20 },
   input: {
-    marginTop: 26, backgroundColor: theme.fill, borderRadius: theme.radius,
-    paddingHorizontal: 18, paddingVertical: 18, fontSize: 18, color: theme.fg,
+    marginTop: 26, backgroundColor: p.raised, borderRadius: p.radius,
+    paddingHorizontal: 18, paddingVertical: 18, fontSize: 18, color: p.fg,
   },
   option: {
-    marginTop: 12, backgroundColor: theme.fill, borderRadius: theme.radius,
+    marginTop: 12, backgroundColor: p.raised, borderRadius: p.radius,
     paddingHorizontal: 18, paddingVertical: 16, borderWidth: 2, borderColor: 'transparent',
   },
-  optionOn: { borderColor: theme.accent, backgroundColor: theme.bg },
-  optionText: { fontSize: 17, fontWeight: '600', color: theme.fg },
-  optionTextOn: { color: theme.fg },
-  optionHint: { fontSize: 13, color: theme.muted, marginTop: 3 },
+  optionOn: { borderColor: p.accent, backgroundColor: p.bg },
+  optionText: { fontSize: 17, fontWeight: '600', color: p.fg },
+  optionTextOn: { color: p.fg },
+  optionHint: { fontSize: 13, color: p.muted, marginTop: 3 },
   footer: { ...wrap, padding: 24, paddingTop: 8 },
   cta: {
-    backgroundColor: theme.accent, borderRadius: theme.radius,
+    backgroundColor: p.accent, borderRadius: p.radius,
     paddingVertical: 17, alignItems: 'center',
   },
-  ctaOff: { backgroundColor: theme.fill },
-  ctaText: { color: theme.onAccent, fontSize: 16, fontWeight: '700' },
-  ctaTextOff: { color: theme.muted },
-});
+  ctaOff: { backgroundColor: p.raised },
+  ctaText: { color: p.onAccent, fontSize: 16, fontWeight: '700' },
+  ctaTextOff: { color: p.muted },
+  });
