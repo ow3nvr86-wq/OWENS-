@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-nati
 import { DRILLS, Drill, Equipment, Focus } from '../content/drills';
 import { QUIZ } from '../content/quiz';
 import { Profile } from '../storage';
-import { theme } from '../theme';
+import { Palette, useTheme } from '../theme';
 
 type Props = { profile: Profile; onBack: () => void };
 
@@ -16,6 +16,8 @@ const FOCUS_LABELS = Object.fromEntries(
 ) as Record<string, string>;
 
 export default function DrillsScreen({ profile, onBack }: Props) {
+  const { palette } = useTheme();
+  const styles = useMemo(() => makeStyles(palette), [palette]);
   const chosenFocus = Array.isArray(profile.focus) ? (profile.focus as string[]) : [];
   const [filter, setFilter] = useState<string>(chosenFocus[0] ?? 'all');
   const [open, setOpen] = useState<string | null>(null);
@@ -115,41 +117,42 @@ function uniqueRest(chosen: string[]) {
 
 const wrap = { maxWidth: 560, width: '100%', alignSelf: 'center' } as const;
 
-const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: theme.bg },
+const makeStyles = (p: Palette) =>
+  StyleSheet.create({
+  root: { flex: 1, backgroundColor: p.bg },
   header: {
     ...wrap, flexDirection: 'row', justifyContent: 'space-between',
     alignItems: 'center', paddingHorizontal: 24, paddingTop: 20,
   },
-  brand: { fontSize: 13, fontWeight: '800', letterSpacing: 2, color: theme.fg },
-  count: { fontSize: 13, fontWeight: '700', color: theme.muted },
+  brand: { fontSize: 13, fontWeight: '800', letterSpacing: 2, color: p.fg },
+  count: { fontSize: 13, fontWeight: '700', color: p.muted },
   headerRight: { flexDirection: 'row', alignItems: 'center', gap: 14 },
-  headerLink: { fontSize: 14, fontWeight: '700', color: theme.fg },
+  headerLink: { fontSize: 14, fontWeight: '700', color: p.fg },
   tabRow: { ...wrap, flexGrow: 0, paddingHorizontal: 18, paddingTop: 14 },
   tab: {
     paddingHorizontal: 14, paddingVertical: 8, marginHorizontal: 5,
-    borderRadius: 20, backgroundColor: theme.fill,
+    borderRadius: 20, backgroundColor: p.raised,
   },
-  tabOn: { backgroundColor: theme.accent },
-  tabText: { fontSize: 13, fontWeight: '700', color: theme.muted },
-  tabTextOn: { color: theme.onAccent },
+  tabOn: { backgroundColor: p.accent },
+  tabText: { fontSize: 13, fontWeight: '700', color: p.muted },
+  tabTextOn: { color: p.onAccent },
   list: { ...wrap, padding: 24, paddingTop: 16 },
-  empty: { color: theme.muted, fontSize: 15, lineHeight: 22 },
+  empty: { color: p.muted, fontSize: 15, lineHeight: 22 },
   card: {
-    backgroundColor: theme.fill, borderRadius: theme.radius,
+    backgroundColor: p.raised, borderRadius: p.radius,
     padding: 18, marginBottom: 12,
   },
-  name: { fontSize: 17, fontWeight: '700', color: theme.fg },
-  work: { fontSize: 14, color: theme.muted, marginTop: 3 },
-  detail: { marginTop: 14, borderTopWidth: 1, borderTopColor: theme.line, paddingTop: 14 },
-  setup: { fontSize: 14, color: theme.muted, marginBottom: 10, fontStyle: 'italic' },
+  name: { fontSize: 17, fontWeight: '700', color: p.fg },
+  work: { fontSize: 14, color: p.muted, marginTop: 3 },
+  detail: { marginTop: 14, borderTopWidth: 1, borderTopColor: p.line, paddingTop: 14 },
+  setup: { fontSize: 14, color: p.muted, marginBottom: 10, fontStyle: 'italic' },
   stepRow: { flexDirection: 'row', marginBottom: 8 },
   stepNum: {
-    width: 20, fontSize: 13, fontWeight: '800', color: theme.muted, marginTop: 1,
+    width: 20, fontSize: 13, fontWeight: '800', color: p.muted, marginTop: 1,
   },
-  stepText: { flex: 1, fontSize: 15, color: theme.fg, lineHeight: 21 },
+  stepText: { flex: 1, fontSize: 15, color: p.fg, lineHeight: 21 },
   cue: {
-    marginTop: 8, fontSize: 14, fontWeight: '700', color: theme.fg,
-    backgroundColor: theme.bg, padding: 12, borderRadius: 10, lineHeight: 20,
+    marginTop: 8, fontSize: 14, fontWeight: '700', color: p.fg,
+    backgroundColor: p.bg, padding: 12, borderRadius: 10, lineHeight: 20,
   },
-});
+  });

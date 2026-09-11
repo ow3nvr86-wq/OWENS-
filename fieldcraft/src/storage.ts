@@ -1,18 +1,19 @@
 // All persistence is local to the device. Nothing here talks to a network.
-// Key names are kept identical to the original build so existing installs
-// keep their profile, log and purchase state.
+// Fieldcraft has never shipped, so its keys carry its own name rather than
+// the ones inherited when this project was copied from Court Craft.
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const KEYS = {
-  profile: 'courtready:profile',
-  log: 'courtready:log',
-  cycle: 'courtready:cycle',
-  drillTicks: 'courtready:drillticks',
-  results: 'courtready:results',
-  banked: 'courtready:banked',
-  accepted: 'courtready:accepted',
-  entitlement: 'courtready:entitlement',
+  profile: 'fieldcraft:profile',
+  log: 'fieldcraft:log',
+  cycle: 'fieldcraft:cycle',
+  drillTicks: 'fieldcraft:drillticks',
+  results: 'fieldcraft:results',
+  banked: 'fieldcraft:banked',
+  accepted: 'fieldcraft:accepted',
+  entitlement: 'fieldcraft:entitlement',
+  agreement: 'fieldcraft:agreement',
 } as const;
 
 export async function readJSON<T>(key: string, fallback: T): Promise<T> {
@@ -54,3 +55,9 @@ export const todayKey = () => new Date().toISOString().slice(0, 10);
 export function isDayComplete(log: LogEntry[], day: number, cycle: number): boolean {
   return log.some((e) => e.day === day && e.cycle === cycle);
 }
+
+/** Recorded when the player accepts the injury acknowledgement. */
+export type Agreement = { version: string; acceptedAt: string; name?: string };
+
+export const loadAgreement = () => readJSON<Agreement | null>(KEYS.agreement, null);
+export const saveAgreement = (a: Agreement) => writeJSON(KEYS.agreement, a);

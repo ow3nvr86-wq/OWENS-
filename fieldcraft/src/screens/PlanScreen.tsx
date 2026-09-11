@@ -6,11 +6,14 @@ import {
   LogEntry, Profile, isDayComplete, loadCycle, loadLog,
   saveCycle, saveLog, todayKey,
 } from '../storage';
-import { theme } from '../theme';
+import { Palette, useTheme } from '../theme';
+import Hero from '../components/Hero';
 
 type Props = { profile: Profile; onOpenLibrary: () => void };
 
 export default function PlanScreen({ profile, onOpenLibrary }: Props) {
+  const { palette } = useTheme();
+  const styles = useMemo(() => makeStyles(palette), [palette]);
   const routine = useMemo(() => buildRoutine(profile), [profile]);
   const [selected, setSelected] = useState(0);
   const [log, setLog] = useState<LogEntry[]>([]);
@@ -97,6 +100,13 @@ export default function PlanScreen({ profile, onOpenLibrary }: Props) {
       </ScrollView>
 
       <ScrollView ref={bodyRef} contentContainerStyle={styles.body}>
+        <Hero
+          name={typeof profile.name === 'string' ? profile.name : undefined}
+          done={doneCount}
+          total={routine.length}
+          ticks={routine.map((d) => isDayComplete(log, d.day, cycle))}
+          cycles={cycle}
+        />
         <Text style={styles.dayFocus}>{dayTitle(day).toUpperCase()}</Text>
         <Text style={styles.dayTitle}>Day {day.day}</Text>
         <Text style={styles.dayMeta}>
@@ -147,50 +157,51 @@ export default function PlanScreen({ profile, onOpenLibrary }: Props) {
 
 const wrap = { maxWidth: 560, width: '100%', alignSelf: 'center' } as const;
 
-const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: theme.bg },
+const makeStyles = (p: Palette) =>
+  StyleSheet.create({
+  root: { flex: 1, backgroundColor: p.bg },
   header: {
     ...wrap, flexDirection: 'row', justifyContent: 'space-between',
     alignItems: 'center', paddingHorizontal: 24, paddingTop: 20,
   },
-  brand: { fontSize: 13, fontWeight: '800', letterSpacing: 2, color: theme.fg },
-  headerLink: { fontSize: 14, fontWeight: '700', color: theme.muted },
+  brand: { fontSize: 13, fontWeight: '800', letterSpacing: 2, color: p.fg },
+  headerLink: { fontSize: 14, fontWeight: '700', color: p.muted },
   pillsRow: { ...wrap, flexGrow: 0, flexShrink: 0, paddingHorizontal: 18, paddingTop: 14 },
   pills: { gap: 8, alignItems: 'center' },
   pill: {
-    borderRadius: 999, backgroundColor: theme.fill,
+    borderRadius: 999, backgroundColor: p.raised,
     paddingHorizontal: 18, paddingVertical: 10, marginRight: 8,
   },
-  pillOn: { backgroundColor: theme.accent },
-  pillText: { fontSize: 14, fontWeight: '700', color: theme.muted },
-  pillTextOn: { color: theme.onAccent },
+  pillOn: { backgroundColor: p.accent },
+  pillText: { fontSize: 14, fontWeight: '700', color: p.muted },
+  pillTextOn: { color: p.onAccent },
   body: { ...wrap, paddingHorizontal: 24, paddingBottom: 40, paddingTop: 18 },
-  dayFocus: { fontSize: 11, fontWeight: '800', letterSpacing: 1.6, color: theme.muted },
+  dayFocus: { fontSize: 11, fontWeight: '800', letterSpacing: 1.6, color: p.muted },
   dayTitle: {
     fontSize: 40, lineHeight: 44, fontWeight: '800',
-    color: theme.fg, letterSpacing: -1.6, marginTop: 2,
+    color: p.fg, letterSpacing: -1.6, marginTop: 2,
   },
-  dayMeta: { fontSize: 14, color: theme.muted, marginTop: 4, marginBottom: 20 },
+  dayMeta: { fontSize: 14, color: p.muted, marginTop: 4, marginBottom: 20 },
   card: {
-    backgroundColor: theme.fill, borderRadius: theme.radius,
+    backgroundColor: p.raised, borderRadius: p.radius,
     padding: 18, marginBottom: 12,
   },
-  name: { fontSize: 17, fontWeight: '700', color: theme.fg },
-  work: { fontSize: 14, color: theme.muted, marginTop: 3 },
-  detail: { marginTop: 14, borderTopWidth: 1, borderTopColor: theme.line, paddingTop: 14 },
-  setup: { fontSize: 14, color: theme.muted, marginBottom: 10, fontStyle: 'italic' },
+  name: { fontSize: 17, fontWeight: '700', color: p.fg },
+  work: { fontSize: 14, color: p.muted, marginTop: 3 },
+  detail: { marginTop: 14, borderTopWidth: 1, borderTopColor: p.line, paddingTop: 14 },
+  setup: { fontSize: 14, color: p.muted, marginBottom: 10, fontStyle: 'italic' },
   stepRow: { flexDirection: 'row', marginBottom: 8 },
-  stepNum: { width: 20, fontSize: 13, fontWeight: '800', color: theme.muted, marginTop: 1 },
-  stepText: { flex: 1, fontSize: 15, color: theme.fg, lineHeight: 21 },
+  stepNum: { width: 20, fontSize: 13, fontWeight: '800', color: p.muted, marginTop: 1 },
+  stepText: { flex: 1, fontSize: 15, color: p.fg, lineHeight: 21 },
   cue: {
-    marginTop: 8, fontSize: 14, fontWeight: '700', color: theme.fg,
-    backgroundColor: theme.bg, padding: 12, borderRadius: 10, lineHeight: 20,
+    marginTop: 8, fontSize: 14, fontWeight: '700', color: p.fg,
+    backgroundColor: p.bg, padding: 12, borderRadius: 10, lineHeight: 20,
   },
   cta: {
-    marginTop: 10, backgroundColor: theme.accent,
-    borderRadius: theme.radius, paddingVertical: 17, alignItems: 'center',
+    marginTop: 10, backgroundColor: p.accent,
+    borderRadius: p.radius, paddingVertical: 17, alignItems: 'center',
   },
-  ctaDone: { backgroundColor: theme.bg, borderWidth: 2, borderColor: theme.accent },
-  ctaText: { color: theme.onAccent, fontSize: 16, fontWeight: '700' },
-  ctaTextDone: { color: theme.fg },
-});
+  ctaDone: { backgroundColor: p.bg, borderWidth: 2, borderColor: p.accent },
+  ctaText: { color: p.onAccent, fontSize: 16, fontWeight: '700' },
+  ctaTextDone: { color: p.fg },
+  });
