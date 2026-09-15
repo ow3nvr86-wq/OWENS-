@@ -3,6 +3,8 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-nati
 import { DRILLS, Drill, Equipment, Focus } from '../content/drills';
 import { QUIZ } from '../content/quiz';
 import { Profile } from '../storage';
+import { estimateMinutes } from '../routine';
+import DrillTimer from '../components/DrillTimer';
 import { Palette, useTheme } from '../theme';
 
 type Props = { profile: Profile; onBack: () => void };
@@ -92,6 +94,7 @@ export default function DrillsScreen({ profile, onBack }: Props) {
               {isOpen && (
                 <View style={styles.detail}>
                   {d.cue ? <Text style={styles.cue}>{d.cue}</Text> : null}
+                  <DrillTimer minutes={estimateMinutes(d)} />
                 </View>
               )}
             </TouchableOpacity>

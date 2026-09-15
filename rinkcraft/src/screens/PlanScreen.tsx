@@ -8,6 +8,7 @@ import {
 } from '../storage';
 import { Palette, useTheme } from '../theme';
 import Hero from '../components/Hero';
+import DrillTimer from '../components/DrillTimer';
 
 type Props = { profile: Profile; onOpenLibrary: () => void };
 
@@ -166,6 +167,10 @@ export default function PlanScreen({ profile, onOpenLibrary }: Props) {
                     </View>
                   ))}
                   <Text style={styles.cue}>{d.cue}</Text>
+                  <DrillTimer
+                    minutes={estimateMinutes(d)}
+                    onComplete={() => { if (!ticked) toggleTick(d.id); }}
+                  />
                 </View>
               )}
             </TouchableOpacity>
