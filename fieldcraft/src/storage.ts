@@ -70,3 +70,12 @@ export async function resetAll(): Promise<void> {
     // Nothing to do; the app simply keeps whatever it could not clear.
   }
 }
+
+/** Per-drill ticks, keyed so each cycle and day is tracked separately. */
+export type DrillTicks = Record<string, boolean>;
+
+export const tickKey = (cycle: number, day: number, drillId: string) =>
+  `${cycle}:${day}:${drillId}`;
+
+export const loadTicks = () => readJSON<DrillTicks>(KEYS.drillTicks, {});
+export const saveTicks = (t: DrillTicks) => writeJSON(KEYS.drillTicks, t);

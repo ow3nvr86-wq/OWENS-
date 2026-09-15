@@ -3,8 +3,8 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-nati
 import { Drill } from '../content/drills';
 import { RoutineDay, buildRoutine, dayTitle, estimateMinutes } from '../routine';
 import {
-  LogEntry, Profile, isDayComplete, loadCycle, loadLog,
-  saveCycle, saveLog, todayKey,
+  DrillTicks, LogEntry, Profile, isDayComplete, loadCycle, loadLog, loadTicks,
+  saveCycle, saveLog, saveTicks, tickKey, todayKey,
 } from '../storage';
 import { Palette, useTheme } from '../theme';
 import Hero from '../components/Hero';
@@ -20,10 +20,14 @@ export default function PlanScreen({ profile, onOpenLibrary }: Props) {
   const [cycle, setCycle] = useState(0);
   const [open, setOpen] = useState<string | null>(null);
   const bodyRef = useRef<ScrollView>(null);
+  const [ticks, setTicks] = useState<DrillTicks>({});
 
   useEffect(() => {
     (async () => {
-      const [storedLog, storedCycle] = await Promise.all([loadLog(), loadCycle()]);
+      const [storedLog, storedCycle, storedTicks] = await Promise.all([
+        loadLog(), loadCycle(), loadTicks(),
+      ]);
+      setTicks(storedTicks);
       setLog(storedLog);
       setCycle(storedCycle);
       // Open on the first day of this cycle that is not done yet.
@@ -39,6 +43,18 @@ export default function PlanScreen({ profile, onOpenLibrary }: Props) {
   const day = routine[selected];
   const done = day ? isDayComplete(log, day.day, cycle) : false;
   const doneCount = routine.filter((d) => isDayComplete(log, d.day, cycle)).length;
+
+  async function toggleTick(drillId: string) {
+    if (!day) return;
+    const key = tickKey(cycle, day.day, drillId);
+    const next = { ...ticks, [key]: !ticks[key] };
+    setTicks(next);
+    await saveTicks(next);
+  }
+
+  const doneDrills = day
+    ? day.drills.filter((d) => ticks[tickKey(cycle, day.day, d.id)]).length
+    : 0;
 
   async function toggleComplete() {
     if (!day) return;
@@ -110,21 +126,36 @@ export default function PlanScreen({ profile, onOpenLibrary }: Props) {
         <Text style={styles.dayFocus}>{dayTitle(day).toUpperCase()}</Text>
         <Text style={styles.dayTitle}>Day {day.day}</Text>
         <Text style={styles.dayMeta}>
-          {day.drills.length} drills  ·  about {day.totalMinutes} min  ·  {doneCount} of{' '}
-          {routine.length} days done
+          {doneDrills} of {day.drills.length} drills  ·  about {day.totalMinutes} min  ·{' '}
+          {doneCount} of {routine.length} days done
         </Text>
 
         {day.drills.map((d: Drill) => {
           const isOpen = open === d.id;
+          const ticked = !!ticks[tickKey(cycle, day.day, d.id)];
           return (
             <TouchableOpacity
               key={d.id}
-              style={styles.card}
+              style={[styles.card, ticked && styles.cardDone]}
               onPress={() => setOpen(isOpen ? null : d.id)}
               accessibilityRole="button"
             >
-              <Text style={styles.name}>{d.name}</Text>
-              <Text style={styles.work}>{d.work}  ·  ~{estimateMinutes(d)} min</Text>
+              <View style={styles.cardHead}>
+                <TouchableOpacity
+                  style={[styles.tick, ticked && styles.tickOn]}
+                  onPress={() => toggleTick(d.id)}
+                  accessibilityRole="checkbox"
+                  accessibilityState={{ checked: ticked }}
+                  accessibilityLabel={`Mark ${d.name} done`}
+                  hitSlop={8}
+                >
+                  {ticked ? <Text style={styles.tickMark}>✓</Text> : null}
+                </TouchableOpacity>
+                <View style={styles.cardText}>
+                  <Text style={[styles.name, ticked && styles.nameDone]}>{d.name}</Text>
+                  <Text style={styles.work}>{d.work}  ·  ~{estimateMinutes(d)} min</Text>
+                </View>
+              </View>
               {isOpen && (
                 <View style={styles.detail}>
                   {d.cue ? <Text style={styles.cue}>{d.cue}</Text> : null}
@@ -179,7 +210,17 @@ const makeStyles = (p: Palette) =>
     backgroundColor: p.raised, borderRadius: p.radius,
     padding: 18, marginBottom: 12,
   },
+  cardDone: { opacity: 0.65 },
+  cardHead: { flexDirection: 'row', alignItems: 'flex-start' },
+  cardText: { flex: 1 },
+  tick: {
+    width: 26, height: 26, borderRadius: 13, borderWidth: 2, borderColor: p.line,
+    marginRight: 14, alignItems: 'center', justifyContent: 'center', marginTop: 1,
+  },
+  tickOn: { backgroundColor: p.accent, borderColor: p.accent },
+  tickMark: { color: p.onAccent, fontSize: 14, fontWeight: '800' },
   name: { fontSize: 17, fontWeight: '700', color: p.fg },
+  nameDone: { color: p.muted, textDecorationLine: 'line-through' },
   work: { fontSize: 14, color: p.muted, marginTop: 3 },
   detail: { marginTop: 14, borderTopWidth: 1, borderTopColor: p.line, paddingTop: 14 },
   setup: { fontSize: 14, color: p.muted, marginBottom: 10, fontStyle: 'italic' },

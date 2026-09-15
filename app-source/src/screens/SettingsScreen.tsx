@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { PRIVACY_SUMMARY, WARRANTY_SUMMARY } from '../content/disclaimer';
 import HuePicker from '../components/HuePicker';
 import { ACCENTS, AccentId, Mode, Palette, useTheme } from '../theme';
@@ -19,6 +19,9 @@ const MODES: { id: Mode; label: string }[] = [
 ];
 
 const APP_VERSION = '1.0.0';
+
+// Hosted from the project repo's docs folder via GitHub Pages.
+const POLICY_BASE = 'https://ow3nvr86-wq.github.io/OWENS-';
 
 export default function SettingsScreen({ name, onReadSafety, onRedoSetup, onReset }: Props) {
   const { palette, mode, accent, customHue, setMode, setAccent, setCustomHue } = useTheme();
@@ -110,7 +113,23 @@ export default function SettingsScreen({ name, onReadSafety, onRedoSetup, onRese
         <Text style={s.chevron}>›</Text>
       </TouchableOpacity>
       {panel('privacy', 'Privacy', PRIVACY_SUMMARY)}
+      <TouchableOpacity
+        style={s.link}
+        onPress={() => Linking.openURL(`${POLICY_BASE}/privacy.html`)}
+        accessibilityRole="link"
+      >
+        <Text style={s.linkText}>Full privacy policy</Text>
+        <Text style={s.chevron}>↗</Text>
+      </TouchableOpacity>
       {panel('terms', 'Terms and liability', WARRANTY_SUMMARY)}
+      <TouchableOpacity
+        style={s.link}
+        onPress={() => Linking.openURL(`${POLICY_BASE}/terms.html`)}
+        accessibilityRole="link"
+      >
+        <Text style={s.linkText}>Full terms of use</Text>
+        <Text style={s.chevron}>↗</Text>
+      </TouchableOpacity>
       {panel(
         'agreement',
         'Your risk acknowledgement',

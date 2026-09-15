@@ -8,6 +8,7 @@ import AgreementScreen, { AGREEMENT_VERSION } from './src/screens/AgreementScree
 import OnboardingScreen from './src/screens/OnboardingScreen';
 import PlanScreen from './src/screens/PlanScreen';
 import DrillsScreen from './src/screens/DrillsScreen';
+import RecordScreen from './src/screens/RecordScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import { DISCLAIMER_VERSION } from './src/content/disclaimer';
 import {
@@ -17,11 +18,12 @@ import {
 import { Palette, ThemeProvider, useTheme } from './src/theme';
 
 type Gate = 'loading' | 'disclaimer' | 'agreement' | 'onboarding' | 'ready';
-type Tab = 'plan' | 'library' | 'settings';
+type Tab = 'plan' | 'library' | 'record' | 'settings';
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
   { id: 'plan', label: 'Plan', icon: '▦' },
   { id: 'library', label: 'Drills', icon: '☰' },
+  { id: 'record', label: 'Record', icon: '◷' },
   { id: 'settings', label: 'Settings', icon: '⚙' },
 ];
 
@@ -95,6 +97,7 @@ function Shell() {
         {tab === 'library' && (
           <DrillsScreen profile={profile} onBack={() => setTab('plan')} />
         )}
+        {tab === 'record' && <RecordScreen />}
         {tab === 'settings' && (
           <SettingsScreen
             name={typeof profile.name === 'string' ? profile.name : undefined}

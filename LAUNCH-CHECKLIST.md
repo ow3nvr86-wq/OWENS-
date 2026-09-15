@@ -31,8 +31,10 @@ Status as of 9 September 2026. Tick items off in order; the blockers come first.
 ## Legal and store listing
 
 - [x] Privacy policy written — `docs/privacy.html`
+- [x] Contact email filled in on both policy pages
+- [x] App icons replaced with original marks in both apps
+- [x] Both apps link out to the hosted policy pages from Settings
 - [x] Terms of use written — `docs/terms.html`
-- [ ] **Add a contact email** to both pages, replacing `[ADD YOUR CONTACT EMAIL HERE]`.
 - [ ] **Enable GitHub Pages** so both pages are publicly reachable: repo Settings → Pages →
       Source: Deploy from a branch → Branch `claude/new-session-v8qhxu`, folder `/docs` → Save.
 - [ ] Point the app's two policy links at the live URLs. They currently point at
