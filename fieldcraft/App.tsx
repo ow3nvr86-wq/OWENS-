@@ -8,6 +8,7 @@ import AgreementScreen, { AGREEMENT_VERSION } from './src/screens/AgreementScree
 import OnboardingScreen from './src/screens/OnboardingScreen';
 import PlanScreen from './src/screens/PlanScreen';
 import DrillsScreen from './src/screens/DrillsScreen';
+import BuildScreen from './src/screens/BuildScreen';
 import RecordScreen from './src/screens/RecordScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import { DISCLAIMER_VERSION } from './src/content/disclaimer';
@@ -18,11 +19,12 @@ import {
 import { Palette, ThemeProvider, useTheme } from './src/theme';
 
 type Gate = 'loading' | 'disclaimer' | 'agreement' | 'onboarding' | 'ready';
-type Tab = 'plan' | 'library' | 'record' | 'settings';
+type Tab = 'plan' | 'library' | 'build' | 'record' | 'settings';
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
   { id: 'plan', label: 'Plan', icon: '▦' },
   { id: 'library', label: 'Drills', icon: '☰' },
+  { id: 'build', label: 'Build', icon: '✚' },
   { id: 'record', label: 'Record', icon: '◷' },
   { id: 'settings', label: 'Settings', icon: '⚙' },
 ];
@@ -97,6 +99,7 @@ function Shell() {
         {tab === 'library' && (
           <DrillsScreen profile={profile} onBack={() => setTab('plan')} />
         )}
+        {tab === 'build' && <BuildScreen profile={profile} />}
         {tab === 'record' && <RecordScreen />}
         {tab === 'settings' && (
           <SettingsScreen

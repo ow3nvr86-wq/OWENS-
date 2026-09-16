@@ -79,3 +79,16 @@ export const tickKey = (cycle: number, day: number, drillId: string) =>
 
 export const loadTicks = () => readJSON<DrillTicks>(KEYS.drillTicks, {});
 export const saveTicks = (t: DrillTicks) => writeJSON(KEYS.drillTicks, t);
+
+/** A workout the player built themselves, as an ordered list of drill ids. */
+export type CustomWorkout = {
+  id: string;
+  name: string;
+  drillIds: string[];
+  createdAt: string;
+};
+
+const WORKOUTS_KEY = 'fieldcraft:workouts';
+
+export const loadWorkouts = () => readJSON<CustomWorkout[]>(WORKOUTS_KEY, []);
+export const saveWorkouts = (w: CustomWorkout[]) => writeJSON(WORKOUTS_KEY, w);

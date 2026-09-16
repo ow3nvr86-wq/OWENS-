@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Drill } from '../content/drills';
+import { badgesFrom, streakFrom } from '../progress';
+import SessionSummary from '../components/SessionSummary';
 import { RoutineDay, buildRoutine, dayTitle, estimateMinutes } from '../routine';
 import {
   DrillTicks, LogEntry, Profile, isDayComplete, loadCycle, loadLog, loadTicks,
@@ -22,6 +24,11 @@ export default function PlanScreen({ profile, onOpenLibrary }: Props) {
   const [open, setOpen] = useState<string | null>(null);
   const bodyRef = useRef<ScrollView>(null);
   const [ticks, setTicks] = useState<DrillTicks>({});
+  const [summary, setSummary] = useState<null | {
+    dayNumber: number; drillsDone: number; drillsTotal: number;
+    minutes: number; streak: number; daysDone: number;
+    daysTotal: number; newBadges: string[];
+  }>(null);
 
   useEffect(() => {
     (async () => {
@@ -65,8 +72,28 @@ export default function PlanScreen({ profile, onOpenLibrary }: Props) {
     } else {
       nextLog = [...log, { date: todayKey(), day: day.day, cycle }];
     }
+    // Badges earned by this session are the ones that were not earned before it.
+    const before = badgesFrom({ log, cycle, streak: streakFrom(log) })
+      .filter((b) => b.earned).map((b) => b.id);
+    const afterStreak = streakFrom(nextLog);
+    const gained = badgesFrom({ log: nextLog, cycle, streak: afterStreak })
+      .filter((b) => b.earned && !before.includes(b.id));
+
     setLog(nextLog);
     await saveLog(nextLog);
+
+    if (!done) {
+      setSummary({
+        dayNumber: day.day,
+        drillsDone: day.drills.filter((d) => ticks[tickKey(cycle, day.day, d.id)]).length,
+        drillsTotal: day.drills.length,
+        minutes: day.totalMinutes,
+        streak: afterStreak.current,
+        daysDone: routine.filter((r) => isDayComplete(nextLog, r.day, cycle)).length,
+        daysTotal: routine.length,
+        newBadges: gained.map((b) => b.name),
+      });
+    }
 
     // Finishing every day rolls the routine over into a fresh cycle.
     const finished = routine.every((d) => isDayComplete(nextLog, d.day, cycle));
@@ -123,6 +150,7 @@ export default function PlanScreen({ profile, onOpenLibrary }: Props) {
           total={routine.length}
           ticks={routine.map((d) => isDayComplete(log, d.day, cycle))}
           cycles={cycle}
+          streak={streakFrom(log).current}
         />
         <Text style={styles.dayFocus}>{dayTitle(day).toUpperCase()}</Text>
         <Text style={styles.dayTitle}>Day {day.day}</Text>
@@ -187,6 +215,10 @@ export default function PlanScreen({ profile, onOpenLibrary }: Props) {
           </Text>
         </TouchableOpacity>
       </ScrollView>
+
+      {summary ? (
+        <SessionSummary visible {...summary} onClose={() => setSummary(null)} />
+      ) : null}
     </View>
   );
 }

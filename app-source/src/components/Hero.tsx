@@ -9,9 +9,11 @@ type Props = {
   /** Which days of the current cycle are finished, in order. */
   ticks: boolean[];
   cycles: number;
+  /** Sessions in a row, counting a single rest day as not breaking the run. */
+  streak?: number;
 };
 
-export default function Hero({ name, done, total, ticks, cycles }: Props) {
+export default function Hero({ name, done, total, ticks, cycles, streak = 0 }: Props) {
   const { palette } = useTheme();
   const s = useMemo(() => makeStyles(palette), [palette]);
 
@@ -21,7 +23,9 @@ export default function Hero({ name, done, total, ticks, cycles }: Props) {
 
       <View style={s.top}>
         <Text style={s.label}>{name ? `${name.toUpperCase()}'S WEEK` : 'THIS WEEK'}</Text>
-        {cycles > 0 ? (
+        {streak > 1 ? (
+          <Text style={s.streak}>🔥 {streak} in a row</Text>
+        ) : cycles > 0 ? (
           <Text style={s.streak}>
             {cycles} week{cycles === 1 ? '' : 's'} banked
           </Text>
