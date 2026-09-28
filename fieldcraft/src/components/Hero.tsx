@@ -59,18 +59,24 @@ const makeStyles = (p: Palette) =>
     hero: {
       backgroundColor: p.ink, borderRadius: p.radiusLg,
       padding: 22, overflow: 'hidden', marginBottom: 22,
+      boxShadow: p.shadowStrong,
     },
-    ball: { position: 'absolute', right: -26, top: -22, fontSize: 130, opacity: 0.13 },
+    ball: { position: 'absolute', right: -26, top: -26, fontSize: 138, opacity: 0.12 },
     top: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-    label: { fontSize: 11, fontWeight: '800', letterSpacing: 1.8, color: p.onInkMuted },
-    streak: { fontSize: 12, fontWeight: '600', color: p.onInkMuted },
-    number: {
-      fontSize: 64, lineHeight: 72, fontWeight: '800',
-      color: p.onInk, letterSpacing: -3, marginTop: 4,
+    label: { fontSize: 11, fontWeight: '800', letterSpacing: 2.2, color: p.onInkMuted },
+    streak: {
+      fontSize: 12, fontWeight: '800', color: p.onInk,
+      backgroundColor: p.inkRaised, overflow: 'hidden',
+      paddingHorizontal: 10, paddingVertical: 5, borderRadius: 999,
     },
-    of: { fontSize: 30, fontWeight: '800', color: p.onInkMuted, letterSpacing: -1 },
+    number: {
+      fontSize: 76, lineHeight: 82, fontWeight: '800',
+      color: p.onInk, letterSpacing: -4, marginTop: 2,
+      fontVariant: ['tabular-nums'],
+    },
+    of: { fontSize: 32, fontWeight: '800', color: p.onInkMuted, letterSpacing: -1.2 },
     track: { flexDirection: 'row', gap: 6, marginTop: 14 },
-    tick: { flex: 1, height: 6, borderRadius: 3, backgroundColor: 'rgba(255,255,255,0.20)' },
-    tickOn: { backgroundColor: p.onInk },
+    tick: { flex: 1, height: 7, borderRadius: 4, backgroundColor: 'rgba(255,255,255,0.18)' },
+    tickOn: { backgroundColor: p.accent },
     caption: { fontSize: 13, color: p.onInkMuted, marginTop: 14 },
   });

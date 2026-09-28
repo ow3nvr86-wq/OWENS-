@@ -26,20 +26,33 @@ export type Palette = {
   bg: string; surface: string; raised: string;
   fg: string; muted: string; faint: string; line: string;
   accent: string; onAccent: string;
+  /** Accent at low opacity, for tinted surfaces and rails. */
+  accentSoft: string;
   ink: string; onInk: string; onInkMuted: string;
+  /** A lighter layer inside the ink card, so it is not one flat slab. */
+  inkRaised: string;
   radius: number; radiusLg: number; radiusPill: number;
+  /** Cross platform elevation. Ignored where unsupported. */
+  shadow: string;
+  shadowStrong: string;
 };
 
 const LIGHT = {
-  bg: '#fbfaf8', surface: '#ffffff', raised: '#f3f2ee',
-  fg: '#141413', muted: '#6b6b66', faint: '#9a9a93', line: '#e6e5e0',
-  ink: '#141413', onInk: '#ffffff', onInkMuted: 'rgba(255,255,255,0.62)',
+  bg: '#f7f6f3', surface: '#ffffff', raised: '#efeee9',
+  fg: '#100f0e', muted: '#63625c', faint: '#9a9a93', line: '#e2e1db',
+  ink: '#141413', onInk: '#ffffff', onInkMuted: 'rgba(255,255,255,0.60)',
+  inkRaised: 'rgba(255,255,255,0.09)',
+  shadow: '0 1px 2px rgba(16,15,14,0.05), 0 4px 14px rgba(16,15,14,0.05)',
+  shadowStrong: '0 2px 6px rgba(16,15,14,0.10), 0 12px 32px rgba(16,15,14,0.12)',
 };
 
 const DARK = {
-  bg: '#0f0f0e', surface: '#1a1a18', raised: '#232320',
-  fg: '#f4f4f1', muted: '#a2a29b', faint: '#6f6f69', line: '#2c2c28',
-  ink: '#1f1f1c', onInk: '#f7f7f4', onInkMuted: 'rgba(247,247,244,0.60)',
+  bg: '#0c0c0b', surface: '#171715', raised: '#212120',
+  fg: '#f6f6f3', muted: '#a6a69f', faint: '#71716b', line: '#2a2a27',
+  ink: '#1c1c1a', onInk: '#f8f8f5', onInkMuted: 'rgba(248,248,245,0.58)',
+  inkRaised: 'rgba(255,255,255,0.06)',
+  shadow: '0 1px 2px rgba(0,0,0,0.40), 0 6px 18px rgba(0,0,0,0.30)',
+  shadowStrong: '0 2px 8px rgba(0,0,0,0.50), 0 16px 40px rgba(0,0,0,0.45)',
 };
 
 /** Any hue on the wheel, tuned so it stays readable in each mode. */
@@ -63,6 +76,13 @@ function hslToHex(h: number, s: number, l: number): string {
   return `#${to(r)}${to(g)}${to(b)}`;
 }
 
+/** Same colour at a given opacity, for tints and rails. */
+function withAlpha(hex: string, alpha: number): string {
+  const n = hex.replace('#', '');
+  const [r, g, b] = [0, 2, 4].map((i) => parseInt(n.slice(i, i + 2), 16));
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 /** White text on a mid-dark accent, near-black on a light one. */
 function onAccentFor(hex: string): string {
   const n = hex.replace('#', '');
@@ -80,7 +100,8 @@ export function buildPalette(dark: boolean, accentId: AccentId, customHue: numbe
     ...base,
     accent,
     onAccent: onAccentFor(accent),
-    radius: 16, radiusLg: 24, radiusPill: 999,
+    accentSoft: withAlpha(accent, dark ? 0.18 : 0.10),
+    radius: 16, radiusLg: 22, radiusPill: 999,
   };
 }
 

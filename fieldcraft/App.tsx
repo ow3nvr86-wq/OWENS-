@@ -115,7 +115,7 @@ function Shell() {
         {TABS.map((t) => (
           <TouchableOpacity
             key={t.id}
-            style={s.tab}
+            style={[s.tab, tab === t.id && s.tabActive]}
             onPress={() => setTab(t.id)}
             accessibilityRole="tab"
             accessibilityState={{ selected: tab === t.id }}
@@ -157,10 +157,15 @@ const makeStyles = (p: Palette) =>
     centre: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: p.bg },
     tabBar: {
       flexDirection: 'row', borderTopWidth: 1, borderTopColor: p.line,
-      backgroundColor: p.surface, paddingTop: 8, paddingBottom: 6,
+      backgroundColor: p.surface, paddingTop: 8, paddingBottom: 8,
+      paddingHorizontal: 6, gap: 4,
     },
-    tab: { flex: 1, alignItems: 'center', paddingVertical: 4 },
-    tabIcon: { fontSize: 19, color: p.faint, marginBottom: 2 },
-    tabLabel: { fontSize: 11, fontWeight: '700', color: p.faint },
+    tab: {
+      flex: 1, alignItems: 'center', paddingVertical: 6,
+      borderRadius: 14, backgroundColor: 'transparent',
+    },
+    tabActive: { backgroundColor: p.accentSoft },
+    tabIcon: { fontSize: 19, color: p.faint, marginBottom: 3 },
+    tabLabel: { fontSize: 11, fontWeight: '700', color: p.faint, letterSpacing: .2 },
     tabOn: { color: p.accent },
   });

@@ -126,17 +126,19 @@ const makeStyles = (p: Palette) =>
   headerLink: { fontSize: 14, fontWeight: '700', color: p.fg },
   tabRow: { ...wrap, flexGrow: 0, paddingHorizontal: 18, paddingTop: 14 },
   tab: {
-    paddingHorizontal: 14, paddingVertical: 8, marginHorizontal: 5,
-    borderRadius: 20, backgroundColor: p.raised,
+    paddingHorizontal: 14, paddingVertical: 9, marginHorizontal: 5,
+    borderRadius: 20, backgroundColor: p.surface,
+    borderWidth: 1, borderColor: p.line,
   },
-  tabOn: { backgroundColor: p.accent },
+  tabOn: { backgroundColor: p.accent, borderColor: p.accent },
   tabText: { fontSize: 13, fontWeight: '700', color: p.muted },
   tabTextOn: { color: p.onAccent },
   list: { ...wrap, padding: 24, paddingTop: 16 },
   empty: { color: p.muted, fontSize: 15, lineHeight: 22 },
   card: {
-    backgroundColor: p.raised, borderRadius: p.radius,
-    padding: 18, marginBottom: 12,
+    backgroundColor: p.surface, borderRadius: p.radius,
+    padding: 18, marginBottom: 10,
+    borderWidth: 1, borderColor: p.line, boxShadow: p.shadow,
   },
   name: { fontSize: 17, fontWeight: '700', color: p.fg },
   work: { fontSize: 14, color: p.muted, marginTop: 3 },
@@ -149,6 +151,7 @@ const makeStyles = (p: Palette) =>
   stepText: { flex: 1, fontSize: 15, color: p.fg, lineHeight: 21 },
   cue: {
     marginTop: 8, fontSize: 14, fontWeight: '700', color: p.fg,
-    backgroundColor: p.bg, padding: 12, borderRadius: 10, lineHeight: 20,
+    backgroundColor: p.accentSoft, padding: 13, borderRadius: 12, lineHeight: 20,
+    borderLeftWidth: 3, borderLeftColor: p.accent,
   },
   });
