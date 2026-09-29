@@ -47,6 +47,10 @@ export default function HuePicker({ hue, onChange }: Props) {
         {...responder.panHandlers}
         accessibilityRole="adjustable"
         accessibilityLabel="Accent colour"
+        accessibilityValue={{ min: 0, max: 359, now: shown }}
+        aria-valuemin={0}
+        aria-valuemax={359}
+        aria-valuenow={shown}
       >
         {Array.from({ length: BANDS }).map((_, i) => (
           <View

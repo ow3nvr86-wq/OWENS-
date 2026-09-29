@@ -11,7 +11,11 @@ export default function DisclaimerScreen({ onAccept, ctaLabel = 'I understand' }
 
   return (
     <View style={s.root}>
-      <ScrollView contentContainerStyle={s.scroll}>
+      <ScrollView
+        contentContainerStyle={s.scroll}
+        focusable
+        accessibilityLabel="Safety notes"
+      >
         <View style={s.badge}>
           <Text style={s.badgeMark}>🏀</Text>
         </View>

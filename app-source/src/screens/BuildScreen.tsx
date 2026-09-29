@@ -4,6 +4,7 @@ import { DRILLS, Drill, Equipment } from '../content/drills';
 import { FOCUS_LABELS, estimateMinutes } from '../routine';
 import { CustomWorkout, Profile, loadWorkouts, saveWorkouts } from '../storage';
 import DrillTimer from '../components/DrillTimer';
+import { LIMITS, cleanText } from '../sanitize';
 import { Palette, useTheme } from '../theme';
 
 type Props = { profile: Profile };
@@ -55,7 +56,10 @@ export default function BuildScreen({ profile }: Props) {
       const d = DRILLS.find((x) => x.id === id);
       return sum + (d ? estimateMinutes(d) : 0);
     }, 0);
-    const canSave = draft.name.trim().length > 0 && chosen.length > 0;
+    const canSave =
+      cleanText(draft.name, LIMITS.workoutName).length > 0 &&
+      chosen.length > 0 &&
+      chosen.length <= LIMITS.drillsPerWorkout;
 
     const toggle = (id: string) =>
       setMode({
@@ -75,7 +79,10 @@ export default function BuildScreen({ profile }: Props) {
             placeholder="Name it. Shooting night, pre season, anything."
             placeholderTextColor={palette.faint}
             value={draft.name}
-            onChangeText={(name) => setMode({ kind: 'edit', draft: { ...draft, name } })}
+            maxLength={LIMITS.workoutName}
+            onChangeText={(name) =>
+              setMode({ kind: 'edit', draft: { ...draft, name: name.slice(0, LIMITS.workoutName) } })
+            }
           />
           <Text style={s.meta}>
             {chosen.length} {chosen.length === 1 ? 'drill' : 'drills'} · about {minutes} min
@@ -113,7 +120,7 @@ export default function BuildScreen({ profile }: Props) {
             style={[s.cta, !canSave && s.ctaOff]}
             disabled={!canSave}
             onPress={async () => {
-              await persist([...workouts.filter((w) => w.id !== draft.id), { ...draft, name: draft.name.trim() }]);
+              await persist([...workouts.filter((w) => w.id !== draft.id).slice(-LIMITS.workouts + 1), { ...draft, name: cleanText(draft.name, LIMITS.workoutName) }]);
               setMode({ kind: 'list' });
             }}
             accessibilityRole="button"

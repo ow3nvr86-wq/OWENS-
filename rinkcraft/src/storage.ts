@@ -3,6 +3,9 @@
 // the ones inherited when this project was copied from Court Craft.
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  parseAgreement, parseCycle, parseLog, parseProfile, parseTicks, parseWorkouts,
+} from './sanitize';
 
 export const KEYS = {
   profile: 'rinkcraft:profile',
@@ -25,9 +28,14 @@ export async function readJSON<T>(key: string, fallback: T): Promise<T> {
   }
 }
 
+/** Refuse to persist anything absurdly large, whatever produced it. */
+const MAX_VALUE_BYTES = 512 * 1024;
+
 export async function writeJSON(key: string, value: unknown): Promise<void> {
   try {
-    await AsyncStorage.setItem(key, JSON.stringify(value));
+    const payload = JSON.stringify(value);
+    if (payload.length > MAX_VALUE_BYTES) return;
+    await AsyncStorage.setItem(key, payload);
   } catch {
     // Storage being unavailable must never crash a training session.
   }
@@ -35,7 +43,8 @@ export async function writeJSON(key: string, value: unknown): Promise<void> {
 
 export type Profile = Record<string, string | number | string[]>;
 
-export const loadProfile = () => readJSON<Profile | null>(KEYS.profile, null);
+export const loadProfile = async (): Promise<Profile | null> =>
+  parseProfile(await readJSON<unknown>(KEYS.profile, null));
 export const saveProfile = (p: Profile) => writeJSON(KEYS.profile, p);
 
 export const loadAccepted = () => readJSON<string | null>(KEYS.accepted, null);
@@ -44,10 +53,12 @@ export const saveAccepted = (version: string) => writeJSON(KEYS.accepted, versio
 /** One completed training day. cycle counts how many times the routine has been finished. */
 export type LogEntry = { date: string; day: number; cycle: number };
 
-export const loadLog = () => readJSON<LogEntry[]>(KEYS.log, []);
+export const loadLog = async (): Promise<LogEntry[]> =>
+  parseLog(await readJSON<unknown>(KEYS.log, []));
 export const saveLog = (log: LogEntry[]) => writeJSON(KEYS.log, log);
 
-export const loadCycle = () => readJSON<number>(KEYS.cycle, 0);
+export const loadCycle = async (): Promise<number> =>
+  parseCycle(await readJSON<unknown>(KEYS.cycle, 0));
 export const saveCycle = (cycle: number) => writeJSON(KEYS.cycle, cycle);
 
 export const todayKey = () => new Date().toISOString().slice(0, 10);
@@ -59,7 +70,8 @@ export function isDayComplete(log: LogEntry[], day: number, cycle: number): bool
 /** Recorded when the player accepts the injury acknowledgement. */
 export type Agreement = { version: string; acceptedAt: string; name?: string };
 
-export const loadAgreement = () => readJSON<Agreement | null>(KEYS.agreement, null);
+export const loadAgreement = async (): Promise<Agreement | null> =>
+  parseAgreement(await readJSON<unknown>(KEYS.agreement, null));
 export const saveAgreement = (a: Agreement) => writeJSON(KEYS.agreement, a);
 
 /** Wipes everything this app has stored on the device. */
@@ -77,7 +89,8 @@ export type DrillTicks = Record<string, boolean>;
 export const tickKey = (cycle: number, day: number, drillId: string) =>
   `${cycle}:${day}:${drillId}`;
 
-export const loadTicks = () => readJSON<DrillTicks>(KEYS.drillTicks, {});
+export const loadTicks = async (): Promise<DrillTicks> =>
+  parseTicks(await readJSON<unknown>(KEYS.drillTicks, {}));
 export const saveTicks = (t: DrillTicks) => writeJSON(KEYS.drillTicks, t);
 
 /** A workout the player built themselves, as an ordered list of drill ids. */
@@ -90,5 +103,6 @@ export type CustomWorkout = {
 
 const WORKOUTS_KEY = 'rinkcraft:workouts';
 
-export const loadWorkouts = () => readJSON<CustomWorkout[]>(WORKOUTS_KEY, []);
+export const loadWorkouts = async (): Promise<CustomWorkout[]> =>
+  parseWorkouts(await readJSON<unknown>(WORKOUTS_KEY, []));
 export const saveWorkouts = (w: CustomWorkout[]) => writeJSON(WORKOUTS_KEY, w);

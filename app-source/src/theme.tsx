@@ -39,7 +39,7 @@ export type Palette = {
 
 const LIGHT = {
   bg: '#f7f6f3', surface: '#ffffff', raised: '#efeee9',
-  fg: '#100f0e', muted: '#63625c', faint: '#9a9a93', line: '#e2e1db',
+  fg: '#100f0e', muted: '#63625c', faint: '#6e6e66', line: '#e2e1db',
   ink: '#141413', onInk: '#ffffff', onInkMuted: 'rgba(255,255,255,0.60)',
   inkRaised: 'rgba(255,255,255,0.09)',
   shadow: '0 1px 2px rgba(16,15,14,0.05), 0 4px 14px rgba(16,15,14,0.05)',
@@ -48,7 +48,7 @@ const LIGHT = {
 
 const DARK = {
   bg: '#0c0c0b', surface: '#171715', raised: '#212120',
-  fg: '#f6f6f3', muted: '#a6a69f', faint: '#71716b', line: '#2a2a27',
+  fg: '#f6f6f3', muted: '#a6a69f', faint: '#8b8b84', line: '#2a2a27',
   ink: '#1c1c1a', onInk: '#f8f8f5', onInkMuted: 'rgba(248,248,245,0.58)',
   inkRaised: 'rgba(255,255,255,0.06)',
   shadow: '0 1px 2px rgba(0,0,0,0.40), 0 6px 18px rgba(0,0,0,0.30)',

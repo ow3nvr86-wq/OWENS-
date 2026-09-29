@@ -111,7 +111,7 @@ function Shell() {
         )}
       </View>
 
-      <View style={s.tabBar}>
+      <View style={s.tabBar} accessibilityRole="tablist">
         {TABS.map((t) => (
           <TouchableOpacity
             key={t.id}
@@ -119,6 +119,7 @@ function Shell() {
             onPress={() => setTab(t.id)}
             accessibilityRole="tab"
             accessibilityState={{ selected: tab === t.id }}
+            aria-selected={tab === t.id}
             accessibilityLabel={t.label}
           >
             <Text style={[s.tabIcon, tab === t.id && s.tabOn]}>{t.icon}</Text>

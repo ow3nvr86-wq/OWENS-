@@ -122,6 +122,7 @@ export default function PlanScreen({ profile, onOpenLibrary }: Props) {
         showsHorizontalScrollIndicator={false}
         style={styles.pillsRow}
         contentContainerStyle={styles.pills}
+        accessibilityRole="tablist"
       >
         {routine.map((d, i) => {
           const complete = isDayComplete(log, d.day, cycle);
@@ -132,6 +133,7 @@ export default function PlanScreen({ profile, onOpenLibrary }: Props) {
               onPress={() => { setSelected(i); setOpen(null); }}
               accessibilityRole="tab"
               accessibilityState={{ selected: on }}
+              aria-selected={on}
               accessibilityLabel={`Day ${d.day}`}
               style={[styles.pill, on && styles.pillOn]}
             >
@@ -163,11 +165,9 @@ export default function PlanScreen({ profile, onOpenLibrary }: Props) {
           const isOpen = open === d.id;
           const ticked = !!ticks[tickKey(cycle, day.day, d.id)];
           return (
-            <TouchableOpacity
+            <View
               key={d.id}
               style={[styles.card, ticked && styles.cardDone]}
-              onPress={() => setOpen(isOpen ? null : d.id)}
-              accessibilityRole="button"
             >
               <View style={styles.cardHead}>
                 <TouchableOpacity
@@ -175,15 +175,22 @@ export default function PlanScreen({ profile, onOpenLibrary }: Props) {
                   onPress={() => toggleTick(d.id)}
                   accessibilityRole="checkbox"
                   accessibilityState={{ checked: ticked }}
+                  aria-checked={ticked}
                   accessibilityLabel={`Mark ${d.name} done`}
                   hitSlop={8}
                 >
                   {ticked ? <Text style={styles.tickMark}>✓</Text> : null}
                 </TouchableOpacity>
-                <View style={styles.cardText}>
+                <TouchableOpacity
+                  style={styles.cardText}
+                  onPress={() => setOpen(isOpen ? null : d.id)}
+                  accessibilityRole="button"
+                  accessibilityState={{ expanded: isOpen }}
+                  accessibilityLabel={`${d.name}, ${isOpen ? 'hide' : 'show'} details`}
+                >
                   <Text style={[styles.name, ticked && styles.nameDone]}>{d.name}</Text>
                   <Text style={styles.work}>{d.work}  ·  ~{estimateMinutes(d)} min</Text>
-                </View>
+                </TouchableOpacity>
               </View>
               {isOpen && (
                 <View style={styles.detail}>
@@ -201,7 +208,7 @@ export default function PlanScreen({ profile, onOpenLibrary }: Props) {
                   />
                 </View>
               )}
-            </TouchableOpacity>
+            </View>
           );
         })}
 

@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { QUIZ, QuizOption } from '../content/quiz';
 import { Profile } from '../storage';
+import { LIMITS, cleanText } from '../sanitize';
 import { Palette, useTheme } from '../theme';
 
 type Props = { onDone: (profile: Profile) => void };
@@ -49,7 +50,7 @@ export default function OnboardingScreen({ onDone }: Props) {
   function next() {
     if (!canContinue) return;
     if (index < QUIZ.length - 1) setIndex(index + 1);
-    else onDone(answers);
+    else onDone({ ...answers, name: cleanText(answers.name, LIMITS.name) });
   }
 
   return (
@@ -75,7 +76,10 @@ export default function OnboardingScreen({ onDone }: Props) {
             placeholder={step.placeholder}
             placeholderTextColor={palette.faint}
             value={typeof current === 'string' ? current : ''}
-            onChangeText={(text) => setAnswers((p) => ({ ...p, [step.key]: text }))}
+            maxLength={LIMITS.name}
+            onChangeText={(text) =>
+              setAnswers((p) => ({ ...p, [step.key]: text.slice(0, LIMITS.name) }))
+            }
             autoFocus
             returnKeyType="next"
             onSubmitEditing={next}

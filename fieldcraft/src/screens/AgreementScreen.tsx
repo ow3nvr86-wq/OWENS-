@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { LIMITS, cleanText } from '../sanitize';
 import { Palette, useTheme } from '../theme';
 
 export const AGREEMENT_VERSION = '1.0';
@@ -24,7 +25,7 @@ export default function AgreementScreen({ onAccept }: Props) {
   const [name, setName] = useState('');
 
   const allChecked = checked.every(Boolean);
-  const canAccept = allChecked && name.trim().length > 1;
+  const canAccept = allChecked && cleanText(name, LIMITS.fullName).length > 1;
   const today = new Date().toLocaleDateString();
 
   function toggle(i: number) {
@@ -47,6 +48,7 @@ export default function AgreementScreen({ onAccept }: Props) {
             onPress={() => toggle(i)}
             accessibilityRole="checkbox"
             accessibilityState={{ checked: checked[i] }}
+            aria-checked={checked[i]}
           >
             <View style={[s.box, checked[i] && s.boxOn]}>
               {checked[i] ? <Text style={s.tick}>✓</Text> : null}
@@ -61,7 +63,8 @@ export default function AgreementScreen({ onAccept }: Props) {
           placeholder="Full name"
           placeholderTextColor={palette.faint}
           value={name}
-          onChangeText={setName}
+          maxLength={LIMITS.fullName}
+          onChangeText={(t) => setName(t.slice(0, LIMITS.fullName))}
           autoCapitalize="words"
         />
         <Text style={s.date}>Dated {today}</Text>
@@ -70,7 +73,7 @@ export default function AgreementScreen({ onAccept }: Props) {
       <View style={s.footer}>
         <TouchableOpacity
           style={[s.cta, !canAccept && s.ctaOff]}
-          onPress={() => canAccept && onAccept(name.trim())}
+          onPress={() => canAccept && onAccept(cleanText(name, LIMITS.fullName))}
           disabled={!canAccept}
           accessibilityRole="button"
         >
