@@ -31,13 +31,14 @@
   --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   --radius: 14px;
+  --shadow: 0 10px 24px rgb(19 26 44 / .18);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0C1019; --surface: #151B29; --surface-2: #1B2233; --ink: #E6EAF3; --muted: #9AA4BA;
     --line: #2A3349; --accent: #8193FF; --accent-ink: #0C1019; --accent-soft: #232C4E;
-    --ok: #4BC983; --bad: #FF6B74; --warn: #FFB05C;
+    --ok: #4BC983; --bad: #FF6B74; --warn: #FFB05C; --shadow: 0 10px 28px rgb(0 0 0 / .55);
     --c-red: #FF5B61; --c-blue: #5E95FF; --c-green: #3FD07B; --c-purple: #C27DFF;
     color-scheme: dark;
   }
@@ -45,7 +46,7 @@
 :root[data-theme="dark"] {
   --bg: #0C1019; --surface: #151B29; --surface-2: #1B2233; --ink: #E6EAF3; --muted: #9AA4BA;
   --line: #2A3349; --accent: #8193FF; --accent-ink: #0C1019; --accent-soft: #232C4E;
-  --ok: #4BC983; --bad: #FF6B74; --warn: #FFB05C;
+  --ok: #4BC983; --bad: #FF6B74; --warn: #FFB05C; --shadow: 0 10px 28px rgb(0 0 0 / .55);
   --c-red: #FF5B61; --c-blue: #5E95FF; --c-green: #3FD07B; --c-purple: #C27DFF;
   color-scheme: dark;
 }
@@ -246,6 +247,7 @@ kbd {
   background: var(--surface-2);
 }
 .answer:focus { border-color: var(--accent); outline: none; }
+.answer::placeholder { color: var(--muted); font: 400 17px/1.4 var(--f-body); }
 .span-form { display: grid; gap: 12px; justify-items: center; width: 100%; }
 
 /* 2-back */
@@ -269,15 +271,31 @@ kbd {
 .cell.miss { animation: badp .3s ease-out; border-color: var(--bad); }
 
 /* Anagram */
-.tiles { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.tiles {
+  position: relative; /* tiles measure their slots against this box while dragging */
+  display: flex; flex-wrap: wrap; gap: clamp(5px, 1.5vw, 8px); justify-content: center;
+  padding: 8px;
+  user-select: none; -webkit-user-select: none;
+}
 .tile {
-  width: clamp(42px, 10vw, 58px); aspect-ratio: 1;
+  position: relative;
+  width: clamp(38px, 10.5vw, 62px); aspect-ratio: 1;
   display: grid; place-items: center;
+  padding: 0;
   border-radius: 10px;
   background: var(--accent-soft);
   border: 1.5px solid var(--accent);
+  color: var(--ink);
   font: 800 clamp(22px, 5vw, 30px)/1 var(--f-display);
+  cursor: grab;
+  touch-action: none;
+  transition: transform .16s ease, background-color .15s, color .15s;
 }
+.tile:hover { background: var(--surface); }
+.tile.typed { background: var(--accent); color: var(--accent-ink); }
+.tile.selected { transform: translateY(-6px); outline: 3px solid var(--accent); outline-offset: 3px; }
+.tile.dragging { z-index: 2; cursor: grabbing; transition: none; box-shadow: var(--shadow); background: var(--surface); }
+.tiles.solved .tile { background: var(--ok); border-color: var(--ok); color: var(--surface); }
 
 /* Riddle */
 .question { margin: 0; font: 600 clamp(20px, 3vw, 25px)/1.35 var(--f-display); letter-spacing: -0.01em; text-wrap: balance; max-width: 34ch; }
@@ -482,8 +500,8 @@ kbd {
     anagram: {
       name: 'Unscramble', trains: 'Verbal fluency', time: '60 s', unit: 'words', higher: true,
       glyph: 'TKCORE',
-      how: 'Each set of six letters spells one word. Type the word to score. It is accepted the moment it is right.',
-      keys: 'Type the word. Enter skips and shows the answer.', run: runAnagram
+      how: 'Each set of six letter tiles spells one word. Rearrange the tiles until they spell it: <b>drag</b> a tile to a new spot, <b>tap two tiles</b> to swap them, or just <b>type</b> and the tiles jump into place. It scores the moment the tiles spell the word.',
+      keys: 'Drag or tap tiles, or type. Backspace undoes a letter, Enter skips.', run: runAnagram
     },
     riddle: {
       name: 'Riddle Round', trains: 'Reasoning', time: '~2 min', unit: 'of 3', higher: true,
@@ -911,32 +929,213 @@ kbd {
   }
 
   // ---------- 6. Anagrams ----------
+  // The tiles are the answer. Dragging, tap-to-swap and typing all rearrange the same
+  // `order`; the word scores as soon as the tiles spell it.
+  // Typing works from `base` (the arrangement when typing began): each typed letter pulls
+  // the first matching tile to the front, so Backspace simply puts it back.
   function runAnagram(arena, done) {
     const pool = shuffle(WORDS);
+    const HINT = 'Drag tiles, tap two to swap, or type.';
     arena.innerHTML = `<div class="play">
-      <div class="tiles" id="at" aria-live="polite"></div>
-      <label class="sr-only" for="aa">Your word</label>
-      <input id="aa" class="answer" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next">
-      <p class="hint" id="ah">Accepted as soon as it is right. Enter skips.</p>
+      <div class="tiles" id="at" role="group" aria-label="Letter tiles"></div>
+      <label class="sr-only" for="aa">Type the word</label>
+      <input id="aa" class="answer" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next" placeholder="or type here">
+      <div class="row">
+        <button class="btn" id="ash" type="button">Shuffle</button>
+        <button class="btn" id="ask" type="button">Skip <kbd>Enter</kbd></button>
+      </div>
+      <p class="hint" id="ah" aria-live="polite">${HINT}</p>
     </div>`;
-    const tiles = $('#at', arena), inp = $('#aa', arena), hint = $('#ah', arena);
+    const tilesEl = $('#at', arena), inp = $('#aa', arena), hint = $('#ah', arena);
     let idx = 0, word = '', solved = 0, skipped = 0;
-    const next = () => {
+    let base = [], order = [], typedCount = 0, selected = null, locked = false;
+    let els = new Map(), drag = null, justDragged = false;
+
+    const spelled = () => order.map(t => t.ch).join('');
+    const layout = () => new Map([...els].map(([id, b]) => [id, [b.offsetLeft, b.offsetTop]]));
+    // Slide tiles from where they were to their new slot.
+    const flip = (before, skip) => {
+      els.forEach((b, id) => {
+        if (b === skip) return;
+        const [x, y] = before.get(id);
+        const dx = x - b.offsetLeft, dy = y - b.offsetTop;
+        if (!dx && !dy) return;
+        b.style.transition = 'none';
+        b.style.transform = `translate(${dx}px, ${dy}px)`;
+        void b.offsetWidth;
+        b.style.transition = '';
+        b.style.transform = '';
+      });
+    };
+    // Put the tile elements in `order` and refresh their state, keeping keyboard focus.
+    const sync = (animate, skip) => {
+      const before = animate ? layout() : null;
+      const focusedId = document.activeElement && document.activeElement.classList.contains('tile') ? document.activeElement.dataset.id : null;
+      order.forEach((t, i) => {
+        const b = els.get(t.id);
+        tilesEl.appendChild(b);
+        b.classList.toggle('typed', i < typedCount);
+        b.classList.toggle('selected', selected === t.id);
+        b.setAttribute('aria-label', `${t.ch.toUpperCase()}, tile ${i + 1} of ${order.length}`);
+      });
+      if (before) flip(before, skip);
+      if (focusedId != null) els.get(+focusedId).focus({ preventScroll: true });
+    };
+    const check = () => {
+      if (spelled() !== word) return;
+      locked = true;
+      solved++;
+      hudScore(String(solved));
+      tilesEl.classList.add('solved');
+      hint.textContent = `${word.toUpperCase()}. Got it.`;
+      later(next, 450);
+    };
+    // After a drag, swap or shuffle the arrangement becomes the new starting point for typing.
+    const commit = () => { base = order.slice(); typedCount = 0; inp.value = ''; };
+
+    function next() {
       word = pool[idx++ % pool.length];
       let s;
       do { s = shuffle(word.split('')).join(''); } while (s === word);
-      tiles.innerHTML = s.toUpperCase().split('').map(c => `<span class="tile">${c}</span>`).join('');
+      base = s.split('').map((ch, i) => ({ id: i, ch }));
+      order = base.slice();
+      typedCount = 0; selected = null; locked = false;
       inp.value = '';
+      tilesEl.classList.remove('solved');
+      tilesEl.innerHTML = '';
+      els = new Map(base.map(t => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'tile';
+        b.dataset.id = t.id;
+        b.textContent = t.ch.toUpperCase();
+        return [t.id, b];
+      }));
+      sync(false);
+    }
+
+    const applyTyped = () => {
+      if (locked) return;
+      const raw = inp.value.toLowerCase().replace(/[^a-z]/g, '');
+      const rest = base.slice(), picked = [];
+      let missing = '';
+      for (const ch of raw) {
+        const k = rest.findIndex(t => t.ch === ch);
+        if (k < 0) { missing = ch; break; }
+        picked.push(rest.splice(k, 1)[0]);
+      }
+      inp.value = picked.map(t => t.ch).join('');
+      if (missing) { hint.textContent = `There is no spare ${missing.toUpperCase()} tile.`; flash(tilesEl, false); }
+      else hint.textContent = HINT;
+      order = picked.concat(rest);
+      typedCount = picked.length;
+      selected = null;
+      sync(true);
+      check();
     };
-    inp.addEventListener('input', () => {
-      if (inp.value.trim().toLowerCase() === word) { solved++; hudScore(String(solved)); flash(tiles, true); hint.textContent = 'Accepted as soon as it is right. Enter skips.'; next(); }
+    const skip = () => {
+      if (locked) return;
+      skipped++;
+      hint.textContent = `That one was ${word.toUpperCase()}.`;
+      flash(tilesEl, false);
+      next();
+    };
+    const reshuffle = () => {
+      if (locked) return;
+      let o;
+      do { o = shuffle(order); } while (o.map(t => t.ch).join('') === word);
+      order = o;
+      selected = null;
+      commit();
+      sync(true);
+    };
+
+    inp.addEventListener('input', applyTyped);
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); skip(); } });
+    $('#ask', arena).addEventListener('click', skip);
+    $('#ash', arena).addEventListener('click', reshuffle);
+    // Typing works even when a tile or button has focus.
+    onKey(e => {
+      if (e.target === inp || e.ctrlKey || e.metaKey || e.altKey) return;
+      if (/^[a-z]$/i.test(e.key)) { e.preventDefault(); inp.value += e.key; applyTyped(); }
+      else if (e.key === 'Backspace') { e.preventDefault(); inp.value = inp.value.slice(0, -1); applyTyped(); }
+      else if (e.key === 'Enter' && !(e.target instanceof HTMLButtonElement)) { e.preventDefault(); skip(); }
     });
-    inp.addEventListener('keydown', e => {
-      if (e.key === 'Enter') { e.preventDefault(); skipped++; hint.textContent = `That one was ${word.toUpperCase()}.`; flash(tiles, false); next(); }
+
+    // Tap one tile, then another, to swap them.
+    tilesEl.addEventListener('click', e => {
+      if (justDragged || locked) return;
+      const b = e.target.closest('.tile');
+      if (!b) return;
+      const id = +b.dataset.id;
+      if (selected === null) selected = id;
+      else if (selected === id) selected = null;
+      else {
+        const i = order.findIndex(t => t.id === selected), j = order.findIndex(t => t.id === id);
+        [order[i], order[j]] = [order[j], order[i]];
+        selected = null;
+        commit();
+        sync(true);
+        check();
+        return;
+      }
+      sync(false);
     });
+
+    // Drag a tile to a new slot. Capture starts only once the pointer has moved,
+    // so a plain tap still reaches the click handler above.
+    tilesEl.addEventListener('pointerdown', e => {
+      const b = e.target.closest('.tile');
+      if (!b || locked || e.button > 0) return;
+      drag = { el: b, id: +b.dataset.id, pid: e.pointerId, sx: e.clientX, sy: e.clientY, gx: e.clientX - b.getBoundingClientRect().left, gy: e.clientY - b.getBoundingClientRect().top, active: false };
+    });
+    tilesEl.addEventListener('pointermove', e => {
+      if (!drag || e.pointerId !== drag.pid) return;
+      if (!drag.active) {
+        if (Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) < 6) return;
+        drag.active = true;
+        tilesEl.setPointerCapture(e.pointerId);
+        drag.el.classList.add('dragging');
+        if (selected !== null) { selected = null; sync(false); }
+      }
+      e.preventDefault();
+      const box = tilesEl.getBoundingClientRect();
+      const px = e.clientX - box.left - tilesEl.clientLeft, py = e.clientY - box.top - tilesEl.clientTop;
+      // Slot = how many other tiles sit before the pointer in reading order.
+      let target = 0;
+      els.forEach(o => {
+        if (o === drag.el) return;
+        const h = o.offsetHeight, cx = o.offsetLeft + o.offsetWidth / 2, cy = o.offsetTop + h / 2;
+        if (cy < py - h / 2 || (Math.abs(cy - py) <= h / 2 && cx < px)) target++;
+      });
+      const from = order.findIndex(t => t.id === drag.id);
+      if (target !== from) {
+        const [t] = order.splice(from, 1);
+        order.splice(target, 0, t);
+        typedCount = 0;
+        sync(true, drag.el);
+      }
+      drag.el.style.transform = `translate(${px - drag.gx - drag.el.offsetLeft}px, ${py - drag.gy - drag.el.offsetTop}px)`;
+    });
+    const endDrag = e => {
+      if (!drag || e.pointerId !== drag.pid) return;
+      const d = drag;
+      drag = null;
+      if (!d.active) return;
+      justDragged = true;
+      setTimeout(() => { justDragged = false; }, 0);
+      d.el.classList.remove('dragging');
+      d.el.style.transform = '';
+      commit();
+      sync(false);
+      check();
+    };
+    tilesEl.addEventListener('pointerup', endDrag);
+    tilesEl.addEventListener('pointercancel', endDrag);
+
     hudScore('0');
     next();
-    inp.focus();
+    if (matchMedia('(hover: hover)').matches) inp.focus();
     countdown(60, () => done({ score: solved, detail: `${skipped} skipped.` }));
   }
 
