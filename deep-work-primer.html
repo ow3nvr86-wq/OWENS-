@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Deep Work Primer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one centred column. Hero with two warm-up routes, then a grid of eight drills.
+   Play happens in a single stage panel that replaces the list, with a HUD and route progress bar. */
+:root {
+  --bg: #ECEFF5;
+  --surface: #FFFFFF;
+  --surface-2: #F4F6FA;
+  --ink: #131A2C;
+  --muted: #535D74;
+  --line: #D2D8E3;
+  --accent: #2B45E6;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #E1E6FD;
+  --ok: #157A46;
+  --bad: #C02C36;
+  --warn: #A85800;
+  --c-red: #D12530;
+  --c-blue: #1E5CDB;
+  --c-green: #15853B;
+  --c-purple: #8729CC;
+  --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --radius: 14px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0C1019; --surface: #151B29; --surface-2: #1B2233; --ink: #E6EAF3; --muted: #9AA4BA;
+    --line: #2A3349; --accent: #8193FF; --accent-ink: #0C1019; --accent-soft: #232C4E;
+    --ok: #4BC983; --bad: #FF6B74; --warn: #FFB05C;
+    --c-red: #FF5B61; --c-blue: #5E95FF; --c-green: #3FD07B; --c-purple: #C27DFF;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0C1019; --surface: #151B29; --surface-2: #1B2233; --ink: #E6EAF3; --muted: #9AA4BA;
+  --line: #2A3349; --accent: #8193FF; --accent-ink: #0C1019; --accent-soft: #232C4E;
+  --ok: #4BC983; --bad: #FF6B74; --warn: #FFB05C;
+  --c-red: #FF5B61; --c-blue: #5E95FF; --c-green: #3FD07B; --c-purple: #C27DFF;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.55 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+[hidden] { display: none !important; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-inline: clamp(16px, 4vw, 32px);
+  padding-block: 24px 64px;
+  display: grid;
+  gap: 28px;
+}
+
+/* Masthead */
+.masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 10px; font: 700 18px/1 var(--f-display); letter-spacing: -0.01em; }
+.mark { width: 26px; height: 26px; position: relative; flex: none; }
+.mark::before, .mark::after { content: ""; position: absolute; border-radius: 50%; }
+.mark::before { inset: 0; border: 3px solid var(--accent); }
+.mark::after { width: 10px; height: 10px; background: var(--accent); top: 8px; left: 8px; }
+.stats { display: flex; gap: 22px; margin: 0; }
+.stats div { display: grid; gap: 2px; }
+.stats dt { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.stats dd { margin: 0; font: 700 20px/1 var(--f-mono); font-variant-numeric: tabular-nums; }
+
+/* Hero */
+.hero { display: grid; gap: 12px; max-width: 720px; }
+.hero h1 {
+  margin: 0;
+  font: 800 clamp(34px, 6vw, 58px)/1.02 var(--f-display);
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+.lead { margin: 0; color: var(--muted); font-size: 17px; max-width: 62ch; }
+
+/* Routes */
+.routes { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 14px; }
+.route {
+  text-align: left; cursor: pointer;
+  display: grid; gap: 8px; align-content: start;
+  padding: 20px 22px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+  transition: border-color .15s, transform .15s;
+}
+.route:hover { border-color: var(--accent); transform: translateY(-1px); }
+.route.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.route-name { font: 800 24px/1.1 var(--f-display); letter-spacing: -0.02em; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.route-meta { font: 500 13px/1.3 var(--f-mono); opacity: .85; }
+.route-list { font-size: 14px; opacity: .85; }
+
+.intent { display: grid; gap: 6px; max-width: 560px; }
+.intent label { font-weight: 700; font-size: 14px; }
+.field {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+}
+.field::placeholder { color: var(--muted); }
+
+.section-h { margin: 8px 0 0; font: 700 13px/1 var(--f-body); text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+
+/* Drill grid */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+.card {
+  text-align: left; cursor: pointer;
+  display: grid; grid-template-rows: auto auto 1fr auto; gap: 6px;
+  padding: 16px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+  transition: border-color .15s, transform .15s;
+  min-width: 0;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.glyph {
+  height: 74px; display: grid; place-items: center;
+  border-radius: 10px; background: var(--surface-2);
+  font: 800 26px/1 var(--f-display); letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+.glyph.mono { font: 700 22px/1 var(--f-mono); }
+.card-name { font: 700 18px/1.2 var(--f-display); }
+.card-trains { font-size: 14px; color: var(--muted); }
+.card-foot { display: flex; justify-content: space-between; gap: 8px; font: 500 12px/1.3 var(--f-mono); color: var(--muted); padding-top: 8px; border-top: 1px solid var(--line); margin-top: 6px; }
+.card-foot .best { color: var(--ink); }
+
+/* Buttons */
+.btn {
+  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 10px; justify-content: center;
+  padding: 11px 18px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+  font-weight: 700;
+}
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn.ghost { background: transparent; border-color: transparent; padding-inline: 8px; color: var(--muted); }
+.btn.ghost:hover { color: var(--ink); }
+kbd {
+  font: 500 11px/1 var(--f-mono);
+  padding: 3px 5px;
+  border-radius: 4px;
+  border: 1px solid currentColor;
+  opacity: .7;
+}
+@media (hover: none) { kbd { display: none; } }
+.row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+
+/* Stage */
+.stage { display: grid; gap: 14px; }
+.route-bar { display: flex; gap: 4px; }
+.route-bar span { flex: 1; height: 5px; border-radius: 3px; background: var(--line); }
+.route-bar span.done { background: var(--accent); opacity: .45; }
+.route-bar span.now { background: var(--accent); }
+.stage-head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.stage-title { flex: 1 1 200px; min-width: 0; }
+.stage-title h2 { margin: 0; font: 800 26px/1.1 var(--f-display); letter-spacing: -0.02em; }
+.eyebrow { margin: 0 0 4px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted); }
+.hud { display: flex; gap: 10px; }
+.hud > div {
+  display: grid; gap: 2px; min-width: 96px;
+  padding: 8px 12px; border-radius: 10px;
+  background: var(--surface); border: 1.5px solid var(--line);
+}
+.hud-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+.hud .mono { font-size: 18px; font-weight: 700; }
+#hudTimer.low { color: var(--warn); }
+
+.arena {
+  min-height: 440px;
+  display: grid; place-items: center;
+  padding: clamp(20px, 4vw, 40px) clamp(16px, 4vw, 40px);
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+}
+.play, .intro, .result { width: 100%; max-width: 620px; display: grid; gap: 20px; justify-items: center; text-align: center; }
+.intro h2, .result h2 { margin: 0; font: 800 clamp(30px, 5vw, 44px)/1.05 var(--f-display); letter-spacing: -0.03em; text-wrap: balance; }
+.intro p { margin: 0; max-width: 54ch; }
+.keys { color: var(--muted); font-size: 14px; }
+.hint { margin: 0; color: var(--muted); min-height: 1.55em; }
+
+.stimulus {
+  font: 800 clamp(56px, 13vw, 120px)/1 var(--f-display);
+  letter-spacing: -0.02em;
+  min-height: 1.15em;
+  display: grid; place-items: center;
+  user-select: none;
+}
+.stimulus.mono { font: 700 clamp(48px, 11vw, 96px)/1 var(--f-mono); letter-spacing: 0; }
+.flash-ok { animation: okp .28s ease-out; }
+.flash-bad { animation: badp .32s ease-out; }
+@keyframes okp { 0% { text-shadow: 0 0 0 transparent; transform: scale(1.06); } 100% { transform: scale(1); } }
+@keyframes badp { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+
+/* Stroop */
+.choices { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%; }
+@media (max-width: 560px) { .choices { grid-template-columns: repeat(2, 1fr); } }
+.choice {
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 10px; border-radius: 12px;
+  border: 1.5px solid var(--line); background: var(--surface-2);
+  font-weight: 700;
+}
+.choice:hover { border-color: var(--accent); }
+.swatch { width: 16px; height: 16px; border-radius: 50%; flex: none; }
+
+/* Answers */
+.answer {
+  width: min(100%, 320px);
+  text-align: center;
+  font-size: 30px; font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 2px solid var(--line);
+  background: var(--surface-2);
+}
+.answer:focus { border-color: var(--accent); outline: none; }
+.span-form { display: grid; gap: 12px; justify-items: center; width: 100%; }
+
+/* 2-back */
+.match { min-width: 220px; padding-block: 16px; font-size: 18px; }
+.match.good { background: var(--ok); border-color: var(--ok); color: var(--surface); }
+.match.bad { background: var(--bad); border-color: var(--bad); color: var(--surface); }
+.nback-trail { display: flex; gap: 8px; font: 500 16px/1 var(--f-mono); color: var(--muted); min-height: 1em; }
+
+/* Schulte */
+.schulte { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; width: min(100%, 420px); }
+.cell {
+  aspect-ratio: 1; max-width: 100%;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  background: var(--surface-2);
+  font-size: clamp(18px, 4.5vw, 26px); font-weight: 700;
+}
+.cell:hover { border-color: var(--accent); }
+.cell.found { background: transparent; border-style: dashed; color: var(--muted); opacity: .45; cursor: default; }
+.cell.miss { animation: badp .3s ease-out; border-color: var(--bad); }
+
+/* Anagram */
+.tiles { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.tile {
+  width: clamp(42px, 10vw, 58px); aspect-ratio: 1;
+  display: grid; place-items: center;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  border: 1.5px solid var(--accent);
+  font: 800 clamp(22px, 5vw, 30px)/1 var(--f-display);
+}
+
+/* Riddle */
+.question { margin: 0; font: 600 clamp(20px, 3vw, 25px)/1.35 var(--f-display); letter-spacing: -0.01em; text-wrap: balance; max-width: 34ch; }
+.reveal { display: grid; gap: 12px; justify-items: center; padding: 18px; border-radius: 12px; background: var(--surface-2); width: 100%; }
+.reveal p { margin: 0; }
+.why { color: var(--muted); font-size: 15px; max-width: 52ch; }
+
+/* Breathing */
+.breath { width: 220px; height: 220px; max-width: 100%; border: 2px solid var(--accent); border-radius: 18px; display: grid; place-items: center; position: relative; }
+.breath-fill { position: absolute; inset: 14px; border-radius: 12px; background: var(--accent-soft); transform: scale(.3); transition: transform 4s linear; }
+.breath-fill.grow { transform: scale(1); }
+.breath-fill.shrink { transform: scale(.3); }
+.breath-label { position: relative; font: 700 22px/1 var(--f-display); }
+
+/* Results */
+.score-big { display: flex; align-items: baseline; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.score-big .num { font: 700 clamp(64px, 14vw, 110px)/1 var(--f-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.04em; }
+.score-big .unit { font: 700 20px/1 var(--f-display); color: var(--muted); }
+.detail { margin: 0; color: var(--muted); }
+.pill { display: inline-block; padding: 5px 12px; border-radius: 999px; font-size: 13px; font-weight: 700; background: var(--accent-soft); color: var(--ink); }
+.pill.best { background: var(--ok); color: var(--surface); }
+
+.summary { width: 100%; border-collapse: collapse; text-align: left; }
+.summary th, .summary td { padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.summary th { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.summary td.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+.summary td.sub { color: var(--muted); font-size: 14px; }
+.table-wrap { width: 100%; overflow-x: auto; }
+.focus-line { margin: 0; font: 700 clamp(20px, 3vw, 26px)/1.3 var(--f-display); text-wrap: balance; }
+
+@media (max-width: 560px) {
+  .arena { min-height: 400px; }
+  .hud > div { min-width: 0; flex: 1; }
+  .hud { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="brand"><span class="mark" aria-hidden="true"></span>Deep Work Primer</div>
+    <dl class="stats">
+      <div><dt>Primers done</dt><dd id="stSessions">0</dd></div>
+      <div><dt>Day streak</dt><dd id="stStreak">0</dd></div>
+    </dl>
+  </header>
+
+  <main id="home" class="wrap" style="padding:0">
+    <div class="hero">
+      <h1>Switch your brain on <em>before</em> you go deep.</h1>
+      <p class="lead">Short drills that each work a different part of thinking: holding back an impulse, keeping things in mind, speed, attention, words and logic. Finish with a minute of slow breathing, then start the work.</p>
+    </div>
+
+    <div class="routes" id="routes"></div>
+
+    <div class="intent">
+      <label for="intent">After the primer I will work on</label>
+      <input id="intent" class="field" maxlength="120" autocomplete="off" placeholder="e.g. Draft section 2 of the report">
+    </div>
+
+    <h2 class="section-h">Or play one drill</h2>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <section id="stage" class="stage" hidden aria-labelledby="stageName">
+    <div class="route-bar" id="routeBar" aria-hidden="true"></div>
+    <div class="stage-head">
+      <button class="btn ghost" id="quit" type="button">&larr; All drills <kbd>Esc</kbd></button>
+      <div class="stage-title"><p class="eyebrow" id="stageStep"></p><h2 id="stageName"></h2></div>
+      <div class="hud">
+        <div><span class="hud-label" id="hudTimerLabel">Time</span><span id="hudTimer" class="mono">&mdash;</span></div>
+        <div><span class="hud-label">Score</span><span id="hudScore" class="mono">&mdash;</span></div>
+      </div>
+    </div>
+    <div class="arena" id="arena"></div>
+  </section>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  // ---------- helpers ----------
+  const $ = (s, el = document) => el.querySelector(s);
+  const rand = n => Math.floor(Math.random() * n);
+  const randInt = (a, b) => a + rand(b - a + 1);
+  const pick = arr => arr[rand(arr.length)];
+  const shuffle = arr => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = rand(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const mean = a => a.length ? Math.round(a.reduce((s, x) => s + x, 0) / a.length) : 0;
+
+  // Everything a running drill sets up (timers, key listeners) registers a cleanup here,
+  // so quitting or finishing a drill always leaves nothing running.
+  let cleanups = [];
+  const clearAll = () => { const c = cleanups; cleanups = []; c.forEach(f => f()); };
+  const later = (fn, ms) => { const id = setTimeout(fn, ms); cleanups.push(() => clearTimeout(id)); return id; };
+  const every = (fn, ms) => { const id = setInterval(fn, ms); cleanups.push(() => clearInterval(id)); return id; };
+  const onKey = fn => { document.addEventListener('keydown', fn); cleanups.push(() => document.removeEventListener('keydown', fn)); };
+  const typing = e => e.target instanceof HTMLInputElement;
+
+  // ---------- storage (per browser, optional) ----------
+  const KEY = 'deep-work-primer.v1';
+  const store = { bests: {}, sessions: 0, streak: 0, lastDate: null, intention: '' };
+  try { Object.assign(store, JSON.parse(localStorage.getItem(KEY)) || {}); } catch (e) { /* storage unavailable */ }
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) { /* ignore */ } };
+  const dayKey = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+
+  // ---------- DOM ----------
+  const home = $('#home'), stage = $('#stage'), arena = $('#arena');
+  const timerEl = $('#hudTimer'), timerLabel = $('#hudTimerLabel'), scoreEl = $('#hudScore');
+  const hudTimer = t => { timerEl.textContent = t; };
+  const hudScore = t => { scoreEl.textContent = t; };
+  const flash = (el, ok) => { el.classList.remove('flash-ok', 'flash-bad'); void el.offsetWidth; el.classList.add(ok ? 'flash-ok' : 'flash-bad'); };
+
+  function countdown(secs, onEnd) {
+    timerLabel.textContent = 'Time left';
+    const endAt = performance.now() + secs * 1000;
+    let stopped = false;
+    const stop = () => { if (!stopped) { stopped = true; clearInterval(id); timerEl.classList.remove('low'); } };
+    const tick = () => {
+      const left = Math.max(0, endAt - performance.now());
+      hudTimer(`${Math.ceil(left / 1000)} s`);
+      timerEl.classList.toggle('low', left < 10000);
+      if (left <= 0) { stop(); onEnd(); }
+    };
+    const id = setInterval(tick, 100);
+    cleanups.push(stop);
+    tick();
+    return stop;
+  }
+
+  // ---------- content ----------
+  const WORDS = ['pencil', 'window', 'bridge', 'jungle', 'rocket', 'puzzle', 'frozen', 'bright', 'island', 'guitar',
+    'monkey', 'orange', 'camera', 'button', 'yellow', 'rhythm', 'galaxy', 'clever', 'oxygen', 'kitten', 'spirit',
+    'summit', 'violin', 'wizard', 'branch', 'cotton', 'engine', 'falcon', 'gentle', 'hammer', 'jacket', 'ladder',
+    'magnet', 'napkin', 'muffin', 'pepper', 'rabbit', 'script', 'shadow', 'sponge', 'thread', 'tunnel', 'velvet',
+    'walrus', 'zipper', 'beacon', 'dragon', 'fabric', 'goblet', 'harbor', 'insect', 'jigsaw', 'kettle', 'launch',
+    'meadow', 'number', 'poetry', 'quartz', 'ribbon', 'salmon', 'temple', 'unfold', 'vortex', 'winter', 'empire',
+    'flight', 'glider', 'humble', 'ignite', 'kernel', 'lizard', 'mellow', 'oyster', 'pickle', 'quiver', 'riddle',
+    'sketch', 'trophy', 'uphill', 'voyage', 'basket', 'circus', 'mosaic', 'planet', 'stream'];
+
+  const RIDDLES = [
+    { q: 'A bat and a ball cost $1.10 together. The bat costs $1.00 more than the ball. How much is the ball?', a: '5 cents.', why: 'Ball 0.05 + bat 1.05 = 1.10. The quick answer, 10 cents, makes the bat only 90 cents more.' },
+    { q: 'If 5 machines take 5 minutes to make 5 widgets, how long do 100 machines take to make 100 widgets?', a: '5 minutes.', why: 'Each machine makes one widget in 5 minutes, however many machines there are.' },
+    { q: 'A patch of lily pads doubles in size every day. It covers the whole lake on day 48. On which day did it cover half?', a: 'Day 47.', why: 'It doubles overnight from half to full.' },
+    { q: 'A farmer has 17 sheep. All but 9 run away. How many are left?', a: '9.', why: '"All but 9" means 9 stay.' },
+    { q: 'In a race you overtake the person in second place. What place are you in now?', a: 'Second.', why: 'You took their place; the leader is still ahead.' },
+    { q: "Mary's father has five daughters: Nana, Nene, Nini and Nono. What is the fifth daughter called?", a: 'Mary.', why: 'The question names her at the start.' },
+    { q: 'Two fathers and two sons go fishing. Each catches one fish, and they bring home three fish. How?', a: 'There are only three people: a grandfather, his son, and his grandson.', why: 'The middle man is both a father and a son.' },
+    { q: 'A clock reads 3:15. What is the angle between the hour and minute hands?', a: '7.5 degrees.', why: 'The minute hand is on the 3, but the hour hand has moved a quarter of the way to the 4: 30° × 0.25.' },
+    { q: 'What comes next: 1, 11, 21, 1211, 111221, ?', a: '312211.', why: 'Each term reads the one before aloud: "one 1" → 11, "two 1s" → 21, "one 2, one 1" → 1211, and so on.' },
+    { q: 'You have two ropes. Each burns in exactly 60 minutes, but unevenly. How do you time 45 minutes?', a: 'Light rope A at both ends and rope B at one end. When A burns out (30 min), light the other end of B. B finishes 15 minutes later.', why: 'Burning from both ends halves the remaining time, however uneven the rope.' },
+    { q: 'Three boxes are labelled Apples, Oranges and Mixed. Every label is wrong. You may take one fruit from one box. How do you fix all the labels?', a: 'Take a fruit from the box labelled Mixed.', why: 'It can\'t be mixed, so the fruit tells you what it holds. The other two then have only one consistent arrangement.' },
+    { q: 'A man points at a portrait: "Brothers and sisters I have none, but that man\'s father is my father\'s son." Who is in the portrait?', a: 'His son.', why: '"My father\'s son" with no brothers is the speaker himself, so the portrait shows the speaker\'s son.' },
+    { q: 'What comes next: 2, 3, 5, 9, 17, ?', a: '33.', why: 'Double the number and subtract 1.' },
+    { q: 'A drawer in the dark holds 6 black and 6 white socks. What is the fewest you must take to be sure of a matching pair?', a: '3.', why: 'With two colours, the third sock must match one of the first two.' },
+    { q: 'A price drops by 20%, then the new price rises by 20%. Is it back to where it started?', a: 'No. It ends at 96% of the original.', why: '0.8 × 1.2 = 0.96.' },
+    { q: 'A snail climbs 3 m up a 10 m well each day and slides back 2 m each night. On which day does it reach the top?', a: 'Day 8.', why: 'After 7 nights it is at 7 m. On day 8 it climbs the last 3 m and never slides back.' },
+    { q: 'If you write out every whole number from 1 to 100, how many times do you write the digit 9?', a: '20.', why: 'Ten in the units place (9, 19 … 99) and ten in the tens place (90 to 99).' },
+    { q: 'Five people each shake hands once with everyone else. How many handshakes is that?', a: '10.', why: '5 × 4 ÷ 2: each handshake involves two people.' },
+    { q: 'A is taller than B. C is shorter than B. D is taller than A. Who is second tallest?', a: 'A.', why: 'The order is D, A, B, C.' },
+    { q: 'Rearrange the letters of NEW DOOR to make one word.', a: 'ONE WORD.', why: 'Taken literally, it asks for "one word".' },
+    { q: 'How many months have 28 days?', a: 'All 12.', why: 'Every month has at least 28 days.' },
+    { q: 'How many times can you subtract 5 from 25?', a: 'Once.', why: 'After the first time you are subtracting from 20, not 25.' }
+  ];
+
+  // ---------- drills ----------
+  const GAMES = {
+    stroop: {
+      name: 'Ink, Not Word', trains: 'Impulse control', time: '45 s', unit: 'points', higher: true,
+      glyph: '<span style="color:var(--c-blue)">RED</span>',
+      how: 'A colour word appears in a coloured ink. Pick the <b>ink colour</b> and ignore what the word says. A right answer scores a point and a wrong one loses a point.',
+      keys: 'Keys 1 to 4 pick a colour.', run: runStroop
+    },
+    math: {
+      name: 'Quick Sums', trains: 'Processing speed', time: '60 s', unit: 'solved', higher: true,
+      glyph: '7×8', mono: true,
+      how: 'Solve as many sums as you can in 60 seconds. Your answer is accepted the moment you type it correctly. Sums get harder after every five you solve.',
+      keys: 'Type the answer. Enter skips a sum you are stuck on.', run: runMath
+    },
+    nback: {
+      name: '2-Back', trains: 'Working memory', time: '50 s', unit: '% accurate', higher: true,
+      glyph: 'K·R·K', mono: true,
+      how: 'Letters appear one at a time. Press <b>Match</b> when the letter is the same as the one <b>two letters back</b>. Do nothing when it is not.',
+      keys: 'Space or M presses Match.', run: runNBack
+    },
+    schulte: {
+      name: 'Number Hunt', trains: 'Visual attention', time: '~40 s', unit: 'seconds', higher: false,
+      glyph: '1 → 25', mono: true,
+      how: 'The numbers 1 to 25 are scattered in a grid. Tap them in order as fast as you can. Keep your eyes near the centre and let your side vision do the searching.',
+      keys: 'Tap or click each number in order.', run: runSchulte
+    },
+    span: {
+      name: 'Number Recall', trains: 'Short-term memory', time: '~90 s', unit: 'digits', higher: true,
+      glyph: '4 9 1 7', mono: true,
+      how: 'Digits flash one at a time. Type them back in the same order. Each correct round adds a digit. Two misses at the same length ends the drill.',
+      keys: 'Type the digits, then press Enter.', run: runSpan
+    },
+    anagram: {
+      name: 'Unscramble', trains: 'Verbal fluency', time: '60 s', unit: 'words', higher: true,
+      glyph: 'TKCORE',
+      how: 'Each set of six letters spells one word. Type the word to score. It is accepted the moment it is right.',
+      keys: 'Type the word. Enter skips and shows the answer.', run: runAnagram
+    },
+    riddle: {
+      name: 'Riddle Round', trains: 'Reasoning', time: '~2 min', unit: 'of 3', higher: true,
+      glyph: '?',
+      how: 'Three classic logic riddles. Most have a fast, wrong answer that jumps out first. Take up to a minute on each, then reveal the answer and mark yourself honestly.',
+      keys: 'Enter reveals. Y or N marks your answer.', run: runRiddle
+    },
+    breathe: {
+      name: 'Settle', trains: 'Calm focus', time: '64 s', unit: null,
+      glyph: '4·4·4·4', mono: true,
+      how: 'Four rounds of box breathing: breathe in for 4, hold for 4, breathe out for 4, hold for 4. Follow the square. It brings your heart rate down so you can start focused, not wired.',
+      keys: 'Just breathe along.', run: runBreathe
+    }
+  };
+
+  const ROUTES = {
+    full: { name: 'Full primer', meta: '8 drills · about 10 min', ids: ['stroop', 'math', 'nback', 'schulte', 'span', 'anagram', 'riddle', 'breathe'] },
+    quick: { name: 'Quick primer', meta: '4 drills · about 4 min', ids: ['stroop', 'math', 'schulte', 'breathe'] }
+  };
+
+  const fmtScore = (id, s) => id === 'schulte' ? Number(s).toFixed(1) : String(s);
+
+  // ---------- home ----------
+  function renderHome() {
+    $('#stSessions').textContent = store.sessions;
+    const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
+    const live = store.lastDate === dayKey(new Date()) || store.lastDate === dayKey(yesterday);
+    $('#stStreak').textContent = live ? store.streak : 0;
+
+    $('#routes').innerHTML = Object.entries(ROUTES).map(([key, r], i) => `
+      <button type="button" class="route${i === 0 ? ' primary' : ''}" data-route="${key}">
+        <span class="route-name">${r.name}<span aria-hidden="true">&rarr;</span></span>
+        <span class="route-meta">${r.meta}</span>
+        <span class="route-list">${r.ids.map(id => GAMES[id].name).join(' · ')}</span>
+      </button>`).join('');
+
+    $('#grid').innerHTML = Object.entries(GAMES).map(([id, g]) => {
+      const b = store.bests[id];
+      const best = g.unit ? (b == null ? 'Not played yet' : `Best <span class="best">${fmtScore(id, b)}</span> ${g.unit}`) : 'Unscored';
+      return `<button type="button" class="card" data-game="${id}">
+        <span class="glyph${g.mono ? ' mono' : ''}" aria-hidden="true">${g.glyph}</span>
+        <span class="card-name">${g.name}</span>
+        <span class="card-trains">${g.trains}</span>
+        <span class="card-foot"><span>${g.time}</span><span>${best}</span></span>
+      </button>`;
+    }).join('');
+  }
+
+  $('#routes').addEventListener('click', e => { const b = e.target.closest('[data-route]'); if (b) startRoute(b.dataset.route); });
+  $('#grid').addEventListener('click', e => { const b = e.target.closest('[data-game]'); if (b) { session = null; openGame(b.dataset.game); } });
+  const intent = $('#intent');
+  intent.value = store.intention || '';
+  intent.addEventListener('input', () => { store.intention = intent.value.trim(); save(); });
+
+  // ---------- flow ----------
+  let session = null; // { route, ids, idx, results, started }
+
+  function showHome() {
+    clearAll();
+    session = null;
+    stage.hidden = true;
+    home.hidden = false;
+    renderHome();
+    window.scrollTo(0, 0);
+  }
+
+  function startRoute(key) {
+    const r = ROUTES[key];
+    session = { route: r, ids: r.ids, idx: 0, results: [], started: Date.now() };
+    openGame(r.ids[0]);
+  }
+
+  function renderRouteBar() {
+    const bar = $('#routeBar');
+    bar.hidden = !session;
+    if (session) bar.innerHTML = session.ids.map((_, i) => `<span class="${i < session.idx ? 'done' : i === session.idx ? 'now' : ''}"></span>`).join('');
+  }
+
+  function setHead(step, name) {
+    $('#stageStep').textContent = step;
+    $('#stageName').textContent = name;
+    timerLabel.textContent = 'Time';
+    hudTimer('—');
+    hudScore('—');
+    timerEl.classList.remove('low');
+  }
+
+  function openGame(id) {
+    clearAll();
+    const g = GAMES[id];
+    home.hidden = true;
+    stage.hidden = false;
+    renderRouteBar();
+    setHead(session ? `${session.route.name} · drill ${session.idx + 1} of ${session.ids.length}` : g.trains, g.name);
+    arena.innerHTML = `<div class="intro">
+      <p class="eyebrow">${g.trains} · ${g.time}</p>
+      <h2>${g.name}</h2>
+      <p>${g.how}</p>
+      <p class="keys">${g.keys}</p>
+      <button class="btn primary" id="go" type="button">Start <kbd>Enter</kbd></button>
+    </div>`;
+    const go = () => { clearAll(); arena.innerHTML = ''; g.run(arena, res => finish(id, res)); };
+    $('#go').addEventListener('click', go);
+    $('#go').focus({ preventScroll: true });
+    onKey(e => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
+    window.scrollTo(0, 0);
+  }
+
+  function finish(id, res) {
+    clearAll();
+    const g = GAMES[id];
+    let badge = '';
+    if (g.unit && res.score != null) {
+      const prev = store.bests[id];
+      const better = prev == null || (g.higher ? res.score > prev : res.score < prev);
+      if (better) { store.bests[id] = res.score; save(); }
+      badge = prev == null ? '<span class="pill">First score saved</span>'
+        : better ? '<span class="pill best">New personal best</span>'
+        : `<span class="pill">Best so far: ${fmtScore(id, prev)} ${g.unit}</span>`;
+    }
+    if (session) session.results.push({ id, ...res });
+
+    const lastInRoute = session && session.idx === session.ids.length - 1;
+    const nextLabel = !session ? 'Play again' : lastInRoute ? 'See summary' : `Next: ${GAMES[session.ids[session.idx + 1]].name}`;
+    const scoreHtml = res.score == null
+      ? '<h2>Settled.</h2>'
+      : `<div class="score-big"><span class="num">${fmtScore(id, res.score)}</span><span class="unit">${g.unit}</span></div>`;
+
+    arena.innerHTML = `<div class="result">
+      <p class="eyebrow">${g.name} · done</p>
+      ${scoreHtml}
+      <p class="detail">${res.detail}</p>
+      ${badge}
+      <div class="row">
+        <button class="btn primary" id="next" type="button">${esc(nextLabel)} <kbd>Enter</kbd></button>
+        <button class="btn" id="back" type="button">${session ? 'End warm-up' : 'All drills'}</button>
+      </div>
+    </div>`;
+    const next = () => {
+      if (!session) return openGame(id);
+      if (lastInRoute) return showSummary();
+      session.idx++;
+      openGame(session.ids[session.idx]);
+    };
+    $('#next').addEventListener('click', next);
+    $('#back').addEventListener('click', showHome);
+    $('#next').focus({ preventScroll: true });
+    onKey(e => { if (e.key === 'Enter') { e.preventDefault(); next(); } });
+  }
+
+  function showSummary() {
+    clearAll();
+    const today = dayKey(new Date());
+    const y = new Date(); y.setDate(y.getDate() - 1);
+    if (store.lastDate !== today) store.streak = store.lastDate === dayKey(y) ? store.streak + 1 : 1;
+    store.lastDate = today;
+    store.sessions += 1;
+    save();
+
+    session.idx = session.ids.length;
+    renderRouteBar();
+    setHead(`${session.route.name} · complete`, 'Ready for deep work');
+    const mins = Math.max(1, Math.round((Date.now() - session.started) / 60000));
+    hudTimer(`${mins} min`);
+    hudScore(`${session.results.length} drills`);
+
+    const rows = session.results.map(r => {
+      const g = GAMES[r.id];
+      const score = r.score == null ? 'Done' : `${fmtScore(r.id, r.score)} ${g.unit}`;
+      return `<tr><td><b>${g.name}</b><br><span class="sub">${g.trains}</span></td><td class="num">${esc(score)}</td><td class="sub">${r.detail}</td></tr>`;
+    }).join('');
+    const task = store.intention
+      ? `Now close the other tabs and start on: <br>“${esc(store.intention)}”`
+      : 'Now close the other tabs and start on the one thing that matters most today.';
+
+    arena.innerHTML = `<div class="result" style="max-width:720px">
+      <p class="eyebrow">Warm-up finished in about ${mins} min · day streak ${store.streak}</p>
+      <p class="focus-line">${task}</p>
+      <div class="table-wrap"><table class="summary">
+        <thead><tr><th>Drill</th><th>Score</th><th>Notes</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table></div>
+      <div class="row"><button class="btn primary" id="done" type="button">Back to start <kbd>Enter</kbd></button></div>
+    </div>`;
+    $('#done').addEventListener('click', showHome);
+    $('#done').focus({ preventScroll: true });
+    onKey(e => { if (e.key === 'Enter') { e.preventDefault(); showHome(); } });
+  }
+
+  $('#quit').addEventListener('click', showHome);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !stage.hidden) showHome(); });
+
+  // ---------- 1. Stroop ----------
+  function runStroop(arena, done) {
+    const C = [['red', 'Red'], ['blue', 'Blue'], ['green', 'Green'], ['purple', 'Purple']];
+    arena.innerHTML = `<div class="play">
+      <div class="stimulus" id="sw" aria-live="off"></div>
+      <div class="choices">${C.map((c, i) => `<button type="button" class="choice" data-i="${i}"><span class="swatch" style="background:var(--c-${c[0]})"></span>${c[1]}<kbd>${i + 1}</kbd></button>`).join('')}</div>
+    </div>`;
+    const w = $('#sw', arena);
+    let ink = 0, word = -1, right = 0, wrong = 0, t0 = 0;
+    const rts = [];
+    const next = () => {
+      let nw, ni;
+      do {
+        nw = rand(4);
+        ni = Math.random() < 0.25 ? nw : (nw + 1 + rand(3)) % 4; // 75% mismatched
+      } while (nw === word && ni === ink);
+      word = nw; ink = ni;
+      w.textContent = C[word][1].toUpperCase();
+      w.style.color = `var(--c-${C[ink][0]})`;
+      t0 = performance.now();
+    };
+    const answer = i => {
+      if (i === ink) { right++; rts.push(performance.now() - t0); flash(w, true); }
+      else { wrong++; flash(w, false); }
+      hudScore(`${right - wrong} pts`);
+      next();
+    };
+    arena.querySelectorAll('.choice').forEach(b => b.addEventListener('click', () => answer(+b.dataset.i)));
+    onKey(e => { const n = +e.key; if (n >= 1 && n <= 4) { e.preventDefault(); answer(n - 1); } });
+    hudScore('0 pts');
+    next();
+    countdown(45, () => {
+      const total = right + wrong;
+      done({
+        score: right - wrong,
+        detail: total ? `${right} right, ${wrong} wrong · ${Math.round(right / total * 100)}% accurate · ${mean(rts)} ms per right answer` : 'No answers given.'
+      });
+    });
+  }
+
+  // ---------- 2. Quick sums ----------
+  function runMath(arena, done) {
+    arena.innerHTML = `<div class="play">
+      <div class="stimulus mono" id="mq"></div>
+      <label class="sr-only" for="ma">Your answer</label>
+      <input id="ma" class="answer mono" inputmode="numeric" autocomplete="off" enterkeyhint="next">
+      <p class="hint" id="mh">Accepted as soon as it is right. Enter skips.</p>
+    </div>`;
+    const q = $('#mq', arena), inp = $('#ma', arena), hint = $('#mh', arena);
+    let ans = '', right = 0, skipped = 0;
+    const gen = () => {
+      const lvl = Math.min(3, Math.floor(right / 5));
+      const op = pick(lvl === 0 ? ['+', '−'] : lvl === 1 ? ['+', '−', '×'] : ['+', '−', '×', '÷']);
+      const top = [12, 45, 99, 160][lvl];
+      let a, b, r;
+      if (op === '+') { a = randInt(3, top); b = randInt(3, top); r = a + b; }
+      else if (op === '−') { a = randInt(6, top + 10); b = randInt(2, a - 1); r = a - b; }
+      else if (op === '×') { a = randInt(2, lvl < 3 ? 9 : 12); b = randInt(3, lvl < 3 ? 9 : 15); r = a * b; }
+      else { b = randInt(2, 9); r = randInt(2, lvl < 3 ? 9 : 12); a = b * r; }
+      q.textContent = `${a} ${op} ${b}`;
+      ans = String(r);
+      inp.value = '';
+    };
+    inp.addEventListener('input', () => {
+      inp.value = inp.value.replace(/\D/g, '');
+      if (inp.value === ans) { right++; hudScore(`${right}`); flash(q, true); hint.textContent = 'Accepted as soon as it is right. Enter skips.'; gen(); }
+    });
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); skipped++; hint.textContent = `${q.textContent} = ${ans}`; flash(q, false); gen(); }
+    });
+    hudScore('0');
+    gen();
+    inp.focus();
+    countdown(60, () => done({ score: right, detail: `${skipped} skipped. The last level reached was ${['adding and subtracting', 'bigger numbers and times tables', 'all four operations', 'all four with larger numbers'][Math.min(3, Math.floor(right / 5))]}.` }));
+  }
+
+  // ---------- 3. 2-back ----------
+  function runNBack(arena, done) {
+    const L = 'BCDFHKLMPRST'.split('');
+    const N = 22, SHOW = 1100, STEP = 2300;
+    const seq = [];
+    for (let i = 0; i < N; i++) {
+      if (i >= 2 && Math.random() < 0.33) seq.push(seq[i - 2]);
+      else { let c; do { c = pick(L); } while (i >= 2 && c === seq[i - 2]); seq.push(c); }
+    }
+    arena.innerHTML = `<div class="play">
+      <div class="stimulus mono" id="nb"></div>
+      <p class="hint" id="nbh">Remember the first two letters. Matching starts on letter 3.</p>
+      <button class="btn primary match" id="nbm" type="button">Match <kbd>Space</kbd></button>
+    </div>`;
+    const el = $('#nb', arena), hint = $('#nbh', arena), btn = $('#nbm', arena);
+    let i = -1, responded = false, hits = 0, misses = 0, fa = 0, cr = 0;
+    timerLabel.textContent = 'Letter';
+    const step = () => {
+      if (i >= 2) {
+        const target = seq[i] === seq[i - 2];
+        if (target && responded) hits++;
+        else if (target) { misses++; hint.textContent = `Missed one: ${seq[i]} matched two back.`; }
+        else if (responded) fa++;
+        else cr++;
+      }
+      i++;
+      responded = false;
+      btn.classList.remove('good', 'bad');
+      if (i >= N) {
+        const acc = Math.round((hits + cr) / (N - 2) * 100);
+        done({ score: acc, detail: `Caught ${hits} of ${hits + misses} matches · ${fa} false alarm${fa === 1 ? '' : 's'}.` });
+        return;
+      }
+      if (i === 2) hint.textContent = 'Same as two back? Press Match.';
+      hudTimer(`${i + 1}/${N}`);
+      el.textContent = seq[i];
+      later(() => { el.textContent = ''; }, SHOW);
+      later(step, STEP);
+    };
+    const press = () => {
+      if (i < 2 || i >= N || responded) return;
+      responded = true;
+      const target = seq[i] === seq[i - 2];
+      btn.classList.add(target ? 'good' : 'bad');
+      hint.textContent = target ? 'Match.' : 'Not a match.';
+      hudScore(`${hits + (target ? 1 : 0)} caught`);
+    };
+    btn.addEventListener('click', press);
+    onKey(e => { if (e.key === ' ' || e.key === 'm' || e.key === 'M') { e.preventDefault(); press(); } });
+    hudScore('0 caught');
+    later(step, 700);
+  }
+
+  // ---------- 4. Schulte table ----------
+  function runSchulte(arena, done) {
+    const nums = shuffle(Array.from({ length: 25 }, (_, k) => k + 1));
+    arena.innerHTML = `<div class="play">
+      <p class="hint" id="sh">Find <b>1</b></p>
+      <div class="schulte" id="sg">${nums.map(n => `<button type="button" class="cell mono" data-n="${n}">${n}</button>`).join('')}</div>
+    </div>`;
+    const grid = $('#sg', arena), hint = $('#sh', arena);
+    let next = 1, errors = 0;
+    const t0 = performance.now();
+    timerLabel.textContent = 'Time';
+    every(() => hudTimer(`${((performance.now() - t0) / 1000).toFixed(1)} s`), 100);
+    hudScore('0/25');
+    grid.addEventListener('click', e => {
+      const b = e.target.closest('.cell');
+      if (!b || b.classList.contains('found')) return;
+      if (+b.dataset.n === next) {
+        b.classList.add('found');
+        b.setAttribute('aria-disabled', 'true');
+        hudScore(`${next}/25`);
+        next++;
+        if (next > 25) {
+          const secs = Math.round((performance.now() - t0) / 100) / 10;
+          done({ score: secs, detail: `${errors} wrong tap${errors === 1 ? '' : 's'}. Under 30 seconds is sharp; under 20 is excellent.` });
+          return;
+        }
+        hint.innerHTML = `Find <b>${next}</b>`;
+      } else {
+        errors++;
+        b.classList.remove('miss'); void b.offsetWidth; b.classList.add('miss');
+      }
+    });
+  }
+
+  // ---------- 5. Digit span ----------
+  function runSpan(arena, done) {
+    arena.innerHTML = `<div class="play">
+      <div class="stimulus mono" id="ds"></div>
+      <form class="span-form" id="df" hidden>
+        <label class="sr-only" for="da">The digits in order</label>
+        <input id="da" class="answer mono" inputmode="numeric" autocomplete="off" enterkeyhint="done">
+        <button class="btn primary" type="submit">Check <kbd>Enter</kbd></button>
+      </form>
+      <p class="hint" id="dh"></p>
+    </div>`;
+    const ds = $('#ds', arena), form = $('#df', arena), inp = $('#da', arena), hint = $('#dh', arena);
+    let len = 4, missesAtLen = 0, best = 0, current = '';
+    timerLabel.textContent = 'Length';
+    const finishSpan = () => done({
+      score: best,
+      detail: best ? `You held ${best} digits in order. Most adults manage 6 to 8.` : 'Four digits is a fine place to start. Try saying them under your breath as they appear.'
+    });
+    const round = () => {
+      hudTimer(String(len));
+      form.hidden = true;
+      hint.textContent = 'Watch the digits.';
+      const digits = [];
+      for (let k = 0; k < len; k++) { let d; do { d = rand(10); } while (k > 0 && d === digits[k - 1]); digits.push(d); }
+      current = digits.join('');
+      let k = 0;
+      ds.textContent = '';
+      const show = () => {
+        if (k < digits.length) {
+          ds.textContent = digits[k];
+          later(() => { ds.textContent = ''; }, 650);
+          k++;
+          later(show, 850);
+        } else {
+          ds.textContent = '?';
+          inp.value = '';
+          form.hidden = false;
+          inp.focus();
+          hint.textContent = `Type the ${len} digits in order.`;
+        }
+      };
+      later(show, 600);
+    };
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const v = inp.value.replace(/\D/g, '');
+      if (!v) return;
+      form.hidden = true;
+      if (v === current) {
+        best = len;
+        hudScore(String(best));
+        ds.textContent = '✓';
+        flash(ds, true);
+        hint.textContent = 'Correct. One more digit next time.';
+        len++;
+        missesAtLen = 0;
+        if (len > 14) { later(finishSpan, 900); return; }
+      } else {
+        missesAtLen++;
+        ds.textContent = '✗';
+        flash(ds, false);
+        hint.textContent = `It was ${current}.`;
+        if (missesAtLen >= 2) { later(finishSpan, 1600); return; }
+        hint.textContent += ' One more try at this length.';
+      }
+      later(round, 1500);
+    });
+    hudScore('0');
+    round();
+  }
+
+  // ---------- 6. Anagrams ----------
+  function runAnagram(arena, done) {
+    const pool = shuffle(WORDS);
+    arena.innerHTML = `<div class="play">
+      <div class="tiles" id="at" aria-live="polite"></div>
+      <label class="sr-only" for="aa">Your word</label>
+      <input id="aa" class="answer" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next">
+      <p class="hint" id="ah">Accepted as soon as it is right. Enter skips.</p>
+    </div>`;
+    const tiles = $('#at', arena), inp = $('#aa', arena), hint = $('#ah', arena);
+    let idx = 0, word = '', solved = 0, skipped = 0;
+    const next = () => {
+      word = pool[idx++ % pool.length];
+      let s;
+      do { s = shuffle(word.split('')).join(''); } while (s === word);
+      tiles.innerHTML = s.toUpperCase().split('').map(c => `<span class="tile">${c}</span>`).join('');
+      inp.value = '';
+    };
+    inp.addEventListener('input', () => {
+      if (inp.value.trim().toLowerCase() === word) { solved++; hudScore(String(solved)); flash(tiles, true); hint.textContent = 'Accepted as soon as it is right. Enter skips.'; next(); }
+    });
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); skipped++; hint.textContent = `That one was ${word.toUpperCase()}.`; flash(tiles, false); next(); }
+    });
+    hudScore('0');
+    next();
+    inp.focus();
+    countdown(60, () => done({ score: solved, detail: `${skipped} skipped.` }));
+  }
+
+  // ---------- 7. Riddles ----------
+  function runRiddle(arena, done) {
+    const set = shuffle(RIDDLES).slice(0, 3);
+    let n = 0, got = 0;
+    const show = () => {
+      clearAll();
+      const r = set[n];
+      arena.innerHTML = `<div class="play">
+        <p class="eyebrow">Riddle ${n + 1} of 3</p>
+        <p class="question">${esc(r.q)}</p>
+        <button class="btn primary" id="rv" type="button">Reveal answer <kbd>Enter</kbd></button>
+        <div class="reveal" id="rr" hidden>
+          <p><b>Answer:</b> ${esc(r.a)}</p>
+          <p class="why">${esc(r.why)}</p>
+          <p>Did you get it?</p>
+          <div class="row">
+            <button class="btn primary" id="ry" type="button">I got it <kbd>Y</kbd></button>
+            <button class="btn" id="rn" type="button">Not this time <kbd>N</kbd></button>
+          </div>
+        </div>
+      </div>`;
+      const rv = $('#rv', arena), rr = $('#rr', arena);
+      let revealed = false;
+      hudScore(`${got} of ${n}`);
+      const reveal = () => {
+        if (revealed) return;
+        revealed = true;
+        stop();
+        hudTimer('—');
+        rv.hidden = true;
+        rr.hidden = false;
+        $('#ry', arena).focus({ preventScroll: true });
+      };
+      const mark = ok => {
+        if (ok) got++;
+        n++;
+        if (n < 3) show();
+        else done({ score: got, detail: got === 3 ? 'Clean sweep. Your slow, careful thinking is switched on.' : 'The first answer that jumps out is often the trap. Spotting that is the warm-up.' });
+      };
+      const stop = countdown(60, reveal);
+      rv.addEventListener('click', reveal);
+      $('#ry', arena).addEventListener('click', () => mark(true));
+      $('#rn', arena).addEventListener('click', () => mark(false));
+      onKey(e => {
+        if (!revealed && e.key === 'Enter') { e.preventDefault(); reveal(); }
+        else if (revealed && (e.key === 'y' || e.key === 'Y')) { e.preventDefault(); mark(true); }
+        else if (revealed && (e.key === 'n' || e.key === 'N')) { e.preventDefault(); mark(false); }
+      });
+    };
+    show();
+  }
+
+  // ---------- 8. Box breathing ----------
+  function runBreathe(arena, done) {
+    arena.innerHTML = `<div class="play">
+      <div class="breath"><div class="breath-fill" id="bf"></div><span class="breath-label" id="bl">Get ready</span></div>
+      <p class="hint" id="bh">Breathe in through your nose as the square fills.</p>
+      <button class="btn" id="bs" type="button">Skip</button>
+    </div>`;
+    const fill = $('#bf', arena), label = $('#bl', arena);
+    const phases = [['Breathe in', 'grow'], ['Hold', 'grow'], ['Breathe out', 'shrink'], ['Hold', 'shrink']];
+    const total = 16;
+    let p = 0;
+    timerLabel.textContent = 'Count';
+    const end = () => done({ score: null, detail: 'Four rounds of box breathing. Your shoulders should feel lower than when you started.' });
+    const phase = () => {
+      if (p >= total) { end(); return; }
+      const [text, state] = phases[p % 4];
+      label.textContent = text;
+      fill.className = `breath-fill ${state}`;
+      hudScore(`Round ${Math.floor(p / 4) + 1}/4`);
+      let c = 4;
+      hudTimer(String(c));
+      const iv = every(() => { c--; if (c > 0) hudTimer(String(c)); }, 1000);
+      later(() => { clearInterval(iv); p++; phase(); }, 4000);
+    };
+    $('#bs', arena).addEventListener('click', end);
+    later(phase, 1000);
+  }
+
+  renderHome();
+})();
+</script>
+</body>
+</html>
