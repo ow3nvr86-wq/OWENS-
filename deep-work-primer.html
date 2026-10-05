@@ -270,6 +270,26 @@ kbd {
 .cell.found { background: transparent; border-style: dashed; color: var(--muted); opacity: .45; cursor: default; }
 .cell.miss { animation: badp .3s ease-out; border-color: var(--bad); }
 
+/* Pattern flash */
+.pgrid { display: grid; gap: 6px; width: min(100%, 380px); }
+.pcell {
+  aspect-ratio: 1; padding: 0;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  background: var(--surface-2);
+  transition: background-color .15s, border-color .15s;
+}
+.pcell:hover { border-color: var(--accent); }
+.pgrid.showing .pcell { cursor: default; }
+.pgrid.showing .pcell:hover { border-color: var(--line); }
+.pcell.lit, .pcell.hit { background: var(--accent); border-color: var(--accent); }
+.pcell.miss { background: var(--bad); border-color: var(--bad); animation: badp .3s ease-out; }
+.pcell.missed { border: 2.5px dashed var(--accent); background: var(--accent-soft); }
+.mini { display: grid; grid-template-columns: repeat(3, 14px); gap: 4px; }
+.mini i { width: 14px; height: 14px; border-radius: 3px; background: var(--line); }
+.mini i.on { background: var(--accent); }
+
 /* Anagram */
 .tiles {
   position: relative; /* tiles measure their slots against this box while dragging */
@@ -496,6 +516,12 @@ kbd {
       glyph: '4 9 1 7', mono: true,
       how: 'Digits flash one at a time. Type them back in the same order. Each correct round adds a digit. Two misses at the same length ends the drill.',
       keys: 'Type the digits, then press Enter.', run: runSpan
+    },
+    pattern: {
+      name: 'Pattern Flash', trains: 'Visual memory', time: '~90 s', unit: 'squares', higher: true,
+      glyph: `<span class="mini">${[1, 0, 0, 0, 1, 1, 0, 0, 1].map(on => `<i${on ? ' class="on"' : ''}></i>`).join('')}</span>`,
+      how: 'Some squares in the grid light up for a moment. When they go dark, tap <b>every square that was lit</b>, in any order. Each pattern you get right adds a square, and the grid grows as you go. Three wrong taps ends the drill.',
+      keys: 'Tap or click the squares. Tab and Enter work too.', run: runPattern
     },
     anagram: {
       name: 'Unscramble', trains: 'Verbal fluency', time: '60 s', unit: 'words', higher: true,
@@ -924,6 +950,85 @@ kbd {
       }
       later(round, 1500);
     });
+    hudScore('0');
+    round();
+  }
+
+  // ---------- 5b. Pattern flash ----------
+  // A few squares light up, then go dark; tap all of them back in any order.
+  // Each clean round adds a square and the grid grows. Three wrong taps ends it.
+  function runPattern(arena, done) {
+    arena.innerHTML = `<div class="play">
+      <p class="hint" id="ph" aria-live="polite"></p>
+      <div class="pgrid" id="pg" role="group" aria-label="Pattern grid"></div>
+    </div>`;
+    const grid = $('#pg', arena), hint = $('#ph', arena);
+    const MAX = 16;
+    const sizeFor = n => n <= 3 ? 3 : n <= 6 ? 4 : n <= 10 ? 5 : 6;
+    let count = 3, lives = 3, best = 0, bestSize = 3, cleanRounds = 0;
+    let cells = [], target = new Set(), found = new Set(), accepting = false;
+    timerLabel.textContent = 'Lives';
+
+    const finishPattern = () => done({
+      score: best,
+      detail: best
+        ? `You recalled a pattern of ${best} squares on a ${bestSize}×${bestSize} grid, across ${cleanRounds} clean round${cleanRounds === 1 ? '' : 's'}.`
+        : 'Three squares is a fine start. Try seeing the lit squares as one shape rather than separate spots.'
+    });
+
+    const round = () => {
+      const size = sizeFor(count);
+      accepting = false;
+      found = new Set();
+      target = new Set(shuffle(Array.from({ length: size * size }, (_, k) => k)).slice(0, count));
+      grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+      grid.classList.add('showing');
+      grid.innerHTML = Array.from({ length: size * size }, (_, k) =>
+        `<button type="button" class="pcell" data-k="${k}" aria-disabled="true" aria-label="Row ${Math.floor(k / size) + 1}, column ${k % size + 1}"></button>`).join('');
+      cells = [...grid.children];
+      hudTimer(String(lives));
+      hint.textContent = `Watch for ${count} squares.`;
+      later(() => {
+        target.forEach(k => { cells[k].classList.add('lit'); cells[k].setAttribute('aria-label', cells[k].getAttribute('aria-label') + ', lit'); });
+      }, 500);
+      later(() => {
+        cells.forEach(c => { c.classList.remove('lit'); c.setAttribute('aria-label', c.getAttribute('aria-label').replace(', lit', '')); c.removeAttribute('aria-disabled'); });
+        grid.classList.remove('showing');
+        accepting = true;
+        hint.textContent = `Tap the ${count} squares that were lit.`;
+      }, 500 + 900 + 120 * count);
+    };
+
+    grid.addEventListener('click', e => {
+      const b = e.target.closest('.pcell');
+      if (!b || !accepting) return;
+      const k = +b.dataset.k;
+      if (found.has(k)) return;
+      if (target.has(k)) {
+        found.add(k);
+        b.classList.add('hit');
+        b.setAttribute('aria-disabled', 'true');
+        if (found.size < count) { hint.textContent = `${count - found.size} to go.`; return; }
+        accepting = false;
+        best = count; bestSize = sizeFor(count); cleanRounds++;
+        hudScore(String(best));
+        flash(grid, true);
+        if (count >= MAX) { hint.textContent = 'Perfect. That is the biggest pattern there is.'; later(finishPattern, 900); return; }
+        count++;
+        hint.textContent = sizeFor(count) > sizeFor(count - 1) ? 'Correct. The grid grows next round.' : 'Correct. One more square next round.';
+        later(round, 1000);
+      } else {
+        accepting = false;
+        lives--;
+        hudTimer(String(lives));
+        b.classList.add('miss');
+        target.forEach(t => { if (!found.has(t)) cells[t].classList.add('missed'); });
+        if (lives <= 0) { hint.textContent = 'No lives left. The dashed squares were the rest of the pattern.'; later(finishPattern, 1800); return; }
+        hint.textContent = `Not that one. ${lives} ${lives === 1 ? 'life' : 'lives'} left, same size again.`;
+        later(round, 1900);
+      }
+    });
+
     hudScore('0');
     round();
   }
