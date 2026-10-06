@@ -310,6 +310,36 @@ kbd {
 .breath-fill.shrink { transform: scale(.3); }
 .breath-label { position: relative; font: 700 22px/1 var(--f-display); }
 
+/* Switch */
+.switch-box { display: grid; grid-template-rows: 1fr 1fr; width: min(100%, 300px); border: 2px solid var(--line); border-radius: 16px; overflow: hidden; }
+.switch-half { display: grid; grid-template-rows: auto 1fr; justify-items: center; gap: 4px; padding: 10px 12px 14px; min-height: 140px; background: var(--surface-2); transition: background-color .12s; }
+.switch-half + .switch-half { border-top: 2px dashed var(--line); }
+.switch-half.on { background: var(--accent-soft); }
+.switch-rule { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.switch-half.on .switch-rule { color: var(--ink); }
+.switch-num { font: 800 64px/1 var(--f-mono); align-self: center; min-height: 1em; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: min(100%, 420px); }
+.pair .choice { flex-direction: column; gap: 2px; }
+.pair .choice small { font-weight: 400; color: var(--muted); }
+
+/* Turn or Flip */
+.shapes { display: flex; gap: clamp(14px, 5vw, 40px); align-items: center; justify-content: center; }
+.shape { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; width: clamp(110px, 30vw, 160px); padding: 8px; border-radius: 12px; background: var(--surface-2); }
+.shape i { aspect-ratio: 1; border-radius: 4px; }
+.shape i.on { background: var(--accent); }
+.shapes .vs { font: 700 14px/1 var(--f-body); color: var(--muted); }
+
+/* Code Breaker */
+.code-log { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; width: min(100%, 360px); }
+.code-log li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 14px; border-radius: 10px; background: var(--surface-2); }
+.code-log .g { font: 700 24px/1 var(--f-mono); letter-spacing: .25em; }
+.code-log .fb { display: flex; gap: 5px; align-items: center; font-size: 13px; color: var(--muted); }
+.peg { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--ok); }
+.peg.hit { background: var(--ok); }
+.peg.near { background: transparent; border-color: var(--warn); }
+.legend { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
+.legend span { display: inline-flex; gap: 6px; align-items: center; }
+
 /* Results */
 .score-big { display: flex; align-items: baseline; gap: 10px; justify-content: center; flex-wrap: wrap; }
 .score-big .num { font: 700 clamp(64px, 14vw, 110px)/1 var(--f-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.04em; }
@@ -514,6 +544,24 @@ kbd {
       glyph: '4·4·4·4', mono: true,
       how: 'Four rounds of box breathing: breathe in for 4, hold for 4, breathe out for 4, hold for 4. Follow the square. It brings your heart rate down so you can start focused, not wired.',
       keys: 'Just breathe along.', run: runBreathe
+    },
+    switcher: {
+      name: 'Switch', trains: 'Mental flexibility', time: '45 s', unit: 'points', higher: true,
+      glyph: '7 ⇅ 2', mono: true,
+      how: 'A digit lands in the top or bottom of a box. In the <b>top</b>, say whether it is <b>odd or even</b>. In the <b>bottom</b>, say whether it is <b>lower or higher than 5</b>. The rule flips without warning, so read where it landed first.',
+      keys: 'Left arrow or F for odd / lower, right arrow or J for even / higher.', run: runSwitch
+    },
+    rotate: {
+      name: 'Turn or Flip', trains: 'Spatial reasoning', time: '60 s', unit: 'points', higher: true,
+      glyph: '⟲ ⇋', mono: true,
+      how: 'Two shapes appear. Decide whether the right one is the left one <b>turned</b>, or its <b>mirror image</b>. Turn it in your head rather than guessing. A right answer scores a point and a wrong one loses a point.',
+      keys: 'Left arrow or T for turned, right arrow or M for mirror.', run: runRotate
+    },
+    code: {
+      name: 'Code Breaker', trains: 'Deduction', time: '~3 min', unit: 'guesses', higher: false,
+      glyph: '4 ● ○', mono: true,
+      how: 'Crack a secret code of <b>three different digits</b> in 10 guesses or fewer. After each guess, a <b>filled dot</b> means a right digit in the right place and a <b>hollow dot</b> means a right digit in the wrong place. The dots do not say which digit they mean.',
+      keys: 'Type three digits, then press Enter.', run: runCode
     }
   };
 
@@ -627,7 +675,7 @@ kbd {
     const lastInRoute = session && session.idx === session.ids.length - 1;
     const nextLabel = !session ? 'Play again' : lastInRoute ? 'See summary' : `Next: ${GAMES[session.ids[session.idx + 1]].name}`;
     const scoreHtml = res.score == null
-      ? '<h2>Settled.</h2>'
+      ? `<h2>${res.title || 'Settled.'}</h2>`
       : `<div class="score-big"><span class="num">${fmtScore(id, res.score)}</span><span class="unit">${g.unit}</span></div>`;
 
     arena.innerHTML = `<div class="result">
@@ -1217,6 +1265,198 @@ kbd {
     };
     $('#bs', arena).addEventListener('click', end);
     later(phase, 1000);
+  }
+
+  // ---------- Switch (task switching) ----------
+  // Top half asks odd/even, bottom half asks lower/higher than 5. The answer keys stay put;
+  // only the rule changes, so the cost of switching shows up as slower switch trials.
+  function runSwitch(arena, done) {
+    arena.innerHTML = `<div class="play">
+      <div class="switch-box" aria-live="polite">
+        <div class="switch-half" id="swt"><span class="switch-rule">Odd or even?</span><span class="switch-num" id="swtn"></span></div>
+        <div class="switch-half" id="swb"><span class="switch-rule">Lower or higher than 5?</span><span class="switch-num" id="swbn"></span></div>
+      </div>
+      <div class="pair">
+        <button type="button" class="choice" data-a="0">Odd · Lower<small>&larr; or F</small></button>
+        <button type="button" class="choice" data-a="1">Even · Higher<small>&rarr; or J</small></button>
+      </div>
+      <p class="hint" id="swh">Top: odd or even. Bottom: lower or higher than 5.</p>
+    </div>`;
+    const halves = [$('#swt', arena), $('#swb', arena)], nums = [$('#swtn', arena), $('#swbn', arena)];
+    const box = $('.switch-box', arena), hint = $('#swh', arena);
+    const DIGITS = [1, 2, 3, 4, 6, 7, 8, 9];
+    let rule = -1, n = 0, ans = 0, switched = false, t0 = 0, right = 0, wrong = 0;
+    const rtSwitch = [], rtStay = [];
+    const next = () => {
+      const nr = rule < 0 ? rand(2) : Math.random() < 0.4 ? 1 - rule : rule;
+      switched = rule >= 0 && nr !== rule;
+      rule = nr;
+      let d; do { d = pick(DIGITS); } while (d === n);
+      n = d;
+      ans = rule === 0 ? (n % 2 === 0 ? 1 : 0) : (n > 5 ? 1 : 0);
+      halves.forEach((h, i) => h.classList.toggle('on', i === rule));
+      nums.forEach((el, i) => { el.textContent = i === rule ? n : ''; });
+      t0 = performance.now();
+    };
+    const answer = a => {
+      const rt = performance.now() - t0;
+      if (a === ans) { right++; (switched ? rtSwitch : rtStay).push(rt); flash(box, true); hint.textContent = ''; }
+      else {
+        wrong++; flash(box, false);
+        hint.textContent = rule === 0 ? `${n} is ${n % 2 ? 'odd' : 'even'}.` : `${n} is ${n > 5 ? 'higher' : 'lower'} than 5.`;
+      }
+      hudScore(`${right - wrong} pts`);
+      next();
+    };
+    arena.querySelectorAll('.choice').forEach(b => b.addEventListener('click', () => answer(+b.dataset.a)));
+    onKey(e => {
+      const k = e.key.toLowerCase();
+      if (k === 'arrowleft' || k === 'f') { e.preventDefault(); answer(0); }
+      else if (k === 'arrowright' || k === 'j') { e.preventDefault(); answer(1); }
+    });
+    hudScore('0 pts');
+    next();
+    countdown(45, () => {
+      const total = right + wrong;
+      if (!total) { done({ score: 0, detail: 'No answers given.' }); return; }
+      const cost = rtSwitch.length && rtStay.length ? mean(rtSwitch) - mean(rtStay) : null;
+      done({
+        score: right - wrong,
+        detail: `${right} right, ${wrong} wrong · ${Math.round(right / total * 100)}% accurate.` +
+          (cost == null ? '' : ` Switching rules cost you ${Math.max(0, cost)} ms per answer. Smaller is more flexible.`)
+      });
+    });
+  }
+
+  // ---------- Turn or Flip (mental rotation) ----------
+  // Shapes are five-cell pieces on a 4×4 grid. Only shapes whose mirror image can't be
+  // reached by turning are used, so every trial has exactly one right answer.
+  function runRotate(arena, done) {
+    const norm = cells => {
+      const r0 = Math.min(...cells.map(c => c[0])), c0 = Math.min(...cells.map(c => c[1]));
+      return cells.map(([r, c]) => [r - r0, c - c0]);
+    };
+    const key = cells => norm(cells).map(c => c.join(',')).sort().join(';');
+    const turn = cells => norm(cells.map(([r, c]) => [c, -r]));
+    const mirror = cells => norm(cells.map(([r, c]) => [r, -c]));
+    const turns = cells => { const out = [cells]; for (let i = 0; i < 3; i++) out.push(turn(out[i])); return out; };
+    const makeShape = () => {
+      for (;;) {
+        const cells = [[rand(4), rand(4)]];
+        while (cells.length < 5) {
+          const [r, c] = pick(cells);
+          const [dr, dc] = pick([[1, 0], [-1, 0], [0, 1], [0, -1]]);
+          const nr = r + dr, nc = c + dc;
+          if (nr < 0 || nr > 3 || nc < 0 || nc > 3 || cells.some(x => x[0] === nr && x[1] === nc)) continue;
+          cells.push([nr, nc]);
+        }
+        const shape = norm(cells);
+        const own = new Set(turns(shape).map(key));
+        if (!turns(mirror(shape)).some(t => own.has(key(t)))) return shape;
+      }
+    };
+    const draw = cells => {
+      const h = Math.max(...cells.map(c => c[0])) + 1, w = Math.max(...cells.map(c => c[1])) + 1;
+      const dr = Math.floor((4 - h) / 2), dc = Math.floor((4 - w) / 2);
+      const on = new Set(cells.map(([r, c]) => `${r + dr},${c + dc}`));
+      let html = '';
+      for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) html += `<i class="${on.has(`${r},${c}`) ? 'on' : ''}"></i>`;
+      return html;
+    };
+    arena.innerHTML = `<div class="play">
+      <div class="shapes" id="rs">
+        <div class="shape" id="ra" role="img" aria-label="Shape A"></div>
+        <span class="vs">vs</span>
+        <div class="shape" id="rb" role="img" aria-label="Shape B"></div>
+      </div>
+      <div class="pair">
+        <button type="button" class="choice" data-a="0">Turned<small>&larr; or T</small></button>
+        <button type="button" class="choice" data-a="1">Mirror image<small>&rarr; or M</small></button>
+      </div>
+      <p class="hint" id="rh">Is the right shape the left one turned, or flipped?</p>
+    </div>`;
+    const a = $('#ra', arena), b = $('#rb', arena), wrapEl = $('#rs', arena), hint = $('#rh', arena);
+    let isMirror = false, right = 0, wrong = 0, t0 = 0;
+    const rts = [];
+    const next = () => {
+      const shape = makeShape();
+      isMirror = Math.random() < 0.5;
+      const base = isMirror ? mirror(shape) : shape;
+      const other = turns(base)[1 + rand(3)]; // always turned at least 90°, so it never looks identical
+      a.innerHTML = draw(shape);
+      b.innerHTML = draw(other);
+      t0 = performance.now();
+    };
+    const answer = m => {
+      if ((m === 1) === isMirror) { right++; rts.push(performance.now() - t0); flash(wrapEl, true); hint.textContent = 'Is the right shape the left one turned, or flipped?'; }
+      else { wrong++; flash(wrapEl, false); hint.textContent = `That one was ${isMirror ? 'a mirror image' : 'just turned'}.`; }
+      hudScore(`${right - wrong} pts`);
+      next();
+    };
+    arena.querySelectorAll('.choice').forEach(btn => btn.addEventListener('click', () => answer(+btn.dataset.a)));
+    onKey(e => {
+      const k = e.key.toLowerCase();
+      if (k === 'arrowleft' || k === 't') { e.preventDefault(); answer(0); }
+      else if (k === 'arrowright' || k === 'm') { e.preventDefault(); answer(1); }
+    });
+    hudScore('0 pts');
+    next();
+    countdown(60, () => {
+      const total = right + wrong;
+      done({
+        score: right - wrong,
+        detail: total ? `${right} right, ${wrong} wrong · ${Math.round(right / total * 100)}% accurate · ${(mean(rts) / 1000).toFixed(1)} s per right answer.` : 'No answers given.'
+      });
+    });
+  }
+
+  // ---------- Code Breaker (deduction) ----------
+  function runCode(arena, done) {
+    const MAX = 10;
+    const secret = shuffle('0123456789'.split('')).slice(0, 3).join('');
+    arena.innerHTML = `<div class="play">
+      <p class="legend"><span><i class="peg hit"></i> right digit, right place</span><span><i class="peg near"></i> right digit, wrong place</span></p>
+      <ol class="code-log" id="cl" aria-live="polite"></ol>
+      <form class="span-form" id="cf">
+        <label class="sr-only" for="ca">Your guess: three different digits</label>
+        <input id="ca" class="answer mono" inputmode="numeric" autocomplete="off" maxlength="3" enterkeyhint="done" placeholder="3 different digits">
+        <button class="btn primary" type="submit">Guess <kbd>Enter</kbd></button>
+      </form>
+      <p class="hint" id="ch">Try any three different digits to start.</p>
+    </div>`;
+    const log = $('#cl', arena), form = $('#cf', arena), inp = $('#ca', arena), hint = $('#ch', arena);
+    const t0 = performance.now();
+    let guesses = 0;
+    timerLabel.textContent = 'Time';
+    every(() => { const s = Math.floor((performance.now() - t0) / 1000); hudTimer(`${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`); }, 250);
+    hudScore(`0/${MAX}`);
+    inp.addEventListener('input', () => { inp.value = inp.value.replace(/\D/g, '').slice(0, 3); });
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const g = inp.value;
+      if (g.length !== 3) { hint.textContent = 'A guess is three digits.'; flash(inp, false); return; }
+      if (new Set(g).size !== 3) { hint.textContent = 'Use three different digits; the code never repeats one.'; flash(inp, false); return; }
+      guesses++;
+      let hit = 0, near = 0;
+      for (let i = 0; i < 3; i++) { if (g[i] === secret[i]) hit++; else if (secret.includes(g[i])) near++; }
+      const pegs = '<i class="peg hit"></i>'.repeat(hit) + '<i class="peg near"></i>'.repeat(near);
+      const said = hit + near ? `${hit} in place, ${near} elsewhere` : 'none of these digits';
+      log.insertAdjacentHTML('beforeend', `<li><span class="g">${g}</span><span class="fb">${pegs}<span>${said}</span></span></li>`);
+      hudScore(`${guesses}/${MAX}`);
+      inp.value = '';
+      const secs = Math.round((performance.now() - t0) / 1000);
+      if (hit === 3) {
+        form.hidden = true;
+        later(() => done({ score: guesses, detail: `Cracked ${secret} in ${guesses} guess${guesses === 1 ? '' : 'es'} and ${secs} s. Six or fewer means you are using every clue.` }), 900);
+      } else if (guesses >= MAX) {
+        form.hidden = true;
+        later(() => done({ score: null, title: 'Out of guesses.', detail: `The code was ${secret}. Try ruling digits in or out with each guess, not just hunting for the answer.` }), 900);
+      } else {
+        hint.textContent = hit + near ? `${MAX - guesses} guesses left.` : `None of ${g.split('').join(', ')} is in the code. ${MAX - guesses} guesses left.`;
+        inp.focus();
+      }
+    });
+    inp.focus();
   }
 
   renderHome();
