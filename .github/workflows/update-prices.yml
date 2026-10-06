@@ -1,0 +1,40 @@
+name: Update stock prices
+
+# Feeds Paper Portfolio. Runs hourly while the US market is open
+# (13:35-21:35 UTC covers 9:30am-4pm New York time in summer and winter).
+# The price file goes to its own branch, prices-data, as a single
+# replaced commit so this branch's history stays clean.
+on:
+  schedule:
+    - cron: "35 13-21 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-prices
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch prices
+        run: python3 scripts/fetch_prices.py "$RUNNER_TEMP/prices.json"
+
+      - name: Publish to the prices-data branch
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/out" && cd "$RUNNER_TEMP/out"
+          cp "$RUNNER_TEMP/prices.json" prices.json
+          git init -q -b prices-data
+          git add prices.json
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -q -m "Prices as of $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -q -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" prices-data
