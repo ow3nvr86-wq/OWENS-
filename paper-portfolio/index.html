@@ -120,6 +120,8 @@ tr:last-child td{border-bottom:0}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .setup{max-width:520px;margin:24px auto}
 .presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+textarea.code{width:100%;min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px 11px;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;resize:vertical;margin-top:10px;word-break:break-all}
+.field textarea.code{margin-top:0}
 .check{display:flex;gap:8px;align-items:flex-start;font-size:14px;margin-bottom:10px}
 @media (max-width:720px){.grid2{grid-template-columns:1fr}.big{font-size:28px}}
 @media (max-width:480px){nav.tabs button{padding:10px 8px;font-size:14px}.top-inner{padding-inline:10px}}
@@ -181,7 +183,8 @@ const P = new Map(); // symbol -> {s, n, p, c, t, m, y, x}
 let pricesAsOf = null, pricesError = null, searchList = [];
 async function loadPrices() {
   try {
-    const r = await fetch("prices.json?t=" + Date.now(), { cache: "no-store" });
+    const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 20000);
+    const r = await fetch("prices.json", { cache: "no-store", signal: ctl.signal }).finally(() => clearTimeout(timer));
     if (!r.ok) throw new Error("HTTP " + r.status);
     const d = await r.json();
     const cols = d.cols || ["s", "n", "p", "c", "t", "m", "y", "x"];
@@ -252,31 +255,30 @@ async function connectStore() {
     return db.doc("data/users/" + uid + "/portfolio");
   } catch (e) { return null; }
 }
-async function loadState() {
-  store = await connectStore();
-  if (store) {
-    try {
-      const snap = await store.get();
-      if (snap.exists && snap.data().state) { S = normalize(snap.data().state); storeMode = "account"; writeLocal(); return; }
-      storeMode = "account";
-      const local = readLocal();
-      if (local && local.started) { S = normalize(local); await store.set({ state: S }); }
-      return;
-    } catch (e) { store = null; }
-  }
-  storeMode = "device";
-  const local = readLocal();
-  if (local) S = normalize(local);
+const within = (ms, p) => Promise.race([p, new Promise((_, no) => setTimeout(() => no(new Error("timed out")), ms))]);
+function loadLocalState() { const local = readLocal(); if (local) S = normalize(local); }
+/* Runs after the app is already on screen, so a slow or missing account never blocks it. */
+async function connectAccount() {
+  try {
+    const doc = await within(15000, connectStore());
+    if (!doc) { storeMode = "device"; return; }
+    const snap = await within(15000, doc.get());
+    const remote = snap.exists && snap.data().state ? normalize(snap.data().state) : null;
+    store = doc; storeMode = "account";
+    if (remote && remote.started && (!S.started || (remote.savedAt || 0) >= (S.savedAt || 0))) { S = remote; writeLocal(); }
+    else if (S.started) save();
+  } catch (e) { store = null; storeMode = "device"; }
 }
 let saveTimer = null, saving = Promise.resolve(), saveWarned = false;
 function save() {
   if (S.txns.length > MAX_TXNS) S.txns.length = MAX_TXNS;
   if (S.history.length > MAX_HISTORY) S.history = S.history.slice(-MAX_HISTORY);
+  if (!store) { S.savedAt = Date.now(); writeLocal(); return; }
   writeLocal();
-  if (!store) return;
   clearTimeout(saveTimer);
   saveTimer = setTimeout(() => {
-    const body = { state: JSON.parse(JSON.stringify(S)), savedAt: Date.now() };
+    S.savedAt = Date.now();
+    const body = { state: JSON.parse(JSON.stringify(S)), savedAt: S.savedAt };
     saving = saving.then(() => store.set(body)).catch(e => {
       if (!saveWarned) { saveWarned = true; toast("Couldn't save to your account. Your changes are kept on this device for now."); }
     });
@@ -456,10 +458,10 @@ function forecast() {
 
 /* ============================================================ views */
 const TABS = [["portfolio", "Portfolio"], ["trade", "Trade"], ["watch", "Watchlist"], ["forecast", "Forecast"], ["history", "Activity"], ["settings", "Settings"]];
-let tab = "portfolio", detailSym = null, orderSide = "buy", orderMode = "dollars", query = "", resetArmed = false;
+let tab = "portfolio", detailSym = null, orderSide = "buy", orderMode = "dollars", query = "", resetArmed = false, restoreArmed = false;
 function setTab(t, sym) {
   tab = t; if (sym !== undefined) detailSym = sym; else if (t !== "trade") detailSym = null;
-  resetArmed = false; render(); window.scrollTo(0, 0);
+  resetArmed = false; restoreArmed = false; render(); window.scrollTo(0, 0);
 }
 function applyTheme() {
   const t = S.settings.theme;
@@ -487,7 +489,8 @@ function render() {
 function banner() {
   let out = "";
   if (pricesError) out += `<div class="notice">${esc(pricesError)}</div>`;
-  if (storeMode === "device") out += `<div class="notice info">Saving on this device only. Open this page from your Claude account to keep your portfolio safe and use it on any device.</div>`;
+  if (storeMode === "loading") out += `<div class="notice info">Connecting to your Claude account to load your saved portfolio…</div>`;
+  else if (storeMode === "device") out += `<div class="notice info">Saving on this device only. Open this page from your Claude account to keep your portfolio safe and use it on any device.</div>`;
   if (daysBetween(todayISO(), S.setup.endDate) < 0) {
     const V = totalValue(), r = (V / S.setup.startCash - 1) * 100;
     out += `<div class="notice info"><b>Challenge finished on ${esc(fmtDay(S.setup.endDate))}.</b> You ended at ${esc(money(V))} (${esc(pct(r))}). Keep trading, or start a new challenge in Settings.</div>`;
@@ -754,7 +757,16 @@ function viewSettings() {
     <div class="seg" role="group" aria-label="Theme">${["auto", "light", "dark"].map(t => `<button type="button" data-theme-set="${t}" aria-pressed="${st.theme === t}">${t[0].toUpperCase() + t.slice(1)}</button>`).join("")}</div>
   </div>
   <div class="card"><h2>Where your portfolio is saved</h2>
-    <p class="small muted">${storeMode === "account" ? "Saved to your Claude account. Open this page on any device where you're signed in and your portfolio is there." : "Saved on this device only. Open this page while signed in to Claude to save it to your account."}</p>
+    <p class="small muted">${storeMode === "account" ? "Saved to your Claude account. Logging out doesn't erase it: sign back in on any device and your portfolio is there." : storeMode === "loading" ? "Connecting to your Claude account…" : "Saved on this device only right now. Open this page while signed in to Claude to save it to your account."}</p>
+  </div>
+  <div class="card"><h2>Backup code</h2>
+    <p class="small muted">An extra copy of your whole portfolio as text. Copy it into your Notes app now and then. If anything is ever lost, paste it below to get everything back.</p>
+    <div class="row"><button class="btn" type="button" id="b-copy">Copy backup code</button></div>
+    <textarea id="b-text" class="code" readonly hidden aria-label="Your backup code"></textarea>
+    <form id="b-form" novalidate style="margin-top:14px">
+      <div class="field"><label for="b-in">Restore from a backup code</label><textarea id="b-in" class="code" rows="3" placeholder="Paste your backup code here" spellcheck="false"></textarea></div>
+      <button class="btn" type="submit">${restoreArmed ? "Tap again to replace your current portfolio" : "Restore"}</button>
+    </form>
   </div>
   <div class="card"><h2>Start over</h2>
     <p class="small muted">Wipes your trades and starts a new challenge.</p>
@@ -766,6 +778,13 @@ function viewSettings() {
     </form>
   </div>
   <p class="tiny" style="margin-top:16px">Pretend money only. Prices come from Nasdaq's public listings and update hourly on weekdays while the market is open. Nothing here is financial advice.</p>`;
+}
+
+function backupCode() { return "PP1:" + btoa(unescape(encodeURIComponent(JSON.stringify(S)))); }
+async function copyBackup() {
+  const code = backupCode(), box = document.getElementById("b-text");
+  try { await navigator.clipboard.writeText(code); toast("Backup code copied. Paste it into your Notes app."); }
+  catch (e) { box.value = code; box.hidden = false; box.focus(); box.select(); toast("Copy the selected code and paste it into your Notes app."); }
 }
 
 /* ============================================================ events */
@@ -805,6 +824,7 @@ app.addEventListener("click", e => {
   if (t.closest("#o-max")) { orderMode = "dollars"; rerenderDetail(); const el = document.getElementById("o-qty"); el.value = (Math.floor(S.cash * 100) / 100).toFixed(2); updateEstimate(); return; }
   const th = t.closest("[data-theme-set]"); if (th) { S.settings.theme = th.dataset.themeSet; save(); render(); return; }
   if (t.closest("#r-cancel")) { resetArmed = false; render(); return; }
+  if (t.closest("#b-copy")) { copyBackup(); return; }
 });
 app.addEventListener("input", e => {
   if (e.target.id === "q") { query = e.target.value; const r = document.getElementById("results"); if (r) r.innerHTML = resultsHtml(); }
@@ -824,6 +844,15 @@ app.addEventListener("submit", e => {
     const end = document.getElementById("c-end").value;
     if (!end || daysBetween(S.setup.startDate, end) < 1) return toast("The end date has to be after the start date.");
     S.setup.name = document.getElementById("c-name").value.trim().slice(0, 40); S.setup.endDate = end; save(); toast("Saved.");
+    return;
+  }
+  if (id === "b-form") {
+    const raw = document.getElementById("b-in").value.trim();
+    let o = null;
+    try { o = JSON.parse(decodeURIComponent(escape(atob(raw.replace(/^PP1:/, "").replace(/\s+/g, ""))))); } catch (err) { o = null; }
+    if (!o || !o.started || !o.setup) { restoreArmed = false; return toast("That isn't a Paper Portfolio backup code. Copy the whole code and try again."); }
+    if (!restoreArmed) { restoreArmed = true; const v = raw; render(); document.getElementById("b-in").value = v; return; }
+    restoreArmed = false; S = normalize(o); rememberPrices(); recordSnapshot(); save(); toast("Backup restored."); setTab("portfolio");
     return;
   }
   if (id === "r-form") {
@@ -847,9 +876,19 @@ async function refresh() {
 document.addEventListener("visibilitychange", () => { if (!document.hidden) refresh(); });
 setInterval(() => { if (!document.hidden) refresh(); }, 10 * 60 * 1000);
 
+function showFatal(e) {
+  document.getElementById("app").innerHTML = `<div class="card"><h2>Something went wrong loading the app</h2><p class="small muted">Try reloading the page. If it keeps happening, send Claude this message:</p><pre class="small" style="white-space:pre-wrap">${esc(String(e && (e.stack || e.message) || e))}</pre></div>`;
+}
+window.addEventListener("error", e => { if (!document.getElementById("tabs").children.length && !document.getElementById("setup-form")) showFatal(e.error || e.message); });
 (async function boot() {
-  await Promise.all([loadPrices(), loadState()]);
-  if (S.started) { rememberPrices(); recordSnapshot(); save(); }
-  render();
+  try {
+    loadLocalState();
+    await loadPrices();
+    if (S.started) { rememberPrices(); recordSnapshot(); }
+    render();
+    await connectAccount();
+    if (S.started) { rememberPrices(); recordSnapshot(); save(); }
+    if (document.activeElement?.id !== "o-qty" && document.activeElement?.id !== "q") render(); else renderTop();
+  } catch (e) { showFatal(e); }
 })();
 </script>
