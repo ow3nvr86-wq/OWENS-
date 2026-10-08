@@ -265,7 +265,8 @@ async function connectAccount() {
     const snap = await within(15000, doc.get());
     const remote = snap.exists && snap.data().state ? normalize(snap.data().state) : null;
     store = doc; storeMode = "account";
-    if (remote && remote.started && (!S.started || (remote.savedAt || 0) >= (S.savedAt || 0))) { S = remote; writeLocal(); }
+    // The newer save wins, so a reset made on one device (or by Claude) also clears the others.
+    if (remote && (!S.started || (remote.savedAt || 0) >= (S.savedAt || 0))) { S = remote; writeLocal(); }
     else if (S.started) save();
   } catch (e) { store = null; storeMode = "device"; }
 }
