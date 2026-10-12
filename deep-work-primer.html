@@ -286,6 +286,22 @@ kbd {
 .pcell.lit, .pcell.hit { background: var(--accent); border-color: var(--accent); }
 .pcell.miss { background: var(--bad); border-color: var(--bad); animation: badp .3s ease-out; }
 .pcell.missed { border: 2.5px dashed var(--accent); background: var(--accent-soft); }
+/* Pair up */
+.pairs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: min(100%, 380px); }
+.card2 {
+  aspect-ratio: 1; padding: 0;
+  cursor: pointer;
+  border-radius: 12px;
+  border: 1.5px solid var(--accent);
+  background: var(--accent-soft);
+  font: 700 clamp(26px, 8vw, 40px)/1 var(--f-body);
+  color: transparent;
+  transition: background-color .15s, color .15s;
+}
+.card2:hover { background: var(--surface); }
+.card2.up { background: var(--surface); color: var(--ink); }
+.card2.done { background: transparent; border-style: dashed; border-color: var(--ok); color: var(--ok); cursor: default; }
+.card2.wrong { border-color: var(--bad); animation: badp .3s ease-out; }
 .mini { display: grid; grid-template-columns: repeat(3, 14px); gap: 4px; }
 .mini i { width: 14px; height: 14px; border-radius: 3px; background: var(--line); }
 .mini i.on { background: var(--accent); }
@@ -522,6 +538,12 @@ kbd {
       glyph: `<span class="mini">${[1, 0, 0, 0, 1, 1, 0, 0, 1].map(on => `<i${on ? ' class="on"' : ''}></i>`).join('')}</span>`,
       how: 'Some squares in the grid light up for a moment. When they go dark, tap <b>every square that was lit</b>, in any order. Each pattern you get right adds a square, and the grid grows as you go. Three wrong taps ends the drill.',
       keys: 'Tap or click the squares. Tab and Enter work too.', run: runPattern
+    },
+    pairs: {
+      name: 'Pair Up', trains: 'Location memory', time: '~60 s', unit: 'moves', higher: false,
+      glyph: '♠ ▢ ♠', mono: true,
+      how: 'Sixteen cards lie face down, eight matching pairs. Turn two at a time. A match stays face up; a miss turns back over, so <b>remember where each symbol was</b>. Clear the board in as few moves as you can. A perfect game is 8 moves.',
+      keys: 'Tap or click a card. Tab and Enter work too.', run: runPairs
     },
     anagram: {
       name: 'Unscramble', trains: 'Verbal fluency', time: '60 s', unit: 'words', higher: true,
@@ -1031,6 +1053,68 @@ kbd {
 
     hudScore('0');
     round();
+  }
+
+  // ---------- 5c. Pair up ----------
+  // Classic pairs: turn two cards a move; matches stay up, misses turn back.
+  // A "slip" is a miss where the first card's partner had already been seen, so memory could have found it.
+  function runPairs(arena, done) {
+    const SYMS = [['♠', 'spade'], ['♥', 'heart'], ['♣', 'club'], ['♦', 'diamond'], ['★', 'star'], ['●', 'circle'], ['▲', 'triangle'], ['■', 'square']];
+    const deck = shuffle([...SYMS.keys(), ...SYMS.keys()]);
+    arena.innerHTML = `<div class="play">
+      <p class="hint" id="pph" aria-live="polite">Turn over two cards.</p>
+      <div class="pairs" id="pp" role="group" aria-label="Cards">${deck.map((s, k) =>
+        `<button type="button" class="card2" data-k="${k}" aria-label="Card ${k + 1}, face down"></button>`).join('')}</div>
+    </div>`;
+    const grid = $('#pp', arena), hint = $('#pph', arena);
+    const cards = [...grid.children];
+    const seen = new Set(), done2 = new Set();
+    let first = null, busy = false, moves = 0, slips = 0;
+    const t0 = performance.now();
+    timerLabel.textContent = 'Time';
+    every(() => hudTimer(`${Math.floor((performance.now() - t0) / 1000)} s`), 250);
+    hudScore('0 moves');
+
+    const face = (k, up) => {
+      const [ch, name] = SYMS[deck[k]];
+      cards[k].textContent = up ? ch : '';
+      cards[k].classList.toggle('up', up);
+      cards[k].setAttribute('aria-label', `Card ${k + 1}, ${up ? name : 'face down'}`);
+    };
+    // Was the partner of card k already seen before this move?
+    const partnerSeen = k => cards.some((_, j) => j !== k && deck[j] === deck[k] && seen.has(j));
+
+    grid.addEventListener('click', e => {
+      const b = e.target.closest('.card2');
+      if (!b || busy) return;
+      const k = +b.dataset.k;
+      if (k === first || done2.has(k)) return;
+      face(k, true);
+      if (first === null) { first = k; return; }
+      const a = first;
+      first = null;
+      moves++;
+      hudScore(`${moves} move${moves === 1 ? '' : 's'}`);
+      if (deck[a] === deck[k]) {
+        [a, k].forEach(j => { done2.add(j); cards[j].classList.add('done'); cards[j].setAttribute('aria-disabled', 'true'); });
+        seen.add(a); seen.add(k);
+        hint.textContent = `A pair of ${SYMS[deck[k]][1]}s.`;
+        if (done2.size === deck.length) {
+          const secs = Math.round((performance.now() - t0) / 1000);
+          later(() => done({
+            score: moves,
+            detail: `Cleared in ${secs} s with ${slips} slip${slips === 1 ? '' : 's'} (a miss when its match had already been turned over earlier). A perfect game is 8 moves.`
+          }), 600);
+        }
+        return;
+      }
+      if (partnerSeen(a)) slips++;
+      seen.add(a); seen.add(k);
+      busy = true;
+      hint.textContent = 'Not a pair. Remember where they are.';
+      [a, k].forEach(j => { cards[j].classList.remove('wrong'); void cards[j].offsetWidth; cards[j].classList.add('wrong'); });
+      later(() => { face(a, false); face(k, false); cards[a].classList.remove('wrong'); cards[k].classList.remove('wrong'); busy = false; }, 900);
+    });
   }
 
   // ---------- 6. Anagrams ----------
