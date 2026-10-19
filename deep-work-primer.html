@@ -286,6 +286,21 @@ kbd {
 .pcell.lit, .pcell.hit { background: var(--accent); border-color: var(--accent); }
 .pcell.miss { background: var(--bad); border-color: var(--bad); animation: badp .3s ease-out; }
 .pcell.missed { border: 2.5px dashed var(--accent); background: var(--accent-soft); }
+/* Word list */
+.wordpick { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; width: 100%; }
+.wp {
+  cursor: pointer;
+  padding: 12px 8px; border-radius: 12px;
+  border: 1.5px solid var(--line); background: var(--surface-2);
+  font-weight: 700;
+}
+.wp:hover { border-color: var(--accent); }
+.wp[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.wordpick.checked .wp { cursor: default; }
+.wp.hit { background: var(--ok); border-color: var(--ok); color: var(--surface); }
+.wp.false { background: var(--bad); border-color: var(--bad); color: var(--surface); }
+.wp.missed { border: 2.5px dashed var(--accent); background: var(--accent-soft); color: var(--ink); }
+
 /* Pair up */
 .pairs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: min(100%, 380px); }
 .card2 {
@@ -544,6 +559,12 @@ kbd {
       glyph: '♠ ▢ ♠', mono: true,
       how: 'Sixteen cards lie face down, eight matching pairs. Turn two at a time. A match stays face up; a miss turns back over, so <b>remember where each symbol was</b>. Clear the board in as few moves as you can. A perfect game is 8 moves.',
       keys: 'Tap or click a card. Tab and Enter work too.', run: runPairs
+    },
+    words: {
+      name: 'Word List', trains: 'Verbal memory', time: '~60 s', unit: 'of 10', higher: true,
+      glyph: 'falcon…', mono: true,
+      how: 'Ten words appear one at a time. Then you see twenty words: the ten you saw and ten new ones. <b>Pick the ten you saw</b>, then check. Each right pick scores a point and each wrong pick loses one.',
+      keys: 'Tap words to pick them, then press Check.', run: runWords
     },
     anagram: {
       name: 'Unscramble', trains: 'Verbal fluency', time: '60 s', unit: 'words', higher: true,
@@ -1115,6 +1136,77 @@ kbd {
       [a, k].forEach(j => { cards[j].classList.remove('wrong'); void cards[j].offsetWidth; cards[j].classList.add('wrong'); });
       later(() => { face(a, false); face(k, false); cards[a].classList.remove('wrong'); cards[k].classList.remove('wrong'); busy = false; }, 900);
     });
+  }
+
+  // ---------- 5d. Word list ----------
+  // Study ten words, then recognise them among ten new ones. Score = right picks - wrong picks.
+  function runWords(arena, done) {
+    const N = 10, SHOW = 1500, GAP = 350;
+    const [studied, lures] = (p => [p.slice(0, N), p.slice(N, N * 2)])(shuffle(WORDS));
+    arena.innerHTML = `<div class="play">
+      <div class="stimulus" id="ws"></div>
+      <p class="hint" id="wh" aria-live="polite">Read each word. Saying it in your head helps.</p>
+    </div>`;
+    const ws = $('#ws', arena), hint = $('#wh', arena);
+    timerLabel.textContent = 'Word';
+    hudScore('—');
+    let k = 0;
+    const show = () => {
+      if (k >= N) { later(test, 600); return; }
+      hudTimer(`${k + 1}/${N}`);
+      ws.textContent = studied[k];
+      later(() => { ws.textContent = ''; }, SHOW);
+      k++;
+      later(show, SHOW + GAP);
+    };
+
+    function test() {
+      const studiedSet = new Set(studied);
+      const all = shuffle(studied.concat(lures));
+      timerLabel.textContent = 'Picked';
+      hudTimer(`0/${N}`);
+      arena.innerHTML = `<div class="play">
+        <p class="hint" id="wh" aria-live="polite">Pick the ${N} words you just saw.</p>
+        <div class="wordpick" id="wp" role="group" aria-label="Words">${all.map(w =>
+          `<button type="button" class="wp" aria-pressed="false" data-w="${w}">${w}</button>`).join('')}</div>
+        <button class="btn primary" id="wc" type="button">Check</button>
+      </div>`;
+      const grid = $('#wp', arena), hint = $('#wh', arena), check = $('#wc', arena);
+      const picked = new Set();
+      let checked = false;
+      grid.addEventListener('click', e => {
+        const b = e.target.closest('.wp');
+        if (!b || checked) return;
+        const w = b.dataset.w;
+        if (picked.has(w)) picked.delete(w); else picked.add(w);
+        b.setAttribute('aria-pressed', String(picked.has(w)));
+        hudTimer(`${picked.size}/${N}`);
+        hint.textContent = picked.size > N ? `That is more than ${N}. Wrong picks cost a point.` : `Pick the ${N} words you just saw.`;
+      });
+      check.addEventListener('click', () => {
+        if (checked) return;
+        checked = true;
+        grid.classList.add('checked');
+        let hits = 0, falses = 0;
+        [...grid.children].forEach(b => {
+          const w = b.dataset.w, was = studiedSet.has(w), p = picked.has(w);
+          b.setAttribute('aria-disabled', 'true');
+          if (was && p) { hits++; b.classList.add('hit'); }
+          else if (p) { falses++; b.classList.add('false'); }
+          else if (was) b.classList.add('missed');
+        });
+        const score = Math.max(0, hits - falses);
+        hudScore(`${score}/${N}`);
+        check.hidden = true;
+        hint.textContent = 'Green: right. Red: not on the list. Dashed: ones you missed.';
+        later(() => done({
+          score,
+          detail: `${hits} of ${N} remembered, ${falses} wrong pick${falses === 1 ? '' : 's'}. The list was: ${studied.join(', ')}.`
+        }), 2600);
+      });
+    }
+
+    later(show, 700);
   }
 
   // ---------- 6. Anagrams ----------
