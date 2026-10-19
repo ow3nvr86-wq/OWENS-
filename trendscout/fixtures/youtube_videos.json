@@ -1,0 +1,4 @@
+{"items": [
+ {"id": "vid001", "snippet": {"title": "I ran Northwind's 3B AI model on a Raspberry Pi 5", "description": "Testing the new open-weights model offline.", "channelTitle": "Sample Maker Channel", "publishedAt": "{{iso:6h}}", "tags": ["raspberry pi", "ai"], "categoryId": "28"}, "statistics": {"viewCount": "820000", "likeCount": "41000", "commentCount": "3100"}},
+ {"id": "vid002", "snippet": {"title": "Contoso Browser's cookie blocking, explained", "description": "What third-party cookie blocking means for you.", "channelTitle": "Sample Explainers", "publishedAt": "{{iso:8h}}", "tags": ["privacy"], "categoryId": "28"}, "statistics": {"viewCount": "120000", "likeCount": "5200", "commentCount": "640"}}
+]}

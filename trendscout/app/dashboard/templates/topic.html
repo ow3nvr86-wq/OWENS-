@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% from "_macros.html" import status_pill, decision_pill %}
+{% block title %}{{ c.title }} · Trend Scout{% endblock %}
+{% block content %}
+<p><a href="/trends?run={{ c.run_id }}">← Trends for run #{{ c.run_id }}</a></p>
+<h1>{{ c.title }}</h1>
+<p>{{ status_pill(c.status) }} score <strong>{{ '%.1f'|format(c.score) }}</strong>
+  {% if c.category %}· {{ c.category }}{% endif %}
+  {% if c.rejection_reason %}<span class="reason">· {{ c.rejection_reason }}</span>{% endif %}</p>
+
+<section class="grid two">
+  <div class="card">
+    <h2>Score breakdown</h2>
+    <table>{% for k, v in (c.score_breakdown_json|fromjson).items() %}<tr><td>{{ k }}</td><td>{{ v }}</td></tr>{% endfor %}</table>
+  </div>
+  <div class="card">
+    <h2>Screening</h2>
+    {% set cls = c.classification_json|fromjson %}
+    {% set saf = c.safety_json|fromjson %}
+    <p class="small">{{ cls.get('reason', 'Not classified (ranked below the shortlist or rejected earlier).') }}</p>
+    {% if cls.get('relevance') is not none %}<p class="small">relevance {{ cls.relevance }} · value add {{ cls.value_add }} · engagement potential {{ cls.engagement_potential }}</p>{% endif %}
+    {% if cls.get('update_of') %}<p class="small">Update to covered topic #{{ cls.update_of }}; new terms: {{ cls.new_terms|join(', ') }}</p>{% endif %}
+    <p class="small">Safety: {{ saf.get('action', 'n/a') }}{% if saf.get('reason') %} — {{ saf.reason }}{% endif %}</p>
+    {% if saf.get('flags') %}<p class="small">Flags: {% for k, v in saf.flags.items() %}<span class="pill warn">{{ k }}: {{ v|join(', ') }}</span> {% endfor %}</p>{% endif %}
+  </div>
+</section>
+
+<section class="card">
+  <h2>Source items</h2>
+  <ul class="list">
+  {% for i in items %}
+    <li><span class="pill src">{{ i.source }}</span> {% if i.url %}<a href="{{ i.url|safe_url }}" rel="noopener noreferrer nofollow" target="_blank">{{ i.topic }}</a>{% else %}{{ i.topic }}{% endif %}
+      <div class="small muted">first seen {{ i.first_seen_at|local }} · published {{ i.published_at|local }} · {{ i.summary[:200] }}</div></li>
+  {% endfor %}
+  </ul>
+</section>
+
+{% if research %}
+<section class="card">
+  <h2>Research <span class="pill">{{ research.output.confidence }} confidence</span>
+    {% if research.sufficient %}<span class="pill ok">sufficient</span>{% else %}<span class="pill danger">insufficient</span>{% endif %}
+    <span class="small muted">by {{ research.generated_by }} · {{ research.created_at|local }}</span></h2>
+  {% if not research.sufficient %}<p class="reason">{{ research.insufficiency_reason }}</p>{% endif %}
+  <p>{{ research.output.summary }}</p>
+  <p><strong>Angle:</strong> {{ research.output.angle }}</p>
+  <h3>Claims</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Claim</th><th>Kind</th><th>Verified</th><th>Evidence</th></tr></thead>
+    {% for cl in research.output.claims %}
+      <tr class="{{ '' if cl.verified else 'dim' }}"><td>{{ cl.claim }}</td><td>{{ cl.kind }}</td><td>{{ '✔' if cl.verified else '✘' }}</td>
+        <td class="small">{{ cl.evidence }}{% for u in cl.evidence_urls %}<br><a href="{{ u|safe_url }}" rel="noopener noreferrer nofollow" target="_blank">{{ u }}</a>{% endfor %}</td></tr>
+    {% endfor %}
+  </table></div>
+  {% if research.output.conflicting_evidence %}<h3>Conflicting evidence</h3><ul>{% for x in research.output.conflicting_evidence %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+  {% if research.output.missing_information %}<h3>Missing information</h3><ul>{% for x in research.output.missing_information %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+  <h3>Sources</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>URL</th><th>Publisher</th><th>Published</th><th>Body retrieved</th><th>HTTP</th><th>Found via</th></tr></thead>
+    {% for s in research.sources %}
+      <tr><td class="small"><a href="{{ s.url|safe_url }}" rel="noopener noreferrer nofollow" target="_blank">{{ s.url }}</a></td><td>{{ s.publisher or s.domain }}</td>
+        <td>{{ s.published_at|local }}</td><td>{{ 'yes' if s.fetched else 'no' }}</td><td>{{ s.http_status or '—' }}</td><td>{{ s.origin }}</td></tr>
+    {% endfor %}
+  </table></div>
+</section>
+{% endif %}
+
+<section class="card">
+  <h2>Drafts</h2>
+  <ul class="list">
+  {% for d in drafts %}<li><span class="pill src">{{ d.platform }}</span> {{ status_pill(d.status) }} {{ decision_pill(d.review_decision) }}
+    <a href="/drafts?status=all&platform={{ d.platform }}#draft-{{ d.id }}">{{ d.post_text[:120] }}…</a></li>
+  {% else %}<li class="muted">No drafts for this topic.</li>{% endfor %}
+  </ul>
+</section>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% from "_macros.html" import status_pill %}
+{% block title %}Logs · Trend Scout{% endblock %}
+{% block content %}
+<h1>Logs</h1>
+<section class="card"><h2>Runs</h2>
+  <div class="table-wrap"><table class="small">
+    <thead><tr><th>#</th><th>Kind</th><th>Status</th><th>Trigger</th><th>Started</th><th>Finished</th><th>Mode</th><th>Details</th></tr></thead>
+    {% for r in runs %}<tr><td>{{ r.id }}</td><td>{{ r.kind }}</td><td>{{ status_pill(r.status) }}</td><td>{{ r.trigger }}</td>
+      <td>{{ r.started_at|local }}</td><td>{{ r.finished_at|local }}</td><td>{{ 'offline' if r.offline else ('dry run' if r.dry_run else 'live') }}</td>
+      <td><details><summary>stats</summary><pre>{{ r.stats_json }}</pre></details>{% if r.error %}<div class="error-text">{{ r.error }}</div>{% endif %}</td></tr>{% endfor %}
+  </table></div>
+</section>
+<section class="card"><h2>Errors</h2>
+  <div class="table-wrap"><table class="small"><thead><tr><th>When</th><th>Component</th><th>Message</th></tr></thead>
+    {% for e in errors %}<tr><td>{{ e.ts|local }}</td><td>{{ e.component }}</td><td>{{ e.message }}</td></tr>{% else %}<tr><td colspan="3" class="muted">No errors.</td></tr>{% endfor %}
+  </table></div>
+</section>
+<section class="card"><h2>Audit log</h2>
+  <div class="table-wrap"><table class="small"><thead><tr><th>When</th><th>Who</th><th>Action</th><th>Entity</th><th>Detail</th></tr></thead>
+    {% for a in audit %}<tr><td>{{ a.ts|local }}</td><td>{{ a.actor }}</td><td>{{ a.action }}</td><td>{{ a.entity }} {{ a.entity_id or '' }}</td><td><code>{{ a.detail_json[:300] }}</code></td></tr>{% endfor %}
+  </table></div>
+</section>
+{% endblock %}

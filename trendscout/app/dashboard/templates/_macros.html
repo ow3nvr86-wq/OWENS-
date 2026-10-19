@@ -1,0 +1,3 @@
+{% macro csrf_field() %}<input type="hidden" name="csrf_token" value="{{ csrf }}">{% endmacro %}
+{% macro status_pill(status) %}<span class="pill s-{{ status }}">{{ status|replace('_', ' ') }}</span>{% endmacro %}
+{% macro decision_pill(d) %}{% if d %}<span class="pill d-{{ d }}">{{ d|replace('_', ' ')|lower }}</span>{% endif %}{% endmacro %}

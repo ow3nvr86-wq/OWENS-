@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% from "_macros.html" import status_pill %}
+{% block title %}Trends · Trend Scout{% endblock %}
+{% block content %}
+<h1>Trends</h1>
+<form method="get" class="filters">
+  <label>Run
+    <select name="run" data-autosubmit>
+      {% for r in runs %}<option value="{{ r.id }}" {{ 'selected' if r.id == run }}>#{{ r.id }} · {{ r.started_at|local }}{{ ' · offline' if r.offline }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>Show
+    <select name="show" data-autosubmit>
+      {% for v in ['all', 'selected', 'rejected'] %}<option {{ 'selected' if v == show }}>{{ v }}</option>{% endfor %}
+    </select>
+  </label>
+  <noscript><button>Apply</button></noscript>
+</form>
+{% if not clusters %}<p class="muted">No topics for this run.</p>{% endif %}
+{% for c in clusters %}
+  {% set b = c.score_breakdown_json|fromjson %}
+  <article class="card topic {{ c.status }}">
+    <header class="row">
+      <div class="score" title="0-100">{{ '%.0f'|format(c.score) }}</div>
+      <div class="grow">
+        <h2><a href="/topics/{{ c.id }}">{{ c.title }}</a></h2>
+        <div class="small">{{ status_pill(c.status) }}
+          {% if c.category %}<span class="pill">{{ c.category }}</span>{% endif %}
+          {% if c.needs_human_review %}<span class="pill warn">needs human review</span>{% endif %}
+          {% for s in c.sources_json|fromjson([]) %}<span class="pill src">{{ s }}</span>{% endfor %}
+        </div>
+        {% if c.rejection_reason %}<p class="reason">Rejected: {{ c.rejection_reason }}</p>{% endif %}
+      </div>
+    </header>
+    <div class="bars">
+      {% for k in ['popularity', 'momentum', 'recency', 'relevance', 'engagement', 'credibility', 'originality'] %}
+        <div class="bar"><span>{{ k }}</span><meter min="0" max="1" value="{{ b.get(k, 0) }}"></meter><span class="small">{{ '%.2f'|format(b.get(k, 0)) }}</span></div>
+      {% endfor %}
+      {% if b.get('learned_multiplier') and b.get('learned_multiplier') != 1 %}<div class="small muted">learned multiplier ×{{ b.learned_multiplier }}</div>{% endif %}
+    </div>
+    <details><summary>{{ c['items']|length }} source item(s)</summary>
+      <ul class="list">
+      {% for i in c['items'] %}
+        {% set m = i.metrics_json|fromjson %}
+        <li><span class="pill src">{{ i.source }}</span>
+          {% if i.url %}<a href="{{ i.url|safe_url }}" rel="noopener noreferrer nofollow" target="_blank">{{ i.topic }}</a>{% else %}{{ i.topic }}{% endif %}
+          <div class="small muted">discovered {{ i.first_seen_at|local }}{% if i.published_at %} · published {{ i.published_at|local }}{% endif %}
+            {% for k, v in m.items() %} · {{ k }} {{ '%.0f'|format(v) if v >= 10 else '%.2f'|format(v) }}{% endfor %}</div>
+        </li>
+      {% endfor %}
+      </ul>
+    </details>
+  </article>
+{% endfor %}
+{% endblock %}

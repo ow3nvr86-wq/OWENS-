@@ -1,0 +1,23 @@
+# Dashboard + scheduler sharing one SQLite volume.
+#   docker compose up -d --build
+# Put a TLS-terminating proxy (Caddy, nginx, a platform load balancer) in front of
+# port 8000 and set COOKIE_SECURE=true in .env.
+services:
+  web:
+    build: .
+    env_file: .env
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - trendscout-data:/data
+    restart: unless-stopped
+  scheduler:
+    build: .
+    env_file: .env
+    command: ["python", "-m", "app", "scheduler"]
+    volumes:
+      - trendscout-data:/data
+    restart: unless-stopped
+    depends_on: [web]
+volumes:
+  trendscout-data:

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel><title>Sample Tech Desk</title><link>https://example.com/</link><description>Sample feed for offline mode</description>
+<item><title>Raspberry Pi can now run a capable AI model offline, says Northwind</title><link>https://example.com/northwind-open-model-news</link><guid>sample-a-1</guid><pubDate>{{rfc:2h}}</pubDate><description>Northwind Labs says its new 3-billion-parameter model runs on a Raspberry Pi 5 without an internet connection.</description></item>
+<item><title>Contoso browser to block tracking cookies for all users</title><link>https://example.com/contoso-browser-news</link><guid>sample-a-2</guid><pubDate>{{rfc:4h}}</pubDate><description>The change rolls out in the next stable release, the company said.</description></item>
+<item><title>Pop star's rumoured breakup sets the internet ablaze</title><link>https://example.net/popstar</link><guid>sample-a-3</guid><pubDate>{{rfc:1h}}</pubDate><description>Celebrity gossip about a rumoured split.</description></item>
+<item><title>Local derby ends in dramatic late winner</title><link>https://example.net/derby</link><guid>sample-a-4</guid><pubDate>{{rfc:3h}}</pubDate><description>A football match report.</description></item>
+</channel></rss>

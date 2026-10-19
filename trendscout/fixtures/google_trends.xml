@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:ht="https://trends.google.com/trending/rss" version="2.0"><channel><title>Daily Search Trends</title>
+<item><title>raspberry pi ai model</title><ht:approx_traffic>50K+</ht:approx_traffic><pubDate>{{rfc:3h}}</pubDate>
+<ht:news_item><ht:news_item_title>Raspberry Pi can now run a capable AI model offline</ht:news_item_title><ht:news_item_url>https://example.com/northwind-open-model-news</ht:news_item_url><ht:news_item_source>Sample Tech Desk</ht:news_item_source></ht:news_item></item>
+<item><title>derby result</title><ht:approx_traffic>200K+</ht:approx_traffic><pubDate>{{rfc:2h}}</pubDate>
+<ht:news_item><ht:news_item_title>Local derby ends in dramatic late winner</ht:news_item_title><ht:news_item_url>https://example.net/derby</ht:news_item_url><ht:news_item_source>Sample Sports</ht:news_item_source></ht:news_item></item>
+<item><title>contoso browser</title><ht:approx_traffic>20K+</ht:approx_traffic><pubDate>{{rfc:5h}}</pubDate>
+<ht:news_item><ht:news_item_title>Contoso browser to block tracking cookies</ht:news_item_title><ht:news_item_url>https://example.com/contoso-browser-news</ht:news_item_url><ht:news_item_source>Sample Tech Desk</ht:news_item_source></ht:news_item></item>
+</channel></rss>

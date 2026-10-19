@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Sign in · Trend Scout{% endblock %}
+{% block content %}
+<section class="login card">
+  <h1>Trend Scout</h1>
+  {% if problem %}
+    <p class="flash error">Sign-in is disabled until the dashboard is configured. {{ problem }}</p>
+  {% endif %}
+  <form method="post" action="/login">
+    <input type="hidden" name="csrf_token" value="{{ csrf }}">
+    <label>Username <input name="username" autocomplete="username" required></label>
+    <label>Password <input name="password" type="password" autocomplete="current-password" required></label>
+    <button class="primary" {% if problem %}disabled{% endif %}>Sign in</button>
+  </form>
+</section>
+{% endblock %}

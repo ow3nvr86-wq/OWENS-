@@ -1,0 +1,106 @@
+name: Trend Scout
+
+# Two jobs:
+# - test: runs the test suite and a full offline dry run on every change to trendscout/.
+# - trigger: on a schedule (or by hand) asks your hosted Trend Scout instance to run
+#   discovery, publishing or metrics. The work happens on the server, which keeps the
+#   database and the dashboard; Actions is only the clock.
+#
+# Scheduled triggers do nothing until you set the repository variable
+# TRENDSCOUT_ENABLED=true (Settings -> Secrets and variables -> Actions -> Variables) and
+# add the secrets TRENDSCOUT_URL and TRENDSCOUT_TRIGGER_TOKEN. Set the variable to false,
+# or disable this workflow in the Actions tab, to stop them.
+#
+# Cron times are UTC. GitHub may delay scheduled runs by several minutes under load.
+on:
+  schedule:
+    - cron: "17 11,16,21 * * *"   # discovery (07:17, 12:17, 17:17 New York in summer)
+    - cron: "*/30 * * * *"        # publish approved posts that are due
+    - cron: "43 * * * *"          # collect metrics
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "What to run"
+        type: choice
+        options: [test, discover, publish, metrics, all]
+        default: test
+  push:
+    paths: ["trendscout/**", ".github/workflows/trend_scout.yml"]
+  pull_request:
+    paths: ["trendscout/**", ".github/workflows/trend_scout.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    if: github.event_name == 'push' || github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && inputs.task == 'test')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: trendscout
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: trendscout/requirements-dev.txt
+      - run: pip install -r requirements-dev.txt
+      - name: Unit and integration tests (no network, nothing is published)
+        run: python -m pytest -q
+      - name: Offline dry run, discovery to simulated publication
+        env:
+          DATABASE_PATH: ${{ runner.temp }}/dryrun.db
+          TRENDSCOUT_CONFIG: ${{ runner.temp }}/ci.toml
+        run: |
+          # Same config, with the publishing window open all day so CI passes at any hour.
+          sed -e 's/^publish_window_start = .*/publish_window_start = "00:00"/' \
+              -e 's/^publish_window_end = .*/publish_window_end = "23:59"/' config/trendscout.toml > "$TRENDSCOUT_CONFIG"
+          python -m app --log-level WARNING discover --offline | tee "$RUNNER_TEMP/discover.json"
+          python - <<'PY'
+          import os
+          from app.config import load_settings
+          from app.database import Database
+          from app.services import approval
+          db = Database(os.environ["DATABASE_PATH"])
+          s = load_settings()
+          ids = [r["id"] for r in db.query("SELECT id FROM drafts WHERE status = 'pending_approval'")]
+          assert ids, "offline discovery produced no drafts"
+          approval.approve(db, s, ids[0], "ci")
+          db.execute("UPDATE publish_jobs SET scheduled_at = '2000-01-01T00:00:00.000000Z'")
+          PY
+          python -m app --log-level WARNING publish --offline | tee "$RUNNER_TEMP/publish.json"
+          python -c "import json,sys; d=json.load(open(sys.argv[1])); assert d.get('published') == 1, d" "$RUNNER_TEMP/publish.json"
+
+  trigger:
+    if: >-
+      (github.event_name == 'schedule' && vars.TRENDSCOUT_ENABLED == 'true') ||
+      (github.event_name == 'workflow_dispatch' && inputs.task != 'test')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    concurrency:
+      group: trend-scout-trigger-${{ github.event.schedule || inputs.task }}
+      cancel-in-progress: false
+    steps:
+      - name: Ask the Trend Scout server to run
+        env:
+          URL: ${{ secrets.TRENDSCOUT_URL }}
+          TOKEN: ${{ secrets.TRENDSCOUT_TRIGGER_TOKEN }}
+          SCHEDULE: ${{ github.event.schedule }}
+          INPUT_TASK: ${{ inputs.task }}
+        run: |
+          if [ -z "$URL" ] || [ -z "$TOKEN" ]; then
+            echo "::warning::Set the TRENDSCOUT_URL and TRENDSCOUT_TRIGGER_TOKEN secrets to enable triggers."
+            exit 0
+          fi
+          case "$SCHEDULE" in
+            "17 11,16,21 * * *") TASK=discover ;;
+            "*/30 * * * *") TASK=publish ;;
+            "43 * * * *") TASK=metrics ;;
+            *) TASK="$INPUT_TASK" ;;
+          esac
+          echo "Triggering: $TASK"
+          curl --fail-with-body --silent --show-error --max-time 30 --retry 3 --retry-all-errors \
+            -X POST "${URL%/}/api/trigger?task=${TASK}" -H "Authorization: Bearer ${TOKEN}"

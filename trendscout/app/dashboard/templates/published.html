@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Published · Trend Scout{% endblock %}
+{% block content %}
+<h1>Published</h1>
+{% if not posts %}<p class="muted">Nothing published yet.</p>{% endif %}
+{% for p in posts %}
+<article class="card">
+  <header class="row"><span class="pill src">{{ p.platform }}</span>
+    {% if p.dry_run %}<span class="pill warn">simulated (dry run)</span>{% endif %}
+    <span class="small muted">{{ p.published_at|local }}</span><span class="grow"></span>
+    {% if p.url %}<a href="{{ p.url|safe_url }}" rel="noopener noreferrer" target="_blank">Open post</a>{% elif p.platform_post_id %}<span class="small muted">{{ p.platform_post_id }}</span>{% endif %}
+  </header>
+  <div class="post">{{ p.post_text }}</div>
+  {% if p.metrics %}
+  <table class="small">
+    <thead><tr><th>Age</th><th>Collected</th><th>Views</th><th>Likes</th><th>Replies</th><th>Reposts</th><th>Clicks</th><th>Engagement rate</th></tr></thead>
+    {% for m in p.metrics %}<tr><td>{{ m.age_bucket }}</td><td>{{ m.collected_at|local }}</td>
+      {% for k in ['impressions', 'likes', 'comments', 'reposts', 'clicks'] %}<td>{{ '—' if m[k] is none else m[k] }}</td>{% endfor %}
+      <td>{{ '—' if m.engagement_rate is none else '%.2f%%'|format(100 * m.engagement_rate) }}</td></tr>{% endfor %}
+  </table>
+  {% elif not p.dry_run %}<p class="small muted">No metrics yet (first collection one hour after posting). A dash means the platform does not report that number.</p>{% endif %}
+</article>
+{% endfor %}
+{% endblock %}

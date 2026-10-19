@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% from "_macros.html" import status_pill %}
+{% block title %}Queue · Trend Scout{% endblock %}
+{% block content %}
+<h1>Publishing queue</h1>
+<p class="small muted">Uncertain means the platform may have accepted the post but did not confirm it. Trend Scout checks with the platform automatically on every publishing run; if it cannot tell, look at the account and resolve it here. It never retries an uncertain post on its own.</p>
+{% if not jobs %}<p class="muted">Nothing has been approved yet.</p>{% endif %}
+<div class="table-wrap"><table class="queue">
+  <thead><tr><th>Job</th><th>Platform</th><th>Status</th><th>When</th><th>Attempts</th><th>Post</th><th>Actions</th></tr></thead>
+  <tbody>
+  {% for j in jobs %}
+    <tr>
+      <td>#{{ j.id }}</td><td>{{ j.platform }}</td>
+      <td>{{ status_pill(j.status) }}{% if j.dry_run %} <span class="pill warn">simulated</span>{% endif %}
+        {% if j.last_error %}<div class="small error-text">{{ j.last_error }}</div>{% endif %}</td>
+      <td class="small">{{ (j.published_at or j.scheduled_at)|local }}</td>
+      <td>{{ j.attempts }}</td>
+      <td class="small">{{ j.post_text[:140] }}{% if j.url %}<br><a href="{{ j.url|safe_url }}" rel="noopener noreferrer" target="_blank">view post</a>{% endif %}</td>
+      <td class="actions">
+        {% if j.status == 'queued' %}
+          <form method="post" action="/drafts/{{ j.draft_id }}/schedule" class="inline"><input type="hidden" name="csrf_token" value="{{ csrf }}">
+            <input type="datetime-local" name="scheduled_at" required aria-label="new time"><button>Reschedule</button></form>
+        {% endif %}
+        {% if j.status == 'uncertain' %}
+          <form method="post" action="/jobs/{{ j.id }}/mark-published" class="inline"><input type="hidden" name="csrf_token" value="{{ csrf }}">
+            <input name="url" placeholder="post URL (optional)"><button>It was posted</button></form>
+          <form method="post" action="/jobs/{{ j.id }}/retry" class="inline" data-confirm="Only retry if you checked the account and the post is NOT there."><input type="hidden" name="csrf_token" value="{{ csrf }}">
+            <input type="hidden" name="confirm" value="1"><button>Not posted: retry</button></form>
+        {% endif %}
+        {% if j.status in ['failed', 'held', 'cancelled'] %}
+          <form method="post" action="/jobs/{{ j.id }}/retry" class="inline"><input type="hidden" name="csrf_token" value="{{ csrf }}"><button>Retry</button></form>
+        {% endif %}
+        {% if j.status == 'published' and j.dry_run %}
+          <form method="post" action="/jobs/{{ j.id }}/requeue-live" class="inline" data-confirm="Publish this post for real?"><input type="hidden" name="csrf_token" value="{{ csrf }}"><button>Publish for real</button></form>
+        {% endif %}
+        {% if j.status in ['queued', 'held', 'failed', 'uncertain'] %}
+          <form method="post" action="/jobs/{{ j.id }}/cancel" class="inline"><input type="hidden" name="csrf_token" value="{{ csrf }}"><button class="danger">Cancel</button></form>
+        {% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table></div>
+{% endblock %}

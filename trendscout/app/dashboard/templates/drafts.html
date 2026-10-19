@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% from "_macros.html" import status_pill, decision_pill %}
+{% block title %}Drafts · Trend Scout{% endblock %}
+{% block content %}
+<h1>Drafts</h1>
+<nav class="tabs">
+  {% for s in statuses + ['all'] %}<a class="{{ 'active' if s == status }}" href="/drafts?status={{ s }}{% if platform %}&platform={{ platform }}{% endif %}">{{ s|replace('_', ' ') }}</a>{% endfor %}
+</nav>
+<nav class="tabs small">
+  <a class="{{ 'active' if not platform }}" href="/drafts?status={{ status }}">all platforms</a>
+  {% for p in ['bluesky', 'x', 'instagram', 'threads', 'linkedin', 'tiktok'] %}<a class="{{ 'active' if p == platform }}" href="/drafts?status={{ status }}&platform={{ p }}">{{ p }}</a>{% endfor %}
+</nav>
+
+{% set here = '/drafts?status=' ~ status ~ ('&platform=' ~ platform if platform else '') %}
+{% if drafts and status == 'pending_approval' %}
+<form id="bulk" method="post" action="/drafts/bulk-approve" class="bulk card" data-confirm="Approve every selected draft? They will be scheduled for publishing.">
+  <input type="hidden" name="csrf_token" value="{{ csrf }}">
+  <label><input type="checkbox" data-select-all> Select all</label>
+  <button class="primary">Approve selected</button>
+  <span class="small muted">Approved posts are spread across the publishing window and respect each platform's daily limit.</span>
+</form>
+{% endif %}
+
+{% if not drafts %}<p class="muted">Nothing here.</p>{% endif %}
+{% for d in drafts %}
+{% set rv = d.reviews[0] if d.reviews else None %}
+<article class="card draft" id="draft-{{ d.id }}">
+  <header class="row">
+    {% if d.status == 'pending_approval' %}<input type="checkbox" name="ids" value="{{ d.id }}" form="bulk" aria-label="select draft {{ d.id }}">{% endif %}
+    <span class="pill src">{{ d.platform }}</span> {{ status_pill(d.status) }} {{ decision_pill(d.review_decision) }}
+    {% if d.needs_human_review %}<span class="pill warn">sensitive: read carefully</span>{% endif %}
+    {% if d.human_edited %}<span class="pill warn">edited, not re-reviewed</span>{% endif %}
+    {% if d.generated_by == 'simulated' %}<span class="pill">simulated draft</span>{% endif %}
+    <span class="grow"></span>
+    <span class="count {{ 'over' if d.char_count > d.char_limit }}">{{ d.char_count }}/{{ d.char_limit }}</span>
+  </header>
+  <p class="small"><a href="/topics/{{ d.cluster_id }}">{{ d.topic }}</a> · {{ d.category or 'uncategorised' }} · revision {{ d.revision_count }} · updated {{ d.updated_at|local }}
+    {% if d.job_status %} · job {{ d.job_status }}{% if d.scheduled_at and d.job_status == 'queued' %} for {{ d.scheduled_at|local }}{% endif %}{% endif %}</p>
+  <div class="post">{{ d.post_text }}</div>
+  {% for t in d.structure.get('thread_posts', []) %}<div class="post reply">{{ t }}</div>{% endfor %}
+  {% if d.structure.get('carousel_slides') %}<h4>Carousel</h4><ol>{% for s in d.structure.carousel_slides %}<li>{{ s }}</li>{% endfor %}</ol>{% endif %}
+  {% if d.structure.get('script') %}<h4>Script</h4><p>{{ d.structure.script }}</p>{% endif %}
+  {% if d.structure.get('shot_list') %}<h4>Shot list</h4><ol>{% for s in d.structure.shot_list %}<li>{{ s }}</li>{% endfor %}</ol>{% endif %}
+  {% if d.media_brief %}<p class="small"><strong>Media brief:</strong> {{ d.media_brief }}</p>{% endif %}
+  {% if d.structure.get('media_url') %}<p class="small"><strong>Media URL:</strong> {{ d.structure.media_url }}</p>{% endif %}
+  <details><summary>Sources, claims and rationale</summary>
+    <p class="small"><strong>Sources:</strong>{% for u in d.source_urls_json|fromjson([]) %} <a href="{{ u|safe_url }}" rel="noopener noreferrer nofollow" target="_blank">{{ u }}</a>{% endfor %}</p>
+    {% set tags = d.hashtags_json|fromjson([]) %}{% if tags %}<p class="small"><strong>Suggested hashtags:</strong> {{ tags|join(' ') }}</p>{% endif %}
+    <p class="small"><strong>Claims:</strong></p><ul class="small">{% for c in d.claims_json|fromjson([]) %}<li>{{ c }}</li>{% endfor %}</ul>
+    <p class="small"><strong>Writer's rationale:</strong> {{ d.rationale }}</p>
+  </details>
+  {% if rv %}
+  <details {{ 'open' if d.review_decision != 'APPROVED_FOR_HUMAN_REVIEW' }}><summary>Reviewer: {{ rv.decision|replace('_', ' ')|lower }} ({{ rv.reviewer }}, attempt {{ rv.attempt }})</summary>
+    <ul class="small">{% for r in rv.reasons_json|fromjson([]) %}<li>{{ r }}</li>{% endfor %}</ul>
+    {% if rv.instructions %}<p class="small"><strong>Revision instructions:</strong> {{ rv.instructions }}</p>{% endif %}
+    {% set checks = (rv.checks_json|fromjson).get('automated', {}) %}
+    {% if checks %}<table class="small checks">{% for k, v in checks.items() %}<tr><td>{{ '✔' if v.passed else '✘' }}</td><td>{{ k }}</td><td>{{ v.note }}</td></tr>{% endfor %}</table>{% endif %}
+    {% if d.reviews|length > 1 %}<p class="small muted">Earlier attempts: {% for r in d.reviews[1:] %}{{ r.attempt }}: {{ r.decision|lower }}{{ ', ' if not loop.last }}{% endfor %}</p>{% endif %}
+  </details>
+  {% endif %}
+
+  <div class="actions">
+    {% if d.status == 'pending_approval' %}
+    <form method="post" action="/drafts/{{ d.id }}/approve" class="inline">
+      <input type="hidden" name="csrf_token" value="{{ csrf }}"><input type="hidden" name="next" value="{{ here }}">
+      <label class="small">Publish at (optional) <input type="datetime-local" name="scheduled_at"></label>
+      <button class="primary">Approve</button>
+    </form>
+    {% endif %}
+    {% if d.status in ['pending_approval', 'approved', 'rejected'] %}
+    <details class="inline-details"><summary class="button">Edit</summary>
+      <form method="post" action="/drafts/{{ d.id }}/edit">
+        <input type="hidden" name="csrf_token" value="{{ csrf }}"><input type="hidden" name="next" value="{{ here }}">
+        <textarea name="text" rows="6" data-limit="{{ d.char_limit }}" data-platform="{{ d.platform }}">{{ d.post_text }}</textarea>
+        <div class="small"><span data-counter>{{ d.char_count }}</span>/{{ d.char_limit }}</div>
+        {% if d.platform in ['instagram', 'tiktok'] %}<label class="small">Public media URL ({{ 'image' if d.platform == 'instagram' else 'video' }}, https)
+          <input name="media_url" value="{{ d.structure.get('media_url', '') }}" placeholder="https://"></label>{% endif %}
+        <label class="small"><input type="checkbox" name="rereview" value="1" checked> Run the reviewer on my edit</label>
+        <button>Save edit</button>
+        {% if d.status == 'approved' %}<p class="small muted">Saving cancels the scheduled post and returns it for approval.</p>{% endif %}
+      </form>
+    </details>
+    {% endif %}
+    {% if d.status in ['pending_approval', 'rejected', 'rejected_by_human'] %}
+    <details class="inline-details"><summary class="button">Request rewrite</summary>
+      <form method="post" action="/drafts/{{ d.id }}/rewrite">
+        <input type="hidden" name="csrf_token" value="{{ csrf }}"><input type="hidden" name="next" value="{{ here }}">
+        <textarea name="instructions" rows="3" placeholder="What should change? e.g. lead with why it matters for developers" required></textarea>
+        <button>Rewrite</button>
+      </form>
+    </details>
+    {% endif %}
+    {% if d.human_edited %}
+    <form method="post" action="/drafts/{{ d.id }}/rereview" class="inline"><input type="hidden" name="csrf_token" value="{{ csrf }}"><input type="hidden" name="next" value="{{ here }}"><button>Run reviewer</button></form>
+    {% endif %}
+    {% if d.status in ['pending_approval', 'approved', 'rejected'] %}
+    <form method="post" action="/drafts/{{ d.id }}/reject" class="inline">
+      <input type="hidden" name="csrf_token" value="{{ csrf }}"><input type="hidden" name="next" value="{{ here }}">
+      <input name="note" placeholder="Why? (optional)" aria-label="Rejection note">
+      <button class="danger">Reject</button>
+    </form>
+    {% endif %}
+  </div>
+</article>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,196 @@
+# Trend Scout configuration. Everything about the account and behaviour lives
+# here; secrets (API keys, passwords) go in .env and never in this file.
+# Restart the app after editing. `python -m app check-config` validates it.
+
+[account]
+name = "Signal Daily"
+niche = "consumer technology, AI tools and the internet"
+audience = "curious professionals who want practical, accurate takeaways without hype"
+voice = "clear, curious and lightly witty; plain words; confident only when the facts are"
+personality = "a well-read friend who explains why something matters"
+categories = ["AI", "software", "gadgets", "internet culture", "science"]
+# Cheap relevance signal used before any AI call. Lowercase words or phrases.
+keywords = ["ai", "artificial intelligence", "openai", "anthropic", "google", "apple", "microsoft",
+            "chip", "software", "app", "startup", "open source", "privacy", "security", "robot",
+            "smartphone", "iphone", "android", "linux", "programming", "space", "nasa", "science",
+            "research", "llm", "model", "data", "cloud", "browser", "internet"]
+avoid_topics = ["celebrity gossip", "partisan politics", "crypto price predictions"]
+avoid_keywords = ["horoscope", "giveaway"]
+language = "en"
+region = "US"
+
+[schedule]
+timezone = "America/New_York"
+discovery_times = ["07:30", "12:00", "17:30"]
+publish_window_start = "08:00"
+publish_window_end = "21:00"
+publish_check_minutes = 10
+metrics_check_minutes = 60
+
+[publishing]
+require_human_approval = true   # every post needs a person to approve it
+auto_publish = false            # only honoured when require_human_approval = false
+dry_run = true                  # simulate publishing; set false once Bluesky is connected
+min_minutes_between_posts = 90  # per platform
+near_duplicate_hours = 48
+near_duplicate_threshold = 0.6
+error_pause_threshold = 5       # publishing failures within the window that trigger an automatic pause
+error_window_minutes = 60
+max_attempts = 3
+
+[platforms.bluesky]
+enabled = true
+daily_limit = 4
+threads = false
+
+[platforms.x]
+enabled = false
+daily_limit = 3
+threads = false
+
+[platforms.instagram]
+enabled = false
+daily_limit = 1
+
+[platforms.threads]
+enabled = false
+daily_limit = 3
+
+[platforms.linkedin]
+enabled = false
+daily_limit = 1
+
+[platforms.tiktok]
+enabled = false
+daily_limit = 1
+
+[content]
+length = "medium"     # short | medium | long, relative to each platform's limit
+max_hashtags = 2
+include_links = true
+banned_phrases = ["you won't believe", "smash that like", "link in bio", "game-changer", "comment below if"]
+
+[selection]
+topics_per_run = 2
+max_candidates_for_ai = 12   # topics sent to the (cheap) classification model each run
+min_score = 40
+cluster_similarity = 0.45
+covered_similarity = 0.5
+covered_cooldown_days = 7
+update_min_new_terms = 3
+recency_half_life_hours = 18
+max_age_hours = 72
+min_relevance = 35
+
+[scoring]
+learning_enabled = true
+learning_min_posts = 5
+learning_max_adjustment = 0.2
+
+[scoring.weights]
+popularity = 0.20
+momentum = 0.15
+recency = 0.15
+relevance = 0.25
+engagement = 0.10
+credibility = 0.10
+originality = 0.05
+
+[safety]
+# "exclude" drops the topic, "review" keeps it but flags the drafts for a person, "allow" ignores the flag.
+exclude_breaking_hours = 2   # extra caution window for very fresh news on sensitive subjects
+
+[safety.policy]
+tragedy = "exclude"
+unverified_allegation = "exclude"
+personal_information = "exclude"
+medical_misinformation = "exclude"
+financial_claims = "review"
+political_misinformation = "exclude"
+hate_harassment = "exclude"
+dangerous_challenge = "exclude"
+copyright = "review"
+engagement_bait = "exclude"
+outside_expertise = "exclude"
+
+[safety.keywords]
+tragedy = ["killed", "dead", "death toll", "shooting", "massacre", "suicide", "crash victims", "earthquake",
+           "wildfire", "hurricane", "terror attack", "explosion", "hostage", "mass casualty", "funeral", "obituary"]
+unverified_allegation = ["allegedly", "accused of", "rumor", "rumour", "unconfirmed", "leaked claims"]
+personal_information = ["home address", "phone number leaked", "doxx", "doxxed"]
+medical_misinformation = ["miracle cure", "cures cancer", "anti-vax", "detox cure"]
+financial_claims = ["guaranteed returns", "to the moon", "price prediction", "buy now before", "stock tip"]
+political_misinformation = ["stolen election", "rigged election"]
+hate_harassment = ["slur", "racist rant"]
+dangerous_challenge = ["challenge goes viral", "tiktok challenge", "blackout challenge"]
+engagement_bait = ["you won't believe", "will shock you", "number 7 will"]
+
+[ai]
+model = "claude-opus-5-5"          # research, writing, review
+classify_model = "claude-haiku-5-5" # cheap batched relevance/safety classification
+effort_classify = "low"
+effort_research = "medium"
+effort_write = "medium"
+effort_review = "high"
+use_web_search = true
+web_search_max_uses = 3
+max_revisions = 2
+max_source_chars = 12000
+monthly_budget_usd = 50.0          # AI steps are skipped for the rest of the month once estimated spend passes this
+request_timeout_seconds = 300
+
+[collectors]
+timeout_seconds = 15
+retries = 2
+
+[collectors.hacker_news]
+enabled = true
+lists = ["top", "best", "new"]
+limit = 30
+
+[collectors.news_rss]
+enabled = true
+limit_per_feed = 20
+feeds = [
+  { name = "BBC Technology", url = "https://feeds.bbci.co.uk/news/technology/rss.xml", credibility = 0.9, trusted = true },
+  { name = "Ars Technica", url = "https://feeds.arstechnica.com/arstechnica/index", credibility = 0.85, trusted = true },
+  { name = "The Verge", url = "https://www.theverge.com/rss/index.xml", credibility = 0.8, trusted = true },
+  { name = "NASA", url = "https://www.nasa.gov/news-release/feed/", credibility = 0.95, trusted = true },
+]
+
+[collectors.google_trends]
+enabled = true
+geo = "US"
+
+[collectors.reddit]
+enabled = true   # needs REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET; skipped with a clear log line otherwise
+subreddits = ["popular", "technology", "artificial", "gadgets", "science"]
+limit = 25
+
+[collectors.youtube]
+enabled = true   # needs YOUTUBE_API_KEY
+region = "US"
+category_id = "28"   # 28 = Science & Technology; leave "" for all categories
+search_queries = []  # e.g. ["ai tools"]; each search costs 100 quota units
+limit = 25
+
+[collectors.x_trends]
+enabled = false  # needs X_BEARER_TOKEN on an API tier that includes the trends endpoint
+woeid = 23424977 # United States
+
+# Credibility (0-1) by domain, used for the source-credibility score and to prefer sources in research.
+[source_credibility]
+"bbc.co.uk" = 0.9
+"bbc.com" = 0.9
+"reuters.com" = 0.95
+"apnews.com" = 0.95
+"arstechnica.com" = 0.85
+"theverge.com" = 0.8
+"nasa.gov" = 0.95
+"nature.com" = 0.95
+"github.com" = 0.7
+"news.ycombinator.com" = 0.5
+"reddit.com" = 0.4
+"youtube.com" = 0.4
+"trends.google.com" = 0.5
+"x.com" = 0.3
