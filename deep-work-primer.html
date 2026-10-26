@@ -566,6 +566,12 @@ kbd {
       how: 'Ten words appear one at a time. Then you see twenty words: the ten you saw and ten new ones. <b>Pick the ten you saw</b>, then check. Each right pick scores a point and each wrong pick loses one.',
       keys: 'Tap words to pick them, then press Check.', run: runWords
     },
+    count: {
+      name: 'Star Count', trains: 'Sustained attention', time: '~45 s', unit: 'of 3', higher: true,
+      glyph: '★ ● ★', mono: true,
+      how: 'Shapes flash in the middle one after another. <b>Count only the solid stars</b> (★) and ignore everything else, including hollow stars (☆). After each run of shapes, type how many solid stars you saw. Three rounds, each a little faster.',
+      keys: 'Watch, then type the count and press Enter.', run: runCount
+    },
     anagram: {
       name: 'Unscramble', trains: 'Verbal fluency', time: '60 s', unit: 'words', higher: true,
       glyph: 'TKCORE',
@@ -1207,6 +1213,80 @@ kbd {
     }
 
     later(show, 700);
+  }
+
+  // ---------- 5e. Star count ----------
+  // A fast stream of shapes; keep a silent tally of solid stars only. Hollow stars are lures from round 2.
+  function runCount(arena, done) {
+    const ROUNDS = [{ n: 16, show: 520, gap: 230, lures: false }, { n: 18, show: 430, gap: 200, lures: true }, { n: 20, show: 360, gap: 170, lures: true }];
+    const OTHERS = ['●', '▲', '■', '◆', '✚'];
+    arena.innerHTML = `<div class="play">
+      <div class="stimulus" id="cs" aria-live="off"></div>
+      <form class="span-form" id="cf" hidden>
+        <label class="sr-only" for="ca">How many solid stars</label>
+        <input id="ca" class="answer mono" inputmode="numeric" autocomplete="off" enterkeyhint="done" maxlength="2">
+        <button class="btn primary" type="submit">Check <kbd>Enter</kbd></button>
+      </form>
+      <p class="hint" id="ch" aria-live="polite"></p>
+    </div>`;
+    const cs = $('#cs', arena), form = $('#cf', arena), inp = $('#ca', arena), hint = $('#ch', arena);
+    let r = 0, exact = 0, answer = 0;
+    const log = [];
+    timerLabel.textContent = 'Round';
+    hudScore('0');
+
+    const round = () => {
+      const R = ROUNDS[r];
+      hudTimer(`${r + 1}/${ROUNDS.length}`);
+      form.hidden = true;
+      answer = randInt(4, 7);
+      const lureCount = R.lures ? randInt(2, 4) : 0;
+      // Stars never come twice in a row, so every star is its own flash.
+      let seq;
+      do {
+        seq = shuffle([...Array(answer).fill('★'), ...Array(lureCount).fill('☆'),
+          ...Array.from({ length: R.n - answer - lureCount }, () => pick(OTHERS))]);
+      } while (seq.some((x, i) => i > 0 && x === '★' && seq[i - 1] === '★'));
+      hint.textContent = R.lures ? 'Solid stars only. Hollow ones do not count.' : 'Count the solid stars.';
+      cs.textContent = '+';
+      let k = 0;
+      const show = () => {
+        if (k >= seq.length) {
+          cs.textContent = '?';
+          inp.value = '';
+          form.hidden = false;
+          inp.focus();
+          hint.textContent = 'How many solid stars?';
+          return;
+        }
+        cs.textContent = seq[k++];
+        later(() => { cs.textContent = ''; }, R.show);
+        later(show, R.show + R.gap);
+      };
+      later(show, 900);
+    };
+
+    inp.addEventListener('input', () => { inp.value = inp.value.replace(/\D/g, ''); });
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (!inp.value) return;
+      const guess = +inp.value;
+      form.hidden = true;
+      log.push(guess - answer);
+      if (guess === answer) { exact++; hudScore(String(exact)); cs.textContent = '✓'; flash(cs, true); hint.textContent = `Exactly ${answer}.`; }
+      else { cs.textContent = '✗'; flash(cs, false); hint.textContent = `There were ${answer}. You counted ${guess}.`; }
+      r++;
+      if (r >= ROUNDS.length) {
+        later(() => done({
+          score: exact,
+          detail: `Off by ${log.map(d => (d > 0 ? '+' : '') + d).join(', ')} across the three rounds. Keeping a silent tally while ignoring look-alikes is the skill.`
+        }), 1400);
+        return;
+      }
+      later(round, 1600);
+    });
+
+    round();
   }
 
   // ---------- 6. Anagrams ----------
