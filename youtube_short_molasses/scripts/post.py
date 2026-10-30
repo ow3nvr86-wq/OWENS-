@@ -265,7 +265,7 @@ def thermo_readout(img, t):
 
 def clock_label(img, t):
     s = SHOT['rivets']
-    a = fade(t, s['t0'] + 0.1, s['t1'] + 0.05, 0.2, 0.1)
+    a = fade(t, s['t0'] + 0.1, s['t1'], 0.2, 0.1)
     if a <= 0:
         return
     flick = 0.85 + 0.15 * math.sin(t * 40)
