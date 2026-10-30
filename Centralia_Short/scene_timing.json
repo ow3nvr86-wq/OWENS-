@@ -1,0 +1,82 @@
+{
+  "_about": "Single source of truth for timing. animation.py (cameras, events, captions, titles) and tools/voiceover.py read this file. Times are seconds from the start of the video at 30 fps.",
+  "fps": 30,
+  "duration": 60.0,
+  "render_end": 57.6,
+  "scenes": [
+    {"id": 1, "name": "THE HOOK", "start": 0.0, "end": 5.0, "shots": [
+      {"name": "street", "start": 0.0, "end": 2.9},
+      {"name": "dive", "start": 2.9, "end": 5.0}]},
+    {"id": 2, "name": "THE TOWN BEFORE", "start": 5.0, "end": 17.0, "shots": [
+      {"name": "town62", "start": 5.0, "end": 10.5},
+      {"name": "main62", "start": 10.5, "end": 13.6},
+      {"name": "dump", "start": 13.6, "end": 17.0}]},
+    {"id": 3, "name": "THE FIRE SPREADS", "start": 17.0, "end": 30.8, "shots": [
+      {"name": "xsec", "start": 17.0, "end": 21.6},
+      {"name": "tunnel", "start": 21.6, "end": 25.7},
+      {"name": "gas", "start": 25.7, "end": 30.8}]},
+    {"id": 4, "name": "THE ABANDONMENT", "start": 30.8, "end": 45.7, "shots": [
+      {"name": "sinkhole", "start": 30.8, "end": 37.4},
+      {"name": "empty", "start": 37.4, "end": 43.4},
+      {"name": "road", "start": 43.4, "end": 45.7}]},
+    {"id": 5, "name": "THE FINAL REVEAL", "start": 45.7, "end": 60.0, "shots": [
+      {"name": "reveal", "start": 45.7, "end": 52.0},
+      {"name": "pullback", "start": 52.0, "end": 57.6},
+      {"name": "title", "start": 57.6, "end": 60.0}]}
+  ],
+  "lines": [
+    {"scene": 1, "start": 0.1, "deadline": 4.9, "text": "Imagine living in a town where the ground beneath your feet was literally burning.",
+     "tts": "Imagine living in a town where the ground beneath your feet was literally burning."},
+    {"scene": 2, "start": 5.1, "deadline": 10.45, "text": "This is Centralia, Pennsylvania: a coal-mining town of over a thousand people.",
+     "tts": "This is Centralia, Pennsylvania: a coal-mining town of over a thousand people."},
+    {"scene": 2, "start": 10.6, "deadline": 17.4, "text": "In May 1962, a trash fire in an old mine pit most likely spread into a coal seam below.",
+     "tts": "In May, nineteen sixty-two, a trash fire in an old mine pit most likely spread into a coal seam below."},
+    {"scene": 3, "start": 17.6, "deadline": 21.55, "text": "Old mine tunnels fed it oxygen, and it crept beneath the streets.",
+     "tts": "Old mine tunnels fed it oxygen, and it crept beneath the streets."},
+    {"scene": 3, "start": 21.75, "deadline": 25.6, "text": "Crews dug trenches and flushed the mines. Nothing put it out.",
+     "tts": "Crews dug trenches and flushed the mines. Nothing put it out."},
+    {"scene": 3, "start": 25.8, "deadline": 30.7, "text": "Underground, it reached over a thousand degrees. Toxic gas seeped into homes.",
+     "tts": "Underground, it reached over a thousand degrees. Toxic gas seeped into homes."},
+    {"scene": 4, "start": 30.95, "deadline": 37.3, "text": "In 1981, the ground opened beneath a twelve-year-old boy. His cousin pulled him out alive.",
+     "tts": "In nineteen eighty-one, the ground opened beneath a twelve-year-old boy. His cousin pulled him out alive."},
+    {"scene": 4, "start": 37.5, "deadline": 43.3, "text": "Congress set aside 42 million dollars to move the town. Hundreds of homes were torn down.",
+     "tts": "Congress set aside forty-two million dollars to move the town. Hundreds of homes were torn down."},
+    {"scene": 4, "start": 43.5, "deadline": 45.65, "text": "Today, just five people remain.",
+     "tts": "Today, just five people remain."},
+    {"scene": 5, "start": 45.9, "deadline": 51.9, "text": "From above, you'd barely know. But the fire has spread beyond the town, and could burn for another century.",
+     "tts": "From above, you'd barely know. But the fire has spread beyond the town, and could burn for another century."},
+    {"scene": 5, "start": 53.4, "deadline": 58.2, "text": "A whole town almost disappeared... and beneath it, the fire kept burning.",
+     "tts": "A whole town almost disappeared... and beneath it, the fire kept burning."}
+  ],
+  "titles": [
+    {"text": "CENTRALIA, PA", "start": 5.3, "end": 10.2, "style": "date"},
+    {"text": "POP. ~1,100 (1962)", "start": 6.2, "end": 10.2, "style": "label"},
+    {"text": "MAY 1962", "start": 10.7, "end": 13.4, "style": "date"},
+    {"text": "THE TOWN DUMP: AN OLD STRIP-MINE PIT", "start": 13.8, "end": 16.8, "style": "label"},
+    {"text": "ILLUSTRATION, NOT TO SCALE", "start": 17.1, "end": 21.4, "style": "tag"},
+    {"text": "FIRE FRONT: ~50-75 FT A YEAR", "start": 18.4, "end": 21.4, "style": "label"},
+    {"text": "TRENCHES. FLUSHING. ALL FAILED.", "start": 22.0, "end": 25.5, "style": "label"},
+    {"text": "1,000°F+", "start": 26.1, "end": 28.4, "style": "big"},
+    {"text": "CARBON MONOXIDE", "start": 28.4, "end": 30.6, "style": "label"},
+    {"text": "14 FEBRUARY 1981", "start": 31.0, "end": 37.1, "style": "date"},
+    {"text": "THE BOY SURVIVED", "start": 34.4, "end": 37.1, "style": "label"},
+    {"text": "$42 MILLION TO RELOCATE", "start": 37.6, "end": 40.4, "style": "label"},
+    {"text": "~500 BUILDINGS DEMOLISHED", "start": 40.5, "end": 43.2, "style": "label"},
+    {"text": "POPULATION: 5 (2020)", "start": 43.6, "end": 45.5, "style": "big"},
+    {"text": "STILL BURNING", "start": 46.0, "end": 51.7, "style": "date"},
+    {"text": "~400 ACRES (2012 EST.)", "start": 48.3, "end": 51.7, "style": "label"},
+    {"text": "CENTRALIA, PENNSYLVANIA", "start": 55.6, "end": 59.6, "style": "final"},
+    {"text": "THE TOWN THAT BURNED FROM WITHIN.", "start": 56.6, "end": 59.6, "style": "final2"}
+  ],
+  "events": {
+    "crack_open": [0.6, 2.6],
+    "dump_fire": 13.6,
+    "seam_ignite": 15.6,
+    "xsec_front": [17.0, 21.6],
+    "flush": [22.0, 25.4],
+    "sinkhole_open": [31.6, 32.4],
+    "demolish": [38.2, 42.8],
+    "fade_to_black": [56.0, 57.6],
+    "final_fade": [59.4, 60.0]
+  }
+}
