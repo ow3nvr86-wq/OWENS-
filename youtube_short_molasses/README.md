@@ -2,7 +2,12 @@
 
 A 59-second vertical Short about the 1919 Boston Molasses Flood. All of it was made with code: the 3D world, the animation, the flood physics, the captions and graphics, the music, the sound effects and the narration. No models, footage, templates or audio samples were downloaded. The only external assets are two open-licence fonts (SIL OFL, in `assets/fonts/`).
 
-**Final video:** `renders/the_wave_of_molasses.mp4` (1080×1920, 9:16, 30 fps, H.264 + AAC 48 kHz)
+**Final video:** `renders/the_wave_of_molasses.mp4`
+
+- 1080×1920 (9:16), 30 fps, 59.3 s, 1,778 frames.
+- Video: H.264 High, CRF 19 capped at 9 Mbps.
+- Audio: AAC 192 kbps, 48 kHz stereo, loudness-normalised to −14 LUFS (true peak −1.5 dB), YouTube's playback target.
+- File size: 69 MB.
 
 ## Folder layout
 
@@ -87,7 +92,7 @@ Useful options:
 ### Render budget and resolution
 
 This video was rendered on a cloud machine with 4 CPU cores and no GPU:
-- **Cycles render:** 540×960, 8 adaptive samples, OpenImageDenoise, about 8.7 s per frame (about 4.3 hours for 1,778 frames).
+- **Cycles render:** 540×960, 8 adaptive samples, OpenImageDenoise, about 8.7 s per frame on day shots and up to about 15 s on night shots (about 5 hours for 1,778 frames).
 - **Upscale:** `post.py` upscales 2× with Lanczos and an unsharp mask. Captions and graphics are drawn natively at 1080×1920, so the text is fully sharp.
 
 On a GPU machine, change `resolution_percentage` for `'final'` in `setup_render()` to `100` (and raise `samples`) to render natively at 1080×1920. `post.py` then skips nothing; the resize becomes a no-op.

@@ -478,8 +478,9 @@ def main():
         print(f'warning: {len(missing)} frames missing (first {missing[:5]}) — they will be black')
     cmd = ['ffmpeg', '-y', '-loglevel', 'error', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{W}x{H}',
            '-r', str(FPS), '-i', '-', '-i', os.path.join(ROOT, 'audio', 'mix.wav'),
-           '-c:v', 'libx264', '-preset', 'slow', '-crf', '18', '-pix_fmt', 'yuv420p', '-profile:v', 'high',
-           '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-movflags', '+faststart', '-shortest', args.out]
+           '-c:v', 'libx264', '-preset', 'slow', '-crf', '19', '-maxrate', '9M', '-bufsize', '18M',
+           '-pix_fmt', 'yuv420p', '-profile:v', 'high',
+           '-af', 'loudnorm=I=-14:TP=-1.5:LRA=11', '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-movflags', '+faststart', '-shortest', args.out]
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     for f in range(1, LAST + 1):
         p.stdin.write(compose(f).tobytes())
