@@ -1,0 +1,83 @@
+{
+  "_about": "Single source of truth for timing. animation.py (cameras, events, captions) and voiceover.py read this file. Times are seconds from the start of the video at 30 fps. Edit a line's 'start' or a shot's boundaries here and re-run; nothing else needs changing.",
+  "fps": 30,
+  "duration": 60.0,
+  "render_end": 53.0,
+  "scenes": [
+    {"id": 1, "name": "THE HOOK", "start": 0.0, "end": 6.0, "shots": [
+      {"name": "aerial", "start": 0.0, "end": 3.5},
+      {"name": "hikers", "start": 3.5, "end": 6.0}]},
+    {"id": 2, "name": "THE DISCOVERY", "start": 6.0, "end": 17.0, "shots": [
+      {"name": "campwide", "start": 6.0, "end": 9.5},
+      {"name": "tentclose", "start": 9.5, "end": 12.4},
+      {"name": "footprints", "start": 12.4, "end": 17.0}]},
+    {"id": 3, "name": "THE MYSTERY AND THEORIES", "start": 17.0, "end": 29.0, "shots": [
+      {"name": "desk", "start": 17.0, "end": 22.4},
+      {"name": "lights", "start": 22.4, "end": 29.0}]},
+    {"id": 4, "name": "THE AVALANCHE THEORY", "start": 29.0, "end": 44.0, "shots": [
+      {"name": "study", "start": 29.0, "end": 35.2},
+      {"name": "cut", "start": 35.2, "end": 38.4},
+      {"name": "load", "start": 38.4, "end": 41.4},
+      {"name": "release", "start": 41.4, "end": 44.0}]},
+    {"id": 5, "name": "THE ENDING", "start": 44.0, "end": 60.0, "shots": [
+      {"name": "return", "start": 44.0, "end": 48.2},
+      {"name": "pullaway", "start": 48.2, "end": 53.0},
+      {"name": "title", "start": 53.0, "end": 60.0}]}
+  ],
+  "lines": [
+    {"scene": 1, "start": 0.15, "deadline": 4.75, "text": "February 1959. Nine hikers skied into Russia's Ural Mountains.",
+     "tts": "February, nineteen fifty-nine. Nine hikers skied into Russia's Ural Mountains."},
+    {"scene": 1, "start": 4.95, "deadline": 6.2, "text": "None of them came back.",
+     "tts": "None of them came back."},
+    {"scene": 2, "start": 6.35, "deadline": 11.5, "text": "Weeks later, searchers found their tent half-buried in snow, cut open from the inside.",
+     "tts": "Weeks later, searchers found their tent half-buried in snow, cut open from the inside."},
+    {"scene": 2, "start": 11.75, "deadline": 16.6, "text": "Footprints, in socks or bare feet, led down the slope, toward the trees.",
+     "tts": "Footprints, in socks or bare feet, led down the slope, toward the trees."},
+    {"scene": 3, "start": 17.3, "deadline": 21.9, "text": "Investigators blamed a \"compelling natural force\", and closed the case.",
+     "tts": "Investigators blamed a compelling natural force, and closed the case."},
+    {"scene": 3, "start": 22.6, "deadline": 28.2, "text": "Decades of theories followed. Secret weapons tests. Strange lights in the sky.",
+     "tts": "Decades of theories followed. Secret weapons tests. Strange lights in the sky."},
+    {"scene": 4, "start": 29.3, "deadline": 35.0, "text": "In 2021, scientists modelled the leading explanation: a delayed slab avalanche.",
+     "tts": "In twenty twenty-one, scientists modelled the leading explanation: a delayed slab avalanche."},
+    {"scene": 4, "start": 35.3, "deadline": 38.2, "text": "To pitch the tent, the hikers had cut into the slope.",
+     "tts": "To pitch the tent, the hikers had cut into the slope."},
+    {"scene": 4, "start": 38.45, "deadline": 43.7, "text": "Wind piled snow above the cut, until, hours later, a slab may have broken loose.",
+     "tts": "Wind piled snow above the cut, until, hours later, a slab may have broken loose."},
+    {"scene": 5, "start": 44.4, "deadline": 50.8, "text": "In 2020, Russian prosecutors also blamed an avalanche. But not everyone is convinced.",
+     "tts": "In twenty twenty, Russian prosecutors also blamed an avalanche. But not everyone is convinced."},
+    {"scene": 5, "start": 54.6, "deadline": 57.8, "text": "So, what really happened at Dyatlov Pass?",
+     "tts": "So, what really happened at Dyatlov Pass?"}
+  ],
+  "titles": [
+    {"text": "NORTHERN URALS, USSR", "start": 0.1, "end": 3.3, "style": "date"},
+    {"text": "9 HIKERS", "start": 0.6, "end": 3.3, "style": "big"},
+    {"text": "NONE CAME BACK", "start": 4.85, "end": 5.95, "style": "big"},
+    {"text": "26 FEBRUARY 1959", "start": 6.2, "end": 9.3, "style": "date"},
+    {"text": "CUT FROM THE INSIDE", "start": 9.7, "end": 12.2, "style": "label"},
+    {"text": "TRACKS LED ~1.5 KM DOWNHILL", "start": 13.2, "end": 16.8, "style": "label"},
+    {"text": "1959 VERDICT", "start": 17.2, "end": 22.2, "style": "date"},
+    {"text": "THEORY: WEAPONS TESTS", "start": 24.15, "end": 25.6, "style": "theory"},
+    {"text": "THEORY: UNKNOWN LIGHTS", "start": 25.7, "end": 28.8, "style": "theory"},
+    {"text": "SPECULATION, NOT EVIDENCE", "start": 23.0, "end": 28.8, "style": "tag"},
+    {"text": "2021 STUDY", "start": 29.3, "end": 34.9, "style": "date"},
+    {"text": "LEADING HYPOTHESIS", "start": 30.8, "end": 34.9, "style": "label"},
+    {"text": "STEP 1: SLOPE CUT", "start": 35.3, "end": 38.3, "style": "label"},
+    {"text": "STEP 2: WIND-BLOWN SNOW", "start": 38.5, "end": 41.3, "style": "label"},
+    {"text": "STEP 3: SLAB RELEASE", "start": 41.5, "end": 43.9, "style": "label"},
+    {"text": "SIMULATION, NOT FOOTAGE", "start": 29.3, "end": 43.9, "style": "tag"},
+    {"text": "2020 RULING: AVALANCHE", "start": 44.6, "end": 48.0, "style": "label"},
+    {"text": "STILL DISPUTED", "start": 48.4, "end": 51.0, "style": "label"},
+    {"text": "DYATLOV PASS", "start": 53.4, "end": 59.0, "style": "final"},
+    {"text": "WHAT REALLY HAPPENED?", "start": 55.0, "end": 59.0, "style": "final2"}
+  ],
+  "events": {
+    "cut_dig": [35.4, 37.6],
+    "tent_pitch": [37.0, 38.3],
+    "wind_load": [38.4, 41.6],
+    "slab_release": 41.75,
+    "trail": [24.1, 25.6],
+    "orbs": 25.6,
+    "fade_to_black": [51.6, 53.0],
+    "final_fade": [59.0, 60.0]
+  }
+}

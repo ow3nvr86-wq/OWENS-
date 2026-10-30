@@ -3,3 +3,6 @@ dist/
 youtube_short_molasses/renders/frames/
 youtube_short_molasses/build/
 __pycache__/
+Dyatlov_Pass/build/
+Dyatlov_Pass/renders/frames/
+Dyatlov_Pass/audio/music_sfx_stem.wav
