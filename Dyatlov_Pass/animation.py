@@ -2955,9 +2955,9 @@ def stage_audio():
 TITLE_STYLE = {
     #          font         size  colour                     y      outline
     'date':   (FONT_SERIF, 66, (0.93, 0.88, 0.76, 1.0), 0.845, 0.06),
-    'big':    (FONT_TITLE, 150, (1.0, 1.0, 1.0, 1.0), 0.765, 0.05),
-    'label':  (FONT_TITLE, 76, (1.0, 1.0, 1.0, 1.0), 0.775, 0.07),
-    'theory': (FONT_TITLE, 76, (1.0, 0.72, 0.42, 1.0), 0.775, 0.07),
+    'big':    (FONT_TITLE, 128, (1.0, 1.0, 1.0, 1.0), 0.765, 0.05),
+    'label':  (FONT_TITLE, 70, (1.0, 1.0, 1.0, 1.0), 0.775, 0.07),
+    'theory': (FONT_TITLE, 70, (1.0, 0.72, 0.42, 1.0), 0.775, 0.07),
     'tag':    (FONT_TITLE, 40, (0.80, 0.88, 1.0, 1.0), 0.885, 0.0),
     'final':  (FONT_TITLE, 168, (0.94, 0.97, 1.0, 1.0), 0.565, 0.0),
     'final2': (FONT_TITLE, 86, (0.62, 0.78, 1.0, 1.0), 0.48, 0.0),
@@ -3015,7 +3015,7 @@ def add_text(se, name, text, t0, t1, style, channel, fade=5, rise=0.012):
     st.color = col
     st.align_x = 'CENTER'
     st.align_y = 'CENTER'
-    st.wrap_width = 0.86
+    st.wrap_width = 0.96
     st.use_shadow = True
     st.shadow_color = (0, 0, 0, 0.85)
     st.shadow_blur = 0.35

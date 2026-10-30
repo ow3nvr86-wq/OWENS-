@@ -54,7 +54,7 @@
     {"text": "NONE CAME BACK", "start": 4.85, "end": 5.95, "style": "big"},
     {"text": "26 FEBRUARY 1959", "start": 6.2, "end": 9.3, "style": "date"},
     {"text": "CUT FROM THE INSIDE", "start": 9.7, "end": 12.2, "style": "label"},
-    {"text": "TRACKS LED ~1.5 KM DOWNHILL", "start": 13.2, "end": 16.8, "style": "label"},
+    {"text": "TRACKS: ~1.5 KM DOWNHILL", "start": 13.2, "end": 16.8, "style": "label"},
     {"text": "1959 VERDICT", "start": 17.2, "end": 22.2, "style": "date"},
     {"text": "THEORY: WEAPONS TESTS", "start": 24.15, "end": 25.6, "style": "theory"},
     {"text": "THEORY: UNKNOWN LIGHTS", "start": 25.7, "end": 28.8, "style": "theory"},
