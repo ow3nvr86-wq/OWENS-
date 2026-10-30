@@ -1,2 +1,5 @@
 node_modules/
 dist/
+youtube_short_molasses/renders/frames/
+youtube_short_molasses/build/
+__pycache__/

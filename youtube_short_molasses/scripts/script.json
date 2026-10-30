@@ -1,0 +1,110 @@
+{
+  "title": "The Wave of Molasses",
+  "lead_in": 0.15,
+  "lines": [
+    {
+      "id": "L01",
+      "section": "HOOK",
+      "text": "In 1919, a wave of molasses killed twenty-one people.",
+      "pause": 0.23
+    },
+    {
+      "id": "L02",
+      "section": "SETUP",
+      "text": "Boston. January fifteenth.",
+      "pause": 0.1
+    },
+    {
+      "id": "L03",
+      "section": "SETUP",
+      "text": "This tank, five stories tall, held two point three million gallons of molasses.",
+      "pause": 0.13
+    },
+    {
+      "id": "L04",
+      "section": "SETUP",
+      "text": "And it leaked from day one.",
+      "pause": 0.23
+    },
+    {
+      "id": "L05",
+      "section": "STORY",
+      "text": "The man in charge had no engineering experience, and skipped a proper water test.",
+      "pause": 0.13
+    },
+    {
+      "id": "L06",
+      "section": "STORY",
+      "text": "When the leaks got worse, he had the tank painted brown to hide them.",
+      "pause": 0.2
+    },
+    {
+      "id": "L07",
+      "section": "STORY",
+      "text": "Then, after a bitter cold snap, the temperature shot past forty degrees.",
+      "pause": 0.29
+    },
+    {
+      "id": "L08",
+      "section": "STORY",
+      "text": "Around twelve forty, rivets burst out like machine-gun fire.",
+      "pause": 0.1
+    },
+    {
+      "id": "L09",
+      "section": "STORY",
+      "text": "The tank split open.",
+      "pause": 0.6
+    },
+    {
+      "id": "L10",
+      "section": "STORY",
+      "text": "A wave up to twenty-five feet high raced through the streets at thirty-five miles an hour,",
+      "pause": 0.07
+    },
+    {
+      "id": "L11",
+      "section": "STORY",
+      "text": "knocking buildings off their foundations and slamming into the elevated railway.",
+      "pause": 0.45
+    },
+    {
+      "id": "L12",
+      "section": "PAYOFF",
+      "text": "But speed wasn't the deadliest part.",
+      "pause": 0.26
+    },
+    {
+      "id": "L13",
+      "section": "PAYOFF",
+      "text": "As the air froze that night, the molasses thickened. Scientists estimate at least four times.",
+      "pause": 0.2
+    },
+    {
+      "id": "L14",
+      "section": "PAYOFF",
+      "text": "About half the victims died simply because they were stuck.",
+      "pause": 0.6
+    },
+    {
+      "id": "L15",
+      "section": "ENDING",
+      "text": "For decades, locals said the North End smelled sweet on hot days.",
+      "pause": 0.2
+    },
+    {
+      "id": "L16",
+      "section": "ENDING",
+      "text": "Could you have outrun it?",
+      "pause": 0.3
+    }
+  ],
+  "captions": {
+    "L01": "In 1919, a wave of molasses killed 21 people.",
+    "L02": "Boston. January 15th.",
+    "L03": "This tank, five stories tall, held 2.3 million gallons of molasses.",
+    "L08": "Around 12:40, rivets burst out like machine-gun fire.",
+    "L10": "A wave up to 25 feet high raced through the streets at 35 miles an hour,",
+    "L13": "As the air froze that night, the molasses thickened. Scientists estimate at least 4×."
+  }
+}
