@@ -2668,14 +2668,14 @@ def build_emitters():
     fis = fis[fis[:, 1] > -372]
     E['road'] = [emitter('smoke', fis, 0.6, 4.5, (0.3, 0.1, 0.7), 0.2, (0.25, 1.4), opacity=0.35, area=0.1, turb=0.3, salt=60)]
     E['reveal'] = [emitter('smoke', tv[tv[:, 1] > YC + 6], 0.6, 9.0, (0.8, 0.3, 2.0), 0.6, (2.5, 9.0), opacity=0.5, glow=0.15, area=2.0, salt=70)]
-    E['pullback'] = [emitter('smoke', tv, 0.7, 9.0, (0.8, 0.3, 1.8), 0.6, (2.0, 8.0), opacity=0.6, glow=0.9, area=2.0, salt=80),
+    E['pullback'] = [emitter('smoke', tv, 0.8, 10.0, (0.8, 0.3, 2.0), 0.7, (3.0, 12.0), opacity=0.7, glow=1.3, area=2.5, salt=80),
                      emitter('ember', tv, 1.5, 3.0, (0.2, 0.1, 2.0), 0.6, (0.06, 0.04), area=2.0, rise=-0.2, salt=81)]
     # fire lights per shot: (position, energy, colour)
     FIRELIGHTS['dive'] = [(M0 + Vector((x, y, 1.2)), 2500.0) for x, y in ((-60, 22), (-48, 8), (-30, 21), (-18, 9), (0, 16), (-70, 8))]
     FIRELIGHTS['tunnel'] = [(M0 + Vector((x, y, 1.2)), 2200.0) for x, y in ((-10, 6), (2, -6), (14, 5), (22, -4), (-22, -5))]
     FIRELIGHTS['dump'] = [(Vector((PIT[0] + dx, PIT[1] + dy, pz + 1.5)), 6000.0) for dx, dy in ((-6, -3), (4, 2), (-1, 5))] + \
         [(PITFX['hole'] - PITFX['dir'] * 1.0, 1500.0)]
-    FIRELIGHTS['pullback'] = [(Vector((x, y, z + 0.5)), 20000.0) for x, y, z in tv[:6]]
+    FIRELIGHTS['pullback'] = [(Vector((x, y, z + 1.0)), 60000.0) for x, y, z in tv[:6]]
 
 
 def xsec_front(t):
@@ -2750,7 +2750,7 @@ SHOTCFG = {
                      groups=['TerrainN', 'South', 'Town', 'Forest', 'EraNow', 'FX']),
     'reveal':   dict(light=DUSK, era='now', season=0.85, decay=1.0, grade='fire', smoke_tint=0.5,
                      groups=['TerrainN', 'Town', 'Forest', 'EraNow', 'Section', 'SecFill', 'FX']),
-    'pullback': dict(light=dict(NIGHT, exposure=1.3, sun=(30, 210, 0.15, (0.6, 0.7, 1.0))), era='now', season=0.85, decay=1.0, grade='night', smoke_tint=0.4,
+    'pullback': dict(light=dict(NIGHT, exposure=1.6, sun=(30, 210, 0.3, (0.6, 0.7, 1.0))), era='now', season=0.85, decay=1.0, grade='night', smoke_tint=0.4,
                      groups=['TerrainN', 'South', 'Town', 'Forest', 'EraNow', 'FX', 'FireLights']),
 }
 ALL_GROUPS = ['TerrainN', 'South', 'Town', 'Forest', 'Era62', 'EraNow', 'Hook', 'NightLights', 'Mine', 'Section',
@@ -2837,6 +2837,10 @@ def apply_shot(name, cs=None):
             lo.hide_render = False
         else:
             lo.hide_render = True
+    # street lamps burn only in the living town (they are dark in today's abandoned town)
+    for n in MAT['lamp_bulb'].node_tree.nodes:
+        if n.type == 'EMISSION':
+            n.inputs['Strength'].default_value = 0.0 if era in ('now', 'demo') else 25.0
     CUR['shot'] = name
 
 
