@@ -223,7 +223,7 @@ def gallons(img, t):
     if a <= 0:
         return
     t_on = word_time('L03', '2.3')
-    u = ease((t - t_on + 0.3) / 1.3)
+    u = ease((t - s['t0'] - 0.5) / max(t_on + 0.6 - s['t0'] - 0.5, 0.5))
     n = int(2_300_000 * u)
     draw_text_fx(img, (W / 2, 330), f'{n:,}', 132, AMBER, stroke=8, alpha=int(255 * a))
     draw_text_fx(img, (W / 2, 440), 'GALLONS OF MOLASSES', 54, WHITE, stroke=6, alpha=int(255 * a))
