@@ -86,10 +86,10 @@ def build_words():
         t0 = c[0]['t0']
         t1 = c[-1]['t1']
         nxt = chunks[i + 1][0]['t0'] if i + 1 < len(chunks) else t1 + 1.0
-        if nxt - t1 < 0.6:
+        if nxt - t1 < 0.35:
             t1 = nxt
         else:
-            t1 += 0.35
+            t1 += 0.2
         out.append(dict(words=c, t0=t0, t1=t1))
     return words, out
 
