@@ -66,6 +66,7 @@ def parse_args():
     ap.add_argument('--no-voice', action='store_true')
     ap.add_argument('--output', default=None)
     ap.add_argument('--save-blend', default=None)
+    ap.add_argument('--bitrate', type=int, default=8000, help='edit stage: video kbit/s')
     return ap.parse_args(argv)
 
 
@@ -3353,8 +3354,8 @@ TITLE_STYLE = {
     'big':    (FONT_TITLE, 132, (1.0, 0.62, 0.22, 1.0), 0.765, 0.05),
     'label':  (FONT_TITLE, 66, (1.0, 1.0, 1.0, 1.0), 0.775, 0.07),
     'tag':    (FONT_TITLE, 40, (1.0, 0.86, 0.66, 1.0), 0.885, 0.0),
-    'final':  (FONT_TITLE, 118, (0.96, 0.94, 0.90, 1.0), 0.56, 0.0),
-    'final2': (FONT_TITLE, 64, (1.0, 0.55, 0.16, 1.0), 0.485, 0.0),
+    'final':  (FONT_TITLE, 92, (0.96, 0.94, 0.90, 1.0), 0.555, 0.0),
+    'final2': (FONT_TITLE, 56, (1.0, 0.55, 0.16, 1.0), 0.49, 0.0),
 }
 
 
@@ -3526,8 +3527,8 @@ def stage_edit():
     ff.format = 'MPEG4'
     ff.codec = 'H264'
     ff.constant_rate_factor = 'NONE'
-    ff.video_bitrate = 8000
-    ff.maxrate = 9000
+    ff.video_bitrate = ARGS.bitrate
+    ff.maxrate = int(ARGS.bitrate * 1.125)
     ff.minrate = 0
     ff.buffersize = 18000
     ff.gopsize = 30
