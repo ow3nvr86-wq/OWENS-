@@ -4,6 +4,7 @@
 #   - Blender 4.2 LTS (headless rendering with Cycles)     -> $BLENDER
 #   - Python venv with numpy/scipy/pillow/piper-tts       -> $SHORTS_PY
 #   - Piper voices cleared for commercial use              -> $PIPER_VOICES
+#   - Kokoro-82M TTS (Apache-2.0, more natural narration)  -> $KOKORO_PY, $KOKORO_DIR
 # Idempotent: every step is skipped when its result is already present.
 set -euo pipefail
 
@@ -50,8 +51,27 @@ for v in en_US/ljspeech/high en_US/joe/medium en_US/bryce/medium en_US/john/medi
   fetch_voice "$v"
 done
 
+# Kokoro-82M (Apache-2.0): a more natural-sounding narrator than Piper. Separate venv so its
+# dependencies can't disturb the main one. Default Dyatlov Pass narrator: bm_george.
+KVENV="$TOOLS/kokoro-venv"
+KDIR="$TOOLS/kokoro"
+mkdir -p "$KDIR"
+if [ ! -x "$KVENV/bin/python" ]; then
+  python3 -m venv "$KVENV"
+fi
+"$KVENV/bin/pip" install -q --disable-pip-version-check kokoro-onnx==0.6.1 soundfile
+for f in kokoro-v1.0.onnx voices-v1.0.bin; do
+  if [ ! -s "$KDIR/$f" ]; then
+    curl -sSfL -o "$KDIR/$f.part" \
+      "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/$f"
+    mv "$KDIR/$f.part" "$KDIR/$f"
+  fi
+done
+
 {
   echo "export BLENDER=\"$BLENDER_DIR/blender\""
   echo "export SHORTS_PY=\"$VENV/bin/python\""
   echo "export PIPER_VOICES=\"$VOICES\""
+  echo "export KOKORO_PY=\"$KVENV/bin/python\""
+  echo "export KOKORO_DIR=\"$KDIR\""
 } >> "$CLAUDE_ENV_FILE"

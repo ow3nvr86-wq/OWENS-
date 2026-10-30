@@ -25,9 +25,9 @@
       {"name": "title", "start": 53.0, "end": 60.0}]}
   ],
   "lines": [
-    {"scene": 1, "start": 0.15, "deadline": 4.75, "text": "February 1959. Nine hikers skied into Russia's Ural Mountains.",
+    {"scene": 1, "start": 0.1, "deadline": 4.85, "text": "February 1959. Nine hikers skied into Russia's Ural Mountains.",
      "tts": "February, nineteen fifty-nine. Nine hikers skied into Russia's Ural Mountains."},
-    {"scene": 1, "start": 4.95, "deadline": 6.2, "text": "None of them came back.",
+    {"scene": 1, "start": 4.92, "deadline": 6.32, "text": "None of them came back.",
      "tts": "None of them came back."},
     {"scene": 2, "start": 6.35, "deadline": 11.5, "text": "Weeks later, searchers found their tent half-buried in snow, cut open from the inside.",
      "tts": "Weeks later, searchers found their tent half-buried in snow, cut open from the inside."},
@@ -39,7 +39,7 @@
      "tts": "Decades of theories followed. Secret weapons tests. Strange lights in the sky."},
     {"scene": 4, "start": 29.3, "deadline": 35.0, "text": "In 2021, scientists modelled the leading explanation: a delayed slab avalanche.",
      "tts": "In twenty twenty-one, scientists modelled the leading explanation: a delayed slab avalanche."},
-    {"scene": 4, "start": 35.3, "deadline": 38.2, "text": "To pitch the tent, the hikers had cut into the slope.",
+    {"scene": 4, "start": 35.25, "deadline": 38.4, "text": "To pitch the tent, the hikers had cut into the slope.",
      "tts": "To pitch the tent, the hikers had cut into the slope."},
     {"scene": 4, "start": 38.45, "deadline": 43.7, "text": "Wind piled snow above the cut, until, hours later, a slab may have broken loose.",
      "tts": "Wind piled snow above the cut, until, hours later, a slab may have broken loose."},

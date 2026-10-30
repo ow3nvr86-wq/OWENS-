@@ -13,7 +13,7 @@ No models, footage, stock, templates or audio samples were downloaded. The only 
 
 **Final video:** `renders/dyatlov_pass_final.mp4`
 - 1080×1920 (9:16), 30 fps, 60.0 s, H.264 + AAC.
-- Narration by a synthetic male voice (Piper `en_US-joe-medium`, CC0).
+- Narration by a synthetic male voice (Kokoro-82M voice `bm_george`, British, Apache-2.0).
 - Burned-in captions.
 
 **For CapCut:** `renders/dyatlov_pass_no_voice.mp4` is the same video with music and SFX only and no narration captions. The titles and on-screen facts are kept. Add your own AI voiceover from `narration.txt` and let CapCut auto-caption it; `subtitles.srt` is also provided.
@@ -28,7 +28,7 @@ Dyatlov_Pass/
 ├── scene_timing.md       ← timing sheet: scenes, shots, frames, narration, on-screen text, events
 ├── scene_timing.json     ← the timing system (single source of truth read by everything)
 ├── README.md
-├── tools/voiceover.py    ← Piper TTS narration + generates narration.txt / subtitles.srt / scene_timing.md
+├── tools/voiceover.py    ← Kokoro (or Piper) TTS narration + generates narration.txt / subtitles.srt / scene_timing.md
 ├── render_all.sh         ← resumable chunked render of all 3D frames
 ├── audio/                ← narration.wav, mix_with_voice.wav, mix_no_voice.wav, timing_sheet.md
 ├── assets/fonts/         ← Anton, Old Standard TT (SIL Open Font License)
@@ -99,7 +99,7 @@ Dyatlov_Pass/
 
 ## Rendering instructions
 
-Requirements: Blender 4.2 LTS (tested with 4.2.3) and ffmpeg. The voiceover helper also needs Python 3.10 or later with `numpy` and `piper-tts`, plus the voice model `en_US-joe-medium` from huggingface.co/rhasspy/piper-voices. In this repo's Claude Code cloud sessions the SessionStart hook installs all of these and exports `$BLENDER`, `$SHORTS_PY` and `$PIPER_VOICES`.
+Requirements: Blender 4.2 LTS (tested with 4.2.3) and ffmpeg. The voiceover helper needs Python 3.10 or later with `kokoro-onnx` and `soundfile`, plus `kokoro-v1.0.onnx` and `voices-v1.0.bin` from the kokoro-onnx GitHub releases (run it as `$KOKORO_PY tools/voiceover.py`; `--kokoro-voice` picks another voice). The older Piper voices still work with `$SHORTS_PY tools/voiceover.py --engine piper`. In this repo's Claude Code cloud sessions the SessionStart hook installs all of these and exports `$BLENDER`, `$SHORTS_PY`, `$PIPER_VOICES`, `$KOKORO_PY` and `$KOKORO_DIR`.
 
 ```bash
 cd Dyatlov_Pass
@@ -170,10 +170,10 @@ Sources:
   - The night-time hiking in scene 1 is artistic: the group pitched the tent in the evening of 1 February.
   - The moon disc is placed for composition in the opening shot.
 - **No injuries or deaths are depicted.** The hikers are anonymous, stylised figures with no likenesses of the real people, and nobody is shown in the avalanche scene.
-- **Nothing was recorded.** The narration is a synthetic voice (Piper TTS), and all music and effects are synthesised.
+- **Nothing was recorded.** The narration is a synthetic voice (Kokoro TTS), and all music and effects are synthesised.
 
 ## Licences
 
 - **Code:** as for this repository.
 - **Fonts:** Anton and Old Standard TT are under the SIL Open Font License 1.1 (texts in `assets/fonts/`). DejaVu Sans Mono is bundled with Blender and used for the typed documents.
-- **Voice:** Piper `en_US-joe-medium`, CC0. The model isn't redistributed here.
+- **Voice:** Kokoro-82M (hexgrad), voice `bm_george`, Apache-2.0, run through kokoro-onnx (MIT). The model isn't redistributed here. (Earlier drafts used Piper `en_US-joe-medium`, CC0.)

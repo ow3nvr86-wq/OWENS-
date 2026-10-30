@@ -1,14 +1,18 @@
 """Narration, subtitles and timing docs for the Dyatlov Pass Short.
 
-Reads ../scene_timing.json, synthesises each narration line with Piper TTS (a real,
-local, synthetic voice - en_US-joe-medium, CC0), fits every line into its slot, and writes:
+Reads ../scene_timing.json, synthesises each narration line with a local, synthetic voice -
+Kokoro-82M voice bm_george (Apache-2.0, default) or Piper en_US-joe-medium (CC0) - fits every
+line into its slot, and writes:
   audio/narration.wav      full-length 60 s voice track (48 kHz mono) - import into CapCut or keep
   build/vo_timing.json     measured line + caption-chunk times (read by animation.py)
   subtitles.srt            subtitles from the measured times
   narration.txt            the narration script, scene by scene
   scene_timing.md          human-readable timing sheet
 
-  $SHORTS_PY tools/voiceover.py [--voice /path/en_US-joe-medium.onnx] [--no-tts]
+  $KOKORO_PY tools/voiceover.py                           # Kokoro, bm_george (default)
+  $KOKORO_PY tools/voiceover.py --kokoro-voice am_michael
+  $SHORTS_PY tools/voiceover.py --engine piper [--voice /path/en_US-joe-medium.onnx]
+  $SHORTS_PY tools/voiceover.py --no-tts
 
 --no-tts skips synthesis and uses an estimate of 2.7 words/s instead, so the timing files can be
 made without a voice model (e.g. when the narration will be recorded later in CapCut).
@@ -30,15 +34,31 @@ def load_timing():
         return json.load(fh)
 
 
+class KokoroVoice:
+    """Kokoro-82M via kokoro-onnx; length_scale maps to 1/speed like Piper's."""
+    def __init__(self, model_dir, name):
+        from kokoro_onnx import Kokoro
+        self.k = Kokoro(os.path.join(model_dir, 'kokoro-v1.0.onnx'), os.path.join(model_dir, 'voices-v1.0.bin'))
+        self.name = name
+        self.lang = 'en-gb' if name[:1] == 'b' else 'en-us'
+
+    def synth(self, text, scale):
+        a, sr = self.k.create(text, voice=self.name, speed=1.0 / scale, lang=self.lang)
+        return np.asarray(a, np.float32), sr
+
+
 def synth(voice, text, scale):
-    from piper import SynthesisConfig
-    tmp = os.path.join(ROOT, 'build', '_tmp.wav')
-    with wave.open(tmp, 'wb') as w:
-        voice.synthesize_wav(text, w, syn_config=SynthesisConfig(length_scale=scale))
-    with wave.open(tmp) as w:
-        sr = w.getframerate()
-        a = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
-    os.remove(tmp)
+    if isinstance(voice, KokoroVoice):
+        a, sr = voice.synth(text, scale)
+    else:
+        from piper import SynthesisConfig
+        tmp = os.path.join(ROOT, 'build', '_tmp.wav')
+        with wave.open(tmp, 'wb') as w:
+            voice.synthesize_wav(text, w, syn_config=SynthesisConfig(length_scale=scale))
+        with wave.open(tmp) as w:
+            sr = w.getframerate()
+            a = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
+        os.remove(tmp)
     nz = np.nonzero(np.abs(a) > 0.01)[0]
     a = a[max(nz[0] - int(0.02 * sr), 0): nz[-1] + int(0.06 * sr)]
     # resample to 48 kHz (linear interpolation is fine for speech at this ratio)
@@ -80,6 +100,9 @@ def srt_time(t):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument('--engine', choices=['kokoro', 'piper'], default='kokoro')
+    ap.add_argument('--kokoro-voice', default='bm_george')
+    ap.add_argument('--kokoro-dir', default=os.environ.get('KOKORO_DIR', '/opt/shorts/kokoro'))
     ap.add_argument('--voice', default=os.path.join(os.environ.get('PIPER_VOICES', '/opt/shorts/piper-voices'),
                                                     'en_US-joe-medium.onnx'))
     ap.add_argument('--no-tts', action='store_true')
@@ -88,9 +111,15 @@ def main():
     os.makedirs(os.path.join(ROOT, 'build'), exist_ok=True)
     os.makedirs(os.path.join(ROOT, 'audio'), exist_ok=True)
     voice = None
-    if not args.no_tts:
+    if not args.no_tts and args.engine == 'kokoro':
+        voice = KokoroVoice(args.kokoro_dir, args.kokoro_voice)
+        voice_name = f'Kokoro-82M {args.kokoro_voice}'
+    elif not args.no_tts:
         from piper import PiperVoice
         voice = PiperVoice.load(args.voice)
+        voice_name = f'Piper {os.path.basename(args.voice)}'
+    else:
+        voice_name = None
     track = np.zeros(int(T['duration'] * SR), np.float32)
     timed = []
     for i, ln in enumerate(T['lines']):
@@ -133,7 +162,7 @@ def main():
             w.setframerate(SR)
             w.writeframes((np.clip(track, -1, 1) * 32767).astype(np.int16).tobytes())
     with open(os.path.join(ROOT, 'build', 'vo_timing.json'), 'w') as fh:
-        json.dump({'voice': None if voice is None else os.path.basename(args.voice), 'lines': timed}, fh, indent=1)
+        json.dump({'voice': voice_name, 'lines': timed}, fh, indent=1)
 
     # subtitles.srt: one cue per caption phrase
     with open(os.path.join(ROOT, 'subtitles.srt'), 'w') as fh:
@@ -163,7 +192,7 @@ def main():
              'The cameras, animation events, captions and titles in `animation.py` all read that file. To retime the video '
              'for a different voiceover, edit the times there and re-run (see README).\n')
     L.append(f'- 30 fps, {T["duration"]:.0f} s, {int(T["duration"] * 30)} frames. The 3D render covers 0 to {T["render_end"]:.0f} s; the end title is drawn in the edit.')
-    L.append(f'- Voice: {"Piper " + os.path.basename(args.voice) if voice else "not synthesised (estimated timings)"}. '
+    L.append(f'- Voice: {voice_name or "not synthesised (estimated timings)"}. '
              'The line times below are measured from the synthesised audio.\n')
     for sc in T['scenes']:
         f0, f1 = round(sc['start'] * 30) + 1, round(sc['end'] * 30)

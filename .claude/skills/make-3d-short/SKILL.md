@@ -13,6 +13,7 @@ The repo's SessionStart hook (`.claude/hooks/session-start.sh`) installs everyth
 - `$BLENDER` - Blender 4.2.3 (headless Cycles)
 - `$SHORTS_PY` - Python venv with numpy, scipy, pillow, piper-tts
 - `$PIPER_VOICES` - narrator voices cleared for commercial use
+- `$KOKORO_PY`, `$KOKORO_DIR` - Kokoro-82M TTS (Apache-2.0), much more natural than Piper
 
 If the variables are missing, run the hook script yourself (it is idempotent). The machine is 4 CPU cores and **no GPU** - this drives the render budget below.
 
@@ -35,7 +36,7 @@ Deliverable folder layout (one folder per video, e.g. `youtube_short_<slug>/`): 
 
 ## Defaults and preferences
 
-- **Narrator**: the user prefers a **male** voice. Default to `en_US-joe-medium` (CC0); alternatives `en_US-bryce-medium`, `en_US-john-medium`, `en_US-norman-medium` (public domain). `en_US-ljspeech-high` (female, public domain) was used for the molasses video. Never use `en_US-ryan-*` - its dataset is CC BY-NC-SA (non-commercial), a problem for monetized videos. Check any other voice's MODEL_CARD license first.
+- **Narrator**: the user prefers a **male** voice and found Piper voices too robotic. Default to **Kokoro `bm_george`** (British male, Apache-2.0) via `$KOKORO_PY` (see `Dyatlov_Pass/tools/voiceover.py`, `--engine kokoro`); other good Kokoro males: `am_michael`, `am_fenrir`, `am_onyx`, `bm_fable`. Kokoro reads slower than Piper, so give lines roomier slots. Piper fallbacks: `en_US-joe-medium` (CC0); alternatives `en_US-bryce-medium`, `en_US-john-medium`, `en_US-norman-medium` (public domain). `en_US-ljspeech-high` (female, public domain) was used for the molasses video. Never use `en_US-ryan-*` - its dataset is CC BY-NC-SA (non-commercial), a problem for monetized videos. Check any other voice's MODEL_CARD license first.
 - **Captions**: Anton, uppercase, white with black outline + soft shadow, active word in amber, max 3 words / 17 chars per chunk, centred ~64% down the frame (clear of Shorts UI at bottom and right).
 - **Graphics**: big Anton numbers in amber with a short tag underneath; period/date tags in a serif on cream. Keep top graphics above y~600 px and captions around y~1235 px.
 - **Delivery**: H.264 CRF 19 capped at 9 Mbps (keeps files < 100 MB for GitHub), AAC 192k 48 kHz, `loudnorm=I=-14:TP=-1.5`, `+faststart`.

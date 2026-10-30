@@ -2,8 +2,8 @@ DYATLOV PASS - NARRATION SCRIPT (60 seconds, 120 words)
 Start times are where each line begins in the video. Read at a calm, low documentary pace.
 
 [SCENE 1 - THE HOOK  0-6 s]
-(00.15) February 1959. Nine hikers skied into Russia's Ural Mountains.
-(04.95) None of them came back.
+(00.10) February 1959. Nine hikers skied into Russia's Ural Mountains.
+(04.92) None of them came back.
 
 [SCENE 2 - THE DISCOVERY  6-17 s]
 (06.35) Weeks later, searchers found their tent half-buried in snow, cut open from the inside.
@@ -15,7 +15,7 @@ Start times are where each line begins in the video. Read at a calm, low documen
 
 [SCENE 4 - THE AVALANCHE THEORY  29-44 s]
 (29.30) In 2021, scientists modelled the leading explanation: a delayed slab avalanche.
-(35.30) To pitch the tent, the hikers had cut into the slope.
+(35.25) To pitch the tent, the hikers had cut into the slope.
 (38.45) Wind piled snow above the cut, until, hours later, a slab may have broken loose.
 
 [SCENE 5 - THE ENDING  44-60 s]
