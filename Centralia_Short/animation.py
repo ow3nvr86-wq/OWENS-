@@ -2535,7 +2535,7 @@ def build_cameras():
     # 5 DUMP: the burning trash in the old strip-mine pit; push in on the opening in the coal seam
     h = PITFX['hole']
     pz = gz(*PIT)
-    camera_shot('dump', 26, [(0, Vector((PIT[0] - 30, PIT[1] - 30, pz + 19))), (1, Vector((h.x - 13, h.y - 15, h.z + 3.0)))],
+    camera_shot('dump', 26, [(0, Vector((PIT[0] - 30, PIT[1] - 30, pz + 19))), (1, Vector((h.x - 9, h.y - 11, h.z + 1.6)))],
                 [(0, Vector((PIT[0] + 2, PIT[1] + 2, pz + 2))), (1, h + Vector((0, 0, -0.3)))], fstop=5.6)
     # 6 SECTION: the ground cut open under the 1962 town; the camera tracks the fire front west
     zc = gz(150, YC)
@@ -2633,10 +2633,10 @@ def build_emitters():
     h = PITFX['hole']
     E['dump'] = [
         emitter('flame', trash, 2.5, 0.9, (0.2, 0.1, 1.0), 0.3, (0.6, 1.3), area=1.2, heat=1.0, salt=7),
-        emitter('smoke', trash[::2], 0.8, 7.0, (0.8, 0.5, 1.6), 0.5, (1.5, 6.0), opacity=0.75, glow=0.35, area=2.0, rise=0.1, salt=8),
-        emitter('ember', trash, 2.0, 2.5, (0.3, 0.2, 2.0), 0.7, (0.03, 0.02), area=1.5, rise=-0.3, salt=9),
-        emitter('flame', [h + Vector((0, 0, -0.6))], 6.0, 0.7, (0, 0, 0.5), 0.15, (0.3, 0.7), area=0.5, heat=0.9, t0=EV['seam_ignite'], salt=10),
-        emitter('smoke', [h + Vector((0, 0, 0.3))], 2.0, 5.0, (0.2, 0.1, 1.2), 0.3, (0.6, 2.8), opacity=0.7, glow=0.5, area=0.4, t0=EV['seam_ignite'] - 0.4, salt=11)]
+        emitter('smoke', trash[::3], 0.7, 7.0, (0.8, 0.5, 1.8), 0.5, (1.5, 6.0), opacity=0.5, glow=0.35, area=2.0, rise=0.1, salt=8),
+        emitter('ember', trash[::2], 1.2, 2.5, (0.3, 0.2, 2.0), 0.7, (0.05, 0.03), area=1.5, rise=-0.3, salt=9),
+        emitter('flame', [h + Vector((0, 0, -0.7))], 7.0, 0.8, (0, 0, 0.6), 0.15, (0.5, 1.1), area=0.6, heat=1.0, t0=EV['seam_ignite'], salt=10),
+        emitter('smoke', [h + Vector((0, 0, 0.6))], 1.5, 5.0, (0.2, 0.1, 1.4), 0.3, (0.5, 2.2), opacity=0.4, glow=0.5, area=0.4, t0=EV['seam_ignite'] - 0.4, salt=11)]
     # --- section: steam/smoke vents appear at the surface as the front passes beneath
     vents = []
     for x in np.arange(330, 40, -14.0):
