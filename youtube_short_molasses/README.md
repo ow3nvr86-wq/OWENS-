@@ -62,6 +62,14 @@ youtube_short_molasses/
 
 ## Rendering instructions
 
+In a Claude Code cloud session, `.claude/hooks/session-start.sh` installs everything automatically and exports:
+
+- `$BLENDER`: Blender 4.2.3.
+- `$SHORTS_PY`: a Python venv with `requirements.txt` installed.
+- `$PIPER_VOICES`: narrator voices cleared for commercial use: `ljspeech-high`, plus the male voices `joe`, `bryce`, `john` and `norman`.
+
+Use `$SHORTS_PY` in place of `.venv/bin/python` and `$BLENDER` in place of `blender` below.
+
 Requirements:
 - Blender 4.2 LTS (tested with 4.2.3) and ffmpeg.
 - Python 3.10 or later with `numpy scipy pillow piper-tts`.

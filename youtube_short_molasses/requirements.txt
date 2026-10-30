@@ -1,0 +1,6 @@
+# Python tools for the code-generated Shorts pipeline (voiceover, simulation, audio, post)
+numpy==2.5.4
+scipy==1.18.1
+pillow==13.0.0
+piper-tts==1.8.0
+onnxruntime==1.31.1
