@@ -5,7 +5,7 @@ description: Research a topic and produce a complete, fully code-generated 3D an
 
 # Make a code-generated 3D Short
 
-You are producing an educational 3D-animated Short where *everything* is made with code: 3D world, animation, physics, captions, music, SFX and narration. The reference implementation is `youtube_short_molasses/` in this repo ("The Wave of Molasses", 59 s). Read its `README.md` first and reuse its scripts as your starting template - they already solve the hard plumbing (timeline-driven cuts, frame handlers, event export, ducking, captions, delivery encode). Copy them into a new project folder and adapt; don't rewrite from scratch.
+You are producing an educational 3D-animated Short where *everything* is made with code: 3D world, animation, physics, captions, music, SFX and narration. There are two reference implementations in this repo: `youtube_short_molasses/` ("The Wave of Molasses", 59 s: multi-script pipeline with a PIL post stage) and `Dyatlov_Pass/` (60 s: one self-contained `animation.py` with render/audio/edit stages, the edit done in Blender's Video Sequencer, timing from `scene_timing.json`; use it when the user wants a single Blender script that renders the final video). Read its `README.md` first and reuse its scripts as your starting template - they already solve the hard plumbing (timeline-driven cuts, frame handlers, event export, ducking, captions, delivery encode). Copy them into a new project folder and adapt; don't rewrite from scratch.
 
 ## Toolchain (cloud sessions)
 

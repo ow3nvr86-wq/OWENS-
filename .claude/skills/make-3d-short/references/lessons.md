@@ -84,3 +84,27 @@ Each item is a real problem hit while building `youtube_short_molasses/`, with t
 - Stop a running render as soon as a sample frame shows a look problem; fixing the shader cost 10 minutes, re-rendering everything later would have cost hours.
 - Commit and push after each stage (scripts/docs first, MP4 last). Keep `renders/frames/`, `build/` and `__pycache__/` git-ignored.
 - Give the user honest time estimates up front (the full render is hours) and short status notes while long jobs run.
+
+## 8. Lessons from "Dyatlov Pass" (second video, `Dyatlov_Pass/`)
+
+This one is a single self-contained `animation.py` (render, audio and edit stages) driven by `scene_timing.json`. Use it as the template when the user wants "one Blender script that renders the final video".
+
+- **Profile before a long render.** Read the Cycles status lines for one frame: `grep "^Fra:N" | awk -F'|' '{print $2 "|" $NF}' | uniq`. Sync vs. "Sample 1/10 ... Sample 10/10" tells you whether geometry or shading is the cost.
+- **Shader cost traps found here:**
+  - A procedural star field (Voronoi) in the *world* shader is evaluated for every escaped bounce ray. Bright snow makes that cost huge: ~23 s → 14 s/frame after moving the stars to a camera-only dome (all other ray visibilities off).
+  - Bump nodes re-evaluate the noise chain several times, so lower the noise Detail.
+  - 275k tree instances were about 4 s of sync per frame; 230k concentrated where the cameras look was fine.
+- **Keyframed `hide_render` on heavy objects** was suspected but not the cost. Still, set heavy groups' visibility statically per shot and render shot by shot (`apply_shot_visibility`). That makes every shot's BVH static.
+- **Moonlit snow on an east-facing slope goes black** if the moon is behind the slope: a 27° slope with the moon at 12° on the far side is fully in shadow. Pick the moon azimuth per shot so the lit side faces the camera. For a hook shot it's fine to "cheat" the visible moon disc into frame independently of the lamp direction (`DISC_CHEAT`).
+- **Backlit distant ridged-noise mountains read as thin "crumpled paper" crest lines.** Side-light them instead.
+- **Flakes:**
+  - Cull near the lens in proportion to flake size (`45*size .. 115*size` m), or single flakes become huge diamonds.
+  - Elongated octahedra along the velocity give wind streaks without motion blur.
+  - Powder/dust needs many tiny particles (3-9 mm) with alpha, not a few big ones.
+- **Blender 4.2 VSE text strips** support `use_outline`, `outline_width`, `use_shadow`, `shadow_blur`, `shadow_offset` and `use_box`. `shadow_offset` is relative to the font size: 4 puts the shadow ~60 px away, 0.035 is right. Fade with `blend_alpha` keyframes.
+  - Set the edit scene's view transform to **Standard**. The frames are already AgX tone-mapped.
+  - Image strips: `new_image(..., fit_method='FIT')`, then `elements.append(name)`. Repeated names work, so a 24-frame grain loop can be one strip. `transform.filter = 'CUBIC_MITCHELL'` for the 2x upscale.
+  - Blender's FFmpeg output: `constant_rate_factor='NONE'`, `video_bitrate=8000`, `maxrate=9000`; remux with `ffmpeg -c copy -movflags +faststart`.
+- **Accuracy check the narration word by word.** "Nine hikers set out" was wrong (ten set out, one turned back). Also verify every prop text (map labels, notes); one route name on the desk notes couldn't be verified and was cut.
+- **Voice vs. bed level:** measure it instead of guessing. Project the mix onto the voice track per line (`g = v·m / v·v`) and compare to the residual. Aim for ≥ 9-10 dB. The first mix was −5 to +9 dB, and the wind roar and music-box reverb were the culprits.
+- **Numbers:** ~13 s/frame at 540x960, 8 spp, on 4 cores, for 1,590 3D frames ≈ 6 h. The end title is drawn in the edit, so it costs no render time.
