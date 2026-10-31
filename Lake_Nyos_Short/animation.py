@@ -2713,8 +2713,20 @@ def stage_edit():
         key_alpha(fl, [(f0 - 2, 0.0), (f0, peak), (f0 + 1, peak * 0.8), (f0 + 11, 0.0)])
     ch = 6
     for k, tl in enumerate(TIMING['titles']):
-        add_text(se, f'Title{k}', tl['text'], tl['start'], tl['end'], tl['style'], ch + (k % 4),
-                 fade=10 if tl['style'].startswith('final') else 5, rise=0.0 if tl['style'] == 'tag' else 0.012)
+        # '|' marks a line break: each line is its own centred strip, stacked downward
+        for j, line in enumerate(tl['text'].split('|')):
+            st = add_text(se, f'Title{k}_{j}', line, tl['start'], tl['end'], tl['style'], ch + (k % 4) * 2 + j,
+                          fade=10 if tl['style'].startswith('final') else 5, rise=0.0 if tl['style'] == 'tag' else 0.012)
+            if j:
+                dy = j * TITLE_STYLE[tl['style']][1] * 1.2 / RES[1]
+                fc = sc.animation_data.action.fcurves if sc.animation_data and sc.animation_data.action else []
+                for fcu in fc:
+                    if fcu.data_path == f'sequence_editor.sequences_all["{st.name}"].location' and fcu.array_index == 1:
+                        for kp in fcu.keyframe_points:
+                            kp.co[1] -= dy
+                            kp.handle_left[1] -= dy
+                            kp.handle_right[1] -= dy
+                st.location = (0.5, st.location[1] - dy)
     if not ARGS.no_voice:
         vt = os.path.join(BUILD, 'vo_timing.json')
         with open(vt) as fh:
@@ -2722,7 +2734,7 @@ def stage_edit():
         k = 0
         for ln in vlines:
             for c in ln['chunks']:
-                st = add_text(se, f'Cap{k}', c['text'].upper(), c['start'], c['end'] + 0.02, 'label', 12 + k % 2, fade=2, rise=0.0)
+                st = add_text(se, f'Cap{k}', c['text'].upper(), c['start'], c['end'] + 0.02, 'label', 16 + k % 2, fade=2, rise=0.0)
                 st.font_size = 84
                 st.location = (0.5, 0.335)
                 k += 1

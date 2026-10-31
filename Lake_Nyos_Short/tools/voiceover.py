@@ -213,7 +213,7 @@ def main():
             L.append('| On-screen text | Start | End |')
             L.append('|---|---|---|')
             for t in tl:
-                L.append(f'| {t["text"]} | {t["start"]:.1f} | {t["end"]:.1f} |')
+                L.append(f'| {t["text"].replace("|", " / ")} | {t["start"]:.1f} | {t["end"]:.1f} |')
             L.append('')
     L.append('## Animation events\n')
     for k, v in T['events'].items():
