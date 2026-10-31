@@ -297,6 +297,9 @@ def reset_scene():
     return sc
 
 
+SPP = [8]           # base samples per pixel (set by setup_render)
+
+
 def setup_render(sc):
     q = ARGS.quality
     r = sc.render
@@ -315,6 +318,7 @@ def setup_render(sc):
     c = sc.cycles
     c.device = 'CPU'
     c.samples = {'preview': 4, 'final': 8}[q]
+    SPP[0] = c.samples
     c.use_adaptive_sampling = True
     c.adaptive_threshold = {'preview': 0.1, 'final': 0.05}[q]
     c.use_denoising = True
@@ -1595,8 +1599,8 @@ def hash01(a, b, salt=0.0):
 
 
 def emitter(kind, src, rate, life, vel, spread, size, opacity=1.0, glow=0.0, area=0.5, t0=-10.0, t1=1e9,
-            rise=0.0, turb=0.4, wind=(0, 0, 0), salt=0.0, fade=None, flat=False):
-    return dict(kind=kind, src=np.atleast_2d(np.array(src, float)), rate=rate, life=life, vel=np.array(vel, float),
+            rise=0.0, turb=0.4, wind=(0, 0, 0), salt=0.0, fade=None, flat=False, vjit=0.0):
+    return dict(vjit=vjit, kind=kind, src=np.atleast_2d(np.array(src, float)), rate=rate, life=life, vel=np.array(vel, float),
                 spread=spread, size=size, opacity=opacity, glow=glow, area=area, t0=t0, t1=t1, rise=rise, turb=turb,
                 wind=np.array(wind, float), salt=salt, fade=fade, flat=flat)
 
@@ -1620,7 +1624,8 @@ def eval_emitter(e, t):
     start = e['src'][k] + np.stack([rr * np.cos(a), rr * np.sin(a), np.zeros_like(a)], -1)
     dirn = np.stack([np.cos(a + 1.3), np.sin(a + 1.3), (r3 - 0.5) * (0.0 if e['flat'] else 0.6)], -1)
     u = age / e['life']
-    pos = start + (e['vel'][None, :] + e['wind'][None, :] * u[:, None]) * age[:, None] + dirn * (e['spread'] * age)[:, None]
+    vs = 1.0 - e['vjit'] * hash01(k + 0.5, i, e['salt'] + 7)          # per-particle launch speed (ragged jets)
+    pos = start + (e['vel'][None, :] * vs[:, None] + e['wind'][None, :] * u[:, None]) * age[:, None] + dirn * (e['spread'] * age)[:, None]
     pos[:, 2] += 0.5 * e['rise'] * age ** 2
     tw = e['turb'] * np.stack([np.sin(age * 1.3 + r4 * 6.3), np.cos(age * 1.1 + r1 * 6.3), np.zeros_like(age)], -1) * u[:, None]
     pos += tw
@@ -1918,15 +1923,15 @@ def build_emitters():
     EMIT['erupt'] = [
         emitter('mist', [(cx, cy, 0.5)], 22.0, 3.0, (0, 0, 2.0), 2.5, (4.0, 14.0), opacity=0.6, area=90.0, t0=b0, t1=f1,
                 flat=True, salt=5, fade=(b0, b1)),
-        emitter('mist', [(cx, cy, 0.0)] + ring, 34.0, 5.5, (0, 0, 46.0), 1.3, (6.0, 22.0), opacity=0.75, area=10.0,
-                rise=-11.0, t0=f0, t1=f1, salt=6, turb=3.0),
+        emitter('mist', [(cx, cy, 0.0)] + ring, 40.0, 5.0, (0, 0, 46.0), 2.2, (6.0, 24.0), opacity=0.75, area=10.0, vjit=0.5,
+                rise=-9.8, t0=f0, t1=f1, salt=6, turb=3.0),
         emitter('mist', [(cx, cy, 2.0)], 30.0, 7.0, (0, 0, 1.5), 13.0, (25.0, 85.0), opacity=0.5, area=60.0,
                 t0=f0 + 0.4, t1=f1, flat=True, salt=7),
-        emitter('mist', [(cx, cy, 40.0)], 14.0, 6.0, (2.0, 3.0, 4.0), 7.0, (30.0, 90.0), opacity=0.35, area=40.0,
+        emitter('mist', [(cx, cy, 22.0)], 14.0, 6.0, (2.0, 3.0, 2.0), 6.0, (20.0, 55.0), opacity=0.25, area=35.0,
                 t0=f0 + 1.0, t1=f1, salt=8)]
     # 9 morning mist lying in the valley
-    pts = [VP(s, side, 4.0) for s in np.arange(800, 1500, 60) for side in (-90, 0, 90)]
-    EMIT['dawn'] = [emitter('mist', [tuple(p) for p in pts], 0.5, 10.0, (0.6, 1.5, 0.1), 1.0, (14.0, 40.0), opacity=0.4,
+    pts = [VP(s, side, 3.0) for s in np.arange(780, 1080, 60) for side in (-90, 0, 90)]
+    EMIT['dawn'] = [emitter('mist', [tuple(p) for p in pts], 0.5, 10.0, (0.6, 1.5, 0.1), 1.0, (14.0, 40.0), opacity=0.26,
                             area=30.0, t0=-15.0, flat=True, salt=9)]
     # 10 the degassing fountain (a spray about 45 m high)
     rx, ry = RAFT
@@ -1948,8 +1953,8 @@ def build_emitters():
 # Per-shot look: sky, sun / moon, haze, grade, visibility and material values.  Applied once before each
 # shot is rendered (static within a shot, so Cycles does not re-sync shaders every frame).
 # ============================================================================
-DUSK = dict(sun=(13, 285, 3.4, (1.0, 0.66, 0.44)), sky=((0.70, 0.52, 0.42), (0.10, 0.17, 0.36), 1.8),
-            mist=(300, 6000), fog=(0.16, (0.46, 0.38, 0.36)), beams=0.3, exposure=0.45, mist_lum=0.45)
+DUSK = dict(sun=(13, 285, 3.4, (1.0, 0.58, 0.34)), sky=((0.70, 0.52, 0.42), (0.10, 0.17, 0.36), 1.8),
+            mist=(300, 6000), fog=(0.10, (0.50, 0.38, 0.32)), beams=0.3, exposure=0.65, mist_lum=0.45)
 BLUE = dict(sun=(4, 285, 1.1, (1.0, 0.70, 0.55)), sky=((0.22, 0.28, 0.44), (0.025, 0.06, 0.19), 1.6),
             mist=(250, 4500), fog=(0.16, (0.18, 0.23, 0.36)), beams=0.0, exposure=0.05, mist_lum=0.3)
 NIGHT = dict(sun=(32, 200, 1.1, (0.55, 0.66, 1.0)), sky=((0.045, 0.06, 0.10), (0.006, 0.010, 0.026), 1.0),
@@ -1982,7 +1987,7 @@ SHOTCFG = {
                     gas_alpha=0.42, gas_lum=0.28, mist_lum=0.25),
     'valley':  dict(light=NIGHT, grade='cold', groups=['Terrain', 'Village', 'Trees', 'Gas', 'FX'],
                     gas_alpha=0.3, gas_lum=0.2, mist_lum=0.18),
-    'dawn':    dict(light=DAWN, grade='dawn', groups=['Terrain', 'Village', 'Trees', 'FX']),
+    'dawn':    dict(light=DAWN, grade='dawn', groups=['Terrain', 'Village', 'Trees', 'FX'], spp=2),
     'today':   dict(light=OVERCAST, grade='day', groups=['Terrain', 'Water', 'Trees', 'Raft', 'FX']),
     'final':   dict(light=UNDER, grade='under', groups=UNDER_GROUPS + ['Raft'], under_lum=2.2, dot_lum=6.0, ray_amt=0.12),
 }
@@ -2005,6 +2010,7 @@ def apply_shot(name):
         if g in COLL:
             for ob in COLL[g].all_objects:
                 ob.hide_render = True
+    sc.cycles.samples = SPP[0] * cfg.get('spp', 1)          # misty shots get more samples (less grain)
     vals = dict(redlake=0.0, under_lum=cfg.get('under_lum', 0.0), dot_lum=cfg.get('dot_lum', 6.0),
                 mist_lum=cfg.get('mist_lum', L['mist_lum']), gas_alpha=cfg.get('gas_alpha', 0.35),
                 gas_lum=cfg.get('gas_lum', 0.1), ray_amt=cfg.get('ray_amt', 0.0))
@@ -2090,7 +2096,7 @@ def on_frame(scene, depsgraph=None):
         k = ramp(t, *EV['darken'])
         SKY['sun'].data.energy = 3.4 * (1 - 0.75 * k)
         SKY['bg'].inputs['Strength'].default_value = 1.8 * (1.0 - 0.5 * k)
-        scene.view_settings.exposure = 0.45 - 0.8 * k
+        scene.view_settings.exposure = 0.65 - 1.0 * k
     if name in ('spill', 'valley'):
         ts = sim_time(name, t)
         update_gas_sheet(ts, t)
