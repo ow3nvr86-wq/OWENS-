@@ -52,7 +52,7 @@ for v in en_US/ljspeech/high en_US/joe/medium en_US/bryce/medium en_US/john/medi
 done
 
 # Kokoro-82M (Apache-2.0): a more natural-sounding narrator than Piper. Separate venv so its
-# dependencies can't disturb the main one. Default Dyatlov Pass narrator: bm_george.
+# dependencies can't disturb the main one. Narrator for all projects: bm_george (user's choice).
 KVENV="$TOOLS/kokoro-venv"
 KDIR="$TOOLS/kokoro"
 mkdir -p "$KDIR"
