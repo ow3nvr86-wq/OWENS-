@@ -84,7 +84,7 @@ $BLENDER -b --factory-startup -P animation.py -- --stage edit --out renders/prev
 
 | Render | Frames | Time per frame | Total |
 |---|---|---|---|
-| Final, 540×960 at 8 samples (OIDN denoised, upscaled in the edit) | 1,728 (3D) | about 10-15 s; mine and fire shots are the slowest | about 6 hours |
+| Final, 540×960 at 8 samples (OIDN denoised, upscaled in the edit) | 1,728 (3D) | about 12-17 s; mine and fire shots are the slowest | about 7.5 hours (measured) |
 | Preview, 270×480 at 4 samples | 1,728 (3D) | about 3 s | about 1.5 hours |
 
 The last 2.4 s (the title) is drawn by the edit over black. On a desktop GPU, Cycles renders this many times faster.
