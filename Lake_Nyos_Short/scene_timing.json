@@ -1,0 +1,333 @@
+{
+ "_about": "Single source of truth for timing. animation.py (cameras, events, captions, titles) and tools/voiceover.py read this file. Times are seconds from the start of the video at 30 fps.",
+ "fps": 30,
+ "duration": 60.0,
+ "render_end": 57.4,
+ "scenes": [
+  {
+   "id": 1,
+   "name": "THE HOOK",
+   "start": 0.0,
+   "end": 6.1,
+   "shots": [
+    {
+     "name": "village",
+     "start": 0.0,
+     "end": 6.1
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "THE LAKE",
+   "start": 6.1,
+   "end": 14.6,
+   "shots": [
+    {
+     "name": "lake",
+     "start": 6.1,
+     "end": 11.2
+    },
+    {
+     "name": "dive",
+     "start": 11.2,
+     "end": 14.6
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "name": "THE ERUPTION",
+   "start": 14.6,
+   "end": 29.8,
+   "shots": [
+    {
+     "name": "seep",
+     "start": 14.6,
+     "end": 18.7
+    },
+    {
+     "name": "column",
+     "start": 18.7,
+     "end": 23.0
+    },
+    {
+     "name": "erupt",
+     "start": 23.0,
+     "end": 29.8
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "name": "THE INVISIBLE THREAT",
+   "start": 29.8,
+   "end": 43.0,
+   "shots": [
+    {
+     "name": "spill",
+     "start": 29.8,
+     "end": 35.7
+    },
+    {
+     "name": "valley",
+     "start": 35.7,
+     "end": 43.0
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "name": "THE AFTERMATH",
+   "start": 43.0,
+   "end": 53.1,
+   "shots": [
+    {
+     "name": "dawn",
+     "start": 43.0,
+     "end": 48.4
+    },
+    {
+     "name": "today",
+     "start": 48.4,
+     "end": 53.1
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "name": "THE FINAL REVEAL",
+   "start": 53.1,
+   "end": 60.0,
+   "shots": [
+    {
+     "name": "final",
+     "start": 53.1,
+     "end": 57.4
+    },
+    {
+     "name": "title",
+     "start": 57.4,
+     "end": 60.0
+    }
+   ]
+  }
+ ],
+ "lines": [
+  {
+   "scene": 1,
+   "start": 0.15,
+   "deadline": 6.25,
+   "text": "Imagine an entire village being overcome by an invisible cloud... without anyone knowing what was happening.",
+   "tts": "Imagine an entire village being overcome by an invisible cloud, without anyone knowing what was happening."
+  },
+  {
+   "scene": 2,
+   "start": 6.35,
+   "deadline": 11.2,
+   "text": "This is Lake Nyos, in northwest Cameroon: a calm crater lake on an old volcano.",
+   "tts": "This is Lake Nyos, in northwest Cameroon: a calm crater lake on an old volcano."
+  },
+  {
+   "scene": 2,
+   "start": 11.35,
+   "deadline": 14.6,
+   "text": "But two hundred metres down, it was hiding something.",
+   "tts": "But two hundred metres down, it was hiding something."
+  },
+  {
+   "scene": 3,
+   "start": 14.75,
+   "deadline": 18.6,
+   "text": "Carbon dioxide from magma seeped into its cold bottom water.",
+   "tts": "Carbon dioxide from magma seeped into its cold bottom water."
+  },
+  {
+   "scene": 3,
+   "start": 18.85,
+   "deadline": 22.9,
+   "text": "The weight of the lake kept it dissolved, like a sealed bottle of soda.",
+   "tts": "The weight of the lake kept it dissolved, like a sealed bottle of soda."
+  },
+  {
+   "scene": 3,
+   "start": 23.15,
+   "deadline": 29.7,
+   "text": "Then, on the night of August 21st, 1986, the lake overturned... and the gas burst free.",
+   "tts": "Then, on the night of August the twenty-first, nineteen eighty-six, the lake overturned... and the gas burst free."
+  },
+  {
+   "scene": 4,
+   "start": 29.95,
+   "deadline": 35.6,
+   "text": "A cloud of carbon dioxide, heavier than air, spilled over the rim and down the valleys.",
+   "tts": "A cloud of carbon dioxide, heavier than air, spilled over the rim and down the valleys."
+  },
+  {
+   "scene": 4,
+   "start": 35.85,
+   "deadline": 42.9,
+   "text": "It pushed the oxygen away. In the villages below, people rapidly lost consciousness. Many never woke up.",
+   "tts": "It pushed the oxygen away. In the villages below, people rapidly lost consciousness. Many never woke up."
+  },
+  {
+   "scene": 5,
+   "start": 43.15,
+   "deadline": 48.3,
+   "text": "About 1,746 people died, along with thousands of animals.",
+   "tts": "About seventeen hundred and forty-six people died, along with thousands of animals."
+  },
+  {
+   "scene": 5,
+   "start": 48.55,
+   "deadline": 53.15,
+   "text": "Scientists called it a limnic eruption. Today, pipes vent the gas from the deep.",
+   "tts": "Scientists called it a limnic eruption. Today, pipes vent the gas from the deep."
+  },
+  {
+   "scene": 6,
+   "start": 53.4,
+   "deadline": 57.4,
+   "text": "The most terrifying part? The danger was completely invisible.",
+   "tts": "The most terrifying part? The danger was completely invisible."
+  }
+ ],
+ "titles": [
+  {
+   "text": "LAKE NYOS, CAMEROON",
+   "start": 6.4,
+   "end": 10.9,
+   "style": "date"
+  },
+  {
+   "text": "A VOLCANIC CRATER LAKE",
+   "start": 7.3,
+   "end": 10.9,
+   "style": "label"
+  },
+  {
+   "text": "208 M DEEP",
+   "start": 11.6,
+   "end": 14.4,
+   "style": "big"
+  },
+  {
+   "text": "SCIENTIFIC VISUALISATION: DISSOLVED CO2",
+   "start": 12.2,
+   "end": 22.8,
+   "style": "tag"
+  },
+  {
+   "text": "CO2 FROM MAGMA, VIA SPRINGS",
+   "start": 15.0,
+   "end": 18.5,
+   "style": "label"
+  },
+  {
+   "text": "HELD DOWN BY PRESSURE",
+   "start": 19.2,
+   "end": 22.8,
+   "style": "label"
+  },
+  {
+   "text": "21 AUGUST 1986, ABOUT 9:30 PM",
+   "start": 23.3,
+   "end": 26.6,
+   "style": "date"
+  },
+  {
+   "text": "UP TO ~1.2 CUBIC KM OF CO2 (EST.)",
+   "start": 26.7,
+   "end": 29.6,
+   "style": "label"
+  },
+  {
+   "text": "VISUALISATION: THE REAL GAS WAS INVISIBLE",
+   "start": 30.0,
+   "end": 42.8,
+   "style": "tag"
+  },
+  {
+   "text": "CO2 IS ~1.5 TIMES DENSER THAN AIR",
+   "start": 30.3,
+   "end": 35.5,
+   "style": "label"
+  },
+  {
+   "text": "SURVIVORS FOUND THEIR OIL LAMPS HAD GONE OUT",
+   "start": 38.8,
+   "end": 42.8,
+   "style": "label"
+  },
+  {
+   "text": "1,746",
+   "start": 43.4,
+   "end": 48.1,
+   "style": "big"
+  },
+  {
+   "text": "AND ~3,500 LIVESTOCK",
+   "start": 45.3,
+   "end": 48.1,
+   "style": "tag"
+  },
+  {
+   "text": "A LIMNIC ERUPTION",
+   "start": 48.7,
+   "end": 50.8,
+   "style": "date"
+  },
+  {
+   "text": "DEGASSING PIPES SINCE 2001",
+   "start": 50.9,
+   "end": 52.9,
+   "style": "label"
+  },
+  {
+   "text": "LAKE NYOS",
+   "start": 55.8,
+   "end": 59.6,
+   "style": "final"
+  },
+  {
+   "text": "THE INVISIBLE DISASTER",
+   "start": 56.7,
+   "end": 59.6,
+   "style": "final2"
+  }
+ ],
+ "events": {
+  "darken": [
+   0.0,
+   6.1
+  ],
+  "fog_build": [
+   1.5,
+   6.1
+  ],
+  "bubbles": [
+   24.4,
+   26.0
+  ],
+  "fountain": [
+   26.0,
+   29.8
+  ],
+  "gas_spill": [
+   29.8,
+   35.7
+  ],
+  "gas_valley": [
+   35.7,
+   43.0
+  ],
+  "fade_to_black": [
+   56.2,
+   57.4
+  ],
+  "final_fade": [
+   59.4,
+   60.0
+  ]
+ }
+}
