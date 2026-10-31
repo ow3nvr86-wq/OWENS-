@@ -1822,11 +1822,59 @@ def build_pit():
         if gz(x, y) > gz(*PIT) + 5.6:
             break
     PITFX['hole'] = Vector((x, y, gz(*PIT) + 5.6))
-    bm = bmesh.new()
-    m = Matrix.Translation(PITFX['hole']) @ Matrix.Rotation(a + math.pi / 2, 4, 'Z')
-    add_box(bm, -1.1, -0.5, -1.2, 1.1, 3.0, 0.9, matrix=m)
-    hole = obj_from_bm('PitHole', bm, MAT['void'], collection='South')
-    PITFX['dir'] = Vector((math.cos(a), math.sin(a), 0))
+    PITFX['dir'] = d = Vector((math.cos(a), math.sin(a), 0))
+    # a ragged opening on the wall face: black at its lip, glowing deep inside
+    tan = Vector((-d.y, d.x, 0))
+    base, hz = PITFX['hole'], gz(*PIT) + 5.6
+
+    def on_wall(u, h):
+        q = base + tan * u
+        for r in np.linspace(-6.0, 6.0, 241):
+            x, y = q.x + d.x * r, q.y + d.y * r
+            if gz(x, y) > hz + h:
+                return Vector((x, y, hz + h)) - d * 0.32
+        return Vector((q.x, q.y, hz + h)) - d * 0.32
+
+    rings = [0.0, 0.2, 0.4, 0.6, 0.8, 0.92, 1.0]
+    nseg = 40
+    verts, rf, faces = [], [], []
+    for fr in rings:
+        for j in range(nseg):
+            th = 2 * math.pi * j / nseg
+            jag = 1.0 + 0.08 * math.sin(2 * th + 1.3) + 0.05 * math.sin(5 * th + 0.4) + 0.025 * math.sin(11 * th)
+            rz = 0.85 if math.sin(th) > 0 else 0.62
+            verts.append(on_wall(1.0 * fr * jag * math.cos(th), rz * fr * jag * math.sin(th) + 0.1))
+            rf.append(fr)
+    for i in range(len(rings) - 1):
+        for j in range(nseg):
+            k = (j + 1) % nseg
+            faces.append((i * nseg + j, i * nseg + k, (i + 1) * nseg + k, (i + 1) * nseg + j))
+    me = bpy.data.meshes.new('PitHole')
+    me.from_pydata([tuple(v) for v in verts], [], faces)
+    a_rf = me.attributes.new('rf', 'FLOAT', 'POINT')
+    a_rf.data.foreach_set('value', rf)
+    me.shade_smooth()
+    me.materials.append(pit_mouth_material())
+    hole = bpy.data.objects.new('PitHole', me)
+    hole['glow'] = 0.0
+    coll('South').objects.link(hole)
+    PITFX['mouth'] = hole
+
+
+def pit_mouth_material():
+    """The old mine entry in the pit wall: black at the lip, deep orange glow inside once the seam has caught."""
+    m, nt, out = new_mat('pit_mouth')
+    oc = obj_coord(nt)
+    rf = attr(nt, 'rf', 'GEOMETRY')
+    deep = mth(nt, 'POWER', mth(nt, 'SUBTRACT', 1.0, rf, clamp=True), 2.2)
+    n = mth(nt, 'MULTIPLY_ADD', noise(nt, 1.4, 3.0, 0.6, vec=oc), 0.9, 0.55)
+    heat = mth(nt, 'MULTIPLY', mth(nt, 'MULTIPLY', deep, n), attr(nt, 'glow', 'OBJECT'))
+    em = glow_texture(nt, oc, mth(nt, 'MINIMUM', heat, 0.75))
+    principled(nt, out, **{'Base Color': (0.0, 0.0, 0.0, 1.0), 'Roughness': 1.0, 'Specular IOR Level': 0.0,
+                           'Emission Color': em, 'Emission Strength': mth(nt, 'MULTIPLY', heat, 3.5)})
+    m.cycles.emission_sampling = 'NONE'
+    MAT['pit_mouth'] = m
+    return m
 
 
 # ============================================================================
@@ -2884,6 +2932,9 @@ def on_frame(scene, depsgraph=None):
         seam = PITFX['seam']
         seam['burn'] = -50.0 + 75.0 * ramp(t, EV['seam_ignite'] - 0.3, s['t1'])
         seam.update_tag()
+        mouth = PITFX['mouth']
+        mouth['glow'] = 0.15 + 0.85 * ramp(t, EV['seam_ignite'] - 0.6, EV['seam_ignite'] + 0.6)
+        mouth.update_tag()
     if name == 'xsec':
         SEC['face']['burn'] = xsec_front(t)
         SEC['face'].update_tag()
