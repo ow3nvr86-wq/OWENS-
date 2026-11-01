@@ -1988,7 +1988,8 @@ SHOTCFG = {
     'valley':  dict(light=NIGHT, grade='cold', groups=['Terrain', 'Village', 'Trees', 'Gas', 'FX'],
                     gas_alpha=0.3, gas_lum=0.2, mist_lum=0.18),
     'dawn':    dict(light=DAWN, grade='dawn', groups=['Terrain', 'Village', 'Trees', 'FX'], spp=2),
-    'today':   dict(light=OVERCAST, grade='day', groups=['Terrain', 'Water', 'Trees', 'Raft', 'FX'], tbounce=256),
+    'today':   dict(light=OVERCAST, grade='day', groups=['Terrain', 'Water', 'Trees', 'Raft', 'FX'], tbounce=256,
+                    mist_reflect=False),
     'final':   dict(light=UNDER, grade='under', groups=UNDER_GROUPS + ['Raft'], under_lum=2.2, dot_lum=6.0, ray_amt=0.12),
 }
 ALL_GROUPS = ['Terrain', 'Water', 'Village', 'Trees', 'Under', 'Gas', 'FX', 'Raft']
@@ -2012,6 +2013,7 @@ def apply_shot(name):
                 ob.hide_render = True
     sc.cycles.samples = SPP[0] * cfg.get('spp', 1)          # misty shots get more samples (less grain)
     sc.cycles.transparent_max_bounces = cfg.get('tbounce', 32)   # dense spray needs more transparent layers
+    PART['mist'].visible_glossy = cfg.get('mist_reflect', True)   # the fine fountain spray reflects as a dark streak
     vals = dict(redlake=0.0, under_lum=cfg.get('under_lum', 0.0), dot_lum=cfg.get('dot_lum', 6.0),
                 mist_lum=cfg.get('mist_lum', L['mist_lum']), gas_alpha=cfg.get('gas_alpha', 0.35),
                 gas_lum=cfg.get('gas_lum', 0.1), ray_amt=cfg.get('ray_amt', 0.0))
