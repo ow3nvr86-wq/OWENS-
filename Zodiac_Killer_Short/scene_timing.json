@@ -67,7 +67,7 @@
   {"text": "RECREATION: HANDWRITING AND CIPHER SYMBOLS ARE ILLUSTRATIVE", "start": 18.5, "end": 40.3, "style": "tag"},
   {"text": "\"THIS IS THE ZODIAC SPEAKING\"", "start": 22.15, "end": 24.6, "style": "quote"},
   {"text": "THE 408-SYMBOL CIPHER", "start": 27.0, "end": 31.6, "style": "big"},
-  {"text": "SOLVED WITHIN A WEEK  ·  AUGUST 1969", "start": 28.2, "end": 31.6, "style": "label"},
+  {"text": "SOLVED WITHIN A WEEK  ·  AUGUST 1969", "start": 28.2, "end": 31.6, "style": "label", "y": 0.715},
   {"text": "THE 340-SYMBOL CIPHER", "start": 31.95, "end": 34.4, "style": "big"},
   {"text": "51 YEARS UNSOLVED", "start": 34.5, "end": 37.7, "style": "big"},
   {"text": "SOLVED  ·  DECEMBER 2020", "start": 37.8, "end": 40.3, "style": "big"},

@@ -3076,8 +3076,9 @@ def key_alpha(strip, pts):
         strip.keyframe_insert('blend_alpha', frame=f)
 
 
-def add_text(se, name, text, t0, t1, style, channel, fade=5, rise=0.012):
-    fnt, size, col, y, outline = TITLE_STYLE[style]
+def add_text(se, name, text, t0, t1, style, channel, fade=5, rise=0.012, y=None):
+    fnt, size, col, y0, outline = TITLE_STYLE[style]
+    y = y0 if y is None else y
     f0, f1 = frame(t0), frame(t1)
     st = se.sequences.new_effect(name=name, type='TEXT', channel=channel, frame_start=f0, frame_end=f1)
     st.text = text
@@ -3095,9 +3096,10 @@ def add_text(se, name, text, t0, t1, style, channel, fade=5, rise=0.012):
         st.use_outline = True
         st.outline_color = (0, 0, 0, 1)
         st.outline_width = outline
-    if style == 'tag':
+    if style in ('tag', 'final2'):
+        # a dark plate keeps small text readable over busy props (the final symbol's crosshair)
         st.use_box = True
-        st.box_color = (0.03, 0.02, 0.015, 0.62)
+        st.box_color = (0.03, 0.02, 0.015, 0.62 if style == 'tag' else 0.78)
         st.box_margin = 0.012
     st.blend_type = 'ALPHA_OVER'
     fade = min(fade, max(1, (f1 - f0) // 3))
@@ -3170,7 +3172,8 @@ def stage_edit():
         # '|' marks a line break: each line is its own centred strip, stacked downward
         for j, line in enumerate(tl['text'].split('|')):
             st = add_text(se, f'Title{k}_{j}', line, tl['start'], tl['end'], tl['style'], ch + (k % 4) * 2 + j,
-                          fade=10 if tl['style'].startswith('final') else 5, rise=0.0 if tl['style'] == 'tag' else 0.012)
+                          fade=10 if tl['style'].startswith('final') else 5, rise=0.0 if tl['style'] == 'tag' else 0.012,
+                          y=tl.get('y'))
             if j:
                 dy = j * TITLE_STYLE[tl['style']][1] * 1.2 / RES[1]
                 fc = sc.animation_data.action.fcurves if sc.animation_data and sc.animation_data.action else []
