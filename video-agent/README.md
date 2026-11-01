@@ -56,17 +56,17 @@ If `NTFY_TOPIC` isn't set, everything still works and the notifications just pri
 ## Run it
 
 ```bash
-python pipeline.py --brief "60-second tips for youth basketball players"
+python pipeline.py --brief "wild history facts most people never learned"
 ```
 
-That makes one video. More options:
+That makes one video. The brief can be any topic: facts, money tips, motivation, storytime, product reviews, whatever your page is about. Describe the vibe and audience too (for example "funny, fast, for Gen Z"). If you leave `--brief` off the first time, it asks you. After that it remembers. More options:
 
 ```bash
 python pipeline.py --count 5               # five videos back to back
 python pipeline.py --count 3 --gap 30      # three videos, 30 minutes apart
 python pipeline.py --forever --gap 60      # one an hour until you press Ctrl-C
 python pipeline.py --voice cedar           # a different voice
-python pipeline.py --new-series --brief "hockey stickhandling drills"   # start a fresh series
+python pipeline.py --new-series --brief "money tips for teens"   # start a fresh series
 ```
 
 Everything lands in `output/`:

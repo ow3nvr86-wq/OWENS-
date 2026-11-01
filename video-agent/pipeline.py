@@ -10,7 +10,7 @@ The loop, for each video:
      which is ChatGPT's cue to write the next script.
 
 Run:
-    python pipeline.py --brief "60-second tips for youth basketball players"
+    python pipeline.py --brief "wild history facts most people never learned"
     python pipeline.py --count 5 --gap 10    # 5 videos, 10 minutes apart
     python pipeline.py --forever --gap 60    # one an hour until you stop it
 """
@@ -27,12 +27,6 @@ from director import Director
 from notify import notify
 from render import render
 from writer import ScriptWriter
-
-DEFAULT_BRIEF = (
-    "Quick, practical training tips for young athletes and their parents: drills you can do at "
-    "home, game-day habits, and mindset. Friendly, upbeat, never preachy."
-)
-
 
 def slug(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")[:40] or "video"
@@ -71,7 +65,7 @@ def make_one(writer: ScriptWriter, director: Director, out_dir: Path, voice: str
 
 def main() -> None:
     p = argparse.ArgumentParser(description="ChatGPT writes scripts, Claude makes the videos.")
-    p.add_argument("--brief", help="what the video series is about (saved after the first run)")
+    p.add_argument("--brief", help="what your content is about (asked on first run if missing, then remembered)")
     p.add_argument("--count", type=int, default=1, help="how many videos to make (default 1)")
     p.add_argument("--forever", action="store_true", help="keep making videos until you press Ctrl-C")
     p.add_argument("--gap", type=float, default=0, help="minutes to wait between videos")
@@ -88,7 +82,14 @@ def main() -> None:
     if args.new_series:
         state.unlink(missing_ok=True)
     saved_brief = json.loads(state.read_text()).get("brief") if state.exists() else None
-    brief = args.brief or saved_brief or DEFAULT_BRIEF
+    brief = args.brief or saved_brief
+    if not brief:
+        if not sys.stdin.isatty():
+            sys.exit('Tell me what your content is about, e.g. --brief "wild history facts".')
+        print("What's your content about? Describe the topic, the vibe and who it's for.")
+        brief = input("> ").strip()
+        if not brief:
+            sys.exit("No topic given, so nothing to make.")
     if args.brief and saved_brief and args.brief != saved_brief:
         sys.exit("This folder already holds a series with a different brief. "
                  "Use --new-series to start over, or --out to pick another folder.")
