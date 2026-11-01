@@ -74,7 +74,7 @@ Lake_Nyos_Short/
 - **CO2 "dots".** A deterministic field of tiny emissive billboards whose density follows a depth profile (sparse near the surface, dense toward the bottom). Streams rise from vents on the lake floor. Today's version is sparse and is drawn up the degassing pipe.
 - **Particles.** Mist, spray and gas wisps are camera-facing billboards. Every particle's state is a closed-form function of time, so any frame renders identically, in any order.
 - **Look.**
-  - Each shot has a fixed look (sky, sun or moon, haze, light shafts, exposure, grade, visibility, material values), applied once before that shot renders.
+  - Each shot has a fixed look (sky, sun or moon, haze, light shafts, exposure, grade, visibility, material values), applied once before that shot renders. Misty shots can also raise the sample count, and the fountain shot raises the transparent-bounce limit (its dense spray otherwise cuts off in hard-edged blocks).
   - The hook animates the light draining away.
   - Emissive surfaces are excluded from light sampling, which is much faster.
 - **Edit.** Blender's Video Sequencer upscales the frames 2×. It adds:
@@ -108,7 +108,7 @@ The first render builds the gas simulation, which takes about 1 minute, and cach
 
 | Render | Frames | Time per frame | Total |
 |---|---|---|---|
-| Final, 540×960 at 8 samples (OIDN denoised, upscaled in the edit) | 1,722 (3D) | about 13-15 s | about 7 hours |
+| Final, 540×960 at 8 samples (OIDN denoised, upscaled in the edit) | 1,722 (3D) | about 12-15 s on most shots; 20-36 s on the misty dawn (16 samples) and the fountain | about 7.5 hours (measured) |
 | Preview, 270×480 at 4 samples | 1,722 (3D) | about 3 s | about 1.5-2 hours |
 
 The last 2.6 s (the title) is drawn by the edit over black. On a desktop GPU, Cycles renders this many times faster.
