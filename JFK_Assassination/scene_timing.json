@@ -1,0 +1,448 @@
+{
+ "_about": "Single source of truth for timing. animation.py (cameras, events, captions, titles) and tools/voiceover.py read this file. Times are seconds from the start of the video at 30 fps.",
+ "fps": 30,
+ "duration": 60.0,
+ "render_end": 59.0,
+ "scenes": [
+  {
+   "id": 1,
+   "name": "THE OPENING",
+   "start": 0.0,
+   "end": 4.6,
+   "desc": "Darkness. A 1963 newspaper fades up under a single raking light; the camera pushes slowly toward the headline PRESIDENT KENNEDY ASSASSINATED.",
+   "shots": [
+    {
+     "name": "paper",
+     "start": 0.0,
+     "end": 4.6,
+     "camera": "Top-down push-in on the front page, 50 mm, shallow focus sliding onto the headline."
+    }
+   ],
+   "edit": "Fade up from black over the first second; film grain throughout; low drone and a single piano note under the hook."
+  },
+  {
+   "id": 2,
+   "name": "DALLAS, 1963",
+   "start": 4.6,
+   "end": 11.4,
+   "desc": "Main Street, Dallas, at midday: period buildings and signs, crowds on the kerbs, broken cloud. The motorcade (police motorcycles, lead car, the dark-blue open presidential limousine, follow-up cars) moves west toward Dealey Plaza.",
+   "shots": [
+    {
+     "name": "main_high",
+     "start": 4.6,
+     "end": 8.1,
+     "camera": "High angle from an office window above Main Street, slow tilt-down as the motorcade approaches through the crowds."
+    },
+    {
+     "name": "main_low",
+     "start": 8.1,
+     "end": 11.4,
+     "camera": "Low, respectful 3/4 view from the kerb, 85 mm, tracking with the limousine as it passes at a distance; flags fluttering."
+    }
+   ],
+   "edit": "Dip to black into the street; crowd roar and motorcycle engines rise; cut between the two angles on a beat."
+  },
+  {
+   "id": 3,
+   "name": "THE MOMENT THAT CHANGED HISTORY",
+   "start": 11.4,
+   "end": 19.6,
+   "desc": "A wide, distant view of Dealey Plaza: the Texas School Book Depository, the Elm Street curve, the triple underpass. The motorcade turns onto Elm. Pigeons burst off the rooftops; the colour drains away. Nothing of the shooting is shown. A newspaper spins in: THE PRESIDENT IS DEAD.",
+   "shots": [
+    {
+     "name": "plaza",
+     "start": 11.4,
+     "end": 16.6,
+     "camera": "High wide view from above the south side of the plaza, very slow push; the motorcade small in frame."
+    },
+    {
+     "name": "paper2",
+     "start": 16.6,
+     "end": 19.6,
+     "camera": "A newspaper spins up out of darkness toward the lens and settles on the investigators' desk."
+    }
+   ],
+   "edit": "Hold the wide; at 'shots rang out' everything drops to near-silence and the picture drains of colour; pigeons scatter; a muffled drum roll leads into the spinning front page."
+  },
+  {
+   "id": 4,
+   "name": "THE INVESTIGATION",
+   "start": 19.6,
+   "end": 36.6,
+   "desc": "A 1960s police investigation room: blinds, haze, desk lamp, typewriter, newspapers, photographs, folders, a timeline board. A portrait-style card for Lee Harvey Oswald (no likeness: a silhouette and typed facts). A television flickers with a news bulletin.",
+   "shots": [
+    {
+     "name": "desk",
+     "start": 19.6,
+     "end": 25.3,
+     "camera": "Slow lateral dolly across the desk: newspapers, case folders, photographs, ending on the portrait card."
+    },
+    {
+     "name": "card",
+     "start": 25.3,
+     "end": 30.9,
+     "camera": "Push-in on the portrait card and the typed statement, lamp light raking across the paper."
+    },
+    {
+     "name": "tv",
+     "start": 30.9,
+     "end": 36.6,
+     "camera": "From behind the desk toward the TV set flickering in the dark corner, then drift to the board's timeline."
+    }
+   ],
+   "edit": "Room tone, a ticking clock and distant phones; the TV crackles on at 'live television'."
+  },
+  {
+   "id": 5,
+   "name": "THE QUESTIONS",
+   "start": 36.6,
+   "end": 52.7,
+   "desc": "A dark archive: steel shelving, record boxes, light shafts through high windows. The Warren Commission and House Select Committee report covers. An acoustic-analysis printout. Declassified pages slide across the frame with 2025 and 2026 release stamps.",
+   "shots": [
+    {
+     "name": "archive",
+     "start": 36.6,
+     "end": 40.5,
+     "camera": "Dolly down the archive aisle toward a reading table; the Warren Commission report in a pool of light."
+    },
+    {
+     "name": "reports",
+     "start": 40.5,
+     "end": 47.0,
+     "camera": "Over the table: the House Select Committee report slides in beside the Warren report; the acoustic printout."
+    },
+    {
+     "name": "files",
+     "start": 47.0,
+     "end": 52.7,
+     "camera": "Top-down: declassified pages slide and stack across the frame, stamps landing."
+    }
+   ],
+   "edit": "A slow, low pulse; paper slides and two stamp thumps on the release dates; a burst of radio static under 'acoustic evidence'."
+  },
+  {
+   "id": 6,
+   "name": "THE FINAL SHOT",
+   "start": 52.7,
+   "end": 60.0,
+   "desc": "Dealey Plaza at night, empty, in fog and lamplight. The camera pulls slowly backward and up. MORE THAN 60 YEARS LATER... then WHAT REALLY HAPPENED? Fade to black.",
+   "shots": [
+    {
+     "name": "night",
+     "start": 52.7,
+     "end": 59.0,
+     "camera": "Slow pull-back and rise over Elm Street toward the underpass, the Depository lit in the fog."
+    },
+    {
+     "name": "title",
+     "start": 59.0,
+     "end": 60.0,
+     "camera": "Black (drawn in the edit)."
+    }
+   ],
+   "edit": "Wind and a distant train horn; the final question lands on a deep low hit; fade to black over the last second."
+  }
+ ],
+ "lines": [
+  {
+   "scene": 1,
+   "start": 0.25,
+   "deadline": 4.3,
+   "text": "In under ten seconds, in Dallas, America lost a president.",
+   "tts": "In under ten seconds, in Dallas, America lost a president."
+  },
+  {
+   "scene": 2,
+   "start": 4.55,
+   "deadline": 11.15,
+   "text": "November 22nd, 1963. President Kennedy came to Texas to mend a divided party.",
+   "tts": "November twenty-second, nineteen sixty-three. President Kennedy came to Texas to mend a divided party."
+  },
+  {
+   "scene": 3,
+   "start": 11.4,
+   "deadline": 19.3,
+   "text": "At 12:30, in Dealey Plaza, shots rang out. Governor Connally was badly wounded. Thirty minutes later, the President was dead.",
+   "tts": "At twelve-thirty, in Dealey Plaza, shots rang out. Governor Connally was badly wounded. Thirty minutes later, the President was dead."
+  },
+  {
+   "scene": 4,
+   "start": 19.65,
+   "deadline": 25.2,
+   "text": "That afternoon, police arrested Lee Harvey Oswald, who worked in the book depository above the route.",
+   "tts": "That afternoon, police arrested Lee Harvey Oswald, who worked in the book depository above the route."
+  },
+  {
+   "scene": 4,
+   "start": 25.45,
+   "deadline": 30.75,
+   "text": "Charged with killing the President, he denied it. \"I'm just a patsy,\" he told reporters.",
+   "tts": "Charged with killing the President, he denied it. \"I'm just a patsy,\" he told reporters."
+  },
+  {
+   "scene": 4,
+   "start": 31.0,
+   "deadline": 36.4,
+   "text": "Two days later, on live television, Jack Ruby shot and killed him. There would be no trial.",
+   "tts": "Two days later, on live television, Jack Ruby shot and killed him. There would be no trial."
+  },
+  {
+   "scene": 5,
+   "start": 36.7,
+   "deadline": 43.75,
+   "text": "The Warren Commission said Oswald acted alone. In 1979, a House committee found a probable conspiracy,",
+   "tts": "The Warren Commission said Oswald acted alone. In nineteen seventy-nine, a House committee found a probable conspiracy,"
+  },
+  {
+   "scene": 5,
+   "start": 43.95,
+   "deadline": 52.55,
+   "text": "based on acoustic evidence scientists later disputed. Even files released as recently as 2026 have not ended the debate.",
+   "tts": "based on acoustic evidence scientists later disputed. Even files released as recently as twenty twenty-six have not ended the debate."
+  },
+  {
+   "scene": 6,
+   "start": 52.85,
+   "deadline": 57.2,
+   "text": "More than sixty years later, one question still hangs over Dealey Plaza.",
+   "tts": "More than sixty years later, one question still hangs over Dealey Plaza."
+  }
+ ],
+ "titles": [
+  {
+   "text": "A DRAMATIZED RECREATION",
+   "start": 0.4,
+   "end": 4.2,
+   "style": "tag"
+  },
+  {
+   "text": "DALLAS, TEXAS",
+   "start": 5.0,
+   "end": 7.9,
+   "style": "date"
+  },
+  {
+   "text": "NOVEMBER 22, 1963",
+   "start": 5.3,
+   "end": 7.9,
+   "style": "label"
+  },
+  {
+   "text": "JOHN F. KENNEDY",
+   "start": 8.3,
+   "end": 11.2,
+   "style": "big"
+  },
+  {
+   "text": "35TH U.S. PRESIDENT",
+   "start": 8.6,
+   "end": 11.2,
+   "style": "label",
+   "y": 0.715
+  },
+  {
+   "text": "DEALEY PLAZA",
+   "start": 11.7,
+   "end": 14.3,
+   "style": "date"
+  },
+  {
+   "text": "12:30 P.M.",
+   "start": 12.0,
+   "end": 14.3,
+   "style": "label"
+  },
+  {
+   "text": "GOV. JOHN CONNALLY WOUNDED",
+   "start": 14.6,
+   "end": 16.4,
+   "style": "label"
+  },
+  {
+   "text": "HE SURVIVED",
+   "start": 14.8,
+   "end": 16.4,
+   "style": "tag"
+  },
+  {
+   "text": "PARKLAND HOSPITAL  ·  1:00 P.M.",
+   "start": 17.4,
+   "end": 19.4,
+   "style": "tag"
+  },
+  {
+   "text": "LEE HARVEY OSWALD",
+   "start": 21.2,
+   "end": 25.0,
+   "style": "big"
+  },
+  {
+   "text": "AGE 24  ·  DEPOSITORY WORKER",
+   "start": 21.5,
+   "end": 25.0,
+   "style": "label",
+   "y": 0.715
+  },
+  {
+   "text": "ARRESTED IN A DALLAS MOVIE THEATER",
+   "start": 21.5,
+   "end": 25.0,
+   "style": "tag"
+  },
+  {
+   "text": "\"I'M JUST A PATSY.\"",
+   "start": 28.3,
+   "end": 30.8,
+   "style": "quote"
+  },
+  {
+   "text": "OSWALD TO REPORTERS  ·  NOV. 22, 1963",
+   "start": 28.5,
+   "end": 30.8,
+   "style": "tag"
+  },
+  {
+   "text": "NOVEMBER 24, 1963",
+   "start": 31.2,
+   "end": 34.6,
+   "style": "date"
+  },
+  {
+   "text": "SHOT BY NIGHTCLUB OWNER JACK RUBY",
+   "start": 31.5,
+   "end": 34.6,
+   "style": "label"
+  },
+  {
+   "text": "NO TRIAL",
+   "start": 34.8,
+   "end": 36.4,
+   "style": "big"
+  },
+  {
+   "text": "WARREN COMMISSION",
+   "start": 36.9,
+   "end": 39.6,
+   "style": "big"
+  },
+  {
+   "text": "1964  ·  \"OSWALD ACTED ALONE\"",
+   "start": 37.2,
+   "end": 39.6,
+   "style": "label",
+   "y": 0.715
+  },
+  {
+   "text": "HOUSE COMMITTEE",
+   "start": 39.9,
+   "end": 43.7,
+   "style": "big"
+  },
+  {
+   "text": "1979  ·  \"PROBABLY\" A CONSPIRACY",
+   "start": 40.2,
+   "end": 43.7,
+   "style": "label",
+   "y": 0.715
+  },
+  {
+   "text": "HOUSE SELECT COMMITTEE ON ASSASSINATIONS",
+   "start": 40.2,
+   "end": 43.7,
+   "style": "tag"
+  },
+  {
+   "text": "ACOUSTIC EVIDENCE DISPUTED",
+   "start": 44.1,
+   "end": 46.9,
+   "style": "label"
+  },
+  {
+   "text": "NATIONAL ACADEMY OF SCIENCES PANEL  ·  1982",
+   "start": 44.3,
+   "end": 46.9,
+   "style": "tag"
+  },
+  {
+   "text": "2025  ·  2026",
+   "start": 47.6,
+   "end": 50.6,
+   "style": "big"
+  },
+  {
+   "text": "NEWLY RELEASED FILES",
+   "start": 47.9,
+   "end": 50.6,
+   "style": "label",
+   "y": 0.715
+  },
+  {
+   "text": "THE DEBATE CONTINUES",
+   "start": 50.8,
+   "end": 52.5,
+   "style": "label"
+  },
+  {
+   "text": "MORE THAN 60 YEARS LATER...",
+   "start": 53.1,
+   "end": 56.9,
+   "style": "later"
+  },
+  {
+   "text": "WHAT REALLY HAPPENED?",
+   "start": 57.3,
+   "end": 59.8,
+   "style": "final"
+  }
+ ],
+ "events": {
+  "paper_light": [
+   0.15,
+   1.9
+  ],
+  "pigeons": [
+   13.5,
+   14.2
+  ],
+  "desat": [
+   13.55,
+   15.4
+  ],
+  "paper_spin": [
+   16.65,
+   18.1
+  ],
+  "tv_on": [
+   31.8,
+   32.05
+  ],
+  "hsca_slide": [
+   40.7,
+   41.9
+  ],
+  "acoustic": [
+   43.95,
+   46.6
+  ],
+  "docs": [
+   47.1,
+   50.5
+  ],
+  "stamp_2025": [
+   48.55,
+   48.75
+  ],
+  "stamp_2026": [
+   49.75,
+   49.95
+  ],
+  "fade_to_black": [
+   58.4,
+   59.0
+  ],
+  "final_fade": [
+   59.5,
+   60.0
+  ]
+ }
+}

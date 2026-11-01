@@ -1,0 +1,68 @@
+THE JFK ASSASSINATION - SOUND DESIGN, MUSIC AND TIMING
+============================================================
+
+Everything below is synthesised by code in animation.py --stage audio (numpy only: filtered noise, sine
+partials, envelopes, convolution reverb). No samples, recordings or stock sound. The narration is a synthetic
+voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py; music and ambience duck under it.
+
+Files: audio/mix_with_voice.wav (final mix, -14 LUFS), audio/mix_no_voice.wav (music + sound only, for a
+voice recorded in CapCut), audio/narration.wav (voice only).
+
+RESPECT: no gunshot sounds are used. At "shots rang out" the sound drops to near-silence; the only sounds
+are pigeons taking off and a faint ringing tone.
+
+CUE SHEET (generated)
+------------------------------------------------------------
+  0.00 s  [music    ] Dark string-like drone in D minor; drops out completely at "shots rang out" and returns low and grieving
+  0.25 s  [voice    ] NARRATION: "In under ten seconds, in Dallas, America lost a president." (to 3.89 s)
+  0.35 s  [sfx      ] Paper rustle as the front page comes out of the dark
+  0.70 s  [music    ] Sparse piano-like notes over the hook; reprised in the investigation room and at night
+  4.55 s  [voice    ] NARRATION: "November 22nd, 1963. President Kennedy came to Texas to mend a divided party." (to 11.06 s)
+  4.60 s  [ambience ] Crowds on Main Street: a cheering roar, applause, a few whistles (builds as the limousine passes)
+  4.60 s  [music    ] Low hit on the cut to Dallas
+  4.60 s  [ambience ] Police motorcycles and cars: low engine rumble, closest as the limousine passes the camera
+ 11.40 s  [voice    ] NARRATION: "At 12:30, in Dealey Plaza, shots rang out. Governor Connally was badly wounded. Thirty minutes later, the President was dead." (to 19.18 s)
+ 13.50 s  [sfx      ] Pigeons take off from the rooftops: a rush of wingbeats in the silence
+ 13.55 s  [sfx      ] A faint high ringing tone (shock), fading over three seconds
+ 13.55 s  [mix      ] Everything cuts to near-silence at "shots rang out" (no gunshot sounds are used)
+ 15.15 s  [music    ] Muffled drums (cloth-covered snares), quiet and slow, leading into the front page
+ 16.60 s  [music    ] Noise riser into 18.10 s
+ 16.65 s  [sfx      ] Whoosh as the front page spins toward the lens; a paper slap as it stops
+ 18.10 s  [music    ] Low hit as the front page lands
+ 19.60 s  [ambience ] Police headquarters: room tone, lamp hum, a busy building murmuring beyond the door
+ 19.60 s  [sfx      ] Wall clock ticking, once a second, in the investigation room
+ 19.65 s  [voice    ] NARRATION: "That afternoon, police arrested Lee Harvey Oswald, who worked in the book depository above the route." (to 25.17 s)
+ 20.40 s  [sfx      ] A telephone ringing in another office
+ 21.80 s  [sfx      ] Typewriter keys (a short burst)
+ 25.45 s  [voice    ] NARRATION: "Charged with killing the President, he denied it. "I'm just a patsy," he told reporters." (to 30.61 s)
+ 25.90 s  [sfx      ] A telephone ringing in another office
+ 31.00 s  [voice    ] NARRATION: "Two days later, on live television, Jack Ruby shot and killed him. There would be no trial." (to 36.32 s)
+ 31.80 s  [sfx      ] The TV switches on: a click, a burst of static, then the hiss of a live broadcast (no voices)
+ 36.60 s  [music    ] Low hit on the cut into the archive
+ 36.60 s  [music    ] Low muted pulse (eighth notes, 84 bpm) building through the investigations
+ 36.60 s  [ambience ] The archive: a large quiet room, ventilation air, distant footsteps
+ 36.70 s  [voice    ] NARRATION: "The Warren Commission said Oswald acted alone. In 1979, a House committee found a probable conspiracy," (to 43.67 s)
+ 40.70 s  [sfx      ] A heavy report slides across the table (paper and cloth on wood)
+ 43.95 s  [voice    ] NARRATION: "based on acoustic evidence scientists later disputed. Even files released as recently as 2026 have not ended the debate." (to 52.48 s)
+ 43.95 s  [sfx      ] Police-radio static under "acoustic evidence" (a nod to the disputed recording)
+ 47.10 s  [sfx      ] Released pages slide onto the table one by one
+ 48.55 s  [sfx      ] Rubber stamp thump: RELEASED 2025
+ 49.75 s  [sfx      ] Rubber stamp thump: RELEASED 2026
+ 52.70 s  [ambience ] Night wind across the empty plaza, a far-off traffic hush
+ 52.85 s  [voice    ] NARRATION: "More than sixty years later, one question still hangs over Dealey Plaza." (to 57.18 s)
+ 54.00 s  [ambience ] A distant locomotive horn from the rail yard behind the plaza
+ 55.40 s  [music    ] Noise riser into 57.28 s
+ 57.30 s  [music    ] Final deep impact on WHAT REALLY HAPPENED?
+
+BACKGROUND MUSIC RECOMMENDATIONS (if you re-score it in an editor)
+------------------------------------------------------------
+- Style: slow, dark orchestral underscore in a minor key (low strings, soft piano, distant brass), no vocals,
+  about 70-90 bpm. Think understated documentary scoring, never action-trailer percussion.
+- 0-4.6 s: a single held low note and one piano phrase under the hook.
+- 4.6-13.5 s: a restrained build under the crowd noise (the excitement of the motorcade, in a minor key).
+- 13.5 s ("shots rang out"): stop the music dead. Hold silence for about 1.5 s.
+- 15-19.6 s: muffled, slow drums (a respectful nod to the state funeral), into the front page.
+- 19.6-52.7 s: a low, patient pulse under the investigation and the archive; let it tighten slightly toward the 2025-2026 files.
+- 52.7-60 s: thin out to a single sustained chord; one last low hit on WHAT REALLY HAPPENED?, then let it ring into black.
+- Keep the narration 10-15 dB above the music; YouTube Shorts plays back at about -14 LUFS.
+- Use only music you have the rights to (your own, a licensed library, or YouTube Audio Library tracks that allow it).

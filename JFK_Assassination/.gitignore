@@ -1,0 +1,5 @@
+build/
+renders/frames/
+renders/preview_frames/
+audio/music_sfx_stem.wav
+__pycache__/

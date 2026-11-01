@@ -1,0 +1,148 @@
+THE JFK ASSASSINATION - SOURCES AND FACT CHECK
+============================================================
+
+Every statement in the narration and every date, time and name on screen was checked against at least two
+of the sources below. Where investigations disagree, the video says which body concluded what, and does not
+pick a side. Checked November 2026.
+
+
+1. SOURCES
+------------------------------------------------------------
+Primary / official records
+ [NARA-WC]   Report of the President's Commission on the Assassination of President Kennedy (Warren Commission
+             Report, 1964), National Archives: https://www.archives.gov/research/jfk/warren-commission-report
+             (chapter 5, "Detention and Death of Oswald": https://www.archives.gov/research/jfk/warren-commission-report/chapter-5)
+ [NARA-HSCA] Report of the Select Committee on Assassinations, U.S. House of Representatives (1979), summary of
+             findings: https://www.archives.gov/research/jfk/select-committee-report/summary.html
+ [NARA-2025] National Archives, "JFK Assassination Records - 2025 Documents Release" (release notes, including
+             the March 18, 2025 release and later batches): https://www.archives.gov/research/jfk/release-2025
+ [GPO]       U.S. Government Publishing Office, Kennedy assassination documents (Warren Commission summary, weather
+             and bubble-top details): https://www.govinfo.gov/features/Kennedy-assassination-documents
+ [DOJ-1988]  Assistant Attorney General William F. Weld, memo to the House Judiciary Committee (1988), quoted in
+             [WIKI-HSCA]: "no persuasive evidence can be identified to support the theory of a conspiracy".
+ [NAS-1982]  National Research Council, Committee on Ballistic Acoustics, Report (1982): the acoustic evidence did
+             not support the HSCA's finding of a second gunman (as summarised in [WIKI-HSCA]).
+
+Museums and libraries
+ [SFM]       The Sixth Floor Museum at Dealey Plaza, collections and timeline (arrest at the Texas Theatre; photographs
+             of the third-floor hallway at Dallas police headquarters): https://www.jfk.org
+ [HF]        The Henry Ford, "Kennedy Presidential Limousine" and "JFK Remembered: The X-100" (1961 Lincoln Continental,
+             SS-100-X, midnight blue in 1963, later repainted black):
+             https://www.thehenryford.org/collections-and-research/digital-resources/popular-topics/kennedy-limo
+ [JFKL]      John F. Kennedy Presidential Library, "November 22, 1963: Death of the President"
+             https://www.jfklibrary.org/learn/about-jfk/jfk-in-history/november-22-1963-death-of-the-president
+             (consulted for cross-checking; the site refused automated access during research)
+
+Reference and reporting
+ [WIKI-A]    Wikipedia, "Assassination of John F. Kennedy" (with its cited sources), used as an index to the record:
+             purpose of the Texas trip, 12:30 p.m. CST, Parkland 1:00 p.m., Tippit ~1:12-1:15 p.m., Texas Theatre arrest,
+             Ruby 11:21 a.m. Nov. 24, Warren Commission dates, Johnson sworn in 2:38 p.m.
+ [WIKI-LHO]  Wikipedia, "Lee Harvey Oswald": age 24, former Marine, order filler at the Texas School Book Depository
+             (hired October 1963), "I'm just a patsy!" said to reporters in a police hallway after his arrest.
+ [WIKI-HSCA] Wikipedia, "United States House Select Committee on Assassinations": the committee's findings, the
+             acoustic evidence, the 1982 NAS review and the 1988 DOJ memo.
+ [WIKI-TSBD] Wikipedia, "Texas School Book Depository": seven storeys, NW corner of Elm and Houston, 411 Elm St.
+ [WIKI-DP]   Wikipedia / Britannica, "Dealey Plaza": Elm, Main and Commerce converging at the triple underpass,
+             the pergolas, the grassy knoll, Houston St on the east side.
+ [GALLUP]    Gallup, "Decades Later, Most Americans Doubt Lone Gunman Killed JFK" (2023): 65% believe others were
+             involved: https://news.gallup.com/poll/514310/decades-later-americans-doubt-lone-gunman-killed-jfk.aspx
+ [AP/CBS/WaPo 2025] Coverage of the March 18, 2025 release: CBS News
+             (https://www.cbsnews.com/news/trump-jfk-assassination-files-released-2025/), The Washington Post
+             (https://www.washingtonpost.com/investigations/2025/03/18/jfk-assassination-files-released-unredacted-national-archives/),
+             The Boston Globe "4 things to know" (March 19, 2025), Al Jazeera, The Hill.
+ [JFKFACTS]  JFK Facts (Jefferson Morley), "Assorted new JFK documents released" (on the January 30, 2026 release,
+             including the CIA Mexico City station history): https://jfkfacts.substack.com/p/assorted-new-jfk-documents-released
+ [LIVESCI]   Live Science, "Did Clear Weather Play a Role in JFK's Assassination?" (rain earlier that morning, clear by
+             the motorcade, bubble top removed).
+ [PBS]       PBS NewsHour, "Could the bubble top have saved Kennedy in 1963?" (the bubble top was a weather cover, not armour).
+
+
+2. CLAIMS IN THE VIDEO
+------------------------------------------------------------
+Claim (narration or on screen)                         | Value used                       | Sources                     | Notes
+-------------------------------------------------------|----------------------------------|-----------------------------|--------------------------------------
+"In under ten seconds ... America lost a president"   | under 10 s                       | WC, HSCA, WIKI-A            | WC: all shots within roughly 4.8-7.9 s; HSCA: about 8.3 s for the shots it counted. "Under ten seconds" is true under both.
+Date, place                                            | Nov 22, 1963, Dallas, Texas      | WC, JFKL, WIKI-A            |
+"came to Texas to mend a divided party"                | rift between Gov. Connally and   | WIKI-A, JFKL                | The trip was also an early start to the 1964 campaign; we state only the party rift.
+                                                       | Sen. Yarborough factions         |                             |
+John F. Kennedy, 35th U.S. President                   | 35th                             | JFKL, WIKI-A                |
+"At 12:30, in Dealey Plaza, shots rang out"            | 12:30 p.m. CST                   | WC, WIKI-A, SFM             |
+"Governor Connally was badly wounded" / HE SURVIVED    | seriously wounded, recovered     | WC, WIKI-A                  |
+"Thirty minutes later, the President was dead"         | pronounced dead 1:00 p.m.,       | WC, WIKI-A, JFKL            |
+ PARKLAND HOSPITAL · 1:00 P.M.                         | Parkland Memorial Hospital       |                             |
+"That afternoon, police arrested Lee Harvey Oswald"    | Texas Theatre, ~1:40-1:50 p.m.   | WC ch.5, WIKI-LHO, SFM      | Police arrived ~1:40; radio reported the car en route to HQ at 1:51. Card says "~1:50 PM".
+ ARRESTED IN A DALLAS MOVIE THEATER                    |                                  |                             |
+"who worked in the book depository above the route"   | order filler, TSBD, 411 Elm St   | WIKI-LHO, WIKI-TSBD, WC     | The narration does not say he fired; the conclusions are attributed to the commissions below.
+ AGE 24 · DEPOSITORY WORKER                            | 24 (born Oct 18, 1939)           | WIKI-LHO                    |
+"Charged with killing the President, he denied it"   | charged under Texas law with the | WIKI-A, WIKI-LHO, WC        | He was also charged with the murder of Officer J. D. Tippit (shown on the portrait card).
+                                                       | murders of Kennedy and Tippit    |                             |
+"'I'm just a patsy,' he told reporters"               | "I'm just a patsy!"              | WIKI-LHO, SFM (hallway)     | Said in the third-floor hallway at police headquarters on Nov 22 (filmed by TV crews). Shown as his own words, not as evidence.
+"Two days later, on live television, Jack Ruby        | Nov 24, 1963, 11:21 a.m., police | WC ch.5, WIKI-A             | Ruby was a Dallas nightclub owner (title card).
+ shot and killed him. There would be no trial."        | HQ basement, broadcast live      |                             |
+"The Warren Commission said Oswald acted alone"       | report Sept 24, 1964             | NARA-WC, WIKI-A             | Also concluded Ruby acted alone. Title: 1964 · "OSWALD ACTED ALONE".
+"In 1979, a House committee found a probable          | "probably assassinated as a      | NARA-HSCA, WIKI-HSCA        | The HSCA also concluded Oswald fired the shots that killed the President and could not identify any other gunman or the extent of a conspiracy.
+ conspiracy,"                                          | result of a conspiracy"          |                             | Title: 1979 · "PROBABLY" A CONSPIRACY.
+"based on acoustic evidence scientists later          | NAS Committee on Ballistic       | NAS-1982, WIKI-HSCA,        | The DOJ (1988) found "no persuasive evidence" of a conspiracy.
+ disputed"                                             | Acoustics, 1982                  | DOJ-1988                    | Title: ACOUSTIC EVIDENCE DISPUTED · NATIONAL ACADEMY OF SCIENCES PANEL · 1982.
+"Even files released as recently as 2026 have not     | Mar 18, 2025 (~80,000 pages      | NARA-2025, CBS, WaPo,       | Experts quoted in 2025 coverage found no revelation that changed the understanding of the assassination.
+ ended the debate."                                    | announced; tens of thousands     | Boston Globe, JFKFACTS      | We say only that the debate has not ended - true either way. We do NOT claim the files prove or disprove a conspiracy.
+                                                       | posted); Jan 30, 2026 batch      |                             |
+                                                       | (~11,000 pages, incl. CIA Mexico |                             |
+                                                       | City station history)            |                             |
+"More than sixty years later"                         | 1963 -> 2026 = 63 years          | -                           |
+Timeline cards on the board                            | 12:30 shots; 1:00 president dies | WC, WIKI-A, SFM             | Tippit time marked approximate (~1:15); arrest approximate (~1:50).
+                                                       | ~1:15 Tippit; ~1:50 arrest; 2:38 |                             |
+                                                       | Johnson sworn in (Air Force One);|                             |
+                                                       | Nov 24 Ruby; Sept 1964 report    |                             |
+Front page: JOHNSON SWORN IN, Oath Taken Aboard Plane | 2:38 p.m., Love Field            | WIKI-A                      |
+Weather: clouds clearing, sun                          | drizzle earlier, clear by midday | GPO, LIVESCI, PBS           | The brief asked for cloudy light; the scenes show broken cloud with sun, which matches the record.
+The limousine                                          | 1961 Lincoln Continental         | HF                          | Open top (the bubble top was removed because the rain had cleared); two small flags on the front fenders.
+                                                       | convertible, SS-100-X, midnight  |                             |
+                                                       | blue                             |                             |
+Motorcade route                                        | west on Main, right on Houston,  | WC, WIKI-A, WIKI-DP         | Shown on the board's plaza diagram and in the 3D layout.
+                                                       | left on Elm                      |                             |
+
+
+3. ESTABLISHED FACT vs. DISPUTED vs. SPECULATION (how the video handles each)
+------------------------------------------------------------
+Established (stated as fact): the date, time and place; Kennedy killed and Connally wounded; Oswald arrested
+the same afternoon, charged, denied it; Ruby killed Oswald on live TV two days later; the Warren Commission
+concluded Oswald acted alone; the HSCA concluded a probable conspiracy; scientists later disputed the acoustic
+evidence that conclusion relied on; records have been released over decades, including in 2025 and 2026.
+
+Disputed (attributed, never resolved by the video): whether Oswald acted alone (Warren Commission: yes; HSCA:
+probably not, on evidence later disputed; DOJ 1988: no persuasive evidence of conspiracy). The video names
+which body said what.
+
+Speculation (not presented): no conspiracy theory is described or endorsed; no person or agency is accused of
+involvement. The 2025-2026 releases are not described as proving anything. The closing question "WHAT
+REALLY HAPPENED?" reflects the documented, ongoing public debate (Gallup 2023: 65% of Americans believe
+others were involved), not a claim that the record is wrong.
+
+
+4. WHAT IS ILLUSTRATIVE (recreations, not records)
+------------------------------------------------------------
+- All 3D environments are recreations built in code. The Dallas street is a composite of 1963 downtown
+  Main Street, not a specific block; Dealey Plaza's layout is simplified (distances approximate).
+- The motorcade's composition is simplified (fewer vehicles and motorcycles than in reality). Occupants are
+  faceless mannequins seen at a distance. Nothing of the shooting, injuries or any weapon is shown or heard.
+- Oswald appears only on a "portrait-style" card with a silhouette and verified facts - not a likeness,
+  labelled "ILLUSTRATIVE CARD - NOT A PHOTOGRAPH".
+- Newspaper front pages use fictional, generic mastheads ("THE MORNING EDITION", "THE EVENING EDITION");
+  their headlines state facts that were reported that weekend.
+- Case folders, the reporter's notepad, location "photographs" (drawings), the acoustic printout (labelled
+  "ILLUSTRATIVE RECREATION"), the declassified pages (generic typed lines and redaction bars) and the release
+  stamps are props made for the video. The report covers carry the real titles of the two reports.
+- The roof-top sign frame on the Depository is shown empty (no lettering).
+
+
+5. FACTS CHECKED BUT CUT (for time)
+------------------------------------------------------------
+- Kennedy's itinerary: San Antonio, Houston, Fort Worth, Dallas, then Austin; the Trade Mart luncheon.
+- Lyndon B. Johnson sworn in at 2:38 p.m. aboard Air Force One by Judge Sarah T. Hughes (kept on the front
+  page and the timeline card only).
+- The Zapruder film; the "single bullet" conclusion; the Dictabelt recording itself; the 1992 JFK Records Act
+  and the Assassination Records Review Board; the 2017-2023 releases.
+- Executive Order 14176 (January 2025) directing full release; some 2026 pages still carry redactions
+  (per JFKFACTS) - not needed for the claim made.
+- Gallup trend (52% in 1963, 81% in 1976, 61% in 2013, 65% in 2023) - informs the closing line, not stated.
