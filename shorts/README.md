@@ -45,6 +45,29 @@ python shorts/make_shorts.py "my recording.mp4" --clips "1:05-1:40,4:10-4:55"
 python shorts/make_shorts.py "my recording.mp4" --clips "2:00-2:45" --title "He did NOT see that coming"
 ```
 
+## Many Shorts from one long video
+
+For an hour-long video, list your picks in a text file, one Short per line,
+each with an optional on-screen title (lines starting with `#` are ignored):
+
+```text
+# START-END | on-screen title
+12:05-12:40 | He did NOT see that coming
+31:10-31:52 | The face at the end, though
+48:00-48:35
+```
+
+```bash
+python shorts/make_shorts.py "my 1 hour video.mp4" --clips-file clips.txt
+```
+
+Or let it pick. Automatic picks are spread across the whole video, and
+`--auto-title` uses each clip's opening line as its hook:
+
+```bash
+python shorts/make_shorts.py "my 1 hour video.mp4" --auto 10 --auto-title
+```
+
 Everything lands in `shorts/out/`:
 
 | File | What it is |

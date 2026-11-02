@@ -74,6 +74,7 @@ class Clip:
     start: float
     end: float
     score: float = 0.0
+    title: str | None = None
 
     @property
     def duration(self) -> float:
@@ -214,24 +215,39 @@ def write_transcript_txt(segments: list[Segment], path: Path) -> None:
 # 2. Clip selection
 # --------------------------------------------------------------------------
 
+def parse_clip_item(item: str, duration: float) -> Clip:
+    """'1:05-1:40' or '1:05-1:40 | Hook title' -> Clip."""
+    rng, _, title = item.partition("|")
+    rng = rng.strip()
+    if "-" not in rng:
+        die(f"clip '{item}' must look like START-END, e.g. 1:05-1:40")
+    a, b = rng.split("-", 1)
+    try:
+        start, end = parse_time(a), parse_time(b)
+    except ValueError as exc:
+        die(f"clip '{item}': {exc}")
+    if duration:
+        end = min(end, duration)
+    if end <= start:
+        die(f"clip '{item}' ends before it starts")
+    return Clip(start, end, title=title.strip() or None)
+
+
 def parse_clips(spec: str, duration: float) -> list[Clip]:
+    return [parse_clip_item(i, duration) for i in spec.split(",") if i.strip()]
+
+
+def parse_clips_file(path: Path, duration: float) -> list[Clip]:
+    """One clip per line: START-END | optional title. Blank lines and # comments are skipped."""
+    if not path.exists():
+        die(f"no such clips file: {path}")
     clips = []
-    for item in spec.split(","):
-        item = item.strip()
-        if not item:
-            continue
-        if "-" not in item:
-            die(f"clip '{item}' must look like START-END, e.g. 1:05-1:40")
-        a, b = item.split("-", 1)
-        try:
-            start, end = parse_time(a), parse_time(b)
-        except ValueError as exc:
-            die(f"clip '{item}': {exc}")
-        if duration:
-            end = min(end, duration)
-        if end <= start:
-            die(f"clip '{item}' ends before it starts")
-        clips.append(Clip(start, end))
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#"):
+            clips.append(parse_clip_item(line, duration))
+    if not clips:
+        die(f"{path} has no clips in it")
     return clips
 
 
@@ -281,7 +297,8 @@ def _words_to_segment(words: list[Word]) -> Segment:
     return Segment(words[0].start, words[-1].end, " ".join(w.text for w in words), list(words))
 
 
-def auto_clips(segments: list[Segment], count: int, min_len: float, max_len: float) -> list[Clip]:
+def auto_clips(segments: list[Segment], count: int, min_len: float, max_len: float,
+               min_gap: float = 0.0) -> list[Clip]:
     segments = split_sentences(segments)
     candidates: list[Clip] = []
     for i in range(len(segments)):
@@ -302,7 +319,8 @@ def auto_clips(segments: list[Segment], count: int, min_len: float, max_len: flo
     candidates.sort(key=lambda c: c.score, reverse=True)
     picked: list[Clip] = []
     for cand in candidates:
-        if all(cand.end <= p.start or cand.start >= p.end for p in picked):
+        # keep picks apart so they come from different parts of the video
+        if all(cand.end + min_gap <= p.start or cand.start >= p.end + min_gap for p in picked):
             picked.append(cand)
             if len(picked) == count:
                 break
@@ -468,11 +486,11 @@ def render_clip(video: Path, clip: Clip, ass_text: str, out_path: Path,
 # 4. Posting notes
 # --------------------------------------------------------------------------
 
-def suggest_title(text: str) -> str:
+def suggest_title(text: str, limit: int = 80) -> str:
     sentence = re.split(r"(?<=[.!?])\s+", text.strip())[0]
     sentence = sentence.rstrip(".")
-    if len(sentence) > 80:
-        sentence = sentence[:77].rsplit(" ", 1)[0] + "..."
+    if len(sentence) > limit:
+        sentence = sentence[:limit - 3].rsplit(" ", 1)[0] + "..."
     return sentence
 
 
@@ -494,11 +512,18 @@ def build_parser() -> argparse.ArgumentParser:
     pick = p.add_argument_group("choosing clips")
     pick.add_argument("--list", action="store_true",
                       help="only transcribe and print the transcript with timestamps")
-    pick.add_argument("--clips", help='your own timestamps, e.g. "1:05-1:40,4:10-4:55"')
+    pick.add_argument("--clips", help='your own timestamps, e.g. "1:05-1:40,4:10-4:55". '
+                      'Add a title per clip with |, e.g. "1:05-1:40|Wait for it"')
+    pick.add_argument("--clips-file", type=Path,
+                      help="text file with one clip per line: START-END | optional title "
+                           "(best for long videos)")
     pick.add_argument("--auto", type=int, default=3, metavar="N",
                       help="when --clips is not given, pick the N best moments")
     pick.add_argument("--min-len", type=float, default=20, help="shortest auto clip (s)")
     pick.add_argument("--max-len", type=float, default=58, help="longest auto clip (s)")
+    pick.add_argument("--min-gap", type=float, default=None,
+                      help="auto: seconds to keep between picked clips; default "
+                           "spreads them across the video")
 
     look = p.add_argument_group("framing")
     look.add_argument("--layout", choices=["blur", "crop", "fit"], default="blur",
@@ -527,6 +552,8 @@ def build_parser() -> argparse.ArgumentParser:
     cap.add_argument("--caption-pos", type=float, default=0.70,
                      help="caption height, 0 = top of screen, 1 = bottom")
     cap.add_argument("--title", help='hook text shown at the top, e.g. "He did NOT see that coming"')
+    cap.add_argument("--auto-title", action="store_true",
+                     help="use each clip's opening line as its on-screen title")
     cap.add_argument("--title-pos", type=float, default=0.14, help="title height, 0 = top, 1 = bottom")
 
     tech = p.add_argument_group("transcription and output")
@@ -559,16 +586,27 @@ def main() -> None:
 
     if args.list:
         print(txt.read_text())
-        print(f"Transcript saved to {txt}. Pick timestamps and rerun with --clips.")
+        print(f"Transcript saved to {txt}. Pick timestamps and rerun with --clips "
+              f"or --clips-file.")
         return
 
-    if args.clips:
+    if args.clips_file:
+        clips = parse_clips_file(args.clips_file, info["duration"])
+    elif args.clips:
         clips = parse_clips(args.clips, info["duration"])
     else:
         if not segments:
             die("no speech found, so there is nothing to auto-pick. Use --clips instead.")
-        clips = auto_clips(segments, args.auto, args.min_len, args.max_len)
-        print(f"Auto-picked {len(clips)} clip(s).")
+        gap = args.min_gap
+        if gap is None:  # spread picks out: up to 1/4 of an even share each, max 2 min
+            gap = min(120.0, info["duration"] / max(args.auto, 1) / 4)
+        clips = auto_clips(segments, args.auto, args.min_len, args.max_len, gap)
+        print(f"Auto-picked {len(clips)} clip(s):")
+        if len(clips) < args.auto:
+            print(f"  (asked for {args.auto}; the video only has room for {len(clips)} "
+                  f"well-spaced clips. Try a lower --min-gap or --min-len.)")
+        for c in clips:
+            print(f"  {fmt_time(c.start)} - {fmt_time(c.end)}  {suggest_title(clip_text(segments, c), 60)}")
 
     notes = [f"# Shorts from {args.video.name}\n"]
     for n, clip in enumerate(clips, 1):
@@ -576,13 +614,17 @@ def main() -> None:
         print(f"\n[{n}/{len(clips)}] {fmt_time(clip.start)} - {fmt_time(clip.end)} "
               f"({clip.duration:.0f}s) -> {out_path}")
         words = words_in_clip(segments, clip)
-        ass_text = build_ass(words, args, clip.duration, args.title)
+        text = clip_text(segments, clip)
+        title = clip.title or args.title
+        if not title and args.auto_title and text:
+            title = suggest_title(text, 50)
+        ass_text = build_ass(words, args, clip.duration, title)
         render_clip(args.video, clip, ass_text, out_path, args, info["has_audio"])
 
-        text = clip_text(segments, clip)
         notes += [
             f"## {out_path.name}",
             f"- Source: {fmt_time(clip.start)} - {fmt_time(clip.end)} ({clip.duration:.0f}s)",
+            f"- On-screen title: {title or '(none)'}",
             f"- Suggested title: {suggest_title(text) if text else '(add your own)'} #shorts",
             f"- Transcript: {text or '(no speech)'}",
             "- Hashtags: #shorts #fyp #viral",
