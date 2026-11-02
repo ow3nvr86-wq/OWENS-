@@ -75,6 +75,7 @@ class Clip:
     end: float
     score: float = 0.0
     title: str | None = None
+    rank: int | None = None
 
     @property
     def duration(self) -> float:
@@ -358,10 +359,14 @@ def group_words(words: list[Word], per_line: int, max_chars: int) -> list[list[W
     return groups
 
 
-def build_ass(words: list[Word], args: argparse.Namespace, clip_len: float, title: str | None) -> str:
+def build_ass(words: list[Word], args: argparse.Namespace, clip_len: float, title: str | None,
+              rank: int | None = None) -> str:
     size = args.font_size
     caption_y = int(OUT_H * args.caption_pos)
     title_y = int(OUT_H * args.title_pos)
+    if rank is not None:  # stack: series heading, big #N, then the clip title
+        series_y, rank_y = int(OUT_H * 0.065), int(OUT_H * 0.10)
+        title_y = int(OUT_H * 0.10) + int(size * 1.7) + 10
     hl = COLORS.get(args.highlight_color, args.highlight_color)
 
     header = f"""[Script Info]
@@ -375,11 +380,24 @@ ScaledBorderAndShadow: yes
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Caption,{args.font},{size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,1,0,1,{max(3, size // 14)},3,5,70,70,0,1
 Style: Title,{args.font},{int(size * 0.85)},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,{max(3, size // 12)},4,8,80,80,0,1
+Style: Rank,{args.font},{int(size * 1.7)},{hl},&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,2,0,1,{max(4, size // 9)},5,8,80,80,0,1
+Style: Series,{args.font},{int(size * 0.55)},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,1,0,1,{max(3, size // 16)},3,8,80,80,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
     events = []
+
+    if rank is not None:
+        if args.series:
+            events.append(
+                f"Dialogue: 1,{ass_time(0)},{ass_time(clip_len)},Series,,0,0,0,,"
+                f"{{\\pos({OUT_W // 2},{series_y})}}{ass_escape(args.series.upper())}"
+            )
+        events.append(
+            f"Dialogue: 1,{ass_time(0)},{ass_time(clip_len)},Rank,,0,0,0,,"
+            f"{{\\pos({OUT_W // 2},{rank_y})\\fscx60\\fscy60\\t(0,180,\\fscx100\\fscy100)}}#{rank}"
+        )
 
     if title:
         events.append(
@@ -494,6 +512,14 @@ def suggest_title(text: str, limit: int = 80) -> str:
     return sentence
 
 
+def post_title(args: argparse.Namespace, clip: Clip, title: str | None, text: str) -> str:
+    base = title or (suggest_title(text) if text else "(add your own)")
+    if clip.rank:
+        prefix = f"{args.series} " if args.series else "Top "
+        return f"{prefix}#{clip.rank}: {base}"
+    return base
+
+
 def clip_text(segments: list[Segment], clip: Clip) -> str:
     return " ".join(w.text for w in words_in_clip(segments, clip))
 
@@ -552,6 +578,10 @@ def build_parser() -> argparse.ArgumentParser:
     cap.add_argument("--caption-pos", type=float, default=0.70,
                      help="caption height, 0 = top of screen, 1 = bottom")
     cap.add_argument("--title", help='hook text shown at the top, e.g. "He did NOT see that coming"')
+    cap.add_argument("--rank", action="store_true",
+                     help="countdown series: put a big #1, #2... on each clip. The first clip "
+                          "listed is #1 (with --auto, the highest-scoring clip is #1)")
+    cap.add_argument("--series", help='heading shown above the rank, e.g. "Top 5 funniest moments"')
     cap.add_argument("--auto-title", action="store_true",
                      help="use each clip's opening line as its on-screen title")
     cap.add_argument("--title-pos", type=float, default=0.14, help="title height, 0 = top, 1 = bottom")
@@ -608,9 +638,19 @@ def main() -> None:
         for c in clips:
             print(f"  {fmt_time(c.start)} - {fmt_time(c.end)}  {suggest_title(clip_text(segments, c), 60)}")
 
+    if args.rank:
+        if not (args.clips_file or args.clips):  # auto: best score is #1
+            clips = sorted(clips, key=lambda c: c.score, reverse=True)
+        for r, clip in enumerate(clips, 1):
+            clip.rank = r
+        clips.reverse()  # render and post as a countdown: #N first, #1 last
+
     notes = [f"# Shorts from {args.video.name}\n"]
+    if args.rank:
+        notes.append("Post them in this order, counting down, so #1 comes last.\n")
     for n, clip in enumerate(clips, 1):
-        out_path = args.out / f"{stem}_short{n:02d}.mp4"
+        name = f"rank{clip.rank}" if clip.rank else f"short{n:02d}"
+        out_path = args.out / f"{stem}_{name}.mp4"
         print(f"\n[{n}/{len(clips)}] {fmt_time(clip.start)} - {fmt_time(clip.end)} "
               f"({clip.duration:.0f}s) -> {out_path}")
         words = words_in_clip(segments, clip)
@@ -618,14 +658,14 @@ def main() -> None:
         title = clip.title or args.title
         if not title and args.auto_title and text:
             title = suggest_title(text, 50)
-        ass_text = build_ass(words, args, clip.duration, title)
+        ass_text = build_ass(words, args, clip.duration, title, clip.rank)
         render_clip(args.video, clip, ass_text, out_path, args, info["has_audio"])
 
         notes += [
             f"## {out_path.name}",
             f"- Source: {fmt_time(clip.start)} - {fmt_time(clip.end)} ({clip.duration:.0f}s)",
             f"- On-screen title: {title or '(none)'}",
-            f"- Suggested title: {suggest_title(text) if text else '(add your own)'} #shorts",
+            f"- Suggested title: {post_title(args, clip, title, text)} #shorts",
             f"- Transcript: {text or '(no speech)'}",
             "- Hashtags: #shorts #fyp #viral",
             "",

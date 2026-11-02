@@ -68,6 +68,17 @@ Or let it pick. Automatic picks are spread across the whole video, and
 python shorts/make_shorts.py "my 1 hour video.mp4" --auto 10 --auto-title
 ```
 
+### Ranked countdown series ("Top 5 ...")
+
+Add `--rank` to put a big **#1 … #5** on each clip, and `--series` for a
+heading above it. In a clips file the **first line is #1**. With `--auto`, the
+highest-scoring clip is #1. Files are named `<name>_rank5.mp4` … `_rank1.mp4`,
+and the notes file lists them in countdown posting order, #5 first.
+
+```bash
+python shorts/make_shorts.py rec.mp4 --clips-file top5.txt --rank --series "Top 5 funniest moments"
+```
+
 Everything lands in `shorts/out/`:
 
 | File | What it is |
