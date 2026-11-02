@@ -301,6 +301,11 @@ kbd {
 .wp.false { background: var(--bad); border-color: var(--bad); color: var(--surface); }
 .wp.missed { border: 2.5px dashed var(--accent); background: var(--accent-soft); color: var(--ink); }
 
+/* Odd one out */
+.oddgrid { display: grid; gap: 6px; width: min(100%, 420px); }
+.oddgrid.locked .cell { cursor: default; opacity: .6; }
+.cell.odd-hit { background: var(--ok); border-color: var(--ok); color: var(--surface); }
+
 /* Pair up */
 .pairs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: min(100%, 380px); }
 .card2 {
@@ -571,6 +576,12 @@ kbd {
       glyph: '★ ● ★', mono: true,
       how: 'Shapes flash in the middle one after another. <b>Count only the solid stars</b> (★) and ignore everything else, including hollow stars (☆). After each run of shapes, type how many solid stars you saw. Three rounds, each a little faster.',
       keys: 'Watch, then type the count and press Enter.', run: runCount
+    },
+    odd: {
+      name: 'Odd One Out', trains: 'Selective attention', time: '45 s', unit: 'found', higher: true,
+      glyph: 'b b d b', mono: true,
+      how: 'A grid fills with one character, except for <b>one look-alike</b> hiding somewhere: a d among b\'s, a Q among O\'s. Tap the odd one out. Find as many as you can in 45 seconds. The grid gets bigger as you go, and a wrong tap freezes the grid for a second.',
+      keys: 'Tap or click the odd one out.', run: runOdd
     },
     anagram: {
       name: 'Unscramble', trains: 'Verbal fluency', time: '60 s', unit: 'words', higher: true,
@@ -1287,6 +1298,63 @@ kbd {
     });
 
     round();
+  }
+
+  // ---------- 5f. Odd one out ----------
+  // One look-alike character hidden in a grid of the same character. Wrong taps lock the grid briefly.
+  function runOdd(arena, done) {
+    const PAIRS = [['b', 'd'], ['p', 'q'], ['O', 'Q'], ['6', '9'], ['M', 'N'], ['E', 'F'], ['8', 'B'], ['u', 'v'], ['C', 'G'], ['5', 'S'], ['n', 'h'], ['W', 'V']];
+    const sizeFor = n => n < 3 ? 4 : n < 6 ? 5 : n < 10 ? 6 : 7;
+    arena.innerHTML = `<div class="play">
+      <p class="hint" id="oh" aria-live="polite">Find the one that is different.</p>
+      <div class="oddgrid" id="og" role="group" aria-label="Character grid"></div>
+    </div>`;
+    const grid = $('#og', arena), hint = $('#oh', arena);
+    let found = 0, wrong = 0, oddAt = -1, locked = false, last = -1, t0 = 0;
+    const times = [];
+
+    const next = () => {
+      const size = sizeFor(found);
+      let pi;
+      do { pi = rand(PAIRS.length); } while (pi === last);
+      last = pi;
+      const [common, odd] = Math.random() < 0.5 ? PAIRS[pi] : PAIRS[pi].slice().reverse();
+      oddAt = rand(size * size);
+      grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+      grid.innerHTML = Array.from({ length: size * size }, (_, k) =>
+        `<button type="button" class="cell mono" data-k="${k}">${k === oddAt ? odd : common}</button>`).join('');
+      t0 = performance.now();
+    };
+
+    grid.addEventListener('click', e => {
+      const b = e.target.closest('.cell');
+      if (!b || locked) return;
+      if (+b.dataset.k === oddAt) {
+        found++;
+        times.push(performance.now() - t0);
+        hudScore(String(found));
+        b.classList.add('odd-hit');
+        locked = true;
+        hint.textContent = sizeFor(found) > sizeFor(found - 1) ? 'Found it. The grid grows.' : 'Found it.';
+        later(() => { locked = false; next(); }, 250);
+      } else {
+        wrong++;
+        b.classList.remove('miss'); void b.offsetWidth; b.classList.add('miss');
+        locked = true;
+        grid.classList.add('locked');
+        hint.textContent = 'Not that one. Wait a second.';
+        later(() => { locked = false; grid.classList.remove('locked'); hint.textContent = 'Find the one that is different.'; }, 1000);
+      }
+    });
+
+    hudScore('0');
+    next();
+    countdown(45, () => done({
+      score: found,
+      detail: found
+        ? `${wrong} wrong tap${wrong === 1 ? '' : 's'} · ${(mean(times) / 1000).toFixed(1)} s per find on average. Scanning in rows beats darting around.`
+        : 'None found this time. Try scanning row by row instead of looking all over.'
+    }));
   }
 
   // ---------- 6. Anagrams ----------
