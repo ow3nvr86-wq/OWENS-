@@ -3264,10 +3264,10 @@ def add_text(se, name, text, t0, t1, style, channel, fade=5, rise=0.012, y=None)
         st.use_outline = True
         st.outline_color = (0, 0, 0, 1)
         st.outline_width = outline
-    if style in ('tag', 'final2'):
-        # a dark plate keeps small text readable over busy props (the final symbol's crosshair)
+    if style in ('tag', 'final2', 'quote'):
+        # a dark plate keeps small or light text readable over busy props (newspapers, papers)
         st.use_box = True
-        st.box_color = (0.03, 0.02, 0.015, 0.62 if style == 'tag' else 0.78)
+        st.box_color = (0.03, 0.02, 0.015, {'tag': 0.62, 'quote': 0.72}.get(style, 0.78))
         st.box_margin = 0.012
     st.blend_type = 'ALPHA_OVER'
     fade = min(fade, max(1, (f1 - f0) // 3))

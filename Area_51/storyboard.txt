@@ -55,7 +55,7 @@ Visual: Dusk: the silver U-2 crosses the desert at very high altitude, its wings
   VO 35.15-37.01: "The truth stayed classified."
   VO 37.35-42.80: "Later, the CIA admitted its spy planes caused a surge in UFO reports."
   TEXT 30.5-34.7 [date]: LATE 1950s
-  TEXT 30.8-34.7 [label]: AIRLINERS: 10,000-20,000 FT  ·  U-2: 60,000+ FT
+  TEXT 30.8-34.7 [label]: AIRLINERS: 10,000-20,000 FT / U-2: 60,000+ FT
   TEXT 35.3-37.4 [tag]: ILLUSTRATIVE RECREATION
   TEXT 38.0-42.8 [quote]: "A TREMENDOUS INCREASE" / IN UFO REPORTS
   TEXT 38.2-42.8 [tag]: CIA HISTORY OF THE U-2 AND OXCART PROGRAMS  ·  ILLUSTRATIVE HEADLINES
@@ -71,9 +71,9 @@ Visual: A dark government archive: steel shelves, light shafts from high windows
   Shot "files" 46.8-51.6 s (frames 1405-1548): Top-down over the table as documents and photographs slide in and settle, 40 mm.
   VO 43.15-51.20: "In 2013, a declassified CIA history named Area 51. It revealed spy planes, not flying saucers."
   TEXT 43.5-47.0 [big]: DECLASSIFIED — 2013
-  TEXT 43.8-47.0 [label]: RELEASED AFTER A FOIA REQUEST  ·  NATIONAL SECURITY ARCHIVE
+  TEXT 43.8-47.0 [label]: RELEASED AFTER A FOIA REQUEST / NATIONAL SECURITY ARCHIVE
   TEXT 47.3-51.2 [label]: WHAT THE FILES REVEALED
-  TEXT 47.5-51.2 [big]: SECRET AIRCRAFT TESTING
+  TEXT 47.5-51.2 [big]: SECRET AIRCRAFT / TESTING
   TEXT 47.7-51.2 [tag]: NO EVIDENCE OF ALIEN TECHNOLOGY
   EVENT 45.60-45.80: stamp
   EVENT 46.90-50.40: docs
@@ -85,7 +85,7 @@ SCENE 6 - WHAT ARE THEY STILL HIDING?  (51.6-60.0 s, frames 1549-1800)
 Visual: The desert at night under the stars. The camera approaches one illuminated hangar across the dark apron; light spills out through haze. The hangar doors slide shut and the light narrows to a slit and is gone. THE MYSTERY OF AREA 51. WHAT ELSE IS OUT THERE? Fade to black.
   Shot "night" 51.6-59.0 s (frames 1549-1770): Slow approach at ground level toward the lit hangar, 35 mm; the doors close as the camera arrives.
   VO 51.90-56.18: "Most of its work is still classified. So what are they testing out there tonight?"
-  TEXT 53.0-56.6 [later]: THE MYSTERY OF AREA 51
+  TEXT 53.0-56.6 [later]: THE MYSTERY OF / AREA 51
   TEXT 57.1-60.0 [final]: WHAT ELSE IS / OUT THERE?
   EVENT 54.20-57.60: doors_close
   EVENT 58.40-59.00: fade_to_black
