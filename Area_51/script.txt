@@ -1,0 +1,27 @@
+AREA 51 - NARRATION SCRIPT (60 seconds, 127 words)
+Voice: Kokoro-82M bm_george. Start and end times are measured from the synthesised voice.
+Read as a serious, suspenseful documentary: low, measured, unhurried; let the short sentences land.
+
+[SCENE 1 - THE DESERT  0.0-5.0 s]
+(00.25-03.80) For nearly sixty years, Washington wouldn't even say its name.
+
+[SCENE 2 - THE RESTRICTED BASE  5.0-17.0 s]
+(05.10-10.58) Area 51. A secret airbase beside a dry lakebed, deep in the Nevada desert.
+(11.10-16.38) Ringed by mountains, armed patrols, and signs warning that deadly force is authorized.
+
+[SCENE 3 - THE SECRET AIRCRAFT  17.0-30.0 s]
+(17.15-22.67) In 1955, the CIA came here to test a secret spy plane: the U-2.
+(23.75-29.78) Then came the A-12 Oxcart, built from titanium to fly over three times the speed of sound.
+
+[SCENE 4 - THE UFO MYSTERY  30.0-43.0 s]
+(30.15-34.77) Airline pilots began reporting silver shapes, glinting impossibly high at dusk.
+(35.15-37.01) The truth stayed classified.
+(37.35-42.80) Later, the CIA admitted its spy planes caused a surge in UFO reports.
+
+[SCENE 5 - THE DECLASSIFIED FILES  43.0-51.6 s]
+(43.15-51.20) In 2013, a declassified CIA history named Area 51. It revealed spy planes, not flying saucers.
+
+[SCENE 6 - WHAT ARE THEY STILL HIDING?  51.6-60.0 s]
+(51.90-56.18) Most of its work is still classified. So what are they testing out there tonight?
+
+Total: 127 words.

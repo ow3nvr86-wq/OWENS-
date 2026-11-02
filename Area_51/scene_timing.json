@@ -1,0 +1,407 @@
+{
+ "_about": "Single source of truth for timing. animation.py (cameras, events, captions, titles) and tools/voiceover.py read this file. Times are seconds from the start of the video at 30 fps.",
+ "fps": 30,
+ "duration": 60.0,
+ "render_end": 59.0,
+ "scenes": [
+  {
+   "id": 1,
+   "name": "THE DESERT",
+   "start": 0.0,
+   "end": 5.0,
+   "desc": "Total darkness, then first light over the Nevada desert: ridgelines and valley fog. The camera flies low over the mountains toward a distant dry lakebed and the lights of a remote airfield. Title AREA 51 - NEVADA, USA.",
+   "shots": [
+    {
+     "name": "desert",
+     "start": 0.0,
+     "end": 5.0,
+     "camera": "Aerial fly-over, 35 mm, gliding over a ridge then tilting down toward the lakebed and the base on its shore."
+    }
+   ],
+   "edit": "Fade up from black over the first 1.5 s. Low drone, wind, a single deep pulse under the hook."
+  },
+  {
+   "id": 2,
+   "name": "THE RESTRICTED BASE",
+   "start": 5.0,
+   "end": 17.0,
+   "desc": "A recreated desert airbase beside the lakebed: a long runway, rows of hangars, a control tower, fences and guard towers, dust drifting. Then the perimeter: chain-link fence, barbed wire, a guard tower, a patrol truck on the ridge and a large RESTRICTED AREA warning sign.",
+   "shots": [
+    {
+     "name": "base",
+     "start": 5.0,
+     "end": 11.0,
+     "camera": "Helicopter-style flyover across the hangar line toward the runway, 28 mm, slight drift."
+    },
+    {
+     "name": "sign",
+     "start": 11.0,
+     "end": 17.0,
+     "camera": "Ground level at the perimeter road: slow dolly past the fence to the big RESTRICTED AREA sign, 35 mm, dust blowing through."
+    }
+   ],
+   "edit": "Hard cut on the base reveal; radio static and distant jet hum; the drone builds."
+  },
+  {
+   "id": 3,
+   "name": "THE SECRET AIRCRAFT",
+   "start": 17.0,
+   "end": 30.0,
+   "desc": "Inside a vast dark hangar. Banks of lights switch on one by one and reveal a silver U-2 with its long glider wings. Then an A-12 OXCART, black titanium, chines and inward-canted fins, emerges from the dark under a moving rim light.",
+   "shots": [
+    {
+     "name": "u2",
+     "start": 17.0,
+     "end": 23.6,
+     "camera": "Low dolly along the U-2's wing toward the cockpit as the overhead lights come on, 24 mm."
+    },
+    {
+     "name": "a12",
+     "start": 23.6,
+     "end": 30.0,
+     "camera": "Slow arc around the A-12's nose and engine spikes, 35 mm, light raking along the chines."
+    }
+   ],
+   "edit": "Each bank of lights lands on a heavy electrical clunk; hangar reverb; a rising pulse."
+  },
+  {
+   "id": 4,
+   "name": "THE UFO MYSTERY",
+   "start": 30.0,
+   "end": 43.0,
+   "desc": "Dusk: the silver U-2 crosses the desert at very high altitude, its wings catching the last sunlight, a tiny glinting shape far above any airliner. Night: a mysterious light appears low over the mountains; a lone observer by a parked pickup watches it. Then 1950s-style newspaper headlines about strange lights (illustrative).",
+   "shots": [
+    {
+     "name": "flight",
+     "start": 30.0,
+     "end": 35.0,
+     "camera": "Long lens from below and behind, tracking the U-2 against the dusk sky, then wide as it becomes a glinting point."
+    },
+    {
+     "name": "sky",
+     "start": 35.0,
+     "end": 37.6,
+     "camera": "Low, behind the observer at the roadside; the light appears above the ridgeline and drifts."
+    },
+    {
+     "name": "news",
+     "start": 37.6,
+     "end": 43.0,
+     "camera": "Top-down slide across three front pages on a dark table, 50 mm."
+    }
+   ],
+   "edit": "Thin radio chatter and static; the music thins to a high tone at the light; a paper rustle into the headlines."
+  },
+  {
+   "id": 5,
+   "name": "THE DECLASSIFIED FILES",
+   "start": 43.0,
+   "end": 51.6,
+   "desc": "A dark government archive: steel shelves, light shafts from high windows. On the reading table, the CIA history of the U-2 and OXCART programs and folders stamped DECLASSIFIED; pages, a site map and photographs of the aircraft slide across.",
+   "shots": [
+    {
+     "name": "archive",
+     "start": 43.0,
+     "end": 46.8,
+     "camera": "Slow push down the aisle toward the reading table through the light shafts, 28 mm."
+    },
+    {
+     "name": "files",
+     "start": 46.8,
+     "end": 51.6,
+     "camera": "Top-down over the table as documents and photographs slide in and settle, 40 mm."
+    }
+   ],
+   "edit": "Archive air, a stamp hit on DECLASSIFIED, paper slides; the score resolves into a low pulse."
+  },
+  {
+   "id": 6,
+   "name": "WHAT ARE THEY STILL HIDING?",
+   "start": 51.6,
+   "end": 60.0,
+   "desc": "The desert at night under the stars. The camera approaches one illuminated hangar across the dark apron; light spills out through haze. The hangar doors slide shut and the light narrows to a slit and is gone. THE MYSTERY OF AREA 51. WHAT ELSE IS OUT THERE? Fade to black.",
+   "shots": [
+    {
+     "name": "night",
+     "start": 51.6,
+     "end": 59.0,
+     "camera": "Slow approach at ground level toward the lit hangar, 35 mm; the doors close as the camera arrives."
+    }
+   ],
+   "edit": "Wind and a distant jet; the doors' rumble and a heavy final clunk; silence; the end title on black."
+  }
+ ],
+ "lines": [
+  {
+   "scene": 1,
+   "start": 0.25,
+   "deadline": 4.85,
+   "text": "For nearly sixty years, Washington wouldn't even say its name.",
+   "tts": "For nearly sixty years, Washington wouldn't even say its name."
+  },
+  {
+   "scene": 2,
+   "start": 5.1,
+   "deadline": 10.9,
+   "text": "Area 51. A secret airbase beside a dry lakebed, deep in the Nevada desert.",
+   "tts": "Area fifty-one. A secret airbase beside a dry lakebed, deep in the Nevada desert."
+  },
+  {
+   "scene": 2,
+   "start": 11.1,
+   "deadline": 16.85,
+   "text": "Ringed by mountains, armed patrols, and signs warning that deadly force is authorized.",
+   "tts": "Ringed by mountains, armed patrols, and signs warning that deadly force is authorized."
+  },
+  {
+   "scene": 3,
+   "start": 17.15,
+   "deadline": 23.45,
+   "text": "In 1955, the CIA came here to test a secret spy plane: the U-2.",
+   "tts": "In nineteen fifty-five, the C.I.A. came here to test a secret spy plane: the U-two."
+  },
+  {
+   "scene": 3,
+   "start": 23.75,
+   "deadline": 29.85,
+   "text": "Then came the A-12 Oxcart, built from titanium to fly over three times the speed of sound.",
+   "tts": "Then came the A-twelve Oxcart, built from titanium to fly over three times the speed of sound."
+  },
+  {
+   "scene": 4,
+   "start": 30.15,
+   "deadline": 34.85,
+   "text": "Airline pilots began reporting silver shapes, glinting impossibly high at dusk.",
+   "tts": "Airline pilots began reporting silver shapes, glinting impossibly high at dusk."
+  },
+  {
+   "scene": 4,
+   "start": 35.15,
+   "deadline": 38.25,
+   "text": "The truth stayed classified.",
+   "tts": "The truth stayed classified."
+  },
+  {
+   "scene": 4,
+   "start": 37.35,
+   "deadline": 42.85,
+   "text": "Later, the CIA admitted its spy planes caused a surge in UFO reports.",
+   "tts": "Later, the C.I.A. admitted its spy planes caused a surge in U.F.O. reports."
+  },
+  {
+   "scene": 5,
+   "start": 43.15,
+   "deadline": 51.45,
+   "text": "In 2013, a declassified CIA history named Area 51. It revealed spy planes, not flying saucers.",
+   "tts": "In twenty thirteen, a declassified C.I.A. history named Area fifty-one. It revealed spy planes, not flying saucers."
+  },
+  {
+   "scene": 6,
+   "start": 51.9,
+   "deadline": 57.6,
+   "text": "Most of its work is still classified. So what are they testing out there tonight?",
+   "tts": "Most of its work is still classified. So what are they testing out there tonight?"
+  }
+ ],
+ "titles": [
+  {
+   "text": "A DRAMATIZED RECREATION",
+   "start": 0.4,
+   "end": 4.7,
+   "style": "tag"
+  },
+  {
+   "text": "AREA 51",
+   "start": 1.9,
+   "end": 4.8,
+   "style": "big"
+  },
+  {
+   "text": "NEVADA, USA",
+   "start": 2.2,
+   "end": 4.8,
+   "style": "label",
+   "y": 0.715
+  },
+  {
+   "text": "GROOM LAKE",
+   "start": 5.5,
+   "end": 10.7,
+   "style": "date"
+  },
+  {
+   "text": "ABOUT 80 MILES FROM LAS VEGAS",
+   "start": 5.8,
+   "end": 10.7,
+   "style": "label"
+  },
+  {
+   "text": "RESTRICTED AIRSPACE  ·  R-4808N",
+   "start": 11.5,
+   "end": 16.7,
+   "style": "tag"
+  },
+  {
+   "text": "LOCKHEED U-2",
+   "start": 18.6,
+   "end": 23.3,
+   "style": "big"
+  },
+  {
+   "text": "FIRST FLIGHT  ·  AUGUST 1955",
+   "start": 18.9,
+   "end": 23.3,
+   "style": "label",
+   "y": 0.715
+  },
+  {
+   "text": "BUILT TO FLY ABOVE 70,000 FEET",
+   "start": 18.9,
+   "end": 23.3,
+   "style": "tag"
+  },
+  {
+   "text": "A-12 OXCART",
+   "start": 24.3,
+   "end": 29.7,
+   "style": "big"
+  },
+  {
+   "text": "FIRST FLIGHT  ·  APRIL 1962",
+   "start": 24.6,
+   "end": 29.7,
+   "style": "label",
+   "y": 0.715
+  },
+  {
+   "text": "MACH 3+  ·  TITANIUM AIRFRAME",
+   "start": 24.6,
+   "end": 29.7,
+   "style": "tag"
+  },
+  {
+   "text": "LATE 1950s",
+   "start": 30.5,
+   "end": 34.7,
+   "style": "date"
+  },
+  {
+   "text": "AIRLINERS: 10,000-20,000 FT  ·  U-2: 60,000+ FT",
+   "start": 30.8,
+   "end": 34.7,
+   "style": "label"
+  },
+  {
+   "text": "ILLUSTRATIVE RECREATION",
+   "start": 35.3,
+   "end": 37.4,
+   "style": "tag"
+  },
+  {
+   "text": "\"A TREMENDOUS INCREASE\"|IN UFO REPORTS",
+   "start": 38.0,
+   "end": 42.8,
+   "style": "quote"
+  },
+  {
+   "text": "CIA HISTORY OF THE U-2 AND OXCART PROGRAMS  ·  ILLUSTRATIVE HEADLINES",
+   "start": 38.2,
+   "end": 42.8,
+   "style": "tag"
+  },
+  {
+   "text": "DECLASSIFIED — 2013",
+   "start": 43.5,
+   "end": 47.0,
+   "style": "big"
+  },
+  {
+   "text": "RELEASED AFTER A FOIA REQUEST  ·  NATIONAL SECURITY ARCHIVE",
+   "start": 43.8,
+   "end": 47.0,
+   "style": "label",
+   "y": 0.715
+  },
+  {
+   "text": "WHAT THE FILES REVEALED",
+   "start": 47.3,
+   "end": 51.2,
+   "style": "label"
+  },
+  {
+   "text": "SECRET AIRCRAFT TESTING",
+   "start": 47.5,
+   "end": 51.2,
+   "style": "big",
+   "y": 0.715
+  },
+  {
+   "text": "NO EVIDENCE OF ALIEN TECHNOLOGY",
+   "start": 47.7,
+   "end": 51.2,
+   "style": "tag"
+  },
+  {
+   "text": "THE MYSTERY OF AREA 51",
+   "start": 53.0,
+   "end": 56.6,
+   "style": "later"
+  },
+  {
+   "text": "WHAT ELSE IS|OUT THERE?",
+   "start": 57.1,
+   "end": 60.0,
+   "style": "final"
+  }
+ ],
+ "events": {
+  "fade_in": [
+   0.0,
+   1.6
+  ],
+  "lights_u2": [
+   17.6,
+   19.4
+  ],
+  "rim_a12": [
+   23.8,
+   27.0
+  ],
+  "glint": [
+   31.0,
+   34.4
+  ],
+  "ufo_light": [
+   35.6,
+   38.3
+  ],
+  "paper_slide": [
+   37.7,
+   39.2
+  ],
+  "stamp": [
+   45.6,
+   45.8
+  ],
+  "docs": [
+   46.9,
+   50.4
+  ],
+  "doors_close": [
+   54.2,
+   57.6
+  ],
+  "fade_to_black": [
+   58.4,
+   59.0
+  ],
+  "final_fade": [
+   59.5,
+   60.0
+  ],
+  "stamp2": [
+   50.0,
+   50.2
+  ]
+ }
+}

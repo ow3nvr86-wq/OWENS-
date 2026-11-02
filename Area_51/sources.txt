@@ -1,0 +1,123 @@
+AREA 51 - RESEARCH SOURCES, FACT TABLE AND HONESTY NOTES
+============================================================
+
+Every date, number and name used in the narration or on screen is listed below with the sources that support it.
+Confirmed history is stated as fact. UFO reports are presented as reports, not as evidence of anything. The video
+does not claim that aliens or alien technology have ever been found at Area 51, because no reliable evidence says so.
+
+
+1. PRIMARY AND OFFICIAL SOURCES
+-------------------------------
+[CIA-1] Gregory W. Pedlow and Donald E. Welzenbach, "The Central Intelligence Agency and Overhead Reconnaissance:
+        The U-2 and OXCART Programs, 1954-1974", CIA History Staff, 1992. Declassified with Area 51 references
+        restored in June 2013 in response to a 2005 FOIA request by the National Security Archive; published
+        August 15, 2013. CIA Reading Room / National Security Archive.
+[NSA-1] National Security Archive (George Washington University): posting of the CIA history, August 15, 2013
+        (see its Unredacted blog, "The CIA Declassifies Area 51", https://unredacted.com/2013/08/16/the-cia-declassifies-area-51/),
+        and Electronic Briefing Book No. 443 compiled by Jeffrey T. Richelson, October 29, 2013.
+        https://nsarchive.gwu.edu/node/3324
+[CIA-2] CIA, "Area 51 and the Accidental Test Flight" (CIA.gov stories): Groom Lake selected by the U-2 Development
+        Projects Staff; Tony LeVier's unplanned lift-off on August 1, 1955; first official flight August 4, 1955.
+        https://www.cia.gov/stories/story/area-51-and-the-accidental-test-flight
+[CIA-3] Gerald K. Haines, "A Die-Hard Issue: CIA's Role in the Study of UFOs, 1947-90", Studies in Intelligence,
+        1997 (CIA Center for the Study of Intelligence).
+        https://www.cia.gov/resources/csi/studies-in-intelligence/studies-in-intelligence-1997/cias-role-in-the-study-of-ufos-1947-1990
+[AARO]  U.S. Department of Defense, All-domain Anomaly Resolution Office, "Report on the Historical Record of U.S.
+        Government Involvement with Unidentified Anomalous Phenomena, Volume I", released March 8, 2024: found no
+        evidence that the U.S. government has recovered or reverse-engineered extraterrestrial technology; many
+        alleged hidden programmes were misidentified real national-security programmes. Acting director Tim
+        Phillips cited the secret, high-flying U-2 as the basis of many 1950s UFO reports.
+
+2. JOURNALISM AND HISTORICAL RESEARCH
+-------------------------------------
+[NBC]   Alan Boyle, "Area 51 and its purpose declassified: No UFOs, but lots of U-2 spy planes", NBC News,
+        August 16, 2013. https://www.nbcnews.com/sciencemain/area-51-its-purpose-declassified-no-ufos-lots-u-2-6C10931555
+[FP]    "Declassified: The CIA's Secret History of Area 51", Foreign Policy, August 15, 2013. https://foreignpolicy.com/2013/08/15/declassified-the-cias-secret-history-of-area-51/
+[CSM]   "Area 51 is real, say CIA documents", Christian Science Monitor / AP, August 17, 2013.
+[D1]    "Area 51 Has Been Hiding U-2 Spy Planes, Not UFOs", Defense One, August 2013.
+        https://defenseone.com/technology/2013/08/area-51-has-been-hiding-u-2-spy-planes-not-ufos/68951
+[SPACE] Leonard David, Space.com, on the CIA's statements about U-2 flights and UFO reports, with
+        the objections of Robert Sheaffer and Bruce Maccabee. https://www.space.com/28256-ufo-sightings-cia-u2-aircraft.html
+[WSJ]   "The Pentagon Disinformation That Fueled America's UFO Mythology", The Wall Street Journal, June 6, 2025:
+        reports, drawing on the AARO review, that some officials spread UFO stories to shield classified aircraft
+        programmes (including a 1980s episode near Area 51 involving doctored saucer photographs).
+[AIR]   Air & Space / Smithsonian Magazine, "Area 51 origins". https://www.smithsonianmag.com/air-space-magazine/area-51-origins-9278810/
+[TDA]   This Day in Aviation, "1 August 1955" (U-2 first flight). https://www.thisdayinaviation.com/1-august-1955/
+[WIKI-A12] "Lockheed A-12", Wikipedia (citing CIA and Lockheed sources): first flight April 26, 1962 (unofficial,
+        Lou Schalk), first official flight April 30, 1962, Groom Lake; titanium airframe; Mach 3.2 cruise; length
+        101 ft 7 in (31.0 m), span 55 ft 7 in (16.97 m). https://en.wikipedia.org/wiki/Lockheed_A-12
+[WIKI-51] "Area 51", Wikipedia: about 83 miles (134 km) north-northwest of Las Vegas; restricted airspace R-4808N;
+        boundary signs warning that photography is prohibited and that use of deadly force is authorized.
+        https://en.wikipedia.org/wiki/Area_51
+
+3. CLAIM-BY-CLAIM FACT TABLE
+----------------------------
+Claim (narration or on screen)                              | Value used                    | Sources
+------------------------------------------------------------+-------------------------------+---------------------------
+The government would not officially name the base for       | 1955 -> 2013 = 58 years       | CIA-1, NSA-1, NBC, CSM
+  "nearly sixty years"                                      |                               |
+Area 51 is a secret airbase beside a dry lakebed (Groom     | Groom Lake, Nevada            | CIA-1, NSA-1, CIA-2
+  Lake) in the Nevada desert                                |                               |
+"About 80 miles from Las Vegas"                             | ~83 mi NNW (rounded down)     | WIKI-51, AIR
+Restricted airspace                                         | R-4808N                       | WIKI-51
+Signs warn that deadly force is authorized; armed patrols   | boundary signs                | WIKI-51 (widely photographed)
+In 1955 the CIA chose the site to test the U-2              | April 1955 site survey; first | CIA-1, CIA-2, NSA-1
+                                                            | flights Aug 1 (unplanned) and |
+                                                            | Aug 4, 1955 (official)        |
+U-2 "built to fly above 70,000 feet"                        | design goal ~70,000 ft;       | CIA-1, TDA (74,500 ft reached
+                                                            | early tests reached 74,500 ft | in September 1955)
+A-12 OXCART: titanium, over three times the speed of sound  | Mach 3.2 cruise; first flight | WIKI-A12, CIA-1, NSA-1
+                                                            | April 1962 (26th, 30th)       |
+Airline pilots reported silver objects very high at dusk    | U-2 silver wings caught the   | CIA-1 (as quoted by NBC, D1)
+                                                            | setting sun                   |
+Airliners 10,000-20,000 ft; U-2 above 60,000 ft             | mid-1950s figures             | CIA-1 (via D1, SPACE), AARO
+"The CIA admitted its spy planes caused a surge in UFO      | "a tremendous increase in     | CIA-1 (quoted by NBC), CIA-3
+  reports" / on screen: "A TREMENDOUS INCREASE" IN UFO      | reports of unidentified       |
+  REPORTS                                                   | flying objects"               |
+2013: a declassified CIA history named Area 51              | released Aug 15, 2013 after   | NSA-1, NBC, FP, CSM
+                                                            | 2005 FOIA request             |
+It revealed spy planes and test flights, not flying saucers | U-2, OXCART; later F-117 etc. | CIA-1, NSA-1, NBC
+"Most of its work is still classified"                      | the site remains an active,   | NSA-1, WIKI-51, AARO
+                                                            | classified test facility      |
+On screen: NO EVIDENCE OF ALIEN TECHNOLOGY                  | AARO 2024 finding             | AARO
+
+4. CONFIRMED vs. DISPUTED vs. SPECULATION
+-----------------------------------------
+CONFIRMED (official records): the CIA selected Groom Lake in 1955 to test the U-2; the A-12 OXCART was tested there
+from 1962; the facility's existence and name were officially acknowledged in the CIA history released in August
+2013; the CIA's own historians wrote that U-2 test flights caused "a tremendous increase" in UFO reports and that
+Air Force Project Blue Book investigators checked sightings against U-2 flight logs; the site was later used for
+other classified aircraft programmes.
+
+DISPUTED: the CIA estimate (Haines 1997, citing CIA officials) that U-2 and OXCART flights accounted for more than
+half of all UFO reports in the late 1950s and most of the 1960s. Researchers on both sides of the UFO debate have
+challenged that figure (see SPACE). The video therefore does NOT use the "more than half" number; it says only that
+the spy planes caused a surge in reports, which is the CIA history's own wording.
+
+SPECULATION / RUMOUR (not supported by evidence and not presented as fact): that alien spacecraft or bodies are kept
+at Area 51, or that alien technology has been reverse-engineered there. AARO (2024) found no evidence for this.
+The video mentions UFO stories only as reports and rumours, and the observer's light in scene 4 is deliberately left
+unexplained: it is a dramatisation of what witnesses described, not a depiction of a real object.
+
+5. WHAT IS ILLUSTRATIVE (RECREATION, NOT RECORD)
+------------------------------------------------
+- The base: runway, hangars, buildings, fences and guard towers are a recreation for the film, not a plan of the
+  real site. The perimeter scene is a composite (the real boundary is marked mainly by posts and signs; the fence,
+  gate and tower are added for the picture).
+- The warning sign recreates wording widely photographed at the boundary; it is not a copy of a specific sign.
+- The aircraft are code-built models from published dimensions and photographs: the U-2 in its early unpainted
+  natural-metal finish (as in 1955), the A-12 in its later all-black paint.
+- The newspapers use fictional mastheads and generic headlines in the style of 1950s UFO coverage; no specific
+  article is reproduced and no quote is invented.
+- The CIA history's cover is a recreation (its title, authors and date are real); the documents, the sketch map and
+  the "photographs" (code-drawn plan views) are illustrative and labelled as such where legible.
+- The observer and the light in the sky are a dramatisation.
+
+6. FACTS CHECKED BUT CUT FOR TIME
+---------------------------------
+- Names: the site was also called "Paradise Ranch", "the Ranch", "Watertown" and "Dreamland"; "Area 51" comes from
+  its grid designation on Atomic Energy Commission maps.
+- The Air Force acknowledged an "operating location near Groom Lake" in the 1990s, but not the name "Area 51".
+- Later programmes at the site included the F-117 stealth fighter and tests of captured Soviet MiG fighters (NSA-1).
+- 2025: the Wall Street Journal reported that some officials deliberately fed UFO stories to cover classified
+  aircraft (WSJ). Not used in the narration because it concerns the 1980s and later, outside the story's span.

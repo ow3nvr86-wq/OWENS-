@@ -1,0 +1,69 @@
+AREA 51 - SOUND DESIGN, MUSIC AND TIMING
+============================================================
+
+Everything below is synthesised by code in animation.py --stage audio (numpy only: filtered noise, sine
+partials, envelopes, convolution reverb). No samples, recordings or stock sound. The narration is a synthetic
+voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py; music and ambience duck under it (about
+10-15 dB below the voice) so no effect ever covers a line.
+
+Files: audio/mix_with_voice.wav (final mix, -14 LUFS), audio/mix_no_voice.wav (music + sound only, for a
+voice recorded in CapCut), audio/narration.wav (voice only).
+
+CUE SHEET (generated)
+------------------------------------------------------------
+  0.00 s  [ambience ] Desert wind, gusting (outdoor shots); sand hiss in the gusts
+  0.00 s  [music    ] Low drone pad (D, A, D, E: suspended, unresolved), the bed of the whole film
+  0.25 s  [voice    ] NARRATION: "For nearly sixty years, Washington wouldn't even say its name." (to 3.80 s)
+  0.80 s  [music    ] Sparse piano-like notes over the hook; reprised at night
+  5.00 s  [ambience ] A distant jet passes high over the base (roar and a falling turbine whine)
+  5.00 s  [music    ] Low hit on the cut to the base
+  5.10 s  [voice    ] NARRATION: "Area 51. A secret airbase beside a dry lakebed, deep in the Nevada desert." (to 10.58 s)
+  7.20 s  [sfx      ] Radio static and distant, unintelligible radio chatter
+ 11.10 s  [voice    ] NARRATION: "Ringed by mountains, armed patrols, and signs warning that deadly force is authorized." (to 16.38 s)
+ 12.40 s  [sfx      ] Radio static and distant, unintelligible radio chatter
+ 15.40 s  [music    ] Noise riser into 17.00 s
+ 17.00 s  [ambience ] Inside the hangar: a vast, quiet metal room (long reverb); ballast hum once the lights are on
+ 17.00 s  [music    ] Low muted pulse (eighth notes, 90 bpm) building through the hangar
+ 17.15 s  [voice    ] NARRATION: "In 1955, the CIA came here to test a secret spy plane: the U-2." (to 22.67 s)
+ 17.60 s  [sfx      ] Heavy electrical clunk: light bank 1 switches on
+ 17.60 s  [music    ] Low hit as the first lights land
+ 18.05 s  [sfx      ] Heavy electrical clunk: light bank 2 switches on
+ 18.50 s  [sfx      ] Heavy electrical clunk: light bank 3 switches on
+ 18.95 s  [sfx      ] Heavy electrical clunk: light bank 4 switches on
+ 23.75 s  [voice    ] NARRATION: "Then came the A-12 Oxcart, built from titanium to fly over three times the speed of sound." (to 29.78 s)
+ 23.80 s  [sfx      ] A low air swell as the light rakes along the A-12
+ 23.80 s  [music    ] Deep hit on the A-12 reveal
+ 28.80 s  [music    ] Noise riser into 30.00 s
+ 30.00 s  [ambience ] High-altitude wind hiss and the U-2's steady engine, fading as the camera falls away
+ 30.15 s  [voice    ] NARRATION: "Airline pilots began reporting silver shapes, glinting impossibly high at dusk." (to 34.77 s)
+ 35.00 s  [ambience ] Night desert: crickets, a faint breeze
+ 35.15 s  [voice    ] NARRATION: "The truth stayed classified." (to 37.01 s)
+ 35.30 s  [sfx      ] Radio static and distant, unintelligible radio chatter
+ 35.60 s  [music    ] A thin, high sustained tone as the light appears (the music thins out)
+ 37.35 s  [voice    ] NARRATION: "Later, the CIA admitted its spy planes caused a surge in UFO reports." (to 42.80 s)
+ 37.70 s  [sfx      ] Paper rustle; a front page slides onto the pile
+ 43.00 s  [music    ] Low hit into the archive
+ 43.00 s  [ambience ] The archive: a large quiet room, ventilation air, footsteps
+ 43.00 s  [music    ] The pulse returns, slower, under the declassified files
+ 43.15 s  [voice    ] NARRATION: "In 2013, a declassified CIA history named Area 51. It revealed spy planes, not flying saucers." (to 51.20 s)
+ 45.60 s  [sfx      ] Rubber-stamp thump: DECLASSIFIED
+ 46.90 s  [sfx      ] Pages and photographs slide onto the table one by one
+ 50.00 s  [sfx      ] Rubber-stamp thump: RELEASED 2013
+ 51.90 s  [voice    ] NARRATION: "Most of its work is still classified. So what are they testing out there tonight?" (to 56.18 s)
+ 51.90 s  [ambience ] Night: a jet somewhere out over the range, far away
+ 54.20 s  [sfx      ] The hangar doors roll shut (a long metallic rumble), ending in a heavy clang
+ 55.60 s  [music    ] Noise riser into 57.60 s
+ 57.60 s  [music    ] Final deep impact as the hangar doors shut, under WHAT ELSE IS OUT THERE?
+
+BACKGROUND MUSIC RECOMMENDATIONS (if you re-score it in an editor)
+------------------------------------------------------------
+- Style: dark, minimal mystery underscore: low synth or string drones, a muted pulse, sparse piano; no vocals,
+  about 80-95 bpm. Think slow-burn documentary, not sci-fi trailer: avoid theremins and "alien" clichés.
+- 0-5 s: one held low note and a three-note piano phrase under the hook.
+- 5-17 s: wind-swept drone with radio static; let it swell into the cut to the hangar.
+- 17-30 s: a low pulse that builds as the lights come on and the A-12 is revealed; a deep hit on the reveal.
+- 30-43 s: thin out; a single high sustained tone under the light in the sky; near silence for the headlines.
+- 43-52 s: the pulse returns, slower and steadier, under the declassified files.
+- 52-60 s: back to the drone and the piano phrase; one final deep hit as the hangar doors shut; ring out into black.
+- Keep the narration 10-15 dB above the music; YouTube Shorts plays back at about -14 LUFS.
+- Use only music you have the rights to (your own, a licensed library, or YouTube Audio Library tracks that allow it).
