@@ -2644,7 +2644,7 @@ def build_sim_props():
         sim_prop(f'Paper{k}', ob, (x, y, 0.925), rot0=(0, 0, R(yaw)), v0=(rng.normal(0, 0.02), rng.normal(0, 0.02), 0.03),
                  w=(R(25), R(-12), R(30)), e=0.0, mu=1.0)
     # bins
-    for k, (x, y) in enumerate(((-7.0, -6.0), (7.0, 12.0), (-7.0, 24.5), (7.1, -16.0))):
+    for k, (x, y) in enumerate(((-7.4, -21.0), (7.0, 12.0), (-7.0, 24.5), (7.1, -16.0))):
         bm = bmesh.new()
         bin_bm(bm)
         ob = obj_from_bm(f'Bin{k}', bm, [MAT['bin_green'], MAT['darksteel']], C, smooth=True)
@@ -2660,7 +2660,7 @@ def build_sim_props():
     c = make_car('MoveN', C, (2.2, 0, 0), 0, 'car_silver')
     sim_prop('MoveN', c['root'], (2.2, 20.0, 0.0), kind='car', vpre=(0, 9.0, 0), v0=(0, 9.0, 0.40), w=(R(0.5), 0, R(0.6)), e=0.12, mu=6.0)
     c = make_car('MoveS', C, (-2.2, 0, 0), 180, 'car_blue')
-    sim_prop('MoveS', c['root'], (-2.2, 92.0, 0.0), kind='car', rot0=(0, 0, R(180)), vpre=(0, -8.0, 0), v0=(0, -8.0, 0.38),
+    sim_prop('MoveS', c['root'], (-2.2, 122.0, 0.0), kind='car', rot0=(0, 0, R(180)), vpre=(0, -8.0, 0), v0=(0, -8.0, 0.38),
              w=(R(-0.3), R(0.4), R(-0.4)), e=0.12, mu=6.0)
     # the basketball
     bm = bmesh.new()
@@ -3326,7 +3326,7 @@ def build_cameras():
     camera_shot('land', 26, [(0, (6.6, 6.0, 0.8)), (1, (6.7, 6.6, 0.85))], [(0, (8.2, 9.6, 1.0)), (1, (8.2, 9.8, 0.8))], fstop=4.0)
     camera_shot('aftermath', 24, [(0, (-3.6, -6.5, 1.7)), (1, (-3.2, -13.0, 9.0))], [(0, (-2.0, 12.0, 1.0)), (1, (-1.5, 16.0, 0.6))], fstop=100)
     cupF = MAYA_AT + fwd * 0.27 + Vector((0, 0, 1.18 - 0.15 + 0.06))
-    camera_shot('coffee', 34, [(0, face + fwd * 1.9 - right * 0.7 + Vector((0, 0, -0.1))), (1, cupF + fwd * 0.5 - right * 0.32 + Vector((0, 0, -0.12)))],
+    camera_shot('coffee', 34, [(0, face + fwd * 1.9 + right * 0.6 + Vector((0, 0, -0.1))), (1, cupF + fwd * 0.5 - right * 0.32 + Vector((0, 0, -0.12)))],
                 [(0, face + Vector((0, 0, -0.15))), (1, cupF + Vector((0, 0, 0.1)))], fstop=2.8, lenses=[(0, 34), (1, 40)])
 
 
