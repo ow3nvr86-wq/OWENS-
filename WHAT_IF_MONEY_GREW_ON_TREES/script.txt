@@ -1,0 +1,32 @@
+WHAT IF MONEY GREW ON TREES? - NARRATION SCRIPT (58.5 seconds, 137 words)
+Voice: Kokoro-82M bm_george. Start and end times are measured from the synthesised voice.
+Read as a completely serious nature/history documentary while the world gets steadily dumber: calm, dry, unhurried.
+Never wink at the joke. Leave a full beat after "doesn't grow on trees." before "Well... technically, now it does."
+Captions show digits ($500); the voice engine is given the numbers spelled out (see scene_timing.json, "tts").
+
+[SCENE 1 - EVERYONE IS A MILLIONAIRE  0.0-5.7 s]
+(00.15-05.37) By noon, everyone on Earth was a millionaire. By dinner, nobody could afford a sandwich.
+
+[SCENE 2 - THE FIRST MONEY TREE  5.7-12.8 s]
+(05.75-09.14) It started when dollar bills began growing on trees.
+(09.35-12.62) Within an hour, whole neighborhoods were out shaking branches.
+
+[SCENE 3 - THE WORLD GOES CRAZY  12.8-23.4 s]
+(12.95-15.44) Farmers ripped out their crops to plant money.
+(15.75-18.10) Families grew cash in their backyards.
+(18.40-23.17) And one man bought an entire forest, just to become the richest person alive.
+
+[SCENE 4 - PRICES GO INSANE  23.4-34.5 s]
+(23.75-28.06) But then, something strange happened. Shops started raising their prices.
+(28.30-34.20) A loaf of bread? $500. Milk? $250. A bicycle? $20,000.
+
+[SCENE 5 - THE ECONOMY COLLAPSES  34.5-45.9 s]
+(34.60-40.84) Here's the problem. Everyone had more money, but the world wasn't making any more food, houses or cars.
+(41.15-45.55) Too much money, chasing too few goods. So every dollar bought less and less.
+
+[SCENE 6 - THE FINAL TWIST  45.9-58.5 s]
+(45.95-50.02) Soon, people needed a wheelbarrow of cash just to buy groceries.
+(50.45-53.34) Turns out, money really doesn't grow on trees.
+(54.40-56.14) Well... technically, now it does.
+
+Total: 137 words.

@@ -1,0 +1,547 @@
+{
+ "_about": "Single source of truth for timing. animation.py (cameras, events, captions, titles) and tools/voiceover.py read this file. Times are seconds from the start of the video at 30 fps. 'text' is the caption/script text; 'tts' is what the voice engine reads (numbers spelled out).",
+ "fps": 30,
+ "duration": 58.5,
+ "render_end": 58.5,
+ "scenes": [
+  {
+   "id": 1,
+   "name": "EVERYONE IS A MILLIONAIRE",
+   "start": 0.0,
+   "end": 5.65,
+   "desc": "A bright supermarket. The main customer (yellow hoodie) strides toward the checkout hugging a huge, wobbling pile of cash bundles, grinning; loose bills slip off the top. Other shoppers behind him also carry piles of cash. At the till the deadpan cashier turns round a little price card next to a single sandwich. Reverse angle: a snap zoom into the card: SANDWICH $1,999,999.99.",
+   "actions": "Customer: proud strut, chin up, grin -> at the reveal his eyebrows shoot up, eyes widen, jaw drops. Cashier: half-lidded, bored, turns the card with one finger.",
+   "lighting": "Cool fluorescent ceiling strips, warm window light from the street behind, light haze; slightly green \"money\" grade.",
+   "sfx": "Upbeat plucked theme starts at once; cash rustle; a register beep; the price reveal lands on a comedic cash-register \"ka-CHING\" plus a falling-whistle; snap-zoom whoosh.",
+   "shots": [
+    {
+     "name": "hook_a",
+     "start": 0.0,
+     "end": 2.8,
+     "camera": "Tracking backwards in front of the customer at chest height, 35 mm, slight handheld bounce; he fills the lower-middle of the frame."
+    },
+    {
+     "name": "hook_b",
+     "start": 2.8,
+     "end": 4.2,
+     "camera": "Over the cashier's shoulder onto the customer's face, 50 mm, slow push-in as his face falls."
+    },
+    {
+     "name": "hook_c",
+     "start": 4.2,
+     "end": 5.65,
+     "camera": "Reverse angle over the customer's shoulder: fast snap zoom (eased) into the price card on the counter, 50 mm."
+    }
+   ],
+   "edit": "Opens cold on motion (no fade). Hard cuts on the beats. Whip-smear into Scene 2."
+  },
+  {
+   "id": 2,
+   "name": "THE FIRST MONEY TREE",
+   "start": 5.65,
+   "end": 12.85,
+   "desc": "A quiet suburban street in golden morning light. Extreme close-up: a crisp banknote hangs from a twig among green leaves, sunbeams through the canopy. A hand reaches in and plucks it. Pull back: the same man (yellow hoodie) stands under an ordinary-looking tree whose branches are full of money; more bills flutter down and he jumps for joy. Wide: neighbours sprint across lawns, shake branches, scoop bills into bags and hold up phones.",
+   "actions": "Main man: confused look at the bill -> big grin -> jumps with both arms up. Neighbours: run in, two shake branches, one crouches filling a bag, one takes a phone photo (flash).",
+   "lighting": "Low warm sun from behind the tree; volumetric light shafts through the canopy; soft blue sky fill; dust and drifting bills catch the light.",
+   "sfx": "Birdsong and a lawn sprinkler; leaves rustle; a soft paper \"snap\" as the bill is plucked; bills fluttering; running footsteps; crowd whoops; branch shakes; phone camera shutter.",
+   "shots": [
+    {
+     "name": "bill",
+     "start": 5.65,
+     "end": 8.0,
+     "camera": "Macro close-up of the banknote on the twig, 85 mm, shallow depth of field; slow drift in; a hand enters frame and plucks it."
+    },
+    {
+     "name": "tree",
+     "start": 8.0,
+     "end": 10.2,
+     "camera": "Pull back and up from the man to reveal the whole tree, 28 mm."
+    },
+    {
+     "name": "crowd",
+     "start": 10.2,
+     "end": 12.85,
+     "camera": "Wide, slow crane up and sideways as the neighbours swarm the tree, 24 mm."
+    }
+   ],
+   "edit": "Whip-smear in from Scene 1. Title WHAT IF MONEY GREW ON TREES? at the top. Dip through a quick flash into Scene 3."
+  },
+  {
+   "id": 3,
+   "name": "THE WORLD GOES CRAZY",
+   "start": 12.85,
+   "end": 23.45,
+   "desc": "A farmer in a straw hat stands between his cornfield and one small money tree. He looks at the corn... looks at the money tree... and yanks up a corn stalk and throws it away. A man in a backyard kneels beside a potted sapling holding exactly ONE banknote, with a hand-made sign MY FIRST MONEY TREE, and presents it like a trophy. Aerial: endless rows of money trees and plastic greenhouses where corn used to be; a worker with a leaf blower blasts a river of bills onto a heap; sign MONEY FARM - EST. TODAY. Golden hour: a businessman in a suit stands on a hill with his arms spread before a forest of money trees that reaches the horizon; a SOLD sign beside him.",
+   "actions": "Farmer: slow double-take, decision, yank and throw. Backyard dad: kneels, beams, \"ta-da\" hands. Worker: sweeps the leaf blower. Businessman: smug, arms spread wide.",
+   "lighting": "Warm late-afternoon sun with long shadows; dust in the air over the farm; golden backlight and haze over the forest.",
+   "sfx": "The music speeds up and adds layers (claps, whistle, shaker). Corn stalk rip and a whoosh; a tiny \"ding\" for the one-bill tree; leaf-blower drone and a gush of fluttering paper; a choir-like swell as the forest is revealed.",
+   "shots": [
+    {
+     "name": "farmer",
+     "start": 12.85,
+     "end": 15.6,
+     "camera": "Medium shot at the edge of the field, 35 mm, slow lateral track as he turns from the corn to the money tree."
+    },
+    {
+     "name": "backyard",
+     "start": 15.6,
+     "end": 18.3,
+     "camera": "Low push-in on the proud owner and his one-bill sapling, 40 mm."
+    },
+    {
+     "name": "farm",
+     "start": 18.3,
+     "end": 20.4,
+     "camera": "Drone glide over the money orchard and greenhouses, descending toward the leaf-blower worker, 24 mm."
+    },
+    {
+     "name": "forest",
+     "start": 20.4,
+     "end": 23.45,
+     "camera": "Starts on the businessman's smug face and cranes up and back to reveal the forest to the horizon, 28 mm."
+    }
+   ],
+   "edit": "Fast cuts on the beat; each shot is bigger and sillier than the last. Hard cut with a record scratch into Scene 4."
+  },
+  {
+   "id": 4,
+   "name": "PRICES GO INSANE",
+   "start": 23.45,
+   "end": 34.5,
+   "desc": "The supermarket again: shoppers push carts heaped with cash down the aisle; everything looks normal under a LOW PRICES EVERY DAY banner. Then a store owner in an apron walks the bread aisle with a price gun, flipping tags: $5 becomes $500. A woman at the dairy fridge watches the milk tag flip to $250 and her jaw drops. A shiny bicycle on display gets a giant $20,000 tag.",
+   "actions": "Owner: brisk, cheerful, slaps on new tags. Woman shopper: double-take, jaw drop. Customers: stare at the bicycle tag.",
+   "lighting": "Same fluorescent store, slightly harsher and greener as prices climb; product highlights.",
+   "sfx": "Record scratch kills the music at the cut; a moment of muzak; then tense \"documentary\" pizzicato. Each tag flip: a price-gun click plus a register \"ka-ching\" pitched higher each time; a shocked gasp; cash rustle; cart squeak.",
+   "shots": [
+    {
+     "name": "store",
+     "start": 23.45,
+     "end": 26.0,
+     "camera": "Slow dolly down the main aisle at cart height, 28 mm."
+    },
+    {
+     "name": "tags",
+     "start": 26.0,
+     "end": 30.45,
+     "camera": "Lateral track along the bread shelf as the owner re-tags it, ending on the $500 tag, 45 mm."
+    },
+    {
+     "name": "milk",
+     "start": 30.45,
+     "end": 32.25,
+     "camera": "Push-in on the shocked shopper beside the milk tag, 40 mm."
+    },
+    {
+     "name": "bike",
+     "start": 32.25,
+     "end": 34.5,
+     "camera": "Low arc around the bicycle and its huge tag, 30 mm."
+    }
+   ],
+   "edit": "Fast cuts. Prices also pop up as big amber numbers at the top of the frame, marked as illustrative."
+  },
+  {
+   "id": 5,
+   "name": "THE ECONOMY COLLAPSES",
+   "start": 34.5,
+   "end": 45.85,
+   "desc": "A cashier is buried behind a mountain of cash while a counting machine sprays bills. A city street: money blows down the avenue like autumn leaves and everyone carries sacks of cash, while a huge screen on a building plots two lines: MONEY shoots straight up, GOODS barely moves. A shopper with two carts of cash takes the very last egg carton from an almost empty shelf (LIMIT 1 PER CUSTOMER).",
+   "actions": "Cashier: frantic counting, sweating, deadpan. City crowd: walking with sacks, bills swirling round them. Shopper: reaches for the last eggs.",
+   "lighting": "Overcast city with a low sun breaking through haze and side-lighting the bills; the screen glows; back in the store the light is colder.",
+   "sfx": "Cash-counting machine whirr; city traffic and wind, paper blizzard; a low drum pulse and rising strings (dramatic, with a comic tuba-like bass); a downward \"bwomp\" as the dollar buys less.",
+   "shots": [
+    {
+     "name": "count",
+     "start": 34.5,
+     "end": 37.3,
+     "camera": "Push-in toward the cashier behind the cash mountain, 35 mm."
+    },
+    {
+     "name": "city",
+     "start": 37.3,
+     "end": 41.0,
+     "camera": "Low wide dolly forward through the street among the people, tilting up toward the giant screen, 24 mm."
+    },
+    {
+     "name": "graph",
+     "start": 41.0,
+     "end": 43.6,
+     "camera": "Looking up at the screen as the lines draw, slow push-in, 32 mm."
+    },
+    {
+     "name": "struggle",
+     "start": 43.6,
+     "end": 45.85,
+     "camera": "Side track past the shopper to the nearly empty egg shelf, 35 mm."
+    }
+   ],
+   "edit": "Hard cuts. The graph is labelled ILLUSTRATIVE."
+  },
+  {
+   "id": 6,
+   "name": "THE FINAL TWIST",
+   "start": 45.85,
+   "end": 58.5,
+   "desc": "Back to the first tree, now enormous and completely covered in banknotes. The man in the yellow hoodie shovels bills into a wheelbarrow. Then the same supermarket and the same checkout: he wheels the overflowing barrow up to the deadpan cashier, who turns the same price card: the old $1,999,999.99 is crossed out and the new price is $9,999,999.99. He turns and looks straight into the camera. Snap zoom into the price card, framed exactly like the opening.",
+   "actions": "Man: determined shovelling -> proud push of the barrow -> face falls -> slow, deadpan look straight at the camera. Cashier: same bored card turn.",
+   "lighting": "Giant tree: golden, backlit, volumetric shafts. Store: the exact lighting of Scene 1.",
+   "sfx": "The playful theme returns, bigger; shovel scrapes and paper; wheelbarrow squeak; the card turn hits a ka-ching; silence for the stare; a final brass sting on \"now it does\", then a tiny \"ding\" on the price card.",
+   "shots": [
+    {
+     "name": "giant",
+     "start": 45.85,
+     "end": 50.3,
+     "camera": "Low angle on the man and the wheelbarrow, craning up to the giant money tree, 24 mm."
+    },
+    {
+     "name": "final",
+     "start": 50.3,
+     "end": 53.6,
+     "camera": "Tracking beside the wheelbarrow to the checkout, 35 mm (matches the opening)."
+    },
+    {
+     "name": "stare",
+     "start": 53.6,
+     "end": 56.3,
+     "camera": "Over the cashier's shoulder: he turns his head and looks into the lens, 50 mm (matches hook_b)."
+    },
+    {
+     "name": "tagend",
+     "start": 56.3,
+     "end": 58.5,
+     "camera": "The opening's snap zoom into the price card, recreated; hold on the card."
+    }
+   ],
+   "edit": "The ending re-creates the opening framing so the Short loops seamlessly back to the first frame."
+  }
+ ],
+ "lines": [
+  {
+   "scene": 1,
+   "start": 0.15,
+   "deadline": 5.5,
+   "text": "By noon, everyone on Earth was a millionaire. By dinner, nobody could afford a sandwich.",
+   "tts": "By noon, everyone on Earth was a millionaire. By dinner, nobody could afford a sandwich."
+  },
+  {
+   "scene": 2,
+   "start": 5.75,
+   "deadline": 9.2,
+   "text": "It started when dollar bills began growing on trees.",
+   "tts": "It started when dollar bills began growing on trees."
+  },
+  {
+   "scene": 2,
+   "start": 9.35,
+   "deadline": 12.75,
+   "text": "Within an hour, whole neighborhoods were out shaking branches.",
+   "tts": "Within an hour, whole neighborhoods were out shaking branches."
+  },
+  {
+   "scene": 3,
+   "start": 12.95,
+   "deadline": 15.5,
+   "text": "Farmers ripped out their crops to plant money.",
+   "tts": "Farmers ripped out their crops to plant money."
+  },
+  {
+   "scene": 3,
+   "start": 15.75,
+   "deadline": 18.2,
+   "text": "Families grew cash in their backyards.",
+   "tts": "Families grew cash in their backyards."
+  },
+  {
+   "scene": 3,
+   "start": 18.4,
+   "deadline": 23.3,
+   "text": "And one man bought an entire forest, just to become the richest person alive.",
+   "tts": "And one man bought an entire forest, just to become the richest person alive."
+  },
+  {
+   "scene": 4,
+   "start": 23.75,
+   "deadline": 28.15,
+   "text": "But then, something strange happened. Shops started raising their prices.",
+   "tts": "But then, something strange happened. Shops started raising their prices."
+  },
+  {
+   "scene": 4,
+   "start": 28.3,
+   "deadline": 34.3,
+   "text": "A loaf of bread? $500. Milk? $250. A bicycle? $20,000.",
+   "tts": "A loaf of bread? Five hundred dollars. Milk? Two hundred and fifty. A bicycle? Twenty thousand."
+  },
+  {
+   "scene": 5,
+   "start": 34.6,
+   "deadline": 40.95,
+   "text": "Here's the problem. Everyone had more money, but the world wasn't making any more food, houses or cars.",
+   "tts": "Here's the problem. Everyone had more money, but the world wasn't making any more food, houses or cars."
+  },
+  {
+   "scene": 5,
+   "start": 41.15,
+   "deadline": 45.7,
+   "text": "Too much money, chasing too few goods. So every dollar bought less and less.",
+   "tts": "Too much money, chasing too few goods. So every dollar bought less and less."
+  },
+  {
+   "scene": 6,
+   "start": 45.95,
+   "deadline": 50.2,
+   "text": "Soon, people needed a wheelbarrow of cash just to buy groceries.",
+   "tts": "Soon, people needed a wheelbarrow of cash just to buy groceries."
+  },
+  {
+   "scene": 6,
+   "start": 50.45,
+   "deadline": 53.45,
+   "text": "Turns out, money really doesn't grow on trees.",
+   "tts": "Turns out, money really doesn't grow on trees."
+  },
+  {
+   "scene": 6,
+   "start": 54.4,
+   "deadline": 56.3,
+   "text": "Well... technically, now it does.",
+   "tts": "Well... technically, now it does."
+  }
+ ],
+ "titles": [
+  {
+   "text": "A HYPOTHETICAL SCENARIO",
+   "start": 0.25,
+   "end": 5.55,
+   "style": "tag"
+  },
+  {
+   "text": "EVERYONE IS A|MILLIONAIRE.",
+   "start": 0.45,
+   "end": 2.75,
+   "style": "hero"
+  },
+  {
+   "text": "BUT NOBODY|IS RICH.",
+   "start": 4.25,
+   "end": 5.6,
+   "style": "big"
+  },
+  {
+   "text": "WHAT IF MONEY|GREW ON TREES?",
+   "start": 5.85,
+   "end": 8.0,
+   "style": "hero"
+  },
+  {
+   "text": "MONEY STARTED|GROWING ON TREES.",
+   "start": 10.35,
+   "end": 12.8,
+   "style": "label"
+  },
+  {
+   "text": "EVERYONE WANTED|A MONEY FARM.",
+   "start": 15.75,
+   "end": 20.35,
+   "style": "label"
+  },
+  {
+   "text": "MORE MONEY.|HIGHER PRICES.",
+   "start": 26.1,
+   "end": 28.4,
+   "style": "label"
+  },
+  {
+   "text": "ILLUSTRATIVE PRICES - A HYPOTHETICAL ECONOMY",
+   "start": 26.1,
+   "end": 34.45,
+   "style": "tag"
+  },
+  {
+   "text": "BREAD",
+   "start": 29.3,
+   "end": 30.4,
+   "style": "item"
+  },
+  {
+   "text": "$500",
+   "start": 29.3,
+   "end": 30.4,
+   "style": "big"
+  },
+  {
+   "text": "MILK",
+   "start": 31.15,
+   "end": 32.2,
+   "style": "item"
+  },
+  {
+   "text": "$250",
+   "start": 31.15,
+   "end": 32.2,
+   "style": "big"
+  },
+  {
+   "text": "BICYCLE",
+   "start": 33.0,
+   "end": 34.45,
+   "style": "item"
+  },
+  {
+   "text": "$20,000",
+   "start": 33.0,
+   "end": 34.45,
+   "style": "big"
+  },
+  {
+   "text": "EVERYONE WAS RICH.",
+   "start": 35.5,
+   "end": 37.25,
+   "style": "label"
+  },
+  {
+   "text": "THE MONEY WAS|EVERYWHERE.",
+   "start": 37.6,
+   "end": 40.95,
+   "style": "label"
+  },
+  {
+   "text": "THE GOODS|WEREN'T.",
+   "start": 41.3,
+   "end": 43.55,
+   "style": "big"
+  },
+  {
+   "text": "ILLUSTRATIVE - NOT REAL DATA",
+   "start": 41.1,
+   "end": 43.55,
+   "style": "tag"
+  },
+  {
+   "text": "EVERY DOLLAR|BOUGHT LESS.",
+   "start": 43.85,
+   "end": 45.8,
+   "style": "label"
+  },
+  {
+   "text": "RICH IN CASH.|BROKE IN EVERYTHING ELSE.",
+   "start": 54.0,
+   "end": 58.35,
+   "style": "label"
+  }
+ ],
+ "events": {
+  "card_flip": [
+   3.25,
+   3.6
+  ],
+  "face_fall": [
+   3.45,
+   3.85
+  ],
+  "snap_zoom": [
+   4.25,
+   4.65
+  ],
+  "pluck": [
+   6.8,
+   7.2
+  ],
+  "tree_fall": [
+   8.25,
+   10.2
+  ],
+  "jump": [
+   8.9,
+   9.6
+  ],
+  "yank": [
+   14.15,
+   14.5
+  ],
+  "toss": [
+   14.5,
+   15.3
+  ],
+  "tada": [
+   16.3,
+   16.7
+  ],
+  "blower": [
+   18.3,
+   20.4
+  ],
+  "forest_crane": [
+   20.9,
+   23.45
+  ],
+  "scratch": [
+   23.45,
+   23.75
+  ],
+  "flip1": [
+   26.7,
+   26.9
+  ],
+  "flip2": [
+   27.3,
+   27.5
+  ],
+  "flip3": [
+   27.9,
+   28.1
+  ],
+  "flip_bread": [
+   29.15,
+   29.35
+  ],
+  "flip_milk": [
+   30.95,
+   31.15
+  ],
+  "gasp": [
+   31.2,
+   31.6
+  ],
+  "flip_bike": [
+   32.85,
+   33.05
+  ],
+  "counter": [
+   34.5,
+   37.3
+  ],
+  "graph": [
+   38.4,
+   43.5
+  ],
+  "eggs": [
+   44.4,
+   45.2
+  ],
+  "shovel": [
+   46.3,
+   50.0
+  ],
+  "card_flip2": [
+   53.72,
+   54.05
+  ],
+  "face_fall2": [
+   53.95,
+   54.3
+  ],
+  "turn": [
+   54.55,
+   55.1
+  ],
+  "sting": [
+   55.6,
+   56.3
+  ],
+  "snap_zoom2": [
+   56.35,
+   56.75
+  ]
+ }
+}
