@@ -1,0 +1,51 @@
+WHAT IF YOU WERE THE LAST HUMAN ON EARTH? - OPENING HOOK OPTIONS
+=================================================================
+
+Scored 1-5 on: stops the scroll in 1-2 s, works with the sound off, puts the viewer INSIDE the experience, originality,
+open loop.
+
+OPTION 1 (first-person anti-hook: the phone) - SELECTED
+  Picture: an extreme close-up of a pair of eyes opening, lit only by a phone screen. Cut: the phone - 07:12, "No
+  notifications". Cut: the same face at a 12th-floor window; the camera pulls back over the shoulder and the city
+  below is completely empty - cars stopped in the lanes, nobody on the pavements, nothing moving.
+  On screen: NO CALLS. NO MESSAGES.  ->  YOU ARE THE LAST HUMAN ON EARTH.  /  EVERYONE IS GONE.
+  Narration: "You wake up. No calls. No messages. The city outside is silent. Everyone is gone."
+  Stop-the-scroll 5 | Sound-off 5 | Inside the experience 5 | Originality 4 | Open loop 5   = 24/25
+  - Everyone has woken up and checked their phone; "no messages at all" is a small, instantly recognisable wrongness,
+    and it is the viewer's own morning routine (second person: "you").
+  - The window reveal pays it off within 5 seconds with one huge image, so nobody is left confused.
+  - The phone becomes the thread of the whole film: the last scene is the same phone, "No service", and the last shot
+    is the same eyes closing - so the Short loops back to the eyes opening without forcing it.
+
+OPTION 2 (event anti-hook: the crowded street)
+  Picture: a busy pedestrian crossing at rush hour - then a hard cut on a blink to the same crossing, completely empty;
+  the crossing signal still ticks.
+  Narration: "Blink. And eight billion people are gone."
+  Stop-the-scroll 4 | Sound-off 4 | Inside the experience 3 | Originality 3 | Open loop 4   = 18/25
+  - A strong before/after, but it needs a crowd in the first second (expensive, and it shows the event from outside
+    rather than through the character's eyes). The ticking crossing signal survives as the "something is wrong" beat.
+
+OPTION 3 (traditional hook: the question)
+  Picture: an aerial shot of a silent city at dawn.
+  Narration: "If every other person on Earth vanished tonight, how long would it take you to notice the world falling
+  apart?"
+  Stop-the-scroll 3 | Sound-off 2 | Inside the experience 2 | Originality 3 | Open loop 5   = 15/25
+  - The best open loop, but it explains before it shows, and a pretty aerial shot is easy to scroll past. Its question
+    became the structure of the film instead (exciting first half -> the systems start to fail -> the silence).
+
+SELECTED: OPTION 1 - first person, instant, readable with the sound off, and it sets up the loop.
+
+OPEN LOOP: "Everyone is gone" (5 s) raises two questions the film answers in order: is it as good as it first seems
+(scene 2: "The entire world is yours."), and what happens next ("But something is wrong." at 17 s -> the lights going
+out at 29 s -> the silence at 33 s -> the realisation on the roof at 43 s -> "nobody left to tell" at 55 s).
+
+Phrases avoided on purpose: "Have you ever wondered...", "Today we're going to explore...", "You won't believe what
+happens...", "Imagine if I told you...".
+
+THE TWO PROPOSED ENDINGS
+  A: "You wouldn't own the world. You'd just be the only one left to experience it."
+  B: "The strangest part wouldn't be having the entire planet to yourself. It would be realising there's nobody left
+      to tell."  - CHOSEN (lightly shortened: "...having the world to yourself...")
+  B wins because it lands on the film's thread - the phone with no messages - and turns the opening's "No calls. No
+  messages." from a puzzle into the emotional point. It is followed by one short question to the viewer: "Would you
+  still want it?"

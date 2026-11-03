@@ -1,0 +1,368 @@
+{
+ "fps": 30,
+ "duration": 59.0,
+ "render_end": 59.0,
+ "scenes": [
+  {
+   "id": 1,
+   "name": "YOU WAKE UP",
+   "start": 0.0,
+   "end": 7.5,
+   "desc": "Morning. An extreme close-up of a young person's eyes opening in bed, lit by a phone screen. The phone: 07:12, \"No notifications\". They go to the bedroom window of their 12th-floor flat: the camera starts on their face and pulls back over their shoulder to reveal the city below - empty avenues, cars stopped where they were left, no people, no movement.",
+   "actions": "The main character (the only character in the film): young adult, short dark hair, olive hoodie, jeans, white trainers. Sleepy -> puzzled -> uneasy. Thumb scrolls the phone; walks to the window; hand on the glass.",
+   "lighting": "Cool grey-blue morning light through the window; the phone's glow on the face in the first shot.",
+   "sfx": "Quiet room tone, a fridge hum, a single phone buzz that turns out to be nothing; distant birds; no traffic.",
+   "edit": "Hard cut from the eyes to the phone; slow pull-back on the window shot. Title: YOU ARE THE LAST HUMAN ON EARTH.",
+   "shots": [
+    {
+     "name": "eyes",
+     "start": 0.0,
+     "end": 1.5,
+     "camera": "extreme close-up of the eyes, slow push-out and drift; eyes open"
+    },
+    {
+     "name": "phone",
+     "start": 1.5,
+     "end": 3.6,
+     "camera": "over-the-shoulder insert of the phone screen, slight drift; shallow focus"
+    },
+    {
+     "name": "window",
+     "start": 3.6,
+     "end": 7.5,
+     "camera": "starts close on the face at the window, pulls back and arcs over the shoulder to reveal the empty avenue 36 m below"
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "THE WORLD IS YOURS",
+   "start": 7.5,
+   "end": 16.9,
+   "desc": "Freedom. They walk down the middle of the empty avenue, past abandoned cars. A supermarket with abandoned trolleys - they help themselves. A cinema: they sit alone in the middle of the empty rows, the film still playing. A shopping mall: they ride the escalator, which still runs. A deserted city square: they spin with their arms out as pigeons take off.",
+   "actions": "Unsure at first, then grinning; takes an apple, puts their feet up in the cinema, spins in the square.",
+   "lighting": "Bright, warm morning sun; clean fluorescent supermarket; projector light in the dark cinema; skylight in the mall.",
+   "sfx": "Footsteps that echo, a shop's automatic door, fridges humming, film soundtrack bleeding from the screen, escalator hum, pigeons' wings; light, rising music.",
+   "edit": "Fast, energetic cuts on the beat. Key caption: THE ENTIRE WORLD IS YOURS.",
+   "shots": [
+    {
+     "name": "road",
+     "start": 7.5,
+     "end": 11.1,
+     "camera": "low tracking shot backwards in front of the character walking down the centre line"
+    },
+    {
+     "name": "market",
+     "start": 11.1,
+     "end": 12.2,
+     "camera": "slow dolly along the aisle past an abandoned trolley"
+    },
+    {
+     "name": "cinema",
+     "start": 12.2,
+     "end": 14.0,
+     "camera": "slow push-in from the front rows to the lone figure in the middle of the seats"
+    },
+    {
+     "name": "mall",
+     "start": 14.0,
+     "end": 15.1,
+     "camera": "parallel tracking shot alongside the moving escalator"
+    },
+    {
+     "name": "square",
+     "start": 15.1,
+     "end": 16.9,
+     "camera": "low orbit around the character spinning by the fountain as pigeons rise"
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "name": "SOMETHING IS WRONG",
+   "start": 16.9,
+   "end": 32.1,
+   "desc": "Afternoon to dusk. A traffic light changes from red to green over an empty junction. A commuter train waits at a platform with its doors open and its lights on. A neighbour's home: lights and TV still on, dinner on the table, nobody there - the character looks in from outside. Sunset over the skyline. Then, from the flat's window, districts of the city go dark one after another while others stay lit.",
+   "actions": "Walking more slowly; looking into the train; face at the neighbour's window; standing at their own window as the lights go out.",
+   "lighting": "Flat afternoon light, then a warm low sunset, then blue dusk with the city's windows lit, then patches of darkness.",
+   "sfx": "The music drops away. Traffic-light relay click and the ticking of a crossing signal, the train's idling compressor, a TV muffled behind glass, a low electrical hum that dies district by district.",
+   "edit": "Slower cuts. Key caption: BUT SOMETHING IS WRONG.",
+   "shots": [
+    {
+     "name": "signal",
+     "start": 16.9,
+     "end": 20.25,
+     "camera": "slow push past the traffic light head; it changes red -> green at the word \"change\""
+    },
+    {
+     "name": "station",
+     "start": 20.25,
+     "end": 23.2,
+     "camera": "tracking shot along the train as the character walks the empty platform"
+    },
+    {
+     "name": "house",
+     "start": 23.2,
+     "end": 25.9,
+     "camera": "from inside the empty lit room, slow push toward the window and the face outside"
+    },
+    {
+     "name": "grid",
+     "start": 25.9,
+     "end": 28.8,
+     "camera": "long-lens drift across the skyline at sunset, windows coming on"
+    },
+    {
+     "name": "dark",
+     "start": 28.8,
+     "end": 32.1,
+     "camera": "behind the character at their window; slow push; districts go dark one by one"
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "name": "THE SILENCE",
+   "start": 32.1,
+   "end": 42.4,
+   "desc": "Night. The character sits alone at the kitchen table by candlelight and looks at an old photograph of friends. Then the empty street: streetlights still on in this district, wind pushing sheets of paper across the road. A deserted playground: an empty swing moving in the wind beside them. Finally a tiny figure walking alone beneath the dark towers.",
+   "actions": "Still and quiet: thumb on the photo; hands in pockets; sitting on a swing; walking slowly.",
+   "lighting": "Candle and moonlight in the kitchen; sodium/LED streetlights; a single lamp at the playground; moonlit clouds over the towers.",
+   "sfx": "Music almost gone. Candle flicker, a clock ticking, wind, paper scraping across asphalt, a creaking swing chain, footsteps.",
+   "edit": "Long shots; two full seconds without narration. Key caption: YOU ARE COMPLETELY ALONE.",
+   "shots": [
+    {
+     "name": "kitchen",
+     "start": 32.1,
+     "end": 35.75,
+     "camera": "slow push over the shoulder onto the photograph, then rack to the face"
+    },
+    {
+     "name": "papers",
+     "start": 35.75,
+     "end": 38.0,
+     "camera": "low static-then-drift shot across the night street as papers blow past"
+    },
+    {
+     "name": "playground",
+     "start": 38.0,
+     "end": 39.7,
+     "camera": "slow lateral dolly past the swings"
+    },
+    {
+     "name": "towers",
+     "start": 39.7,
+     "end": 42.4,
+     "camera": "low wide shot; slow crane up as the figure walks between the towers"
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "name": "THE BIG REALISATION",
+   "start": 42.4,
+   "end": 49.4,
+   "desc": "Dawn. The roof door of the character's tower opens onto blinding morning light. A huge aerial shot pulls away from the lone figure at the parapet to reveal the whole empty city in the mist: no traffic, no crowds, no voices. Then the figure, small against the sunrise.",
+   "actions": "Pushes the door open, walks to the parapet, looks across the horizon.",
+   "lighting": "Low golden sun behind the skyline, haze and long shadows.",
+   "sfx": "A door's latch and creak, strong wind on the roof, distant birds; a slow, wide swell of strings.",
+   "edit": "One long, slow aerial move.",
+   "shots": [
+    {
+     "name": "roofdoor",
+     "start": 42.4,
+     "end": 43.6,
+     "camera": "from the roof, low; the door opens toward camera, light floods in"
+    },
+    {
+     "name": "aerial",
+     "start": 43.6,
+     "end": 46.55,
+     "camera": "drone-style pull back and up from the figure to the whole city"
+    },
+    {
+     "name": "edge",
+     "start": 46.55,
+     "end": 49.4,
+     "camera": "behind and to the side of the figure at the parapet, slow drift"
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "name": "THE FINAL PAYOFF",
+   "start": 49.4,
+   "end": 59.0,
+   "desc": "On the roof: they take out their phone one last time - \"No service\", \"No new messages\". They put it away and look toward the empty horizon. The film ends on an extreme close-up of their eyes closing, mirroring the first shot, so it loops.",
+   "actions": "Looks at the phone, lowers it, slides it into the hoodie pocket; a long look; eyes close.",
+   "lighting": "Warm dawn light on one side of the face, cool shadow on the other.",
+   "sfx": "Wind; a soft piano figure; the music fades to nothing on the last line, leaving only the wind.",
+   "edit": "Slow push-ins; fade to black on the last frame (the first frame is the same eyes, so the Short loops).",
+   "shots": [
+    {
+     "name": "phone2",
+     "start": 49.4,
+     "end": 52.9,
+     "camera": "over the shoulder onto the phone; the city out of focus behind"
+    },
+    {
+     "name": "pocket",
+     "start": 52.9,
+     "end": 55.9,
+     "camera": "profile medium shot, slow push in as the phone goes away"
+    },
+    {
+     "name": "eyes2",
+     "start": 55.9,
+     "end": 59.0,
+     "camera": "extreme close-up of the eyes; very slow push; the eyes close"
+    }
+   ]
+  }
+ ],
+ "lines": [
+  {
+   "scene": 1,
+   "start": 0.5,
+   "deadline": 3.47,
+   "text": "You wake up. No calls. No messages.",
+   "tts": "You wake up. No calls. No messages."
+  },
+  {
+   "scene": 1,
+   "start": 3.87,
+   "deadline": 7.45,
+   "text": "The city outside is silent. Everyone is gone.",
+   "tts": "The city outside is silent. Everyone is gone."
+  },
+  {
+   "scene": 2,
+   "start": 7.7,
+   "deadline": 9.86,
+   "text": "At first, it's incredible.",
+   "tts": "At first, it's incredible."
+  },
+  {
+   "scene": 2,
+   "start": 9.86,
+   "deadline": 13.95,
+   "text": "Every road is yours. Every shop. Every seat in the cinema.",
+   "tts": "Every road is yours. Every shop. Every seat in the cinema."
+  },
+  {
+   "scene": 2,
+   "start": 14.05,
+   "deadline": 16.47,
+   "text": "The entire world is yours.",
+   "tts": "The entire world is yours."
+  },
+  {
+   "scene": 3,
+   "start": 16.82,
+   "deadline": 18.69,
+   "text": "But something is wrong.",
+   "tts": "But something is wrong."
+  },
+  {
+   "scene": 3,
+   "start": 18.79,
+   "deadline": 23.24,
+   "text": "Traffic lights change for no one. Trains wait at empty platforms.",
+   "tts": "Traffic lights change for no one. Trains wait at empty platforms."
+  },
+  {
+   "scene": 3,
+   "start": 23.29,
+   "deadline": 28.84,
+   "text": "Machines can run on their own for a while. But power grids need people, day and night.",
+   "tts": "Machines can run on their own for a while. But power grids need people, day and night."
+  },
+  {
+   "scene": 3,
+   "start": 28.94,
+   "deadline": 32.03,
+   "text": "Sooner or later, the lights start going out.",
+   "tts": "Sooner or later, the lights start going out."
+  },
+  {
+   "scene": 4,
+   "start": 32.68,
+   "deadline": 35.72,
+   "text": "That night, you finally hear it. The silence.",
+   "tts": "That night, you finally hear it. The silence."
+  },
+  {
+   "scene": 4,
+   "start": 37.37,
+   "deadline": 41.68,
+   "text": "Over 8 billion voices, gone. Just your footsteps, and the wind.",
+   "tts": "Over eight billion voices, gone. Just your footsteps, and the wind."
+  },
+  {
+   "scene": 5,
+   "start": 42.43,
+   "deadline": 46.38,
+   "text": "From up here, a whole city belongs to you. A whole planet.",
+   "tts": "From up here, a whole city belongs to you. A whole planet."
+  },
+  {
+   "scene": 5,
+   "start": 46.63,
+   "deadline": 48.83,
+   "text": "And nobody to share it with.",
+   "tts": "And nobody to share it with."
+  },
+  {
+   "scene": 6,
+   "start": 49.48,
+   "deadline": 55.97,
+   "text": "The strangest part wouldn't be having the world to yourself. It would be realising there's nobody left to tell.",
+   "tts": "The strangest part wouldn't be having the world to yourself. It would be realising there's nobody left to tell."
+  },
+  {
+   "scene": 6,
+   "start": 56.12,
+   "deadline": 57.75,
+   "text": "Would you still want it?",
+   "tts": "Would you still want it?"
+  }
+ ],
+ "titles": [
+  {
+   "text": "A HYPOTHETICAL SCENARIO",
+   "start": 0.4,
+   "end": 7.4,
+   "style": "tag"
+  },
+  {
+   "text": "YOU ARE THE LAST|HUMAN ON EARTH.",
+   "start": 4.1,
+   "end": 7.4,
+   "style": "hero"
+  }
+ ],
+ "keys": [
+  {
+   "text": "NO CALLS. NO MESSAGES.",
+   "match": "No calls. No messages."
+  },
+  {
+   "text": "EVERYONE IS GONE.",
+   "match": "Everyone is gone."
+  },
+  {
+   "text": "THE ENTIRE WORLD|IS YOURS.",
+   "match": "The entire world is yours."
+  },
+  {
+   "text": "BUT SOMETHING|IS WRONG.",
+   "match": "But something is wrong."
+  },
+  {
+   "text": "YOU ARE|COMPLETELY ALONE.",
+   "start": 35.75,
+   "end": 37.3
+  }
+ ],
+ "events": {}
+}

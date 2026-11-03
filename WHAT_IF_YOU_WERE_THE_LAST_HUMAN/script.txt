@@ -1,0 +1,35 @@
+WHAT IF YOU WERE THE LAST HUMAN ON EARTH? - NARRATION SCRIPT (59.0 seconds, 136 words)
+Voice: Kokoro-82M bm_george. Start and end times are measured from the synthesised voice.
+Read close to the microphone, quiet and personal, as if talking to one listener: second person ("you"), short
+sentences, real pauses. Curious in scene 1, lighter and amused in scene 2, slower from "But something is wrong."
+Leave the two seconds after "The silence." empty. Let "And nobody to share it with." fall away; the last line is a
+question, asked gently. Captions show digits (8 billion); the voice engine is given the words (see scene_timing.json).
+
+[SCENE 1 - YOU WAKE UP  0.0-7.5 s]
+(00.50-03.12) You wake up. No calls. No messages.
+(03.87-07.10) The city outside is silent. Everyone is gone.
+
+[SCENE 2 - THE WORLD IS YOURS  7.5-16.9 s]
+(07.70-09.51) At first, it's incredible.
+(09.86-13.60) Every road is yours. Every shop. Every seat in the cinema.
+(14.05-16.12) The entire world is yours.
+
+[SCENE 3 - SOMETHING IS WRONG  16.9-32.1 s]
+(16.82-18.34) But something is wrong.
+(18.79-22.89) Traffic lights change for no one. Trains wait at empty platforms.
+(23.29-28.49) Machines can run on their own for a while. But power grids need people, day and night.
+(28.94-31.68) Sooner or later, the lights start going out.
+
+[SCENE 4 - THE SILENCE  32.1-42.4 s]
+(32.68-35.37) That night, you finally hear it. The silence.
+(37.37-41.33) Over 8 billion voices, gone. Just your footsteps, and the wind.
+
+[SCENE 5 - THE BIG REALISATION  42.4-49.4 s]
+(42.43-46.03) From up here, a whole city belongs to you. A whole planet.
+(46.63-48.48) And nobody to share it with.
+
+[SCENE 6 - THE FINAL PAYOFF  49.4-59.0 s]
+(49.48-55.62) The strangest part wouldn't be having the world to yourself. It would be realising there's nobody left to tell.
+(56.12-57.40) Would you still want it?
+
+Total: 136 words.

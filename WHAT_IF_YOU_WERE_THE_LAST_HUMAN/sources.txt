@@ -1,0 +1,113 @@
+WHAT IF YOU WERE THE LAST HUMAN ON EARTH? - SOURCES, FACT TABLE AND HONESTY NOTES
+==================================================================================
+
+This Short is FICTION: a hypothetical "what if" told in the second person. Nothing in it happened, and it does not
+explain how everyone disappears. It is labelled on screen ("A HYPOTHETICAL SCENARIO"). What it tries to get right is
+how the world around the last person would behave in the first day: things that run automatically keep running for
+a while, things that need people to watch over them start to fail - gradually, not all at once - and nature carries on.
+
+The narration makes only a few factual claims. Each was checked in at least two sources.
+
+
+1. SOURCES
+----------
+[1] United Nations, Department of Economic and Social Affairs, "World Population Prospects 2024" press release
+    (11 July 2024): world population 8.2 billion in 2024, projected to peak at about 10.3 billion in the mid-2080s.
+    https://www.un.org/sustainabledevelopment/blog/2024/07/press-release-wpp2024/
+[2] UN News, "World population expected to reach 10.3 billion in the mid-2080s" (July 2024); UN Geneva, "Growing or
+    shrinking? What latest trends tell us about world's population" (July 2024) - same 8.2 billion figure.
+    https://news.un.org/en/story/2024/07/1151971
+    https://www.ungeneva.org/en/news-media/news/2024/07/95264/growing-or-shrinking-what-latest-trends-tell-us-about-worlds
+[3] U.S. Department of Energy, "The Role of the Balancing Authority" (and its 2022 Balancing Authority backgrounder):
+    a balancing authority "ensures, in real time, that power system demand and supply are finely balanced"; if they
+    drift apart, frequency deviations can damage equipment and cause wide blackouts; operators can shed load (rolling
+    blackouts) to restore the balance.
+    https://www.energy.gov/documents/role-balancing-authority
+[4] U.S. Energy Information Administration, "Today in Energy": "U.S. electric system is made up of interconnections and
+    balancing authorities" - the actual operation of the electric system is managed by balancing authorities.
+    https://www.eia.gov/todayinenergy/detail.php?id=27152
+[5] North American Electric Reliability Corporation (NERC), Reliability Standard PER-004: each Reliability Coordinator
+    "shall be staffed with adequately trained and NERC-certified Reliability Coordinator operators, 24 hours per day,
+    seven days per week"; PER-003: real-time system operators must be NERC-certified.
+    https://nerc.com/pa/Stand/Reliability%20Standards/PER-004-0.pdf
+    https://www.nerc.com/pa/Stand/Reliability%20Standards/PER-003-2.pdf
+[6] U.S. Federal Highway Administration, Traffic Signal Timing Manual, chapter 5: signals run on "pre-timed" control
+    (fixed intervals, regardless of traffic) or "actuated" control (phases called by vehicle detectors).
+    https://ops.fhwa.dot.gov/publications/fhwahop08024/chapter5.htm
+[7] Backup power at mobile phone sites: after Hurricane Katrina the FCC set an 8-hour backup-power expectation for
+    cell sites (contested in court by carriers); runtimes in practice vary from a few hours (batteries) to days
+    (generators). NBC News, "Some cell carriers fight FCC backup power rule" (2008); KTVU, "California could mandate
+    backup power at cell phone towers" (2019).
+    https://www.nbcnews.com/id/wbna23523577
+    https://www.ktvu.com/news/california-could-mandate-backup-power-at-cell-phone-towers
+[8] USDA food-safety guidance on power cuts (via UConn Extension and USDA): a closed refrigerator keeps food cold for
+    about 4 hours; a full freezer about 48 hours (24 if half full).
+    https://publications.extension.uconn.edu/2014/02/19/keeping-food-safe-during-a-power-outage
+    https://www.usda.gov/node/44742
+
+
+2. CLAIM-BY-CLAIM TABLE
+-----------------------
+Claim (as said or shown)                          | Value used            | Sources   | Notes
+--------------------------------------------------|-----------------------|-----------|-------------------------------------
+"Over 8 billion voices, gone."                    | over 8 billion        | [1] [2]   | UN: 8.2 billion in 2024; "over 8
+                                                  |                       |           | billion" is safely conservative.
+"Traffic lights change for no one."               | narration + shot      | [6]       | Pre-timed signals cycle on fixed
+                                                  |                       |           | timers whether or not anyone is
+                                                  |                       |           | there. (Detector-actuated signals
+                                                  |                       |           | may simply rest - not shown.)
+"Trains wait at empty platforms."                 | narration + shot      | -         | Story image, not a technical claim:
+                                                  |                       |           | a train left standing with its
+                                                  |                       |           | doors open and lights on.
+"Machines can run on their own for a while."      | narration             | [6] [7]   | Deliberately vague: automatic
+                                                  |                       |           | systems (timers, backup batteries,
+                                                  |                       |           | generators) run for very different
+                                                  |                       |           | lengths of time. No timeline given.
+"But power grids need people, day and night."     | narration             | [3] [4]   | Supply and demand are balanced in
+                                                  |                       | [5]       | real time by staffed control rooms,
+                                                  |                       |           | legally required 24/7 (NERC).
+"Sooner or later, the lights start going out."    | narration + shot      | [3]       | Without operators the balance cannot
+ (districts go dark one by one, others stay lit)  |                       |           | be kept; the film shows a gradual,
+                                                  |                       |           | patchy loss, not a sudden worldwide
+                                                  |                       |           | blackout. WHEN and HOW FAST are not
+                                                  |                       |           | claimed (see section 3).
+The phone: "No service" at the end (day 2)        | screen prop           | [7]       | Phone sites run on backup power for
+                                                  |                       |           | hours to days; plausible in the
+                                                  |                       |           | character's area, not claimed as a
+                                                  |                       |           | universal time.
+
+
+3. CONFIRMED vs ESTIMATED vs SPECULATION
+----------------------------------------
+CONFIRMED (facts):
+- World population: about 8.2 billion (2024) [1] [2].
+- Power grids are balanced continuously by staffed control rooms; NERC requires certified operators around the clock [3] [4] [5].
+- Many traffic signals run on fixed timers [6]; phone sites have limited backup power [7].
+REASONABLE EXPECTATION (presented as story, without times or numbers):
+- That grids would fail somewhere "sooner or later" without operators, area by area rather than everywhere at once.
+- That some lights, screens, escalators, fountains and fridges keep running while their area still has power.
+SPECULATION / NOT CLAIMED:
+- How long any particular system would last. Real answers depend on the plant, the fuel, the weather and the
+  automation; the film deliberately gives no timeline ("for a while", "sooner or later").
+- What caused everyone to disappear - the story never says, and it is not a scientific claim.
+- Animals: pigeons appear in the square because animals would still be there; nothing is claimed about them.
+
+
+4. WHAT IS ILLUSTRATIVE (made up for the story)
+-----------------------------------------------
+- The city, its streets, shops ("LUNA CAFE", "HARBOUR BAKERY", "FRESH MARKET", "PAGE & SPINE BOOKS"), the supermarket,
+  mall, cinema, station and every sign, screen and departure board are invented.
+- The main character is an invented, stylised figure; nobody real is depicted. The "old photograph" shows invented,
+  stylised figures, not real people.
+- The order and speed of the lights going out at dusk are compressed for the story.
+- The film shown in the empty cinema is an abstract landscape made for this video.
+
+
+5. FACTS CHECKED BUT CUT FOR TIME
+---------------------------------
+- Food: a closed fridge keeps food cold for about 4 hours without power, a full freezer about 48 hours [8] - so fresh
+  food in shops would start to spoil soon after their power failed, while tins and dried food would last for years.
+- Phone networks: the FCC's post-Katrina 8-hour backup expectation for cell sites [7] - cut because the rule's current
+  status could not be confirmed and real runtimes vary widely.
+- Detector-actuated traffic signals can "rest" on one colour when no vehicle is detected [6] - true, but too detailed.
+- UN projection: world population is expected to peak at about 10.3 billion in the mid-2080s [1].
