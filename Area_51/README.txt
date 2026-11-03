@@ -78,7 +78,7 @@ On Windows or macOS, replace $BLENDER with the path to blender.exe or Blender.ap
 render_all.sh's loop by hand (or just: blender -b --factory-startup -P animation.py -- --quality final).
 
 Render budget on 4 CPU cores with no GPU (Cycles, OIDN denoising):
-  final   540x960, 6 samples, upscaled 2x in the edit   roughly 8-20 s per frame, about 5-8 hours for 1,770 frames
+  final   540x960, 6 samples, upscaled 2x in the edit   roughly 8-20 s per frame; this render took about 6.5 hours
   preview 270x480, 4 samples                            roughly 2-6 s per frame, about 1.5-2 hours
   The last second (black with the closing title) is drawn in the edit. A desktop GPU renders this many times faster.
 
