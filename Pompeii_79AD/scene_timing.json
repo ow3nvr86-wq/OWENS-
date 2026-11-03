@@ -398,10 +398,11 @@
    "style": "tag"
   },
   {
-   "text": "LOST IN 79 AD.|FOUND AGAIN, PIECE BY PIECE.",
+   "text": "LOST IN 79 AD.|FOUND AGAIN,|PIECE BY PIECE.",
    "start": 57.0,
    "end": 60.0,
-   "style": "final"
+   "style": "final",
+   "y": 0.78
   }
  ],
  "events": {

@@ -114,7 +114,7 @@ SCENE 11 - THE FINAL SHOT  (56.0-60.0 s, frames 1681-1800)
 Visual: The excavated forum today in soft evening light: broken columns, the temple podium, Vesuvius beyond (echoing the opening shot). Final caption, fade to black.
   Shot "ruins" 56.0-59.4 s (frames 1681-1782): Slow push-in, 30 mm, between the columns toward the temple and the mountain.
   VO 55.95-59.27: "The eruption that buried Pompeii also preserved it."
-  TEXT 57.0-60.0 [final]: LOST IN 79 AD. / FOUND AGAIN, PIECE BY PIECE.
+  TEXT 57.0-60.0 [final]: LOST IN 79 AD. / FOUND AGAIN, / PIECE BY PIECE.
   EVENT 58.80-59.40: fade_to_black
   EVENT 59.60-60.00: final_fade
   Edit: The final line; music resolves softly; fade to black under the final caption.
