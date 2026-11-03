@@ -88,10 +88,14 @@ installs all of it and exports $BLENDER, $SHORTS_PY, $KOKORO_PY and $KOKORO_DIR.
 On Windows or macOS, replace $BLENDER with the path to blender.exe or Blender.app/Contents/MacOS/Blender and run
 render_all.sh's loop by hand (or simply: blender -b --factory-startup -P animation.py -- --quality final).
 
-Render budget on 4 CPU cores with no GPU (Cycles, OIDN denoising):
-  final   540x960, 6 samples, upscaled 2x in the edit   about 7-9 s per frame -> about 4-4.5 hours for 1,755 frames
-  preview 270x480, 4 samples                            about 2 s per frame   -> about 1 hour
-  audio stage about 20 s; edit stage about 10-15 minutes. A desktop GPU renders all of this many times faster.
+Render times measured on this machine (4 CPU cores, no GPU; Cycles with OIDN denoising):
+  final   540x960, 6 samples, upscaled 2x in the edit   about 8 s per frame -> 3 h 50 min for 1,755 frames
+  preview 270x480, 4 samples                            about 1.7 s per frame -> about 55 minutes
+  audio stage about 20 s; edit stage about 4.5 minutes per video. A desktop GPU renders all of this many times faster.
+
+Final files (checked with ffprobe and ffmpeg ebur128):
+  final_video.mp4                    1080x1920, 30 fps, 58.5 s, H.264 High + AAC 48 kHz stereo, 58.4 MB, -13.9 LUFS
+  renders/final_video_no_voice.mp4   same picture without captions or narration, 58.6 MB, -14.0 LUFS
 
 To retime: edit scene_timing.json, re-run tools/voiceover.py and tools/captions.py, then the audio and edit stages.
 Re-render 3D frames only if you move a shot boundary or change anything in the 3D scene.
