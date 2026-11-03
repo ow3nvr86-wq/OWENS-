@@ -1,0 +1,35 @@
+WHAT IF GRAVITY TURNED OFF FOR 10 SECONDS? - NARRATION SCRIPT (58.3 seconds, 145 words)
+Voice: Kokoro-82M bm_george. Start and end times are measured from the synthesised voice.
+Read like a calm, slightly awed science documentary that slowly turns tense: short sentences, clear beats.
+Let "For ten seconds." land on its own. Build pace through the countdown, leave a beat after "never the problem."
+and say "The landing is." quietly, just before the silence. Warm and wry on "hold on to your coffee."
+Captions show digits (1,600); the voice engine is given the numbers spelled out (see scene_timing.json, "tts").
+
+[SCENE 1 - THE FIRST MOMENT  0.0-8.3 s]
+(00.55-03.29) Gravity just switched off. For ten seconds.
+(03.55-08.09) The coffee doesn't fall. Nothing rockets upward. It just stops being pulled down.
+
+[SCENE 2 - EVERYTHING STARTS FLOATING  8.3-17.4 s]
+(08.35-14.43) Anything already moving keeps going. A basketball flies dead straight. A fountain just keeps rising.
+(14.70-17.13) One small step, and you're off the ground.
+
+[SCENE 3 - THE WORLD BECOMES CHAOTIC  17.4-31.0 s]
+(17.45-21.89) But the planet is still spinning, at over 1,600 kilometres an hour.
+(22.15-26.09) Everything keeps going straight, while the ground curves away beneath it.
+(26.35-30.63) Tyres lose their grip. Airliners climb, because their wings still push up.
+
+[SCENE 4 - THE 10 SECONDS ARE ALMOST OVER  31.0-42.0 s]
+(31.10-33.99) Second by second, the whole city drifts higher.
+(34.30-37.93) Near the equator, a café table would end up as high as a person.
+(38.10-40.40) But the floating was never the problem.
+(40.65-41.73) The landing is.
+
+[SCENE 5 - GRAVITY RETURNS  42.0-50.0 s]
+(43.00-46.15) Everything that drifted comes back down. All at once.
+(46.45-49.13) Fountains collapse. Cars slam onto the road.
+
+[SCENE 6 - THE FINAL PAYOFF  50.0-58.3 s]
+(50.00-54.34) Ten seconds without gravity, and the world would never look quite the same.
+(55.00-56.77) So... hold on to your coffee.
+
+Total: 145 words.

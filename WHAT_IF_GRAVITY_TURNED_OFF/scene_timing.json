@@ -1,0 +1,678 @@
+{
+ "fps": 30,
+ "duration": 58.3,
+ "render_end": 58.3,
+ "g_off": 0.45,
+ "g_on": 42.05,
+ "count_keys": [
+  [
+   31.0,
+   0.88
+  ],
+  [
+   32.3,
+   1.0
+  ],
+  [
+   33.6,
+   2.0
+  ],
+  [
+   34.9,
+   3.0
+  ],
+  [
+   42.05,
+   10.0
+  ]
+ ],
+ "scenes": [
+  {
+   "id": 1,
+   "name": "THE FIRST MOMENT",
+   "start": 0.0,
+   "end": 8.3,
+   "desc": "A normal city morning: a woman lifts her takeaway coffee on the sidewalk outside a cafe. At 0.45 s gravity switches off. Her hand stops, but the coffee keeps rising out of the cup as a wobbling brown blob. Then a fast tracking shot down the street: pedestrians' feet leave the pavement mid-stride, a hat drifts off a head, newspapers and a dog float, parked cars lift gently on their own springs. Nothing shoots into the sky - everything just keeps the motion it had.",
+   "actions": "Maya (hero, cream coat, ponytail) lifts her cup, freezes, stares at the floating coffee. Walkers in the street stop mid-stride, arms out, confused; a man reaches for his floating hat; a dog paddles beside its owner.",
+   "lighting": "Warm morning sun low over the rooftops, soft haze and drifting dust in the light, long shadows.",
+   "sfx": "Busy city ambience (traffic, footsteps, chatter), then a deep sub \"whoomp\" and a tonal hum as gravity switches off; the city noise thins out; floaty shimmer and a soft wind.",
+   "edit": "Cold open: no title card before the action. GRAVITY: OFF slams in on the switch. Whip-pan cut into the street.",
+   "shots": [
+    {
+     "name": "cup",
+     "start": 0.0,
+     "end": 4.6,
+     "camera": "Close-up on the cup in her hand, slow push-in and orbit; pull back to reveal her face and the street.",
+     "tau": [
+      [
+       0.0,
+       -0.3
+      ],
+      [
+       0.45,
+       0.0
+      ],
+      [
+       1.2,
+       0.12
+      ],
+      [
+       4.6,
+       0.75
+      ]
+     ]
+    },
+    {
+     "name": "street",
+     "start": 4.6,
+     "end": 8.3,
+     "camera": "Fast low tracking shot along the sidewalk past floating people, a hat, papers, a dog; parked cars lifting.",
+     "tau": [
+      [
+       4.6,
+       0.25
+      ],
+      [
+       8.3,
+       1.05
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "EVERYTHING STARTS FLOATING",
+   "start": 8.3,
+   "end": 17.35,
+   "desc": "Anything that was already moving keeps going. A basketball shot sails dead straight over the hoop with no arc while the jumping player rises with it and grabs the rim. The plaza fountain's jets keep climbing as straight columns of water. A dog in mid-hop floats beside its owner; indoors, a man who stands up from his sofa drifts off the floor, a bumped chair glides away and poured water breaks into floating droplets.",
+   "actions": "Basketball players (4) - one shooting, one jumping, two watching; dog owner and dog; the man in the apartment.",
+   "lighting": "Morning sun; the court and plaza in hard sunlight; the apartment lit by the window.",
+   "sfx": "Ball swish of air (no bounce), water rushing upward with a hollow rising tone, dog whimper, glass clink, wind.",
+   "edit": "Hard cuts on the beat.",
+   "shots": [
+    {
+     "name": "hoop",
+     "start": 8.3,
+     "end": 11.25,
+     "camera": "Low angle under the hoop; the ball flies straight over the backboard; the player rises.",
+     "tau": [
+      [
+       8.3,
+       0.0
+      ],
+      [
+       11.25,
+       0.95
+      ]
+     ]
+    },
+    {
+     "name": "fountain",
+     "start": 11.25,
+     "end": 14.6,
+     "camera": "Slow tilt up the plaza fountain as its jets keep rising into tall straight columns.",
+     "tau": [
+      [
+       11.25,
+       0.2
+      ],
+      [
+       14.6,
+       1.6
+      ]
+     ]
+    },
+    {
+     "name": "dog",
+     "start": 14.6,
+     "end": 16.05,
+     "camera": "Low tracking shot: a dog floats beside its owner, who pulls it in by the lead.",
+     "tau": [
+      [
+       14.6,
+       0.3
+      ],
+      [
+       16.05,
+       1.0
+      ]
+     ]
+    },
+    {
+     "name": "room",
+     "start": 16.05,
+     "end": 17.35,
+     "camera": "Inside an apartment: a man drifts up off the floor; water blobs float from a jug; a chair glides.",
+     "tau": [
+      [
+       16.05,
+       0.4
+      ],
+      [
+       17.35,
+       1.2
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "name": "THE WORLD BECOMES CHAOTIC",
+   "start": 17.35,
+   "end": 31.0,
+   "desc": "Earth from space, still spinning: the equator moves at about 1,670 km/h. An illustration shows why the city lifts: everything keeps going in a straight line while the ground curves away beneath it. Back in the city, a moving car drifts on with its wheels spinning in the air - with no weight, tyres have no grip. Above the skyline an airliner pitches up and climbs, because its wings are still pushing up and nothing pulls it down; people in the street look up.",
+   "actions": "Driver in the floating car; street crowd looking up at the sky (Maya among them).",
+   "lighting": "Space: hard sunlight on the globe, thin blue atmosphere rim, stars. City: morning sun, haze, a little dust.",
+   "sfx": "Deep space drone and low rumble for the globe; a soft \"whoosh\" along the straight-line arrow; tyres spinning freely (electric whine), a horn; distant jet engines rising in pitch.",
+   "edit": "Dip through white into space; graphic lines and labels on the diagram; whip back into the street.",
+   "shots": [
+    {
+     "name": "globe",
+     "start": 17.35,
+     "end": 22.1,
+     "camera": "Space: slow push toward the turning Earth; the equator highlighted."
+    },
+    {
+     "name": "tangent",
+     "start": 22.1,
+     "end": 26.3,
+     "camera": "Close illustration: a dot leaves the turning surface along a straight line; the ground falls away beneath it."
+    },
+    {
+     "name": "traffic",
+     "start": 26.3,
+     "end": 28.6,
+     "camera": "Tracking alongside a floating car, wheels spinning in mid-air.",
+     "tau": [
+      [
+       26.3,
+       1.0
+      ],
+      [
+       28.6,
+       3.2
+      ]
+     ]
+    },
+    {
+     "name": "plane",
+     "start": 28.6,
+     "end": 31.0,
+     "camera": "Low angle from the street up past people looking up; an airliner climbs steeply over the towers.",
+     "tau": [
+      [
+       28.6,
+       1.0
+      ],
+      [
+       31.0,
+       4.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "name": "THE 10 SECONDS ARE ALMOST OVER",
+   "start": 31.0,
+   "end": 42.05,
+   "desc": "The countdown. Seconds pass in (almost) real time and everything that was resting on the ground drifts higher: cafe tables, bins, parked cars, people. Near the equator, by the end of the ten seconds, anything that was simply resting on the street is about 1.7 m above it. A worried close-up on the woman, now floating well above the pavement. Then silence, as the last second runs out.",
+   "actions": "Everyone floating, holding on to lamp posts, each other, car doors. Maya clutches her cup and looks down.",
+   "lighting": "The sun dims slightly behind thin cloud; the grade cools; haze thickens - tension.",
+   "sfx": "Ticking clock under a rising string/synth swell; heartbeat pulse; each countdown digit a deep tick; total silence for the last 0.3 s.",
+   "edit": "Big amber countdown digits (10 ... 1) top of frame, each with a soft pulse; shots get shorter toward the end.",
+   "shots": [
+    {
+     "name": "wide",
+     "start": 31.0,
+     "end": 34.2,
+     "camera": "Dramatic aerial crane over the street: everything hovering above its shadow.",
+     "tau": [
+      [
+       31.0,
+       0.88
+      ],
+      [
+       32.3,
+       1.0
+      ],
+      [
+       33.6,
+       2.0
+      ],
+      [
+       34.9,
+       3.0
+      ],
+      [
+       42.05,
+       10.0
+      ]
+     ]
+    },
+    {
+     "name": "table",
+     "start": 34.2,
+     "end": 38.0,
+     "camera": "Slow orbit around a cafe table rising past a height scale; its shadow stays on the ground.",
+     "tau": [
+      [
+       31.0,
+       0.88
+      ],
+      [
+       32.3,
+       1.0
+      ],
+      [
+       33.6,
+       2.0
+      ],
+      [
+       34.9,
+       3.0
+      ],
+      [
+       42.05,
+       10.0
+      ]
+     ]
+    },
+    {
+     "name": "tension",
+     "start": 38.0,
+     "end": 40.6,
+     "camera": "Close on Maya floating, looking down at the pavement far below her feet; slow push-in.",
+     "tau": [
+      [
+       31.0,
+       0.88
+      ],
+      [
+       32.3,
+       1.0
+      ],
+      [
+       33.6,
+       2.0
+      ],
+      [
+       34.9,
+       3.0
+      ],
+      [
+       42.05,
+       10.0
+      ]
+     ]
+    },
+    {
+     "name": "edge",
+     "start": 40.6,
+     "end": 42.05,
+     "camera": "Extreme low angle from the road up at the floating city: cars, people, tables overhead.",
+     "tau": [
+      [
+       31.0,
+       0.88
+      ],
+      [
+       32.3,
+       1.0
+      ],
+      [
+       33.6,
+       2.0
+      ],
+      [
+       34.9,
+       3.0
+      ],
+      [
+       42.05,
+       10.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "name": "GRAVITY RETURNS",
+   "start": 42.05,
+   "end": 50.0,
+   "desc": "Gravity switches back on. Everything still has the motion it had - things that were drifting up first slow, then fall. The whole street comes down at once: cars drop onto their suspension and bounce, tables clatter, people land in a crouch, the fountain's tall columns collapse into a heavy shower, papers flutter down. Shown in slow motion. Dramatic, but non-graphic: nobody is shown hurt.",
+   "actions": "People land on their feet and stumble or sit down hard; the dog lands in its owner's arms; the basketball player drops from the rim.",
+   "lighting": "Sun breaks through again; dust and spray catch the light.",
+   "sfx": "A huge low impact on the switch, then a rising whoosh of falling air; crashes, car-suspension thumps, glass and metal clatter, a heavy water downpour, car alarms.",
+   "edit": "GRAVITY: RESTORED slams in with a white flash; camera shakes on the impacts.",
+   "shots": [
+    {
+     "name": "drop_wide",
+     "start": 42.05,
+     "end": 44.3,
+     "camera": "Aerial wide: the whole street drops at once (slow motion).",
+     "tau": [
+      [
+       42.05,
+       10.0
+      ],
+      [
+       44.3,
+       11.15
+      ]
+     ]
+    },
+    {
+     "name": "drop_street",
+     "start": 44.3,
+     "end": 46.4,
+     "camera": "Street level: tables, bins and people falling past the lens.",
+     "tau": [
+      [
+       44.3,
+       10.35
+      ],
+      [
+       46.4,
+       11.4
+      ]
+     ]
+    },
+    {
+     "name": "fountain_fall",
+     "start": 46.4,
+     "end": 47.7,
+     "camera": "The plaza: the water columns collapse in a heavy shower.",
+     "tau": [
+      [
+       46.4,
+       11.2
+      ],
+      [
+       47.7,
+       12.6
+      ]
+     ]
+    },
+    {
+     "name": "cars_slam",
+     "start": 47.7,
+     "end": 49.3,
+     "camera": "Low angle: cars slam onto the road and bounce on their springs.",
+     "tau": [
+      [
+       47.7,
+       10.75
+      ],
+      [
+       49.3,
+       11.75
+      ]
+     ]
+    },
+    {
+     "name": "land",
+     "start": 49.3,
+     "end": 50.0,
+     "camera": "People landing in a crouch; the dog drops into its owner's arms.",
+     "tau": [
+      [
+       49.3,
+       10.95
+      ],
+      [
+       50.0,
+       11.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "name": "THE FINAL PAYOFF",
+   "start": 50.0,
+   "end": 58.3,
+   "desc": "The aftermath: a quiet, confused street. Things lie scattered where they landed, not where they started. People get up and look at the sky. The woman stands in the street, holding her coffee cup tight with both hands. The last shot matches the opening close-up of the cup, so the Short loops.",
+   "actions": "People getting up, dusting off; the basketball rolls across the road; Maya looks up, then at her cup, and grips it.",
+   "lighting": "Clear warm morning light, dust settling.",
+   "sfx": "Car alarms fading, a dripping fountain, distant murmurs; soft resolving music; a final low \"whoomp\" hinting at the loop.",
+   "edit": "Slow crane; final close-up framed exactly like the opening.",
+   "shots": [
+    {
+     "name": "aftermath",
+     "start": 50.0,
+     "end": 54.6,
+     "camera": "Slow rising crane over the scattered street as people get up and look skyward.",
+     "tau": [
+      [
+       50.0,
+       15.0
+      ],
+      [
+       54.6,
+       19.6
+      ]
+     ]
+    },
+    {
+     "name": "coffee",
+     "start": 54.6,
+     "end": 58.3,
+     "camera": "Push-in to Maya holding her cup in both hands; ends on the cup like the opening.",
+     "tau": [
+      [
+       54.6,
+       19.6
+      ],
+      [
+       58.3,
+       23.3
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "lines": [
+  {
+   "scene": 1,
+   "start": 0.55,
+   "deadline": 3.45,
+   "text": "Gravity just switched off. For ten seconds.",
+   "tts": "Gravity just switched off. For ten seconds."
+  },
+  {
+   "scene": 1,
+   "start": 3.55,
+   "deadline": 8.3,
+   "text": "The coffee doesn't fall. Nothing rockets upward. It just stops being pulled down.",
+   "tts": "The coffee doesn't fall. Nothing rockets upward. It just stops being pulled down."
+  },
+  {
+   "scene": 2,
+   "start": 8.35,
+   "deadline": 14.6,
+   "text": "Anything already moving keeps going. A basketball flies dead straight. A fountain just keeps rising.",
+   "tts": "Anything already moving keeps going. A basketball flies dead straight. A fountain just keeps rising."
+  },
+  {
+   "scene": 2,
+   "start": 14.7,
+   "deadline": 17.35,
+   "text": "One small step, and you're off the ground.",
+   "tts": "One small step, and you're off the ground."
+  },
+  {
+   "scene": 3,
+   "start": 17.45,
+   "deadline": 22.1,
+   "text": "But the planet is still spinning, at over 1,600 kilometres an hour.",
+   "tts": "But the planet is still spinning, at over sixteen hundred kilometres an hour."
+  },
+  {
+   "scene": 3,
+   "start": 22.15,
+   "deadline": 26.3,
+   "text": "Everything keeps going straight, while the ground curves away beneath it.",
+   "tts": "Everything keeps going straight, while the ground curves away beneath it."
+  },
+  {
+   "scene": 3,
+   "start": 26.35,
+   "deadline": 30.9,
+   "text": "Tyres lose their grip. Airliners climb, because their wings still push up.",
+   "tts": "Tyres lose their grip. Airliners climb, because their wings still push up."
+  },
+  {
+   "scene": 4,
+   "start": 31.1,
+   "deadline": 34.2,
+   "text": "Second by second, the whole city drifts higher.",
+   "tts": "Second by second, the whole city drifts higher."
+  },
+  {
+   "scene": 4,
+   "start": 34.3,
+   "deadline": 38.0,
+   "text": "Near the equator, a caf\u00e9 table would end up as high as a person.",
+   "tts": "Near the equator, a cafe table would end up as high as a person."
+  },
+  {
+   "scene": 4,
+   "start": 38.1,
+   "deadline": 40.55,
+   "text": "But the floating was never the problem.",
+   "tts": "But the floating was never the problem."
+  },
+  {
+   "scene": 4,
+   "start": 40.65,
+   "deadline": 41.95,
+   "text": "The landing is.",
+   "tts": "The landing is."
+  },
+  {
+   "scene": 5,
+   "start": 43.0,
+   "deadline": 46.35,
+   "text": "Everything that drifted comes back down. All at once.",
+   "tts": "Everything that drifted comes back down. All at once."
+  },
+  {
+   "scene": 5,
+   "start": 46.45,
+   "deadline": 49.3,
+   "text": "Fountains collapse. Cars slam onto the road.",
+   "tts": "Fountains collapse. Cars slam onto the road."
+  },
+  {
+   "scene": 6,
+   "start": 50.0,
+   "deadline": 54.6,
+   "text": "Ten seconds without gravity, and the world would never look quite the same.",
+   "tts": "Ten seconds without gravity, and the world would never look quite the same."
+  },
+  {
+   "scene": 6,
+   "start": 55.0,
+   "deadline": 56.9,
+   "text": "So... hold on to your coffee.",
+   "tts": "So... hold on to your coffee."
+  }
+ ],
+ "titles": [
+  {
+   "text": "GRAVITY: OFF",
+   "start": 0.5,
+   "end": 2.45,
+   "style": "big"
+  },
+  {
+   "text": "WHAT IF GRAVITY|DISAPPEARED?",
+   "start": 2.5,
+   "end": 5.4,
+   "style": "hero"
+  },
+  {
+   "text": "A HYPOTHETICAL SCENARIO  -  SHOWN IN SLOW MOTION",
+   "start": 0.5,
+   "end": 8.3,
+   "style": "tag"
+  },
+  {
+   "text": "EVERYTHING IS FLOATING",
+   "start": 14.6,
+   "end": 17.35,
+   "style": "label"
+  },
+  {
+   "text": "1,670 KM/H",
+   "start": 18.6,
+   "end": 22.1,
+   "style": "big"
+  },
+  {
+   "text": "EARTH'S SPIN AT THE EQUATOR",
+   "start": 18.6,
+   "end": 22.1,
+   "style": "item",
+   "y": 0.7
+  },
+  {
+   "text": "ILLUSTRATION - NOT TO SCALE",
+   "start": 22.1,
+   "end": 26.3,
+   "style": "tag"
+  },
+  {
+   "text": "STRAIGHT LINE",
+   "start": 22.9,
+   "end": 26.3,
+   "style": "item",
+   "y": 0.7
+  },
+  {
+   "text": "GRAVITY: RESTORED",
+   "start": 42.05,
+   "end": 44.0,
+   "style": "big"
+  },
+  {
+   "text": "SLOW MOTION",
+   "start": 42.3,
+   "end": 50.0,
+   "style": "tag"
+  }
+ ],
+ "events": {
+  "grav_off": [
+   0.45,
+   0.75
+  ],
+  "grav_on": [
+   42.05,
+   42.349999999999994
+  ],
+  "ball": [
+   8.3,
+   11.25
+  ],
+  "yank_dog": [
+   15.0,
+   15.8
+  ],
+  "drop_impacts": [
+   42.6,
+   44.3
+  ],
+  "car_impact": [
+   48.2,
+   48.6
+  ]
+ }
+}
