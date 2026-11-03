@@ -1,0 +1,107 @@
+WHAT IF MONEY GREW ON TREES? - SOURCES, FACT TABLE AND HONESTY NOTES
+=======================================================================
+
+This Short is a HYPOTHETICAL comedy. Money does not grow on trees, nothing in the story happened, and every price
+in it is invented. The only factual content is the economic idea it ends on, and it is stated in the cautious form
+that central banks and the IMF use. The video says so on screen ("A HYPOTHETICAL SCENARIO", "ILLUSTRATIVE PRICES -
+A HYPOTHETICAL ECONOMY", "ILLUSTRATIVE - NOT REAL DATA" on the graph).
+
+
+1. SOURCES
+----------
+[1] International Monetary Fund, Finance & Development, "Back to Basics" series: Ceyda Oner, "Inflation: Prices on
+    the Rise" (2019).
+    https://www.imf.org/en/Publications/fandd/issues/Series/Back-to-Basics/Inflation
+    Says that when demand exceeds the economy's production capacity, "demand-pull" inflation can result, and that
+    "if the money supply grows too big relative to the size of an economy, the currency's purchasing power falls"
+    (the quantity theory of money).
+[2] European Central Bank, "What is inflation?" (ECB explainers).
+    https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/what_is_inflation.en.html
+    Inflation is "a broad increase in the prices of goods and services"; it means "you can buy less for EUR1 today
+    than you could yesterday" - the same money buys fewer goods.
+[3] Federal Reserve Education (Federal Reserve System / St. Louis Fed), lesson "Teaching About Money, Spending, and
+    Inflation Using an Auction" (classroom inflation auction).
+    https://www.federalreserveeducation.org/teaching-resources/economics/inflation/classroom-inflation-auction
+    Students learn that if spending grows faster than the economy's ability to produce goods and services,
+    inflation results - "too much spending chasing too few goods".
+[4] Federal Reserve Bank of St. Louis, Feducation video series, "Money and Inflation Explained".
+    https://www.stlouisfed.org/education/feducation-video-series/money-and-inflation-explained
+    Describes inflation caused by too much money relative to output ("too much money chasing too few goods").
+[5] Mercatus Center (George Mason University), policy brief "What Would Milton Friedman Say about the Recent Surge in
+    Money Growth?", quoting Friedman and Schwartz's "A Monetary History of the United States": inflation as "too much
+    money chasing the available supply of goods and services".
+    https://mercatus.org/research/policy-briefs/what-would-milton-friedman-say-about-recent-surge-money-growth
+[6] PBS, "Commanding Heights", essay on the German hyperinflation (1923): by November 1923 one U.S. dollar was worth
+    one trillion marks; a wheelbarrow full of cash "would not even buy a newspaper".
+    https://www.pbs.org/wgbh/commandingheights/shared/minitextlo/ess_germanhyperinflation.html
+[7] Alpha History, "The 1923 hyperinflation" (Weimar Republic): shoppers carrying banknotes in bags and wheelbarrows;
+    the price of bread rising into the billions of marks.
+    https://alphahistory.com/weimarrepublic/1923-hyperinflation/
+[8] Centre for Future Work, "We need more goods, not less money" (2023) - an example of the counter-view that recent
+    inflation was driven mainly by supply shortages rather than money growth.
+    https://centreforfuturework.ca/2023/03/20/we-need-more-goods-not-less-money/
+[9] Alliant Credit Union, "The dollar bill: believe it or not" (banknote dimensions, used only for modelling).
+    https://www.alliantcreditunion.org/money-mentor/the-dollar-bill-believe-it-or-not
+
+
+2. CLAIM-BY-CLAIM TABLE
+-----------------------
+Claim (as said or shown)                                   | Value used                         | Sources     | Notes
+-----------------------------------------------------------|------------------------------------|-------------|------------------------------
+More money, but no more food, houses or cars -> prices     | stated as the story's logic,       | [1] [2] [3] | Cautious form: "can" / "tends
+rise and each dollar buys less                             | "every dollar bought less"         | [4]         | to"; see section 3.
+"Too much money, chasing too few goods"                    | narration line (41.2 s)            | [3] [4] [5] | A standard textbook description
+                                                           |                                    |             | of demand-pull inflation, not a
+                                                           |                                    |             | quote from any one person.
+"MORE MONEY. HIGHER PRICES."                               | on-screen title                    | [1] [3]     | Summary of the same idea.
+Graph: MONEY shoots up, GOODS barely moves                 | drawn shape only, no numbers       | [1] [3]     | Labelled ILLUSTRATIVE - NOT
+                                                           |                                    |             | REAL DATA.
+Bread $500, milk $250, bicycle $20,000, sandwich           | invented                           | none        | Fictional prices of the
+$1,999,999.99 -> $9,999,999.99, eggs $900                  |                                    |             | hypothetical economy (labelled).
+"People needed a wheelbarrow of cash just to buy           | part of the hypothetical story     | [6] [7]     | Echoes a real image from the
+groceries"                                                 |                                    |             | German hyperinflation of 1923.
+Banknote size (modelling only)                             | 156 x 66 mm                        | [9]         | Not stated in the video.
+
+
+3. CONFIRMED vs DISPUTED vs SPECULATION
+---------------------------------------
+CONFIRMED (mainstream textbook / central-bank position):
+- When the amount of money and spending grows much faster than the economy's ability to produce goods and services,
+  prices tend to rise and each unit of money buys less [1] [2] [3] [4].
+- Real hyperinflations (Germany 1923) produced the "wheelbarrow of cash" image [6] [7].
+
+DISPUTED / NUANCED (and how the script handles it):
+- Inflation does not always follow money growth one-for-one. How fast money is spent (velocity) changes; extra money
+  can be saved rather than spent; and if an economy has idle capacity, output can rise too [1] [5].
+- Inflation can also come from the supply side (shortages, energy shocks), not only from "too much money". The causes
+  of the 2021-2023 inflation are still argued over [8].
+- The script therefore keeps to the scenario it describes - a world where money multiplies while the amount of food,
+  houses and cars stays the same - and avoids saying that inflation "always" works this way. It never names a
+  real-world inflation rate or blames a real government.
+
+SPECULATION / FICTION:
+- The whole premise (money growing on trees, farms switching to money orchards, a man buying a forest) is invented
+  for comedy. No real people, companies or events are depicted.
+
+
+4. WHAT IS ILLUSTRATIVE (RECREATIONS, NOT RECORDS)
+--------------------------------------------------
+- All characters are stylised, invented figures; none represents a real person.
+- The banknote is an invented design ("LEGAL TENDER", a tree in the oval, "THIS NOTE GREW ON A TREE",
+  serial "TR 0000001 EE"). It deliberately copies no real currency: no real portrait, seal, motto, signature or
+  serial format.
+- Store, brands and signs are invented ("CORNER GROCER", "SUNNY O'S", "BRAN BITS", "LOW PRICES EVERY DAY!" etc.).
+- The city screen's graph has no axis values and is labelled ILLUSTRATIVE - NOT REAL DATA.
+- Every price is fictional and labelled ILLUSTRATIVE PRICES - A HYPOTHETICAL ECONOMY.
+
+
+5. FACTS CHECKED BUT CUT FOR TIME
+---------------------------------
+- Germany, November 1923: one U.S. dollar = one trillion (10^12) paper marks [6].
+- Germany, late 1923: a loaf of bread cost billions of marks (figures quoted for November 1923 are around 80 billion)
+  [7]; sources differ on the exact monthly prices, so no number was used.
+- The phrase usually attributed to Milton Friedman is "inflation is always and everywhere a monetary phenomenon"; the
+  "too much money chasing..." wording appears in Friedman and Schwartz's book in a longer form [5]. Because the
+  short slogan has no single verified author, the narration does not attribute it to anyone.
+- The idea that a currency's value depends on how much there is of it compared with goods is the "quantity theory of
+  money" [1]; the name was cut to keep the narration simple.

@@ -1,0 +1,87 @@
+WHAT IF MONEY GREW ON TREES? - SOUND DESIGN, MUSIC AND TIMING
+============================================================
+
+Everything below is synthesised by code in animation.py --stage audio (numpy only: oscillators, filtered noise,
+envelopes, convolution reverb). No samples, recordings, stock sound or copyrighted music. The narration is a
+synthetic voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py. Music, ambience and effects duck under
+the voice (about 10 dB) so the narration always stays on top. Every cue time below is generated from
+scene_timing.json and the measured narration, the same numbers the animation uses.
+
+Files: audio/mix_with_voice.wav (final mix, -14 LUFS), audio/mix_no_voice.wav (music + sound only, -14 LUFS, for
+recording your own voice), audio/narration.wav (voice only).
+
+CUE SHEET (generated)
+------------------------------------------------------------
+  0.00 s  [ambience ] Distant shoppers murmuring (supermarket shots)
+  0.00 s  [music    ] MUSIC: bouncy oom-pah documentary theme (tuba bass, marimba arpeggios, light kick and claps), 120 bpm, C major
+  0.00 s  [sfx      ] Paper rustle of the cash pile; notes slipping off
+  0.00 s  [ambience ] Supermarket room tone: air conditioning, fluorescent hum
+  0.15 s  [voice    ] NARRATION: "By noon, everyone on Earth was a millionaire. By dinner, nobody could afford a sandwich." (to 5.37 s)
+  0.15 s  [sfx      ] Sneaker squeaks on the store floor as he struts
+  0.70 s  [ambience ] Distant checkout scanner beeps every few seconds (store shots)
+  3.50 s  [sfx      ] Falling slide whistle as his face drops
+  3.55 s  [sfx      ] Cash register "ka-CHING" as the price card turns
+  4.25 s  [sfx      ] Snap-zoom whoosh and a low impact on the $1,999,999.99 card
+  5.45 s  [sfx      ] Whip whoosh into the suburb
+  5.65 s  [music    ] MUSIC: the theme picks up a shaker
+  5.65 s  [ambience ] Suburban morning: birdsong, a light breeze
+  5.75 s  [voice    ] NARRATION: "It started when dollar bills began growing on trees." (to 9.14 s)
+  6.92 s  [sfx      ] A crisp paper snap as the note is plucked
+  8.25 s  [sfx      ] Banknotes fluttering down from the branches
+  8.90 s  [sfx      ] Cartoon "boing" as he jumps for joy
+  9.35 s  [voice    ] NARRATION: "Within an hour, whole neighborhoods were out shaking branches." (to 12.62 s)
+  9.60 s  [sfx      ] Neighbours' running footsteps on lawn and pavement
+ 10.20 s  [sfx      ] Crowd whoops and cheers under the tree
+ 11.00 s  [sfx      ] Branches being shaken: leaf rustle in quick bursts
+ 11.30 s  [sfx      ] Phone camera shutter (x2)
+ 12.85 s  [music    ] MUSIC: the frenzy - whistled melody and brass stabs on every bar
+ 12.85 s  [ambience ] Open country wind (farm and forest)
+ 12.95 s  [voice    ] NARRATION: "Farmers ripped out their crops to plant money." (to 15.44 s)
+ 14.25 s  [sfx      ] Corn stalk ripped out of the ground
+ 14.50 s  [sfx      ] Whoosh as it is flung away; it lands in the corn
+ 15.75 s  [voice    ] NARRATION: "Families grew cash in their backyards." (to 18.10 s)
+ 16.35 s  [sfx      ] A tiny proud "ding" for the one-note money tree
+ 18.30 s  [sfx      ] Leaf-blower engine and a gush of fluttering paper
+ 18.40 s  [voice    ] NARRATION: "And one man bought an entire forest, just to become the richest person alive." (to 23.17 s)
+ 20.50 s  [sfx      ] A choir-like "aaah" swell as the forest is revealed
+ 23.33 s  [sfx      ] RECORD SCRATCH - the music stops dead
+ 23.75 s  [music    ] MUSIC: after the scratch - sneaky minor pizzicato and tuba (C minor)
+ 23.75 s  [voice    ] NARRATION: "But then, something strange happened. Shops started raising their prices." (to 28.06 s)
+ 26.70 s  [sfx      ] Price-gun click + ka-ching (pitched up each time): tag 1
+ 27.30 s  [sfx      ] Price-gun click + ka-ching (pitched up each time): tag 2
+ 27.90 s  [sfx      ] Price-gun click + ka-ching (pitched up each time): tag 3
+ 28.30 s  [voice    ] NARRATION: "A loaf of bread? $500. Milk? $250. A bicycle? $20,000." (to 34.20 s)
+ 29.15 s  [sfx      ] Price-gun click + ka-ching (pitched up each time): bread
+ 30.95 s  [sfx      ] Price-gun click + ka-ching (pitched up each time): milk
+ 31.20 s  [sfx      ] A rising "whoop" for the shopper's gasp
+ 32.85 s  [sfx      ] Price-gun click + ka-ching (pitched up each time): bike
+ 34.50 s  [sfx      ] Cash-counting machine whirring and riffling notes
+ 34.50 s  [music    ] MUSIC: dramatic - low drone, taiko pulse on every beat, rising strings
+ 34.60 s  [voice    ] NARRATION: "Here's the problem. Everyone had more money, but the world wasn't making any more food, houses or cars." (to 40.84 s)
+ 36.55 s  [sfx      ] Counting machine error beeps (x3)
+ 37.30 s  [ambience ] City: traffic rumble and wind, a blizzard of fluttering banknotes
+ 38.40 s  [sfx      ] Digital blips as the graph draws on the giant screen
+ 41.15 s  [voice    ] NARRATION: "Too much money, chasing too few goods. So every dollar bought less and less." (to 45.55 s)
+ 44.10 s  [sfx      ] Sad trombone "wah wah wah waaah" under "bought less and less"
+ 45.85 s  [music    ] MUSIC: the theme returns, bigger (brass on every bar)
+ 45.95 s  [voice    ] NARRATION: "Soon, people needed a wheelbarrow of cash just to buy groceries." (to 50.02 s)
+ 46.30 s  [sfx      ] Shovel scrapes and paper whooshes into the wheelbarrow
+ 50.40 s  [sfx      ] Wheelbarrow wheel squeaks and footsteps
+ 50.45 s  [voice    ] NARRATION: "Turns out, money really doesn't grow on trees." (to 53.34 s)
+ 53.60 s  [music    ] MUSIC: drops out to a faint held note for the stare (near silence)
+ 54.00 s  [sfx      ] The card turns again: a bigger, lower ka-ching
+ 54.40 s  [voice    ] NARRATION: "Well... technically, now it does." (to 56.14 s)
+ 55.63 s  [music    ] MUSIC: the punchline sting - brass "ta-da-DAAA" with cymbal on "now it does"
+ 56.35 s  [sfx      ] Snap-zoom whoosh and a tiny "ding" on the new price
+
+BACKGROUND MUSIC GUIDE (if you re-score it in an editor)
+------------------------------------------------------------
+- 0-23 s: upbeat, playful, slightly pompous "nature documentary" theme: tuba/bassoon oom-pah, pizzicato or
+  marimba, light percussion; it gets busier and sillier from 13 s (whistle, brass stabs) as the frenzy grows.
+- 23.5 s: a hard stop with a record scratch. Then a sneaky minor-key pizzicato under the price rises.
+- 34.5-46 s: dramatic but tongue-in-cheek: low drone, taiko-style pulse, rising strings; a sad trombone on
+  "bought less and less".
+- 46-53.5 s: the playful theme returns, bigger. Then near-silence for the deadpan stare, and one brass
+  "ta-da" sting exactly on "now it does".
+- Keep the narration 10-15 dB above the music; YouTube Shorts plays back at about -14 LUFS.
+- Use only music you have the rights to (your own, a licensed library, or YouTube Audio Library tracks).

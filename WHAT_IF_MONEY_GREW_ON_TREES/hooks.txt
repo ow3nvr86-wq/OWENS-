@@ -1,0 +1,30 @@
+WHAT IF MONEY GREW ON TREES? - OPENING HOOK OPTIONS
+=====================================================
+
+Scored 1-5 on each criterion from the brief (curiosity, visual potential, originality, comedy, open loop).
+
+OPTION 1 (anti-hook, contradiction)
+  "By noon, everyone on Earth was a millionaire. By dinner, nobody could afford a sandwich."
+  Curiosity 5 | Visual 5 | Originality 4 | Comedy 5 | Open loop 5   = 24/25
+  - Drops the viewer into the middle of the situation with a paradox: everyone is rich AND everyone is broke.
+  - The picture writes itself and lands in under two seconds: a grinning man hugging a mountain of cash walks up to a
+    till, and one sandwich costs $1,999,999.99. Works with the sound off.
+  - The open loop is the exact question the video answers: how can everyone become rich and still be broke?
+  - Its timing structure (noon / dinner) promises a fast, escalating story.
+
+OPTION 2 (event hook)
+  "The first guy picked $100 off a tree. Three hours later, the entire city was fighting over them."
+  Curiosity 4 | Visual 4 | Originality 3 | Comedy 3 | Open loop 3   = 17/25
+  - Strong image, but it explains the premise immediately, and "people fight over money" is the expected outcome;
+    it doesn't set up the twist (the money becoming worthless). Used instead as the start of Scene 2.
+
+OPTION 3 (imagine hook)
+  "Imagine waking up and discovering that your backyard tree is worth more than your house."
+  Curiosity 3 | Visual 3 | Originality 2 | Comedy 2 | Open loop 2   = 12/25
+  - "Imagine..." is a slow, familiar opener; it asks the viewer to do the work, and the premise points to "you get
+    rich", not to the payoff. Its best idea (the backyard tree) survives as the "MY FIRST MONEY TREE" gag.
+
+SELECTED: OPTION 1.
+It is the only hook that is funny, visual and paradoxical at the same time, and its contradiction is resolved by the
+ending (more money, same amount of stuff -> higher prices), so the payoff keeps the opening's promise. The last shot
+returns to the same price card, framed exactly like the opening, so the Short loops.

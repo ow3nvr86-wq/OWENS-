@@ -928,10 +928,10 @@ def build_world(sc):
     dot = nd(nt, 'ShaderNodeVectorMath', p_operation='DOT_PRODUCT', Vector=gen)
     nt.links.new(sv.outputs[0], dot.inputs[1])
     g = mth(nt, 'POWER', mth(nt, 'MAXIMUM', dot.outputs['Value'], 0.0), 6.0)
-    g2 = mth(nt, 'POWER', mth(nt, 'MAXIMUM', dot.outputs['Value'], 0.0), 80.0)
+    g2 = mth(nt, 'POWER', mth(nt, 'MAXIMUM', dot.outputs['Value'], 0.0), 200.0)
     gcol = nd(nt, 'ShaderNodeRGB')
     gcol.name = 'GlowCol'
-    gamt = mth(nt, 'MULTIPLY', mth(nt, 'ADD', g, mth(nt, 'MULTIPLY', g2, 3.0)), value(nt, 'SunGlow', 0.0))
+    gamt = mth(nt, 'MULTIPLY', mth(nt, 'ADD', mth(nt, 'MULTIPLY', g, 0.6), mth(nt, 'MULTIPLY', g2, 1.5)), value(nt, 'SunGlow', 0.0))
     glow = nd(nt, 'ShaderNodeMix', p_data_type='RGBA', p_blend_type='MULTIPLY', Factor=1.0)
     nt.links.new(gcol.outputs[0], glow.inputs[6])
     nt.links.new(comb(nt, gamt, gamt, gamt), glow.inputs[7])
@@ -1465,7 +1465,7 @@ def build_char(name, spec, collection):
         add_sbox(bm, (0, 0.118 * g, 0.0), (0.13, 0.018, 0.14), e=0.25, mi=2)
         for sx in (1, -1):
             add_box(bm, sx * 0.09 - 0.02, -0.12, 0.13, sx * 0.09 + 0.02, 0.13, 0.27, mi=2)
-        mats.append(MAT[spec.get('bib', 'denim_light')])
+        mats.append(MAT[spec.get('bib', 'jeans')])
     if 'vest' in extra:
         add_ellipsoid(bm, (0, 0.003, 0.06), (0.212 * g ** 0.5, 0.132 * g, 0.16), 16, 10, 2)
         mats.append(MAT['vest'])
@@ -3010,7 +3010,7 @@ def build_cameras():
                 fstop=4.0)
     # 3 farm and forest
     camera_shot('farmer', 26, [(0, Fm(-0.05, 1.5, 1.4)), (1, Fm(-0.45, 1.85, 1.42))], [(0, Fm(-0.55, 4.6, 1.6)), (1, Fm(-0.7, 4.6, 1.6))], fstop=8.0)
-    camera_shot('farm', 24, [(0, Fm(-31, 2, 6.5)), (1, Fm(-57, -37.5, 4.2))], [(0, Fm(-38, -12, 2.0)), (1, Fm(-65, -44.5, 0.8))], fstop=60, ease='EASE_IN_OUT')
+    camera_shot('farm', 24, [(0, Fm(-31, 2, 6.5)), (1, Fm(-60, -36.5, 5.8))], [(0, Fm(-38, -12, 2.0)), (1, Fm(-65, -44.5, 0.8))], fstop=60, ease='EASE_IN_OUT')
     z0 = FORD['z0']
     camera_shot('forest', 32, [(0, FOREST + Vector((0.25, -1.5, z0 + 1.7))), (0.25, FOREST + Vector((0.4, -2.6, z0 + 2.2))),
                                (1, FOREST + Vector((0.0, -15.0, z0 + 13.0)))],
@@ -3707,10 +3707,10 @@ STOREL = dict(sky=((0.6, 0.6, 0.6), (0.4, 0.45, 0.5), 0.1), sun=(30, 0, 0.0, (1,
               mist=(4, 45), fog=(0.16, (0.62, 0.64, 0.60)))
 MORNING = dict(sky=((0.78, 0.80, 0.82), (0.18, 0.36, 0.72), 1.2), sun=(30, -25, 5.5, (1.0, 0.88, 0.70)), glow=(0.6, (1.0, 0.82, 0.6)),
                clouds=0.55, mist=(60, 900), fog=(0.06, (0.80, 0.80, 0.80)))
-GOLDEN = dict(sky=((0.92, 0.64, 0.40), (0.20, 0.30, 0.52), 1.0), sun=(11, 235, 4.6, (1.0, 0.64, 0.34)), glow=(1.4, (1.0, 0.58, 0.3)),
-              clouds=0.5, mist=(60, 1600), fog=(0.25, (0.88, 0.64, 0.42)))
-FORESTL = dict(sky=((0.95, 0.66, 0.40), (0.22, 0.30, 0.52), 1.0), sun=(9, 80, 4.6, (1.0, 0.62, 0.32)), glow=(1.8, (1.0, 0.56, 0.28)),
-               clouds=0.45, mist=(80, 1400), fog=(0.4, (0.92, 0.66, 0.42)))
+GOLDEN = dict(sky=((0.92, 0.64, 0.40), (0.20, 0.30, 0.52), 1.0), sun=(11, 235, 4.6, (1.0, 0.64, 0.34)), glow=(0.6, (1.0, 0.58, 0.3)),
+              clouds=0.5, mist=(60, 1600), fog=(0.18, (0.88, 0.64, 0.42)))
+FORESTL = dict(sky=((0.95, 0.66, 0.40), (0.22, 0.30, 0.52), 1.0), sun=(9, 80, 4.6, (1.0, 0.62, 0.32)), glow=(0.7, (1.0, 0.56, 0.28)),
+               clouds=0.45, mist=(80, 1400), fog=(0.28, (0.92, 0.66, 0.42)))
 CITYL = dict(sky=((0.78, 0.70, 0.60), (0.34, 0.42, 0.54), 1.0), sun=(38, -100, 4.4, (1.0, 0.78, 0.55)), glow=(1.0, (1.0, 0.7, 0.45)),
              clouds=0.7, mist=(25, 420), fog=(0.32, (0.74, 0.66, 0.56)))
 GRADE = {
@@ -3920,6 +3920,1069 @@ def stage_render():
         sc.frame_start, sc.frame_end = lo, hi
         print(f'--- rendering shot {s["name"]} frames {lo}-{hi}', flush=True)
         bpy.ops.render.render(animation=True)
+
+
+
+# ============================================================================
+# Stage: audio - synthesised score and sound design (numpy only), ducked under the narration
+# ============================================================================
+SR = 48000
+
+
+def _bandpass(x, lo, hi, order=2):
+    X = np.fft.rfft(x)
+    f = np.fft.rfftfreq(len(x), 1 / SR) + 1e-3
+    H = np.ones_like(f)
+    if lo:
+        H /= np.sqrt(1 + (lo / f) ** (2 * order))
+    if hi:
+        H /= np.sqrt(1 + (f / hi) ** (2 * order))
+    return np.fft.irfft(X * H, len(x))
+
+
+def _sweep_bp(x, centre_fn, q=6.0, block=4096):
+    """Time-varying band-pass (overlap-add of FFT-filtered Hann blocks)."""
+    out = np.zeros(len(x) + block)
+    win = np.hanning(block)
+    hop = block // 2
+    f = np.fft.rfftfreq(block, 1 / SR) + 1e-3
+    for i in range(0, len(x), hop):
+        seg = x[i:i + block]
+        if len(seg) < block:
+            seg = np.pad(seg, (0, block - len(seg)))
+        fc = centre_fn((i + block / 2) / SR)
+        bw = fc / q
+        H = 1.0 / np.sqrt(1 + ((f - fc) / bw) ** 2)
+        out[i:i + block] += np.fft.irfft(np.fft.rfft(seg * win) * H, block)
+    return out[:len(x)]
+
+
+def _noise(n, seed, colour='white'):
+    r = np.random.default_rng(seed).standard_normal(n)
+    if colour == 'white':
+        return r
+    X = np.fft.rfft(r)
+    f = np.fft.rfftfreq(n, 1 / SR) + 1.0
+    X /= np.sqrt(f) if colour == 'pink' else f
+    y = np.fft.irfft(X, n)
+    return y / (np.abs(y).max() + 1e-9)
+
+
+def _env(t, pts):
+    """Piecewise-linear envelope from [(time, value), ...]."""
+    ts, vs = zip(*pts)
+    return np.interp(t, ts, vs)
+
+
+def _reverb(x, seconds=2.6, seed=0, damp=3.0):
+    n = int(seconds * SR)
+    tt = np.arange(n) / SR
+    ir = np.random.default_rng(seed).standard_normal(n) * np.exp(-damp * tt / seconds * 2.3)
+    ir = _bandpass(ir, 120, 6000)
+    ir /= np.sqrt((ir ** 2).sum())
+    L = len(x) + n
+    y = np.fft.irfft(np.fft.rfft(x, L) * np.fft.rfft(ir, L), L)[:len(x)]
+    return y
+
+
+def _place(buf, sig, t0, gain=1.0, pan=0.0):
+    i = int(t0 * SR)
+    if i >= buf.shape[1] or i + len(sig) <= 0:
+        return
+    j0 = max(0, -i)
+    sig = sig[j0:]
+    i = max(i, 0)
+    n = min(len(sig), buf.shape[1] - i)
+    gl = math.cos((pan + 1) * math.pi / 4) * gain
+    gr = math.sin((pan + 1) * math.pi / 4) * gain
+    buf[0, i:i + n] += sig[:n] * gl
+    buf[1, i:i + n] += sig[:n] * gr
+
+
+def _boom(dur=2.5, f0=62, f1=32, seed=0):
+    t = np.arange(int(dur * SR)) / SR
+    ph = 2 * np.pi * np.cumsum(f1 + (f0 - f1) * np.exp(-t * 3.0)) / SR
+    body = np.sin(ph) * np.exp(-t * 1.6)
+    n = _bandpass(_noise(len(t), seed), None, 260) * np.exp(-t * 5.0) * 0.6
+    return np.tanh(1.6 * (body + n))
+
+
+def _pluck(freq, dur=3.0, bright=1.0):
+    t = np.arange(int(dur * SR)) / SR
+    y = np.zeros_like(t)
+    for k, a in ((1, 1.0), (2, 0.45 * bright), (3, 0.18 * bright), (4, 0.09 * bright), (5.02, 0.05)):
+        y += a * np.sin(2 * np.pi * freq * k * t) * np.exp(-t * (1.4 + 0.9 * k))
+    return y * np.minimum(t / 0.004, 1)
+
+
+def _crunch(seed, dur=0.16):
+    t = np.arange(int(dur * SR)) / SR
+    r = np.random.default_rng(seed)
+    grains = (r.random(len(t)) < 0.02) * r.standard_normal(len(t))
+    y = _bandpass(grains + 0.2 * r.standard_normal(len(t)), 700, 5500) * np.exp(-t * 22)
+    return y / (np.abs(y).max() + 1e-9)
+
+
+def _pad(notes, dur, seed=0, cutoff=900):
+    t = np.arange(int(dur * SR)) / SR
+    y = np.zeros_like(t)
+    r = np.random.default_rng(seed)
+    for f in notes:
+        for det in (-0.12, 0.0, 0.13):
+            ph = r.uniform(0, 1)
+            saw = 2 * ((t * f * (1 + det / 100) + ph) % 1.0) - 1
+            y += saw
+    y = _bandpass(y, 40, cutoff, order=2)
+    return y / (np.abs(y).max() + 1e-9)
+
+
+
+
+
+def _roar(n, seed):
+    y = _bandpass(_noise(n, seed, 'brown'), 30, 700)
+    return y / (np.abs(y).max() + 1e-9)
+
+
+def _bell(freq, dur=6.0):
+    t = np.arange(int(dur * SR)) / SR
+    y = np.zeros_like(t)
+    for k, a, d in ((0.5, 0.5, 0.6), (1.0, 1.0, 0.9), (1.19, 0.5, 1.4), (1.5, 0.35, 1.6), (2.0, 0.3, 2.0), (2.74, 0.2, 2.6)):
+        y += a * np.sin(2 * np.pi * freq * k * t) * np.exp(-t * d)
+    return y * np.minimum(t / 0.003, 1)
+
+
+
+
+
+def _norm(y):
+    return y / (np.abs(y).max() + 1e-9)
+
+
+def _foghorn(dur=3.2, f=110.0):
+    """Two-tone diaphone-like horn (the sound of San Francisco Bay at night)."""
+    t = np.arange(int(dur * SR)) / SR
+    env = np.minimum(t / 0.25, 1) * np.minimum((dur - t) / 0.6, 1)
+    split = dur * 0.62
+    ff = np.where(t < split, f, f * 0.84)
+    ph = 2 * np.pi * np.cumsum(ff) / SR
+    y = np.sign(np.sin(ph)) * 0.5 + np.sin(ph) + 0.4 * np.sin(2 * ph)
+    return _norm(_bandpass(y, 60, 900)) * env
+
+
+def _siren(dur, f0=640.0, f1=1150.0, period=3.4):
+    """A wailing mechanical siren (rising and falling)."""
+    t = np.arange(int(dur * SR)) / SR
+    k = 0.5 - 0.5 * np.cos(2 * np.pi * t / period)
+    f = f0 + (f1 - f0) * k
+    ph = 2 * np.pi * np.cumsum(f) / SR
+    y = np.sin(ph) + 0.35 * np.sin(2 * ph) + 0.15 * np.sin(3 * ph)
+    return _norm(y)
+
+
+def _tick(seed, bright=1.0):
+    t = np.arange(int(0.05 * SR)) / SR
+    r = np.random.default_rng(seed)
+    y = r.standard_normal(len(t)) * np.exp(-t * 400) + 0.6 * np.sin(2 * np.pi * 3100 * t) * np.exp(-t * 260)
+    return _norm(_bandpass(y, 900 * bright, 9000)) * 0.8
+
+
+def _key(seed):
+    """A typewriter key strike: thump + bright clack + carriage rattle."""
+    r = np.random.default_rng(seed)
+    t = np.arange(int(0.12 * SR)) / SR
+    clack = _bandpass(r.standard_normal(len(t)), 1500, 7000) * np.exp(-t * 90)
+    thump = np.sin(2 * np.pi * 160 * t) * np.exp(-t * 60) * 0.7
+    ring = np.sin(2 * np.pi * r.uniform(2400, 3200) * t) * np.exp(-t * 120) * 0.25
+    return _norm(clack + thump + ring)
+
+
+def _paper(dur, seed):
+    """Paper sliding on a desk."""
+    t = np.arange(int(dur * SR)) / SR
+    y = _sweep_bp(_noise(len(t), seed), lambda x: 1800 + 2400 * math.sin(math.pi * x / dur), q=2.0)
+    return _norm(y) * np.sin(np.pi * t / dur) ** 0.8
+
+
+def _step(seed):
+    t = np.arange(int(0.25 * SR)) / SR
+    r = np.random.default_rng(seed)
+    y = _bandpass(r.standard_normal(len(t)), 80, 1800) * np.exp(-t * 30) + np.sin(2 * np.pi * 70 * t) * np.exp(-t * 40)
+    return _norm(y)
+
+
+def _stamp():
+    t = np.arange(int(0.4 * SR)) / SR
+    y = np.sin(2 * np.pi * 85 * t) * np.exp(-t * 18) + _bandpass(_noise(len(t), 77), 200, 3000) * np.exp(-t * 40) * 0.6
+    return _norm(y)
+
+
+def _click():
+    t = np.arange(int(0.08 * SR)) / SR
+    y = _bandpass(_noise(len(t), 88), 1200, 8000) * np.exp(-t * 160) + 0.3 * np.sin(2 * np.pi * 900 * t) * np.exp(-t * 90)
+    return _norm(y)
+
+
+
+def _crowd(n, seed, density=1.0):
+    """A cheering street crowd: a band-limited roar with swells, plus scattered claps and whistles."""
+    t = np.arange(n) / SR
+    r = np.random.default_rng(seed)
+    roar = _norm(_bandpass(_noise(n, seed, 'pink'), 250, 3200))
+    swell = 0.65 + 0.35 * np.sin(2 * np.pi * t / 2.7 + r.uniform(0, 6)) * np.sin(2 * np.pi * t / 1.3)
+    y = roar * swell * 0.6
+    claps = np.zeros(n)
+    for _ in range(int(n / SR * 140 * density)):
+        i = r.integers(0, n - 2000)
+        k = np.arange(900)
+        claps[i:i + 900] += r.standard_normal(900) * np.exp(-k / 90.0) * r.uniform(0.3, 1.0)
+    y += _norm(_bandpass(claps, 700, 6000)) * 0.45
+    for _ in range(int(n / SR * 0.8 * density)):
+        i = r.integers(0, max(1, n - SR))
+        d = int(r.uniform(0.25, 0.6) * SR)
+        tt = np.arange(d) / SR
+        f = r.uniform(1600, 2600) * (1 + 0.15 * np.sin(2 * np.pi * tt / (d / SR) * 0.5))
+        y[i:i + d] += np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * tt / tt[-1]) * 0.12
+    return _norm(y)
+
+
+def _engine(n, seed, base=42.0):
+    """Idling / cruising motorcycle engines: a rough low harmonic series with jitter."""
+    t = np.arange(n) / SR
+    r = np.random.default_rng(seed)
+    f = base * (1 + 0.04 * np.sin(2 * np.pi * t * 0.7) + 0.02 * r.standard_normal(n).cumsum() / np.sqrt(np.arange(1, n + 1)))
+    ph = 2 * np.pi * np.cumsum(f) / SR
+    y = sum(np.sin(k * ph + r.uniform(0, 6)) / k ** 0.8 for k in range(1, 9))
+    y = y * (1 + 0.5 * np.sign(np.sin(ph * 0.5)))
+    return _norm(_bandpass(y, 30, 900))
+
+
+def _wings(n, seed):
+    """A flock taking off: many fast, soft flaps."""
+    r = np.random.default_rng(seed)
+    y = np.zeros(n)
+    for _ in range(140):
+        i = int(r.uniform(0, 0.75) * n)
+        rate = r.uniform(8, 13)
+        for k in range(int(r.uniform(4, 12))):
+            j = i + int(k * SR / rate)
+            if j + 1500 >= n:
+                break
+            m = np.arange(1500)
+            y[j:j + 1500] += r.standard_normal(1500) * np.exp(-m / 260.0) * (1 - k / 14)
+    return _norm(_bandpass(y, 400, 5000))
+
+
+def _snare(seed, muffle=1.0):
+    t = np.arange(int(0.16 * SR)) / SR
+    r = np.random.default_rng(seed)
+    y = _bandpass(r.standard_normal(len(t)), 180, 4200 / muffle) * np.exp(-t * 26) + 0.6 * np.sin(2 * np.pi * 185 * t) * np.exp(-t * 38)
+    return _norm(y)
+
+
+def _phone(dur=1.6):
+    """A 1960s desk telephone bell: a struck bell modulated by the 20 Hz ringer."""
+    t = np.arange(int(dur * SR)) / SR
+    bell = np.sin(2 * np.pi * 1180 * t) + 0.5 * np.sin(2 * np.pi * 2360 * t + 1) + 0.3 * np.sin(2 * np.pi * 1750 * t)
+    gate = (np.sin(2 * np.pi * 20 * t) > 0) * 1.0
+    return _norm(bell * (0.4 + 0.6 * gate) * np.minimum(t / 0.01, 1) * np.minimum((dur - t) / 0.08, 1))
+
+
+def _static(dur, seed, crackle=1.0):
+    t = np.arange(int(dur * SR)) / SR
+    r = np.random.default_rng(seed)
+    y = _bandpass(r.standard_normal(len(t)), 300, 3400) * (0.5 + 0.5 * np.abs(np.sin(2 * np.pi * t * 3.1)))
+    pops = (r.random(len(t)) < 0.002 * crackle) * r.standard_normal(len(t)) * 6
+    return _norm(y + _bandpass(pops, 500, 7000)) * np.minimum(t / 0.02, 1) * np.minimum((dur - t) / 0.08, 1)
+
+
+def _horn(dur=3.4, freqs=(311.1, 370.0, 415.3)):
+    """A distant locomotive chord horn."""
+    t = np.arange(int(dur * SR)) / SR
+    y = sum(np.sign(np.sin(2 * np.pi * f * t)) * 0.4 + np.sin(2 * np.pi * f * t) for f in freqs)
+    env = np.minimum(t / 0.3, 1) * np.minimum((dur - t) / 0.8, 1)
+    return _norm(_bandpass(y, 150, 1400)) * env
+
+
+def _whoosh(dur, seed):
+    t = np.arange(int(dur * SR)) / SR
+    y = _sweep_bp(_noise(len(t), seed), lambda x: 300 + 3500 * (x / dur) ** 1.5, q=3.0)
+    return _norm(y) * np.sin(np.pi * t / dur) ** 1.5
+
+
+
+
+def _jet(dur, seed, f0=2600.0, f1=1700.0):
+    """A distant jet passing: broadband roar plus a faint falling turbine whine (Doppler)."""
+    n = int(dur * SR)
+    tt = np.arange(n) / SR
+    roar = _norm(_bandpass(_noise(n, seed, 'pink'), 120, 2200))
+    f = f0 + (f1 - f0) * (tt / dur)
+    whine = np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.05
+    env = np.sin(np.pi * np.clip(tt / dur, 0, 1)) ** 1.5
+    return (roar + whine) * env
+
+
+def _chatter(dur, seed):
+    """Radio voices too far away to understand: band-limited noise shaped like syllables, with squelch."""
+    n = int(dur * SR)
+    tt = np.arange(n) / SR
+    rng = np.random.default_rng(seed)
+    sy = np.zeros(n)
+    t = 0.05
+    while t < dur - 0.2:
+        a = int(t * SR)
+        L = int(rng.uniform(0.08, 0.2) * SR)
+        sy[a:a + L] += np.hanning(L)
+        t += rng.uniform(0.1, 0.25) + (0.4 if rng.random() < 0.15 else 0.0)
+    v = _norm(_bandpass(_noise(n, seed + 1), 500, 2600)) * sy
+    v += 0.25 * np.sin(2 * np.pi * rng.uniform(180, 240) * tt) * sy
+    return _norm(v) * 0.6 + _static(dur, seed + 2, 0.6)[:n] * 0.4
+
+
+def _crickets(n, seed):
+    tt = np.arange(n) / SR
+    rng = np.random.default_rng(seed)
+    out = np.zeros(n)
+    for k in range(5):
+        f = rng.uniform(4200, 5200)
+        rate = rng.uniform(2.0, 3.4)
+        ph = rng.uniform(0, 1)
+        gate = (np.sin(2 * np.pi * (tt * rate + ph)) > 0.6).astype(float)
+        trill = (np.sin(2 * np.pi * 38 * tt) > 0).astype(float)
+        out += np.sin(2 * np.pi * f * tt) * gate * trill * rng.uniform(0.3, 1.0)
+    return _norm(_bandpass(out, 3500, 6500))
+
+
+def _clunk(seed):
+    """A heavy breaker / contactor closing in a big metal building."""
+    n = int(0.5 * SR)
+    tt = np.arange(n) / SR
+    body = np.sin(2 * np.pi * 70 * tt) * np.exp(-tt * 18) + 0.6 * np.sin(2 * np.pi * 140 * tt) * np.exp(-tt * 30)
+    click = _bandpass(_noise(n, seed), 800, 5000) * np.exp(-tt * 90)
+    return _norm(body + click * 0.8)
+
+
+def _rumble_doors(dur, seed):
+    n = int(dur * SR)
+    tt = np.arange(n) / SR
+    r = _norm(_bandpass(_noise(n, seed, 'pink'), 40, 400))
+    roll = 0.7 + 0.3 * np.sin(2 * np.pi * 7.0 * tt) * np.sin(2 * np.pi * 2.3 * tt)
+    squeal = 0.04 * np.sin(2 * np.pi * (900 + 60 * np.sin(2 * np.pi * 0.7 * tt)) * tt)
+    return (r * roll + squeal) * np.minimum(tt / 0.3, 1)
+
+
+
+
+# --- instruments and effects for this film -----------------------------------------------------
+def _tt(dur):
+    return np.arange(int(dur * SR)) / SR
+
+
+def _mtof(m):
+    return 440.0 * 2 ** ((m - 69) / 12.0)
+
+
+def _adsr(t, a, d, s_, r, dur):
+    env = np.where(t < a, t / max(a, 1e-4), np.where(t < a + d, 1 - (1 - s_) * (t - a) / max(d, 1e-4), s_))
+    return env * np.clip((dur - t) / max(r, 1e-4), 0, 1)
+
+
+def _saw(f, t, ph=0.0):
+    return 2 * ((np.cumsum(np.broadcast_to(f, t.shape)) / SR + ph) % 1.0) - 1
+
+
+def _marimba(freq, dur=0.6):
+    t = _tt(dur)
+    y = np.sin(2 * np.pi * freq * t) * np.exp(-t * 7) + 0.35 * np.sin(2 * np.pi * freq * 3.9 * t) * np.exp(-t * 26) \
+        + 0.12 * np.sin(2 * np.pi * freq * 9.2 * t) * np.exp(-t * 60)
+    return y * np.minimum(t / 0.002, 1)
+
+
+def _pizz(freq, dur=0.35):
+    t = _tt(dur)
+    y = sum(a * np.sin(2 * np.pi * freq * k * t) * np.exp(-t * (9 + 5 * k)) for k, a in ((1, 1.0), (2, 0.5), (3, 0.28), (4, 0.12)))
+    return y * np.minimum(t / 0.003, 1)
+
+
+def _tuba(freq, dur=0.4):
+    t = _tt(dur)
+    y = _bandpass(_saw(freq * (1 + 0.004 * np.sin(2 * np.pi * 5 * t)), t), None, 520)
+    return y * _adsr(t, 0.025, 0.08, 0.7, 0.08, dur)
+
+
+def _brass(freqs, dur=0.5, bright=1600.0):
+    t = _tt(dur)
+    y = sum(_saw(f * (1 + 0.003 * np.sin(2 * np.pi * 5.5 * t + i)), t, i * 0.3) for i, f in enumerate(freqs))
+    y = _sweep_bp(y, lambda tc: 300 + bright * min(tc / 0.06, 1.0), q=0.8, block=2048)
+    return y * _adsr(t, 0.03, 0.1, 0.75, 0.12, dur)
+
+
+def _whistle_note(freq, dur):
+    t = _tt(dur)
+    f = freq * (1 + 0.012 * np.sin(2 * np.pi * 5.8 * t) * np.clip(t / 0.15, 0, 1))
+    y = np.sin(2 * np.pi * np.cumsum(f) / SR) + 0.05 * _bandpass(np.random.default_rng(int(freq)).standard_normal(len(t)), 1500, 6000)
+    return y * _adsr(t, 0.03, 0.05, 0.8, 0.06, dur)
+
+
+def _kick(dur=0.35):
+    t = _tt(dur)
+    f = 45 + 110 * np.exp(-t * 28)
+    return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 9)
+
+
+def _clap(seed):
+    t = _tt(0.25)
+    n = np.random.default_rng(seed).standard_normal(len(t))
+    e = np.exp(-t * 30) + 0.6 * np.exp(-((t - 0.012) % 0.012) * 300) * (t < 0.036)
+    return _bandpass(n, 900, 5000) * e
+
+
+def _shaker(seed):
+    t = _tt(0.09)
+    return _bandpass(np.random.default_rng(seed).standard_normal(len(t)), 5000, 12000) * np.sin(np.pi * t / t[-1]) ** 2
+
+
+def _taiko(dur=1.2):
+    t = _tt(dur)
+    f = 55 + 40 * np.exp(-t * 12)
+    body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 4)
+    return np.tanh(1.5 * (body + 0.3 * _bandpass(np.random.default_rng(1).standard_normal(len(t)), None, 400) * np.exp(-t * 18)))
+
+
+def _kaching(pitch=1.0, seed=0):
+    """Cash register: a drawer clunk and a bright bell."""
+    t = _tt(1.6)
+    r = np.random.default_rng(seed)
+    clunk = _bandpass(r.standard_normal(len(t)), 80, 900) * np.exp(-t * 35)
+    clunk += np.sin(2 * np.pi * 95 * t) * np.exp(-t * 25) * 0.8
+    bell = np.zeros_like(t)
+    b0 = 0.09
+    tb = np.clip(t - b0, 0, None)
+    for k, a, d in ((1.0, 1.0, 3.0), (2.76, 0.5, 5.0), (5.4, 0.25, 8.0), (1.5, 0.3, 4.0)):
+        bell += a * np.sin(2 * np.pi * 1900 * pitch * k * tb) * np.exp(-tb * d) * (t >= b0)
+    return _norm(0.8 * clunk + 0.55 * bell)
+
+
+def _scratch():
+    """Record scratch: a short back-and-forth scrub."""
+    t = _tt(0.55)
+    pos = 0.06 * np.sin(2 * np.pi * 3.2 * t) * np.exp(-t * 1.5)
+    rate = np.gradient(pos) * SR
+    src = _noise(len(t) + 2000, 3, 'pink')
+    idx = np.clip((np.cumsum(np.abs(rate)) * 2.0).astype(int), 0, len(src) - 1)
+    y = src[idx] * np.abs(rate) / (np.abs(rate).max() + 1e-9)
+    y = _bandpass(y, 300, 5000) + 0.3 * np.sin(2 * np.pi * np.cumsum(200 + 900 * np.abs(rate) / (np.abs(rate).max() + 1e-9)) / SR) * np.exp(-t * 6)
+    return _norm(y) * np.minimum(t / 0.005, 1)
+
+
+def _slide_whistle(f0, f1, dur):
+    t = _tt(dur)
+    f = f0 * (f1 / f0) ** (t / dur)
+    f = f * (1 + 0.02 * np.sin(2 * np.pi * 7 * t))
+    return np.sin(2 * np.pi * np.cumsum(f) / SR) * _adsr(t, 0.02, 0.05, 0.9, 0.08, dur)
+
+
+def _boing(dur=0.6):
+    t = _tt(dur)
+    f = 180 + 260 * (1 - np.exp(-t * 18)) + 60 * np.sin(2 * np.pi * 14 * t) * np.exp(-t * 4)
+    return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 5)
+
+
+def _flutter(dur, seed, density=1.0):
+    """Banknotes fluttering: band-passed noise chopped at paper-flap rates."""
+    t = _tt(dur)
+    r = np.random.default_rng(seed)
+    n = _bandpass(r.standard_normal(len(t)), 1500, 7000)
+    am = np.abs(np.sin(2 * np.pi * (18 + 10 * np.sin(2 * np.pi * 0.7 * t)) * t)) ** 3
+    gate = np.clip(_bandpass(r.standard_normal(len(t)), None, 6) * 6 * density + 0.3, 0, 1)
+    return _norm(n * am * gate)
+
+
+def _birds(n, seed, density=1.0):
+    y = np.zeros(n)
+    r = np.random.default_rng(seed)
+    for _ in range(int(n / SR * 2.2 * density)):
+        i = r.integers(0, max(1, n - SR))
+        f0 = r.uniform(2600, 4200)
+        for k in range(r.integers(2, 6)):
+            d = int(r.uniform(0.04, 0.09) * SR)
+            tt = np.arange(d) / SR
+            f = f0 * (1 + r.uniform(-0.25, 0.3) * tt / tt[-1])
+            j = i + k * int(0.11 * SR)
+            if j + d < n:
+                y[j:j + d] += np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * tt / tt[-1]) * r.uniform(0.3, 1.0)
+    return y
+
+
+def _motor(dur, seed, f=110.0, roar=1.0):
+    t = _tt(dur)
+    y = _bandpass(_saw(f * (1 + 0.01 * np.sin(2 * np.pi * 3 * t)), t), None, 1800) * 0.5
+    y += roar * _bandpass(np.random.default_rng(seed).standard_normal(len(t)), 300, 4000) * 0.7
+    return _norm(y)
+
+
+def _counter_machine(dur):
+    t = _tt(dur)
+    clicks = np.zeros_like(t)
+    rate = 32.0
+    for k in range(int(dur * rate)):
+        i = int(k / rate * SR)
+        m = min(300, len(t) - i)
+        clicks[i:i + m] += np.random.default_rng(k).standard_normal(m) * np.exp(-np.arange(m) / 40.0)
+    hum = np.sin(2 * np.pi * 120 * t) * 0.3 + _bandpass(np.random.default_rng(9).standard_normal(len(t)), 200, 1200) * 0.2
+    return _norm(_bandpass(clicks, 1200, 8000) + hum) * np.minimum(t / 0.05, 1) * np.clip((dur - t) / 0.08, 0, 1)
+
+
+def _beep(f=1800.0, dur=0.12):
+    t = _tt(dur)
+    return np.sin(2 * np.pi * f * t) * _adsr(t, 0.004, 0.01, 0.9, 0.02, dur)
+
+
+def _sad_trombone():
+    """The descending 'wah wah wah waaah'."""
+    notes = [(58, 0.32), (57, 0.32), (56, 0.32), (55, 1.1)]
+    out = []
+    for k, (m, d) in enumerate(notes):
+        t = _tt(d)
+        vib = 1 + (0.025 * np.sin(2 * np.pi * 6 * t) * np.clip((t - 0.25) / 0.2, 0, 1) if k == 3 else 0)
+        y = _saw(_mtof(m) * vib, t, k * 0.1)
+        y = _sweep_bp(y, lambda tc: 350 + 700 * abs(math.sin(math.pi * tc / 0.32)) if k < 3 else 350 + 600 * abs(math.sin(tc * 9)), q=1.2, block=1024)
+        out.append(y * _adsr(t, 0.03, 0.05, 0.85, 0.06, d))
+    return _norm(np.concatenate(out))
+
+
+def _choir(chord, dur, seed=0):
+    t = _tt(dur)
+    y = np.zeros_like(t)
+    for i, m in enumerate(chord):
+        for det in (-0.2, 0.0, 0.2):
+            y += _saw(_mtof(m) * (1 + det / 100) * (1 + 0.004 * np.sin(2 * np.pi * 5 * t + i + det)), t, i * 0.17 + det)
+    y = _bandpass(y, 500, 900) * 0.8 + _bandpass(y, 1000, 1300) * 0.5
+    return _norm(y) * _adsr(t, dur * 0.4, 0.2, 0.9, dur * 0.3, dur)
+
+
+def _shutter(seed):
+    t = _tt(0.12)
+    r = np.random.default_rng(seed)
+    y = np.zeros_like(t)
+    for d in (0.0, 0.055):
+        i = int(d * SR)
+        m = 600
+        y[i:i + m] += r.standard_normal(m) * np.exp(-np.arange(m) / 60.0)
+    return _bandpass(y, 1500, 9000)
+
+
+def _squeak(seed):
+    t = _tt(0.14)
+    f = 2400 + 900 * np.sin(np.pi * t / 0.14) + np.random.default_rng(seed).uniform(-200, 200)
+    return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * t / 0.14) ** 2
+
+
+def _scrape(seed, dur=0.5):
+    t = _tt(dur)
+    n = np.random.default_rng(seed).standard_normal(len(t))
+    return _norm(_sweep_bp(n, lambda tc: 900 + 1600 * tc / dur, q=3.0, block=1024)) * np.sin(np.pi * t / dur)
+
+
+CHORDS_MAJ = [(48, (60, 64, 67)), (45, (57, 60, 64)), (41, (57, 60, 65)), (43, (55, 59, 62))]       # C  Am  F  G
+CHORDS_MIN = [(48, (60, 63, 67)), (44, (56, 60, 63)), (46, (58, 62, 65)), (43, (55, 59, 62))]       # Cm Ab Bb G
+MELODY = [76, 79, 81, 79, 76, 72, 74, 76, 74, 72, 69, 72, 74, 76, 74, 72]
+
+
+def _music(N, cues):
+    """The score: a bouncy oom-pah documentary theme, a sneaky minor pizzicato, a dramatic pulse, the reprise."""
+    mus = np.zeros((2, N))
+    beat = 0.5
+
+    def section(t0, t1, chords, layers, gain=1.0, seed=0):
+        bar = 0
+        tb = t0
+        while tb < t1 - 0.05:
+            root, ch = chords[bar % 4]
+            for b in range(4):
+                tt = tb + b * beat
+                if tt >= t1 - 0.02:
+                    break
+                if 'tuba' in layers:
+                    m = root if b % 2 == 0 else root + 7
+                    _place(mus, _tuba(_mtof(m - 12 if b % 2 == 0 else m - 12), 0.38), tt, 0.55 * gain)
+                if 'pluck' in layers:
+                    arp = [ch[0], ch[1], ch[2], ch[1]]
+                    for e in range(2):
+                        _place(mus, _marimba(_mtof(arp[(b * 2 + e) % 4] + 12), 0.5), tt + e * 0.25, 0.22 * gain, pan=-0.3 + 0.6 * e)
+                if 'pizz' in layers:
+                    pat = [ch[0], ch[2], ch[0] + 12, ch[2]]
+                    for e in range(2):
+                        if (b * 2 + e) % 3 != 2:
+                            _place(mus, _pizz(_mtof(pat[(b * 2 + e) % 4] - 12), 0.3), tt + e * 0.25, 0.28 * gain, pan=0.2 - 0.4 * e)
+                if 'kick' in layers and b % 2 == 0:
+                    _place(mus, _kick(), tt, 0.5 * gain)
+                if 'clap' in layers and b % 2 == 1:
+                    _place(mus, _clap(seed + bar * 4 + b), tt, 0.18 * gain)
+                if 'shaker' in layers:
+                    for e in range(4):
+                        _place(mus, _shaker(seed + bar * 16 + b * 4 + e), tt + e * 0.125, (0.06 if e % 2 else 0.09) * gain, pan=0.4)
+                if 'whistle' in layers and b % 1 == 0:
+                    m = MELODY[(bar * 4 + b) % 16]
+                    _place(mus, _whistle_note(_mtof(m), 0.42), tt, 0.13 * gain, pan=-0.2)
+                if 'taiko' in layers:
+                    _place(mus, _taiko(), tt, (0.5 if b == 0 else 0.3) * gain)
+            if 'brass' in layers:
+                _place(mus, _brass([_mtof(m) for m in ch], 0.3), tb, 0.12 * gain, pan=0.1)
+            bar += 1
+            tb += 4 * beat
+
+    S_ = {s['name']: (s['t0'], s['t1']) for s in SHOTS}
+    section(0.0, 5.65, CHORDS_MAJ, ['tuba', 'pluck', 'kick', 'clap'], 1.0, 1)
+    cues.append((0.0, 'MUSIC: bouncy oom-pah documentary theme (tuba bass, marimba arpeggios, light kick and claps), 120 bpm, C major', 'music'))
+    section(5.65, 12.85, CHORDS_MAJ, ['tuba', 'pluck', 'kick', 'clap', 'shaker'], 1.0, 2)
+    cues.append((5.65, 'MUSIC: the theme picks up a shaker', 'music'))
+    section(12.85, 23.45, CHORDS_MAJ, ['tuba', 'pluck', 'kick', 'clap', 'shaker', 'whistle', 'brass'], 1.05, 3)
+    cues.append((12.85, 'MUSIC: the frenzy - whistled melody and brass stabs on every bar', 'music'))
+    section(23.75, 34.5, CHORDS_MIN, ['pizz', 'tuba'], 0.9, 4)
+    cues.append((23.75, 'MUSIC: after the scratch - sneaky minor pizzicato and tuba (C minor)', 'music'))
+    section(34.5, 44.2, CHORDS_MIN, ['taiko', 'pizz'], 0.85, 5)
+    t = np.arange(N) / SR
+    dr = _pad([_mtof(36), _mtof(43), _mtof(48)], 11.5, seed=6, cutoff=500)
+    _place(mus, dr * _env(np.arange(len(dr)) / SR, [(0, 0), (1.5, 1), (9.5, 1), (11.5, 0)]), 34.5, 0.22)
+    rise = _pad([_mtof(60), _mtof(63), _mtof(67), _mtof(70)], 9.6, seed=7, cutoff=1400)
+    _place(mus, rise * np.linspace(0, 1, len(rise)) ** 2, 34.6, 0.12, pan=0.2)
+    cues.append((34.5, 'MUSIC: dramatic - low drone, taiko pulse on every beat, rising strings', 'music'))
+    section(45.85, 53.6, CHORDS_MAJ, ['tuba', 'pluck', 'kick', 'clap', 'shaker', 'brass'], 1.05, 8)
+    cues.append((45.85, 'MUSIC: the theme returns, bigger (brass on every bar)', 'music'))
+    hold = _pad([_mtof(48), _mtof(55)], 2.0, seed=9, cutoff=600)
+    _place(mus, hold * np.exp(-np.arange(len(hold)) / SR * 1.5), 53.6, 0.1)
+    cues.append((53.6, 'MUSIC: drops out to a faint held note for the stare (near silence)', 'music'))
+    a = EV['sting'][0] + 0.03
+    for k, (d, ch) in enumerate(((0.16, (60, 64, 67)), (0.16, (60, 64, 67)), (1.6, (60, 64, 67, 72)))):
+        tk = a + (0.0, 0.2, 0.42)[k]
+        _place(mus, _brass([_mtof(m) for m in ch], d + 0.15, 2200), tk, 0.22)
+    _place(mus, _kick(0.6), a + 0.42, 0.6)
+    cym = _bandpass(_noise(int(2.4 * SR), 12), 5000, 14000) * np.exp(-np.arange(int(2.4 * SR)) / SR * 1.6)
+    _place(mus, cym, a + 0.42, 0.12)
+    cues.append((a, 'MUSIC: the punchline sting - brass "ta-da-DAAA" with cymbal on "now it does"', 'music'))
+    return mus
+
+
+def stage_audio():
+    N = int(DURATION * SR)
+    t = np.arange(N) / SR
+    amb = np.zeros((2, N))
+    sfx = np.zeros((2, N))
+    cues = []
+
+    def cue(time, what, layer):
+        cues.append((time, what, layer))
+    S_ = {s['name']: (s['t0'], s['t1']) for s in SHOTS}
+    music = _music(N, cues)
+
+    def bed(names, sig_fn, gain, what, layer='ambience'):
+        for nm in names:
+            a, b = S_[nm]
+            n = int((b - a) * SR) + 1
+            y = sig_fn(n, hash(nm) % 1000) * _env(np.arange(n) / SR, [(0, 0), (0.04, 1), ((b - a) - 0.03, 1), (b - a, 0)])
+            _place(amb, y, a, gain, pan=0.0)
+        cue(S_[names[0]][0], what, layer)
+    store = ['hook_a', 'hook_b', 'hook_c', 'store', 'tags', 'milk', 'bike', 'count', 'struggle', 'final', 'stare', 'tagend']
+    bed(store, lambda n, s: _norm(_bandpass(_noise(n, s, 'pink'), 120, 2500)) * 0.5 + 0.15 * np.sin(2 * np.pi * 120 * np.arange(n) / SR),
+        0.16, 'Supermarket room tone: air conditioning, fluorescent hum')
+    bed(store, lambda n, s: _crowd(n, s, 0.15) * 0.5, 0.06, 'Distant shoppers murmuring (supermarket shots)')
+    for k in range(10):
+        tm = 0.7 + k * 5.6
+        if any(S_[nm][0] <= tm < S_[nm][1] for nm in store):
+            _place(sfx, _beep(2100 + 200 * (k % 3), 0.09), tm, 0.05, pan=0.6 - 0.12 * k)
+    cue(0.7, 'Distant checkout scanner beeps every few seconds (store shots)', 'ambience')
+    sub = ['bill', 'tree', 'crowd', 'backyard', 'giant']
+    bed(sub, lambda n, s: _birds(n, s, 1.2) * 0.6 + _norm(_bandpass(_noise(n, s + 1, 'pink'), 200, 3000)) * 0.15, 0.22,
+        'Suburban morning: birdsong, a light breeze')
+    bed(['farmer', 'farm', 'forest'], lambda n, s: _norm(_bandpass(_noise(n, s, 'pink'), 100, 1800)) * 0.5 + _birds(n, s, 0.4) * 0.3, 0.2,
+        'Open country wind (farm and forest)')
+    bed(['city', 'graph'], lambda n, s: _norm(_bandpass(_noise(n, s, 'brown'), 40, 900)) * 0.6 + _flutter(n / SR, s, 1.5) * 0.35, 0.3,
+        'City: traffic rumble and wind, a blizzard of fluttering banknotes')
+    # --- scene 1
+    for k in range(6):
+        tm = 0.15 + k * 0.41
+        _place(sfx, _squeak(k), tm, 0.05, pan=0.1)
+        _place(sfx, _step(k), tm, 0.25)
+    cue(0.15, 'Sneaker squeaks on the store floor as he struts', 'sfx')
+    _place(sfx, _flutter(2.8, 21, 0.8), 0.0, 0.18, pan=0.0)
+    cue(0.0, 'Paper rustle of the cash pile; notes slipping off', 'sfx')
+    a, b = EV['card_flip']
+    _place(sfx, _whoosh(0.35, 22), a, 0.18)
+    _place(sfx, _kaching(1.0, 1), b - 0.05, 0.6)
+    cue(b - 0.05, 'Cash register "ka-CHING" as the price card turns', 'sfx')
+    _place(sfx, _slide_whistle(1400, 300, 0.65), EV['face_fall'][0] + 0.05, 0.16)
+    cue(EV['face_fall'][0] + 0.05, 'Falling slide whistle as his face drops', 'sfx')
+    _place(sfx, _whoosh(0.4, 23), EV['snap_zoom'][0] - 0.05, 0.3)
+    _place(sfx, _boom(1.2, 70, 35, 1), EV['snap_zoom'][1] - 0.05, 0.35)
+    cue(EV['snap_zoom'][0], 'Snap-zoom whoosh and a low impact on the $1,999,999.99 card', 'sfx')
+    _place(sfx, _whoosh(0.5, 24), S_['bill'][0] - 0.2, 0.25)
+    cue(S_['bill'][0] - 0.2, 'Whip whoosh into the suburb', 'sfx')
+    # --- scene 2
+    _place(sfx, _crunch(31, 0.12), EV['pluck'][0] + 0.12, 0.35)
+    cue(EV['pluck'][0] + 0.12, 'A crisp paper snap as the note is plucked', 'sfx')
+    _place(sfx, _flutter(4.6, 32, 1.2), EV['tree_fall'][0], 0.3, pan=-0.2)
+    cue(EV['tree_fall'][0], 'Banknotes fluttering down from the branches', 'sfx')
+    _place(sfx, _boing(0.6), EV['jump'][0] + 0.02, 0.2)
+    cue(EV['jump'][0], 'Cartoon "boing" as he jumps for joy', 'sfx')
+    for k in range(10):
+        _place(sfx, _step(40 + k), 9.6 + k * 0.17, 0.18, pan=0.5 - 0.1 * k)
+    cue(9.6, 'Neighbours\' running footsteps on lawn and pavement', 'sfx')
+    _place(sfx, _crowd(int(2.7 * SR), 41, 0.8) * _env(_tt(2.7), [(0, 0), (0.5, 1), (2.6, 1), (2.7, 0)]), 10.15, 0.22)
+    cue(10.2, 'Crowd whoops and cheers under the tree', 'sfx')
+    rus = _norm(_bandpass(_noise(int(1.8 * SR), 42), 600, 6000)) * np.abs(np.sin(2 * np.pi * 8 * _tt(1.8)))
+    _place(sfx, rus, 11.0, 0.22, pan=-0.3)
+    cue(11.0, 'Branches being shaken: leaf rustle in quick bursts', 'sfx')
+    for tm in (11.3, 12.1):
+        _place(sfx, _shutter(int(tm * 10)), tm, 0.3, pan=0.5)
+    cue(11.3, 'Phone camera shutter (x2)', 'sfx')
+    _place(sfx, _whoosh(0.4, 43), S_['farmer'][0] - 0.15, 0.2)
+    # --- scene 3
+    _place(sfx, _crunch(51, 0.3), EV['yank'][0] + 0.1, 0.45)
+    _place(sfx, _scrape(52, 0.35), EV['yank'][0] + 0.12, 0.15)
+    cue(EV['yank'][0] + 0.1, 'Corn stalk ripped out of the ground', 'sfx')
+    _place(sfx, _whoosh(0.6, 53), EV['toss'][0], 0.3)
+    _place(sfx, _crunch(54, 0.2), EV['toss'][1] - 0.1, 0.2, pan=-0.4)
+    cue(EV['toss'][0], 'Whoosh as it is flung away; it lands in the corn', 'sfx')
+    _place(sfx, _bell(1568.0, 1.5), EV['tada'][0] + 0.05, 0.12)
+    cue(EV['tada'][0] + 0.05, 'A tiny proud "ding" for the one-note money tree', 'sfx')
+    a, b = EV['blower']
+    _place(sfx, _motor(b - a, 61, 105, 1.2) * _env(_tt(b - a), [(0, 0), (0.15, 1), (b - a - 0.1, 1), (b - a, 0)]), a, 0.2)
+    _place(sfx, _flutter(b - a, 62, 2.0), a, 0.25, pan=0.2)
+    cue(a, 'Leaf-blower engine and a gush of fluttering paper', 'sfx')
+    ch = _choir((60, 64, 67, 72), 3.0)
+    _place(sfx, ch, EV['forest_crane'][0] - 0.4, 0.13)
+    cue(EV['forest_crane'][0] - 0.4, 'A choir-like "aaah" swell as the forest is revealed', 'sfx')
+    # --- scene 4
+    _place(sfx, _scratch(), EV['scratch'][0] - 0.12, 0.55)
+    cue(EV['scratch'][0] - 0.12, 'RECORD SCRATCH - the music stops dead', 'sfx')
+    for k, nm in enumerate(('flip1', 'flip2', 'flip3', 'flip_bread', 'flip_milk', 'flip_bike')):
+        tm = EV[nm][0]
+        _place(sfx, _click(), tm - 0.02, 0.35, pan=-0.3)
+        _place(sfx, _kaching(1.0 + 0.08 * k, 70 + k), tm + 0.02, 0.32 + 0.05 * (k >= 3))
+        cue(tm, f'Price-gun click + ka-ching (pitched up each time): {nm.replace("flip_", "").replace("flip", "tag ")}', 'sfx')
+    for nm in ('flip_bread', 'flip_milk', 'flip_bike'):
+        _place(sfx, _taiko(1.0), EV[nm][0] + 0.02, 0.35)
+    _place(sfx, _slide_whistle(600, 1500, 0.3), EV['gasp'][0], 0.1)
+    cue(EV['gasp'][0], 'A rising "whoop" for the shopper\'s gasp', 'sfx')
+    # --- scene 5
+    a, b = EV['counter']
+    _place(sfx, _counter_machine(b - a), a, 0.3, pan=-0.2)
+    cue(a, 'Cash-counting machine whirring and riffling notes', 'sfx')
+    for k in range(3):
+        _place(sfx, _beep(900, 0.12), 36.55 + k * 0.18, 0.18)
+    cue(36.55, 'Counting machine error beeps (x3)', 'sfx')
+    a, b = EV['graph']
+    for k in range(10):
+        _place(sfx, _beep(880 * (1.0 + 0.06 * k), 0.06), a + k * (b - a) / 10, 0.08, pan=0.1)
+    cue(a, 'Digital blips as the graph draws on the giant screen', 'sfx')
+    _place(sfx, _sad_trombone(), 44.1, 0.28)
+    cue(44.1, 'Sad trombone "wah wah wah waaah" under "bought less and less"', 'sfx')
+    _place(sfx, _whoosh(0.45, 81), S_['giant'][0] - 0.2, 0.25)
+    # --- scene 6
+    for k in range(3):
+        tm = 46.3 + k * 1.5
+        _place(sfx, _scrape(90 + k, 0.45), tm, 0.25)
+        _place(sfx, _flutter(0.6, 93 + k), tm + 0.55, 0.25)
+    cue(46.3, 'Shovel scrapes and paper whooshes into the wheelbarrow', 'sfx')
+    for k in range(6):
+        _place(sfx, _squeak(100 + k) * 0.6, 50.4 + k * 0.45, 0.08, pan=0.3)
+        _place(sfx, _step(110 + k), 50.4 + k * 0.35, 0.2)
+    cue(50.4, 'Wheelbarrow wheel squeaks and footsteps', 'sfx')
+    a, b = EV['card_flip2']
+    _place(sfx, _whoosh(0.35, 120), a, 0.18)
+    _place(sfx, _kaching(0.8, 121), b - 0.05, 0.62)
+    cue(b - 0.05, 'The card turns again: a bigger, lower ka-ching', 'sfx')
+    _place(sfx, _slide_whistle(1100, 220, 0.8), EV['face_fall2'][0] + 0.05, 0.15)
+    _place(sfx, _whoosh(0.4, 122), EV['snap_zoom2'][0] - 0.05, 0.3)
+    _place(sfx, _bell(2093.0, 2.0), EV['snap_zoom2'][1] + 0.05, 0.12)
+    cue(EV['snap_zoom2'][0], 'Snap-zoom whoosh and a tiny "ding" on the new price', 'sfx')
+
+    vo = np.zeros(N)
+    vpath = os.path.join(ROOT, 'audio', 'narration.wav')
+    if os.path.exists(vpath):
+        with wave.open(vpath) as w:
+            a_ = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float64) / 32768
+        vo[:min(N, len(a_))] = a_[:N]
+    env = np.abs(vo)
+    k = int(0.03 * SR)
+    env = np.convolve(env, np.ones(k) / k, mode='same')
+    env = np.clip(env / (env.max() + 1e-9) * 4, 0, 1)
+    rel_k = int(0.3 * SR)
+    env = np.maximum.reduce([np.roll(env, j) for j in range(0, rel_k, rel_k // 12)])
+    duck_m = 1 - 0.65 * env
+    duck_a = 1 - 0.55 * env
+    music_n, amb_n, sfx_n = (x / (np.abs(x).max() + 1e-9) for x in (music, amb, sfx))
+    bedm = 0.55 * music_n + 0.35 * amb_n + 0.75 * sfx_n
+    with_voice = 0.55 * music_n * duck_m + 0.35 * amb_n * duck_a + 0.75 * sfx_n * duck_a + np.stack([vo, vo]) * (1.5 / (np.abs(vo).max() + 1e-9))
+    end_fade = np.clip((DURATION - t) / 0.15, 0, 1)
+    os.makedirs(os.path.join(ROOT, 'audio'), exist_ok=True)
+    outs = {}
+    for name, mix in (('mix_with_voice', with_voice), ('mix_no_voice', bedm), ('music_sfx_stem', bedm)):
+        mix = mix * end_fade
+        mix = np.tanh(mix / (np.abs(mix).max() + 1e-9) * 1.2) * 0.89
+        p = os.path.join(ROOT, 'audio', name + '.wav')
+        with wave.open(p, 'wb') as w:
+            w.setnchannels(2)
+            w.setsampwidth(2)
+            w.setframerate(SR)
+            w.writeframes((np.clip(mix.T, -1, 1) * 32767).astype(np.int16).tobytes())
+        outs[name] = p
+    for name in ('mix_with_voice', 'mix_no_voice'):
+        p = outs[name]
+        tmp = p.replace('.wav', '_ln.wav')
+        try:
+            r = subprocess.run(['ffmpeg', '-hide_banner', '-i', p, '-af', 'loudnorm=I=-14:TP=-1.5:LRA=20:print_format=json', '-f', 'null', '-'],
+                               check=True, capture_output=True, text=True).stderr
+            js = json.loads(r[r.rindex('{'):r.rindex('}') + 1])
+            af = (f"loudnorm=I=-14:TP=-1.5:LRA=20:linear=true:measured_I={js['input_i']}:measured_TP={js['input_tp']}:"
+                  f"measured_LRA={js['input_lra']}:measured_thresh={js['input_thresh']}:offset={js['target_offset']}")
+            subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', p, '-af', af, '-ar', str(SR), tmp], check=True)
+            os.replace(tmp, p)
+        except (OSError, subprocess.CalledProcessError) as e:
+            print('loudnorm skipped:', e)
+    write_sound_design(cues)
+    print('audio written:', ', '.join(outs))
+
+
+def write_sound_design(cues):
+    L = ['WHAT IF MONEY GREW ON TREES? - SOUND DESIGN, MUSIC AND TIMING',
+         '=' * 60, '',
+         'Everything below is synthesised by code in animation.py --stage audio (numpy only: oscillators, filtered noise,',
+         'envelopes, convolution reverb). No samples, recordings, stock sound or copyrighted music. The narration is a',
+         'synthetic voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py. Music, ambience and effects duck under',
+         'the voice (about 10 dB) so the narration always stays on top. Every cue time below is generated from',
+         'scene_timing.json and the measured narration, the same numbers the animation uses.',
+         '',
+         'Files: audio/mix_with_voice.wav (final mix, -14 LUFS), audio/mix_no_voice.wav (music + sound only, -14 LUFS, for',
+         'recording your own voice), audio/narration.wav (voice only).',
+         '', 'CUE SHEET (generated)', '-' * 60]
+    vt = os.path.join(BUILD, 'vo_timing.json')
+    if os.path.exists(vt):
+        with open(vt) as fh:
+            for ln in json.load(fh)['lines']:
+                cues.append((ln['start'], f'NARRATION: "{ln["text"]}" (to {ln["end"]:.2f} s)', 'voice'))
+    for tm, what, layer in sorted(cues):
+        L.append(f'{tm:6.2f} s  [{layer:9s}] {what}')
+    L += ['', 'BACKGROUND MUSIC GUIDE (if you re-score it in an editor)', '-' * 60,
+          '- 0-23 s: upbeat, playful, slightly pompous "nature documentary" theme: tuba/bassoon oom-pah, pizzicato or',
+          '  marimba, light percussion; it gets busier and sillier from 13 s (whistle, brass stabs) as the frenzy grows.',
+          '- 23.5 s: a hard stop with a record scratch. Then a sneaky minor-key pizzicato under the price rises.',
+          '- 34.5-46 s: dramatic but tongue-in-cheek: low drone, taiko-style pulse, rising strings; a sad trombone on',
+          '  "bought less and less".',
+          '- 46-53.5 s: the playful theme returns, bigger. Then near-silence for the deadpan stare, and one brass',
+          '  "ta-da" sting exactly on "now it does".',
+          '- Keep the narration 10-15 dB above the music; YouTube Shorts plays back at about -14 LUFS.',
+          '- Use only music you have the rights to (your own, a licensed library, or YouTube Audio Library tracks).']
+    with open(os.path.join(ROOT, 'sound_design.txt'), 'w') as fh:
+        fh.write('\n'.join(L) + '\n')
+
+
+
+# ============================================================================
+# Stage: edit - Video Sequence Editor: upscale, flashes, vignette, grain, titles, word-by-word captions, audio, encode
+# ============================================================================
+TITLE_STYLE = {
+    #          font         size  colour                         y (from bottom)  outline  plate
+    'hero':   (FONT_TITLE, 112, (1.0, 1.0, 1.0, 1.0), 0.815, 0.06, True),
+    'big':    (FONT_TITLE, 150, (1.0, 0.74, 0.16, 1.0), 0.775, 0.05, False),
+    'label':  (FONT_TITLE, 78, (1.0, 1.0, 1.0, 1.0), 0.815, 0.07, True),
+    'item':   (FONT_TITLE, 60, (1.0, 1.0, 1.0, 1.0), 0.855, 0.07, True),
+    'tag':    (FONT_TITLE, 34, (0.95, 0.92, 0.85, 1.0), 0.905, 0.0, True),
+}
+_FONTS = {}
+
+
+def font(path):
+    if path not in _FONTS:
+        _FONTS[path] = bpy.data.fonts.load(path, check_existing=True)
+    return _FONTS[path]
+
+
+def save_png(path, arr):
+    h, w = arr.shape[:2]
+    im = bpy.data.images.new(os.path.basename(path), w, h, alpha=True)
+    im.pixels.foreach_set(np.ascontiguousarray(arr[::-1]).astype(np.float32).ravel())
+    im.filepath_raw = path
+    im.file_format = 'PNG'
+    im.save()
+    bpy.data.images.remove(im)
+
+
+def make_overlays():
+    d = os.path.join(BUILD, 'overlays')
+    os.makedirs(d, exist_ok=True)
+    vpath = os.path.join(d, 'vignette.png')
+    if not os.path.exists(vpath):
+        h, w = 960, 540
+        y, x = np.mgrid[0:h, 0:w]
+        r = np.sqrt(((x - w / 2) / (w / 2)) ** 2 * 0.9 + ((y - h / 2) / (h / 2)) ** 2)
+        a = np.clip((r - 0.6) / 0.75, 0, 1) ** 1.7 * 0.6
+        arr = np.zeros((h, w, 4))
+        arr[..., 3] = a
+        save_png(vpath, arr)
+    grains = []
+    rng = np.random.default_rng(5)
+    for k in range(24):
+        gp = os.path.join(d, f'grain_{k:02d}.png')
+        if not os.path.exists(gp):
+            g = rng.normal(0.5, 0.1, (960, 540))
+            save_png(gp, np.stack([g, g, g, np.ones_like(g)], -1).clip(0, 1))
+        grains.append(os.path.basename(gp))
+    return vpath, d, grains
+
+
+def key_alpha(strip, pts):
+    for f, a in pts:
+        strip.blend_alpha = a
+        strip.keyframe_insert('blend_alpha', frame=f)
+
+
+def add_text(se, name, text, t0, t1, style, channel, fade=4, rise=0.01, y=None):
+    fnt, size, col, y0, outline, plate = TITLE_STYLE[style]
+    y = y0 if y is None else y
+    f0, f1 = frame(t0), frame(t1)
+    st = se.sequences.new_effect(name=name, type='TEXT', channel=channel, frame_start=f0, frame_end=f1)
+    st.text = text
+    st.font = font(fnt)
+    st.font_size = size
+    st.color = col
+    st.align_x = 'CENTER'
+    st.align_y = 'CENTER'
+    st.wrap_width = 0.95
+    st.use_shadow = True
+    st.shadow_color = (0, 0, 0, 0.8)
+    st.shadow_blur = 0.35
+    st.shadow_offset = 0.035
+    if outline > 0:
+        st.use_outline = True
+        st.outline_color = (0, 0, 0, 1)
+        st.outline_width = outline
+    if plate:
+        # a dark plate keeps light text readable over busy, bright backgrounds
+        st.use_box = True
+        st.box_color = (0.02, 0.02, 0.02, 0.62 if style != 'tag' else 0.7)
+        st.box_margin = 0.014
+    st.blend_type = 'ALPHA_OVER'
+    fade = min(fade, max(1, (f1 - f0) // 3))
+    key_alpha(st, [(f0, 0.0), (f0 + fade, 1.0), (f1 - fade, 1.0), (f1, 0.0)])
+    st.location = (0.5, y - rise)
+    if rise > 0:
+        st.keyframe_insert('location', frame=f0)
+        st.location = (0.5, y)
+        st.keyframe_insert('location', frame=f0 + fade * 2)
+    return st
+
+
+def ensure_captions():
+    if not os.path.exists(os.path.join(BUILD, 'captions', 'index.json')):
+        py = os.environ.get('SHORTS_PY', '/opt/shorts/venv/bin/python')
+        subprocess.run([py, os.path.join(ROOT, 'tools', 'captions.py')], check=True)
+    with open(os.path.join(BUILD, 'captions', 'index.json')) as fh:
+        return json.load(fh)
+
+
+def stage_edit():
+    frames_dir = ARGS.out
+    files = sorted(f for f in os.listdir(frames_dir) if f.startswith('f_') and f.endswith('.png')) if os.path.isdir(frames_dir) else []
+    if not files:
+        raise SystemExit('no rendered frames in ' + frames_dir)
+    fset = set(files)
+    missing = [f for f in range(1, RENDER_END + 1) if f'f_{f:04d}.png' not in fset]
+    if missing:
+        print(f'WARNING: {len(missing)} frames missing (first {missing[:5]}); they will show as black')
+    caps = None if ARGS.no_voice else ensure_captions()
+    bpy.ops.wm.read_factory_settings(use_empty=True)
+    sc = bpy.context.scene
+    sc.name = 'Edit'
+    sc.render.resolution_x, sc.render.resolution_y = RES
+    sc.render.resolution_percentage = 100
+    sc.render.fps = FPS
+    sc.frame_start, sc.frame_end = 1, LAST_FRAME
+    sc.view_settings.view_transform = 'Standard'     # frames are already tone-mapped (AgX) in the render
+    sc.view_settings.look = 'None'
+    se = sc.sequence_editor_create()
+    first = 1
+    while f'f_{first:04d}.png' not in fset:
+        first += 1
+    img = se.sequences.new_image('Frames', os.path.join(frames_dir, f'f_{first:04d}.png'), channel=1, frame_start=first, fit_method='FIT')
+    for f in range(first + 1, RENDER_END + 1):
+        img.elements.append(f'f_{f:04d}.png')
+    img.transform.filter = 'CUBIC_MITCHELL'
+    vpath, gdir, grains = make_overlays()
+    vg = se.sequences.new_image('Vignette', vpath, channel=2, frame_start=1, fit_method='STRETCH')
+    vg.frame_final_end = LAST_FRAME + 1
+    vg.blend_type = 'ALPHA_OVER'
+    gr = se.sequences.new_image('Grain', os.path.join(gdir, grains[0]), channel=3, frame_start=1, fit_method='STRETCH')
+    for f in range(2, LAST_FRAME + 1):
+        gr.elements.append(grains[(f - 1) % len(grains)])
+    gr.blend_type = 'OVERLAY'
+    gr.blend_alpha = 0.16
+    # quick white flashes on the big scene changes (the cuts themselves are hard cuts on the beat)
+    for k, tm in enumerate((SHOT['bill']['t0'], SHOT['giant']['t0'])):
+        f0 = frame(tm)
+        fl = se.sequences.new_effect(f'Flash{k}', type='COLOR', channel=4, frame_start=f0 - 1, frame_end=f0 + 6)
+        fl.color = (1.0, 0.98, 0.92)
+        fl.blend_type = 'ADD'
+        key_alpha(fl, [(f0 - 1, 0.0), (f0, 0.55), (f0 + 1, 0.4), (f0 + 5, 0.0)])
+    ch = 6
+    for k, tl in enumerate(TIMING['titles']):
+        for j, line in enumerate(tl['text'].split('|')):
+            st = add_text(se, f'Title{k}_{j}', line, tl['start'], tl['end'], tl['style'], ch + (k % 5) * 2 + j,
+                          rise=0.0 if tl['style'] == 'tag' else 0.01, y=tl.get('y'))
+            if j:
+                dy = j * TITLE_STYLE[tl['style']][1] * 1.25 / RES[1]
+                fc = sc.animation_data.action.fcurves if sc.animation_data and sc.animation_data.action else []
+                for fcu in fc:
+                    if fcu.data_path == f'sequence_editor.sequences_all["{st.name}"].location' and fcu.array_index == 1:
+                        for kp in fcu.keyframe_points:
+                            kp.co[1] -= dy
+                            kp.handle_left[1] -= dy
+                            kp.handle_right[1] -= dy
+                st.location = (0.5, st.location[1] - dy)
+    if caps:
+        cdir = os.path.join(BUILD, 'captions')
+        for k, c in enumerate(caps):
+            f0, f1 = frame(c['start']), max(frame(c['end']), frame(c['start']) + 1)
+            st = se.sequences.new_image(f'Cap{k}', os.path.join(cdir, c['file']), channel=18 + k % 2, frame_start=f0, fit_method='ORIGINAL')
+            st.frame_final_end = f1
+            st.blend_type = 'ALPHA_OVER'
+    apath = os.path.join(ROOT, 'audio', 'mix_no_voice.wav' if ARGS.no_voice else 'mix_with_voice.wav')
+    se.sequences.new_sound('Audio', apath, channel=22, frame_start=1)
+    r = sc.render
+    r.use_sequencer = True
+    r.use_compositing = False
+    r.image_settings.file_format = 'FFMPEG'
+    ff = r.ffmpeg
+    ff.format = 'MPEG4'
+    ff.codec = 'H264'
+    ff.constant_rate_factor = 'NONE'
+    ff.video_bitrate = ARGS.bitrate
+    ff.maxrate = int(ARGS.bitrate * 1.125)
+    ff.minrate = 0
+    ff.buffersize = 18000
+    ff.gopsize = 30
+    ff.ffmpeg_preset = 'GOOD'
+    ff.audio_codec = 'AAC'
+    ff.audio_bitrate = 192
+    ff.audio_mixrate = 48000
+    ff.audio_channels = 'STEREO'
+    name = ARGS.output or ('final_video_no_voice.mp4' if ARGS.no_voice else 'final_video.mp4')
+    out = os.path.join(ROOT, name) if name == 'final_video.mp4' else os.path.join(ROOT, 'renders', name)
+    tmp = os.path.join(BUILD, 'edit_' + name)
+    if ARGS.frames:
+        a, b = (int(x) for x in ARGS.frames.split('-'))
+        sc.frame_start, sc.frame_end = a, b
+    r.filepath = tmp
+    r.use_file_extension = False
+    bpy.ops.render.render(animation=True)
+    try:
+        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', tmp, '-c', 'copy', '-movflags', '+faststart', out], check=True)
+        os.remove(tmp)
+    except (OSError, subprocess.CalledProcessError):
+        os.replace(tmp, out)
+    print('wrote', out)
 
 
 def main():
