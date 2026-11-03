@@ -3017,7 +3017,7 @@ def build_cameras():
                 [(0, FOREST + Vector((0, 0, z0 + 1.66))), (0.25, FOREST + Vector((0, 0.5, z0 + 1.9))), (1, FOREST + Vector((0, 70, z0 + 8.0)))],
                 fstop=60, lenses=[(0, 35), (1, 26)])
     # 4 prices
-    camera_shot('store', 28, [(0, (0.4, 2.8, 1.05)), (1, (0.35, 6.4, 1.15))], [(0, (0.0, 20.0, 1.4)), (1, (-0.1, 24.0, 1.5))], fstop=60)
+    camera_shot('store', 28, [(0, (0.4, 3.8, 1.1)), (1, (0.35, 7.0, 1.15))], [(0, (0.0, 20.0, 1.4)), (1, (-0.1, 24.0, 1.5))], fstop=60)
     camera_shot('tags', 35, [(0, (-0.6, 9.2, 1.05)), (0.3, (-0.6, 10.15, 1.0)), (0.43, (-0.6, 10.9, 1.0)), (0.66, (-0.65, 11.6, 1.0)),
                             (0.78, (-1.4, 11.74, 0.97)), (1, (-1.55, 11.75, 0.96))],
                 [(0, (-2.45, 9.3, 1.0)), (0.3, (-2.45, 10.15, 0.95)), (0.43, (-2.45, 10.9, 0.95)), (0.66, (-2.45, 11.7, 0.94)),
@@ -3429,8 +3429,8 @@ def chor_forest(t):
 
 
 def owner_y(t):
-    keys = [(25.5, 9.75), (26.95, 9.8), (27.08, 10.65), (27.55, 10.65), (27.68, 11.4), (28.4, 11.4), (28.75, 12.25), (31.0, 12.25)]
-    return path_at(keys, t)
+    # the owner side-steps with the tracking camera, just outside the right edge of frame, so only his arm reaches in
+    return eval_loc(RIGS['tags'][0], t * FPS + 1)[1] + 0.62
 
 
 def slap_tags(t, pairs):
@@ -3467,7 +3467,7 @@ def chor_store(t):
 def chor_tags(t):
     store_background(t, 'tags')
     y = owner_y(t)
-    P = merge(dict(loc=(-1.85, y, 0), yaw=90.0), idle(t), dict(smile=0.9, brow=0.3, lid=0.15))
+    P = merge(dict(loc=(-1.95, y, 0), yaw=90.0), idle(t), dict(smile=0.9, brow=0.3, lid=0.15))
     pose('owner', P)
     flips = [(9.3, 1.33, EV['flip1'][0]), (10.15, 0.53, EV['flip2'][0]), (10.9, 1.33, EV['flip3'][0]), (11.75, 0.93, EV['flip_bread'][0])]
     tgt = chest_pt('owner', (-0.25, 0.4, -0.2))
@@ -3733,7 +3733,7 @@ SHOTCFG = {
     'farmer':  dict(light=GOLDEN, grade='golden', groups=['Farm', 'FarmChars', 'FX'], exposure=0.0),
     'farm':    dict(light=GOLDEN, grade='golden', groups=['Farm', 'FarmChars', 'FX'], exposure=0.0),
     'forest':  dict(light=FORESTL, grade='golden', groups=['Forest', 'ForestChars', 'FX'], exposure=0.0, beams=0.3),
-    'store':   dict(light=STOREL, grade='store', groups=STORE_G, hide=['CashMountain', 'Card', 'Barrow_S', 'EBanner1', 'EggLast', 'GaryPile'], exposure=0.0),
+    'store':   dict(light=STOREL, grade='store', groups=STORE_G, hide=['CashMountain', 'Card', 'Barrow_S', 'EBanner1', 'EggLast', 'GaryPile', 'Count'], exposure=0.0),
     'tags':    dict(light=STOREL, grade='store', groups=STORE_G, hide=['CashMountain', 'Card', 'Barrow_S', 'EBanner1', 'EggLast', 'GaryPile'], exposure=0.0),
     'milk':    dict(light=STOREL, grade='store', groups=STORE_G, hide=['CashMountain', 'Card', 'Barrow_S', 'EBanner1', 'EggLast', 'GaryPile'], exposure=0.0),
     'bike':    dict(light=STOREL, grade='store', groups=STORE_G, hide=['CashMountain', 'Card', 'Barrow_S', 'EBanner1', 'EggLast', 'GaryPile'], exposure=0.0),
