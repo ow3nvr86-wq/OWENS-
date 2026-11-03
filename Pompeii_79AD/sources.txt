@@ -1,0 +1,183 @@
+THE DAY POMPEII DISAPPEARED - 79 AD
+RESEARCH, VERIFIED TIMELINE, SOURCES AND HONESTY NOTES
+============================================================
+
+Written before production. Every date, number and name used in the narration or on screen is listed in
+section 4 with the sources that support it. Where sources disagree, the video uses the cautious figure or says
+"about" / "an estimated". Nothing in the video is presented as a quote from a Roman resident, and no ancient or
+modern document is invented.
+
+
+1. SOURCES
+----------
+Ancient eyewitness
+[PLINY]  Pliny the Younger, Letters 6.16 and 6.20, written to the historian Tacitus about 25 years after the
+         eruption. The only surviving eyewitness account. He watched from Misenum, across the Bay of Naples; his
+         uncle, Pliny the Elder, commander of the fleet there, sailed toward the eruption and died at Stabiae.
+         He compared the eruption cloud to a pine tree (an umbrella pine), and described the darkness, falling
+         ash and pumice, and flashes in the cloud. Translations hosted by the University of Virginia
+         (https://pompeii.iath.virginia.edu/pliny.html) and summarised by the University of Rhode Island
+         (https://volcano.uri.edu/vesuvius/Plinys/Plinys.html) and the US Naval Academy library
+         (https://usna.edu/Library/sca/blog/posts/vesuvius_i.php).
+
+Volcanology
+[SIG]    H. Sigurdsson, S. Carey, W. Cornell, T. Pescatore (1985), "The eruption of Vesuvius in A.D. 79",
+         National Geographic Research 1; and Sigurdsson, Cashdollar & Sparks (1982), stratigraphy of the 79 AD
+         deposits. The standard reconstruction: a Plinian phase of white, then grey, pumice fall, followed on the
+         second day by pyroclastic surges and flows; summarised by Michigan Tech
+         (https://geo.mtu.edu/volcanoes/boris/mirror/mirrored_html/VESUVIO_79.html) and the University of Rhode
+         Island (https://digitalcommons.uri.edu/gsofacpubs/1114).
+[CHIO]   Chiominto, doctoral thesis, University of Naples Federico II (2023), on the fall phases of the 79 AD
+         eruption: about 6 h 36 min of white pumice fall and about 11 h of grey pumice fall
+         (https://www.fedoa.unina.it/15239/).
+[UNINA]  University of Naples Federico II and Pompeii Archaeological Park, field studies of the deposits inside
+         Pompeii: the basal pumice-fall deposit is 0 to 4.5 m thick across the site, the overlying ash-flow
+         (current) deposits a few tens of cm to 2 m; "almost six metres" of pyroclastic material in total
+         (https://www.iris.unina.it/handle/11588/849238, https://meetingorganizer.copernicus.org/EGU21/EGU21-9665.html).
+[WIKI-E] "Eruption of Mount Vesuvius in 79 AD", Wikipedia (citing Sigurdsson et al. and others): eruption
+         column up to about 33 km; first Plinian phase 18 to 20 hours; the surges that destroyed Pompeii came in
+         the early morning of the second day; at Pompeii about 2.8 m of pumice fall and 1.8 m of surge deposits;
+         by 2003 about 1,044 casts and remains of about 100 more people recovered in and around Pompeii; total
+         death toll unknown. https://en.wikipedia.org/wiki/Eruption_of_Mount_Vesuvius_in_79_AD
+
+Archaeology and history
+[PARK]   Parco Archeologico di Pompei (Pompeii Archaeological Park), official fact sheet and press kit: the
+         ancient city covers about 66 hectares, about two-thirds (about 44 ha) excavated, about 1,500 buildings
+         brought to light (https://pompeiisites.org/wp-content/uploads/Scheda_ParcoArcheologicoDiPompei.pdf,
+         https://pompeiisites.org/en/archaeological-park-of-pompeii/press-kit).
+[GAL]    Museo Galileo, "The eruption of Vesuvius and the history of the archaeological excavations": digging at
+         the site called "Civita" began in 1748 under the Bourbon king Charles; engineer Roque Joaquin de Alcubierre
+         (https://mostre.museogalileo.it/homofaber/en/introduction.html).
+[HT]     History Today, "Pompeii is Found": the site was identified as Pompeii in August 1763 from an inscription
+         naming the "res publica Pompeianorum" (the cippus of T. Suedius Clemens)
+         (https://www.historytoday.com/archive/months-past/pompeii-found).
+[CSCP]   Cambridge School Classics Project, "Pompeii - AD 79; 1748-1860" (https://www.na4.cambridgescp.com/weblink/449).
+[FIOR]   Giuseppe Fiorelli, director of the excavations from the 1860s, introduced the method of pouring plaster
+         into the cavities left in the ash by victims' bodies (The Florentine, https://www.theflorentine.net/2022/09/14/giuseppe-fiorelli/).
+[62AD]   "AD 62 Pompeii earthquake", Wikipedia; University of Virginia, "Patterns of Reconstruction at Pompeii"
+         (https://www2.iath.virginia.edu/struct/pompeii/patterns/sec-02.html): repairs after the earthquake of
+         62/63 AD were still under way in many buildings in 79 AD.
+
+The date debate
+[DATE]   CNN (2018), "Pompeii eruption inscription date" (the charcoal inscription "XVI K NOV" = 17 October);
+         National Geographic, "Mount Vesuvius eruption"; History.com, "Pompeii destruction date"; Finestre
+         sull'Arte (2024), "Zuchtriegel reopens debate on Pompeii's eruption: August or October"
+         (https://edition.cnn.com/style/article/pompeii-eruption-inscription-date-intl,
+         https://www.nationalgeographic.com/history/article/mount-vesuvius-eruption-pompeii,
+         https://www.history.com/articles/pompeii-vesuvius-destruction-date,
+         https://finestresullarte.info/en/news-focus/zuchtriegel-surprisingly-reopens-debate-on-pompeii-s-eruption-august-or-october).
+
+
+2. VERIFIED TIMELINE
+--------------------
+62/63 AD     A strong earthquake damages Pompeii and the towns around the bay. Repairs are still under way in many
+             buildings when Vesuvius erupts 16-17 years later. [62AD]
+79 AD        The eruption. Traditional date 24-25 August, from manuscripts of Pliny's letter. Many scholars now
+             argue for late October (autumn fruit, clothing, the 2018 charcoal inscription); in 2024 the park
+             showed that a charcoal note can survive for months, so the inscription could date to 78 AD and the
+             August date cannot be ruled out. The video says only "79 AD". [DATE]
+Day 1, from  Plinian phase. Around midday or early afternoon (Pliny: about the seventh hour) a column of gas, ash
+about midday and pumice rises, at its peak an estimated ~30 km (up to about 33 km), and spreads into an umbrella
+             cloud that the wind carries south-east over Pompeii. White pumice falls for roughly 6-7 hours, then
+             grey pumice, about 18 hours of fall in all. Roofs collapse under the weight; the sun is blotted out.
+             [PLINY, SIG, CHIO, WIKI-E]
+Night and    The column partly collapses several times, sending pyroclastic density currents (surges and flows:
+day 2        fast, ground-hugging avalanches of hot gas, ash and rock) down the volcano's flanks. Herculaneum is
+             overwhelmed during the night. [SIG, WIKI-E]
+Day 2, early The surges reach Pompeii and sweep through the town in the early morning, killing those still there
+morning      and burying it further. [SIG, WIKI-E]
+Result       Pompeii lies under several metres of pumice and ash: "almost six metres" in total, varying from place to
+             place. [UNINA, WIKI-E]
+1590s        Domenico Fontana's water channel from the Sarno is cut through the buried city; the ruins are not
+             recognised. [HT, CSCP]
+1748         Excavation begins at "Civita" under Charles of Bourbon. [GAL, CSCP]
+1763         An inscription confirms the site is Pompeii. [HT]
+1860s        Giuseppe Fiorelli directs the excavations and makes the first plaster casts from cavities in the ash.
+             [FIOR]
+Today        About 44 of the city's ~66 hectares have been excavated; about a third is still buried, and digging
+             continues. [PARK]
+
+
+3. NARRATION (125 words, read by a synthetic voice)
+---------------------------------------------------
+See script.txt for the exact lines and timings.
+
+
+4. CLAIM-BY-CLAIM FACT TABLE
+----------------------------
+Claim (narration or on screen)                       | Value used                         | Sources
+-----------------------------------------------------+------------------------------------+----------------------
+Pompeii was a busy Roman town of shops, taverns and   | well-documented shops, bars        | PARK, CSCP
+  painted homes                                       | (thermopolia), frescoed houses     |
+Pompeii lies beneath Mount Vesuvius                   | about 10 km south-east of the cone | WIKI-E, SIG
+Vesuvius erupted in 79 AD                             | 79 AD (month disputed, see DATE)   | PLINY, DATE
+On screen: EXACT DATE DEBATED - AUGUST OR OCTOBER     | both dates argued by scholars      | DATE
+A column of ash and pumice rose "an estimated thirty  | peak column ~30-33 km              | WIKI-E, SIG
+  kilometres"                                         |                                    |
+On screen: an eyewitness likened the cloud to a pine  | Letter 6.16                        | PLINY
+  tree                                                |                                    |
+"For hours, pumice rained down"; roofs collapsed      | ~18 h of pumice fall; roof         | CHIO, WIKI-E, SIG
+  under the weight                                    | collapses found in excavation      |
+On screen: PHASE 1 - PUMICE FALL (ABOUT 18 HOURS)     | 6.6 h white + 11 h grey;           | CHIO, WIKI-E
+                                                      | "18 to 20 hours"                   |
+Daylight turned to darkness                           | the umbrella cloud blotted out the | PLINY, SIG
+                                                      | sun (Pliny describes darkness)     |
+Many fled; others sheltered                           | the remains of ~1,150 people found | WIKI-E, PARK
+                                                      | in ~2/3 of the city suggest most   |
+                                                      | of the population left; about 38%  |
+                                                      | were found in the pumice layer     |
+"Next morning, the column collapsed. Avalanches of    | pyroclastic density currents in    | SIG, WIKI-E
+  scorching gas and ash swept through the city."      | the early morning of day 2         |
+On screen: PHASE 2 - PYROCLASTIC DENSITY CURRENTS     |                                    | SIG
+Buried under "up to about 6 m" of ash and pumice      | "almost six metres", varying       | UNINA, WIKI-E
+Hidden "for more than sixteen centuries"             | 79 -> 1748 = 1,669 years           | GAL
+"In 1748, the digging began."                         | 1748                               | GAL, CSCP
+On screen: ABOUT ONE-THIRD STILL UNEXCAVATED          | ~44 of ~66 ha excavated            | PARK
+"The eruption that buried Pompeii also preserved it." | the deposits sealed the town       | PARK, GAL
+
+
+5. CONFIRMED vs. UNCERTAIN vs. NOT CLAIMED
+------------------------------------------
+CONFIRMED: the eruption in 79 AD; the sequence of a long pumice fall followed by pyroclastic density currents;
+Pompeii buried by several metres of deposits; the 1748 start of excavation; the 1763 identification; about
+two-thirds of the city excavated today.
+
+UNCERTAIN (and how the video handles it):
+- The month (August or October). The video says "79 AD" and flags the debate on screen.
+- Exact clock times. Only Pliny gives a time for the start ("about the seventh hour"); reconstructions of the
+  later phases differ by hours. The video says "for hours" and "next morning" and gives no clock times.
+- The height of the column (estimates from ~26 to ~33 km). The video says "an estimated thirty kilometres".
+- Pompeii's population (estimates range from ~10,000 to ~20,000 or more) and the death toll (unknown). The video
+  gives NO numbers for either, as the brief asked.
+- What the eruption looked like from inside the town: no images exist. Every scene is an artistic
+  reconstruction based on the deposits and on Pliny's description, and is labelled as one.
+
+NOT CLAIMED: no invented conversations, documents or quotes; no named individual residents; no depiction of the
+death of any person (the pyroclastic currents are shown at landscape scale, sweeping over the empty town); no
+plaster casts or human remains are shown.
+
+
+6. WHAT IS ILLUSTRATIVE (ARTISTIC RECONSTRUCTION, NOT RECORD)
+-------------------------------------------------------------
+- The town plan is a simplified, schematic Pompeii: a grid of city blocks, a walled oval, a forum with a temple
+  on a podium at its north end with Vesuvius behind it (as at the real Temple of Jupiter), streets with raised
+  pavements, stepping stones and cart ruts. It is not a survey of the real streets.
+- The shape and height of Vesuvius before 79 AD are not known exactly; it is shown as a single broad cone.
+- The eruption column is drawn far shorter than ~30 km so it fits in a vertical frame; the umbrella cloud,
+  the darkening and the flashes in the cloud follow Pliny's description.
+- Pyroclastic currents are shown as a ground-hugging, billowing ash cloud; their real speed (often tens of m/s)
+  is compressed for the edit.
+- The people are stylised figures in plausible Roman clothing (tunics, stolas, pallas, cloaks); none represents
+  a real person. The excavation workers are generic, not a specific dig.
+- The passage of time (vegetation over the deposits, day and night) is a time-lapse device.
+
+
+7. FACTS CHECKED BUT CUT FOR TIME
+---------------------------------
+- Pliny the Elder's death at Stabiae while trying to reach friends by sea.
+- Herculaneum, buried far deeper (about 20 m) and preserved differently (carbonised wood, skeletons in the boat
+  houses).
+- The 62/63 AD earthquake and the repairs still under way in 79 AD.
+- Fontana's 1590s water channel that ran through the buried town unrecognised.
+- Fiorelli's plaster casts (1860s); deliberately not shown, out of respect.
+- The unexploded Second World War bombs and the 1943 Allied bombing of the site.

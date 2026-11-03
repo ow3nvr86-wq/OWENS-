@@ -1,0 +1,71 @@
+THE DAY POMPEII DISAPPEARED - ASSET PLAN
+============================================================
+
+Everything below is built by animation.py (Blender bpy, procedural geometry and node materials). Nothing is
+downloaded. The function that builds each asset is given in brackets.
+
+ENVIRONMENTS
+- The Campanian plain, the coast of the Bay of Naples and the sea; Mount Vesuvius as a broad cone with gullies,
+  ridges and a summit crater, vegetated lower slopes and bare rock above [build_terrain, vesuvius_h]
+- Countryside: ~5,200 umbrella pines, cypresses, oaks, shrubs and rows of vines; 34 farm villas round yards
+  [build_countryside, tree_templates]
+- Pompeii (schematic): a walled oval of ~66 ha; ~150 city blocks of houses and shops with tiled gable roofs,
+  courtyards and gardens, atrium houses with compluviate roofs; city walls with towers, merlons and the north
+  gate; the amphitheatre [build_town, build_walls, build_amphitheatre]
+- The hero street: basalt roadway with cart ruts, raised pavements and kerbs, stepping stones, a fountain;
+  shopfronts (open, shuttered), a tavern with an L-shaped counter and sunken jars, house doors, a timber balcony,
+  small upper windows, awnings on poles [build_street('intact')]
+- The forum: travertine paving, Doric colonnades with lean-to roofs and back walls, statue bases, the temple on
+  its podium (steps, Corinthian columns, cella, entablature, pediment, roof), two brick arches [build_forum]
+- The close-up roof: individual imbrices (half-round cover tiles), tegulae, ridge tiles [build_roof_patch]
+- The burial: the deposit blanket over the town; new trees that grow over it [build_blanket]
+- The excavation: the street as excavated (walls broken, roofs gone, plaster decayed), the trench with the
+  layers in its walls, the dig face, spoil heaps, the grassed-over ground [build_street('ruin'), build_dig]
+- The forum today, ruined, and the excavated town round it [build_forum(True), build_town(True)]
+
+CHARACTERS (a modular figure: hips, torso, head, two-part arms and legs; forward = -y)
+- 16 townspeople: men in belted knee-length tunics (some bearded, some grey, two in the hooded paenula cloak),
+  women in the long stola with a palla shawl (two with it drawn over the head), a child, merchants
+  [build_roman, roman_cast]
+- 5 excavation workers in shirts, trousers and caps, with picks, a shovel, a basket of spoil; a wheelbarrow
+- Animation: walk cycle (legs, knees, arm swing, hip bob and sway), idle (breathing, weight shift, glances),
+  chatting gestures, a merchant lifting a jug, carrying an amphora on the shoulder, pulling a handcart (wheels
+  turn with distance), turning to look up at the mountain and pointing, hurrying with a cloth held over the head
+  or a torch, swinging a pick, shovelling, a basket on the head [update_people, pose_*]
+- Limitation: the figures are stylised (smooth mannequins in draped clothing, no facial features) - fully
+  detailed humans are not practical procedurally on this machine, and the brief asks not to portray real victims.
+
+OBJECTS
+- Amphorae, dolia, jugs, bowls, baskets of grain, crates, a market stall, a two-wheeled handcart with spoked
+  wheels and cargo, torches with flickering light [lathe profiles: AMPHORA, DOLIUM, JUG, BOWL; build_cart, build_torch]
+
+MATERIALS [build_materials]
+ 1 Roman stone: tuff, limestone, travertine (with joints), basalt (stone_material)
+ 2 Ancient plaster: six painted colours with a dark red dado, grime and rain streaks; 'decay' reveals the rubble
+   masonry behind (plaster_material)
+ 3 Weathered wood (wood_material: 'wood', 'wood_old')
+ 4 Terracotta pottery (terracotta, terracotta_d)
+ 5 Roman roof tiles: rows of tegulae / imbrices, colour variation, moss (tiles_material)
+ 6 Volcanic ash: the ash dusting on every building material ('ashc'), the deposit blanket (deposit_material)
+ 7 Pumice: fresh lapilli with grains and bump (deposit_material 'pumice')
+ 8 Smoke: the eruption cloud and the currents - billowing, lit from above, broken edges, churning noise,
+   internal flashes (cloud_puff_material)
+ 9 Dust: billboard dust and haze, ash flakes, pumice specks, motes (particle_materials, particle_materials_pompeii)
+10 Volcanic rock: the mountain's upper slopes (terrain_material), 'volrock'; the trench strata (strata_material)
+ + cloth (wool and linen weaves in Roman dye colours), skin, hair, leather, foliage, sea, sand, flame
+
+EFFECTS
+- Eruption column (170 puffs), its rising head (22) and the umbrella cloud spreading downwind (150): displaced
+  icospheres on closed-form paths [build_puffs, update_puffs]
+- Pyroclastic density currents (240 puffs): a ground-hugging billowing front that pours down the flanks and
+  over the town [update_puffs, surge_front]
+- Column collapse feeding the currents; flashes in the cloud [flash_level]
+- Falling pumice and ash flakes, ash haze, roof-collapse dust, digging dust, motes (billboard particles)
+- Atmospheric haze and depth fog (compositor mist), drifting clouds and their shadows, the day/night time-lapse
+  [time_lapse], awnings rippling and one collapsing, the pumice layer rising in the street and on the roof,
+  the deposit burying the town, vegetation and trees growing back
+
+RENDER
+- Cycles on CPU (4 cores, no GPU) at 540x960, 6 samples + OpenImageDenoise, upscaled 2x in the edit; titles
+  and captions are drawn at 1080x1920 so they stay sharp. (EEVEE needs a GPU / OpenGL context; on this
+  headless machine Cycles is the practical choice.)

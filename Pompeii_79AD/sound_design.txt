@@ -1,0 +1,72 @@
+THE DAY POMPEII DISAPPEARED - SOUND DESIGN, MUSIC AND TIMING
+============================================================
+
+Everything below is synthesised by code in animation.py --stage audio (numpy only: filtered noise, sine
+partials, envelopes, convolution reverb). No samples, recordings or stock sound, so every sound is legally
+usable. The narration is a synthetic voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py; music
+and ambience duck under it (about 10-15 dB below the voice) so no effect covers a line.
+
+Files: audio/mix_with_voice.wav (final mix, -14 LUFS), audio/mix_no_voice.wav (music + sound only, for a
+voice recorded in CapCut), audio/narration.wav (voice only).
+
+CUE SHEET (generated)
+------------------------------------------------------------
+  0.00 s  [music    ] Low drone pad in D minor, the bed of the film; it darkens (E-flat) from the first falling stones
+  0.00 s  [ambience ] Low, continuous earth rumble (swells and fades; returns, stronger, from the first warning)
+  0.00 s  [music    ] Noise riser into 1.20 s
+  0.25 s  [voice    ] NARRATION: "One morning, this Roman city was still alive." (to 3.04 s)
+  1.20 s  [music    ] Deep impact as the column bursts from the mountain
+  4.00 s  [sfx      ] Handcart wheels rumbling and clacking over the paving joints
+  4.00 s  [ambience ] Town ambience: a wordless murmur of voices, birds; footsteps on stone
+  4.20 s  [voice    ] NARRATION: "Pompeii: a busy town of shops, taverns and painted homes, beneath Mount Vesuvius." (to 9.36 s)
+  4.30 s  [music    ] A gentle plucked melody for life in the town; it returns, warmer, at the rediscovery
+  5.10 s  [sfx      ] A hammer on metal from a workshop up the street
+ 10.00 s  [music    ] A low pulse, like a heartbeat, from 70 bpm accelerating to about 110 as the pumice falls
+ 10.15 s  [voice    ] NARRATION: "Then, in 79 AD, the mountain erupted." (to 13.45 s)
+ 15.00 s  [music    ] Hit on the cut to the sky
+ 15.00 s  [ambience ] Pumice begins to patter on roofs and paving; dense on the roof close-up and in the street
+ 15.15 s  [voice    ] NARRATION: "A column of ash and pumice rose an estimated thirty kilometres into the sky." (to 20.10 s)
+ 19.40 s  [music    ] Noise riser into 21.00 s
+ 21.00 s  [music    ] Hit on the cut to the street under the pumice
+ 21.00 s  [sfx      ] Hurried, muffled footsteps through the pumice
+ 21.10 s  [voice    ] NARRATION: "For hours, pumice rained down on the town. Roofs began to collapse under the weight." (to 26.07 s)
+ 25.20 s  [sfx      ] A roof gives way under the weight of pumice: creak, crash, a slide of stones
+ 27.00 s  [music    ] Low hit into the darkness
+ 27.10 s  [voice    ] NARRATION: "The sun disappeared. Day turned to darkness. Many fled. Others sheltered, and waited." (to 32.19 s)
+ 28.00 s  [sfx      ] Distant cracks and rolling booms with the flashes in the cloud
+ 33.00 s  [ambience ] After a beat of near-silence: a deep rushing roar that swells as the current fills the frame
+ 33.10 s  [voice    ] NARRATION: "Next morning, the column collapsed. Avalanches of scorching gas and ash swept through the city." (to 38.73 s)
+ 33.50 s  [music    ] Noise riser into 36.40 s
+ 36.40 s  [music    ] The biggest hit: the current reaches the town
+ 39.00 s  [music    ] Low hit as the ash settles
+ 39.00 s  [ambience ] Wind over the empty, ash-covered landscape
+ 39.10 s  [voice    ] NARRATION: "Pompeii vanished, under metres of volcanic debris." (to 42.44 s)
+ 44.10 s  [voice    ] NARRATION: "And there it stayed. Hidden, and almost forgotten, for more than sixteen centuries." (to 48.73 s)
+ 45.50 s  [ambience ] Time-lapse: wind, a passing shower, birds returning
+ 50.00 s  [sfx      ] Excavation: picks striking the deposit, shovels scraping, baskets of spoil
+ 50.00 s  [music    ] Soft low note into the rediscovery
+ 50.10 s  [voice    ] NARRATION: "In 1748, the digging began. And Pompeii came back into the light." (to 55.06 s)
+ 55.95 s  [voice    ] NARRATION: "The eruption that buried Pompeii also preserved it." (to 59.27 s)
+ 56.00 s  [ambience ] Evening in the ruins: cicadas and crickets, a soft breeze
+ 56.20 s  [music    ] The harmony resolves to D major under the last line; it rings out into black
+
+IF YOU RE-SCORE OR RE-DESIGN THE SOUND IN AN EDITOR: SUGGESTED ASSETS AND TIMESTAMPS
+------------------------------------------------------------
+- 0-4 s: a low sub rumble; one huge, deep impact at 1.2 s as the column bursts up; no melody yet.
+- 4-10 s: Roman town ambience: a market murmur (no intelligible words), sandals on stone, a handcart on
+  cobbles, a smith's hammer, swifts and sparrows. Music: a gentle, sparse plucked melody (lyre / harp).
+- 10-15 s: the murmur thins as people turn; a long low rumble; a slow heartbeat pulse starts (70 bpm).
+- 15-21 s: pumice pattering on terracotta tiles (dry gravel on tiles), wind; the pulse speeds up; dark strings.
+- 21-27 s: dense pumice fall, muffled hurried footsteps, timber creaks; a roof collapse at 25.2 s.
+- 27-33 s: music drops to a low drone; a continuous deep roar; distant cracks and rolling thunder with the
+  flashes in the cloud.
+- 33-39 s: half a second of near-silence on the cut, then a rushing, rising roar (low-passed wind + rumble);
+  the biggest hit at 36.4 s as the current reaches the town.
+- 39-44 s: wind over an empty landscape; ash settling (a soft hiss); one long low note.
+- 44-50 s: time-lapse: wind, a passing shower, birds returning; a gentle rising pad; soft ticks with the
+  year counter.
+- 50-56 s: picks in soil, shovel scrapes, baskets; the melody returns, warmer.
+- 56-60 s: evening cicadas; the harmony resolves; ring out into black.
+- Keep the narration 10-15 dB above the music; YouTube Shorts plays back at about -14 LUFS.
+- Use only sound you have the rights to: your own recordings, a licensed library, or CC0 / public-domain
+  sources (e.g. freesound.org CC0 filter); YouTube Audio Library tracks marked as free to use.
