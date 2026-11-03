@@ -80,8 +80,8 @@ Sound: Record scratch kills the music at the cut; a moment of muzak; then tense 
   TEXT 29.3-30.4 [big]: $500
   TEXT 31.1-32.2 [item]: MILK
   TEXT 31.1-32.2 [big]: $250
-  TEXT 33.0-34.5 [item]: BICYCLE
-  TEXT 33.0-34.5 [big]: $20,000
+  TEXT 33.3-34.5 [item]: BICYCLE
+  TEXT 33.3-34.5 [big]: $20,000
   EVENT 23.45-23.75: scratch
   EVENT 26.70-26.90: flip1
   EVENT 27.30-27.50: flip2
@@ -129,9 +129,9 @@ Sound: The playful theme returns, bigger; shovel scrapes and paper; wheelbarrow 
   VO 54.40-56.14: "Well... technically, now it does."
   TEXT 54.0-58.4 [label]: RICH IN CASH. / BROKE IN EVERYTHING ELSE.
   EVENT 46.30-50.00: shovel
-  EVENT 52.45-52.80: card_flip2
-  EVENT 52.70-53.10: face_fall2
-  EVENT 54.00-54.60: turn
+  EVENT 53.72-54.05: card_flip2
+  EVENT 53.95-54.30: face_fall2
+  EVENT 54.55-55.10: turn
   EVENT 55.60-56.30: sting
   EVENT 56.35-56.75: snap_zoom2
   Transition / edit: The ending re-creates the opening framing so the Short loops seamlessly back to the first frame.
