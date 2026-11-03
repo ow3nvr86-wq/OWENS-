@@ -72,7 +72,8 @@ SCENE 7 - THE PYROCLASTIC CURRENTS  (33.0-39.0 s, frames 991-1170)
 Visual: From the plain south-east of the walls: the column collapses and a billowing, ground-hugging current of ash and hot gas pours down the slopes and across the fields, rolling over the walls and swallowing the town.
   Shot "surge" 33.0-39.0 s (frames 991-1170): Wide, 24 mm, low over the fields: a slow push as the current advances and fills the frame.
   VO 33.10-38.73: "Next morning, the column collapsed. Avalanches of scorching gas and ash swept through the city."
-  TEXT 33.4-38.8 [date]: PHASE 2 · THE NEXT MORNING
+  TEXT 33.4-38.8 [tag]: THE NEXT MORNING
+  TEXT 33.4-38.8 [date]: PHASE 2
   TEXT 33.6-38.8 [label]: PYROCLASTIC / DENSITY CURRENTS
   EVENT 33.30-34.50: collapse
   EVENT 36.40-38.80: surge_hit

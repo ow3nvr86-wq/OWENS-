@@ -342,7 +342,13 @@
    "style": "tag"
   },
   {
-   "text": "PHASE 2 · THE NEXT MORNING",
+   "text": "THE NEXT MORNING",
+   "start": 33.4,
+   "end": 38.8,
+   "style": "tag"
+  },
+  {
+   "text": "PHASE 2",
    "start": 33.4,
    "end": 38.8,
    "style": "date"

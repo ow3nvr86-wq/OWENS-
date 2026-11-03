@@ -2722,7 +2722,12 @@ def surge_front(t):
     a = EV['collapse'][0]
     if t < a:
         return -1.0
-    return 300.0 + 11500.0 * min((t - a) / 6.0, 1.6) ** 1.15
+    F = 300.0 + 11500.0 * min((t - a) / 6.0, 1.6) ** 1.15
+    # ease the front to a stop just short of the surge camera (about 9,750 m from the vent), so the frame
+    # fills with the wall of the current instead of going black inside it
+    if F > 7700.0:
+        F = 7700.0 + 400.0 * (1.0 - math.exp(-(F - 7700.0) / 400.0))
+    return F
 
 
 def r_col(z):
@@ -3197,7 +3202,7 @@ def build_cameras():
     camera_shot('dig', 28, [(0, Vector((XS + 5.5, 33.0, Z0 + 12.5))), (1, Vector((XS + 1.6, 52.0, Z0 + 1.85)))],
                 [(0, Vector((XS + 0.2, DIG_FACE + 2.0, Z0 + 0.5))), (1, Vector((XS, DIG_FACE + 4.0, Z0 + 2.6)))], fstop=8.0)
     # 11 THE FINAL SHOT: a slow push between the forum's broken columns toward the temple and the mountain
-    camera_shot('ruins', 28, [(0, Vector((-347.6, -126.0, Z0 + 1.7))), (1, Vector((-346.8, -100.0, Z0 + 1.8)))],
+    camera_shot('ruins', 28, [(0, Vector((-342.4, -126.0, Z0 + 1.7))), (1, Vector((-341.8, -100.0, Z0 + 1.8)))],
                 [(0, Vector((-333.0, 40.0, Z0 + 10.0))), (1, Vector((-332.0, 40.0, Z0 + 11.0)))], fstop=8.0,
                 focus=[(0, Vector((-345.0, -80.0, Z0 + 3.0))), (1, Vector((-344.0, -60.0, Z0 + 3.0)))])
 
@@ -3365,17 +3370,19 @@ def apply_shot(name):
 
 
 def time_lapse(t):
-    """Scene 9: days and nights race past (three cycles), clouds hurry over, green spreads and trees grow."""
+    """Scene 9: days and nights race past (six cycles), clouds hurry over, green spreads and trees grow.
+    Nights are moonlit blue rather than black, so the land stays readable while the light flickers."""
     u = u_of('time', t)
-    ph = 3.0 * u
+    ph = 6.0 * u
     el = 42.0 * math.cos(2 * math.pi * ph) - 6.0
     az = -60.0 + 180.0 * (ph % 1.0)
     day = min(max((el + 4.0) / 14.0, 0.0), 1.0)
     L = dict(MORNING)
-    hc = tuple(0.04 + (c - 0.04) * day for c in (0.60, 0.58, 0.56))
-    zc = tuple(0.01 + (c - 0.01) * day for c in (0.22, 0.31, 0.46))
+    hc = tuple(n + (c - n) * day for c, n in zip((0.60, 0.58, 0.56), (0.10, 0.12, 0.17)))
+    zc = tuple(n + (c - n) * day for c, n in zip((0.22, 0.31, 0.46), (0.02, 0.03, 0.07)))
     L['sky'] = (hc, zc, 1.0)
-    L['sun'] = (max(el, 2.0), az, 3.0 * day, (1.0, 0.7 + 0.2 * day, 0.5 + 0.3 * day))
+    L['sun'] = (max(el, 2.0) + 32.0 * (1.0 - day), az, 3.0 * day + 0.7 * (1.0 - day),
+                tuple(m + (c - m) * day for c, m in zip((1.0, 0.9, 0.8), (0.55, 0.65, 0.95))))
     L['glow'] = (0.8 * (1 - abs(day - 0.5) * 2), (1.0, 0.5, 0.25))
     L['stars'] = 0.3 * (1 - day)
     set_light(L)
