@@ -86,8 +86,8 @@ the shared tools and exports $SHORTS_PY and $KOKORO_PY (pycairo: $SHORTS_PY -m p
   $SHORTS_PY render.py --no-voice            # -> renders/final_video_no_voice.mp4
   $SHORTS_PY tools/export_assets.py          # character and prop sheets
 
-Render time on 4 CPU cores: preview about 0.25-0.6 s per frame per core (about 4 minutes); final
-1080x1920 about 1-2.5 s per frame per core (about 15 minutes). Four worker processes render in parallel.
+Render time on 4 CPU cores (four worker processes in parallel): preview about 0.25-0.6 s per frame per
+worker (about 7 minutes); final 1080x1920 about 1.2-2.6 s per frame per worker (about 13 minutes).
 
 
 ACCURACY
