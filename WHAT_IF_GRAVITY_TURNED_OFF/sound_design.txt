@@ -1,0 +1,82 @@
+WHAT IF GRAVITY TURNED OFF FOR 10 SECONDS? - SOUND DESIGN, MUSIC AND TIMING
+============================================================
+
+Everything below is synthesised by code in animation.py --stage audio (numpy only: oscillators, filtered noise,
+envelopes, convolution reverb). No samples, recordings, stock sound or copyrighted music. The narration is a
+synthetic voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py. Music, ambience and effects duck under
+the voice so the narration always stays on top. Impact times in the return-of-gravity shots are computed from the
+same physics as the animation (fall height and speed, mapped through each shot's slow-motion clock).
+
+Files: audio/mix_with_voice.wav (final mix, -14 LUFS), audio/mix_no_voice.wav (music + sound only, -14 LUFS, for
+recording your own voice), audio/narration.wav (voice only).
+
+CUE SHEET (generated)
+------------------------------------------------------------
+  0.00 s  [ambience ] City birds
+  0.00 s  [ambience ] City: traffic rumble and distant voices (thins out while gravity is off)
+  0.00 s  [sfx      ] Footsteps on the pavement
+  0.00 s  [sfx      ] GRAVITY OFF: reversed whoosh into a deep sub "whoomp" and a fading tonal hum
+  0.00 s  [ambience ] Soft wind and air (zero-g street shots)
+  0.55 s  [voice    ] NARRATION: "Gravity just switched off. For ten seconds." (to 3.29 s)
+  0.65 s  [music    ] MUSIC: mysterious - a slow D minor pad swells out of the switch, glassy celesta-like notes, a deep drone
+  0.85 s  [sfx      ] Floaty high shimmer (scenes 1-2)
+  3.55 s  [voice    ] NARRATION: "The coffee doesn't fall. Nothing rockets upward. It just stops being pulled down." (to 8.09 s)
+  4.45 s  [sfx      ] Whip-pan whoosh into the street
+  4.60 s  [sfx      ] A car engine idling on as the car lifts
+  8.30 s  [sfx      ] The ball's rush of air as it sails straight on (no bounce)
+  8.35 s  [voice    ] NARRATION: "Anything already moving keeps going. A basketball flies dead straight. A fountain just keeps rising." (to 14.43 s)
+  8.95 s  [sfx      ] Metal rim "clank" as the player grabs it
+ 11.25 s  [sfx      ] Fountain water rushing upward: a rising hiss
+ 14.70 s  [voice    ] NARRATION: "One small step, and you're off the ground." (to 17.13 s)
+ 14.80 s  [sfx      ] The dog whimpers, then a short bark
+ 16.05 s  [ambience ] Apartment room tone
+ 16.45 s  [sfx      ] Glass clinks against the jug as they drift apart
+ 17.35 s  [music    ] MUSIC: sense of wonder - choir-like chords over slow sub pulses (Earth from space)
+ 17.35 s  [ambience ] Space: a deep, almost silent rumble
+ 17.45 s  [voice    ] NARRATION: "But the planet is still spinning, at over 1,600 kilometres an hour." (to 21.89 s)
+ 22.15 s  [voice    ] NARRATION: "Everything keeps going straight, while the ground curves away beneath it." (to 26.09 s)
+ 22.80 s  [sfx      ] A soft whoosh as the dot leaves along the straight line
+ 26.30 s  [sfx      ] Free-spinning wheel whine stops dead as the driver brakes - the car flies on; a horn
+ 26.30 s  [music    ] MUSIC: motion - a low plucked ostinato (120 bpm) starts and builds
+ 26.35 s  [voice    ] NARRATION: "Tyres lose their grip. Airliners climb, because their wings still push up." (to 30.63 s)
+ 28.30 s  [sfx      ] Jet engines rising in pitch as the airliner climbs
+ 31.00 s  [sfx      ] COUNTDOWN: a deep tick on every digit (10 ... 1)
+ 31.00 s  [music    ] MUSIC: tension - a rising string-like pad, an accelerating pulse and a heartbeat on every countdown digit
+ 31.10 s  [voice    ] NARRATION: "Second by second, the whole city drifts higher." (to 33.99 s)
+ 34.30 s  [voice    ] NARRATION: "Near the equator, a café table would end up as high as a person." (to 37.93 s)
+ 35.00 s  [sfx      ] Chair legs scrape lightly as the cafe furniture lifts
+ 38.10 s  [voice    ] NARRATION: "But the floating was never the problem." (to 40.40 s)
+ 40.65 s  [voice    ] NARRATION: "The landing is." (to 41.73 s)
+ 41.75 s  [music    ] MUSIC: riser peaks, then a HARD CUT to silence for 0.3 s before the impact
+ 42.05 s  [music    ] MUSIC: GRAVITY RETURNS - a huge sub impact, taiko and cymbal; then driving drums and brass chords
+ 42.15 s  [sfx      ] Falling air rushing past
+ 43.00 s  [voice    ] NARRATION: "Everything that drifted comes back down. All at once." (to 46.15 s)
+ 43.28 s  [sfx      ] Impact (clatter) in shot "drop_wide"
+ 43.38 s  [sfx      ] Impact (thud) in shot "drop_wide"
+ 43.91 s  [sfx      ] Impact (thud) in shot "drop_wide"
+ 44.86 s  [sfx      ] Impact (clatter) in shot "drop_street"
+ 44.95 s  [sfx      ] Impact (thud) in shot "drop_street"
+ 45.10 s  [sfx      ] Car alarms start (two, panned) and slowly fade
+ 45.50 s  [sfx      ] Impact (thud) in shot "drop_street"
+ 45.91 s  [sfx      ] Impact (car) in shot "drop_street"
+ 46.30 s  [sfx      ] Heavy downpour as the fountain columns collapse
+ 46.45 s  [voice    ] NARRATION: "Fountains collapse. Cars slam onto the road." (to 49.13 s)
+ 48.35 s  [sfx      ] Impact (car) in shot "cars_slam"
+ 48.36 s  [sfx      ] Impact (car) in shot "cars_slam"
+ 49.60 s  [sfx      ] Impact (thud) in shot "land"
+ 50.00 s  [music    ] MUSIC: resolution - a warm D major pad and gentle notes; a final low "whoomp" at the very end (loop)
+ 50.00 s  [voice    ] NARRATION: "Ten seconds without gravity, and the world would never look quite the same." (to 54.34 s)
+ 50.40 s  [sfx      ] Water dripping from the fountain; murmurs return
+ 55.00 s  [voice    ] NARRATION: "So... hold on to your coffee." (to 56.77 s)
+
+MUSIC GUIDE (if you re-score it in CapCut or another editor)
+------------------------------------------------------------
+- 0-0.45 s: no music, just a busy street. Gravity switches off with a deep sub hit.
+- 0.5-17 s: mysterious and weightless - a slow minor pad, sparse glassy bell notes, no drums.
+- 17-26 s: wonder - wide choir-like chords for Earth from space.
+- 26-31 s: motion - a low ostinato starts; 31-42 s: TENSION - rising strings, an accelerating pulse, a heartbeat on
+  every countdown digit and a riser... then cut everything to silence for 0.3 s.
+- 42 s: the biggest hit of the video when gravity returns; driving drums and brass until about 50 s.
+- 50-58 s: resolve warmly (major key), quiet and reflective; end on a soft low hit so the loop feels intended.
+- Keep the narration 10-15 dB above the music; YouTube Shorts plays back at about -14 LUFS.
+- Use only music you have the rights to (your own, a licensed library, or YouTube Audio Library tracks).
