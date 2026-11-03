@@ -14,6 +14,6 @@ BL=${BLENDER:-/opt/shorts/blender-4.2.3-linux-x64/blender}
 for ((s=A; s<=B; s+=200)); do
   e=$((s+199)); [ $e -gt $B ] && e=$B
   echo "=== chunk $s-$e $(date +%T)"
-  "$BL" -b --factory-startup -P animation.py -- --quality "$Q" --frames "$s-$e" --out "$OUT" 2>&1 | grep -E "^Time|rendering shot|Error|Traceback"
+  "$BL" -b --factory-startup -P animation.py -- --quality "$Q" --frames "$s-$e" --out "$OUT" 2>&1 | grep -E "^Time|rendering shot|Error|Traceback|fault|Killed|Abort"
 done
 echo "=== ALL DONE $(date +%T)"

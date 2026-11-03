@@ -5542,20 +5542,6 @@ def stage_edit():
         os.replace(tmp, out)
     print('wrote', out)
 
-
-def main():
-    os.makedirs(BUILD, exist_ok=True)
-    if ARGS.stage in ('render', 'all'):
-        stage_render()
-    if ARGS.stage in ('audio', 'all'):
-        stage_audio()
-    if ARGS.stage in ('edit', 'all'):
-        stage_edit()
-
-
-if __name__ == '__main__':
-    main()
-
 def main():
     os.makedirs(BUILD, exist_ok=True)
     if ARGS.stage in ('render', 'all'):
