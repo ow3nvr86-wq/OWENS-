@@ -1,0 +1,40 @@
+WHAT IF GRAVITY TURNED OFF FOR 10 SECONDS? - OPENING HOOK OPTIONS
+==================================================================
+
+Scored 1-5 on: stops the scroll in 1-2 s, works with the sound off, curiosity, originality, open loop.
+
+OPTION 1 (visual-first anti-hook) - SELECTED
+  Picture: extreme close-up of a woman's hand lifting a takeaway coffee on a city street. A deep "whoomp" - her hand
+  stops, but the coffee keeps going: it rises out of the cup as a wobbling brown ball and hangs in the air.
+  On screen: GRAVITY: OFF   Narration: "Gravity just switched off. For ten seconds."
+  Stop-the-scroll 5 | Sound-off 5 | Curiosity 5 | Originality 4 | Open loop 5   = 24/25
+  - The impossible image happens in the first half-second and needs no explanation.
+  - It is scientifically right (her hand stops, the coffee keeps the upward motion it already had), which sets up
+    the whole video's idea: things don't shoot into the sky, they just keep moving.
+  - "For ten seconds" opens the loop immediately: what happens when it comes back? The video pays it off at 42 s.
+  - The last shot returns to the same close-up of the cup ("So... hold on to your coffee"), so the Short loops.
+
+OPTION 2 (event anti-hook)
+  Picture: a jump shot on a street court - the ball leaves the shooter's hands and flies dead straight over the hoop
+  and away; the jumping player rises past the rim and grabs it.
+  Narration: "That ball is never coming down. Not for ten seconds."
+  Stop-the-scroll 4 | Sound-off 4 | Curiosity 4 | Originality 3 | Open loop 4   = 19/25
+  - Strong, but a ball flying away is less surprising at a glance (it could be a big throw); it needs a second look.
+    Used as the first shot of scene 2 instead.
+
+OPTION 3 (traditional hook)
+  Picture: an aerial shot of a city street, everything hovering a little above its shadow.
+  Narration: "If Earth's gravity switched off for ten seconds, the floating wouldn't be the problem. The landing would."
+  Stop-the-scroll 3 | Sound-off 2 | Curiosity 4 | Originality 3 | Open loop 4   = 16/25
+  - A great line, but it explains before it shows and gives away the twist. Its idea survives as the turn at
+    38-41 s ("But the floating was never the problem. The landing is.").
+
+SELECTED: OPTION 1 - the only one that is instantly impossible, readable with the sound off, physically honest and
+loopable.
+
+OPEN LOOP: "For ten seconds" (0.5 s) -> the countdown 10...1 (31-42 s) -> "The landing is." -> gravity returns (42 s).
+Consequences are revealed in steps: floating (scene 2) -> why the whole city lifts (scene 3) -> how high it gets
+(scene 4) -> the landing (scene 5).
+
+Phrases avoided on purpose: "You won't believe...", "Have you ever wondered...", "Today we're going to explore...",
+"Imagine if I told you...".

@@ -4467,8 +4467,389 @@ def _scrape(seed, dur=0.5):
     return _norm(_sweep_bp(n, lambda tc: 900 + 1600 * tc / dur, q=3.0, block=1024)) * np.sin(np.pi * t / dur)
 
 
+
+# --- the scenario's clock, for the sound (no 3D scene is built in the audio stage) ---------------------------------
+TAU_KEYS = {}
+for _sc in TIMING['scenes']:
+    for _sh in _sc['shots']:
+        if 'tau' in _sh:
+            TAU_KEYS[_sh['name']] = np.array(_sh['tau'], float)
+
+
+def video_t(shot, tau):
+    k = TAU_KEYS[shot]
+    if not (k[0, 1] <= tau <= k[-1, 1]):
+        return None
+    return float(np.interp(tau, k[:, 1], k[:, 0]))
+
+
+def fall_time(h, v0z):
+    """Sim time (after gravity returns) at which something h metres up, rising at v0z, lands."""
+    v = v0z + 0.0339 * 10.0
+    return 10.0 + (v + math.sqrt(v * v + 2 * 9.81 * h)) / 9.81
+
+
+def countdown_digits():
+    """(digit, start, end) in video time for the countdown, from the global sim-time keys."""
+    k = np.array(TIMING['count_keys'], float)
+    out = []
+    for d in range(10, 0, -1):
+        a = k[0, 0] if d == 10 else float(np.interp(10 - d, k[:, 1], k[:, 0]))
+        b = float(np.interp(11 - d, k[:, 1], k[:, 0]))
+        out.append((d, a, b))
+    return out
+
+
+def _bark(seed):
+    t = np.arange(int(0.22 * SR)) / SR
+    f = 520 * np.exp(-t * 4) + 260
+    y = np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * 0.4 + _bandpass(_noise(len(t), seed), 500, 2500) * 0.6
+    return _norm(_bandpass(y, 300, 3000)) * np.exp(-t * 12) * np.minimum(t / 0.01, 1)
+
+
+def _whimper(dur=0.7):
+    t = np.arange(int(dur * SR)) / SR
+    f = 950 - 280 * t / dur + 25 * np.sin(2 * np.pi * 7 * t)
+    return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * t / dur) ** 1.2
+
+
+def _heartbeat(seed):
+    t = np.arange(int(0.45 * SR)) / SR
+    a = np.sin(2 * np.pi * 52 * t) * np.exp(-t * 22)
+    b = np.sin(2 * np.pi * 46 * t) * np.exp(-np.clip(t - 0.17, 0, None) * 26) * (t > 0.17)
+    return _norm(a + 0.7 * b)
+
+
+def _alarm(dur, seed, f0=880.0, f1=1180.0, rate=2.6):
+    t = np.arange(int(dur * SR)) / SR
+    f = np.where((t * rate) % 1.0 < 0.5, f0, f1)
+    y = np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * 0.5 + np.sin(2 * np.pi * np.cumsum(f) / SR)
+    return _norm(_bandpass(y, 400, 3500))
+
+
+def _rain(dur, seed, lo=600, hi=9000):
+    n = int(dur * SR)
+    tt = np.arange(n) / SR
+    r = np.random.default_rng(seed)
+    hiss = _bandpass(_noise(n, seed, 'pink'), lo, hi)
+    drops = _bandpass((r.random(n) < 0.004) * r.standard_normal(n), 1500, 7000)
+    return _norm(hiss + drops * 2.0)
+
+
+def _hum(dur, f=55.0):
+    t = np.arange(int(dur * SR)) / SR
+    y = np.sin(2 * np.pi * f * t) + 0.5 * np.sin(2 * np.pi * 1.5 * f * t + 0.3) + 0.25 * np.sin(2 * np.pi * 2.01 * f * t)
+    return y * (0.7 + 0.3 * np.sin(2 * np.pi * 0.5 * t))
+
+
+def _music(N, cues):
+    mus = np.zeros((2, N))
+    T_OFF, T_ON = TIMING['g_off'], TIMING['g_on']
+    S_ = {s['name']: (s['t0'], s['t1']) for s in SHOTS}
+    tt = lambda d: np.arange(int(d * SR)) / SR
+    # 1) mystery: a D minor (add 9) pad swelling out of the switch, glassy celesta-like notes, a sub drone
+    a, b = T_OFF + 0.2, S_['globe'][0]
+    d = b - a + 1.5
+    pad = _pad([_mtof(m) for m in (50, 57, 62, 64, 65)], d, seed=3, cutoff=850) * _env(tt(d), [(0, 0), (2.5, 0.8), (d - 1.5, 0.8), (d, 0)])
+    _place(mus, _reverb(pad, 3.0, 4) * 0.8 + pad * 0.5, a, 0.4)
+    notes = [74, 77, 81, 76, 74, 69, 72, 77, 81, 79, 76, 74]
+    tm = T_OFF + 0.6
+    k = 0
+    while tm < b - 0.4:
+        nb = _bell(_mtof(notes[k % len(notes)] + 12), 2.0) * 0.5
+        _place(mus, _reverb(nb, 2.5, 10 + k) * 0.7 + nb * 0.3, tm, 0.13, pan=0.5 * math.sin(k))
+        tm += 0.75 if k % 4 != 3 else 1.1
+        k += 1
+    _place(mus, _hum(d, 36.7) * _env(tt(d), [(0, 0), (1.0, 1), (d - 1, 1), (d, 0)]), a, 0.12)
+    cues.append((a, 'MUSIC: mysterious - a slow D minor pad swells out of the switch, glassy celesta-like notes, a deep drone', 'music'))
+    # 2) wonder: space - choir-like chords Bb - F - C - Dm, sub pulses
+    a, b = S_['globe'][0], S_['traffic'][0]
+    for j, ch in enumerate(((58, 62, 65, 70), (53, 60, 65, 69), (55, 60, 64, 67), (50, 57, 62, 65))):
+        seg = (b - a) / 4
+        y = _choir(ch, seg + 0.6, seed=j)
+        _place(mus, y * _env(tt(seg + 0.6), [(0, 0), (0.4, 1), (seg, 1), (seg + 0.6, 0)]), a + j * seg, 0.3)
+    for j in range(int((b - a) / 1.05)):
+        _place(mus, _boom(0.9, 48, 32, 30 + j), a + 0.3 + j * 1.05, 0.12)
+    cues.append((a, 'MUSIC: sense of wonder - choir-like chords over slow sub pulses (Earth from space)', 'music'))
+    # 3) motion: low plucked ostinato at 120 bpm, building
+    a, b = S_['traffic'][0], S_['wide'][0]
+    pat = [38, 38, 50, 38, 45, 38, 48, 38]
+    j = 0
+    tm = a
+    while tm < b:
+        _place(mus, _pluck(_mtof(pat[j % 8]), 0.4, 1.2), tm, 0.22 + 0.1 * (tm - a) / (b - a))
+        tm += 0.25
+        j += 1
+    pad = _pad([_mtof(m) for m in (50, 57, 62)], b - a + 0.5, seed=8, cutoff=1200)
+    _place(mus, pad * _env(tt(b - a + 0.5), [(0, 0), (1, 0.7), (b - a, 0.8), (b - a + 0.5, 0)]), a, 0.25)
+    cues.append((a, 'MUSIC: motion - a low plucked ostinato (120 bpm) starts and builds', 'music'))
+    # 4) countdown: rising string-like pad, accelerating pulse, heartbeat, a riser - and a hard cut into silence
+    a, b = S_['wide'][0], T_ON - 0.3
+    d = b - a
+    y = _pad([_mtof(m) for m in (50, 53, 57, 62, 65)], d + 0.05, seed=12, cutoff=900)
+    y = _sweep_bp(y, lambda x: 300 + 2600 * (x / d) ** 1.6, q=1.2)
+    _place(mus, _norm(y) * _env(tt(d + 0.05), [(0, 0.2), (d * 0.5, 0.6), (d - 0.02, 1.0), (d + 0.05, 0)]), a, 0.55)
+    tm = a
+    while tm < b:
+        frac = (tm - a) / d
+        _place(mus, _pluck(_mtof(38 if int((tm - a) * 4) % 2 == 0 else 45), 0.3, 1.5), tm, 0.25 + 0.2 * frac)
+        tm += 0.25 - 0.1 * frac
+    for dig, ta, tb in countdown_digits():
+        if ta < b:
+            _place(mus, _heartbeat(dig), ta, 0.5)
+    rs = int(3.0 * SR)
+    riser = _sweep_bp(_noise(rs, 77, 'pink'), lambda x: 300 + 6000 * (x / 3.0) ** 2, q=2.0)
+    _place(mus, _norm(riser) * np.linspace(0, 1, rs) ** 2, b - 3.0, 0.35)
+    cues.append((a, 'MUSIC: tension - a rising string-like pad, an accelerating pulse and a heartbeat on every countdown digit', 'music'))
+    cues.append((b, 'MUSIC: riser peaks, then a HARD CUT to silence for 0.3 s before the impact', 'music'))
+    # 5) gravity returns: the biggest impact, then driving taiko and brass chords Dm - Bb - C - A
+    a, b = T_ON, S_['aftermath'][0]
+    _place(mus, _boom(4.0, 70, 26, 90), a, 1.0)
+    _place(mus, _taiko(1.6), a, 0.9)
+    cym = _bandpass(_noise(int(3.0 * SR), 91), 4000, 14000) * np.exp(-tt(3.0) * 1.2)
+    _place(mus, cym, a, 0.25)
+    for j, ch in enumerate(((50, 57, 62, 65), (46, 58, 62, 65), (48, 55, 60, 64), (45, 57, 61, 64))):
+        seg = (b - a - 0.6) / 4
+        _place(mus, _brass([_mtof(m) for m in ch], seg + 0.4, 1800), a + 0.6 + j * seg, 0.3)
+    tm = a + 0.6
+    j = 0
+    while tm < b - 0.3:
+        _place(mus, _taiko(0.8), tm, 0.35 if j % 4 == 0 else 0.18)
+        tm += 0.5
+        j += 1
+    cues.append((a, 'MUSIC: GRAVITY RETURNS - a huge sub impact, taiko and cymbal; then driving drums and brass chords', 'music'))
+    # 6) resolve: warm D major, gentle plucks; a last low "whoomp" that hints at the loop
+    a, b = S_['aftermath'][0], DURATION
+    d = b - a
+    pad = _pad([_mtof(m) for m in (50, 54, 57, 62, 66)], d, seed=21, cutoff=700)
+    _place(mus, _reverb(pad, 3.0, 22) * 0.6 + pad * 0.6, a, 0.35 * 1.0)
+    for j, m in enumerate((74, 78, 81, 78, 76, 74, 69, 74)):
+        nb = _bell(_mtof(m), 2.0) * 0.5
+        _place(mus, _reverb(nb, 2.5, 30 + j) * 0.6 + nb * 0.4, a + 0.4 + j * 0.85, 0.12)
+    _place(mus, _boom(1.2, 60, 30, 99), DURATION - 0.45, 0.35)
+    cues.append((a, 'MUSIC: resolution - a warm D major pad and gentle notes; a final low "whoomp" at the very end (loop)', 'music'))
+    return mus
+
+
 def stage_audio():
-    raise SystemExit("audio stage not written yet")
+    N = int(DURATION * SR)
+    t = np.arange(N) / SR
+    amb = np.zeros((2, N))
+    sfx = np.zeros((2, N))
+    cues = []
+
+    def cue(time, what, layer='sfx'):
+        cues.append((time, what, layer))
+    S_ = {s['name']: (s['t0'], s['t1']) for s in SHOTS}
+    T_OFF, T_ON = TIMING['g_off'], TIMING['g_on']
+    music = _music(N, cues)
+    tt = lambda d: np.arange(int(d * SR)) / SR
+
+    def bed(names, fn, gain, what, thin=None):
+        for nm in names:
+            a, b = S_[nm]
+            n = int((b - a) * SR) + 1
+            y = fn(n, abs(hash(nm)) % 1000) * _env(np.arange(n) / SR, [(0, 0), (0.04, 1), ((b - a) - 0.03, 1), (b - a, 0)])
+            if thin is not None:
+                y = y * thin(a + np.arange(n) / SR)
+            _place(amb, y, a, gain)
+        cue(S_[names[0]][0], what, 'ambience')
+    street = [s['name'] for s in SHOTS if SHOTCFG_AUDIO.get(s['name']) == 'street']
+    # the city thins out after the switch (no footsteps, engines idle on), and comes back after the landing
+    thin = lambda x: np.where(x < T_OFF, 1.0, np.where(x < T_ON, 0.45, np.clip(0.45 + (x - T_ON) / 6.0, 0.45, 1.0)))
+    bed(street, lambda n, s: _norm(_bandpass(_noise(n, s, 'brown'), 30, 700)) * 0.7 + _crowd(n, s, 0.25) * 0.3, 0.30,
+        'City: traffic rumble and distant voices (thins out while gravity is off)', thin)
+    bed(street, lambda n, s: _birds(n, s, 0.5), 0.10, 'City birds')
+    zg = [nm for nm in street if S_[nm][0] < T_ON]
+    bed(zg, lambda n, s: _norm(_bandpass(_noise(n, s + 3, 'pink'), 200, 1600)) * (0.6 + 0.4 * np.sin(2 * np.pi * 0.15 * np.arange(n) / SR)),
+        0.12, 'Soft wind and air (zero-g street shots)')
+    bed(['room'], lambda n, s: _norm(_bandpass(_noise(n, s, 'pink'), 80, 900)), 0.08, 'Apartment room tone')
+    bed(['globe', 'tangent'], lambda n, s: _norm(_bandpass(_noise(n, s, 'brown'), 20, 200)), 0.25, 'Space: a deep, almost silent rumble')
+    # --- scene 1: the switch
+    for k in range(3):
+        _place(sfx, _step(k), 0.0 + k * 0.17, 0.15, pan=-0.2)
+    cue(0.0, 'Footsteps on the pavement')
+    _place(sfx, _whoosh(0.5, 3)[::-1], T_OFF - 0.45, 0.3)
+    _place(sfx, _boom(2.2, 55, 26, 4), T_OFF, 0.75)
+    _place(sfx, _hum(3.0, 110.0) * _env(tt(3.0), [(0, 0), (0.1, 1), (3.0, 0)]), T_OFF, 0.12)
+    cue(T_OFF - 0.45, 'GRAVITY OFF: reversed whoosh into a deep sub "whoomp" and a fading tonal hum')
+    for k in range(10):
+        _place(sfx, _bell(_mtof(88 + (k * 5) % 12), 1.2) * 0.4, T_OFF + 0.4 + k * 0.7, 0.05, pan=0.6 * math.sin(k * 1.7))
+    cue(T_OFF + 0.4, 'Floaty high shimmer (scenes 1-2)')
+    _place(sfx, _whoosh(0.4, 5), S_['street'][0] - 0.15, 0.3)
+    cue(S_['street'][0] - 0.15, 'Whip-pan whoosh into the street')
+    _place(sfx, _engine(int(3.6 * SR), 6, 40) * 0.6, S_['street'][0], 0.12, pan=0.4)
+    cue(S_['street'][0], 'A car engine idling on as the car lifts')
+    # --- scene 2
+    _place(sfx, _whoosh(1.2, 7), S_['hoop'][0] + 0.05, 0.2, pan=0.3)
+    cue(S_['hoop'][0], 'The ball\'s rush of air as it sails straight on (no bounce)')
+    tg = video_t('hoop', 0.21)
+    if tg:
+        _place(sfx, _clunk(8), tg, 0.35)
+        _place(sfx, _bell(330, 1.2) * 0.4, tg, 0.2)
+        cue(tg, 'Metal rim "clank" as the player grabs it')
+    a, b = S_['fountain']
+    _place(sfx, _norm(_sweep_bp(_noise(int((b - a) * SR), 9, 'pink'), lambda x: 600 + 900 * x, q=1.5)) * _env(tt(b - a), [(0, 0), (0.2, 1), (b - a - 0.2, 1), (b - a, 0)]), a, 0.3)
+    cue(a, 'Fountain water rushing upward: a rising hiss')
+    _place(sfx, _whimper(0.8), S_['dog'][0] + 0.2, 0.18, pan=0.2)
+    _place(sfx, _bark(10), S_['dog'][0] + 1.05, 0.2, pan=0.2)
+    cue(S_['dog'][0] + 0.2, 'The dog whimpers, then a short bark')
+    _place(sfx, _bell(2600, 0.6) * 0.5, S_['room'][0] + 0.4, 0.2)
+    _place(sfx, _bell(3100, 0.5) * 0.4, S_['room'][0] + 0.75, 0.15)
+    cue(S_['room'][0] + 0.4, 'Glass clinks against the jug as they drift apart')
+    # --- scene 3
+    _place(sfx, _whoosh(0.8, 11), S_['tangent'][0] + 0.7, 0.25)
+    cue(S_['tangent'][0] + 0.7, 'A soft whoosh as the dot leaves along the straight line')
+    _place(sfx, _whoosh(0.4, 12), S_['traffic'][0] - 0.15, 0.25)
+    a, b = S_['traffic']
+    whine = np.sin(2 * np.pi * np.cumsum(np.interp(tt(b - a), [0, 0.45, 0.9, b - a], [900, 900, 120, 80])) / SR)
+    _place(sfx, whine * _env(tt(b - a), [(0, 0), (0.05, 1), (1.0, 0.3), (b - a, 0)]), a, 0.1)
+    _place(sfx, _horn(1.0, (392.0, 494.0)), a + 1.0, 0.15, pan=0.3)
+    cue(a, 'Free-spinning wheel whine stops dead as the driver brakes - the car flies on; a horn')
+    a, b = S_['plane']
+    _place(sfx, _jet(b - a + 1.0, 13, 1800, 2600), a - 0.3, 0.4, pan=0.2)
+    cue(a - 0.3, 'Jet engines rising in pitch as the airliner climbs')
+    # --- scene 4: the countdown
+    for dig, ta, tb in countdown_digits():
+        _place(sfx, _tick(20 + dig, 0.6), ta, 0.45)
+        _place(sfx, _boom(0.35, 120, 70, 40 + dig) * 0.5, ta, 0.2)
+    cue(countdown_digits()[0][1], 'COUNTDOWN: a deep tick on every digit (10 ... 1)')
+    _place(sfx, _scrape(30, 0.6), S_['table'][0] + 0.8, 0.08)
+    cue(S_['table'][0] + 0.8, 'Chair legs scrape lightly as the cafe furniture lifts')
+    # --- scene 5: gravity returns
+    _place(sfx, _whoosh(2.2, 50), T_ON + 0.1, 0.35)
+    cue(T_ON + 0.1, 'Falling air rushing past')
+    h_car, h_ppl, h_tab, h_walk = 5.7, 2.0, 1.74, 3.9
+    impacts = [('drop_wide', fall_time(h_tab, 0.0), 'clatter'), ('drop_wide', fall_time(h_ppl, 0.03), 'thud'),
+               ('drop_wide', fall_time(h_walk, 0.2), 'thud'), ('drop_wide', fall_time(h_car, 0.41), 'car'),
+               ('drop_street', fall_time(h_tab, 0.0), 'clatter'), ('drop_street', fall_time(h_ppl, 0.03), 'thud'),
+               ('drop_street', fall_time(h_walk, 0.2), 'thud'), ('drop_street', fall_time(h_car, 0.41), 'car'),
+               ('cars_slam', fall_time(h_car, 0.38), 'car'), ('cars_slam', fall_time(h_car, 0.44), 'car'),
+               ('land', fall_time(2.2, 0.05), 'thud')]
+    for k, (shot, tau, kind) in enumerate(impacts):
+        tv = video_t(shot, tau)
+        if tv is None:
+            continue
+        if kind == 'car':
+            _place(sfx, _boom(1.0, 80, 40, 60 + k), tv, 0.7)
+            _place(sfx, _crunch(61 + k, 0.35), tv, 0.5)
+            _place(sfx, _clunk(62 + k), tv + 0.22, 0.35)
+            for j in range(4):
+                _place(sfx, _crunch(70 + k * 5 + j, 0.12), tv + 0.05 + 0.07 * j, 0.25, pan=0.5 * math.sin(j + k))
+        elif kind == 'clatter':
+            for j in range(6):
+                _place(sfx, _crunch(80 + k * 7 + j, 0.14), tv + 0.03 * j, 0.32, pan=0.4 * math.sin(j))
+            _place(sfx, _bell(1700 + 300 * (k % 3), 0.5) * 0.4, tv, 0.15)
+        else:
+            _place(sfx, _step(90 + k) * 1.0, tv, 0.5)
+            _place(sfx, _boom(0.4, 90, 60, 95 + k) * 0.6, tv, 0.3)
+        cue(tv, f'Impact ({kind}) in shot "{shot}"')
+    a = S_['fountain_fall'][0]
+    _place(sfx, _rain(3.0, 51) * _env(tt(3.0), [(0, 0), (0.15, 1), (2.0, 0.8), (3.0, 0)]), a - 0.1, 0.55)
+    cue(a - 0.1, 'Heavy downpour as the fountain columns collapse')
+    alarm_t = S_['drop_street'][0] + 0.8
+    al = _alarm(13.0, 52)
+    _place(sfx, al * _env(tt(13.0), [(0, 0), (0.05, 1), (8.0, 0.7), (13.0, 0)]), alarm_t, 0.07, pan=-0.5)
+    al2 = _alarm(10.0, 53, 700, 950, 1.8)
+    _place(sfx, al2 * _env(tt(10.0), [(0, 0), (0.05, 1), (6.0, 0.6), (10.0, 0)]), alarm_t + 1.9, 0.05, pan=0.6)
+    cue(alarm_t, 'Car alarms start (two, panned) and slowly fade')
+    _place(sfx, _bark(54), S_['land'][0] + 0.45, 0.18, pan=0.3)
+    # --- scene 6
+    a, b = S_['aftermath'][0], DURATION
+    for k in range(10):
+        _place(sfx, _bell(_mtof(84 + (k % 3)), 0.25) * 0.25, a + 0.4 + k * 0.6, 0.06, pan=-0.6)
+    cue(a + 0.4, 'Water dripping from the fountain; murmurs return')
+    _place(amb, _crowd(int((b - a) * SR), 56, 0.35), a, 0.12)
+
+    vo = np.zeros(N)
+    vpath = os.path.join(ROOT, 'audio', 'narration.wav')
+    if os.path.exists(vpath):
+        with wave.open(vpath) as w:
+            a_ = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float64) / 32768
+        vo[:min(N, len(a_))] = a_[:N]
+    env = np.abs(vo)
+    k = int(0.03 * SR)
+    env = np.convolve(env, np.ones(k) / k, mode='same')
+    env = np.clip(env / (env.max() + 1e-9) * 4, 0, 1)
+    rel_k = int(0.3 * SR)
+    env = np.maximum.reduce([np.roll(env, j) for j in range(0, rel_k, rel_k // 12)])
+    duck_m = 1 - 0.65 * env
+    duck_a = 1 - 0.55 * env
+    music_n, amb_n, sfx_n = (x / (np.abs(x).max() + 1e-9) for x in (music, amb, sfx))
+    # strategic silence right before the impact
+    gap = np.ones(N)
+    i0, i1 = int((T_ON - 0.3) * SR), int(T_ON * SR)
+    gap[i0:i1] = 0.0
+    gap[i1 - 200:i1] = np.linspace(0, 1, 200)
+    bedm = (0.55 * music_n + 0.35 * amb_n + 0.75 * sfx_n) * gap
+    with_voice = (0.55 * music_n * duck_m + 0.35 * amb_n * duck_a + 0.75 * sfx_n * duck_a) * gap + np.stack([vo, vo]) * (1.5 / (np.abs(vo).max() + 1e-9))
+    end_fade = np.clip((DURATION - t) / 0.15, 0, 1)
+    os.makedirs(os.path.join(ROOT, 'audio'), exist_ok=True)
+    outs = {}
+    for name, mix in (('mix_with_voice', with_voice), ('mix_no_voice', bedm), ('music_sfx_stem', bedm)):
+        mix = mix * end_fade
+        mix = np.tanh(mix / (np.abs(mix).max() + 1e-9) * 1.2) * 0.89
+        p = os.path.join(ROOT, 'audio', name + '.wav')
+        with wave.open(p, 'wb') as w:
+            w.setnchannels(2)
+            w.setsampwidth(2)
+            w.setframerate(SR)
+            w.writeframes((np.clip(mix.T, -1, 1) * 32767).astype(np.int16).tobytes())
+        outs[name] = p
+    for name in ('mix_with_voice', 'mix_no_voice'):
+        p = outs[name]
+        tmp = p.replace('.wav', '_ln.wav')
+        try:
+            r = subprocess.run(['ffmpeg', '-hide_banner', '-i', p, '-af', 'loudnorm=I=-14:TP=-1.5:LRA=20:print_format=json', '-f', 'null', '-'],
+                               check=True, capture_output=True, text=True).stderr
+            js = json.loads(r[r.rindex('{'):r.rindex('}') + 1])
+            af = (f"loudnorm=I=-14:TP=-1.5:LRA=20:linear=true:measured_I={js['input_i']}:measured_TP={js['input_tp']}:"
+                  f"measured_LRA={js['input_lra']}:measured_thresh={js['input_thresh']}:offset={js['target_offset']}")
+            subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', p, '-af', af, '-ar', str(SR), tmp], check=True)
+            os.replace(tmp, p)
+        except (OSError, subprocess.CalledProcessError) as e:
+            print('loudnorm skipped:', e)
+    write_sound_design(cues)
+    print('audio written:', ', '.join(outs))
+
+
+SHOTCFG_AUDIO = {}
+for _sc in TIMING['scenes']:
+    for _sh in _sc['shots']:
+        SHOTCFG_AUDIO[_sh['name']] = 'space' if _sh['name'] in ('globe', 'tangent') else ('room' if _sh['name'] == 'room' else 'street')
+
+
+def write_sound_design(cues):
+    L = ['WHAT IF GRAVITY TURNED OFF FOR 10 SECONDS? - SOUND DESIGN, MUSIC AND TIMING',
+         '=' * 60, '',
+         'Everything below is synthesised by code in animation.py --stage audio (numpy only: oscillators, filtered noise,',
+         'envelopes, convolution reverb). No samples, recordings, stock sound or copyrighted music. The narration is a',
+         'synthetic voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py. Music, ambience and effects duck under',
+         'the voice so the narration always stays on top. Impact times in the return-of-gravity shots are computed from the',
+         'same physics as the animation (fall height and speed, mapped through each shot\'s slow-motion clock).',
+         '',
+         'Files: audio/mix_with_voice.wav (final mix, -14 LUFS), audio/mix_no_voice.wav (music + sound only, -14 LUFS, for',
+         'recording your own voice), audio/narration.wav (voice only).',
+         '', 'CUE SHEET (generated)', '-' * 60]
+    vt = os.path.join(BUILD, 'vo_timing.json')
+    if os.path.exists(vt):
+        with open(vt) as fh:
+            for ln in json.load(fh)['lines']:
+                cues.append((ln['start'], f'NARRATION: "{ln["text"]}" (to {ln["end"]:.2f} s)', 'voice'))
+    for tm, what, layer in sorted(cues):
+        L.append(f'{tm:6.2f} s  [{layer:9s}] {what}')
+    L += ['', 'MUSIC GUIDE (if you re-score it in CapCut or another editor)', '-' * 60,
+          '- 0-0.45 s: no music, just a busy street. Gravity switches off with a deep sub hit.',
+          '- 0.5-17 s: mysterious and weightless - a slow minor pad, sparse glassy bell notes, no drums.',
+          '- 17-26 s: wonder - wide choir-like chords for Earth from space.',
+          '- 26-31 s: motion - a low ostinato starts; 31-42 s: TENSION - rising strings, an accelerating pulse, a heartbeat on',
+          '  every countdown digit and a riser... then cut everything to silence for 0.3 s.',
+          '- 42 s: the biggest hit of the video when gravity returns; driving drums and brass until about 50 s.',
+          '- 50-58 s: resolve warmly (major key), quiet and reflective; end on a soft low hit so the loop feels intended.',
+          '- Keep the narration 10-15 dB above the music; YouTube Shorts plays back at about -14 LUFS.',
+          '- Use only music you have the rights to (your own, a licensed library, or YouTube Audio Library tracks).']
+    with open(os.path.join(ROOT, 'sound_design.txt'), 'w') as fh:
+        fh.write('\n'.join(L) + '\n')
 
 # ============================================================================
 # Stage: edit - Video Sequence Editor: upscale, flashes, vignette, grain, titles, word-by-word captions, audio, encode
@@ -4480,6 +4861,7 @@ TITLE_STYLE = {
     'label':  (FONT_TITLE, 78, (1.0, 1.0, 1.0, 1.0), 0.815, 0.07, True),
     'item':   (FONT_TITLE, 60, (1.0, 1.0, 1.0, 1.0), 0.855, 0.07, True),
     'tag':    (FONT_TITLE, 34, (0.95, 0.92, 0.85, 1.0), 0.905, 0.0, True),
+    'count':  (FONT_TITLE, 330, (1.0, 0.74, 0.16, 1.0), 0.775, 0.035, False),
 }
 _FONTS = {}
 
@@ -4609,17 +4991,28 @@ def stage_edit():
         gr.elements.append(grains[(f - 1) % len(grains)])
     gr.blend_type = 'OVERLAY'
     gr.blend_alpha = 0.16
-    # quick white flashes on the big scene changes (the cuts themselves are hard cuts on the beat)
-    for k, tm in enumerate((SHOT['bill']['t0'], SHOT['giant']['t0'])):
+    # white flashes: gravity switching off (soft) and coming back (strong); dips through white into and out of space
+    for k, (tm, peak, n) in enumerate(((TIMING['g_off'], 0.35, 5), (TIMING['g_on'], 0.85, 8), (SHOT['globe']['t0'], 0.6, 6),
+                                        (SHOT['traffic']['t0'], 0.45, 5))):
         f0 = frame(tm)
-        fl = se.sequences.new_effect(f'Flash{k}', type='COLOR', channel=4, frame_start=f0 - 1, frame_end=f0 + 6)
-        fl.color = (1.0, 0.98, 0.92)
+        fl = se.sequences.new_effect(f'Flash{k}', type='COLOR', channel=4, frame_start=f0 - 1, frame_end=f0 + n)
+        fl.color = (1.0, 0.98, 0.94)
         fl.blend_type = 'ADD'
-        key_alpha(fl, [(f0 - 1, 0.0), (f0, 0.55), (f0 + 1, 0.4), (f0 + 5, 0.0)])
+        key_alpha(fl, [(f0 - 1, 0.0), (f0, peak), (f0 + 1, peak * 0.7), (f0 + n - 1, 0.0)])
+    # the countdown: one big digit per second of sim time, with a label above it
+    kk = np.array(TIMING['count_keys'], float)
+    g_on = TIMING['g_on']
+    add_text(se, 'CountLabel', 'GRAVITY RETURNS IN', kk[0, 0], g_on, 'tag', 16, rise=0.0, y=0.905)
+    for d in range(10, 0, -1):
+        a = kk[0, 0] if d == 10 else float(np.interp(10 - d, kk[:, 1], kk[:, 0]))
+        b = float(np.interp(11 - d, kk[:, 1], kk[:, 0]))
+        st = add_text(se, f'Count{d}', str(d), a, b, 'count', 17, fade=2, rise=0.0)
+        st.transform.scale_x = st.transform.scale_y = 1.0
+    add_text(se, 'SecondsLeft', 'SECONDS LEFT', kk[0, 0] + 0.1, float(np.interp(1.0, kk[:, 1], kk[:, 0])), 'item', 15, rise=0.0, y=0.66)
     ch = 6
     for k, tl in enumerate(TIMING['titles']):
         for j, line in enumerate(tl['text'].split('|')):
-            st = add_text(se, f'Title{k}_{j}', line, tl['start'], tl['end'], tl['style'], ch + (k % 5) * 2 + j,
+            st = add_text(se, f'Title{k}_{j}', line, tl['start'], tl['end'], tl['style'], ch + (k % 4) * 2 + j,
                           rise=0.0 if tl['style'] == 'tag' else 0.01, y=tl.get('y'))
             if j:
                 dy = j * TITLE_STYLE[tl['style']][1] * 1.25 / RES[1]
@@ -4635,11 +5028,11 @@ def stage_edit():
         cdir = os.path.join(BUILD, 'captions')
         for k, c in enumerate(caps):
             f0, f1 = frame(c['start']), max(frame(c['end']), frame(c['start']) + 1)
-            st = se.sequences.new_image(f'Cap{k}', os.path.join(cdir, c['file']), channel=18 + k % 2, frame_start=f0, fit_method='ORIGINAL')
+            st = se.sequences.new_image(f'Cap{k}', os.path.join(cdir, c['file']), channel=20 + k % 2, frame_start=f0, fit_method='ORIGINAL')
             st.frame_final_end = f1
             st.blend_type = 'ALPHA_OVER'
     apath = os.path.join(ROOT, 'audio', 'mix_no_voice.wav' if ARGS.no_voice else 'mix_with_voice.wav')
-    se.sequences.new_sound('Audio', apath, channel=22, frame_start=1)
+    se.sequences.new_sound('Audio', apath, channel=24, frame_start=1)
     r = sc.render
     r.use_sequencer = True
     r.use_compositing = False
@@ -4687,3 +5080,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
