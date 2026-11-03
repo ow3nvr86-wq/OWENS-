@@ -89,7 +89,24 @@ frames plus audio/mix_no_voice.wav), add audio/narration.wav, and use subtitles.
 To retime: edit scene_timing.json (each shot's "tau" keys are its slow-motion clock), re-run tools/voiceover.py and
 tools/captions.py, then render, audio and edit. Re-render only the shots whose 3D content or timing you changed.
 
-RENDER_TIMES_PLACEHOLDER
+RENDER TIMES AND FINAL FILES
+----------------------------
+Measured on this machine (4 CPU cores, no GPU; Cycles with OIDN denoising):
+  final   540x960, 6 samples, upscaled 2x in the edit   7.1 s per frame (+ scene load) -> 3 h 42 min for 1,749 frames
+                                                        (run as two background jobs; render_all.sh resumes where it stopped)
+  preview 270x480, 4 samples                            1.6 s per frame -> 58 minutes
+  look-dev stills: about 2-3 minutes per contact sheet of 21 preview stills
+  audio stage about 20 s; edit stage about 4.5 minutes per video. A desktop GPU renders all of this many times faster.
+
+Final files (checked with ffprobe and ffmpeg ebur128):
+  final_video.mp4                    1080x1920, 30 fps, 58.3 s, H.264 + AAC 48 kHz stereo, 57.8 MB, -13.9 LUFS,
+                                     true peak -1.9 dBTP
+  renders/final_video_no_voice.mp4   same picture without captions or narration (titles and countdown kept),
+                                     57.9 MB, -13.9 LUFS, true peak -1.4 dBTP
+  renders/preview.mp4                the 270x480 preview, upscaled; 26.8 MB
+
+To record your own voice: import renders/final_video_no_voice.mp4 into an editor (e.g. CapCut) and read script.txt,
+using the start times in script.txt or subtitles.srt.
 
 
 ACCURACY
