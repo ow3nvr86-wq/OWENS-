@@ -1,0 +1,54 @@
+THE DANCING PLAGUE OF 1518 - SOUND DESIGN TIMELINE
+============================================================
+
+Everything is synthesised in audio.py with numpy: no samples, no recordings, no third-party audio.
+Music: a dance tune in D dorian, 6/8, on a synthetic pipe and shawm with a tabor drum and drones. It builds from a
+lone pipe to a full, slightly out-of-tune band, stops dead when the council bans music, and returns faint at the end.
+Mix: music and ambience are ducked about 7 dB under the narration; both mixes are normalised to -14 LUFS (true peak -1.5 dB).
+
+NARRATION (Kokoro-82M, voice bm_george)
+    0.15 -   5.90  July, 1518. A woman began dancing in a Strasbourg street... and seemingly couldn't stop.
+    6.30 -   9.89  A crowded city, already worn down by hunger and disease.
+   10.30 -  14.64  Within a week, dozens had joined her. Some accounts say hundreds, by August.
+   15.80 -  21.04  The council turned to physicians. Their verdict: a natural illness, caused by hot blood.
+   21.80 -  26.96  Their cure? More dancing. Halls were cleared, a stage was built, and musicians were hired.
+   28.30 -  32.01  It only seemed to spread. So the council banned public dancing.
+   34.80 -  41.89  Many feared a curse of Saint Vitus. Modern theories range from mass psychogenic illness... to toxic, mouldy grain.
+   43.30 -  48.63  In the end, the dancers were taken to a shrine of Saint Vitus, in the hills, to pray for healing.
+   50.90 -  57.38  By September, the dancing had faded. Five centuries later, historians still debate what really happened.
+
+CUES (time in seconds, layer, description)
+    0.00  music     A lone pipe begins the dance tune (D dorian, 6/8) on the first frame
+    0.18  sfx       Her shoes on the cobbles, in time with her steps
+    0.75  music     A soft tabor drum joins on the beat
+    2.60  ambience  A murmur rises as the onlookers turn
+    5.55  sfx       Whoosh: a timber post sweeps across the lens
+    6.00  ambience  Market crowd murmur, footsteps and a cart on the quay
+    6.10  ambience  Distant cathedral bells (three strikes)
+    9.60  sfx       Wet ink swoosh (ink-spread transition)
+   11.00  sfx       Stamping feet multiply as more dancers join
+   13.60  music     A low drone enters under the crowd
+   15.20  sfx       Paper tearing (tear transition)
+   15.50  music     Inside: a low drone; the tune only muffled through the walls
+   18.60  sfx       A quill scratching; papers shuffled
+   21.15  sfx       Page turn
+   21.50  music     The hired band: shawms, bagpipe drone and tabor; one shawm drifts out of tune
+   27.60  sfx       Down-whoosh as the stage shrinks into the city plan
+   30.62  music     On "banned": the music stops dead, leaving only its echo
+   31.00  music     Silence, a low drone and a heartbeat
+   31.90  sfx       Ink stamp lands: "WHY WERE THEY DANCING?" (deep hit)
+   34.50  music     Saint Vitus: a wordless choir and a small bell
+   37.60  music     Mass psychogenic illness: a quickening heartbeat, whispers, a rising tone
+   40.30  music     Ergot: a thin, wavering high tone over a drone
+   43.00  ambience  Storm wind and rain
+   43.60  music     A slow procession drum; the chapel bell tolls from the hill
+   44.20  sfx       Lightning and a long roll of thunder
+   50.00  ambience  Match cut: the empty street; only the wind
+   51.00  ambience  One distant bell
+   55.00  sfx       Stamp lands: "WHAT REALLY HAPPENED IN STRASBOURG?"
+   55.40  music     The dance tune returns, faint and alone, and fades out
+
+SUGGESTED ASSETS FOR A RE-SCORE (licence-free options)
+  - Period dance music: public-domain Renaissance dances (e.g. Susato, Danserye 1551) in a CC0 recording,
+    or record your own; shawm, recorder, bagpipe and tabor suit the setting.
+  - Bells, storm, crowd, footsteps: CC0 field recordings (e.g. Freesound filtered to CC0).

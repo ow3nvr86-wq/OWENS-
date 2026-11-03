@@ -1,0 +1,148 @@
+THE DANCING PLAGUE OF 1518 - SCENE-BY-SCENE STORYBOARD
+======================================================
+
+59.6 s, 1080 x 1920 (9:16), 30 fps. 2D only: every frame is drawn with pycairo vector ink (render.py, src/).
+Characters are animated on twos (a new drawing every second frame) with line boil; the camera, fog, dust,
+candles and water move on every frame. Depth comes only from flat layers moved at different speeds (a
+multiplane camera). Timing comes from scene_timing.json and the measured narration (build/vo_timing.json).
+
+Palette: dark charcoal, muted brown, aged parchment, dusty grey, deep burgundy, desaturated green and warm
+candlelight. The grade darkens scene by scene (look "dark" 0.0 -> 0.6), with colder tints near the end.
+Captions: bold Cinzel capitals in parchment with a dark outline; key words on a burgundy ink plate; max
+3 words per chunk at 65% of the frame height. Titles at the top, clear of the Shorts interface.
+
+----------------------------------------------------------------------------------------------------------
+SCENE 1 - THE FIRST DANCER                                   0.0 - 6.0 s   (frames 1-180)
+----------------------------------------------------------------------------------------------------------
+Visual    A narrow street of jettied half-timbered houses, cobbles with a central gutter, trade signs (a
+          baker's pretzel), the cathedral spire at the far end. A woman in a burgundy gown, linen apron and
+          white coif dances in the middle of the street, arms raised, head thrown back, eyes half closed.
+Camera    Opens tight on her broad-toed shoes and swirling hem on the cobbles (zoom 4.3, high-resolution
+          cobble patch), tilts up her body to her face (2.6 s), then pulls back (to 5 s) to reveal the
+          onlookers framing her and the whole street. The layers separate in parallax as the camera widens.
+Animation 'Whirl' dance cycle (1.35 s): alternate knee lifts, swaying hips, skirt flare and swirl, arms
+          overhead. Ten onlookers turn their heads to her from 2.6 s, staggered (stare, point, hand to
+          mouth, recoil, crossing herself, whispering); a man crossing the street stops and turns. Chimney
+          smoke, drifting fog.
+Narration 0.15-5.90  "July, 1518. A woman began dancing in a Strasbourg street... and seemingly couldn't stop."
+Text      Tag: AN ILLUSTRATED RECONSTRUCTION
+Sound     A lone pipe starts the dance tune on the first frame; her shoe taps; a soft tabor; a murmur rises.
+Out       MOVING FOREGROUND WIPE (5.58-6.42): a dark timber post sweeps across the lens; the cut hides behind it.
+
+----------------------------------------------------------------------------------------------------------
+SCENE 2 - THE CITY                                           6.0 - 10.0 s  (frames 181-300)
+----------------------------------------------------------------------------------------------------------
+Visual    Strasbourg on the river Ill: the cathedral's west front and single spire above the roofs of the old
+          island, tall roofs with rows of dormers, gabled half-timbered houses on the water, a footbridge,
+          a market quay with striped stalls, barrels and goods.
+Camera    A slow sideways truck to the right. Six layers move at different speeds: sky 0.1, roofs and
+          cathedral 0.3, riverside houses 0.6, quay 1.0, foreground awning and hanging herbs 1.35.
+Animation Townspeople walk both ways on the quay (walk cycles, varied speeds); a stallholder and customer
+          haggle; a boatman poles a flat boat; ripples on the water; birds; chimney smoke; fog banks.
+Narration 6.30-9.89  "A crowded city, already worn down by hunger and disease."
+Text      STRASBOURG (blackletter) / JULY 1518
+Sound     Three distant cathedral bells, market murmur, footsteps; the tune far off.
+Out       INK SPREAD (9.6-10.4): ink blooms from the centre and floods the page.
+
+----------------------------------------------------------------------------------------------------------
+SCENE 3 - IT SPREADS                                         10.0 - 15.5 s (frames 301-465)
+----------------------------------------------------------------------------------------------------------
+Visual    The same street. Three beats: one dancer -> several dancers -> a crowded street.
+Camera    Starts close on her (zoom 1.55) and pulls back to the full street; a slight uneasy roll.
+Animation Each new dancer appears through an ink-bloom reveal (a spreading blot with splatter): one man at
+          11.0 s, five more from 12.6 s, sixteen more from 13.6 s. Five dance cycles (jig, convulse,
+          stomp, sway, a full-turn twirl drawn by flipping the drawing each half turn), each with its own
+          tempo and phase, so no two move alike. Onlookers press against the walls.
+Narration 10.30-14.64  "Within a week, dozens had joined her. Some accounts say hundreds, by August."
+Text      DOZENS WITHIN A WEEK -> SOME ACCOUNTS: UP TO 400
+Sound     The tune grows (pipe + shawm + tabor); stamping feet multiply; crowd; a low drone enters.
+Out       PAPER TEAR (15.12-15.88): the page tears along a ragged diagonal and falls away.
+
+----------------------------------------------------------------------------------------------------------
+SCENE 4 - THE CITY PANICS                                    15.5 - 21.5 s (frames 466-645)
+----------------------------------------------------------------------------------------------------------
+Visual    A candlelit council chamber: beamed ceiling, tall leaded windows, carved panelling, the city's arms
+          (argent, a bend gules). Councillors in fur-trimmed gowns and flat caps behind a long cloth-covered
+          table with parchments, an inkwell, books and candles. Two physicians in long robes and round caps:
+          one holds up a urine flask to the light, the other reads from a book. A clerk writes.
+Camera    A slow pan from left to right across the room (zoom 1.32).
+Animation Talking hand gestures, a hand to the chin, folded arms, writing hand, the flask raised; blinking;
+          flickering candles whose light breathes over the whole room; a paper lifting in a draught; dust.
+Narration 15.80-21.04  "The council turned to physicians. Their verdict: a natural illness, caused by hot blood."
+Text      THE PHYSICIANS' VERDICT / "HOT BLOOD"
+Sound     A low drone; the tune muffled through the walls; quill scratch; paper; candle crackle.
+Out       PAGE TURN (21.05-21.95): an illustrated page turns right to left, its parchment back crossing over.
+
+----------------------------------------------------------------------------------------------------------
+SCENE 5 - THE STRANGE SOLUTION                               21.5 - 28.0 s (frames 646-840)
+----------------------------------------------------------------------------------------------------------
+Visual    The market square: the great roof of the grain hall, houses, a wooden stage with steps. On the
+          stage, exhausted dancers; beside them three hired musicians (tabor drum, shawm, bagpipe). Behind,
+          a row of watching townspeople; in front, two officials with folded arms behind a rope barrier.
+Camera    A slow push in with a creeping roll (-0.7 to +1 degree): unsettling.
+Animation Musicians play in time (drum strikes, fingering, bagpipe pumping); dancers in convulse, sway,
+          stomp and jig cycles, with tiredness drooping their heads; the crowd reacts.
+Narration 21.80-26.96  "Their cure? More dancing. Halls were cleared, a stage was built, and musicians were hired."
+Text      THE "CURE" / GUILD HALLS . A WOODEN STAGE . HIRED MUSICIANS
+Sound     The hired band, too loud, one shawm slowly sliding out of tune; stamping; crowd.
+Out       ANIMATED MAP TRANSITION (27.5-28.5): the stage picture shrinks, framed in ink, into its place on
+          the city plan.
+
+----------------------------------------------------------------------------------------------------------
+SCENE 6 - THE MYSTERY DEEPENS                                28.0 - 34.5 s (frames 841-1035)
+----------------------------------------------------------------------------------------------------------
+Visual    A bird's-eye plan of the city in the manner of a 16th-century town view: the Ill round the old
+          island, walls and towers, bridges, blocks of roofs, the cathedral, the market, a compass rose.
+Camera    From close on the market (zoom 2.3) out to the whole plan, then a slow push.
+Animation Groups of tiny dancers appear in twelve streets one after another, each with a burgundy glow and
+          ink ripples; they circle and flail. The page darkens towards the edges.
+Narration 28.30-32.01  "It only seemed to spread. So the council banned public dancing."
+Text      PUBLIC DANCING AND MUSIC BANNED; ink stamp (31.9 s): WHY WERE THEY DANCING?
+Sound     The band plays on until "banned" (30.6 s), then stops dead; silence, a drone, a heartbeat; the
+          stamp lands with a deep hit.
+Out       INK SPREAD (34.1-34.9).
+
+----------------------------------------------------------------------------------------------------------
+SCENE 7 - THE THEORIES                                       34.5 - 43.0 s (frames 1036-1290)
+----------------------------------------------------------------------------------------------------------
+Three illustrated plates on dark parchment with an engraved border, each pushed in slowly.
+7a 34.5-37.6  BELIEF AT THE TIME / A SAINT'S CURSE: a statue of the young Saint Vitus in a niche, with a
+          halo, his martyr's palm and his cockerel; candles flicker before him; a dancer jerks in the
+          foreground in silhouette; rays of light.
+7b 37.6-40.3  MODERN THEORY / MASS PSYCHOGENIC ILLNESS: rows of townspeople; a wave spreads from one person
+          to the next; each it reaches starts to move, linked by burgundy threads of 'contagion'.
+7c 40.3-43.0  MODERN THEORY . DISPUTED / ERGOT POISONING: ears of rye drawn like a botanical engraving, some
+          grains replaced by the dark ergot sclerotia; a magnifying lens passes over them; a loaf and sickle.
+Joined by PAGE TURNS at 37.6 and 40.3.
+Narration 34.80-41.89  "Many feared a curse of Saint Vitus. Modern theories range from mass psychogenic
+          illness... to toxic, mouldy grain."
+Sound     Choir and a small bell; a quickening heartbeat with whispers; a thin wavering tone over a drone.
+Out       CROSS DISSOLVE (42.5-43.5).
+
+----------------------------------------------------------------------------------------------------------
+SCENE 8 - THE SHRINE                                         43.0 - 50.0 s (frames 1291-1500)
+----------------------------------------------------------------------------------------------------------
+Visual    A storm over the hills (the Vosges): dark painted clouds, distant ridges, a wooded hillside with a
+          small chapel and a glowing doorway, a muddy road, grass, dead trees in the foreground.
+Camera    A slow sideways truck with five parallax layers.
+Animation A procession walks the road led by a priest with a cross: tired walk cycles, two still dancing as
+          they go; wind-driven ink rain; fog; a lightning bolt and flash at 44.2 s.
+Narration 43.30-48.63  "In the end, the dancers were taken to a shrine of Saint Vitus, in the hills, to pray for healing."
+Text      THE SHRINE OF SAINT VITUS / SAVERNE . AUGUST 1518
+Sound     Wind and rain, thunder, a slow procession drum, a choir, the chapel bell.
+Out       MATCH CUT (50.0): back to the street of the opening, in the same framing.
+
+----------------------------------------------------------------------------------------------------------
+SCENE 9 - THE FINAL MYSTERY                                  50.0 - 59.6 s (frames 1501-1788)
+----------------------------------------------------------------------------------------------------------
+Visual    The same street at dusk, empty, colder and darker, fog in the lane, dust drifting.
+Camera    A slow push down the street (50.0-52.6), then a tilt down onto the empty cobbles where she danced
+          (to 54.4) - the exact framing of the first shot, without her.
+Then      CROSS DISSOLVE (54.3-55.3) into dark parchment, where her figure dances on faintly, like an old
+          engraving in the paper. Ink stamp (55.0): WHAT REALLY HAPPENED IN STRASBOURG?
+          Tag (57.0): HISTORIANS STILL DEBATE THE CAUSE. Fade to black 59.2-59.6.
+Narration 50.90-57.38  "By September, the dancing had faded. Five centuries later, historians still debate
+          what really happened."
+Sound     Wind, one distant bell, a low drone; the stamp; the dance tune returns faint and alone, and fades.
+Loop      The last live image is the empty cobbles of the first frame: replayed, the Short loops back to her
+          feet on the same stones.

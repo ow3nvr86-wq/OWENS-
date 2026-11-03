@@ -1,0 +1,142 @@
+THE DANCING PLAGUE OF 1518 - RESEARCH AND SOURCES
+==================================================
+
+What this file is: the research behind every spoken line and every piece of on-screen text in the Short,
+which sources support it, where the sources disagree, and what was left out or shown only as an artistic
+reconstruction. The narration avoids anything that only one weak source supports.
+
+
+1. SOURCES
+----------
+[WAL08]  John Waller, "A Time to Dance, a Time to Die: The Extraordinary Story of the Dancing Plague of 1518"
+         (Icon Books, 2008; US edition "The Dancing Plague", Sourcebooks, 2009). The standard modern study,
+         built on the Strasbourg chronicles and council records.
+[WALE]   John Waller, "In a spin: the mysterious dancing epidemic of 1518", Endeavour 32 (3), 2008.
+         https://www.medievalists.net/2012/02/in-a-spin-the-mysterious-dancing-epidemic-of-1518/
+[WALL]   John Waller, "A forgotten plague: making sense of dancing mania", The Lancet 373 (9664), 2009.
+         https://www.medievalists.net/?p=49632
+[PDR]    Ned Pennant-Rea, "The Dancing Plague of 1518", The Public Domain Review, 10 July 2018.
+         https://publicdomainreview.org/essay/the-dancing-plague-of-1518/
+[BRIT]   Encyclopaedia Britannica, "dancing plague of 1518".
+         https://www.britannica.com/event/dancing-plague-of-1518
+[HIST]   Evan Andrews, "What was the dancing plague of 1518?", HISTORY.
+         https://www.history.com/news/what-was-the-dancing-plague-of-1518
+[WIKI]   Wikipedia, "Dancing plague of 1518". Used only as a map to the scholarship (it cites Waller, Midelfort,
+         Pennant-Rea and others) and for how the sources disagree.
+         https://en.wikipedia.org/wiki/Dancing_plague_of_1518
+[MIDF]   H. C. Erik Midelfort, "A History of Madness in Sixteenth-Century Germany" (Stanford UP, 1999), cited
+         through [WIKI] and [WAL08].
+
+What the primary record is: the 1518 events are known from Strasbourg council decisions and from
+chronicles. Some chronicles were written decades later, and Paracelsus's account, which names the first
+dancer, dates from about 1532 ([WIKI], [PDR]). The details below are therefore "reported", not certain.
+
+
+2. VERIFIED TIMELINE
+--------------------
+July 1518      A woman begins dancing in a Strasbourg street. Later accounts name her Frau Troffea; some
+               give 14 July. She is reported to have danced for four to six days ([WALE], [PDR], [BRIT], [HIST]).
+Within a week  About 34 others had joined, according to Waller ([WALE]); "about three dozen" ([HIST]);
+               "more than thirty" within days ([PDR]).
+By August      Estimates run from about 50 to about 400 people. The high figure comes from one chronicle,
+               the Imlin family chronicle, which says 400 within a month ([WIKI], [PDR], [WALE]).
+July-August    The council consults physicians. After ruling out astrological and supernatural causes, they
+               call it a "natural disease" caused by "hot blood" or "overheated blood" ([WALE], [PDR], [BRIT]).
+               Their remedy is more dancing.
+               The council clears two guildhalls and the outdoor grain market and builds a wooden stage,
+               opposite the horse fair according to [WALE] (in the horse market according to [PDR]). It pays
+               musicians and dancers to keep the afflicted moving ([WALE], [PDR], [HIST]).
+Then           The approach seems to make things worse. The council pulls down the stages and bans public
+               dancing and music; exceptions are later reported for stringed instruments at weddings
+               ([PDR], [WIKI]).
+August         Dancers, beginning with the worst affected, are taken to the shrine of Saint Vitus at Saverne,
+               in the hills north-west of Strasbourg. The rituals reportedly included red shoes, holy water,
+               crosses and prayer ([PDR], [WIKI], [HIST]: "a mountaintop shrine").
+Early Sept.    The episode fades ([PDR], [WIKI], [HIST]).
+
+
+3. CONTEXT AND THEORIES (none is proven)
+----------------------------------------
+Context        Strasbourg had suffered bad harvests and famine, with diseases including smallpox and
+               syphilis ([WAL08], [BRIT], [PDR]: "a string of bad harvests, political instability, and the
+               arrival of syphilis").
+Belief at the  Many people believed Saint Vitus could punish sinners by making them dance. The clergy and
+time           many townspeople read the outbreak as a saint's curse ([WAL08], [WALL], [WIKI]).
+Modern theory  Mass psychogenic illness, a stress-induced mass reaction shaped by belief in the curse. This is
+1              Waller's argument, and Britannica calls it the most widely accepted ([WALL], [BRIT], [PDR]).
+Modern theory  Ergot poisoning, from a toxic fungus on damp rye. It is often proposed but widely doubted:
+2              ergot restricts blood flow, which makes days of dancing unlikely. Waller says "this theory
+               does not seem tenable" ([WALL], [PDR], [WIKI]).
+Other          A deliberate religious cult or ritual has also been suggested ([WIKI], [HIST]).
+
+
+4. CLAIM-BY-CLAIM TABLE
+-----------------------
+Said or shown                                         | Supported by                       | Notes
+------------------------------------------------------+------------------------------------+-------------------------
+"July, 1518"                                          | WALE, PDR, BRIT, HIST              | the exact day (14 July)
+                                                      |                                    | is not said
+"A woman began dancing in a Strasbourg street"        | WALE, PDR, BRIT, HIST              | her name is not used:
+                                                      |                                    | it comes from later sources
+"...and seemingly couldn't stop"                      | WALE, PDR ("four to six days")     | hedged on purpose
+"A crowded city, already worn down by hunger and     | WAL08, BRIT, PDR, HIST             |
+  disease"                                            |                                    |
+"Within a week, dozens had joined her"                | WALE (34), HIST, PDR               |
+"Some accounts say hundreds, by August"               | WIKI (50-400), PDR (Imlin: 400),   | given as "some accounts";
+                                                      | WALE, HIST                         | no exact number said
+On screen: "SOME ACCOUNTS: UP TO 400"                 | PDR, WALE, WIKI                    | the high estimate, labelled
+"The council turned to physicians. Their verdict: a   | WALE, PDR, BRIT                    |
+  natural illness, caused by hot blood"               |                                    |
+"Their cure? More dancing. Halls were cleared, a      | WALE, PDR, HIST                    |
+  stage was built, and musicians were hired"          |                                    |
+"It only seemed to spread. So the council banned      | PDR, WIKI                          |
+  public dancing"                                     |                                    |
+"Many feared a curse of Saint Vitus"                  | WAL08, WALL, WIKI, HIST            | shown as a belief of the time
+"Modern theories range from mass psychogenic illness  | WALL, BRIT, PDR, WIKI              | each labelled "theory";
+  ... to toxic, mouldy grain"                         |                                    | ergot labelled "disputed"
+"The dancers were taken to a shrine of Saint Vitus,  | PDR, WIKI, HIST                    | Saverne named on screen
+  in the hills, to pray for healing"                  |                                    |
+"By September, the dancing had faded"                 | PDR, WIKI, HIST                    |
+"Five centuries later, historians still debate what   | WIKI, BRIT, PDR                    |
+  really happened"                                    |                                    |
+
+
+5. CONFIRMED vs UNCERTAIN
+-------------------------
+Well supported: the place and year; that it began with one woman in July; that it spread to dozens; the
+physicians' "hot blood" verdict; the halls, stage and musicians; the ban that followed; the pilgrimage to
+the shrine of Saint Vitus at Saverne; and that it ended by early September.
+
+Uncertain (handled with hedged wording or left out):
+- How many took part. Estimates run from about 50 to about 400; the narration says only "some accounts
+  say hundreds".
+- Deaths. Some modern retellings say "up to 15 a day", but according to [WIKI] the Strasbourg sources of
+  the time do not record deaths, and the sources Waller cites that do mention deaths are later accounts.
+  Waller himself writes that the chronicles suggest some died of exhaustion ([WALE]). Because the evidence
+  conflicts, the video gives no death count and does not show anyone dying.
+- The first dancer's name (Frau Troffea), the exact start date and her husband's role. All come from
+  later accounts and are not used.
+- The cause. Unknown; each theory is labelled as a belief or a theory, and ergot is labelled disputed.
+
+
+6. ARTISTIC RECONSTRUCTION (labelled on screen as "AN ILLUSTRATED RECONSTRUCTION")
+--------------------------------------------------------------------------------
+- Every face, person, costume, street and room is invented. The clothing follows the general look of
+  the Upper Rhine around 1500-1520 (linen headcloths and long gowns for women; doublets, hose, broad
+  flat caps and fur-trimmed gowns for men; physicians in long robes holding a urine flask, the usual
+  symbol of their profession in pictures of the period). These are not portraits of real people.
+- The council chamber, the stage scene and the procession are reconstructions of reported events. No
+  dialogue is spoken or shown, and the papers on the council table carry no readable text.
+- The city plan in scene 6 is a stylised bird's-eye view (the Ill river around the old island, the
+  cathedral with its single north spire, finished in 1439). It is not a survey map.
+- The shrine is drawn as a small chapel in wooded hills. Its real appearance in 1518 is not shown.
+- The three theory panels are diagrams of ideas, not depictions of events.
+
+
+7. FACTS CUT FOR TIME
+---------------------
+- Paracelsus, who visited later, blamed the first dancer's state of mind.
+- Strasbourg was then a Free Imperial City of the Holy Roman Empire.
+- Earlier outbreaks of dancing: Kolbigk (1021), Erfurt (1247), and the 1374 outbreaks along the Rhine.
+- Strong men were reportedly paid to hold dancers upright.
+- The red shoes, crosses and holy water used at the shrine.

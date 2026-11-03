@@ -1,0 +1,37 @@
+THE DANCING PLAGUE OF 1518 - NARRATION SCRIPT (59.6 s, 130 words)
+Voice: Kokoro-82M bm_george. Times are measured from the synthesised voice.
+Delivery: serious, mysterious, controlled; slightly ominous; let the short sentences land.
+
+OPENING HOOKS (three candidates)
+  A. Anti-hook, straight into the moment (CHOSEN): Picture: her dancing feet on the cobbles, then her face, then the staring crowd. Voice: "July, 1518. A woman began dancing in a Strasbourg street... and seemingly couldn't stop." It drops the viewer into the middle of the event with no introduction and opens the question "why can't she stop?", which the video holds open until the last line.
+  B. Paradox: "In 1518, a city tried to cure a dancing epidemic... with more dancing." Strong, but it spends the best surprise of scene 5 in the first second.
+  C. Mystery statement: "Nobody knows why hundreds of people danced in the streets of Strasbourg." It states the mystery but shows no moment, and "hundreds" is only the high estimate.
+
+[SCENE 1 - THE FIRST DANCER  0.0-6.0 s]
+(00.15-05.90) July, 1518. A woman began dancing in a Strasbourg street... and seemingly couldn't stop.
+
+[SCENE 2 - THE CITY  6.0-10.0 s]
+(06.30-09.89) A crowded city, already worn down by hunger and disease.
+
+[SCENE 3 - IT SPREADS  10.0-15.5 s]
+(10.30-14.64) Within a week, dozens had joined her. Some accounts say hundreds, by August.
+
+[SCENE 4 - THE CITY PANICS  15.5-21.5 s]
+(15.80-21.04) The council turned to physicians. Their verdict: a natural illness, caused by hot blood.
+
+[SCENE 5 - THE STRANGE SOLUTION  21.5-28.0 s]
+(21.80-26.96) Their cure? More dancing. Halls were cleared, a stage was built, and musicians were hired.
+
+[SCENE 6 - THE MYSTERY DEEPENS  28.0-34.5 s]
+(28.30-32.01) It only seemed to spread. So the council banned public dancing.
+
+[SCENE 7 - THE THEORIES  34.5-43.0 s]
+(34.80-41.89) Many feared a curse of Saint Vitus. Modern theories range from mass psychogenic illness... to toxic, mouldy grain.
+
+[SCENE 8 - THE SHRINE  43.0-50.0 s]
+(43.30-48.63) In the end, the dancers were taken to a shrine of Saint Vitus, in the hills, to pray for healing.
+
+[SCENE 9 - THE FINAL MYSTERY  50.0-59.6 s]
+(50.90-57.38) By September, the dancing had faded. Five centuries later, historians still debate what really happened.
+
+Total: 130 words. Every line is checked against sources.txt (section 4).

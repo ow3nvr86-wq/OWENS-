@@ -1,0 +1,412 @@
+{
+ "title": "THE DANCING PLAGUE OF 1518",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "duration": 59.6,
+ "scenes": [
+  {
+   "id": 1,
+   "key": "dancer",
+   "name": "THE FIRST DANCER",
+   "start": 0.0,
+   "end": 6.0,
+   "in": "cut",
+   "camera": "close on the dancer's feet, tilt up to her face, pull back to reveal the crowd and the street"
+  },
+  {
+   "id": 2,
+   "key": "city",
+   "name": "THE CITY",
+   "start": 6.0,
+   "end": 10.0,
+   "in": "wipe",
+   "camera": "a slow sideways truck across the city, six parallax layers"
+  },
+  {
+   "id": 3,
+   "key": "spread",
+   "name": "IT SPREADS",
+   "start": 10.0,
+   "end": 15.5,
+   "in": "ink",
+   "camera": "three beats, one, several, a crowded street, each joined by an ink-bloom reveal; the camera pulls back"
+  },
+  {
+   "id": 4,
+   "key": "council",
+   "name": "THE CITY PANICS",
+   "start": 15.5,
+   "end": 21.5,
+   "in": "tear",
+   "camera": "a slow pan across the candlelit council chamber"
+  },
+  {
+   "id": 5,
+   "key": "cure",
+   "name": "THE STRANGE SOLUTION",
+   "start": 21.5,
+   "end": 28.0,
+   "in": "page",
+   "camera": "a slow push in toward the stage, past the musicians and watching officials"
+  },
+  {
+   "id": 6,
+   "key": "map",
+   "name": "THE MYSTERY DEEPENS",
+   "start": 28.0,
+   "end": 34.5,
+   "in": "map",
+   "camera": "zoom out from the stage onto a bird's-eye plan of the city; dancers in many streets; the light darkens"
+  },
+  {
+   "id": 7,
+   "key": "theories",
+   "name": "THE THEORIES",
+   "start": 34.5,
+   "end": 43.0,
+   "in": "ink",
+   "camera": "three illustrated plates, each pushed in slowly, joined by page flips"
+  },
+  {
+   "id": 8,
+   "key": "shrine",
+   "name": "THE SHRINE",
+   "start": 43.0,
+   "end": 50.0,
+   "in": "dissolve",
+   "camera": "a slow sideways truck with a procession through dark hills to the shrine"
+  },
+  {
+   "id": 9,
+   "key": "end",
+   "name": "THE FINAL MYSTERY",
+   "start": 50.0,
+   "end": 59.6,
+   "in": "match",
+   "camera": "the empty street from the opening; a slow push, a tilt down to the empty cobbles, then dark parchment"
+  }
+ ],
+ "lines": [
+  {
+   "scene": 1,
+   "start": 0.15,
+   "deadline": 5.95,
+   "text": "July, 1518. A woman began dancing in a Strasbourg street... and seemingly couldn't stop.",
+   "tts": "July, fifteen eighteen. A woman began dancing in a Strasbourg street... and seemingly, couldn't stop.",
+   "hl": [
+    "1518.",
+    "DANCING",
+    "COULDN'T",
+    "STOP."
+   ]
+  },
+  {
+   "scene": 2,
+   "start": 6.3,
+   "deadline": 9.95,
+   "text": "A crowded city, already worn down by hunger and disease.",
+   "tts": "A crowded city, already worn down by hunger and disease.",
+   "hl": [
+    "HUNGER",
+    "DISEASE."
+   ]
+  },
+  {
+   "scene": 3,
+   "start": 10.3,
+   "deadline": 15.4,
+   "text": "Within a week, dozens had joined her. Some accounts say hundreds, by August.",
+   "tts": "Within a week, dozens had joined her. Some accounts say hundreds, by August.",
+   "hl": [
+    "DOZENS",
+    "HUNDREDS,"
+   ]
+  },
+  {
+   "scene": 4,
+   "start": 15.8,
+   "deadline": 21.4,
+   "text": "The council turned to physicians. Their verdict: a natural illness, caused by hot blood.",
+   "tts": "The council turned to physicians. Their verdict: a natural illness, caused by hot blood.",
+   "hl": [
+    "PHYSICIANS.",
+    "HOT",
+    "BLOOD."
+   ]
+  },
+  {
+   "scene": 5,
+   "start": 21.8,
+   "deadline": 27.9,
+   "text": "Their cure? More dancing. Halls were cleared, a stage was built, and musicians were hired.",
+   "tts": "Their cure? More dancing. Halls were cleared, a stage was built, and musicians were hired.",
+   "hl": [
+    "MORE",
+    "DANCING.",
+    "MUSICIANS"
+   ]
+  },
+  {
+   "scene": 6,
+   "start": 28.3,
+   "deadline": 32.4,
+   "text": "It only seemed to spread. So the council banned public dancing.",
+   "tts": "It only seemed to spread. So the council banned public dancing.",
+   "hl": [
+    "SPREAD.",
+    "BANNED"
+   ]
+  },
+  {
+   "scene": 7,
+   "start": 34.8,
+   "deadline": 42.9,
+   "text": "Many feared a curse of Saint Vitus. Modern theories range from mass psychogenic illness... to toxic, mouldy grain.",
+   "tts": "Many feared a curse of Saint Vitus. Modern theories range from mass psychogenic illness... to toxic, mouldy grain.",
+   "hl": [
+    "CURSE",
+    "VITUS.",
+    "PSYCHOGENIC",
+    "GRAIN."
+   ]
+  },
+  {
+   "scene": 8,
+   "start": 43.3,
+   "deadline": 49.9,
+   "text": "In the end, the dancers were taken to a shrine of Saint Vitus, in the hills, to pray for healing.",
+   "tts": "In the end, the dancers were taken to a shrine of Saint Vitus, in the hills, to pray for healing.",
+   "hl": [
+    "SHRINE",
+    "HEALING."
+   ]
+  },
+  {
+   "scene": 9,
+   "start": 50.9,
+   "deadline": 57.9,
+   "text": "By September, the dancing had faded. Five centuries later, historians still debate what really happened.",
+   "tts": "By September, the dancing had faded. Five centuries later, historians still debate what really happened.",
+   "hl": [
+    "FADED.",
+    "DEBATE"
+   ]
+  }
+ ],
+ "titles": [
+  {
+   "text": "AN ILLUSTRATED RECONSTRUCTION",
+   "start": 0.3,
+   "end": 5.6,
+   "style": "tag",
+   "y": 0.155
+  },
+  {
+   "text": "STRASBOURG",
+   "start": 6.2,
+   "end": 9.8,
+   "style": "hero",
+   "y": 0.19
+  },
+  {
+   "text": "JULY 1518",
+   "start": 6.5,
+   "end": 9.8,
+   "style": "date",
+   "y": 0.252
+  },
+  {
+   "text": "DOZENS WITHIN A WEEK",
+   "start": 10.6,
+   "end": 13.0,
+   "style": "label",
+   "y": 0.18
+  },
+  {
+   "text": "SOME ACCOUNTS: UP TO 400",
+   "start": 13.1,
+   "end": 15.3,
+   "style": "label",
+   "y": 0.18
+  },
+  {
+   "text": "THE PHYSICIANS' VERDICT",
+   "start": 16.0,
+   "end": 21.2,
+   "style": "date",
+   "y": 0.17
+  },
+  {
+   "text": "“HOT BLOOD”",
+   "start": 19.0,
+   "end": 21.2,
+   "style": "big",
+   "y": 0.235
+  },
+  {
+   "text": "THE “CURE”",
+   "start": 22.0,
+   "end": 27.7,
+   "style": "date",
+   "y": 0.17
+  },
+  {
+   "text": "GUILD HALLS · A WOODEN STAGE · HIRED MUSICIANS",
+   "start": 24.6,
+   "end": 27.7,
+   "style": "tag",
+   "y": 0.215
+  },
+  {
+   "text": "PUBLIC DANCING AND MUSIC BANNED",
+   "start": 30.6,
+   "end": 34.2,
+   "style": "tag",
+   "y": 0.155
+  },
+  {
+   "text": "WHY WERE THEY|DANCING?",
+   "start": 31.9,
+   "end": 34.3,
+   "style": "stamp",
+   "y": 0.4
+  },
+  {
+   "text": "BELIEF AT THE TIME",
+   "start": 34.9,
+   "end": 37.5,
+   "style": "tag",
+   "y": 0.15
+  },
+  {
+   "text": "A SAINT'S CURSE",
+   "start": 34.9,
+   "end": 37.5,
+   "style": "plate",
+   "y": 0.195
+  },
+  {
+   "text": "MODERN THEORY",
+   "start": 37.6,
+   "end": 40.2,
+   "style": "tag",
+   "y": 0.15
+  },
+  {
+   "text": "MASS PSYCHOGENIC|ILLNESS",
+   "start": 37.6,
+   "end": 40.2,
+   "style": "plate",
+   "y": 0.205
+  },
+  {
+   "text": "MODERN THEORY · DISPUTED",
+   "start": 40.3,
+   "end": 42.8,
+   "style": "tag",
+   "y": 0.15
+  },
+  {
+   "text": "ERGOT|POISONING",
+   "start": 40.3,
+   "end": 42.8,
+   "style": "plate",
+   "y": 0.205
+  },
+  {
+   "text": "THE SHRINE OF SAINT VITUS",
+   "start": 43.6,
+   "end": 49.7,
+   "style": "date",
+   "y": 0.17
+  },
+  {
+   "text": "SAVERNE · AUGUST 1518",
+   "start": 43.9,
+   "end": 49.7,
+   "style": "tag",
+   "y": 0.215
+  },
+  {
+   "text": "WHAT REALLY|HAPPENED IN|STRASBOURG?",
+   "start": 55.0,
+   "end": 59.6,
+   "style": "stamp_end",
+   "y": 0.38
+  },
+  {
+   "text": "HISTORIANS STILL DEBATE THE CAUSE",
+   "start": 57.0,
+   "end": 59.6,
+   "style": "tag_end",
+   "y": 0.53
+  }
+ ],
+ "events": {
+  "first_step": [
+   0.0,
+   0.0
+  ],
+  "heads_turn": [
+   2.6,
+   3.6
+  ],
+  "bells": [
+   6.1,
+   9.8
+  ],
+  "bloom1": [
+   11.0,
+   11.0
+  ],
+  "bloom2": [
+   12.6,
+   12.6
+  ],
+  "bloom3": [
+   13.6,
+   13.6
+  ],
+  "music_stage": [
+   22.2,
+   27.9
+  ],
+  "stamp": [
+   31.9,
+   31.9
+  ],
+  "plate1": [
+   34.5,
+   34.5
+  ],
+  "plate2": [
+   37.6,
+   37.6
+  ],
+  "plate3": [
+   40.3,
+   40.3
+  ],
+  "thunder": [
+   44.2,
+   44.2
+  ],
+  "empty_street": [
+   50.0,
+   50.0
+  ],
+  "parchment": [
+   54.4,
+   55.2
+  ],
+  "stamp_end": [
+   55.0,
+   55.0
+  ],
+  "fade_out": [
+   59.2,
+   59.6
+  ]
+ }
+}
