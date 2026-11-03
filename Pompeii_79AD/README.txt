@@ -78,7 +78,7 @@ On Windows or macOS, replace $BLENDER with the path to blender.exe or Blender.ap
 render_all.sh's loop by hand (or just: blender -b --factory-startup -P animation.py -- --quality final).
 
 Render budget on 4 CPU cores with no GPU (Cycles, OIDN denoising):
-  final   540x960, 6 samples, upscaled 2x in the edit   roughly 7-14 s per frame, about 5-6 hours for 1,782 frames
+  final   540x960, 6 samples, upscaled 2x in the edit   about 17 s per frame here: about 8.5 hours for 1,782 frames
   preview 270x480, 4 samples                            roughly 2-4 s per frame, about 1.5 hours
   Building the scene takes about 20 s. A desktop GPU renders this many times faster (set the Cycles device to GPU).
   The brief suggested EEVEE: on this headless, GPU-less machine EEVEE has no OpenGL context and software GL is
@@ -94,7 +94,7 @@ times in script.txt or subtitles.srt.
 THE .BLEND FILE
 ---------------
 pompeii.blend is saved by animation.py --save-blend: the whole generated scene with its materials, cameras (one
-per shot, switched by timeline markers) and keyframed camera moves. The per-frame animation (people, the eruption
+per shot, switched by timeline markers) and keyframed camera moves (saved compressed, about 27 MB). The per-frame animation (people, the eruption
 cloud, particles, deposits, light changes) is computed by the frame handler in animation.py, which a saved .blend
 cannot carry; to render the full animation, run animation.py (it rebuilds the scene in about 20 seconds).
 

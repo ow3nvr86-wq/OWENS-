@@ -3488,7 +3488,7 @@ def build_scene():
 def stage_render():
     sc = build_scene()
     if ARGS.save_blend:
-        bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(ARGS.save_blend))
+        bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(ARGS.save_blend), compress=True)
     os.makedirs(ARGS.out, exist_ok=True)
     if ARGS.stills:
         for tok in ARGS.stills.split(','):
