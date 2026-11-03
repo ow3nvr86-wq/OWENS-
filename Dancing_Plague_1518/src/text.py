@@ -156,6 +156,9 @@ def draw_titles(rgb, t, os_):
                 dy = 0
         if st == 'hero':
             scale = 1.06 - 0.06 * ease_out(u_in)
+        # never wider than 90% of the frame
+        fit = 0.9 * Ww / spr.shape[1] * (1 + 2 * 60 * os_ / max(spr.shape[1], 1))
+        scale *= min(1.0, fit)
         blit(rgb, spr, Ww / 2, y * Hh + dy, al, scale, rot)
 
 
