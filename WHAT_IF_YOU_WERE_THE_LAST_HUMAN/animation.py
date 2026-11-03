@@ -4924,11 +4924,637 @@ def _scrape(seed, dur=0.5):
     return _norm(_sweep_bp(n, lambda tc: 900 + 1600 * tc / dur, q=3.0, block=1024)) * np.sin(np.pi * t / dur)
 
 
+# --- instruments and effects for this film ------------------------------------------------------------------------
+def _hum(dur, f=55.0):
+    t = np.arange(int(dur * SR)) / SR
+    y = np.sin(2 * np.pi * f * t) + 0.5 * np.sin(2 * np.pi * 1.5 * f * t + 0.3) + 0.25 * np.sin(2 * np.pi * 2.01 * f * t)
+    return y * (0.7 + 0.3 * np.sin(2 * np.pi * 0.5 * t))
+
+
+def _bark(seed):
+    t = np.arange(int(0.22 * SR)) / SR
+    f = 520 * np.exp(-t * 4) + 260
+    y = np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * 0.4 + _bandpass(_noise(len(t), seed), 500, 2500) * 0.6
+    return _norm(_bandpass(y, 300, 3000)) * np.exp(-t * 12) * np.minimum(t / 0.01, 1)
+
+
+def _piano(freq, dur=3.0, vel=1.0):
+    """A soft felt-piano note: a few inharmonic partials with a quick attack and a long, darkening decay."""
+    t = np.arange(int(dur * SR)) / SR
+    y = np.zeros_like(t)
+    for k, a in ((1, 1.0), (2, 0.45), (3, 0.18), (4, 0.08), (5, 0.04)):
+        f = freq * k * (1 + 0.0004 * k * k)
+        y += a * np.sin(2 * np.pi * f * t) * np.exp(-t * (0.9 + 0.7 * k))
+    hammer = _bandpass(np.random.default_rng(int(freq)).standard_normal(len(t)), 800, 4000) * np.exp(-t * 60) * 0.05
+    return _norm((y + hammer) * np.minimum(t / 0.004, 1) * np.minimum((dur - t) / 0.2, 1)) * vel
+
+
+def _buzz(dur=0.55, seed=0):
+    """A phone vibrating on a bedside table: a 165 Hz motor rattle in two pulses."""
+    t = np.arange(int(dur * SR)) / SR
+    motor = np.sign(np.sin(2 * np.pi * 165 * t)) * 0.6 + np.sin(2 * np.pi * 330 * t) * 0.3
+    rattle = _bandpass(_noise(len(t), seed), 900, 3000) * 0.4
+    gate = ((t % 0.28) < 0.2).astype(float)
+    return _norm(_bandpass(motor + rattle, 120, 4000) * gate * np.minimum((dur - t) / 0.02, 1))
+
+
+def _hum_bed(n, seed, f=50.0, hiss=0.3):
+    t = np.arange(n) / SR
+    y = np.sin(2 * np.pi * f * t) + 0.5 * np.sin(2 * np.pi * 2 * f * t) + 0.25 * np.sin(2 * np.pi * 3 * f * t)
+    y = y * (0.85 + 0.15 * np.sin(2 * np.pi * 0.3 * t))
+    return _norm(y + hiss * _norm(_bandpass(_noise(n, seed, 'pink'), 2000, 9000)))
+
+
+def _wind(n, seed, lo=150, hi=1400, gust=0.35):
+    t = np.arange(n) / SR
+    g = 0.65 + gust * np.sin(2 * np.pi * 0.11 * t + seed) + 0.2 * np.sin(2 * np.pi * 0.37 * t + 2 * seed)
+    y = _sweep_bp(_noise(n, seed, 'pink'), lambda tc: lo + (hi - lo) * (0.5 + 0.5 * math.sin(0.4 * tc + seed)), q=1.4)
+    return _norm(y) * np.clip(g, 0.15, 1.3)
+
+
+def _relay(seed):
+    """The clunk of a traffic-signal relay."""
+    t = np.arange(int(0.12 * SR)) / SR
+    return _norm(_bandpass(_noise(len(t), seed), 300, 3000) * np.exp(-t * 70) + 0.5 * np.sin(2 * np.pi * 180 * t) * np.exp(-t * 40))
+
+
+def _ped_tick(seed, fast=False):
+    t = np.arange(int(0.05 * SR)) / SR
+    f = 1600 if fast else 1100
+    return _norm(np.sin(2 * np.pi * f * t) * np.exp(-t * 90) + 0.3 * _bandpass(_noise(len(t), seed), 2000, 6000) * np.exp(-t * 200))
+
+
+def _door_chime():
+    """A train's door-open chime: two soft sine notes."""
+    out = np.zeros(int(0.9 * SR))
+    for k, f in enumerate((880.0, 698.5)):
+        t = np.arange(int(0.45 * SR)) / SR
+        y = np.sin(2 * np.pi * f * t) * np.exp(-t * 7) * np.minimum(t / 0.005, 1)
+        out[int(k * 0.42 * SR):int(k * 0.42 * SR) + len(t)] += y
+    return _norm(out)
+
+
+def _compressor(n, seed):
+    """A parked train idling: a low thump every 1.4 s over an air hiss."""
+    t = np.arange(n) / SR
+    thump = np.sin(2 * np.pi * 42 * t) * np.exp(-((t % 1.4) * 8)) * 0.8
+    hiss = _norm(_bandpass(_noise(n, seed, 'pink'), 1500, 7000)) * 0.25
+    return _norm(thump + hiss + 0.3 * _hum_bed(n, seed + 1, 75.0, 0.0))
+
+
+def _power_down(seed):
+    """A district losing power: a relay thunk and a hum that sags and dies."""
+    d = 1.6
+    t = np.arange(int(d * SR)) / SR
+    f = 100 * np.exp(-t * 1.2) + 30
+    hum = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 2.2)
+    thunk = _bandpass(_noise(len(t), seed), 80, 900) * np.exp(-t * 25)
+    return _norm(hum * 0.8 + thunk)
+
+
+def _creak(seed, dur=0.5, f0=420.0):
+    """A swing chain / door hinge squeak: a frequency-wobbling bandpassed buzz."""
+    t = np.arange(int(dur * SR)) / SR
+    f = f0 * (1 + 0.25 * np.sin(2 * np.pi * 2.0 * t + seed)) * (1 + 0.4 * t / dur)
+    saw = (np.cumsum(f) / SR) % 1.0 - 0.5
+    y = _bandpass(saw, 300, 2500) * np.sin(np.pi * t / dur) ** 1.5
+    return _norm(y)
+
+
+def _film_bleed(n, seed):
+    """The film's soundtrack heard from the seats: a muffled orchestral swell (no voices)."""
+    d = n / SR
+    y = _pad([_mtof(m) for m in (57, 60, 64, 69)], d, seed=seed, cutoff=500)
+    y = _bandpass(y, 60, 900)
+    return _norm(y) * 0.8
+
+
+def _music(N, cues):
+    mus = np.zeros((2, N))
+    S_ = {s['name']: (s['t0'], s['t1']) for s in SHOTS}
+    tt = lambda d: np.arange(int(d * SR)) / SR
+    # 1) wake up (0 - 7.5): a low A drone and a few hesitant felt-piano notes; a soft swell under the window reveal
+    a, b = 0.2, S_['road'][0]
+    d = b - a
+    _place(mus, _hum(d, 55.0) * _env(tt(d), [(0, 0), (1.5, 0.8), (d - 0.5, 0.8), (d, 0)]), a, 0.10)
+    for tm, m in ((0.5, 69), (1.6, 72), (2.9, 76), (3.7, 74), (5.9, 69), (6.6, 64)):
+        nb = _piano(_mtof(m), 3.0, 0.8)
+        _place(mus, _reverb(nb, 2.4, int(tm * 10)) * 0.6 + nb * 0.5, tm, 0.20, pan=0.3 * math.sin(tm))
+    sw = _pad([_mtof(m) for m in (45, 52, 57, 64, 71)], 4.4, seed=4, cutoff=900)
+    _place(mus, _reverb(sw, 3.0, 5) * 0.5 + sw * 0.5 * _env(tt(4.4), [(0, 0), (2.0, 1), (3.6, 0.8), (4.4, 0)]), 3.5, 0.28)
+    cues.append((0.2, 'MUSIC: quiet and puzzled - a low A drone and a few hesitant felt-piano notes', 'music'))
+    cues.append((3.5, 'MUSIC: a soft string-like swell under the window reveal', 'music'))
+    # 2) the world is yours (7.5 - 16.9): a light marimba ostinato in A major, warm pad, rising; a lift on the square
+    a, b = S_['road'][0], S_['signal'][0]
+    d = b - a
+    pat = [69, 73, 76, 81, 76, 73, 71, 76]
+    j, tm = 0, a + 0.1
+    while tm < b - 0.25:
+        _place(mus, _marimba(_mtof(pat[j % 8]), 0.5), tm, 0.16 + 0.10 * (tm - a) / d, pan=0.35 * math.sin(j * 0.9))
+        tm += 0.3
+        j += 1
+    for k, ch in enumerate(((57, 61, 64, 69), (54, 61, 64, 69), (50, 57, 62, 66), (52, 59, 64, 68))):
+        seg = d / 4
+        y = _pad([_mtof(m) for m in ch], seg + 0.5, seed=10 + k, cutoff=1100)
+        _place(mus, y * _env(tt(seg + 0.5), [(0, 0), (0.3, 1), (seg, 1), (seg + 0.5, 0)]), a + k * seg, 0.28)
+    tm = S_['market'][0]
+    while tm < b - 0.3:
+        _place(mus, _kick(0.3), tm, 0.22)
+        _place(mus, _shaker(int(tm * 100)), tm + 0.3, 0.08)
+        tm += 0.6
+    _place(mus, _reverb(_bell(_mtof(88), 2.5), 2.5, 7) * 0.6, S_['square'][0], 0.15)
+    cues.append((a, 'MUSIC: freedom - a light marimba ostinato in A major over warm chords, building', 'music'))
+    cues.append((S_['market'][0], 'MUSIC: a soft kick and shaker join; a high chime as the pigeons rise', 'music'))
+    # 3) something is wrong (16.9 - 32.1): everything stops; an uneasy low cluster, a slow sombre string line at sunset
+    a, b = S_['signal'][0], S_['kitchen'][0]
+    d = b - a
+    cl = _pad([_mtof(m) for m in (45, 46, 52, 57)], d, seed=20, cutoff=500)
+    _place(mus, cl * _env(tt(d), [(0, 0), (1.0, 0.6), (d - 2.0, 0.8), (d, 0)]), a + 0.3, 0.30)
+    a2, b2 = S_['grid'][0] - 0.5, b
+    d2 = b2 - a2
+    st_ = _pad([_mtof(m) for m in (53, 57, 60, 65)], d2 * 0.5, seed=21, cutoff=900)
+    st2 = _pad([_mtof(m) for m in (50, 57, 62, 65)], d2 * 0.5 + 0.8, seed=22, cutoff=800)
+    _place(mus, st_ * _env(tt(d2 * 0.5), [(0, 0), (1.0, 1), (d2 * 0.5, 0.9)]), a2, 0.32)
+    _place(mus, st2 * _env(tt(d2 * 0.5 + 0.8), [(0, 0.9), (d2 * 0.5 - 0.6, 0.8), (d2 * 0.5 + 0.8, 0)]), a2 + d2 * 0.5, 0.32)
+    cues.append((a, 'MUSIC: the light music STOPS on "But something is wrong." - an uneasy low cluster takes over', 'music'))
+    cues.append((a2, 'MUSIC: a slow, sombre string-like line over the sunset and the lights going out (F - D minor)', 'music'))
+    # 4) the silence (32.1 - 42.4): almost nothing - four piano notes in the kitchen, then no music at all
+    a = S_['kitchen'][0]
+    for k, (tm, m) in enumerate(((0.4, 64), (1.6, 67), (2.9, 69), (3.3, 62))):
+        nb = _piano(_mtof(m), 4.0, 0.7)
+        _place(mus, _reverb(nb, 3.0, 40 + k) * 0.7 + nb * 0.4, a + tm, 0.16)
+    cues.append((a + 0.4, 'MUSIC: four soft piano notes in the kitchen, then the music disappears (the silence)', 'music'))
+    # 5) the realisation (42.4 - 49.4): a slow, wide swell at dawn - F major to C, choir-like
+    a, b = S_['roofdoor'][0], S_['phone2'][0]
+    for k, ch in enumerate(((53, 60, 65, 69, 72), (48, 55, 60, 64, 67), (50, 57, 62, 65, 69))):
+        seg = (b - a) / 3
+        y = _choir(ch, seg + 1.0, seed=50 + k)
+        _place(mus, y * _env(tt(seg + 1.0), [(0, 0), (0.8, 1), (seg, 1), (seg + 1.0, 0)]), a + k * seg, 0.30 + 0.06 * k)
+    _place(mus, _boom(2.0, 50, 30, 61), S_['aerial'][0], 0.18)
+    cues.append((a, 'MUSIC: the realisation - a slow, wide choir-like swell (F - C - D minor) as the city is revealed', 'music'))
+    # 6) the payoff (49.4 - 59): a simple piano figure that thins out; the last line is left with only the wind
+    a = S_['phone2'][0]
+    fig = [(0.0, 65), (0.9, 69), (1.8, 72), (2.9, 70), (4.2, 69), (5.4, 65), (6.6, 64)]
+    for k, (tm, m) in enumerate(fig):
+        nb = _piano(_mtof(m), 4.0, 0.75 - 0.05 * k)
+        _place(mus, _reverb(nb, 3.0, 60 + k) * 0.7 + nb * 0.4, a + tm, 0.18)
+    pad = _pad([_mtof(m) for m in (41, 48, 53, 57)], 7.0, seed=70, cutoff=600)
+    _place(mus, pad * _env(tt(7.0), [(0, 0), (1.5, 0.7), (5.0, 0.6), (7.0, 0)]), a, 0.2)
+    cues.append((a, 'MUSIC: a quiet piano figure over a low pad, fading out by 56.5 s; the last line has only wind', 'music'))
+    return mus
+
+
 def stage_audio():
-    raise SystemExit("part_audio.py not written yet")
+    N = int(DURATION * SR)
+    t = np.arange(N) / SR
+    amb = np.zeros((2, N))
+    sfx = np.zeros((2, N))
+    cues = []
+
+    def cue(time, what, layer='sfx'):
+        cues.append((time, what, layer))
+    S_ = {s['name']: (s['t0'], s['t1']) for s in SHOTS}
+    music = _music(N, cues)
+    tt = lambda d: np.arange(int(d * SR)) / SR
+
+    def bed(names, fn, gain, what, pan=0.0):
+        for nm in names:
+            a, b = S_[nm]
+            n = int((b - a) * SR) + 1
+            y = fn(n, abs(hash(nm)) % 1000) * _env(np.arange(n) / SR, [(0, 0), (0.04, 1), ((b - a) - 0.03, 1), (b - a, 0)])
+            _place(amb, y, a, gain, pan=pan)
+        cue(S_[names[0]][0], what, 'ambience')
+    # --- ambiences: no traffic and no voices anywhere; birds and wind instead
+    bed(['eyes', 'phone'], lambda n, s: _hum_bed(n, s, 50.0, 0.4), 0.05, 'Bedroom room tone, a fridge hum through the wall')
+    bed(['window'], lambda n, s: _wind(n, s, 200, 900, 0.2) * 0.6 + _birds(n, s, 0.3) * 0.4, 0.14,
+        'At the window: faint wind and a few distant birds - no traffic, no voices')
+    bed(['road', 'square'], lambda n, s: _birds(n, s, 0.6) * 0.6 + _wind(n, s + 3, 200, 1200) * 0.4, 0.2,
+        'The empty avenue: birdsong and a light breeze (no engines, no people)')
+    bed(['market'], lambda n, s: _hum_bed(n, s, 100.0, 0.5), 0.14, 'Supermarket: fridges and fluorescent tubes humming')
+    bed(['mall'], lambda n, s: _reverb(_hum_bed(n, s, 60.0, 0.2), 3.0, s) * 0.8, 0.12, 'Mall: a big, reverberant hum')
+    bed(['cinema'], lambda n, s: _film_bleed(n, s), 0.28, 'Cinema: the film\'s soundtrack still playing (music only)')
+    bed(['signal'], lambda n, s: _wind(n, s, 200, 800) * 0.7 + _birds(n, s, 0.2) * 0.3, 0.16, 'Junction: wind, a few birds')
+    bed(['station'], lambda n, s: _compressor(n, s), 0.16, 'Station: the parked train idling - compressor thumps and air hiss')
+    bed(['house'], lambda n, s: _film_bleed(n, s + 9) * 0.6 + _hum_bed(n, s, 50.0, 0.2) * 0.4, 0.12,
+        'The neighbour\'s home: a TV programme\'s music muffled through the glass, a fridge')
+    bed(['grid', 'dark'], lambda n, s: _wind(n, s, 150, 700, 0.4), 0.18, 'High up at dusk: wind')
+    bed(['kitchen'], lambda n, s: _hum_bed(n, s, 50.0, 0.1), 0.06, 'Kitchen: fridge hum')
+    bed(['papers', 'playground', 'towers'], lambda n, s: _wind(n, s, 120, 1500, 0.5), 0.3,
+        'Night: wind is the loudest thing in the city')
+    bed(['papers', 'playground', 'towers'], lambda n, s: _crickets(n, s), 0.05, 'Night insects (nature carries on)')
+    bed(['roofdoor', 'aerial', 'edge', 'phone2', 'pocket', 'eyes2'], lambda n, s: _wind(n, s, 150, 1800, 0.45), 0.3,
+        'Roof at dawn: strong, gusting wind')
+    bed(['aerial', 'edge'], lambda n, s: _birds(n, s, 0.4), 0.10, 'Distant birds at sunrise')
+    # --- scene 1
+    _place(sfx, _buzz(0.55, 1), 0.05, 0.35, pan=-0.3)
+    _place(sfx, _buzz(0.55, 2), 0.75, 0.22, pan=-0.3)
+    cue(0.05, 'Phone alarm vibrating on the bedside table (wakes them); then nothing - no messages')
+    _place(sfx, _click(), S_['phone'][0] + 0.3, 0.12)
+    cue(S_['phone'][0] + 0.3, 'Screen tap')
+    for k in range(3):
+        _place(sfx, _step(10 + k), S_['window'][0] - 0.4 + k * 0.45, 0.12)
+    cue(S_['window'][0] - 0.4, 'Bare footsteps to the window')
+    _place(sfx, _click(), S_['window'][0] + 0.55, 0.15)
+    cue(S_['window'][0] + 0.55, 'Hand touches the glass')
+    # --- scene 2
+    a, b = S_['road']
+    tm, k = a + 0.1, 0
+    while tm < b:
+        _place(sfx, _step(20 + k), tm, 0.25, pan=0.1 * math.sin(k))
+        tm += 0.54
+        k += 1
+    cue(a + 0.1, 'Footsteps echo off the buildings - the only sound in the street')
+    a = S_['market'][0]
+    _place(sfx, _whoosh(0.5, 21), a - 0.25, 0.2)
+    _place(sfx, _whoosh(0.35, 22), a + 0.25, 0.12)
+    _place(sfx, _click(), a + 0.8, 0.2)
+    cue(a - 0.25, 'Automatic doors slide; the apple is tossed and caught')
+    for k in range(4):
+        _place(sfx, _crunch(30 + k, 0.08), S_['cinema'][0] + 0.45 + k * 0.32, 0.12, pan=0.1)
+    cue(S_['cinema'][0] + 0.45, 'Popcorn munching in the empty cinema')
+    a, b = S_['mall']
+    for k in range(int((b - a) / 0.33)):
+        _place(sfx, _tick(40 + k, 0.4), a + k * 0.33, 0.06)
+    cue(a, 'The escalator\'s steady clack')
+    a = S_['square'][0]
+    _place(sfx, _flutter(1.8, 41, 1.6), a + 0.1, 0.45)
+    _place(sfx, _norm(_bandpass(_noise(int(1.8 * SR), 42, 'pink'), 600, 6000)), a, 0.12, pan=-0.5)
+    cue(a + 0.1, 'Pigeons take off - a burst of wings; the fountain splashing')
+    # --- scene 3
+    a = S_['signal'][0]
+    _place(sfx, _relay(50), 19.0, 0.4)
+    _place(sfx, _relay(51), 19.55, 0.45)
+    tm = a + 0.3
+    k = 0
+    while tm < S_['signal'][1]:
+        fast = tm > 19.55
+        _place(sfx, _ped_tick(60 + k, fast), tm, 0.12 if not fast else 0.16)
+        tm += 0.9 if not fast else 0.22
+        k += 1
+    cue(a + 0.3, 'Crossing signal ticking slowly; relay clicks at 19.0 and 19.55 s; fast "walk" ticking on green')
+    a = S_['station'][0]
+    _place(sfx, _door_chime(), a + 0.4, 0.22)
+    _place(sfx, _door_chime(), a + 2.0, 0.15)
+    cue(a + 0.4, 'The train\'s door chime, repeating to nobody')
+    tm, k = a + 0.1, 0
+    while tm < S_['station'][1]:
+        _place(sfx, _step(70 + k), tm, 0.18)
+        tm += 0.6
+        k += 1
+    _place(sfx, _click(), S_['house'][0] + 0.6, 0.1)
+    cue(S_['house'][0] + 0.6, 'Fingertips on the neighbour\'s window')
+    for d, to in sorted(OUTAGE.items(), key=lambda x: x[1]):
+        _place(sfx, _power_down(80 + d), to, 0.35, pan=0.3 * math.sin(d))
+    cue(min(OUTAGE.values()), 'Each district going dark: a relay thunk and a hum that sags and dies (6 times)')
+    # --- scene 4: the silence
+    a, b = S_['kitchen']
+    for k in range(int((b - a) / 1.0) + 1):
+        _place(sfx, _tick(90 + k, 0.5), a + 0.2 + k * 1.0, 0.05)
+    cue(a + 0.2, 'A kitchen clock ticking')
+    for k in range(5):
+        _place(sfx, _paper(0.5, 100 + k), S_['papers'][0] + 0.2 + k * 0.42, 0.35, pan=0.5 - 0.25 * k)
+    cue(S_['papers'][0] + 0.2, 'Sheets of paper scraping across the asphalt in the wind')
+    a, b = S_['playground']
+    for k in range(4):
+        _place(sfx, _creak(110 + k, 0.45, 380 + 30 * (k % 2)), a + 0.1 + k * 0.7, 0.18, pan=0.3)
+    cue(a + 0.1, 'The empty swing\'s chain creaking')
+    a, b = S_['towers']
+    tm, k = a + 0.1, 0
+    while tm < b:
+        st = _step(120 + k)
+        _place(sfx, _reverb(st, 1.8, k) * 0.6 + st * 0.6, tm, 0.18)
+        tm += 0.6
+        k += 1
+    _place(sfx, _reverb(_bark(130), 2.5, 131) * 0.8, a + 1.2, 0.05, pan=-0.7)
+    cue(a + 0.1, 'Lonely footsteps echoing between the towers; a dog barks far away (animals are still here)')
+    # --- scene 5
+    a = S_['roofdoor'][0]
+    _place(sfx, _click(), a + 0.02, 0.4)
+    _place(sfx, _creak(140, 0.6, 260.0), a + 0.08, 0.3)
+    _place(sfx, _whoosh(0.9, 141), a + 0.15, 0.35)
+    cue(a, 'Roof door: latch, hinge creak and a rush of wind')
+    _place(sfx, _whoosh(2.5, 150), S_['aerial'][0] + 0.2, 0.25)
+    cue(S_['aerial'][0] + 0.2, 'A long airy whoosh as the camera pulls away')
+    # --- scene 6
+    _place(sfx, _flutter(0.5, 160, 0.5), S_['pocket'][0] + 0.65, 0.12)
+    cue(S_['pocket'][0] + 0.65, 'The phone slides into the hoodie pocket (fabric rustle)')
+
+    vo = np.zeros(N)
+    vpath = os.path.join(ROOT, 'audio', 'narration.wav')
+    if os.path.exists(vpath):
+        with wave.open(vpath) as w:
+            a_ = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float64) / 32768
+        vo[:min(N, len(a_))] = a_[:N]
+    env = np.abs(vo)
+    k = int(0.03 * SR)
+    env = np.convolve(env, np.ones(k) / k, mode='same')
+    env = np.clip(env / (env.max() + 1e-9) * 4, 0, 1)
+    rel_k = int(0.3 * SR)
+    env = np.maximum.reduce([np.roll(env, j) for j in range(0, rel_k, rel_k // 12)])
+    duck_m = 1 - 0.6 * env
+    duck_a = 1 - 0.45 * env
+    music_n, amb_n, sfx_n = (x / (np.abs(x).max() + 1e-9) for x in (music, amb, sfx))
+    bedm = 0.55 * music_n + 0.4 * amb_n + 0.7 * sfx_n
+    with_voice = 0.55 * music_n * duck_m + 0.4 * amb_n * duck_a + 0.7 * sfx_n * duck_a + np.stack([vo, vo]) * (1.6 / (np.abs(vo).max() + 1e-9))
+    end_fade = np.clip((DURATION - t) / 0.6, 0, 1)
+    os.makedirs(os.path.join(ROOT, 'audio'), exist_ok=True)
+    outs = {}
+    for name, mix in (('mix_with_voice', with_voice), ('mix_no_voice', bedm), ('music_sfx_stem', bedm)):
+        mix = mix * end_fade
+        mix = np.tanh(mix / (np.abs(mix).max() + 1e-9) * 1.2) * 0.89
+        p = os.path.join(ROOT, 'audio', name + '.wav')
+        with wave.open(p, 'wb') as w:
+            w.setnchannels(2)
+            w.setsampwidth(2)
+            w.setframerate(SR)
+            w.writeframes((np.clip(mix.T, -1, 1) * 32767).astype(np.int16).tobytes())
+        outs[name] = p
+    for name in ('mix_with_voice', 'mix_no_voice'):
+        p = outs[name]
+        tmp = p.replace('.wav', '_ln.wav')
+        try:
+            r = subprocess.run(['ffmpeg', '-hide_banner', '-i', p, '-af', 'loudnorm=I=-14:TP=-1.5:LRA=20:print_format=json', '-f', 'null', '-'],
+                               check=True, capture_output=True, text=True).stderr
+            js = json.loads(r[r.rindex('{'):r.rindex('}') + 1])
+            af = (f"loudnorm=I=-14:TP=-1.5:LRA=20:linear=true:measured_I={js['input_i']}:measured_TP={js['input_tp']}:"
+                  f"measured_LRA={js['input_lra']}:measured_thresh={js['input_thresh']}:offset={js['target_offset']}")
+            subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', p, '-af', af, '-ar', str(SR), tmp], check=True)
+            os.replace(tmp, p)
+        except (OSError, subprocess.CalledProcessError) as e:
+            print('loudnorm skipped:', e)
+    write_sound_design(cues)
+    print('audio written:', ', '.join(outs))
+
+
+def write_sound_design(cues):
+    L = ['WHAT IF YOU WERE THE LAST HUMAN ON EARTH? - SOUND DESIGN, MUSIC AND TIMING',
+         '=' * 60, '',
+         'Everything below is synthesised by code in animation.py --stage audio (numpy only: oscillators, filtered noise,',
+         'envelopes, convolution reverb). No samples, recordings, stock sound or copyrighted music. The narration is a',
+         'synthetic voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py. Music, ambience and effects duck under',
+         'the voice so the narration always stays on top.',
+         '',
+         'THE IDEA: the absence of people is the sound of the film. There is no traffic, no crowd and no human voice other',
+         'than the narrator anywhere - only machines that keep running on their own (fridges, an escalator, a crossing',
+         'signal, a train\'s door chime, a TV, the film in the cinema), nature (birds, wind, insects) and the main',
+         'character\'s own footsteps. The music is light and playful only while being alone feels like freedom (7-17 s); it',
+         'stops dead on "But something is wrong.", turns sombre at sunset, disappears completely for the silence (about',
+         '35.4-37.4 s there is no narration and no music: only wind and paper), swells once at dawn on the roof, and leaves',
+         'the last line ("Would you still want it?") with nothing but the wind.',
+         '',
+         'Files: audio/mix_with_voice.wav (final mix, -14 LUFS), audio/mix_no_voice.wav (music + sound only, -14 LUFS, for',
+         'recording your own voice), audio/narration.wav (voice only).',
+         '', 'CUE SHEET (generated)', '-' * 60]
+    vt = os.path.join(BUILD, 'vo_timing.json')
+    if os.path.exists(vt):
+        with open(vt) as fh:
+            for ln in json.load(fh)['lines']:
+                cues.append((ln['start'], f'NARRATION: "{ln["text"]}" (to {ln["end"]:.2f} s)', 'voice'))
+    for tm, what, layer in sorted(cues):
+        L.append(f'{tm:6.2f} s  [{layer:9s}] {what}')
+    L += ['', 'MUSIC GUIDE (if you re-score it in CapCut or another editor)', '-' * 60,
+          '- 0-7.5 s: almost nothing - a low drone, a few hesitant piano notes, a soft swell when the empty city is revealed.',
+          '- 7.5-17 s: light, curious, playful (major key, plucked/marimba ostinato, light percussion) - freedom.',
+          '- 17 s: cut the music dead on "But something is wrong." Keep an uneasy low drone; sombre strings at sunset.',
+          '- 32-42 s: no music, or a few piano notes at most. Let the wind and footsteps carry it.',
+          '- 42-49 s: one wide, slow, emotional swell at dawn as the camera pulls back from the roof.',
+          '- 49-59 s: a simple, quiet piano figure that fades out before the last line; end on wind only.',
+          '- Keep the narration 10-15 dB above the music; YouTube Shorts plays back at about -14 LUFS.',
+          '- Use only music you have the rights to (your own, a licensed library, or YouTube Audio Library tracks).']
+    with open(os.path.join(ROOT, 'sound_design.txt'), 'w') as fh:
+        fh.write('\n'.join(L) + '\n')
+
+# ============================================================================
+# Stage: edit - Video Sequence Editor: upscale, flashes, vignette, grain, titles, word-by-word captions, audio, encode
+# ============================================================================
+TITLE_STYLE = {
+    #          font         size  colour                         y (from bottom)  outline  plate
+    'hero':   (FONT_TITLE, 112, (1.0, 1.0, 1.0, 1.0), 0.815, 0.06, True),
+    'big':    (FONT_TITLE, 150, (1.0, 0.74, 0.16, 1.0), 0.775, 0.05, False),
+    'label':  (FONT_TITLE, 78, (1.0, 1.0, 1.0, 1.0), 0.815, 0.07, True),
+    'item':   (FONT_TITLE, 60, (1.0, 1.0, 1.0, 1.0), 0.855, 0.07, True),
+    'tag':    (FONT_TITLE, 34, (0.95, 0.92, 0.85, 1.0), 0.905, 0.0, True),
+    'count':  (FONT_TITLE, 330, (1.0, 0.74, 0.16, 1.0), 0.775, 0.035, False),
+}
+_FONTS = {}
+
+
+def font(path):
+    if path not in _FONTS:
+        _FONTS[path] = bpy.data.fonts.load(path, check_existing=True)
+    return _FONTS[path]
+
+
+def save_png(path, arr):
+    h, w = arr.shape[:2]
+    im = bpy.data.images.new(os.path.basename(path), w, h, alpha=True)
+    im.pixels.foreach_set(np.ascontiguousarray(arr[::-1]).astype(np.float32).ravel())
+    im.filepath_raw = path
+    im.file_format = 'PNG'
+    im.save()
+    bpy.data.images.remove(im)
+
+
+def make_overlays():
+    d = os.path.join(BUILD, 'overlays')
+    os.makedirs(d, exist_ok=True)
+    vpath = os.path.join(d, 'vignette.png')
+    if not os.path.exists(vpath):
+        h, w = 960, 540
+        y, x = np.mgrid[0:h, 0:w]
+        r = np.sqrt(((x - w / 2) / (w / 2)) ** 2 * 0.9 + ((y - h / 2) / (h / 2)) ** 2)
+        a = np.clip((r - 0.6) / 0.75, 0, 1) ** 1.7 * 0.6
+        arr = np.zeros((h, w, 4))
+        arr[..., 3] = a
+        save_png(vpath, arr)
+    grains = []
+    rng = np.random.default_rng(5)
+    for k in range(24):
+        gp = os.path.join(d, f'grain_{k:02d}.png')
+        if not os.path.exists(gp):
+            g = rng.normal(0.5, 0.1, (960, 540))
+            save_png(gp, np.stack([g, g, g, np.ones_like(g)], -1).clip(0, 1))
+        grains.append(os.path.basename(gp))
+    return vpath, d, grains
+
+
+def key_alpha(strip, pts):
+    for f, a in pts:
+        strip.blend_alpha = a
+        strip.keyframe_insert('blend_alpha', frame=f)
+
+
+def add_text(se, name, text, t0, t1, style, channel, fade=4, rise=0.01, y=None):
+    fnt, size, col, y0, outline, plate = TITLE_STYLE[style]
+    y = y0 if y is None else y
+    f0, f1 = frame(t0), frame(t1)
+    st = se.sequences.new_effect(name=name, type='TEXT', channel=channel, frame_start=f0, frame_end=f1)
+    st.text = text
+    st.font = font(fnt)
+    st.font_size = size
+    st.color = col
+    st.align_x = 'CENTER'
+    st.align_y = 'CENTER'
+    st.wrap_width = 0.95
+    st.use_shadow = True
+    st.shadow_color = (0, 0, 0, 0.8)
+    st.shadow_blur = 0.35
+    st.shadow_offset = 0.035
+    if outline > 0:
+        st.use_outline = True
+        st.outline_color = (0, 0, 0, 1)
+        st.outline_width = outline
+    if plate:
+        # a dark plate keeps light text readable over busy, bright backgrounds
+        st.use_box = True
+        st.box_color = (0.02, 0.02, 0.02, 0.62 if style != 'tag' else 0.7)
+        st.box_margin = 0.014
+    st.blend_type = 'ALPHA_OVER'
+    fade = min(fade, max(1, (f1 - f0) // 3))
+    key_alpha(st, [(f0, 0.0), (f0 + fade, 1.0), (f1 - fade, 1.0), (f1, 0.0)])
+    st.location = (0.5, y - rise)
+    if rise > 0:
+        st.keyframe_insert('location', frame=f0)
+        st.location = (0.5, y)
+        st.keyframe_insert('location', frame=f0 + fade * 2)
+    return st
+
+
+def ensure_captions():
+    if not os.path.exists(os.path.join(BUILD, 'captions', 'index.json')):
+        py = os.environ.get('SHORTS_PY', '/opt/shorts/venv/bin/python')
+        subprocess.run([py, os.path.join(ROOT, 'tools', 'captions.py')], check=True)
+    with open(os.path.join(BUILD, 'captions', 'index.json')) as fh:
+        return json.load(fh)
+
 
 def stage_edit():
-    raise SystemExit("part_edit.py not written yet")
+    frames_dir = ARGS.out
+    files = sorted(f for f in os.listdir(frames_dir) if f.startswith('f_') and f.endswith('.png')) if os.path.isdir(frames_dir) else []
+    if not files:
+        raise SystemExit('no rendered frames in ' + frames_dir)
+    fset = set(files)
+    missing = [f for f in range(1, RENDER_END + 1) if f'f_{f:04d}.png' not in fset]
+    if missing:
+        print(f'WARNING: {len(missing)} frames missing (first {missing[:5]}); they will show as black')
+    caps = None if ARGS.no_voice else ensure_captions()
+    bpy.ops.wm.read_factory_settings(use_empty=True)
+    sc = bpy.context.scene
+    sc.name = 'Edit'
+    sc.render.resolution_x, sc.render.resolution_y = RES
+    sc.render.resolution_percentage = 100
+    sc.render.fps = FPS
+    sc.frame_start, sc.frame_end = 1, LAST_FRAME
+    sc.view_settings.view_transform = 'Standard'     # frames are already tone-mapped (AgX) in the render
+    sc.view_settings.look = 'None'
+    se = sc.sequence_editor_create()
+    first = 1
+    while f'f_{first:04d}.png' not in fset:
+        first += 1
+    img = se.sequences.new_image('Frames', os.path.join(frames_dir, f'f_{first:04d}.png'), channel=1, frame_start=first, fit_method='FIT')
+    for f in range(first + 1, RENDER_END + 1):
+        img.elements.append(f'f_{f:04d}.png')
+    img.transform.filter = 'CUBIC_MITCHELL'
+    vpath, gdir, grains = make_overlays()
+    vg = se.sequences.new_image('Vignette', vpath, channel=2, frame_start=1, fit_method='STRETCH')
+    vg.frame_final_end = LAST_FRAME + 1
+    vg.blend_type = 'ALPHA_OVER'
+    gr = se.sequences.new_image('Grain', os.path.join(gdir, grains[0]), channel=3, frame_start=1, fit_method='STRETCH')
+    for f in range(2, LAST_FRAME + 1):
+        gr.elements.append(grains[(f - 1) % len(grains)])
+    gr.blend_type = 'OVERLAY'
+    gr.blend_alpha = 0.16
+    # dips to black between day and night (scene 4) and into the dawn (scene 5); a fade out on the closing eyes
+    for k, (tm, n, peak) in enumerate(((SHOT['kitchen']['t0'], 8, 1.0), (SHOT['roofdoor']['t0'], 10, 0.85))):
+        f0 = frame(tm)
+        dp = se.sequences.new_effect(f'Dip{k}', type='COLOR', channel=4, frame_start=f0 - n // 2, frame_end=f0 + n // 2 + 1)
+        dp.color = (0.0, 0.0, 0.0)
+        dp.blend_type = 'ALPHA_OVER'
+        key_alpha(dp, [(f0 - n // 2, 0.0), (f0, peak), (f0 + n // 2, 0.0)])
+    fo = se.sequences.new_effect('FadeOut', type='COLOR', channel=5, frame_start=LAST_FRAME - 22, frame_end=LAST_FRAME + 1)
+    fo.color = (0.0, 0.0, 0.0)
+    fo.blend_type = 'ALPHA_OVER'
+    key_alpha(fo, [(LAST_FRAME - 22, 0.0), (LAST_FRAME - 2, 1.0)])
+    ch = 6
+    for k, tl in enumerate(TIMING['titles']):
+        for j, line in enumerate(tl['text'].split('|')):
+            st = add_text(se, f'Title{k}_{j}', line, tl['start'], tl['end'], tl['style'], ch + (k % 4) * 2 + j,
+                          rise=0.0 if tl['style'] == 'tag' else 0.01, y=tl.get('y'))
+            if j:
+                dy = j * TITLE_STYLE[tl['style']][1] * 1.25 / RES[1]
+                fc = sc.animation_data.action.fcurves if sc.animation_data and sc.animation_data.action else []
+                for fcu in fc:
+                    if fcu.data_path == f'sequence_editor.sequences_all["{st.name}"].location' and fcu.array_index == 1:
+                        for kp in fcu.keyframe_points:
+                            kp.co[1] -= dy
+                            kp.handle_left[1] -= dy
+                            kp.handle_right[1] -= dy
+                st.location = (0.5, st.location[1] - dy)
+    if caps:
+        cdir = os.path.join(BUILD, 'captions')
+        for k, c in enumerate(caps):
+            f0, f1 = frame(c['start']), max(frame(c['end']), frame(c['start']) + 1)
+            st = se.sequences.new_image(f'Cap{k}', os.path.join(cdir, c['file']), channel=(22 if c.get('key') else 20 + k % 2),
+                                        frame_start=f0, fit_method='ORIGINAL')
+            st.frame_final_end = f1
+            st.blend_type = 'ALPHA_OVER'
+            if c.get('key'):
+                # key moments pop in: a quick scale-down from 115 % with a fade, and fade out
+                key_alpha(st, [(f0, 0.0), (f0 + 3, 1.0), (f1 - 4, 1.0), (f1, 0.0)])
+                st.transform.origin = (0.5, 0.36)          # scale about the caption itself
+                for fr, sc_ in ((f0, 1.15), (f0 + 5, 1.0)):
+                    st.transform.scale_x = st.transform.scale_y = sc_
+                    st.transform.keyframe_insert('scale_x', frame=fr)
+                    st.transform.keyframe_insert('scale_y', frame=fr)
+    apath = os.path.join(ROOT, 'audio', 'mix_no_voice.wav' if ARGS.no_voice else 'mix_with_voice.wav')
+    se.sequences.new_sound('Audio', apath, channel=24, frame_start=1)
+    r = sc.render
+    r.use_sequencer = True
+    r.use_compositing = False
+    r.image_settings.file_format = 'FFMPEG'
+    ff = r.ffmpeg
+    ff.format = 'MPEG4'
+    ff.codec = 'H264'
+    ff.constant_rate_factor = 'NONE'
+    ff.video_bitrate = ARGS.bitrate
+    ff.maxrate = int(ARGS.bitrate * 1.125)
+    ff.minrate = 0
+    ff.buffersize = 18000
+    ff.gopsize = 30
+    ff.ffmpeg_preset = 'GOOD'
+    ff.audio_codec = 'AAC'
+    ff.audio_bitrate = 192
+    ff.audio_mixrate = 48000
+    ff.audio_channels = 'STEREO'
+    name = ARGS.output or ('final_video_no_voice.mp4' if ARGS.no_voice else 'final_video.mp4')
+    out = os.path.join(ROOT, name) if name == 'final_video.mp4' else os.path.join(ROOT, 'renders', name)
+    tmp = os.path.join(BUILD, 'edit_' + name)
+    if ARGS.frames:
+        a, b = (int(x) for x in ARGS.frames.split('-'))
+        sc.frame_start, sc.frame_end = a, b
+    r.filepath = tmp
+    r.use_file_extension = False
+    bpy.ops.render.render(animation=True)
+    try:
+        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', tmp, '-c', 'copy', '-movflags', '+faststart', out], check=True)
+        os.remove(tmp)
+    except (OSError, subprocess.CalledProcessError):
+        os.replace(tmp, out)
+    print('wrote', out)
+
+
+def main():
+    os.makedirs(BUILD, exist_ok=True)
+    if ARGS.stage in ('render', 'all'):
+        stage_render()
+    if ARGS.stage in ('audio', 'all'):
+        stage_audio()
+    if ARGS.stage in ('edit', 'all'):
+        stage_edit()
+
+
+if __name__ == '__main__':
+    main()
 
 def main():
     os.makedirs(BUILD, exist_ok=True)

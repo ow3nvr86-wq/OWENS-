@@ -1,0 +1,91 @@
+WHAT IF YOU WERE THE LAST HUMAN ON EARTH? - SOUND DESIGN, MUSIC AND TIMING
+============================================================
+
+Everything below is synthesised by code in animation.py --stage audio (numpy only: oscillators, filtered noise,
+envelopes, convolution reverb). No samples, recordings, stock sound or copyrighted music. The narration is a
+synthetic voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py. Music, ambience and effects duck under
+the voice so the narration always stays on top.
+
+THE IDEA: the absence of people is the sound of the film. There is no traffic, no crowd and no human voice other
+than the narrator anywhere - only machines that keep running on their own (fridges, an escalator, a crossing
+signal, a train's door chime, a TV, the film in the cinema), nature (birds, wind, insects) and the main
+character's own footsteps. The music is light and playful only while being alone feels like freedom (7-17 s); it
+stops dead on "But something is wrong.", turns sombre at sunset, disappears completely for the silence (about
+35.4-37.4 s there is no narration and no music: only wind and paper), swells once at dawn on the roof, and leaves
+the last line ("Would you still want it?") with nothing but the wind.
+
+Files: audio/mix_with_voice.wav (final mix, -14 LUFS), audio/mix_no_voice.wav (music + sound only, -14 LUFS, for
+recording your own voice), audio/narration.wav (voice only).
+
+CUE SHEET (generated)
+------------------------------------------------------------
+  0.00 s  [ambience ] Bedroom room tone, a fridge hum through the wall
+  0.05 s  [sfx      ] Phone alarm vibrating on the bedside table (wakes them); then nothing - no messages
+  0.20 s  [music    ] MUSIC: quiet and puzzled - a low A drone and a few hesitant felt-piano notes
+  0.50 s  [voice    ] NARRATION: "You wake up. No calls. No messages." (to 3.12 s)
+  1.80 s  [sfx      ] Screen tap
+  3.20 s  [sfx      ] Bare footsteps to the window
+  3.50 s  [music    ] MUSIC: a soft string-like swell under the window reveal
+  3.60 s  [ambience ] At the window: faint wind and a few distant birds - no traffic, no voices
+  3.87 s  [voice    ] NARRATION: "The city outside is silent. Everyone is gone." (to 7.10 s)
+  4.15 s  [sfx      ] Hand touches the glass
+  7.50 s  [music    ] MUSIC: freedom - a light marimba ostinato in A major over warm chords, building
+  7.50 s  [ambience ] The empty avenue: birdsong and a light breeze (no engines, no people)
+  7.60 s  [sfx      ] Footsteps echo off the buildings - the only sound in the street
+  7.70 s  [voice    ] NARRATION: "At first, it's incredible." (to 9.51 s)
+  9.86 s  [voice    ] NARRATION: "Every road is yours. Every shop. Every seat in the cinema." (to 13.60 s)
+ 10.85 s  [sfx      ] Automatic doors slide; the apple is tossed and caught
+ 11.10 s  [music    ] MUSIC: a soft kick and shaker join; a high chime as the pigeons rise
+ 11.10 s  [ambience ] Supermarket: fridges and fluorescent tubes humming
+ 12.20 s  [ambience ] Cinema: the film's soundtrack still playing (music only)
+ 12.65 s  [sfx      ] Popcorn munching in the empty cinema
+ 14.00 s  [ambience ] Mall: a big, reverberant hum
+ 14.00 s  [sfx      ] The escalator's steady clack
+ 14.05 s  [voice    ] NARRATION: "The entire world is yours." (to 16.12 s)
+ 15.20 s  [sfx      ] Pigeons take off - a burst of wings; the fountain splashing
+ 16.82 s  [voice    ] NARRATION: "But something is wrong." (to 18.34 s)
+ 16.90 s  [ambience ] Junction: wind, a few birds
+ 16.90 s  [music    ] MUSIC: the light music STOPS on "But something is wrong." - an uneasy low cluster takes over
+ 17.20 s  [sfx      ] Crossing signal ticking slowly; relay clicks at 19.0 and 19.55 s; fast "walk" ticking on green
+ 18.79 s  [voice    ] NARRATION: "Traffic lights change for no one. Trains wait at empty platforms." (to 22.89 s)
+ 20.25 s  [ambience ] Station: the parked train idling - compressor thumps and air hiss
+ 20.65 s  [sfx      ] The train's door chime, repeating to nobody
+ 23.20 s  [ambience ] The neighbour's home: a TV programme's music muffled through the glass, a fridge
+ 23.29 s  [voice    ] NARRATION: "Machines can run on their own for a while. But power grids need people, day and night." (to 28.49 s)
+ 23.80 s  [sfx      ] Fingertips on the neighbour's window
+ 25.40 s  [music    ] MUSIC: a slow, sombre string-like line over the sunset and the lights going out (F - D minor)
+ 25.90 s  [ambience ] High up at dusk: wind
+ 28.94 s  [voice    ] NARRATION: "Sooner or later, the lights start going out." (to 31.68 s)
+ 29.10 s  [sfx      ] Each district going dark: a relay thunk and a hum that sags and dies (6 times)
+ 32.10 s  [ambience ] Kitchen: fridge hum
+ 32.30 s  [sfx      ] A kitchen clock ticking
+ 32.50 s  [music    ] MUSIC: four soft piano notes in the kitchen, then the music disappears (the silence)
+ 32.68 s  [voice    ] NARRATION: "That night, you finally hear it. The silence." (to 35.37 s)
+ 35.75 s  [ambience ] Night insects (nature carries on)
+ 35.75 s  [ambience ] Night: wind is the loudest thing in the city
+ 35.95 s  [sfx      ] Sheets of paper scraping across the asphalt in the wind
+ 37.37 s  [voice    ] NARRATION: "Over 8 billion voices, gone. Just your footsteps, and the wind." (to 41.33 s)
+ 38.10 s  [sfx      ] The empty swing's chain creaking
+ 39.80 s  [sfx      ] Lonely footsteps echoing between the towers; a dog barks far away (animals are still here)
+ 42.40 s  [music    ] MUSIC: the realisation - a slow, wide choir-like swell (F - C - D minor) as the city is revealed
+ 42.40 s  [ambience ] Roof at dawn: strong, gusting wind
+ 42.40 s  [sfx      ] Roof door: latch, hinge creak and a rush of wind
+ 42.43 s  [voice    ] NARRATION: "From up here, a whole city belongs to you. A whole planet." (to 46.03 s)
+ 43.60 s  [ambience ] Distant birds at sunrise
+ 43.80 s  [sfx      ] A long airy whoosh as the camera pulls away
+ 46.63 s  [voice    ] NARRATION: "And nobody to share it with." (to 48.48 s)
+ 49.40 s  [music    ] MUSIC: a quiet piano figure over a low pad, fading out by 56.5 s; the last line has only wind
+ 49.48 s  [voice    ] NARRATION: "The strangest part wouldn't be having the world to yourself. It would be realising there's nobody left to tell." (to 55.62 s)
+ 53.55 s  [sfx      ] The phone slides into the hoodie pocket (fabric rustle)
+ 56.12 s  [voice    ] NARRATION: "Would you still want it?" (to 57.40 s)
+
+MUSIC GUIDE (if you re-score it in CapCut or another editor)
+------------------------------------------------------------
+- 0-7.5 s: almost nothing - a low drone, a few hesitant piano notes, a soft swell when the empty city is revealed.
+- 7.5-17 s: light, curious, playful (major key, plucked/marimba ostinato, light percussion) - freedom.
+- 17 s: cut the music dead on "But something is wrong." Keep an uneasy low drone; sombre strings at sunset.
+- 32-42 s: no music, or a few piano notes at most. Let the wind and footsteps carry it.
+- 42-49 s: one wide, slow, emotional swell at dawn as the camera pulls back from the roof.
+- 49-59 s: a simple, quiet piano figure that fades out before the last line; end on wind only.
+- Keep the narration 10-15 dB above the music; YouTube Shorts plays back at about -14 LUFS.
+- Use only music you have the rights to (your own, a licensed library, or YouTube Audio Library tracks).
