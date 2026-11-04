@@ -4272,7 +4272,7 @@ def apply_shot(name):
     nt.nodes['Grade'].lift, nt.nodes['Grade'].gamma, nt.nodes['Grade'].gain = lift, gamma, gain
     nt.nodes['Sat'].inputs['Saturation'].default_value = sat
     sc.view_settings.exposure = cfg_['exposure'] + float(os.environ.get('MT_EXP', '0'))
-    sc.render.use_motion_blur = name in ('crowdcu', 'reveal', 'aerial')
+    sc.render.use_motion_blur = False
     sc.render.motion_blur_shutter = 0.4
     CUR['shot'] = name
 
@@ -5024,182 +5024,225 @@ def _scrape(seed, dur=0.5):
 
 
 # --- instruments and effects for this film ------------------------------------------------------------------------
-def _hum(dur, f=55.0):
-    t = np.arange(int(dur * SR)) / SR
-    y = np.sin(2 * np.pi * f * t) + 0.5 * np.sin(2 * np.pi * 1.5 * f * t + 0.3) + 0.25 * np.sin(2 * np.pi * 2.01 * f * t)
-    return y * (0.7 + 0.3 * np.sin(2 * np.pi * 0.5 * t))
+def _tt2(d):
+    return np.arange(int(d * SR)) / SR
 
 
-def _bark(seed):
-    t = np.arange(int(0.22 * SR)) / SR
-    f = 520 * np.exp(-t * 4) + 260
-    y = np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * 0.4 + _bandpass(_noise(len(t), seed), 500, 2500) * 0.6
-    return _norm(_bandpass(y, 300, 3000)) * np.exp(-t * 12) * np.minimum(t / 0.01, 1)
+def _bass_note(freq, dur, bright=900.0):
+    """A dark analogue-style bass pluck (detuned saws through a falling low-pass)."""
+    t = _tt2(dur)
+    y = _saw(freq, t) + 0.7 * _saw(freq * 1.006, t, 0.3) + 0.5 * np.sin(2 * np.pi * freq * 0.5 * t)
+    y = _bandpass(y, 30, bright)
+    return _norm(y) * np.exp(-t * 5.0) * np.minimum(t / 0.004, 1) * np.minimum((dur - t) / 0.02, 1)
 
 
-def _piano(freq, dur=3.0, vel=1.0):
-    """A soft felt-piano note: a few inharmonic partials with a quick attack and a long, darkening decay."""
-    t = np.arange(int(dur * SR)) / SR
-    y = np.zeros_like(t)
-    for k, a in ((1, 1.0), (2, 0.45), (3, 0.18), (4, 0.08), (5, 0.04)):
-        f = freq * k * (1 + 0.0004 * k * k)
-        y += a * np.sin(2 * np.pi * f * t) * np.exp(-t * (0.9 + 0.7 * k))
-    hammer = _bandpass(np.random.default_rng(int(freq)).standard_normal(len(t)), 800, 4000) * np.exp(-t * 60) * 0.05
-    return _norm((y + hammer) * np.minimum(t / 0.004, 1) * np.minimum((dur - t) / 0.2, 1)) * vel
-
-
-def _buzz(dur=0.55, seed=0):
-    """A phone vibrating on a bedside table: a 165 Hz motor rattle in two pulses."""
-    t = np.arange(int(dur * SR)) / SR
-    motor = np.sign(np.sin(2 * np.pi * 165 * t)) * 0.6 + np.sin(2 * np.pi * 330 * t) * 0.3
-    rattle = _bandpass(_noise(len(t), seed), 900, 3000) * 0.4
-    gate = ((t % 0.28) < 0.2).astype(float)
-    return _norm(_bandpass(motor + rattle, 120, 4000) * gate * np.minimum((dur - t) / 0.02, 1))
-
-
-def _hum_bed(n, seed, f=50.0, hiss=0.3):
-    t = np.arange(n) / SR
-    y = np.sin(2 * np.pi * f * t) + 0.5 * np.sin(2 * np.pi * 2 * f * t) + 0.25 * np.sin(2 * np.pi * 3 * f * t)
-    y = y * (0.85 + 0.15 * np.sin(2 * np.pi * 0.3 * t))
-    return _norm(y + hiss * _norm(_bandpass(_noise(n, seed, 'pink'), 2000, 9000)))
-
-
-def _wind(n, seed, lo=150, hi=1400, gust=0.35):
-    t = np.arange(n) / SR
-    g = 0.65 + gust * np.sin(2 * np.pi * 0.11 * t + seed) + 0.2 * np.sin(2 * np.pi * 0.37 * t + 2 * seed)
-    y = _sweep_bp(_noise(n, seed, 'pink'), lambda tc: lo + (hi - lo) * (0.5 + 0.5 * math.sin(0.4 * tc + seed)), q=1.4)
-    return _norm(y) * np.clip(g, 0.15, 1.3)
-
-
-def _relay(seed):
-    """The clunk of a traffic-signal relay."""
-    t = np.arange(int(0.12 * SR)) / SR
-    return _norm(_bandpass(_noise(len(t), seed), 300, 3000) * np.exp(-t * 70) + 0.5 * np.sin(2 * np.pi * 180 * t) * np.exp(-t * 40))
-
-
-def _ped_tick(seed, fast=False):
-    t = np.arange(int(0.05 * SR)) / SR
-    f = 1600 if fast else 1100
-    return _norm(np.sin(2 * np.pi * f * t) * np.exp(-t * 90) + 0.3 * _bandpass(_noise(len(t), seed), 2000, 6000) * np.exp(-t * 200))
-
-
-def _door_chime():
-    """A train's door-open chime: two soft sine notes."""
-    out = np.zeros(int(0.9 * SR))
-    for k, f in enumerate((880.0, 698.5)):
-        t = np.arange(int(0.45 * SR)) / SR
-        y = np.sin(2 * np.pi * f * t) * np.exp(-t * 7) * np.minimum(t / 0.005, 1)
-        out[int(k * 0.42 * SR):int(k * 0.42 * SR) + len(t)] += y
+def _ostinato(dur, root, bpm=120.0, pattern=(0, 0, 12, 0, 7, 0, 10, 0), bright=900.0, gain_curve=None):
+    """Sixteenth-note bass ostinato (the trailer pulse)."""
+    out = np.zeros(int(dur * SR))
+    step = 60.0 / bpm / 4
+    k = 0
+    tm = 0.0
+    while tm < dur - 0.05:
+        n = _bass_note(_mtof(root + pattern[k % len(pattern)]), step * 1.6, bright)
+        g = 1.0 if gain_curve is None else gain_curve(tm / dur)
+        i = int(tm * SR)
+        m = min(len(n), len(out) - i)
+        out[i:i + m] += n[:m] * g * (1.0 if k % 4 == 0 else 0.7)
+        tm += step
+        k += 1
     return _norm(out)
 
 
-def _compressor(n, seed):
-    """A parked train idling: a low thump every 1.4 s over an air hiss."""
+def _riser(dur, seed=0, f0=200.0, f1=3000.0):
+    """A tension riser: noise swept upward plus a rising tone, ending abruptly."""
+    t = _tt2(dur)
+    n = _sweep_bp(_noise(len(t), seed, 'pink'), lambda tc: f0 + (f1 - f0) * (tc / dur) ** 2, q=3.0)
+    tone = np.sin(2 * np.pi * np.cumsum(80 * 2 ** (3 * t / dur)) / SR)
+    return _norm(_norm(n) * 0.7 + tone * 0.35) * (t / dur) ** 2
+
+
+def _hit(seed=0, size=1.0):
+    """A trailer impact: sub boom, a low brass stab, a noise crack and a long tail."""
+    b = _boom(3.5 * size, 70, 28, seed)
+    br = _brass([_mtof(m) for m in (38, 45, 50)], 1.2, 900)
+    crack = _bandpass(_noise(int(0.4 * SR), seed + 1), 200, 6000) * np.exp(-_tt2(0.4) * 18)
+    y = np.zeros(len(b))
+    y += b
+    y[:len(br)] += br * 0.6
+    y[:len(crack)] += crack * 0.5
+    return _norm(_reverb(_norm(y), 3.0, seed) * 0.6 + _norm(y) * 0.7)
+
+
+def _countbeep(f=1500.0, dur=0.09):
+    t = _tt2(dur)
+    return np.sin(2 * np.pi * f * t) * np.minimum(t / 0.003, 1) * np.minimum((dur - t) / 0.01, 1)
+
+
+def _pa(dur, seed):
+    """The presenter heard through the square's PA: a reverberant, band-limited vowel murmur - no words."""
+    t = _tt2(dur)
+    f0 = 118 * (1 + 0.08 * np.sin(2 * np.pi * 2.3 * t + seed) + 0.05 * np.sin(2 * np.pi * 5.1 * t))
+    buzz = (np.cumsum(f0) / SR) % 1.0 - 0.5
+    syl = (0.5 + 0.5 * np.sin(2 * np.pi * 3.4 * t + seed)) ** 2
+    y = _bandpass(buzz, 400, 2600) * syl
+    return _norm(_reverb(_norm(y), 3.5, seed) * 0.8 + y * 0.3)
+
+
+def _servo(dur, seed, f=900.0):
+    """A camera motor turning: a whine that rises and settles."""
+    t = _tt2(dur)
+    ff = f * (1 + 0.3 * np.sin(np.pi * t / dur))
+    y = np.sin(2 * np.pi * np.cumsum(ff) / SR) * 0.6 + _bandpass(_noise(len(t), seed), 1500, 5000) * 0.25
+    return _norm(y) * np.sin(np.pi * t / dur) ** 0.7
+
+
+def _hiss(dur, seed):
+    t = _tt2(dur)
+    return _norm(_bandpass(_noise(len(t), seed), 1200, 9000)) * np.exp(-t * 3.0) * np.minimum(t / 0.01, 1)
+
+
+def _ping(f=1250.0):
+    t = _tt2(1.4)
+    return _norm(np.sin(2 * np.pi * f * t) * np.exp(-t * 4) + 0.3 * np.sin(2 * np.pi * 2 * f * t) * np.exp(-t * 7))
+
+
+def _glitch(dur, seed):
+    """Digital break-up: stuttering square-wave bursts and noise, gated."""
+    rng = np.random.default_rng(seed)
+    t = _tt2(dur)
+    f = rng.choice([220, 440, 660, 1320, 2200], size=int(dur * 40) + 1)
+    fi = f[(t * 40).astype(int)]
+    sq = np.sign(np.sin(2 * np.pi * np.cumsum(fi) / SR))
+    gate = (rng.random(int(dur * 40) + 1) > 0.35)[(t * 40).astype(int)]
+    return _norm((sq * 0.5 + _noise(len(t), seed) * 0.5) * gate)
+
+
+def _servers(n, seed):
+    """Control-room bed: mains hum, fans, random data chirps."""
     t = np.arange(n) / SR
-    thump = np.sin(2 * np.pi * 42 * t) * np.exp(-((t % 1.4) * 8)) * 0.8
-    hiss = _norm(_bandpass(_noise(n, seed, 'pink'), 1500, 7000)) * 0.25
-    return _norm(thump + hiss + 0.3 * _hum_bed(n, seed + 1, 75.0, 0.0))
+    hum = np.sin(2 * np.pi * 50 * t) + 0.4 * np.sin(2 * np.pi * 150 * t)
+    fans = _norm(_bandpass(_noise(n, seed, 'pink'), 300, 3000)) * 0.5
+    rng = np.random.default_rng(seed)
+    chirps = np.zeros(n)
+    for k in range(int(n / SR * 5)):
+        i = int(rng.uniform(0, n - 0.1 * SR))
+        b = _countbeep(rng.choice([1800, 2400, 3100]), 0.04)
+        chirps[i:i + len(b)] += b * 0.3
+    return _norm(hum * 0.3 + fans + chirps)
 
 
-def _power_down(seed):
-    """A district losing power: a relay thunk and a hum that sags and dies."""
-    d = 1.6
-    t = np.arange(int(d * SR)) / SR
-    f = 100 * np.exp(-t * 1.2) + 30
-    hum = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 2.2)
-    thunk = _bandpass(_noise(len(t), seed), 80, 900) * np.exp(-t * 25)
-    return _norm(hum * 0.8 + thunk)
+def _river(n, seed):
+    return _norm(_sweep_bp(_noise(n, seed, 'pink'), lambda tc: 900 + 300 * math.sin(0.7 * tc), q=0.8))
 
 
-def _creak(seed, dur=0.5, f0=420.0):
-    """A swing chain / door hinge squeak: a frequency-wobbling bandpassed buzz."""
-    t = np.arange(int(dur * SR)) / SR
-    f = f0 * (1 + 0.25 * np.sin(2 * np.pi * 2.0 * t + seed)) * (1 + 0.4 * t / dur)
-    saw = (np.cumsum(f) / SR) % 1.0 - 0.5
-    y = _bandpass(saw, 300, 2500) * np.sin(np.pi * t / dur) ** 1.5
-    return _norm(y)
+def _tremolo_strings(notes, dur, seed=0):
+    t = _tt2(dur)
+    y = _pad([_mtof(m) for m in notes], dur, seed=seed, cutoff=2200)
+    return y * (0.65 + 0.35 * np.sin(2 * np.pi * 11.0 * t))
 
 
-def _film_bleed(n, seed):
-    """The film's soundtrack heard from the seats: a muffled orchestral swell (no voices)."""
-    d = n / SR
-    y = _pad([_mtof(m) for m in (57, 60, 64, 69)], d, seed=seed, cutoff=500)
-    y = _bandpass(y, 60, 900)
-    return _norm(y) * 0.8
+def _heartbeat(dur, bpm=72.0):
+    out = np.zeros(int(dur * SR))
+    period = 60 / bpm
+    tm = 0.0
+    while tm < dur - 0.4:
+        for dt, g in ((0.0, 1.0), (0.22, 0.6)):
+            b = _boom(0.35, 60, 40, int(tm * 10))
+            i = int((tm + dt) * SR)
+            m = min(len(b), len(out) - i)
+            out[i:i + m] += b[:m] * g
+        tm += period
+    return _norm(out)
+
+
+def _test_tone(dur):
+    t = _tt2(dur)
+    return np.sin(2 * np.pi * 1000 * t) * np.minimum(t / 0.01, 1) * np.minimum((dur - t) / 0.05, 1)
 
 
 def _music(N, cues):
     mus = np.zeros((2, N))
     S_ = {s['name']: (s['t0'], s['t1']) for s in SHOTS}
-    tt = lambda d: np.arange(int(d * SR)) / SR
-    # 1) wake up (0 - 7.5): a low A drone and a few hesitant felt-piano notes; a soft swell under the window reveal
-    a, b = 0.2, S_['road'][0]
-    d = b - a
-    _place(mus, _hum(d, 55.0) * _env(tt(d), [(0, 0), (1.5, 0.8), (d - 0.5, 0.8), (d, 0)]), a, 0.10)
-    for tm, m in ((0.5, 69), (1.6, 72), (2.9, 76), (3.7, 74), (5.9, 69), (6.6, 64)):
-        nb = _piano(_mtof(m), 3.0, 0.8)
-        _place(mus, _reverb(nb, 2.4, int(tm * 10)) * 0.6 + nb * 0.5, tm, 0.20, pan=0.3 * math.sin(tm))
-    sw = _pad([_mtof(m) for m in (45, 52, 57, 64, 71)], 4.4, seed=4, cutoff=900)
-    _place(mus, _reverb(sw, 3.0, 5) * 0.5 + sw * 0.5 * _env(tt(4.4), [(0, 0), (2.0, 1), (3.6, 0.8), (4.4, 0)]), 3.5, 0.28)
-    cues.append((0.2, 'MUSIC: quiet and puzzled - a low A drone and a few hesitant felt-piano notes', 'music'))
-    cues.append((3.5, 'MUSIC: a soft string-like swell under the window reveal', 'music'))
-    # 2) the world is yours (7.5 - 16.9): a light marimba ostinato in A major, warm pad, rising; a lift on the square
-    a, b = S_['road'][0], S_['signal'][0]
-    d = b - a
-    pat = [69, 73, 76, 81, 76, 73, 71, 76]
-    j, tm = 0, a + 0.1
-    while tm < b - 0.25:
-        _place(mus, _marimba(_mtof(pat[j % 8]), 0.5), tm, 0.16 + 0.10 * (tm - a) / d, pan=0.35 * math.sin(j * 0.9))
-        tm += 0.3
-        j += 1
-    for k, ch in enumerate(((57, 61, 64, 69), (54, 61, 64, 69), (50, 57, 62, 66), (52, 59, 64, 68))):
-        seg = d / 4
-        y = _pad([_mtof(m) for m in ch], seg + 0.5, seed=10 + k, cutoff=1100)
-        _place(mus, y * _env(tt(seg + 0.5), [(0, 0), (0.3, 1), (seg, 1), (seg + 0.5, 0)]), a + k * seg, 0.28)
-    tm = S_['market'][0]
-    while tm < b - 0.3:
-        _place(mus, _kick(0.3), tm, 0.22)
-        _place(mus, _shaker(int(tm * 100)), tm + 0.3, 0.08)
-        tm += 0.6
-    _place(mus, _reverb(_bell(_mtof(88), 2.5), 2.5, 7) * 0.6, S_['square'][0], 0.15)
-    cues.append((a, 'MUSIC: freedom - a light marimba ostinato in A major over warm chords, building', 'music'))
-    cues.append((S_['market'][0], 'MUSIC: a soft kick and shaker join; a high chime as the pigeons rise', 'music'))
-    # 3) something is wrong (16.9 - 32.1): everything stops; an uneasy low cluster, a slow sombre string line at sunset
-    a, b = S_['signal'][0], S_['kitchen'][0]
-    d = b - a
-    cl = _pad([_mtof(m) for m in (45, 46, 52, 57)], d, seed=20, cutoff=500)
-    _place(mus, cl * _env(tt(d), [(0, 0), (1.0, 0.6), (d - 2.0, 0.8), (d, 0)]), a + 0.3, 0.30)
-    a2, b2 = S_['grid'][0] - 0.5, b
-    d2 = b2 - a2
-    st_ = _pad([_mtof(m) for m in (53, 57, 60, 65)], d2 * 0.5, seed=21, cutoff=900)
-    st2 = _pad([_mtof(m) for m in (50, 57, 62, 65)], d2 * 0.5 + 0.8, seed=22, cutoff=800)
-    _place(mus, st_ * _env(tt(d2 * 0.5), [(0, 0), (1.0, 1), (d2 * 0.5, 0.9)]), a2, 0.32)
-    _place(mus, st2 * _env(tt(d2 * 0.5 + 0.8), [(0, 0.9), (d2 * 0.5 - 0.6, 0.8), (d2 * 0.5 + 0.8, 0)]), a2 + d2 * 0.5, 0.32)
-    cues.append((a, 'MUSIC: the light music STOPS on "But something is wrong." - an uneasy low cluster takes over', 'music'))
-    cues.append((a2, 'MUSIC: a slow, sombre string-like line over the sunset and the lights going out (F - D minor)', 'music'))
-    # 4) the silence (32.1 - 42.4): almost nothing - four piano notes in the kitchen, then no music at all
-    a = S_['kitchen'][0]
-    for k, (tm, m) in enumerate(((0.4, 64), (1.6, 67), (2.9, 69), (3.3, 62))):
-        nb = _piano(_mtof(m), 4.0, 0.7)
-        _place(mus, _reverb(nb, 3.0, 40 + k) * 0.7 + nb * 0.4, a + tm, 0.16)
-    cues.append((a + 0.4, 'MUSIC: four soft piano notes in the kitchen, then the music disappears (the silence)', 'music'))
-    # 5) the realisation (42.4 - 49.4): a slow, wide swell at dawn - F major to C, choir-like
-    a, b = S_['roofdoor'][0], S_['phone2'][0]
-    for k, ch in enumerate(((53, 60, 65, 69, 72), (48, 55, 60, 64, 67), (50, 57, 62, 65, 69))):
-        seg = (b - a) / 3
-        y = _choir(ch, seg + 1.0, seed=50 + k)
-        _place(mus, y * _env(tt(seg + 1.0), [(0, 0), (0.8, 1), (seg, 1), (seg + 1.0, 0)]), a + k * seg, 0.30 + 0.06 * k)
-    _place(mus, _boom(2.0, 50, 30, 61), S_['aerial'][0], 0.18)
-    cues.append((a, 'MUSIC: the realisation - a slow, wide choir-like swell (F - C - D minor) as the city is revealed', 'music'))
-    # 6) the payoff (49.4 - 59): a simple piano figure that thins out; the last line is left with only the wind
-    a = S_['phone2'][0]
-    fig = [(0.0, 65), (0.9, 69), (1.8, 72), (2.9, 70), (4.2, 69), (5.4, 65), (6.6, 64)]
-    for k, (tm, m) in enumerate(fig):
-        nb = _piano(_mtof(m), 4.0, 0.75 - 0.05 * k)
-        _place(mus, _reverb(nb, 3.0, 60 + k) * 0.7 + nb * 0.4, a + tm, 0.18)
-    pad = _pad([_mtof(m) for m in (41, 48, 53, 57)], 7.0, seed=70, cutoff=600)
-    _place(mus, pad * _env(tt(7.0), [(0, 0), (1.5, 0.7), (5.0, 0.6), (7.0, 0)]), a, 0.2)
-    cues.append((a, 'MUSIC: a quiet piano figure over a low pad, fading out by 56.5 s; the last line has only wind', 'music'))
+    # 1) the selection: countdown beeps, the stop, the name hit, then the pulse
+    for k, tm in enumerate((0.0, 0.25, 0.5)):
+        _place(mus, _countbeep(1500), tm, 0.25)
+    _place(mus, _countbeep(1000, 0.5), 0.73, 0.3)
+    cues.append((0.0, 'Digital countdown beeps on the giant screen; a long tone as it stops at 0.73 s (the crowd hushes)', 'music'))
+    _place(mus, _riser(1.5, 3, 150, 2500), 0.95, 0.22)
+    _place(mus, _hit(1, 1.2), 2.45, 0.85)
+    cues.append((2.45, 'IMPACT: sub boom + low brass stab as the name appears - the music changes completely', 'music'))
+    a, b = 3.0, S_['hall'][0] + 0.2
+    _place(mus, _ostinato(b - a, 38, 120, bright=700, gain_curve=lambda u: 0.5 + 0.5 * u), a, 0.32)
+    dr = _pad([_mtof(m) for m in (26, 38, 45)], b - a + 1.0, seed=5, cutoff=400)
+    _place(mus, dr * _env(_tt2(b - a + 1.0), [(0, 0), (0.5, 1), (b - a, 1), (b - a + 1.0, 0)]), a, 0.4)
+    cues.append((3.0, 'MUSIC: a dark sixteenth-note bass pulse (D minor, 120 bpm) and a low drone - the trailer begins', 'music'))
+    # 2) the world watches: pulse continues, a ticking clock, news sting, logo hit and a riser into the arena
+    a, b = S_['hall'][0], S_['gate'][0]
+    _place(mus, _ostinato(b - a, 38, 120, pattern=(0, 0, 12, 0, 8, 0, 10, 7), bright=1100,
+                          gain_curve=lambda u: 0.7 + 0.3 * u), a, 0.34)
+    for k in range(int((b - a) / 0.5)):
+        _place(mus, _tick(300 + k, 0.8), a + k * 0.5, 0.06)
+    for k, ch in enumerate(((50, 53, 57), (46, 50, 53), (48, 52, 55), (45, 49, 52))):
+        seg = (b - a) / 4
+        y = _pad([_mtof(m) for m in ch], seg + 0.4, seed=30 + k, cutoff=1300)
+        _place(mus, y * _env(_tt2(seg + 0.4), [(0, 0), (0.2, 1), (seg, 1), (seg + 0.4, 0)]), a + k * seg, 0.24)
+    _place(mus, _brass([_mtof(m) for m in (62, 65, 69)], 0.35, 2600), S_['news'][0] + 0.02, 0.22)
+    _place(mus, _brass([_mtof(m) for m in (64, 67, 71)], 0.6, 2600), S_['news'][0] + 0.32, 0.2)
+    cues.append((S_['news'][0], 'A bright TV-news sting on the cut to the studio', 'music'))
+    _place(mus, _hit(7, 1.0), S_['logo'][0] + 0.02, 0.6)
+    _place(mus, _riser(S_['gate'][0] - S_['logo'][0] - 0.3, 8, 120, 4000), S_['logo'][0] + 0.3, 0.3)
+    cues.append((S_['logo'][0], 'A deep hit on the giant VANTAGE logo; a riser into the arena', 'music'))
+    # 3) the arena: silence on the doors, then the big reveal swell (D major), countdown beeps, a drive under the aerial
+    a = S_['reveal'][0] - 0.2
+    for k, ch in enumerate(((50, 57, 62, 66, 69), (47, 54, 59, 62, 66), (43, 50, 55, 59, 62), (45, 52, 57, 61, 64))):
+        seg = (S_['countdown'][0] - a) / 2 if k < 2 else (S_['camlens'][0] - S_['countdown'][0]) / 2
+        st = a + (k * seg if k < 2 else (S_['countdown'][0] - a) + (k - 2) * seg)
+        y = _choir(ch, seg + 1.2, seed=60 + k) * 0.6 + _pad([_mtof(m) for m in ch], seg + 1.2, seed=64 + k, cutoff=1800) * 0.6
+        _place(mus, y * _env(_tt2(seg + 1.2), [(0, 0), (0.6, 1), (seg, 1), (seg + 1.2, 0)]), st, 0.42)
+    _place(mus, _taiko(1.8), S_['reveal'][0] + 0.05, 0.5)
+    cues.append((S_['reveal'][0], 'MUSIC: the reveal - a wide, heroic swell (choir and strings, D major) with a deep drum', 'music'))
+    for k in range(4):
+        _place(mus, _countbeep(1100 if k < 3 else 1650, 0.14 if k < 3 else 0.6), 23.4 + 0.6 * k, 0.3)
+    cues.append((23.4, 'Arena countdown: three beeps and a long high tone at zero (25.2 s)', 'music'))
+    a, b = S_['aerial'][0], S_['camlens'][0] + 0.3
+    _place(mus, _ostinato(b - a, 38, 120, pattern=(0, 12, 0, 7, 0, 12, 10, 7), bright=1400), a, 0.3)
+    for k in range(int((b - a) / 1.0)):
+        _place(mus, _taiko(1.0), a + k * 1.0, 0.22 if k % 2 else 0.3)
+    cues.append((a, 'MUSIC: drums and the pulse drive the aerial shot ("broadcast live, to the whole world")', 'music'))
+    # 4) the realisation: suspense - high tremolo strings, the pulse halves, a wrong low rumble on the weather
+    a, b = S_['camlens'][0], S_['door'][0]
+    _place(mus, _tremolo_strings((74, 75, 81), b - a, 70) * _env(_tt2(b - a), [(0, 0), (1.0, 0.7), (b - a - 1, 1), (b - a, 0.6)]), a, 0.2)
+    _place(mus, _ostinato(b - a, 38, 120, pattern=(0, -100, 0, -100, 0, -100, 1, -100), bright=500), a, 0.26)
+    _place(mus, _boom(3.0, 40, 25, 71), S_['weather'][0] + 0.3, 0.35)
+    _place(mus, _riser(2.0, 72, 100, 2000), S_['dome'][0] - 1.6, 0.25)
+    _place(mus, _hit(73, 0.8), S_['dome'][0] + 0.25, 0.5)
+    cues.append((a, 'MUSIC: suspense - high tremolo strings (a semitone cluster) over a slower, sparser pulse', 'music'))
+    cues.append((S_['dome'][0] + 0.25, 'A hit as the sky glitches and the dome\'s panels show through', 'music'))
+    # 5) the twist: heartbeat, rising suspense, a long riser to the switch
+    a, b = S_['door'][0], S_['switch'][0]
+    _place(mus, _heartbeat(b - a, 76), a, 0.35)
+    y = _pad([_mtof(m) for m in (38, 44, 50, 51)], b - a, seed=80, cutoff=900)
+    _place(mus, y * _env(_tt2(b - a), [(0, 0), (1.5, 0.6), (b - a, 1.0)]), a, 0.3)
+    _place(mus, _riser(b - S_['list'][0], 81, 120, 5000), S_['list'][0], 0.32)
+    cues.append((a, 'MUSIC: a heartbeat and a dark, slowly rising cluster; a long riser from the list to the switch', 'music'))
+    # 6) the payoff: the switch hit, the full pulse returns for the broadcast, a final impact, then nothing
+    a = S_['switch'][0] + 0.4
+    _place(mus, _hit(90, 1.0), a, 0.7)
+    b = 57.0
+    _place(mus, _ostinato(b - a - 0.2, 38, 120, pattern=(0, 0, 12, 0, 8, 0, 10, 12), bright=1600,
+                          gain_curve=lambda u: 0.6 + 0.4 * u), a + 0.2, 0.36)
+    for k, ch in enumerate(((50, 57, 62, 65), (46, 53, 58, 62), (48, 55, 60, 64), (45, 52, 57, 61))):
+        seg = (b - a) / 4
+        y = _choir(ch, seg, seed=91 + k) * 0.5 + _pad([_mtof(m) for m in ch], seg, seed=95 + k, cutoff=2000) * 0.7
+        _place(mus, y * _env(_tt2(seg), [(0, 0), (0.3, 1), (seg - 0.02, 1), (seg, 0)]), a + k * seg, 0.36)
+    _place(mus, _riser(2.2, 99, 200, 6000), b - 2.2, 0.35)
+    _place(mus, _hit(100, 1.4), b, 1.0)
+    cues.append((a, 'MUSIC: the hit on the switch; the pulse and choir return at full size for the broadcast', 'music'))
+    cues.append((b, 'FINAL IMPACT on the last word - then the music CUTS OUT completely', 'music'))
+    # hard cut: nothing after the final impact except its own tail
+    i = int((b + 0.02) * SR)
+    tail = mus[:, i:].copy()
+    mus[:, i:] = 0
     return mus
 
 
@@ -5214,7 +5257,6 @@ def stage_audio():
         cues.append((time, what, layer))
     S_ = {s['name']: (s['t0'], s['t1']) for s in SHOTS}
     music = _music(N, cues)
-    tt = lambda d: np.arange(int(d * SR)) / SR
 
     def bed(names, fn, gain, what, pan=0.0):
         for nm in names:
@@ -5223,120 +5265,111 @@ def stage_audio():
             y = fn(n, abs(hash(nm)) % 1000) * _env(np.arange(n) / SR, [(0, 0), (0.04, 1), ((b - a) - 0.03, 1), (b - a, 0)])
             _place(amb, y, a, gain, pan=pan)
         cue(S_[names[0]][0], what, 'ambience')
-    # --- ambiences: no traffic and no voices anywhere; birds and wind instead
-    bed(['eyes', 'phone'], lambda n, s: _hum_bed(n, s, 50.0, 0.4), 0.05, 'Bedroom room tone, a fridge hum through the wall')
-    bed(['window'], lambda n, s: _wind(n, s, 200, 900, 0.2) * 0.6 + _birds(n, s, 0.3) * 0.4, 0.14,
-        'At the window: faint wind and a few distant birds - no traffic, no voices')
-    bed(['road', 'square'], lambda n, s: _birds(n, s, 0.6) * 0.6 + _wind(n, s + 3, 200, 1200) * 0.4, 0.2,
-        'The empty avenue: birdsong and a light breeze (no engines, no people)')
-    bed(['market'], lambda n, s: _hum_bed(n, s, 100.0, 0.5), 0.14, 'Supermarket: fridges and fluorescent tubes humming')
-    bed(['mall'], lambda n, s: _reverb(_hum_bed(n, s, 60.0, 0.2), 3.0, s) * 0.8, 0.12, 'Mall: a big, reverberant hum')
-    bed(['cinema'], lambda n, s: _film_bleed(n, s), 0.28, 'Cinema: the film\'s soundtrack still playing (music only)')
-    bed(['signal'], lambda n, s: _wind(n, s, 200, 800) * 0.7 + _birds(n, s, 0.2) * 0.3, 0.16, 'Junction: wind, a few birds')
-    bed(['station'], lambda n, s: _compressor(n, s), 0.16, 'Station: the parked train idling - compressor thumps and air hiss')
-    bed(['house'], lambda n, s: _film_bleed(n, s + 9) * 0.6 + _hum_bed(n, s, 50.0, 0.2) * 0.4, 0.12,
-        'The neighbour\'s home: a TV programme\'s music muffled through the glass, a fridge')
-    bed(['grid', 'dark'], lambda n, s: _wind(n, s, 150, 700, 0.4), 0.18, 'High up at dusk: wind')
-    bed(['kitchen'], lambda n, s: _hum_bed(n, s, 50.0, 0.1), 0.06, 'Kitchen: fridge hum')
-    bed(['papers', 'playground', 'towers'], lambda n, s: _wind(n, s, 120, 1500, 0.5), 0.3,
-        'Night: wind is the loudest thing in the city')
-    bed(['papers', 'playground', 'towers'], lambda n, s: _crickets(n, s), 0.05, 'Night insects (nature carries on)')
-    bed(['roofdoor', 'aerial', 'edge', 'phone2', 'pocket', 'eyes2'], lambda n, s: _wind(n, s, 150, 1800, 0.45), 0.3,
-        'Roof at dawn: strong, gusting wind')
-    bed(['aerial', 'edge'], lambda n, s: _birds(n, s, 0.4), 0.10, 'Distant birds at sunrise')
+    # --- ambiences
+    a, b = S_['crowdcu'][0], S_['hall'][0]
+    n = int((b - a) * SR)
+    cr = _crowd(n, 1, 1.2) * _env(np.arange(n) / SR, [(0, 0.9), (0.7, 1.0), (0.85, 0.35), (2.4, 0.3), (2.6, 0.8), (5.2, 0.7), (6.6, 0.12), (b - a, 0.1)])
+    _place(amb, cr, a, 0.3)
+    cue(a, 'The square: thousands of people murmuring; hushed when the countdown stops, a gasp at the name, silent as they turn', 'ambience')
+    bed(['crowdcu', 'stage', 'turn'], lambda n, s: _wind(n, s, 150, 900, 0.3), 0.08, 'City wind between the towers')
+    _place(amb, _pa(2.0, 3), S_['stage'][0] - 0.3, 0.16)
+    cue(S_['stage'][0] - 0.3, 'The presenter over the PA, echoing round the square (no words)')
+    bed(['hall', 'logo'], lambda n, s: _reverb(_hum_bed(n, s, 60.0, 0.3), 2.5, s) * 0.7, 0.12, 'Ministry: a cold air-conditioning hum, big reverb')
+    bed(['news'], lambda n, s: _hum_bed(n, s, 50.0, 0.1), 0.05, 'Studio room tone')
+    bed(['homes'], lambda n, s: _bandpass(_crowd(n, s, 1.5), 200, 2500) * 0.7 + _wind(n, s, 100, 600) * 0.3, 0.18,
+        'Night street: a stadium crowd roaring from every TV in the block (muffled through the glass)')
+    bed(['gate'], lambda n, s: _hum_bed(n, s, 45.0, 0.2), 0.1, 'The tunnel: a deep machine hum')
+    bed(['reveal', 'countdown', 'aerial'], lambda n, s: _wind(n, s, 200, 1500, 0.4) * 0.6 + _birds(n, s, 0.5) * 0.4, 0.22,
+        'The arena: a rush of fresh air, wind and birdsong')
+    bed(['countdown', 'aerial'], lambda n, s: _hum(n / SR, 41.0)[:n] * 0.5, 0.06, 'Distant mechanical hum from the towers and the dome')
+    bed(['camlens', 'map', 'others'], lambda n, s: _birds(n, s, 0.5) * 0.5 + _wind(n, s, 300, 1500, 0.2) * 0.5, 0.18,
+        'Forest ambience: birds, leaves, a light wind')
+    bed(['others'], lambda n, s: _river(n, s), 0.14, 'The river')
+    bed(['weather', 'dome', 'door'], lambda n, s: _wind(n, s, 100, 1800, 0.7), 0.3, 'The weather turns on cue: wind rising, gusting')
+    bed(['control', 'list', 'faceglow', 'switch', 'camturn', 'stare'], lambda n, s: _servers(n, s), 0.14,
+        'The hidden room: electrical hum, cooling fans, computer chirps')
+    a, b = S_['square2']
+    n = int((b - a) * SR)
+    _place(amb, _crowd(n, 7, 1.4) * _env(np.arange(n) / SR, [(0, 0.3), (1.0, 0.8), (b - a, 1.0)]), a, 0.32)
+    cue(a, 'The square at night: the crowd\'s murmur rising as the hidden list fills the screen', 'ambience')
     # --- scene 1
-    _place(sfx, _buzz(0.55, 1), 0.05, 0.35, pan=-0.3)
-    _place(sfx, _buzz(0.55, 2), 0.75, 0.22, pan=-0.3)
-    cue(0.05, 'Phone alarm vibrating on the bedside table (wakes them); then nothing - no messages')
-    _place(sfx, _click(), S_['phone'][0] + 0.3, 0.12)
-    cue(S_['phone'][0] + 0.3, 'Screen tap')
-    for k in range(3):
-        _place(sfx, _step(10 + k), S_['window'][0] - 0.4 + k * 0.45, 0.12)
-    cue(S_['window'][0] - 0.4, 'Bare footsteps to the window')
-    _place(sfx, _click(), S_['window'][0] + 0.55, 0.15)
-    cue(S_['window'][0] + 0.55, 'Hand touches the glass')
+    _place(sfx, _static(0.2, 11, 1.0), 2.25, 0.3)
+    cue(2.25, 'A burst of screen static just before the name')
+    _place(sfx, _motor(1.8, 12, 160.0, 0.3), S_['stage'][0], 0.08, pan=-0.4)
+    cue(S_['stage'][0], 'The broadcast crane\'s motor')
+    _place(sfx, _motor(1.6, 13, 220.0, 0.6), S_['turn'][0] + 0.1, 0.16, pan=0.2)
+    cue(S_['turn'][0] + 0.1, 'A camera drone descends, rotors whining; the crowd falls silent')
+    for k in range(10):
+        _place(sfx, _scrape(20 + k, 0.25) * 0.5, S_['turn'][0] + 0.15 + k * 0.12, 0.05, pan=0.6 * math.sin(k))
     # --- scene 2
-    a, b = S_['road']
+    a, b = S_['hall']
+    _place(sfx, _hiss(0.6, 30), a, 0.2)
+    _place(sfx, _clunk(31), a + 0.05, 0.2)
+    cue(a, 'A security door hisses shut behind them')
     tm, k = a + 0.1, 0
     while tm < b:
-        _place(sfx, _step(20 + k), tm, 0.25, pan=0.1 * math.sin(k))
-        tm += 0.54
+        st = _step(40 + k)
+        _place(sfx, _reverb(st, 1.2, k) * 0.4 + st * 0.6, tm, 0.22, pan=0.15 * math.sin(k))
+        tm += 0.46
         k += 1
-    cue(a + 0.1, 'Footsteps echo off the buildings - the only sound in the street')
-    a = S_['market'][0]
-    _place(sfx, _whoosh(0.5, 21), a - 0.25, 0.2)
-    _place(sfx, _whoosh(0.35, 22), a + 0.25, 0.12)
-    _place(sfx, _click(), a + 0.8, 0.2)
-    cue(a - 0.25, 'Automatic doors slide; the apple is tossed and caught')
-    for k in range(4):
-        _place(sfx, _crunch(30 + k, 0.08), S_['cinema'][0] + 0.45 + k * 0.32, 0.12, pan=0.1)
-    cue(S_['cinema'][0] + 0.45, 'Popcorn munching in the empty cinema')
-    a, b = S_['mall']
-    for k in range(int((b - a) / 0.33)):
-        _place(sfx, _tick(40 + k, 0.4), a + k * 0.33, 0.06)
-    cue(a, 'The escalator\'s steady clack')
-    a = S_['square'][0]
-    _place(sfx, _flutter(1.8, 41, 1.6), a + 0.1, 0.45)
-    _place(sfx, _norm(_bandpass(_noise(int(1.8 * SR), 42, 'pink'), 600, 6000)), a, 0.12, pan=-0.5)
-    cue(a + 0.1, 'Pigeons take off - a burst of wings; the fountain splashing')
+    cue(a + 0.1, 'Three sets of footsteps on a metal floor')
+    for k, tm in enumerate((8.0, 8.6, 9.1)):
+        _place(sfx, _servo(0.4, 50 + k, 1100 + 120 * k), tm, 0.12, pan=0.4 * (k - 1))
+    cue(8.0, 'Ceiling cameras whirr as they turn to follow')
+    _place(sfx, _static(0.5, 55, 0.6) * 0.8, 7.6, 0.08)
+    _place(sfx, _static(0.4, 56, 0.6) * 0.8, 9.0, 0.08)
+    cue(7.6, 'Radio chatter on the guards\' earpieces (static and squelch, no words)')
     # --- scene 3
-    a = S_['signal'][0]
-    _place(sfx, _relay(50), 19.0, 0.4)
-    _place(sfx, _relay(51), 19.55, 0.45)
-    tm = a + 0.3
-    k = 0
-    while tm < S_['signal'][1]:
-        fast = tm > 19.55
-        _place(sfx, _ped_tick(60 + k, fast), tm, 0.12 if not fast else 0.16)
-        tm += 0.9 if not fast else 0.22
+    a = S_['gate'][0]
+    _place(sfx, _clunk(60), 16.3, 0.5)
+    _place(sfx, _rumble_doors(1.8, 61), 16.4, 0.45)
+    cue(16.3, 'The gate unlocks with a massive clunk; the doors rumble open')
+    _place(sfx, _whoosh(1.6, 62), 16.9, 0.3)
+    cue(16.9, 'Wind rushes into the tunnel')
+    tm, k = S_['reveal'][0] + 0.1, 0
+    while tm < S_['reveal'][0] + 1.6:
+        _place(sfx, _step(70 + k) * 0.7, tm, 0.12)
+        tm += 0.52
         k += 1
-    cue(a + 0.3, 'Crossing signal ticking slowly; relay clicks at 19.0 and 19.55 s; fast "walk" ticking on green')
-    a = S_['station'][0]
-    _place(sfx, _door_chime(), a + 0.4, 0.22)
-    _place(sfx, _door_chime(), a + 2.0, 0.15)
-    cue(a + 0.4, 'The train\'s door chime, repeating to nobody')
-    tm, k = a + 0.1, 0
-    while tm < S_['station'][1]:
-        _place(sfx, _step(70 + k), tm, 0.18)
-        tm += 0.6
-        k += 1
-    _place(sfx, _click(), S_['house'][0] + 0.6, 0.1)
-    cue(S_['house'][0] + 0.6, 'Fingertips on the neighbour\'s window')
-    for d, to in sorted(OUTAGE.items(), key=lambda x: x[1]):
-        _place(sfx, _power_down(80 + d), to, 0.35, pan=0.3 * math.sin(d))
-    cue(min(OUTAGE.values()), 'Each district going dark: a relay thunk and a hum that sags and dies (6 times)')
-    # --- scene 4: the silence
-    a, b = S_['kitchen']
-    for k in range(int((b - a) / 1.0) + 1):
-        _place(sfx, _tick(90 + k, 0.5), a + 0.2 + k * 1.0, 0.05)
-    cue(a + 0.2, 'A kitchen clock ticking')
-    for k in range(5):
-        _place(sfx, _paper(0.5, 100 + k), S_['papers'][0] + 0.2 + k * 0.42, 0.35, pan=0.5 - 0.25 * k)
-    cue(S_['papers'][0] + 0.2, 'Sheets of paper scraping across the asphalt in the wind')
-    a, b = S_['playground']
-    for k in range(4):
-        _place(sfx, _creak(110 + k, 0.45, 380 + 30 * (k % 2)), a + 0.1 + k * 0.7, 0.18, pan=0.3)
-    cue(a + 0.1, 'The empty swing\'s chain creaking')
-    a, b = S_['towers']
-    tm, k = a + 0.1, 0
-    while tm < b:
-        st = _step(120 + k)
-        _place(sfx, _reverb(st, 1.8, k) * 0.6 + st * 0.6, tm, 0.18)
-        tm += 0.6
-        k += 1
-    _place(sfx, _reverb(_bark(130), 2.5, 131) * 0.8, a + 1.2, 0.05, pan=-0.7)
-    cue(a + 0.1, 'Lonely footsteps echoing between the towers; a dog barks far away (animals are still here)')
+    _place(sfx, _whoosh(3.0, 72), S_['reveal'][0] + 0.8, 0.22)
+    cue(S_['reveal'][0] + 0.8, 'A long airy whoosh as the camera rises over the arena')
+    for k in (1, 2, 3):
+        _place(sfx, _reverb(_clunk(80 + k), 2.5, 80 + k) * 0.6, 26.0 + 0.4 * k, 0.12, pan=0.6 * (k - 2))
+    cue(26.0, 'Other gates opening far away (distant clunks echoing)')
+    # --- scene 4
+    _place(sfx, _servo(0.7, 90, 1400), S_['camlens'][0] + 0.25, 0.22)
+    _place(sfx, _click(), S_['camlens'][0] + 0.2, 0.12)
+    cue(S_['camlens'][0] + 0.2, 'The hidden camera clicks and turns to follow (a tiny servo whine)')
+    _place(sfx, _reverb(_ping(1250), 2.0, 91) * 0.7, S_['map'][0] + 0.1, 0.2)
+    _place(sfx, _reverb(_ping(1250), 2.0, 92) * 0.7, S_['map'][0] + 1.0, 0.16)
+    cue(S_['map'][0] + 0.1, 'The live map pings: a contestant\'s position updating')
+    _place(sfx, _glitch(0.6, 93), S_['dome'][0] + 0.2, 0.2)
+    _place(sfx, _static(1.2, 94, 1.5), S_['dome'][0] + 0.2, 0.18)
+    cue(S_['dome'][0] + 0.2, 'An electrical crackle and digital glitches as the sky breaks up')
     # --- scene 5
-    a = S_['roofdoor'][0]
-    _place(sfx, _click(), a + 0.02, 0.4)
-    _place(sfx, _creak(140, 0.6, 260.0), a + 0.08, 0.3)
-    _place(sfx, _whoosh(0.9, 141), a + 0.15, 0.35)
-    cue(a, 'Roof door: latch, hinge creak and a rush of wind')
-    _place(sfx, _whoosh(2.5, 150), S_['aerial'][0] + 0.2, 0.25)
-    cue(S_['aerial'][0] + 0.2, 'A long airy whoosh as the camera pulls away')
+    a = S_['door'][0]
+    _place(sfx, _hiss(1.2, 100), 39.65, 0.3)
+    _place(sfx, _rumble_doors(1.1, 101) * 0.5, 39.7, 0.2)
+    cue(39.65, 'The hidden door: an air-seal hiss and a sliding stone rumble')
+    for k in range(6):
+        _place(sfx, _countbeep(2200 + 300 * (k % 3), 0.05), S_['control'][0] + 0.4 + k * 0.45, 0.07, pan=0.5 * math.sin(k))
+    cue(S_['control'][0] + 0.4, 'Computer bleeps and data clicks')
+    _place(sfx, _glitch(0.25, 102), S_['list'][0] + 0.05, 0.1)
     # --- scene 6
-    _place(sfx, _flutter(0.5, 160, 0.5), S_['pocket'][0] + 0.65, 0.12)
-    cue(S_['pocket'][0] + 0.65, 'The phone slides into the hoodie pocket (fabric rustle)')
+    a = S_['switch'][0]
+    _place(sfx, _clunk(110), 50.2, 0.45)
+    cue(50.2, 'The master fader thunks home')
+    _place(sfx, _static(1.4, 111, 2.0), 49.65, 0.3)
+    _place(sfx, _glitch(0.8, 112), 49.7, 0.2)
+    cue(49.65, 'Broadcast interference: static sweeps and digital break-up')
+    _place(sfx, _static(0.6, 113, 1.5), S_['square2'][0], 0.2)
+    _place(sfx, _servo(1.0, 114, 800), 53.35, 0.3)
+    cue(53.35, 'The surveillance camera swings round (servo)')
+    _place(sfx, _test_tone(1.3), 57.3, 0.05)
+    cue(57.3, 'After the final impact: only a thin dead-signal tone')
+    _place(sfx, _static(0.45, 115, 2.0), 58.3, 0.35)
+    _place(sfx, _glitch(0.45, 116), 58.3, 0.25)
+    cue(58.3, 'The picture breaks up: a last burst of static, then silence')
 
     vo = np.zeros(N)
     vpath = os.path.join(ROOT, 'audio', 'narration.wav')
@@ -5350,12 +5383,12 @@ def stage_audio():
     env = np.clip(env / (env.max() + 1e-9) * 4, 0, 1)
     rel_k = int(0.3 * SR)
     env = np.maximum.reduce([np.roll(env, j) for j in range(0, rel_k, rel_k // 12)])
-    duck_m = 1 - 0.6 * env
+    duck_m = 1 - 0.55 * env
     duck_a = 1 - 0.45 * env
     music_n, amb_n, sfx_n = (x / (np.abs(x).max() + 1e-9) for x in (music, amb, sfx))
-    bedm = 0.55 * music_n + 0.4 * amb_n + 0.7 * sfx_n
-    with_voice = 0.55 * music_n * duck_m + 0.4 * amb_n * duck_a + 0.7 * sfx_n * duck_a + np.stack([vo, vo]) * (1.6 / (np.abs(vo).max() + 1e-9))
-    end_fade = np.clip((DURATION - t) / 0.6, 0, 1)
+    bedm = 0.6 * music_n + 0.35 * amb_n + 0.6 * sfx_n
+    with_voice = 0.6 * music_n * duck_m + 0.35 * amb_n * duck_a + 0.6 * sfx_n * duck_a + np.stack([vo, vo]) * (1.6 / (np.abs(vo).max() + 1e-9))
+    end_fade = np.clip((DURATION - t) / 0.2, 0, 1)
     os.makedirs(os.path.join(ROOT, 'audio'), exist_ok=True)
     outs = {}
     for name, mix in (('mix_with_voice', with_voice), ('mix_no_voice', bedm), ('music_sfx_stem', bedm)):
@@ -5386,20 +5419,20 @@ def stage_audio():
 
 
 def write_sound_design(cues):
-    L = ['WHAT IF YOU WERE THE LAST HUMAN ON EARTH? - SOUND DESIGN, MUSIC AND TIMING',
+    L = ['WHAT IF YOU WERE SELECTED? - SOUND DESIGN, MUSIC AND TIMING',
          '=' * 60, '',
          'Everything below is synthesised by code in animation.py --stage audio (numpy only: oscillators, filtered noise,',
          'envelopes, convolution reverb). No samples, recordings, stock sound or copyrighted music. The narration is a',
          'synthetic voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py. Music, ambience and effects duck under',
          'the voice so the narration always stays on top.',
          '',
-         'THE IDEA: the absence of people is the sound of the film. There is no traffic, no crowd and no human voice other',
-         'than the narrator anywhere - only machines that keep running on their own (fridges, an escalator, a crossing',
-         'signal, a train\'s door chime, a TV, the film in the cinema), nature (birds, wind, insects) and the main',
-         'character\'s own footsteps. The music is light and playful only while being alone feels like freedom (7-17 s); it',
-         'stops dead on "But something is wrong.", turns sombre at sunset, disappears completely for the silence (about',
-         '35.4-37.4 s there is no narration and no music: only wind and paper), swells once at dawn on the roof, and leaves',
-         'the last line ("Would you still want it?") with nothing but the wind.',
+         'THE IDEA: a trailer that is also a broadcast. Every scene is scored like a film trailer (a dark sixteenth-note',
+         'bass pulse in D minor, big impacts, risers), and every machine that is watching you makes a sound: the countdown',
+         'beeps, PA echo, camera servos, drone rotors, radio squelch, the map\'s ping, data chirps, static. Tension is built',
+         'by taking things away: the crowd hushes when the countdown stops; the doors open on near-silence before the',
+         'reveal; the music thins to tremolo strings in the forest; a heartbeat in the hidden room. The music returns at',
+         'full size when the truth goes out on every screen, hits once more on the last word - and then CUTS OUT, leaving',
+         'a thin dead-signal tone and a last burst of static as the picture breaks up.',
          '',
          'Files: audio/mix_with_voice.wav (final mix, -14 LUFS), audio/mix_no_voice.wav (music + sound only, -14 LUFS, for',
          'recording your own voice), audio/narration.wav (voice only).',
@@ -5412,19 +5445,40 @@ def write_sound_design(cues):
     for tm, what, layer in sorted(cues):
         L.append(f'{tm:6.2f} s  [{layer:9s}] {what}')
     L += ['', 'MUSIC GUIDE (if you re-score it in CapCut or another editor)', '-' * 60,
-          '- 0-7.5 s: almost nothing - a low drone, a few hesitant piano notes, a soft swell when the empty city is revealed.',
-          '- 7.5-17 s: light, curious, playful (major key, plucked/marimba ostinato, light percussion) - freedom.',
-          '- 17 s: cut the music dead on "But something is wrong." Keep an uneasy low drone; sombre strings at sunset.',
-          '- 32-42 s: no music, or a few piano notes at most. Let the wind and footsteps carry it.',
-          '- 42-49 s: one wide, slow, emotional swell at dawn as the camera pulls back from the roof.',
-          '- 49-59 s: a simple, quiet piano figure that fades out before the last line; end on wind only.',
+          '- 0-3 s: no music - countdown beeps, a crowd, a hush; one huge impact when the name appears (2.45 s).',
+          '- 3-16 s: a dark, driving trailer pulse (minor key, 115-125 bpm); a news sting at 9.7 s; a hit on the logo, then a riser.',
+          '- 16-18 s: drop out almost completely for the doors; 18.3 s: the biggest, widest swell in the film for the arena reveal.',
+          '- 29-39 s: suspense - high strings, sparse pulse; a low rumble on the weather; a hit when the sky glitches (37.1 s).',
+          '- 39-49 s: heartbeat and a slow rising cluster; one long riser into the switch.',
+          '- 49.5-57 s: full size again; final impact on the last word (57.0 s) and then cut the music dead.',
           '- Keep the narration 10-15 dB above the music; YouTube Shorts plays back at about -14 LUFS.',
           '- Use only music you have the rights to (your own, a licensed library, or YouTube Audio Library tracks).']
     with open(os.path.join(ROOT, 'sound_design.txt'), 'w') as fh:
         fh.write('\n'.join(L) + '\n')
 
+
+# the generic helpers this file uses that came with the last film's sound set
+def _hum(dur, f=55.0):
+    t = np.arange(int(dur * SR)) / SR
+    y = np.sin(2 * np.pi * f * t) + 0.5 * np.sin(2 * np.pi * 1.5 * f * t + 0.3) + 0.25 * np.sin(2 * np.pi * 2.01 * f * t)
+    return y * (0.7 + 0.3 * np.sin(2 * np.pi * 0.5 * t))
+
+
+def _hum_bed(n, seed, f=50.0, hiss=0.3):
+    t = np.arange(n) / SR
+    y = np.sin(2 * np.pi * f * t) + 0.5 * np.sin(2 * np.pi * 2 * f * t) + 0.25 * np.sin(2 * np.pi * 3 * f * t)
+    y = y * (0.85 + 0.15 * np.sin(2 * np.pi * 0.3 * t))
+    return _norm(y + hiss * _norm(_bandpass(_noise(n, seed, 'pink'), 2000, 9000)))
+
+
+def _wind(n, seed, lo=150, hi=1400, gust=0.35):
+    t = np.arange(n) / SR
+    g = 0.65 + gust * np.sin(2 * np.pi * 0.11 * t + seed) + 0.2 * np.sin(2 * np.pi * 0.37 * t + 2 * seed)
+    y = _sweep_bp(_noise(n, seed, 'pink'), lambda tc: lo + (hi - lo) * (0.5 + 0.5 * math.sin(0.4 * tc + seed)), q=1.4)
+    return _norm(y) * np.clip(g, 0.15, 1.3)
+
 # ============================================================================
-# Stage: edit - Video Sequence Editor: upscale, flashes, vignette, grain, titles, word-by-word captions, audio, encode
+# Stage: edit - Video Sequence Editor: upscale, glitches, vignette, grain, titles, LIVE bug, key captions, captions, audio, encode
 # ============================================================================
 TITLE_STYLE = {
     #          font         size  colour                         y (from bottom)  outline  plate
@@ -5563,18 +5617,56 @@ def stage_edit():
         gr.elements.append(grains[(f - 1) % len(grains)])
     gr.blend_type = 'OVERLAY'
     gr.blend_alpha = 0.16
-    # dips to black between day and night (scene 4) and into the dawn (scene 5); a fade out on the closing eyes
-    for k, (tm, n, peak) in enumerate(((SHOT['kitchen']['t0'], 8, 1.0), (SHOT['roofdoor']['t0'], 10, 0.85))):
-        f0 = frame(tm)
-        dp = se.sequences.new_effect(f'Dip{k}', type='COLOR', channel=4, frame_start=f0 - n // 2, frame_end=f0 + n // 2 + 1)
-        dp.color = (0.0, 0.0, 0.0)
-        dp.blend_type = 'ALPHA_OVER'
-        key_alpha(dp, [(f0 - n // 2, 0.0), (f0, peak), (f0 + n // 2, 0.0)])
-    fo = se.sequences.new_effect('FadeOut', type='COLOR', channel=5, frame_start=LAST_FRAME - 22, frame_end=LAST_FRAME + 1)
+    # broadcast-style glitches on some cuts and moments: a displaced ghost copy of the picture plus a flash
+    def glitch(name, t0, t1, dx=0.03, flash=0.35):
+        f0, f1 = frame(t0), max(frame(t1), frame(t0) + 1)
+        for j, (sx, ch_) in enumerate(((1, 4), (-1, 5))):
+            if f'f_{f0:04d}.png' not in fset:
+                continue
+            g = se.sequences.new_image(f'{name}_g{j}', os.path.join(frames_dir, f'f_{f0:04d}.png'), channel=ch_, frame_start=f0, fit_method='FIT')
+            for f in range(f0 + 1, f1):
+                g.elements.append(f'f_{f:04d}.png')
+            g.transform.offset_x = sx * dx * RES[0] * (1 if j == 0 else 0.6)
+            g.transform.offset_y = (-1) ** j * 6
+            g.blend_type = 'SCREEN' if j == 0 else 'DIFFERENCE'
+            g.blend_alpha = 0.45 if j == 0 else 0.25
+            g.color_saturation = 1.8
+        if flash > 0:
+            fl = se.sequences.new_effect(f'{name}_fl', type='COLOR', channel=6, frame_start=f0, frame_end=f0 + 2)
+            fl.color = (0.85, 0.95, 1.0)
+            fl.blend_type = 'ADD'
+            fl.blend_alpha = flash
+    G = [('g_name', 2.2, 2.42, 0.02, 0.25), ('g_news', SHOT['news']['t0'], SHOT['news']['t0'] + 0.1, 0.03, 0.3),
+         ('g_homes', SHOT['homes']['t0'], SHOT['homes']['t0'] + 0.1, 0.03, 0.3), ('g_logo', SHOT['logo']['t0'], SHOT['logo']['t0'] + 0.08, 0.02, 0.4),
+         ('g_dome', 37.12, 37.3, 0.025, 0.3), ('g_dome2', 37.8, 37.9, 0.02, 0.0), ('g_switch', 49.66, 49.9, 0.035, 0.35),
+         ('g_live', SHOT['square2']['t0'], SHOT['square2']['t0'] + 0.15, 0.04, 0.3), ('g_end', 58.3, 58.75, 0.06, 0.25),
+         ('g_end2', 58.45, 58.55, 0.12, 0.6)]
+    for name_, a_, b_, dx_, fl_ in G:
+        glitch(name_, a_, b_, dx_, fl_)
+    # a dip to black just before the arena doors open; the broadcast cuts to black at the very end
+    f0 = frame(SHOT['gate']['t0'])
+    dp = se.sequences.new_effect('Dip0', type='COLOR', channel=7, frame_start=f0 - 4, frame_end=f0 + 5)
+    dp.color = (0.0, 0.0, 0.0)
+    dp.blend_type = 'ALPHA_OVER'
+    key_alpha(dp, [(f0 - 4, 0.0), (f0, 1.0), (f0 + 4, 0.0)])
+    fo = se.sequences.new_effect('CutToBlack', type='COLOR', channel=7, frame_start=frame(58.75), frame_end=LAST_FRAME + 1)
     fo.color = (0.0, 0.0, 0.0)
     fo.blend_type = 'ALPHA_OVER'
-    key_alpha(fo, [(LAST_FRAME - 22, 0.0), (LAST_FRAME - 2, 1.0)])
-    ch = 6
+    # a broadcast "LIVE" bug while the country watches (scene 2) and when the truth goes out (scene 6)
+    for k, (a_, b_) in enumerate(((SHOT['hall']['t0'], SHOT['logo']['t1']), (SHOT['square2']['t0'], SHOT['square2']['t1']))):
+        st = se.sequences.new_effect(f'Live{k}', type='TEXT', channel=8, frame_start=frame(a_), frame_end=frame(b_))
+        st.text = '  LIVE   VANTAGE  '
+        st.font = font(FONT_TITLE)
+        st.font_size = 40
+        st.color = (1, 1, 1, 1)
+        st.align_x = 'LEFT'
+        st.align_y = 'CENTER'
+        st.location = (0.06, 0.945)
+        st.use_box = True
+        st.box_color = (0.85, 0.08, 0.06, 0.92)
+        st.box_margin = 0.01
+        st.blend_type = 'ALPHA_OVER'
+    ch = 9
     for k, tl in enumerate(TIMING['titles']):
         for j, line in enumerate(tl['text'].split('|')):
             st = add_text(se, f'Title{k}_{j}', line, tl['start'], tl['end'], tl['style'], ch + (k % 4) * 2 + j,
