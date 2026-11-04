@@ -2826,7 +2826,7 @@ def build_forest():
     ok &= np.hypot(x - 27, y + 450) > 22
     ok &= np.hypot(x + 24, y + 538) > 14
     ok &= seg_dist(x, y, [(-24, -538), (-60, -472)]) > 9
-    ok &= seg_dist(x, y, [(27, -452), (62, -318)]) > 9
+    ok &= seg_dist(x, y, [(24, -447), (92, -430)]) > 9
     ok &= ~((np.abs(x + 2) < 3.5) & (y > GATE.y + 60) & (y < GATE.y + 140))                  # the path
     for (gx, gy) in GATES:
         ok &= np.hypot(x - gx, y - gy) > 55
@@ -3178,7 +3178,7 @@ def chor_presenter(t, shot):
     u = ramp(t, 3.85, 4.5)
     P = merge(dict(loc=tuple(loc), yaw=180 + 25 * u), idle(t, 2.0), NEUTRAL_F, TALK(t))
     pose_c('pres', P)
-    P['shL'], P['elL'] = reach('pres', 'L', chest_pt('pres', (-0.15, 0.4, -0.25)) if u < 0.5 else loc + Vector((-1.2, 1.6 * u, 3.1 + 0.6 * u)))
+    P['shL'], P['elL'] = reach('pres', 'L', chest_pt('pres', (-0.15, 0.4, -0.25)).lerp(loc + Vector((-0.85, 0.35, 1.75)), u))
     P['shR'], P['elR'] = reach('pres', 'R', loc + Vector((0.32, -0.45, 1.0)))
     P.update(look_at('pres', Vector((0, 20, 2.0)), head=0.6))
     pose_c('pres', P)
@@ -3329,13 +3329,13 @@ def chor_weather(t, shot):
 def chor_others(t, shot):
     tracker(True)
     p = AP(28.0, -446.0)
-    P = merge(dict(loc=tuple(p), yaw=12, dz=-0.42, lean=28, hipR=(70, 8), hipL=(40, 10), knR=110, knL=80), FEAR_F)
+    P = merge(dict(loc=tuple(p), yaw=-62, dz=-0.42, lean=28, hipR=(70, 8), hipL=(40, 10), knR=110, knL=80), FEAR_F)
     pose_you(P)
-    P.update(look_at(YOU, AP(RIDGE.x, RIDGE.y, 1.5), head=0.8))
+    P.update(look_at(YOU, AP(80.0, -432.0, 1.5), head=0.8))
     P['shR'], P['elR'] = reach(YOU, 'R', AP(23.0, -438.5, 1.3))
     P['shL'], P['elL'] = reach(YOU, 'L', chest_pt(YOU, (-0.1, 0.3, -0.25)))
     pose_you(P)
-    for k, (x, y, yaw, ph) in (('c1', (RIDGE.x - 6, RIDGE.y + 2, 200, 0.0)), ('c2', (RIDGE.x + 8, RIDGE.y + 4, 160, 1.3))):
+    for k, (x, y, yaw, ph) in (('c1', (75.0, -433.0, 250, 0.0)), ('c2', (89.0, -431.0, 280, 1.3))):
         zz = arena_z(x, y)
         G, mv = walk_along([(A.x + x, A.y + y), (A.x + x + 3.0, A.y + y - 1.0)], t, 35.0 + ph, 0.9, amp=0.7)
         G = ground(G, zz)
@@ -3479,8 +3479,8 @@ def build_cameras():
     # SCENE 3 - entering the arena
     camera_shot('gate', 18, [(0, gl(1.6, -17.0, 2.1)), (1, gl(1.2, -14.0, 2.2))],
                 [(0, gl(0.0, 12.0, 3.2)), (1, gl(0.0, 12.0, 3.6))], fstop=5.6)
-    camera_shot('reveal', 22, [(0, gl(0.8, -9.0, 1.9)), (0.22, gl(0.2, 3.0, 4.0)), (0.55, gl(-12.0, 48.0, 58.0)), (1, gl(-45.0, 95.0, 175.0))],
-                [(0, gl(0.0, 20.0, 4.0)), (0.22, gl(0.0, 110.0, 18.0)), (0.6, AP(-20.0, -380.0, 40.0)), (1, AP(-60.0, -60.0, 60.0))],
+    camera_shot('reveal', 22, [(0, gl(0.8, -9.0, 1.9)), (0.2, gl(0.2, 3.0, 5.0)), (0.38, gl(-5.0, 22.0, 42.0)), (0.6, gl(-16.0, 56.0, 82.0)), (1, gl(-45.0, 95.0, 175.0))],
+                [(0, gl(0.0, 20.0, 4.0)), (0.2, gl(0.0, 120.0, 45.0)), (0.6, AP(-20.0, -380.0, 40.0)), (1, AP(-60.0, -60.0, 60.0))],
                 fstop=60, lenses=[(0, 22), (1, 18)], ease='EASE_IN_OUT')
     camera_shot('countdown', 20, [(0, gl(4.6, 2.4, 0.55)), (1, gl(3.6, 3.4, 0.85))],
                 [(0, SETS['gantry'] + V3(0, 0, 17.0)), (1, SETS['gantry'] + V3(0, 0, 19.5))], fstop=60)
@@ -3501,8 +3501,8 @@ def build_cameras():
     c = AP(CLEARING.x, CLEARING.y)
     camera_shot('weather', 22, [(0, c + V3(-8.0, -17.0, 6.5)), (1, c + V3(-6.0, -12.5, 2.4))],
                 [(0, c + V3(-2.0, -4.0, 1.5)), (1, c + V3(-2.0, -4.0, 2.4))], fstop=60)
-    camera_shot('others', 160, [(0, AP(25.2, -451.6, 1.15)), (1, AP(26.0, -451.2, 1.25))],
-                [(0, AP(RIDGE.x + 0.5, RIDGE.y + 2.0, 0.9)), (1, AP(RIDGE.x + 2.5, RIDGE.y + 2.5, 1.0))], fstop=8.0)
+    camera_shot('others', 85, [(0, AP(23.4, -448.0, 1.6)), (1, AP(24.0, -447.4, 1.7))],
+                [(0, AP(80.0, -432.5, 1.0)), (1, AP(81.5, -432.0, 1.1))], fstop=8.0)
     camera_shot('dome', 18, [(0, c + V3(4.6, 4.2, 0.55)), (1, c + V3(4.4, 4.5, 0.8))],
                 [(0, c + V3(-14.0, 40.0, 26.0)), (1, c + V3(-14.0, 40.0, 34.0))], fstop=60)
     # SCENE 5 - the twist
@@ -4291,7 +4291,7 @@ def build_emitters():
     def motes(name, centre, area=3.0, rate=40.0, kind='dot', op=0.4, size=(0.004, 0.008)):
         EMIT.setdefault(name, []).append(emitter(kind, [tuple(centre)], rate, 6.0, (0.0, 0.0, 0.01), 0.02, size, opacity=op,
                                                  area=area, t0=SHOT[name]['t0'] - 6.0, rise=0.0, turb=0.15, salt=len(EMIT.get(name, []))))
-    motes('gate', gl(0.0, -3.0, 3.0), 5.0, 200, op=0.6, size=(0.01, 0.02))
+    motes('gate', gl(0.0, -3.0, 3.0), 5.0, 70, op=0.3, size=(0.004, 0.008))
     motes('camlens', AP(-1.0, -594.0, 1.6), 4.0, 120, op=0.5, size=(0.006, 0.012))
     motes('control', CTRL + Vector((0.3, 0.0, 1.8)), 3.0, 60, op=0.35)
     motes('faceglow', CTRL + Vector((0.3, 2.2, 1.65)), 0.8, 40, op=0.3)

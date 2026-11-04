@@ -1,0 +1,95 @@
+WHAT IF YOU WERE SELECTED? - SOUND DESIGN, MUSIC AND TIMING
+============================================================
+
+Everything below is synthesised by code in animation.py --stage audio (numpy only: oscillators, filtered noise,
+envelopes, convolution reverb). No samples, recordings, stock sound or copyrighted music. The narration is a
+synthetic voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py. Music, ambience and effects duck under
+the voice so the narration always stays on top.
+
+THE IDEA: a trailer that is also a broadcast. Every scene is scored like a film trailer (a dark sixteenth-note
+bass pulse in D minor, big impacts, risers), and every machine that is watching you makes a sound: the countdown
+beeps, PA echo, camera servos, drone rotors, radio squelch, the map's ping, data chirps, static. Tension is built
+by taking things away: the crowd hushes when the countdown stops; the doors open on near-silence before the
+reveal; the music thins to tremolo strings in the forest; a heartbeat in the hidden room. The music returns at
+full size when the truth goes out on every screen, hits once more on the last word - and then CUTS OUT, leaving
+a thin dead-signal tone and a last burst of static as the picture breaks up.
+
+Files: audio/mix_with_voice.wav (final mix, -14 LUFS), audio/mix_no_voice.wav (music + sound only, -14 LUFS, for
+recording your own voice), audio/narration.wav (voice only).
+
+CUE SHEET (generated)
+------------------------------------------------------------
+  0.00 s  [ambience ] City wind between the towers
+  0.00 s  [music    ] Digital countdown beeps on the giant screen; a long tone as it stops at 0.73 s (the crowd hushes)
+  0.00 s  [ambience ] The square: thousands of people murmuring; hushed when the countdown stops, a gasp at the name, silent as they turn
+  0.30 s  [voice    ] NARRATION: "The countdown stops. The name on the screen... is yours." (to 3.70 s)
+  2.25 s  [sfx      ] A burst of screen static just before the name
+  2.45 s  [music    ] IMPACT: sub boom + low brass stab as the name appears - the music changes completely
+  3.00 s  [music    ] MUSIC: a dark sixteenth-note bass pulse (D minor, 120 bpm) and a low drone - the trailer begins
+  3.45 s  [sfx      ] The presenter over the PA, echoing round the square (no words)
+  3.75 s  [sfx      ] The broadcast crane's motor
+  4.09 s  [voice    ] NARRATION: "Out of millions of people, you've been selected." (to 6.73 s)
+  5.40 s  [sfx      ] A camera drone descends, rotors whining; the crowd falls silent
+  7.00 s  [sfx      ] A security door hisses shut behind them
+  7.00 s  [ambience ] Ministry: a cold air-conditioning hum, big reverb
+  7.10 s  [sfx      ] Three sets of footsteps on a metal floor
+  7.26 s  [voice    ] NARRATION: "Within the hour, your face is on every screen in the country." (to 10.79 s)
+  7.60 s  [sfx      ] Radio chatter on the guards' earpieces (static and squelch, no words)
+  8.00 s  [sfx      ] Ceiling cameras whirr as they turn to follow
+  9.65 s  [music    ] A bright TV-news sting on the cut to the studio
+  9.65 s  [ambience ] Studio room tone
+ 11.10 s  [ambience ] Night street: a stadium crowd roaring from every TV in the block (muffled through the glass)
+ 11.19 s  [voice    ] NARRATION: "They call it Vantage. The biggest show on Earth. Millions are watching." (to 15.13 s)
+ 13.05 s  [music    ] A deep hit on the giant VANTAGE logo; a riser into the arena
+ 15.85 s  [ambience ] The tunnel: a deep machine hum
+ 15.98 s  [voice    ] NARRATION: "Then the doors open." (to 17.59 s)
+ 16.30 s  [sfx      ] The gate unlocks with a massive clunk; the doors rumble open
+ 16.90 s  [sfx      ] Wind rushes into the tunnel
+ 18.27 s  [voice    ] NARRATION: "Forests. Mountains. A river. Miles of it, built under one enormous dome." (to 23.15 s)
+ 18.55 s  [music    ] MUSIC: the reveal - a wide, heroic swell (choir and strings, D major) with a deep drum
+ 18.55 s  [ambience ] The arena: a rush of fresh air, wind and birdsong
+ 19.35 s  [sfx      ] A long airy whoosh as the camera rises over the arena
+ 23.40 s  [music    ] Arena countdown: three beeps and a long high tone at zero (25.2 s)
+ 23.40 s  [ambience ] Distant mechanical hum from the towers and the dome
+ 23.56 s  [voice    ] NARRATION: "Welcome to the arena." (to 25.19 s)
+ 25.50 s  [music    ] MUSIC: drums and the pulse drive the aerial shot ("broadcast live, to the whole world")
+ 25.53 s  [voice    ] NARRATION: "Twelve competitors. Broadcast live, to the whole world." (to 28.93 s)
+ 26.00 s  [sfx      ] Other gates opening far away (distant clunks echoing)
+ 29.30 s  [ambience ] Forest ambience: birds, leaves, a light wind
+ 29.30 s  [music    ] MUSIC: suspense - high tremolo strings (a semitone cluster) over a slower, sparser pulse
+ 29.50 s  [sfx      ] The hidden camera clicks and turns to follow (a tiny servo whine)
+ 29.52 s  [voice    ] NARRATION: "Every tree hides a camera. Every step is tracked." (to 32.42 s)
+ 31.15 s  [sfx      ] The live map pings: a contestant's position updating
+ 32.75 s  [ambience ] The weather turns on cue: wind rising, gusting
+ 32.77 s  [voice    ] NARRATION: "The weather changes on cue." (to 34.84 s)
+ 35.10 s  [ambience ] The river
+ 35.20 s  [voice    ] NARRATION: "This isn't chance. Someone out there is steering the game." (to 38.37 s)
+ 37.10 s  [sfx      ] An electrical crackle and digital glitches as the sky breaks up
+ 37.15 s  [music    ] A hit as the sky glitches and the dome's panels show through
+ 39.00 s  [music    ] MUSIC: a heartbeat and a dark, slowly rising cluster; a long riser from the list to the switch
+ 39.22 s  [voice    ] NARRATION: "But then you discover something the audience was never supposed to see." (to 43.26 s)
+ 39.65 s  [sfx      ] The hidden door: an air-seal hiss and a sliding stone rumble
+ 41.75 s  [ambience ] The hidden room: electrical hum, cooling fans, computer chirps
+ 42.15 s  [sfx      ] Computer bleeps and data clicks
+ 43.66 s  [voice    ] NARRATION: "A hidden control room. Every feed. And your name, chosen long before the countdown." (to 48.67 s)
+ 49.36 s  [voice    ] NARRATION: "One switch, and the truth goes live, on every screen." (to 52.73 s)
+ 49.55 s  [music    ] MUSIC: the hit on the switch; the pulse and choir return at full size for the broadcast
+ 49.65 s  [sfx      ] Broadcast interference: static sweeps and digital break-up
+ 50.20 s  [sfx      ] The master fader thunks home
+ 50.80 s  [ambience ] The square at night: the crowd's murmur rising as the hidden list fills the screen
+ 53.20 s  [voice    ] NARRATION: "You were selected to play their game. What if you're the one who ends it?" (to 56.98 s)
+ 53.35 s  [sfx      ] The surveillance camera swings round (servo)
+ 57.00 s  [music    ] FINAL IMPACT on the last word - then the music CUTS OUT completely
+ 57.30 s  [sfx      ] After the final impact: only a thin dead-signal tone
+ 58.30 s  [sfx      ] The picture breaks up: a last burst of static, then silence
+
+MUSIC GUIDE (if you re-score it in CapCut or another editor)
+------------------------------------------------------------
+- 0-3 s: no music - countdown beeps, a crowd, a hush; one huge impact when the name appears (2.45 s).
+- 3-16 s: a dark, driving trailer pulse (minor key, 115-125 bpm); a news sting at 9.7 s; a hit on the logo, then a riser.
+- 16-18 s: drop out almost completely for the doors; 18.3 s: the biggest, widest swell in the film for the arena reveal.
+- 29-39 s: suspense - high strings, sparse pulse; a low rumble on the weather; a hit when the sky glitches (37.1 s).
+- 39-49 s: heartbeat and a slow rising cluster; one long riser into the switch.
+- 49.5-57 s: full size again; final impact on the last word (57.0 s) and then cut the music dead.
+- Keep the narration 10-15 dB above the music; YouTube Shorts plays back at about -14 LUFS.
+- Use only music you have the rights to (your own, a licensed library, or YouTube Audio Library tracks).
