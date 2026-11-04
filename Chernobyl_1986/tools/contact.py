@@ -2,8 +2,8 @@
 import sys
 from PIL import Image, ImageDraw
 out, files = sys.argv[1], sys.argv[2:]
-W, H = 360, 640
-cols = min(len(files), 5)
+W, H = 240, 427
+cols = min(len(files), 8)
 rows = (len(files) + cols - 1) // cols
 sh = Image.new('RGB', (cols * W, rows * (H + 18)), 'black')
 for i, f in enumerate(files):
