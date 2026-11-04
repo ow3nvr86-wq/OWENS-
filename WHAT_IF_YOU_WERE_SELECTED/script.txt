@@ -1,0 +1,35 @@
+WHAT IF YOU WERE SELECTED? - NARRATION SCRIPT (59.0 seconds, 145 words)
+Voice: Kokoro-82M bm_george. Start and end times are measured from the synthesised voice.
+Read like a film trailer: low, controlled, second person ("you"), short sentences with real weight on the
+full stops. Stunned in scene 1, cooler and faster in scene 2, a held breath after "Then the doors open.", quiet and
+watchful in scene 4, almost a whisper on "something the audience was never supposed to see", and the last line
+is a question, asked straight down the lens.
+
+[SCENE 1 - THE SELECTION  0.0-7.0 s]
+(00.30-03.70) The countdown stops. The name on the screen... is yours.
+(04.09-06.73) Out of millions of people, you've been selected.
+
+[SCENE 2 - THE WORLD WATCHES  7.0-15.8 s]
+(07.26-10.79) Within the hour, your face is on every screen in the country.
+(11.19-15.13) They call it Vantage. The biggest show on Earth. Millions are watching.
+
+[SCENE 3 - ENTERING THE ARENA  15.8-29.3 s]
+(15.98-17.59) Then the doors open.
+(18.27-23.15) Forests. Mountains. A river. Miles of it, built under one enormous dome.
+(23.56-25.19) Welcome to the arena.
+(25.53-28.93) Twelve competitors. Broadcast live, to the whole world.
+
+[SCENE 4 - THE REALISATION  29.3-39.0 s]
+(29.52-32.42) Every tree hides a camera. Every step is tracked.
+(32.77-34.84) The weather changes on cue.
+(35.20-38.37) This isn't chance. Someone out there is steering the game.
+
+[SCENE 5 - THE TWIST  39.0-49.1 s]
+(39.22-43.26) But then you discover something the audience was never supposed to see.
+(43.66-48.67) A hidden control room. Every feed. And your name, chosen long before the countdown.
+
+[SCENE 6 - THE FINAL PAYOFF  49.1-59.0 s]
+(49.36-52.73) One switch, and the truth goes live, on every screen.
+(53.20-56.98) You were selected to play their game. What if you're the one who ends it?
+
+Total: 145 words.

@@ -1,0 +1,371 @@
+{
+ "fps": 30,
+ "duration": 59.0,
+ "render_end": 59.0,
+ "scenes": [
+  {
+   "id": 1,
+   "name": "THE SELECTION",
+   "start": 0.0,
+   "end": 7.0,
+   "desc": "Selection Day in a near-future city. A close-up of a young adult in a packed public square, face lit blue by a giant screen; the countdown on it stops. The camera pulls back and up over thousands of people to reveal the screen: one name - theirs. On the stage below the screen a government presenter announces it; broadcast camera cranes swing round. The crowd turns, row after row, to look at them as a camera drone drops toward them.",
+   "actions": "The main character (one consistent model in every shot): young adult, short brown hair, rust-red jacket over a grey hoodie, dark trousers, white trainers. Disbelief, then fear. The presenter gestures to the screen; heads turn.",
+   "lighting": "Cold blue-grey dusk; the giant screen is the key light on thousands of faces; haze over the square.",
+   "sfx": "Huge crowd murmur, digital countdown beeps that stop dead, a sub-bass impact on the name, the presenter's PA reverb (no words), music shifts to a low pulse; the murmur dies as the crowd turns.",
+   "edit": "Opens mid-moment (no intro). One continuous pull-back, then two quick cuts. Key caption: YOUR NAME WAS SELECTED.",
+   "shots": [
+    {
+     "name": "crowdcu",
+     "start": 0.0,
+     "end": 3.75,
+     "camera": "extreme close-up of the face looking up, then a long pull back and crane up over the crowd to reveal the name on the giant screen"
+    },
+    {
+     "name": "stage",
+     "start": 3.75,
+     "end": 5.3,
+     "camera": "low dolly toward the stage: the presenter at the lectern, broadcast crane swinging through frame"
+    },
+    {
+     "name": "turn",
+     "start": 5.3,
+     "end": 7.0,
+     "camera": "from behind the crowd, slow push between turning heads toward the character as a camera drone descends"
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "THE WORLD WATCHES",
+   "start": 7.0,
+   "end": 15.85,
+   "desc": "Within the hour: two guards walk the character down a long, dark Ministry corridor while ceiling cameras turn to follow them. A news studio: the presenter at the desk, the character's face on the wall behind. A whole apartment block at night, every window lit by the same broadcast. Then a cathedral-sized hall: the character, tiny, under a giant screen with the competition's logo - VANTAGE.",
+   "actions": "Walking between the guards, glancing up at the cameras; standing still under the logo, arms by their sides.",
+   "lighting": "Dark metallic corridor with cold strip lights; bright studio; blue TV glow in every window; the logo screen as a huge back-light.",
+   "sfx": "Footsteps on metal, a security door hiss, camera servos whirring, radio chatter (unintelligible); a TV news sting; a crowd roar from a stadium broadcast; a deep logo hit.",
+   "edit": "Quick, broadcast-style cuts. Key caption: MILLIONS ARE WATCHING.",
+   "shots": [
+    {
+     "name": "hall",
+     "start": 7.0,
+     "end": 9.65,
+     "camera": "backward tracking shot in front of the character and the two guards; ceiling cameras turn"
+    },
+    {
+     "name": "news",
+     "start": 9.65,
+     "end": 11.1,
+     "camera": "slow lateral slide across the news desk toward the wall screen showing the face"
+    },
+    {
+     "name": "homes",
+     "start": 11.1,
+     "end": 13.05,
+     "camera": "starts on one lit window (a family watching), pulls back to the whole block"
+    },
+    {
+     "name": "logo",
+     "start": 13.05,
+     "end": 15.85,
+     "camera": "from behind the character, pull back and rise to show the giant logo screen"
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "name": "ENTERING THE ARENA",
+   "start": 15.85,
+   "end": 29.3,
+   "desc": "A tunnel. Giant doors split open and daylight floods in. The reveal: a whole landscape under a vast geodesic dome - dense forest, a river, open meadows, mountains in the haze, slender observation towers with camera pods. A huge countdown display on a gantry runs down to zero. An aerial sweep over the forest and river past the towers, other gates opening along the wall.",
+   "actions": "Stands at the threshold, shielding their eyes; steps out onto the grass.",
+   "lighting": "Rich, warm sunlight through the dome, haze and light shafts; deep green forest.",
+   "sfx": "A massive mechanical unlock and the door rumble, wind rushing in, birds, a river, distant mechanical hums from the towers; the music opens up into a wide, heroic swell.",
+   "edit": "The biggest visual moment: one long crane reveal. Key caption: WELCOME TO THE ARENA.",
+   "shots": [
+    {
+     "name": "gate",
+     "start": 15.85,
+     "end": 18.55,
+     "camera": "inside the tunnel behind the character; the doors part and light floods in"
+    },
+    {
+     "name": "reveal",
+     "start": 18.55,
+     "end": 23.4,
+     "camera": "crane from behind the character, through the doors and up into a wide aerial reveal of the arena"
+    },
+    {
+     "name": "countdown",
+     "start": 23.4,
+     "end": 25.5,
+     "camera": "low angle up the countdown gantry, the character small below; slow tilt"
+    },
+    {
+     "name": "aerial",
+     "start": 25.5,
+     "end": 29.3,
+     "camera": "aerial sweep across the river toward an observation tower; other gates opening along the wall"
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "name": "THE REALISATION",
+   "start": 29.3,
+   "end": 39.0,
+   "desc": "The competition begins. A camera hidden in a tree trunk turns to follow the character. A screen on a tower shows a live map with twelve dots - one of them is them. The sky dims on cue and fog rolls in. Across the river, two other competitors on a ridge. Then the \"sky\" glitches: for a second the dome's panels show through.",
+   "actions": "Moving carefully through the trees; crouching behind rocks; looking up at the dome.",
+   "lighting": "Green forest light and shafts of sun, then a sudden cool dimming as the \"weather\" changes.",
+   "sfx": "Forest ambience, a camera servo click, the map's ping, wind rising on cue, a distant rumble that sounds wrong, an electrical crackle as the sky glitches; suspense strings.",
+   "edit": "Slower, watchful cuts from hidden-camera angles. Key caption: YOU ARE BEING WATCHED.",
+   "shots": [
+    {
+     "name": "camlens",
+     "start": 29.3,
+     "end": 31.05,
+     "camera": "close on a camera hidden in a tree trunk as it turns; the character passes behind"
+    },
+    {
+     "name": "map",
+     "start": 31.05,
+     "end": 32.75,
+     "camera": "over the character's shoulder to the map screen on a tower, slow push"
+    },
+    {
+     "name": "weather",
+     "start": 32.75,
+     "end": 35.1,
+     "camera": "wide in a clearing; the light drops and fog rolls in; slow crane down"
+    },
+    {
+     "name": "others",
+     "start": 35.1,
+     "end": 36.9,
+     "camera": "long lens across the river past the crouching character to two figures on a ridge"
+    },
+    {
+     "name": "dome",
+     "start": 36.9,
+     "end": 39.0,
+     "camera": "low, looking up past the character as the sky panels glitch; slow push up"
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "name": "THE TWIST",
+   "start": 39.0,
+   "end": 49.15,
+   "desc": "In a rock face, a seam of light: a concealed door. Inside, a hidden monitoring room - a curved wall of screens with live feeds of the arena, a digital map, and on the back wall a government crest above the competition logo. One screen holds a confidential list of \"pre-approved\" names - theirs among them, dated weeks before Selection Day.",
+   "actions": "Pulls the door open; walks slowly along the screens; reads the list; disbelief turning to anger.",
+   "lighting": "Dark room lit only by the screens: cold blue-white faces, red status lights.",
+   "sfx": "A heavy door seal, electrical hum, computer chatter, data clicks, digital glitches; rising suspense music.",
+   "edit": "Slow push-ins; one rack focus to the list. Key captions: YOU WERE NEVER SUPPOSED TO FIND THIS. / THE COMPETITION WAS RIGGED.",
+   "shots": [
+    {
+     "name": "door",
+     "start": 39.0,
+     "end": 41.75,
+     "camera": "low, slow push toward the rock face as the hidden door slides open"
+    },
+    {
+     "name": "control",
+     "start": 41.75,
+     "end": 45.0,
+     "camera": "from behind the character, slow push into the wall of screens"
+    },
+    {
+     "name": "list",
+     "start": 45.0,
+     "end": 47.35,
+     "camera": "close on the screen with the list; slow drift to the highlighted name"
+    },
+    {
+     "name": "faceglow",
+     "start": 47.35,
+     "end": 49.15,
+     "camera": "close-up of the face lit by the screens; slow push"
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "name": "THE FINAL PAYOFF",
+   "start": 49.15,
+   "end": 59.0,
+   "desc": "The character pushes a master fader on the console marked ALL CHANNELS. The feeds go out: in the city square at night the giant screen glitches and shows the hidden list to the crowd. Back in the room a surveillance camera swings round toward them. They turn and look straight into it. The broadcast breaks up and cuts out.",
+   "actions": "Hand on the fader; turns to the camera; holds its gaze, determined.",
+   "lighting": "Bright digital screens and hard contrast: the square bathed in white-blue screen light; the final close-up half in monitor light, half in red.",
+   "sfx": "A fader thunk, broadcast interference, the crowd's murmur rising in the square, a camera servo, a final huge impact - then the music cuts out completely, leaving a dead signal tone.",
+   "edit": "Glitch transitions; the final close-up breaks up and cuts to black (the first shot is the same face, so the Short loops).",
+   "shots": [
+    {
+     "name": "switch",
+     "start": 49.15,
+     "end": 50.8,
+     "camera": "close on the hand pushing the fader; the screens behind start to glitch"
+    },
+    {
+     "name": "square2",
+     "start": 50.8,
+     "end": 53.1,
+     "camera": "night square: slow pull back from the glitching giant screen over the crowd"
+    },
+    {
+     "name": "camturn",
+     "start": 53.1,
+     "end": 54.85,
+     "camera": "close on a ceiling camera swinging toward the character"
+    },
+    {
+     "name": "stare",
+     "start": 54.85,
+     "end": 59.0,
+     "camera": "close-up; the character turns and looks straight into the lens; very slow push; the picture breaks up"
+    }
+   ]
+  }
+ ],
+ "lines": [
+  {
+   "scene": 1,
+   "start": 0.3,
+   "deadline": 4.04,
+   "text": "The countdown stops. The name on the screen... is yours.",
+   "tts": "The countdown stops. The name on the screen... is yours."
+  },
+  {
+   "scene": 1,
+   "start": 4.09,
+   "deadline": 7.06,
+   "text": "Out of millions of people, you've been selected.",
+   "tts": "Out of millions of people, you've been selected."
+  },
+  {
+   "scene": 2,
+   "start": 7.26,
+   "deadline": 11.14,
+   "text": "Within the hour, your face is on every screen in the country.",
+   "tts": "Within the hour, your face is on every screen in the country."
+  },
+  {
+   "scene": 2,
+   "start": 11.19,
+   "deadline": 15.53,
+   "text": "They call it Vantage. The biggest show on Earth. Millions are watching.",
+   "tts": "They call it Vantage. The biggest show on Earth. Millions are watching."
+  },
+  {
+   "scene": 3,
+   "start": 15.98,
+   "deadline": 17.92,
+   "text": "Then the doors open.",
+   "tts": "Then the doors open."
+  },
+  {
+   "scene": 3,
+   "start": 18.27,
+   "deadline": 23.46,
+   "text": "Forests. Mountains. A river. Miles of it, built under one enormous dome.",
+   "tts": "Forests. Mountains. A river. Miles of it, built under one enormous dome."
+  },
+  {
+   "scene": 3,
+   "start": 23.56,
+   "deadline": 25.53,
+   "text": "Welcome to the arena.",
+   "tts": "Welcome to the arena."
+  },
+  {
+   "scene": 3,
+   "start": 25.53,
+   "deadline": 29.32,
+   "text": "Twelve competitors. Broadcast live, to the whole world.",
+   "tts": "Twelve competitors. Broadcast live, to the whole world."
+  },
+  {
+   "scene": 4,
+   "start": 29.52,
+   "deadline": 32.72,
+   "text": "Every tree hides a camera. Every step is tracked.",
+   "tts": "Every tree hides a camera. Every step is tracked."
+  },
+  {
+   "scene": 4,
+   "start": 32.77,
+   "deadline": 35.15,
+   "text": "The weather changes on cue.",
+   "tts": "The weather changes on cue."
+  },
+  {
+   "scene": 4,
+   "start": 35.2,
+   "deadline": 38.77,
+   "text": "This isn't chance. Someone out there is steering the game.",
+   "tts": "This isn't chance. Someone out there is steering the game."
+  },
+  {
+   "scene": 5,
+   "start": 39.22,
+   "deadline": 43.56,
+   "text": "But then you discover something the audience was never supposed to see.",
+   "tts": "But then you discover something the audience was never supposed to see."
+  },
+  {
+   "scene": 5,
+   "start": 43.66,
+   "deadline": 49.01,
+   "text": "A hidden control room. Every feed. And your name, chosen long before the countdown.",
+   "tts": "A hidden control room. Every feed. And your name, chosen long before the countdown."
+  },
+  {
+   "scene": 6,
+   "start": 49.36,
+   "deadline": 53.0,
+   "text": "One switch, and the truth goes live, on every screen.",
+   "tts": "One switch, and the truth goes live, on every screen."
+  },
+  {
+   "scene": 6,
+   "start": 53.2,
+   "deadline": 57.34,
+   "text": "You were selected to play their game. What if you're the one who ends it?",
+   "tts": "You were selected to play their game. What if you're the one who ends it?"
+  }
+ ],
+ "titles": [
+  {
+   "text": "A HYPOTHETICAL SCENARIO",
+   "start": 0.3,
+   "end": 6.9,
+   "style": "tag"
+  }
+ ],
+ "keys": [
+  {
+   "text": "YOUR NAME|WAS SELECTED.",
+   "match": "you've been selected."
+  },
+  {
+   "text": "MILLIONS ARE|WATCHING.",
+   "match": "Millions are watching."
+  },
+  {
+   "text": "WELCOME TO|THE ARENA.",
+   "match": "Welcome to the arena."
+  },
+  {
+   "text": "YOU ARE|BEING WATCHED.",
+   "match": "Every step is tracked."
+  },
+  {
+   "text": "YOU WERE NEVER|SUPPOSED TO|FIND THIS.",
+   "match": "was never supposed to see."
+  },
+  {
+   "text": "THE COMPETITION|WAS RIGGED.",
+   "match": "chosen long before the countdown."
+  }
+ ],
+ "events": {}
+}

@@ -1,0 +1,69 @@
+WHAT IF YOU WERE SELECTED? - SOURCES, CLAIMS AND WHAT IS INVENTED
+==================================================================
+
+This Short is FICTION: a hypothetical scenario, labelled on screen ("A HYPOTHETICAL SCENARIO") for its whole first scene.
+The narration contains no real-world facts, statistics, dates, names or quotes, so there is nothing in it to verify. This
+file instead documents (1) what is invented, (2) the genre it belongs to, with checked references, so the originality of
+the world can be judged, and (3) the facts that were considered and cut.
+
+
+1. CLAIM TABLE (everything said or shown that could be read as a claim)
+-----------------------------------------------------------------------
+Claim in the film                                   Status        Notes
+--------------------------------------------------  ------------  ---------------------------------------------------------
+"Out of millions of people, you've been selected."  IN-WORLD      Fiction. No real country runs such a selection.
+"your face is on every screen in the country"       IN-WORLD      Fiction.
+"They call it Vantage. The biggest show on Earth."  IN-WORLD      Vantage is an invented competition. "Biggest show on Earth"
+                                                                  is the fictional broadcaster's slogan, not a ratings claim.
+"Millions are watching."                            IN-WORLD      Fiction; no audience figure is given.
+"Miles of it, built under one enormous dome."       IN-WORLD      Fiction. No artificial landscape of that size exists.
+"Twelve competitors."                               IN-WORLD      Invented number.
+"Every tree hides a camera..." / "The weather       IN-WORLD      Fiction. Not presented as how any real broadcast works.
+ changes on cue."
+"your name, chosen long before the countdown"       IN-WORLD      The twist: the selection was rigged. Fiction.
+The list on the monitor ("pre-approved", dated)     ILLUSTRATIVE  An invented on-screen prop drawn with code (tools/textures.py).
+
+Confirmed real-world facts in the film: none.  Disputed facts: none.  Speculation presented as fact: none - the whole
+film is framed as "what if", in the second person.
+
+
+2. WHAT IS INVENTED (and drawn or modelled with code)
+-----------------------------------------------------
+- The country, the city, the Ministry, the government crest and the competition (VANTAGE, its logo and its rules).
+- The selected person "ALEX VERRAN", their citizen number, the presenter, the guards, the news presenter, the family on
+  the sofa, the other competitors and the crowd: all stylised 3D figures made by animation.py. Nobody real is depicted
+  or imitated, and the name was chosen to be ordinary and gender-neutral.
+- Every screen, broadcast graphic, map and document (tools/textures.py, Pillow), and every "live feed" (rendered by
+  animation.py from cameras inside its own 3D sets).
+
+
+3. THE GENRE - REFERENCES (checked in two sources each)
+-------------------------------------------------------
+Stories about a televised contest that a society treats as entertainment are an old science-fiction genre. These works
+were checked so that this Short borrows the GENRE, not any one work's designs, names, costumes, logos, symbols or places:
+
+- "The Prize of Peril", short story by Robert Sheckley, The Magazine of Fantasy & Science Fiction, May 1958: a contestant on
+  a TV show is hunted for a week; the show is rigged. (Wikipedia, "The Prize of Peril"; Galactic Journey review of Store of
+  Infinity, 1960 collection, galacticjourney.org/?p=1041.) Adapted as Das Millionenspiel (1970) and Le Prix du Danger (1983).
+- "The Running Man", novel by Stephen King writing as Richard Bachman, Signet, 1982: a televised game show in which
+  contestants are chased. (Wikipedia, "The Running Man (novel)"; FictionDB, Richard Bachman, The Running Man.)
+- "Battle Royale", novel by Koushun Takami, Ohta Publishing, April 1999. (Wikipedia, "Battle Royale (novel)" and
+  "Koushun Takami".)
+- "The Truman Show", film directed by Peter Weir, written by Andrew Niccol, 1998: a man's life is secretly a live TV show
+  run from a hidden control room. (Roger Ebert's review, rogerebert.com; Jonathan Rosenbaum, jonathanrosenbaum.net, 1998.)
+- "The Hunger Games", novel by Suzanne Collins, Scholastic, 14 September 2008. (Wikipedia, "The Hunger Games (novel)";
+  Open Library edition records.)
+
+How this Short differs (deliberately): no children, no lottery of districts, no tributes, no reaping, no costumes,
+salutes, pins, birds or symbols from any of these works; no combat or weapons at all. The arena is a domed artificial
+landscape watched by camera towers; the story is about surveillance and a rigged selection, and it ends with the
+contestant exposing the broadcast rather than winning it. The franchise name in the brief's working title is not used
+anywhere in the video.
+
+
+4. FACTS CONSIDERED AND CUT
+---------------------------
+- Real audience figures for the most-watched broadcasts (for "millions are watching"): cut - mixing real ratings into a
+  fictional world would blur fact and fiction, and figures differ between sources.
+- Real-world facts about CCTV camera numbers in cities: cut for the same reason; the film is not a documentary.
+- The publication history above is used only here, for originality notes; none of it is in the narration.

@@ -1,0 +1,62 @@
+WHAT IF YOU WERE SELECTED? - OPENING HOOKS, OPEN LOOP AND ENDING
+================================================================
+
+Goal for the first 1-2 seconds: drop the viewer into the most interesting moment, make it clear something unusual is
+happening to THEM, and leave a question they need answered. No "Have you ever wondered...", no "Today we...".
+
+
+HOOK 1 - ANTI-HOOK: "THE NAME ON THE SCREEN"                                          (CHOSEN)
+------------------------------------------------------------------------------------------------
+Picture:  Frame 1 is an extreme close-up of a face in a crowd, cold blue light flickering over it - the reflection of a
+          countdown. The beeping stops. The camera pulls back and rises over thousands of heads to reveal a giant screen:
+          one name. Theirs.
+Voice:    "The countdown stops. The name on the screen... is yours."
+Text:     A HYPOTHETICAL SCENARIO (top) - then the key caption YOUR NAME WAS SELECTED.
+Why:      It starts at the climax of the selection, not before it. The viewer is addressed as the person selected in the
+          first sentence. The question "selected for WHAT?" is opened at 0.7 s and not answered until the arena.
+Scores (1-5):  stops the scroll 5 | instantly clear 5 | puts the viewer in it 5 | open question 5 | visual payoff 4  = 24/25
+
+
+HOOK 2 - ANTI-HOOK: "THE BROADCAST CUTS IN"
+------------------------------------------------------------------------------------------------
+Picture:  A living room at night. The TV is showing a cooking programme; it cuts to black, then to a government crest:
+          THE SELECTION BEGINS NOW. Every phone in the room lights up at once. Then there is a knock at the door.
+Voice:    "When the broadcast cut in, nobody in your street moved. Then someone knocked on your door."
+Why:      Strong mystery and a good sound moment, but the viewer has to wait 4-5 s to understand what is happening, and
+          the most spectacular image (the city and the crowd) is lost.
+Scores:   stops the scroll 4 | instantly clear 3 | puts the viewer in it 4 | open question 5 | visual payoff 3  = 19/25
+
+
+HOOK 3 - TRADITIONAL: "THE BIGGEST SHOW ON EARTH"
+------------------------------------------------------------------------------------------------
+Picture:  An aerial shot over a futuristic city at dusk, every screen showing the same logo.
+Voice:    "Every year, one ordinary person is chosen for the biggest show on Earth. This year... it's you."
+Why:      Clear, but it explains the premise before showing anything happen - an introduction, not a moment. It also
+          gives the twist ("chosen") away as a rule of the world instead of a shock.
+Scores:   stops the scroll 3 | instantly clear 5 | puts the viewer in it 3 | open question 3 | visual payoff 3  = 17/25
+
+
+CHOSEN: HOOK 1. It is the moment the brief calls the most important ("your name appearing on the giant screen"), it is
+pure image + one line of voice, and it loops: the last shot of the film is the same face, close up.
+
+
+THE OPEN LOOP
+-------------
+Three questions are opened and paid off in order:
+  1. Why were you selected?               opened 0:00 ("the name on the screen... is yours")       paid off 0:46 (your name was
+                                                                                                   on a pre-approved list, weeks before)
+  2. What is waiting inside the arena?    opened 0:11 ("They call it Vantage...")                  paid off 0:16-0:29 (the reveal) - kept
+                                                                                                   mysterious: no rules, no combat shown
+  3. Can you uncover the truth?           opened 0:35 ("Someone out there is steering the game.")  paid off 0:49-0:57 (the feeds go out live)
+Retention beats: a new location or reveal at least every 2-3 s; key captions at 0:05, 0:14, 0:24, 0:31, 0:41, 0:47; the
+arena reveal lands at 0:18-0:23, just as the first-scene curiosity would fade.
+
+
+THE ENDING - TWO OPTIONS
+------------------------
+A) The brief's line as a statement: "You thought you were selected to play their game. But you might be the one who ends it."
+B) The same idea as a question, straight down the lens: "You were selected to play their game. What if you're the one who
+   ends it?"
+CHOSEN: B. It keeps the brief's payoff, makes the last line an open question for the comments, and is 0.5 s shorter, which
+leaves room for the final stare and the broadcast cutting out before 59 s. The final shot (the face in close-up) matches
+the first shot, so the Short loops into "The countdown stops."
