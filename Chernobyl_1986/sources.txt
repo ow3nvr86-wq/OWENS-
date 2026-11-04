@@ -1,0 +1,97 @@
+CHERNOBYL: THE NIGHT THAT CHANGED HISTORY - RESEARCH AND SOURCES
+=================================================================
+
+1. SOURCES
+----------
+[IAEA87]  IAEA Bulletin 29/4 (1987), "The accident at Chernobyl: causes, consequences..." (accident at 1:23 a.m. on
+          26 April 1986 at Unit 4; Pripyat evacuated on 27 April from 2 p.m., completed by 5 p.m.; evacuees about 115,000).
+          https://www.iaea.org/sites/default/files/publications/magazines/bulletin/bull29-4/29402791724.pdf
+[NEA02]   OECD Nuclear Energy Agency, "Chernobyl: Assessment of Radiological and Health Impacts" (2002 update), ch. I:
+          the RBMK-1000, the events leading to the accident (a test of whether the slowing turbine could power the
+          cooling pumps during a loss of station power), the accident and the graphite fire.
+          https://www.oecd-nea.org/jcms/pl_28256/chernobyl-assessment-of-radiological-and-health-impacts
+[WNA1]    World Nuclear Association, "Chernobyl Accident Appendix 1: Sequence of Events" (AZ-5 pressed at 01:23:40; two
+          explosions reported; first group of 14 firemen arrived at 01:28; the 'graphite fire' reported in many accounts
+          as burning for about nine days). https://world-nuclear.org/information-library/safety-and-security/safety-of-plants/appendices/chernobyl-accident-appendix-1-sequence-of-events.aspx
+[WHO05]   World Health Organization press release, "Chernobyl: the true scale of the accident" (2005, Chernobyl Forum).
+          https://www.who.int/mediacentre/news/releases/2005/pr38/en/
+[CNSC]    Canadian Nuclear Safety Commission, "Health effects of the Chernobyl accident" (134 plant staff and emergency
+          workers with acute radiation syndrome, 28 of whom died). https://cnsc-ccsn.gc.ca/eng/resources/health/health-effects-chernobyl-accident
+[UHJ]     Ukrainian Historical Journal (NASU): about 116 thousand people evacuated in 1986 from the 10- and 30-km zones;
+          188 settlements. https://nasu-periodicals.org.ua/index.php/uhj/article/download/28519/22825/45097
+[ICRP]    Nasvit and Skaletskyy, ICRP presentation (2026): about 116 thousand people evacuated; most of the evacuation in
+          May, the last settlements in August 1986. https://www.icrp.org/admin/2026-04-27_FukuChNPP_O-Nasvit.pdf
+[ChNPP]   Chernobyl NPP historical account (cited in the brief): about 116,000 people evacuated from 188 settlements in 1986.
+[AHF]     Atomic Heritage Foundation, "Chernobyl New Safe Confinement slid into place" (29 November 2016; 108 m high,
+          257 m span). https://ahf.nuclearmuseum.org/chernobyl-new-safe-containment-slid-place/
+[NG16]    National Geographic (2016), the 1986 sarcophagus and the New Safe Confinement.
+          https://www.nationalgeographic.com/science/article/042516-chernobyl-new-safe-confinement-contains-radiation
+
+
+2. VERIFIED TIMELINE
+--------------------
+25-26 Apr 1986  Unit 4 (an RBMK-1000) is brought down for a test of whether, after a loss of station power, the slowing
+                turbine could keep the cooling pumps running until the diesels started. [NEA02, WNA1]
+26 Apr, 01:23   The power surges; the emergency button is pressed at 01:23:40; two explosions destroy the reactor and
+                the building; fires start. [IAEA87, WNA1]
+01:28           The first group of 14 firefighters arrives. [WNA1]
+26 Apr          Two plant workers die on the night; 134 plant staff and emergency workers later develop acute
+                radiation syndrome, and 28 of them die within months. (Not stated in the video.) [CNSC, WHO05]
+26 Apr          Saturday: life in Pripyat continues while the emergency goes on at the plant. [IAEA87 implicitly; general]
+27 Apr, 14:00   About 36 hours after the accident the evacuation of Pripyat begins; it is complete within about three
+                hours. The evacuation was presented as temporary; residents never returned to live there. [IAEA87, search
+                summaries of contemporary accounts]
+1986            About 116,000 people evacuated (IAEA 1987 gave 115,000), from 188 settlements. [UHJ, ICRP, ChNPP, IAEA87]
+May-Nov 1986    The 'Shelter' (sarcophagus) is built over the ruined unit. [NG16]
+2013            The ventilation stack beside Unit 4 is dismantled (why the arch scene shows no stack).
+29 Nov 2016     The New Safe Confinement, a steel arch 108 m high with a 257 m span, is slid over the reactor. [AHF]
+
+
+3. CAUSES (as said in the video: "a flawed design and operating errors combined")
+---------------------------------------------------------------------------------
+The NEA and IAEA accounts attribute the accident to the combination of the RBMK reactor's design weaknesses and the
+way the test was prepared and carried out. The video does not apportion blame or show the AZ-5 button, and shows no
+specific person's actions or words.
+
+
+4. CLAIM-BY-CLAIM CHECK OF THE NARRATION AND TEXT
+------------------------------------------------
+"At 1:23 in the morning, a nuclear reactor in Soviet Ukraine... was destroyed."  [IAEA87, WNA1]
+    On screen: "Chernobyl Nuclear Power Plant, Soviet Ukraine", "26 April 1986, 01:23".
+"A few kilometres away, tens of thousands of people lived ordinary lives in the city of Pripyat."
+    Pripyat's population is given as about 43,000-49,000 in different sources, so "tens of thousands".
+"That night, during a safety test on Reactor 4, a flawed design and operating errors combined... and the power surged."
+    [NEA02, WNA1].
+"Two explosions tore the reactor open. The fire released radioactive material into the air."  [WNA1, IAEA87]
+"Firefighters and plant workers rushed in, facing an emergency whose full scale was not yet understood."
+    [WNA1] (first crew at 01:28). On screen: "The first fire crews arrived within minutes".
+"That Saturday, life in Pripyat carried on. Many residents had little idea of the danger nearby."
+    26 April 1986 was a Saturday. "Many", not "all": knowledge differed between people.
+"About thirty-six hours after the explosion, the buses came. Residents were told the evacuation was temporary."
+    [IAEA87] and contemporary accounts.
+"They never came back. In 1986 alone, about 116,000 people were evacuated."
+    Pripyat was never resettled. 116,000 [UHJ, ICRP, ChNPP]; IAEA (1987) said 115,000. On screen: "116,000 people
+    evacuated in 1986, from 188 settlements".
+"Its consequences are still felt today, and it changed how the world sees nuclear safety."
+    General conclusion of the IAEA, NEA and WHO reports; no number of victims is given in the video, because
+    estimates of long-term deaths differ widely and are debated [WHO05].
+
+
+5. WHAT IS ARTISTIC RECONSTRUCTION
+----------------------------------
+- Every person is invented; no real person is portrayed, named or quoted, and no words are put in anyone's mouth.
+- The plant is a simplified elevation (turbine hall, reactor buildings, the stack); it is not to scale. The damaged
+  building, the fires and the smoke are an illustration, not a reconstruction of the exact damage.
+- The control room is a generic illustration of an RBMK unit control room (panels, dials, chart recorders, a large
+  lamp display); the dial's label (MW) is illustrative.
+- The explosion is shown as a burst of light and debris from a distance; no injuries are shown.
+- Pripyat's streets, school, buses and the funfair are drawn in the style of the place and period, not from plans.
+- The years of abandonment (trees, grass, broken windows) are compressed into a few seconds; the overhead view is
+  an illustration.
+
+
+6. FACTS CUT FOR TIME
+---------------------
+The AZ-5 button; the exact test sequence; the graphite fire's duration (reported as about nine or ten days, while
+INSAG-1 says the fires were put out by 05:00); the 30-km exclusion zone; the detection of fallout in Sweden on
+28 April; the 28 acute radiation deaths; the liquidators; the new city of Slavutych.

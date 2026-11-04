@@ -1,0 +1,37 @@
+CHERNOBYL: THE NIGHT THAT CHANGED HISTORY - NARRATION SCRIPT (59.8 s, 139 words)
+Voice: Kokoro-82M bm_george. Times are measured from the synthesised voice.
+Delivery: serious, calm, controlled documentary tone; let the short sentences land.
+
+OPENING HOOKS (three candidates)
+  A. The clock and the night (CHOSEN): Picture: the plant lit against the night, Pripyat's lights beyond the cooling pond, the camera drifting toward Reactor 4, then a flash. Voice: "1:23 in the morning. April 26th, 1986. A nuclear reactor in Soviet Ukraine... was destroyed." The image is calm; the time stamp and the pause before "destroyed" make the viewer ask how, and the next scene steps back to the ordinary day before.
+  B. The city with a day and a half left: "This city had about thirty-six hours left." Over children playing in Pripyat. Strong, but it gives away the evacuation before the disaster is set up.
+  C. The test: "It was supposed to be a routine safety test." Over the control room. Intriguing, but it opens on a technical idea rather than a picture, and "routine" understates how unusual the test conditions were.
+
+[SCENE 1 - THE NIGHT EVERYTHING CHANGED  0.0-5.0 s]
+(00.30-05.08) At 1:23 in the morning, a nuclear reactor in Soviet Ukraine... was destroyed.
+
+[SCENE 2 - BEFORE THE DISASTER  5.0-11.0 s]
+(05.45-10.78) A few kilometres away, tens of thousands of people lived ordinary lives in the city of Pripyat.
+
+[SCENE 3 - INSIDE THE POWER STATION  11.0-18.0 s]
+(11.40-17.84) That night, during a safety test on Reactor 4, a flawed design and operating errors combined... and the power surged.
+
+[SCENE 4 - THE EXPLOSION  18.0-25.0 s]
+(18.35-24.29) Two explosions tore the reactor open. The fire released radioactive material into the air.
+
+[SCENE 5 - THE FIREFIGHTERS  25.0-32.0 s]
+(25.35-31.75) Firefighters and plant workers rushed in, facing an emergency whose full scale was not yet understood.
+
+[SCENE 6 - PRIPYAT DOESN'T KNOW  32.0-39.0 s]
+(32.35-38.51) That Saturday, life in Pripyat carried on. Many residents had little idea of the danger nearby.
+
+[SCENE 7 - THE EVACUATION  39.0-46.0 s]
+(39.35-45.77) About thirty-six hours after the explosion, the buses came. Residents were told the evacuation was temporary.
+
+[SCENE 8 - THE EMPTY CITY  46.0-53.0 s]
+(46.35-52.78) They never came back. In 1986 alone, about 116,000 people were evacuated.
+
+[SCENE 9 - THE LEGACY  53.0-59.8 s]
+(53.30-58.38) Its consequences are still felt today, and it changed how the world sees nuclear safety.
+
+Total: 139 words. Every line is checked against sources.txt (section 4).

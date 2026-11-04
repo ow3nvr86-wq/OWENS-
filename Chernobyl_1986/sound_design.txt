@@ -1,0 +1,49 @@
+CHERNOBYL: THE NIGHT THAT CHANGED HISTORY - SOUND DESIGN TIMELINE
+============================================================
+
+Everything is synthesised in audio.py with numpy: no samples, no recordings, no third-party audio.
+Music: an original, restrained piano theme in A minor over viol and drones. It is gentle for the ordinary city,
+gives way to a quickening pulse and alarms in the control room, stops at the surge, becomes a low choir for the
+fire crews, returns as single notes in the empty city, and ends on one A minor chord.
+Mix: music and ambience are ducked about 7 dB under the narration; both mixes are normalised to -14 LUFS (true peak -1.5 dB).
+
+NARRATION (Kokoro-82M, voice bm_george)
+    0.30 -   5.08  At 1:23 in the morning, a nuclear reactor in Soviet Ukraine... was destroyed.
+    5.45 -  10.78  A few kilometres away, tens of thousands of people lived ordinary lives in the city of Pripyat.
+   11.40 -  17.84  That night, during a safety test on Reactor 4, a flawed design and operating errors combined... and the power surged.
+   18.35 -  24.29  Two explosions tore the reactor open. The fire released radioactive material into the air.
+   25.35 -  31.75  Firefighters and plant workers rushed in, facing an emergency whose full scale was not yet understood.
+   32.35 -  38.51  That Saturday, life in Pripyat carried on. Many residents had little idea of the danger nearby.
+   39.35 -  45.77  About thirty-six hours after the explosion, the buses came. Residents were told the evacuation was temporary.
+   46.35 -  52.78  They never came back. In 1986 alone, about 116,000 people were evacuated.
+   53.30 -  58.38  Its consequences are still felt today, and it changed how the world sees nuclear safety.
+
+CUES (time in seconds, layer, description)
+    0.00  ambience  Night: the plant's low industrial hum across the cooling pond, crickets, frogs, water
+    2.65  sfx       A deep rumble builds
+    4.15  sfx       The explosion: a huge, low impact and the crack and hiss of debris
+    5.00  ambience  A spring day: birds, distant traffic, voices
+    5.20  music     Music: a gentle piano theme in A minor over a viol
+    5.60  sfx       Cars pass
+    7.60  sfx       A bicycle bell
+   11.00  music     A low pulse, slowly quickening
+   11.00  ambience  Control room: fluorescent hum, relays clicking
+   15.35  sfx       Alarms on the panels
+   17.45  sfx       The surge: a heavy jolt, the lights flicker and buzz
+   18.00  ambience  Fire: a deep roar and crackle; wind
+   22.30  sfx       A siren far off, coming closer
+   24.60  sfx       Fire engine sirens
+   25.20  music     Music: a low, respectful choir and viol for the crews
+   29.00  sfx       Engines idling, air brakes
+   32.00  ambience  Birds, children's voices, a ball bouncing
+   32.20  music     The piano theme again, with a dark drone under it
+   39.00  sfx       Bus engines idling and pulling away
+   39.60  music     A slow, falling viol line
+   46.40  music     Single piano notes, far apart
+   49.90  sfx       An empty swing creaks in the wind
+   53.00  music     A soft choir and drone under the last line
+   57.00  music     "APRIL 26, 1986": a low hit and a final A minor chord, fading to silence
+
+SUGGESTED ASSETS FOR A RE-SCORE (licence-free options)
+  - Music: a solo piano or string piece of your own, or a CC0 recording.
+  - Sirens, diesel buses, fire, wind and birds: CC0 field recordings (e.g. Freesound filtered to CC0).

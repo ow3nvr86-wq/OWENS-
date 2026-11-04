@@ -1,0 +1,316 @@
+{
+ "title": "CHERNOBYL: THE NIGHT THAT CHANGED HISTORY",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "duration": 59.8,
+ "scenes": [
+  {
+   "id": 1,
+   "key": "night",
+   "name": "THE NIGHT EVERYTHING CHANGED",
+   "start": 0.0,
+   "end": 5.0,
+   "in": "cut",
+   "camera": "a slow push across the cooling pond at night toward Reactor 4, Pripyat's lights in the distance; then the explosion"
+  },
+  {
+   "id": 2,
+   "key": "city",
+   "name": "BEFORE THE DISASTER",
+   "start": 5.0,
+   "end": 11.0,
+   "in": "flash",
+   "camera": "a sideways truck along a Pripyat street in spring; the plant on the horizon"
+  },
+  {
+   "id": 3,
+   "key": "control",
+   "name": "INSIDE THE POWER STATION",
+   "start": 11.0,
+   "end": 18.0,
+   "in": "wipe",
+   "camera": "the control room; close on the instruments; the operators' faces"
+  },
+  {
+   "id": 4,
+   "key": "fire",
+   "name": "THE EXPLOSION",
+   "start": 18.0,
+   "end": 25.0,
+   "in": "flash",
+   "camera": "the shattered reactor building at night, smoke and fire, a slow push"
+  },
+  {
+   "id": 5,
+   "key": "firemen",
+   "name": "THE FIREFIGHTERS",
+   "start": 25.0,
+   "end": 32.0,
+   "in": "dissolve",
+   "camera": "fire engines arrive under searchlights; the camera tracks the crews"
+  },
+  {
+   "id": 6,
+   "key": "morning",
+   "name": "PRIPYAT DOESN'T KNOW",
+   "start": 32.0,
+   "end": 39.0,
+   "in": "page",
+   "camera": "Saturday morning in Pripyat: a school, families; a far plume on the horizon"
+  },
+  {
+   "id": 7,
+   "key": "buses",
+   "name": "THE EVACUATION",
+   "start": 39.0,
+   "end": 46.0,
+   "in": "wipe",
+   "camera": "a long column of buses; residents board with suitcases; the camera follows the buses out"
+  },
+  {
+   "id": 8,
+   "key": "empty",
+   "name": "THE EMPTY CITY",
+   "start": 46.0,
+   "end": 53.0,
+   "in": "dissolve",
+   "camera": "the empty street becomes years of abandonment; the funfair and its wheel"
+  },
+  {
+   "id": 9,
+   "key": "legacy",
+   "name": "THE LEGACY",
+   "start": 53.0,
+   "end": 59.8,
+   "in": "ink",
+   "camera": "the arch over the reactor; the city from above; dark parchment and the last words"
+  }
+ ],
+ "lines": [
+  {
+   "scene": 1,
+   "start": 0.3,
+   "deadline": 4.95,
+   "text": "At 1:23 in the morning, a nuclear reactor in Soviet Ukraine... was destroyed.",
+   "tts": "At one twenty-three in the morning, a nuclear reactor in Soviet Ukraine... was destroyed.",
+   "hl": [
+    "1:23",
+    "DESTROYED."
+   ]
+  },
+  {
+   "scene": 2,
+   "start": 5.45,
+   "deadline": 10.85,
+   "text": "A few kilometres away, tens of thousands of people lived ordinary lives in the city of Pripyat.",
+   "tts": "A few kilometres away, tens of thousands of people lived ordinary lives, in the city of Pripyat.",
+   "hl": [
+    "ORDINARY",
+    "PRIPYAT."
+   ]
+  },
+  {
+   "scene": 3,
+   "start": 11.4,
+   "deadline": 17.85,
+   "text": "That night, during a safety test on Reactor 4, a flawed design and operating errors combined... and the power surged.",
+   "tts": "That night, during a safety test on Reactor Four, a flawed design and operating errors combined... and the power surged.",
+   "hl": [
+    "SAFETY",
+    "TEST",
+    "SURGED."
+   ]
+  },
+  {
+   "scene": 4,
+   "start": 18.35,
+   "deadline": 24.85,
+   "text": "Two explosions tore the reactor open. The fire released radioactive material into the air.",
+   "tts": "Two explosions tore the reactor open. The fire released radioactive material into the air.",
+   "hl": [
+    "EXPLOSIONS",
+    "RADIOACTIVE"
+   ]
+  },
+  {
+   "scene": 5,
+   "start": 25.35,
+   "deadline": 31.85,
+   "text": "Firefighters and plant workers rushed in, facing an emergency whose full scale was not yet understood.",
+   "tts": "Firefighters and plant workers rushed in, facing an emergency whose full scale, was not yet understood.",
+   "hl": [
+    "FIREFIGHTERS",
+    "NOT",
+    "UNDERSTOOD."
+   ]
+  },
+  {
+   "scene": 6,
+   "start": 32.35,
+   "deadline": 38.85,
+   "text": "That Saturday, life in Pripyat carried on. Many residents had little idea of the danger nearby.",
+   "tts": "That Saturday, life in Pripyat carried on. Many residents had little idea, of the danger nearby.",
+   "hl": [
+    "SATURDAY,",
+    "DANGER"
+   ]
+  },
+  {
+   "scene": 7,
+   "start": 39.35,
+   "deadline": 45.85,
+   "text": "About thirty-six hours after the explosion, the buses came. Residents were told the evacuation was temporary.",
+   "tts": "About thirty-six hours after the explosion, the buses came. Residents were told, the evacuation was temporary.",
+   "hl": [
+    "BUSES",
+    "TEMPORARY."
+   ]
+  },
+  {
+   "scene": 8,
+   "start": 46.35,
+   "deadline": 52.85,
+   "text": "They never came back. In 1986 alone, about 116,000 people were evacuated.",
+   "tts": "They never came back. In nineteen eighty-six alone, about one hundred and sixteen thousand people were evacuated.",
+   "hl": [
+    "NEVER",
+    "116,000"
+   ]
+  },
+  {
+   "scene": 9,
+   "start": 53.3,
+   "deadline": 58.4,
+   "text": "Its consequences are still felt today, and it changed how the world sees nuclear safety.",
+   "tts": "Its consequences are still felt today... and it changed how the world sees nuclear safety.",
+   "hl": [
+    "STILL",
+    "NUCLEAR",
+    "SAFETY."
+   ]
+  }
+ ],
+ "titles": [
+  {
+   "start": 0.4,
+   "end": 3.9,
+   "style": "tag",
+   "text": "CHERNOBYL NUCLEAR POWER PLANT, SOVIET UKRAINE"
+  },
+  {
+   "start": 0.6,
+   "end": 3.9,
+   "style": "label",
+   "text": "26 APRIL 1986, 01:23",
+   "y": 0.195
+  },
+  {
+   "start": 5.6,
+   "end": 10.8,
+   "style": "label",
+   "text": "PRIPYAT"
+  },
+  {
+   "start": 5.8,
+   "end": 10.8,
+   "style": "tag",
+   "text": "THE PLANT'S CITY, A FEW KILOMETRES AWAY",
+   "y": 0.235
+  },
+  {
+   "start": 11.4,
+   "end": 13.8,
+   "style": "tag",
+   "text": "REACTOR 4 CONTROL ROOM: AN ILLUSTRATED RECONSTRUCTION"
+  },
+  {
+   "start": 18.6,
+   "end": 24.8,
+   "style": "label",
+   "text": "REACTOR 4"
+  },
+  {
+   "start": 18.8,
+   "end": 24.8,
+   "style": "tag",
+   "text": "TWO EXPLOSIONS, THEN FIRE",
+   "y": 0.235
+  },
+  {
+   "start": 25.6,
+   "end": 31.7,
+   "style": "tag",
+   "text": "THE FIRST FIRE CREWS ARRIVED WITHIN MINUTES"
+  },
+  {
+   "start": 32.6,
+   "end": 38.6,
+   "style": "label",
+   "text": "PRIPYAT"
+  },
+  {
+   "start": 32.8,
+   "end": 38.6,
+   "style": "tag",
+   "text": "SATURDAY, 26 APRIL 1986",
+   "y": 0.235
+  },
+  {
+   "start": 39.6,
+   "end": 45.7,
+   "style": "label",
+   "text": "27 APRIL 1986"
+  },
+  {
+   "start": 39.8,
+   "end": 45.7,
+   "style": "tag",
+   "text": "THE EVACUATION OF PRIPYAT",
+   "y": 0.235
+  },
+  {
+   "start": 48.3,
+   "end": 52.8,
+   "style": "big",
+   "text": "116,000"
+  },
+  {
+   "start": 48.5,
+   "end": 52.8,
+   "style": "tag",
+   "text": "PEOPLE EVACUATED IN 1986, FROM 188 SETTLEMENTS",
+   "y": 0.3
+  },
+  {
+   "start": 53.4,
+   "end": 55.3,
+   "style": "tag",
+   "text": "THE NEW SAFE CONFINEMENT, IN PLACE SINCE 2016"
+  },
+  {
+   "start": 55.6,
+   "end": 56.8,
+   "style": "tag",
+   "text": "PRIPYAT TODAY"
+  },
+  {
+   "start": 57.0,
+   "end": 59.6,
+   "style": "date",
+   "text": "APRIL 26, 1986",
+   "y": 0.36
+  },
+  {
+   "start": 57.6,
+   "end": 59.6,
+   "style": "endq",
+   "text": "CHERNOBYL|CHANGED THE WORLD.",
+   "y": 0.45
+  }
+ ],
+ "events": {
+  "blast": 4.15,
+  "surge": 17.45
+ }
+}

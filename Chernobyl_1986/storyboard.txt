@@ -1,0 +1,92 @@
+CHERNOBYL: THE NIGHT THAT CHANGED HISTORY - SCENE-BY-SCENE STORYBOARD
+=====================================================================
+
+59.8 s, 1080 x 1920 (9:16), 30 fps. 2D only: every frame is drawn with pycairo vector ink (render.py, src/).
+Characters are animated on twos with line boil; camera, smoke, fire, lights, water, traffic and particles move on
+every frame. Depth comes only from flat layers moved at different speeds (a multiplane camera).
+Captions: bold Cinzel capitals in parchment with a dark outline; key words on a burgundy ink plate.
+
+SCENE 1 - THE NIGHT EVERYTHING CHANGED                         0.0 - 5.0 s
+  Night across the cooling pond: the plant lit up, its stack's red lights blinking, Pripyat's windows on the horizon
+  at the left, pylons, the lights reflected in the water. A slow push toward Reactor 4. At 4.15 s a flash; a ragged
+  fireball, debris flung in arcs, a ring of light, a column of lit smoke; the camera shakes.
+  Narration 0.30-5.08 "At 1:23 in the morning, a nuclear reactor in Soviet Ukraine... was destroyed."
+  Text: CHERNOBYL NUCLEAR POWER PLANT, SOVIET UKRAINE / 26 APRIL 1986, 01:23
+  Sound: industrial hum, crickets, frogs, water; a rumble builds; a huge low impact.
+  Out: WHITE FLASH (4.65-5.35).
+
+SCENE 2 - BEFORE THE DISASTER                                  5.0 - 11.0 s
+  Pripyat in spring: apartment blocks with loggias and laundry behind a row of trees, street lamps, the plant far
+  off on the horizon. Cars and a bus pass; people walk both ways; children; a boy cycles by. Sideways truck, six
+  parallax planes; trees sway in the foreground.
+  Narration 5.45-10.78 "A few kilometres away, tens of thousands of people lived ordinary lives in the city of Pripyat."
+  Text: PRIPYAT / THE PLANT'S CITY, A FEW KILOMETRES AWAY
+  Sound: birds, traffic, voices, a bicycle bell; a gentle piano theme over a viol.
+  Out: MOVING FOREGROUND WIPE (10.58-11.42).
+
+SCENE 3 - INSIDE THE POWER STATION                             11.0 - 18.0 s
+  3a 11.0-14.0 The control room: walls of panels with dials, lamps, chart recorders and pipe diagrams, a large round
+     grid of indicator lamps; ceiling lights; operators in white coats and caps at the console, writing, reaching,
+     arms folded. Slow pan.
+  3b 14.0-16.4 Close on a large dial: the needle creeps up, then swings into the red; lamps begin to flash.
+  3c 16.4-18.0 Two operators lit red by the alarm lamps turn to the panels; at 17.45 s a jolt, the picture shakes and
+     the lights flicker.
+  Narration 11.40-17.84 "That night, during a safety test on Reactor 4, a flawed design and operating errors
+     combined... and the power surged."
+  Text: REACTOR 4 CONTROL ROOM: AN ILLUSTRATED RECONSTRUCTION
+  Sound: fluorescent hum, relays; a quickening low pulse; a rising tone; alarms; a heavy jolt; the music drops away.
+  Out: WHITE FLASH (17.7-18.3).
+
+SCENE 4 - THE EXPLOSION                                        18.0 - 25.0 s
+  The shattered reactor building at night: broken walls and beams, the glowing interior, two columns of smoke lit
+  from below rising and leaning in the wind, fires on the turbine-hall roof, embers drifting, the stack, pylons,
+  blue emergency lights flashing at its foot. Slow push. No people are shown hurt.
+  Narration 18.35-24.29 "Two explosions tore the reactor open. The fire released radioactive material into the air."
+  Text: REACTOR 4 / TWO EXPLOSIONS, THEN FIRE
+  Sound: fire roar and crackle, wind, a drone and low choir; a siren far off.
+  Out: CROSS DISSOLVE (24.55-25.45).
+
+SCENE 5 - THE FIREFIGHTERS                                     25.0 - 32.0 s
+  Fire engines (red, white stripe, ladders, blue beacons) arrive under sweeping searchlights; one brakes into place;
+  firefighters in canvas suits and helmets run to the building, two hold a spraying hose, one directs; hose lines
+  across the ground; the burning plant behind. The camera tracks with the arriving truck.
+  Narration 25.35-31.75 "Firefighters and plant workers rushed in, facing an emergency whose full scale was not yet understood."
+  Text: THE FIRST FIRE CREWS ARRIVED WITHIN MINUTES
+  Sound: sirens, engines, air brakes, water; a respectful low choir and viol.
+  Out: PAGE TURN (31.55-32.45).
+
+SCENE 6 - PRIPYAT DOESN'T KNOW                                 32.0 - 39.0 s
+  Saturday morning: a school behind a fence, blocks, trees; children in school uniform with red Pioneer scarves,
+  families walking, two neighbours talking, two boys playing with a ball. On the far horizon a thin plume rises.
+  Narration 32.35-38.51 "That Saturday, life in Pripyat carried on. Many residents had little idea of the danger nearby."
+  Text: PRIPYAT / SATURDAY, 26 APRIL 1986
+  Sound: birds, children, a ball; the piano theme with a dark drone under it.
+  Out: MOVING FOREGROUND WIPE (38.58-39.42).
+
+SCENE 7 - THE EVACUATION                                       39.0 - 46.0 s
+  27 April, grey sky: a long column of buses along the street, passengers' faces at the windows; residents queue and
+  board with suitcases and bags; a militia officer waves the buses on; an official with a clipboard. One bus after
+  another pulls away and the camera follows the column out.
+  Narration 39.35-45.77 "About thirty-six hours after the explosion, the buses came. Residents were told the evacuation was temporary."
+  Text: 27 APRIL 1986 / THE EVACUATION OF PRIPYAT
+  Sound: diesel engines idling and pulling away, doors, footsteps, voices; a slow falling viol line.
+  Out: CROSS DISSOLVE (45.6-46.4).
+
+SCENE 8 - THE EMPTY CITY                                       46.0 - 53.0 s
+  8a 46.0-49.6 The same street, empty; then the years pass: trees grow over it, grass breaks through the asphalt,
+     windows are broken, leaves blow along.
+  8b 49.6-53.0 The funfair: the Ferris wheel among trees, gondolas rocking in the wind, an empty swing moving.
+  Narration 46.35-52.78 "They never came back. In 1986 alone, about 116,000 people were evacuated."
+  Text: 116,000 / PEOPLE EVACUATED IN 1986, FROM 188 SETTLEMENTS
+  Sound: wind, a creaking swing, a far crow; single piano notes.
+  Out: INK SPREAD (52.6-53.4).
+
+SCENE 9 - THE LEGACY                                           53.0 - 59.8 s
+  9a 53.0-55.4 The New Safe Confinement arch over the ruined unit at dusk (no stack: it was dismantled in 2013); fog,
+     pylons, birds.
+  9b 55.4-56.8 Pripyat from above, the roofs among trees, fog drifting.
+  9c 56.8-59.8 Dark parchment with the arch printed faintly; "APRIL 26, 1986", then "CHERNOBYL / CHANGED THE WORLD.";
+     a slow fade to black.
+  Narration 53.30-58.38 "Its consequences are still felt today, and it changed how the world sees nuclear safety."
+  Text: THE NEW SAFE CONFINEMENT, IN PLACE SINCE 2016 / PRIPYAT TODAY / APRIL 26, 1986 / CHERNOBYL CHANGED THE WORLD.
+  Sound: wind, a soft choir and drone; a low hit and a final A minor chord, fading to silence.
