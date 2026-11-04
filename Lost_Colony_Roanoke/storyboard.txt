@@ -1,0 +1,131 @@
+THE LOST COLONY OF ROANOKE - SCENE-BY-SCENE STORYBOARD
+=======================================================
+
+59.8 s, 1080 x 1920 (9:16), 30 fps. 2D only: every frame is drawn with pycairo vector ink (render.py, src/).
+Characters are animated on twos (a new drawing every second frame) with line boil; the camera, sea, fog, moss,
+grass, flames and particles move on every frame. Depth comes only from flat layers moved at different speeds (a
+multiplane camera). Timing comes from scene_timing.json and the measured narration (build/vo_timing.json).
+
+Palette: charcoal, muted brown, aged parchment, dusty grey, deep burgundy, desaturated green, firelight.
+Captions: bold Cinzel capitals in parchment with a dark outline; key words on a burgundy ink plate; at most 3 words
+per chunk, 65% of the way down the frame. Titles at the top, clear of the Shorts interface.
+
+-------------------------------------------------------------------------------------------------------------
+SCENE 1 - THE DISAPPEARANCE                                   0.0 - 4.0 s
+-------------------------------------------------------------------------------------------------------------
+Visual    Dusk. A weathered palisade of great logs in a forest of loblolly pines and live oaks; fog lies on the
+          ground; through the entrance, what is left of a house; grey Spanish moss hangs into the frame.
+Camera    A slow push through the fog to the great post at the right of the entrance, ending close on the word
+          CROATOAN cut into the stripped wood (zoom 1.0 -> 4.0); the moss and foreground grass slide out of frame.
+Animation A crow takes off from the palisade (1.6 s); moss sways; fog drifts in three layers; a cold light finds the letters.
+Narration 0.12-4.29  "An entire colony vanished... and left behind one mysterious word."
+Text      AN ILLUSTRATED RECONSTRUCTION / The Lost Colony (blackletter)
+Sound     Drone and a single viol note out of silence; wind in the pines; the crow; a soft hit on "word".
+Out       INK SPREAD (3.6-4.4).
+
+-------------------------------------------------------------------------------------------------------------
+SCENE 2 - THE ARRIVAL                                         4.0 - 11.0 s
+-------------------------------------------------------------------------------------------------------------
+2a 4.0-7.4  Open sea: the flagship (an Elizabethan galleon, St George's cross on the mainsail) rolls through an
+          engraved sea; the flyboat and the pinnace further out; a low wooded island slides in on the horizon; gulls.
+          Camera trucks with the ships; sails billow, pennants stream, spray breaks at the bow.
+2b 7.4-11.0 (dissolve) The beach of Roanoke Island: the ship's boat run up on the sand, foam washing along the
+          water's edge; colonists walk up the beach with a chest, a sack, a basket, a musket; a woman, children;
+          one man still stepping out of the boat. Forest edge with dunes and palmetto behind (parallax).
+Narration 4.40-10.65 "July, 1587. More than a hundred English men, women and children landed on Roanoke Island."
+Text      JULY 1587 / ROANOKE ISLAND - OFF THE COAST OF PRESENT-DAY NORTH CAROLINA
+Sound     Waves, wind in the sails, creaking hull, gulls; the theme begins (recorder, lute, viol); footsteps in sand.
+Out       MOVING FOREGROUND WIPE (10.6-11.4): a dark timber sweeps across the lens.
+
+-------------------------------------------------------------------------------------------------------------
+SCENE 3 - BUILDING A NEW LIFE                                 11.0 - 18.0 s
+-------------------------------------------------------------------------------------------------------------
+3a 11.0-13.75 A clearing in the forest: three timber-framed cottages at different stages; posts rise, rafters go up,
+          wattle and daub fill the walls, thatch is laid course by course. Men drive pegs with mallets; a man
+          carries a log; a woman with a basket and a child cross; barrels, a crate and sacks; a campfire and chimney smoke.
+3b 13.75-18.0 (dissolve) Greyer: a woman scrapes the bottom of an empty barrel; a slumped sack; a sentry in a morion
+          helmet with a matchlock stands by the new palisade looking into the forest - an arrow strikes the post
+          beside him (16.55) and he turns. (The arrow stands for George Howe's death; no attacker is shown.)
+Narration 11.35-17.73 "They rebuilt an abandoned fort's houses. But food was short, and clashes with local peoples turned deadly."
+Text      SUPPLIES RAN SHORT
+Sound     Mallets on timber, the fire; the music thins to a drone; wind; the arrow's whistle and thunk.
+Out       PAGE TURN (17.55-18.45).
+
+-------------------------------------------------------------------------------------------------------------
+SCENE 4 - THE DEPARTURE                                       18.0 - 25.0 s
+-------------------------------------------------------------------------------------------------------------
+4a 18.0-21.6 Medium shot on the beach: John White (grey beard, ruff, capotain hat) reaches for his daughter Eleanor's
+          hand; she holds the newborn Virginia; Ananias Dare beside them; behind, the ship waits and a sailor stands
+          by the boat. Slow push in.
+4b 21.6-25.0 (dissolve) Evening: the settlers stand on the beach watching, one waving; Eleanor and the baby in the
+          foreground. The ship sails out, shrinks, and sinks below the horizon hull first, then the sails.
+Narration 18.35-24.17 "Governor John White sailed to England for supplies... leaving his newborn granddaughter, Virginia Dare."
+Text      JOHN WHITE - GOVERNOR OF THE COLONY / VIRGINIA DARE - HIS GRANDDAUGHTER, BORN 18 AUGUST 1587
+Sound     Surf; the air passes to the viol; a soft choir as the ship goes.
+Out       PAPER TEAR (24.6-25.4).
+
+-------------------------------------------------------------------------------------------------------------
+SCENE 5 - THE LONG WAIT                                       25.0 - 32.0 s
+-------------------------------------------------------------------------------------------------------------
+5a 25.0-28.8 An engraved plate of 1588: the Spanish fleet in its crescent, gun smoke and flashes along the line,
+          English fire ships burning in the foreground, an English galleon firing a broadside. Slow push.
+5b 28.8-32.0 (ink spread) The settlement, fixed, through the seasons: autumn with falling leaves (four people),
+          winter snow on roofs and ground and a lit window (two people at a fire), a storm with rain and lightning
+          (no one), summer 1590 with tall grass over everything (no one).
+Narration 25.35-31.38 "But England was at war with Spain. Ships were held back to fight the Armada. One year became three."
+Text      1588: THE SPANISH ARMADA / 1588 / 1589 / 1590 (year counter)
+Sound     Cannon, fire, a war drum; then a soft hit on each new year, winter wind, rain and thunder, insects.
+Out       CROSS DISSOLVE (31.5-32.5).
+
+-------------------------------------------------------------------------------------------------------------
+SCENE 6 - THE RETURN                                          32.0 - 40.0 s
+-------------------------------------------------------------------------------------------------------------
+6a 32.0-38.2 Night. Moon in torn cloud; the dark shore of the island, the glow of a fire through the trees. A boat
+          rows in: three oarsmen, White in the bow with a lantern; a trumpeter raises a long trumpet (36.55); then
+          the men sing. Camera trucks with the boat.
+6b 38.2-40.0 (dissolve) Dawn in the forest: the camera follows White walking, two sailors behind; shafts of light;
+          great pine trunks pass in the foreground.
+Narration 32.35-39.66 "August, 1590. White finally returned. At night, his men sounded a trumpet and sang English
+          songs. No one answered."
+Text      AUGUST 1590
+Sound     Crickets, frogs, lapping water, oars; the trumpet call; men singing; on "No one answered" the music stops;
+          footsteps in dead leaves.
+Out       MOVING FOREGROUND WIPE (39.6-40.4).
+
+-------------------------------------------------------------------------------------------------------------
+SCENE 7 - THE CLUE                                            40.0 - 48.0 s
+-------------------------------------------------------------------------------------------------------------
+7a 40.0-42.3 Inside the palisade: tall grass, the posts of houses taken down, dug-up chests broken open, torn pages,
+          rusted armour. White walks in and stops, looking round; two sailors follow.
+7b 42.3-48.0 (dissolve) The great post: White in the foreground, from behind, raising his hand; a shaft of light falls
+          across the word; the camera pushes in until CROATOAN fills the frame. On "no cross" a dashed burgundy cross
+          is sketched over the letters and fades - the sign that was not there.
+Narration 40.35-47.10 "The houses were gone. Carved into a post, one word: CROATOAN. And no cross, their agreed sign of distress."
+Text      NO CROSS: NO SIGN OF DISTRESS
+Sound     Wind, a creaking timber, a low drone; a heartbeat; a deep hit on CROATOAN; a thin shimmer for the cross.
+Out       ANIMATED MAP TRANSITION (47.5-48.5): the picture shrinks, framed in ink, into the map.
+
+-------------------------------------------------------------------------------------------------------------
+SCENE 8 - THE THEORIES                                        48.0 - 55.0 s
+-------------------------------------------------------------------------------------------------------------
+Visual    A chart of the coast in the manner of the 1580s: the mainland ("The Main"), Albemarle and Pamlico Sounds,
+          the barrier islands, Roanoke Island ringed in burgundy, Croatoan to the south; compass rose, ships, cartouche.
+Camera    Close on Roanoke, pulling out to the whole coast, then a slow drift.
+Animation Croatoan glows and a ring of houses appears (Manteo's people); a dashed route draws south to Croatoan (51.0);
+          a second route draws inland with two Native towns (52.2); excavation marks appear at Cape Creek (Hatteras)
+          and Site X (Bertie County) (53.6); an ink stamp lands: NOT PROVEN (53.85).
+Narration 48.35-54.99 "Croatoan was a nearby island, home to allies. Did they go there? Join Native communities? No one has proven it."
+Text      CROATOAN: HOME OF MANTEO'S PEOPLE / THEORY: THEY MOVED TO CROATOAN / THEORY: THEY JOINED NATIVE
+          COMMUNITIES / EXCAVATIONS: HATTERAS ISLAND, BERTIE COUNTY / stamp: NOT PROVEN
+Sound     The theme on the lute; a quill scratch for each route; the stamp's deep hit.
+Out       INK SPREAD (54.55-55.45).
+
+-------------------------------------------------------------------------------------------------------------
+SCENE 9 - THE FINAL MYSTERY                                   55.0 - 59.8 s
+-------------------------------------------------------------------------------------------------------------
+Visual    The palisade at dusk again, as in the first frame, foggier; a slow push; the picture fades to black
+          (57.2-58.6) and the question fades up on black.
+Narration 55.30-58.99 "Archaeologists are still searching... and the forest keeps its secret."
+Text      WHAT REALLY HAPPENED / TO ROANOKE? (parchment and burgundy on black)
+Sound     Wind, a distant crow, a low drone; the theme alone on a recorder, fading; a low hit under the question.
+Loop      The last live image is the palisade of the first frame.

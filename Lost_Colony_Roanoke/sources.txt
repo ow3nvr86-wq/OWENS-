@@ -1,0 +1,124 @@
+THE LOST COLONY OF ROANOKE - RESEARCH AND SOURCES
+==================================================
+
+1. SOURCES
+----------
+[WHITE90]  John White's own account of the 1590 voyage, printed by Richard Hakluyt in "The Principal Navigations"
+           (1600). Transcription: https://www.constitution.org/primarysources/ronoake.html
+           Also in the National Park Service handbook: https://www.nps.gov/parkhistory/online_books/hh/16/hh16e3.htm
+[NPS87]    National Park Service, Fort Raleigh National Historic Site, "1587: The Lost Colony".
+           https://home.nps.gov/fora/learn/historyculture/1587-the-lost-colony.htm
+[NPS90]    National Park Service, Fort Raleigh NHS, "1590 Rescue Voyage".
+           https://home.nps.gov/fora/learn/historyculture/1590-rescue-voyage.htm
+[NPSED]    National Park Service, "Search for the Lost Colony" (education).
+           https://home.nps.gov/fora/learn/education/search-for-the-lost-colony.htm
+[NCP]      NCpedia (State Library of North Carolina), "Lost Colony". https://ncpedia.org/lost-colony
+[NCPC]     NCpedia, "Croatoan". https://ncpedia.org/croatoan
+[DNCR]     North Carolina Dept. of Natural and Cultural Resources, "The origins of the Lost Colony mystery" (2016).
+           https://www.dncr.nc.gov/blog/2016/08/18/origins-lost-colony-mystery
+[WIKI]     Wikipedia, "Roanoke Colony" (used only as an index to the sources above and for the ships' names).
+           https://en.wikipedia.org/wiki/Roanoke_Colony
+[WUNC]     WUNC, "What is Site X and what does it tell us about the Lost Colony?" (2015).
+           https://www.wunc.org/arts-culture/2015-08-12/what-is-site-x-and-what-does-it-tell-us-about-the-lost-colony
+[PBSNC]    PBS North Carolina, "Lost Colony split?" https://www.pbsnc.org/blogs/science/lost-colony-split/
+
+
+2. VERIFIED TIMELINE
+--------------------
+1585-86    An earlier, all-male English expedition (Ralph Lane) builds a fort on Roanoke Island, then leaves. [NPS87]
+1587 May   About 115-118 colonists sail under John White, governor, intending to settle on Chesapeake Bay. [NPS87, WIKI]
+1587 July  The fleet reaches Roanoke Island; the pilot, Simon Fernandes, refuses to carry them further. The colonists
+           repair the 1585 fort's houses and build new ones. [NPS87, NCP]
+1587       Colonist George Howe is killed in an ambush; the English retaliate and, by mistake, attack friendly
+           Croatoans. Food is short and winter is coming. [NPS87]
+1587 13 Aug  Manteo, a Croatoan who had worked with the English, is baptised. [NCP]
+1587 18 Aug  Virginia Dare, White's granddaughter, is born on Roanoke Island. [NPS87, NCP]
+1587 late Aug  At the colonists' request White sails to England for supplies and more settlers (27 Aug per WIKI;
+           29 Aug per NPS87; the script says only "sailed to England"). He is the last known English contact. [NCP]
+1588       England, threatened by the Spanish Armada, holds its ships at home; a small relief voyage in 1588 is turned back
+           by attackers at sea. [NPS90, NCP, WIKI]
+1590 Aug   White returns with privateers. At night on 17 August his men see a fire through the woods, "sounded with a
+           trumpet a Call, & afterwardes many familiar English tunes of Songs ... but we had no answere." [WHITE90]
+1590 18 Aug  They land at daybreak (NCpedia notes it was Virginia Dare's third birthday). They find "CRO" carved on a
+           tree, the houses "taken downe", the place "strongly enclosed with a high palisado of great trees", and on
+           one of the posts, "the barke taken off, and 5. foote from the ground in fayre Capitall letters was grauen
+           CROATOAN without any crosse or signe of distresse." White's own chests have been dug up: books torn, maps
+           and pictures rotten with rain, his armour "almost eaten through with rust". [WHITE90, NCP, NPS90]
+           The agreed sign: before he left, the colonists were to carve the name of the place they had gone to, and
+           a cross over it if they left in distress. [WHITE90]
+1590       A storm, a broken cable and lost anchors stop the ships from going on to Croatoan; White never returns. [WHITE90, NPS90]
+
+
+3. THEORIES (presented in the video as theories, never as conclusions)
+---------------------------------------------------------------------
+- They moved to Croatoan (today's Hatteras Island area), home of Manteo's people, and lived among them. The carved
+  word is the main clue; later reports of English-descended Hatteras people (John Lawson, early 1700s) are cited
+  for it. [NCPC, NCP, WIKI]
+- They moved inland and joined or lived beside other Native communities of the mainland (the colonists had spoken of
+  moving "into the main"). Archaeology at "Site X" in Bertie County, chosen after a patch on White's own map was found
+  to hide a fort symbol, has turned up English artefacts; its excavators say this does not prove the colonists lived
+  there, and other archaeologists dispute it. [WUNC, PBSNC, WIKI]
+- Other possibilities discussed by historians: they were killed (a 1609 report and later claims, sources unclear),
+  died of hunger or disease (a tree-ring study shows a severe drought), or were lost at sea. [NCP, WIKI]
+- Archaeologists are still digging on Hatteras (Cape Creek) and in Bertie County; no find has settled the question. [WUNC, PBSNC]
+
+
+4. CLAIM-BY-CLAIM CHECK OF THE NARRATION AND TEXT
+------------------------------------------------
+"An entire colony vanished... and left behind one mysterious word."
+    The colony's fate is unknown [all]. The brief's wording "all they left behind was one word" was softened, because
+    White also found chests, the palisade and "CRO" on a tree [WHITE90]; the word is the key clue.
+"July, 1587." / "More than a hundred English men, women and children landed on Roanoke Island."
+    July 1587 [NPS87]. Numbers vary: ~115 [WIKI], 117-118 [NPS87], so "more than a hundred". Women and children [NPS87].
+    On screen: "Off the coast of present-day North Carolina".
+"They rebuilt an abandoned fort's houses."
+    They repaired the 1585 fort and buildings [NPS87].
+"But food was short, and clashes with local peoples turned deadly."
+    Food shortages and Algonquian attacks strained the colony [NPS87]; George Howe was killed and the English
+    retaliation killed Croatoans by mistake [NPS87]. The arrow in the post stands for Howe's death; no attacker is shown.
+"Governor John White sailed to England for supplies... leaving his newborn granddaughter, Virginia Dare."
+    [NPS87, NCP]. On screen: "Born 18 August 1587".
+"But England was at war with Spain. Ships were held back to fight the Armada. One year became three."
+    [NPS90, NCP]; 1587 -> 1590.
+"August, 1590. White finally returned. At night, his men sounded a trumpet and sang English songs. No one answered."
+    [WHITE90] (quoted above).
+"The houses were gone. Carved into a post, one word: CROATOAN. And no cross, their agreed sign of distress."
+    [WHITE90] (quoted above).
+"Croatoan was a nearby island, home to allies. Did they go there? Join Native communities? No one has proven it."
+    Croatoan, about 50 miles south, home of Manteo's people, friendly to the English [NCPC, NPS87]. Theories as section 3.
+    On screen: "Croatoan: home of Manteo's people", "Theory: they moved to Croatoan", "Theory: they joined Native
+    communities", "Excavations: Hatteras Island, Bertie County", "Not proven".
+"Archaeologists are still searching... and the forest keeps its secret."
+    Excavations continue [WUNC, PBSNC]. The last clause is atmosphere, not a claim.
+
+
+5. CONFIRMED vs UNCERTAIN
+-------------------------
+Confirmed: July 1587 arrival; White's departure in 1587; Virginia Dare's birth on 18 August 1587; the Armada delay;
+the 1590 return; the trumpet and songs at night; the dismantled houses and palisade; "CROATOAN" on a post and "CRO"
+on a tree; no cross.
+Uncertain: the exact number of colonists (112-121); White's exact departure day (27 or 29 August); what happened to
+the colonists. The video does not say whether they survived, assimilated, moved or died.
+
+
+6. WHAT IS ARTISTIC RECONSTRUCTION
+----------------------------------
+- Every face and figure is invented: no portraits of the colonists survive (John White's watercolours show the
+  Algonquian people and places, not the 1587 colonists). Clothing follows English dress of the 1580s in general.
+- The look of the houses (timber frames, wattle and daub, thatch) is a plausible reconstruction; their real form
+  is not known. The palisade, gate posts and the post's size are drawn from White's description, not from evidence.
+- The carving's letter forms are drawn by hand to follow "fair capital letters"; the real letters are not recorded.
+  The dashed burgundy cross over the word is a graphic showing the sign that was NOT there.
+- The map is an illustration in the manner of a 1580s chart, not a survey; the Native towns on it are symbols,
+  not located villages.
+- The Armada plate is a general image of the 1588 campaign (fire ships, a crescent of Spanish ships).
+- The time-lapse of seasons is symbolic: nobody knows when the colonists left the island.
+- Native people are shown only as towns on the map: the video does not depict the Roanoke, Croatoan or other
+  Algonquian peoples as characters, so as not to invent their likenesses or their part in events.
+
+
+7. FACTS CUT FOR TIME
+---------------------
+Manteo's baptism; the mistaken attack on the Croatoans; the second child born (to the Harvie family); the Spanish
+searches of 1588; White's 1588 relief attempt; Fernandes' refusal to sail on to the Chesapeake; the "CRO" on the
+tree; the Lost Colony's shoreline possibly eroded into the sound; the Dare Stones (dismissed as a hoax).

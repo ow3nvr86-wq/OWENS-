@@ -1,0 +1,67 @@
+THE LOST COLONY OF ROANOKE - SOUND DESIGN TIMELINE
+============================================================
+
+Everything is synthesised in audio.py with numpy: no samples, no recordings, no third-party audio.
+Music: an original slow air in D minor (3/4) on a synthetic recorder, lute and viol, over drones. It is hopeful at
+the landing, thins as food runs short, turns martial for the Armada, stops dead when no one answers, and
+returns alone and fading at the end.
+Mix: music and ambience are ducked about 7 dB under the narration; both mixes are normalised to -14 LUFS (true peak -1.5 dB).
+
+NARRATION (Kokoro-82M, voice bm_george)
+    0.12 -   4.29  An entire colony vanished... and left behind one mysterious word.
+    4.40 -  10.65  July, 1587. More than a hundred English men, women and children landed on Roanoke Island.
+   11.35 -  17.73  They rebuilt an abandoned fort's houses. But food was short, and clashes with local peoples turned deadly.
+   18.35 -  24.17  Governor John White sailed to England for supplies... leaving his newborn granddaughter, Virginia Dare.
+   25.35 -  31.38  But England was at war with Spain. Ships were held back to fight the Armada. One year became three.
+   32.35 -  39.66  August, 1590. White finally returned. At night, his men sounded a trumpet and sang English songs. No one answered.
+   40.35 -  47.09  The houses were gone. Carved into a post, one word: CROATOAN. And no cross, their agreed sign of distress.
+   48.35 -  54.99  Croatoan was a nearby island, home to allies. Did they go there? Join Native communities? No one has proven it.
+   55.30 -  58.99  Archaeologists are still searching... and the forest keeps its secret.
+
+CUES (time in seconds, layer, description)
+    0.00  music     A low drone and a single bowed viol note swell out of silence
+    0.00  ambience  Wind in the pines; moss and grass rustle
+    1.60  sfx       A crow caws and flaps off the palisade
+    3.60  sfx       Wet ink swoosh (ink transition)
+    3.72  sfx       A deep, soft hit as the camera reaches the word
+    4.00  ambience  Open sea: waves, wind in the sails
+    4.40  music     The theme: an original slow air in D minor on recorder, lute and viol
+    4.60  sfx       The hull and rigging creak
+    4.90  ambience  Gulls
+    7.60  sfx       Footsteps in the sand; the surf on the beach
+   10.55  sfx       Whoosh: a timber post sweeps across the lens
+   11.15  sfx       Mallets on timber
+   13.75  music     Food short: the air thins to the drone and a single line
+   16.55  sfx       An arrow whistles in and strikes the post
+   17.60  sfx       Page turn
+   18.20  music     The air passes to the viol, lower and slower
+   21.60  music     A soft choir as the ship sails out over the horizon
+   24.62  sfx       Paper tearing (tear transition)
+   25.10  music     A war drum and a buzzing drone
+   25.20  sfx       Cannon fire: broadsides at the Armada
+   28.95  music     A soft hit on each new year: 1588, 1589, 1590
+   29.70  ambience  Winter wind
+   31.05  sfx       Storm: rain, lightning and thunder
+   31.40  ambience  Summer 1590: insects in the long grass, and nobody
+   32.00  ambience  Night: crickets, frogs, water lapping
+   32.30  sfx       Oars dip and creak in the rowlocks
+   36.55  sfx       A trumpet call carries across the water (D - A - D)
+   37.15  sfx       Men singing an English tune into the dark
+   38.30  music     "No one answered": the music stops; only the night
+   38.30  sfx       Dawn: footsteps in dead leaves, a far-off crow
+   40.00  ambience  The empty enclosure: wind, a creaking timber, a low drone
+   42.60  sfx       A slow heartbeat as the camera closes on the post
+   43.56  music     CROATOAN: a deep hit and a dissonant viol cluster
+   44.45  music     A thin shimmer as the missing cross is sketched in
+   47.55  sfx       Down-whoosh as the post shrinks into the map
+   48.30  music     The theme returns on a lute, questioning
+   51.00  sfx       A quill scratches as each route is drawn
+   53.85  sfx       Ink stamp lands: "NOT PROVEN"
+   55.00  ambience  The fort again: wind and a distant crow
+   55.30  music     The theme, alone on the recorder, fading
+   57.30  sfx       "WHAT REALLY HAPPENED TO ROANOKE?" fades up on black over a low hit
+
+SUGGESTED ASSETS FOR A RE-SCORE (licence-free options)
+  - Period music: public-domain Elizabethan consort or lute pieces (e.g. Dowland, Byrd) in a CC0 recording,
+    or record your own; recorder, lute and viol suit the setting.
+  - Surf, gulls, crows, crickets, storm and footsteps: CC0 field recordings (e.g. Freesound filtered to CC0).

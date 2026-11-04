@@ -1,0 +1,32 @@
+THE LOST COLONY OF ROANOKE - NARRATION SCRIPT (59.8 s, 143 words)
+Voice: Kokoro-82M bm_george. Times are measured from the synthesised voice.
+Delivery: serious, mysterious, controlled; quiet dread; let the short sentences land.
+
+[SCENE 1 - THE DISAPPEARANCE  0.0-4.0 s]
+(00.12-04.29) An entire colony vanished... and left behind one mysterious word.
+
+[SCENE 2 - THE ARRIVAL  4.0-11.0 s]
+(04.40-10.65) July, 1587. More than a hundred English men, women and children landed on Roanoke Island.
+
+[SCENE 3 - BUILDING A NEW LIFE  11.0-18.0 s]
+(11.35-17.73) They rebuilt an abandoned fort's houses. But food was short, and clashes with local peoples turned deadly.
+
+[SCENE 4 - THE DEPARTURE  18.0-25.0 s]
+(18.35-24.17) Governor John White sailed to England for supplies... leaving his newborn granddaughter, Virginia Dare.
+
+[SCENE 5 - THE LONG WAIT  25.0-32.0 s]
+(25.35-31.38) But England was at war with Spain. Ships were held back to fight the Armada. One year became three.
+
+[SCENE 6 - THE RETURN  32.0-40.0 s]
+(32.35-39.66) August, 1590. White finally returned. At night, his men sounded a trumpet and sang English songs. No one answered.
+
+[SCENE 7 - THE CLUE  40.0-48.0 s]
+(40.35-47.09) The houses were gone. Carved into a post, one word: CROATOAN. And no cross, their agreed sign of distress.
+
+[SCENE 8 - THE THEORIES  48.0-55.0 s]
+(48.35-54.99) Croatoan was a nearby island, home to allies. Did they go there? Join Native communities? No one has proven it.
+
+[SCENE 9 - THE FINAL MYSTERY  55.0-59.8 s]
+(55.30-58.99) Archaeologists are still searching... and the forest keeps its secret.
+
+Total: 143 words. Every line is checked against sources.txt (section 4).

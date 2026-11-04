@@ -1,0 +1,347 @@
+{
+ "title": "THE LOST COLONY OF ROANOKE",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "duration": 59.8,
+ "scenes": [
+  {
+   "id": 1,
+   "key": "vanish",
+   "name": "THE DISAPPEARANCE",
+   "start": 0.0,
+   "end": 4.0,
+   "in": "cut",
+   "camera": "a slow push through the fog of the abandoned, palisaded settlement toward one post"
+  },
+  {
+   "id": 2,
+   "key": "arrival",
+   "name": "THE ARRIVAL",
+   "start": 4.0,
+   "end": 11.0,
+   "in": "ink",
+   "camera": "ships at sea with a sideways truck; then the shore: a longboat lands and settlers step ashore"
+  },
+  {
+   "id": 3,
+   "key": "build",
+   "name": "BUILDING A NEW LIFE",
+   "start": 11.0,
+   "end": 18.0,
+   "in": "wipe",
+   "camera": "a slow truck across the settlement as houses rise, frame by frame"
+  },
+  {
+   "id": 4,
+   "key": "depart",
+   "name": "THE DEPARTURE",
+   "start": 18.0,
+   "end": 25.0,
+   "in": "page",
+   "camera": "close on John White at the shore; then a wide shot as his ship sails over the horizon"
+  },
+  {
+   "id": 5,
+   "key": "wait",
+   "name": "THE LONG WAIT",
+   "start": 25.0,
+   "end": 32.0,
+   "in": "tear",
+   "camera": "an engraved plate of the Armada; then the settlement through the seasons, emptier each time"
+  },
+  {
+   "id": 6,
+   "key": "return",
+   "name": "THE RETURN",
+   "start": 32.0,
+   "end": 40.0,
+   "in": "dissolve",
+   "camera": "night: a boat with a lantern and a trumpet; dawn: the camera follows White through the forest"
+  },
+  {
+   "id": 7,
+   "key": "clue",
+   "name": "THE CLUE",
+   "start": 40.0,
+   "end": 48.0,
+   "in": "wipe",
+   "camera": "the empty palisade and dug-up chests; then a slow push onto the carved letters"
+  },
+  {
+   "id": 8,
+   "key": "theories",
+   "name": "THE THEORIES",
+   "start": 48.0,
+   "end": 55.0,
+   "in": "map",
+   "camera": "an illustrated map of the coast, with routes drawn as theories, pushing in"
+  },
+  {
+   "id": 9,
+   "key": "end",
+   "name": "THE FINAL MYSTERY",
+   "start": 55.0,
+   "end": 59.8,
+   "in": "match",
+   "camera": "the abandoned settlement again; a slow push and a fade to black"
+  }
+ ],
+ "lines": [
+  {
+   "scene": 1,
+   "start": 0.12,
+   "deadline": 4.3,
+   "text": "An entire colony vanished... and left behind one mysterious word.",
+   "tts": "An entire colony vanished... and left behind one mysterious word.",
+   "hl": [
+    "VANISHED...",
+    "WORD."
+   ]
+  },
+  {
+   "scene": 2,
+   "start": 4.4,
+   "deadline": 10.75,
+   "text": "July, 1587. More than a hundred English men, women and children landed on Roanoke Island.",
+   "tts": "July, fifteen eighty-seven. More than a hundred English men, women and children landed on Roanoke Island.",
+   "hl": [
+    "1587.",
+    "HUNDRED",
+    "ROANOKE"
+   ]
+  },
+  {
+   "scene": 3,
+   "start": 11.35,
+   "deadline": 17.75,
+   "text": "They rebuilt an abandoned fort's houses. But food was short, and clashes with local peoples turned deadly.",
+   "tts": "They rebuilt an abandoned fort's houses. But food was short, and clashes with local peoples turned deadly.",
+   "hl": [
+    "FOOD",
+    "SHORT,",
+    "DEADLY."
+   ]
+  },
+  {
+   "scene": 4,
+   "start": 18.35,
+   "deadline": 24.75,
+   "text": "Governor John White sailed to England for supplies... leaving his newborn granddaughter, Virginia Dare.",
+   "tts": "Governor John White sailed to England for supplies... leaving his newborn granddaughter, Virginia Dare.",
+   "hl": [
+    "JOHN",
+    "WHITE",
+    "VIRGINIA",
+    "DARE."
+   ]
+  },
+  {
+   "scene": 5,
+   "start": 25.35,
+   "deadline": 31.75,
+   "text": "But England was at war with Spain. Ships were held back to fight the Armada. One year became three.",
+   "tts": "But England was at war with Spain. Ships were held back to fight the Armada. One year... became three.",
+   "hl": [
+    "SPAIN.",
+    "ARMADA.",
+    "THREE."
+   ]
+  },
+  {
+   "scene": 6,
+   "start": 32.35,
+   "deadline": 39.75,
+   "text": "August, 1590. White finally returned. At night, his men sounded a trumpet and sang English songs. No one answered.",
+   "tts": "August, fifteen ninety. White finally returned. At night, his men sounded a trumpet, and sang English songs. No one answered.",
+   "hl": [
+    "1590.",
+    "TRUMPET",
+    "NO",
+    "ANSWERED."
+   ]
+  },
+  {
+   "scene": 7,
+   "start": 40.35,
+   "deadline": 47.75,
+   "text": "The houses were gone. Carved into a post, one word: CROATOAN. And no cross, their agreed sign of distress.",
+   "tts": "The houses were gone. Carved into a post, one word: Croatoan. And no cross, their agreed sign of distress.",
+   "hl": [
+    "CROATOAN.",
+    "NO",
+    "CROSS,"
+   ]
+  },
+  {
+   "scene": 8,
+   "start": 48.35,
+   "deadline": 54.75,
+   "text": "Croatoan was a nearby island, home to allies. Did they go there? Join Native communities? No one has proven it.",
+   "tts": "Croatoan was a nearby island, home to allies. Did they go there? Join Native communities? No one has proven it.",
+   "hl": [
+    "ISLAND,",
+    "ALLIES.",
+    "PROVEN"
+   ]
+  },
+  {
+   "scene": 9,
+   "start": 55.3,
+   "deadline": 59.1,
+   "text": "Archaeologists are still searching... and the forest keeps its secret.",
+   "tts": "Archaeologists are still searching... and the forest, keeps its secret.",
+   "hl": [
+    "SEARCHING...",
+    "SECRET."
+   ]
+  }
+ ],
+ "titles": [
+  {
+   "start": 0.3,
+   "end": 3.3,
+   "style": "tag",
+   "text": "AN ILLUSTRATED RECONSTRUCTION"
+  },
+  {
+   "start": 0.5,
+   "end": 3.4,
+   "style": "hero",
+   "text": "The Lost Colony"
+  },
+  {
+   "start": 4.5,
+   "end": 7.2,
+   "style": "label",
+   "text": "JULY 1587"
+  },
+  {
+   "start": 7.8,
+   "end": 10.8,
+   "style": "label",
+   "text": "ROANOKE ISLAND"
+  },
+  {
+   "start": 8.0,
+   "end": 10.8,
+   "style": "tag",
+   "text": "OFF THE COAST OF PRESENT-DAY NORTH CAROLINA",
+   "y": 0.235
+  },
+  {
+   "start": 14.6,
+   "end": 17.8,
+   "style": "tag",
+   "text": "SUPPLIES RAN SHORT"
+  },
+  {
+   "start": 18.4,
+   "end": 21.3,
+   "style": "label",
+   "text": "JOHN WHITE"
+  },
+  {
+   "start": 18.6,
+   "end": 21.3,
+   "style": "tag",
+   "text": "GOVERNOR OF THE COLONY",
+   "y": 0.235
+  },
+  {
+   "start": 22.0,
+   "end": 24.9,
+   "style": "label",
+   "text": "VIRGINIA DARE"
+  },
+  {
+   "start": 22.2,
+   "end": 24.9,
+   "style": "tag",
+   "text": "HIS GRANDDAUGHTER, BORN 18 AUGUST 1587",
+   "y": 0.235
+  },
+  {
+   "start": 25.4,
+   "end": 28.6,
+   "style": "label",
+   "text": "1588: THE SPANISH ARMADA"
+  },
+  {
+   "start": 28.95,
+   "end": 29.8,
+   "style": "big",
+   "text": "1588"
+  },
+  {
+   "start": 29.85,
+   "end": 30.8,
+   "style": "big",
+   "text": "1589"
+  },
+  {
+   "start": 30.85,
+   "end": 31.9,
+   "style": "big",
+   "text": "1590"
+  },
+  {
+   "start": 32.4,
+   "end": 35.0,
+   "style": "label",
+   "text": "AUGUST 1590"
+  },
+  {
+   "start": 44.5,
+   "end": 47.7,
+   "style": "tag",
+   "text": "NO CROSS: NO SIGN OF DISTRESS"
+  },
+  {
+   "start": 48.5,
+   "end": 50.8,
+   "style": "tag",
+   "text": "CROATOAN: HOME OF MANTEO'S PEOPLE"
+  },
+  {
+   "start": 51.0,
+   "end": 52.1,
+   "style": "label",
+   "text": "THEORY: THEY MOVED TO CROATOAN"
+  },
+  {
+   "start": 52.2,
+   "end": 53.5,
+   "style": "label",
+   "text": "THEORY: THEY JOINED NATIVE COMMUNITIES"
+  },
+  {
+   "start": 53.7,
+   "end": 55.0,
+   "style": "tag",
+   "text": "EXCAVATIONS: HATTERAS ISLAND, BERTIE COUNTY"
+  },
+  {
+   "start": 53.85,
+   "end": 55.0,
+   "style": "stamp",
+   "text": "NOT PROVEN",
+   "y": 0.42
+  },
+  {
+   "start": 57.3,
+   "end": 59.8,
+   "style": "endq",
+   "text": "WHAT REALLY HAPPENED|TO ROANOKE?",
+   "y": 0.45
+  }
+ ],
+ "events": {
+  "crow": 1.6,
+  "arrow": 16.55,
+  "trumpet": 36.55,
+  "lightning": 31.05,
+  "ghost_cross": 44.45,
+  "stamp": 53.85
+ }
+}
