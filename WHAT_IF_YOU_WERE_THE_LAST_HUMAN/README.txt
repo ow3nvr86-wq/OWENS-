@@ -108,7 +108,21 @@ captions are listed in scene_timing.json ("keys") and in storyboard.txt.
 To retime: edit scene_timing.json, re-run tools/voiceover.py and tools/captions.py, then render, audio and edit.
 Re-render only the shots whose 3D content or timing you changed.
 
-RENDER_TIMES_PLACEHOLDER
+RENDER TIMES (4 CPU cores, no GPU, Cycles CPU)
+----------------------------------------------
+  Look-dev stills (270x480, 4 samples)       about 2-6 s per frame, plus about 1 min of scene building per run
+  Preview, 1,770 frames (270x480, 4 samples)  about 2 s per frame, about 45 min in total (plus a short re-render of two
+                                              ranges after a silent crash; render_all.sh resumes, so only missing
+                                              frames are rendered again)
+  Final, 1,770 frames (540x960, 6 samples)    6.3 s per frame on average (4.0 s fastest, 10 s slowest; 80 % of
+                                              frames between 5.2 and 7.7 s), 3 h 10 min in total; it ran as two background runs
+                                              because one command may run for at most 2 hours, resuming at frame 1050
+  Audio stage                                 about 1 min
+  Edit stage (final_video.mp4)                3 min 35 s
+  Edit stage --no-voice                       3 min 11 s
+
+  final_video.mp4                   1080x1920, 30 fps, 59.0 s, H.264 + AAC 48 kHz, 58.9 MB, -14.0 LUFS (peak -2.2 dBFS)
+  renders/final_video_no_voice.mp4  1080x1920, 30 fps, 59.0 s, H.264 + AAC 48 kHz, 60.0 MB, -14.0 LUFS (peak -1.7 dBFS)
 
 
 QUALITY CHECK (against the brief)
