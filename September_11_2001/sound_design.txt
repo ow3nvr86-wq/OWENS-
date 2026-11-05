@@ -1,0 +1,34 @@
+SEPTEMBER 11, 2001: THE DAY THE WORLD STOOD STILL - SOUND DESIGN TIMELINE
+============================================================
+
+Everything is synthesised in audio.py with numpy: no samples, no recordings, no third-party audio.
+Music: restrained and respectful: a warm string pad and low drones, a slow falling piano line for the aftermath,
+and quiet piano chords in D minor at the memorial. No impact, crash, explosion or collapse sounds are used:
+the times are marked by soft, low swells and quiet interface tones.
+Mix: music and ambience are ducked about 7 dB under the narration; both mixes are normalised to -14 LUFS (true peak -1.5 dB).
+
+NARRATION (Kokoro-82M, voice bm_george)
+    0.35 -   4.31  At 8:46 a.m., an ordinary morning changed forever.
+    4.75 -   9.11  Two hijacked passenger planes struck the towers of the World Trade Center.
+    9.65 -  15.19  Another hit the Pentagon. A fourth crashed in Pennsylvania, after passengers and crew fought back.
+   15.55 -  21.58  Both towers fell. Nearly 3,000 people were killed, leaving families and communities devastated.
+   22.60 -  24.82  And the world would never be the same.
+
+CUES (time in seconds, layer, description)
+    0.00  ambience  A quiet city morning across the water: distant traffic, voices, water, a few birds
+    0.75  sfx       A low, cushioned impact as the date appears
+    4.05  sfx       A soft air whoosh into the timeline
+    4.60  sfx       A quiet clock tick under the timeline
+    5.30  sfx       8:46 and 9:03: a deep, restrained hit for each time; no impact sounds
+    9.40  music     A low drone and a minor string pad
+    9.55  sfx       A soft tone as each place is marked: New York, the Pentagon, Shanksville
+   15.50  music     Music: a slow, falling piano line over a low cello-like viol
+   16.40  ambience  Sirens far off, filtered and quiet; wind; dust
+   22.20  ambience  The steady fall of water at the memorial pools
+   22.40  music     Quiet, reflective piano chords
+   26.30  music     "WE WILL NEVER FORGET.": a soft swell under the final chord
+   28.50  sfx       The channel mark: one soft tone; fade to silence
+
+SUGGESTED ASSETS FOR A RE-SCORE (licence-free options)
+  - Music: a solo piano or string piece of your own, or a CC0 recording.
+  - City ambience, wind and water: CC0 field recordings (e.g. Freesound filtered to CC0).

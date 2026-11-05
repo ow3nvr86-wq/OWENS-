@@ -1,0 +1,57 @@
+SEPTEMBER 11, 2001: THE DAY THE WORLD STOOD STILL - SCENE-BY-SCENE STORYBOARD
+=============================================================================
+
+30.0 s, 1080 x 1920 (9:16), 30 fps. Modern flat 2D motion graphics (navy, charcoal, cool grey, muted blue,
+white, restrained red). Clean vector shapes with gradients, soft light, bloom, a vignette and fine grain; no
+outlines-and-paper look. Depth from layers moved at different speeds. Captions: Inter ExtraBold, white with a
+soft shadow, short phrases; key words in red with a thin red underline. Everything important sits in the
+centre of the frame, clear of the Shorts interface.
+
+SCENE 1 - THE OPENING                                       0.0 - 4.4 s
+  A clear September morning seen across the Hudson: a soft blue sky, drifting clouds, the morning sun behind
+  Lower Manhattan, the Twin Towers catching the light, the river shimmering, a ferry crossing, birds, a
+  waterfront railing in the foreground. A slow push toward the towers.
+  Text: NEW YORK CITY / SEPTEMBER 11, 2001 (slides up and settles)
+  Narration 0.35-4.31 "At 8:46 a.m., an ordinary morning changed forever."  (8:46 A.M. in red)
+  Sound: quiet city ambience, water, a few birds, a warm pad; a low cushioned impact as the date appears.
+  Out: SLIDE (4.05-4.75): the morning slides up and away.
+
+SCENE 2 - THE ATTACKS                                       4.4 - 9.4 s
+  A dark navy drawing board with a faint grid; the skyline as silhouettes; the towers as line drawings with every
+  fifth floor ruled. A large clock: 8:46 - NORTH TOWER, a red band at floors 93-99; then 9:03 - SOUTH TOWER, a red
+  band at floors 77-85; thin grey smoke drifts from each band. A timeline along the bottom fills from 8:46 to 9:03.
+  No aircraft or impact is shown.
+  Text: AMERICAN 11 AND UNITED 175 / 8:46 NORTH TOWER / 9:03 SOUTH TOWER
+  Narration 4.75-9.11 "Two hijacked passenger planes struck the towers of the World Trade Center."
+  Sound: a soft whoosh, a low drone, a quiet clock tick, a deep restrained swell at each time.
+  Out: ZOOM (9.05-9.75): the drawing scales away into the map.
+
+SCENE 3 - THE DISASTER SPREADS                              9.4 - 15.2 s
+  A clean map of the eastern United States: coastline, Long Island, the Great Lakes, the Pennsylvania border and
+  rivers dashed, state names, a faint graticule. The view pulls out from New York. Markers pop with expanding
+  rings: NEW YORK CITY 8:46 / 9:03 AM; THE PENTAGON 9:37 AM (a Pentagon icon drawn from above); SHANKSVILLE, PA
+  10:03 AM, UNITED FLIGHT 93. Dashed lines link them as each is reached.
+  Text: PASSENGERS AND CREW FOUGHT BACK
+  Narration 9.65-15.19 "Another hit the Pentagon. A fourth crashed in Pennsylvania, after passengers and crew fought back."
+  Sound: a soft tone for each marker, a low drone and a minor string pad.
+  Out: CROSS DISSOLVE (14.8-15.6).
+
+SCENE 4 - THE AFTERMATH                                     15.2 - 22.2 s
+  4a 15.2-18.4 The skyline again under a grey, dusty sky: the towers fade from the skyline while smoke drifts
+     across Lower Manhattan; dust falls through the frame.
+  4b 18.4-22.2 Street level in the dust: firefighters walking in, one directing, fire engines with flashing light
+     bars, people gathered at a barrier holding one another, all as anonymous silhouettes with rim light.
+  Text: SOUTH TOWER 9:59 AM / NORTH TOWER 10:28 AM; then 2,977 / LIVES LOST
+  Narration 15.55-21.58 "Both towers fell. Nearly 3,000 people were killed, leaving families and communities devastated."
+  Sound: wind, quiet filtered sirens far off, a slow falling piano line over a low viol.
+  Out: CROSS DISSOLVE (21.6-22.8).
+
+SCENE 5 - THE FINAL MESSAGE                                 22.2 - 30.0 s
+  5a 22.2-26.0 The 9/11 Memorial at blue hour: a pool with water falling down its walls into the central void, the
+     bronze parapet where the names are inscribed, paving and rows of trees, One World Trade Center behind; a slow
+     drift forward.
+  5b 26.0-28.4 Night across the Hudson: the Tribute in Light rises as two beams over Lower Manhattan.
+  5c 28.4-30.0 The Hidden Archives mark on navy; fade to black.
+  Text: THE 9/11 MEMORIAL, NEW YORK / WE WILL / NEVER FORGET.
+  Narration 22.60-24.82 "And the world would never be the same."
+  Sound: falling water, a warm pad, quiet piano chords in D minor, a soft swell under the last words, one tone for the mark.

@@ -1,0 +1,25 @@
+SEPTEMBER 11, 2001: THE DAY THE WORLD STOOD STILL - NARRATION SCRIPT (30.0 s, 56 words)
+Voice: Kokoro-82M bm_george. Times are measured from the synthesised voice.
+Delivery: serious, calm, respectful documentary tone; never dramatic; let the short sentences land.
+
+OPENING HOOKS (three candidates)
+  A. The ordinary morning (CHOSEN): Picture: a clear blue September sky over the Hudson, a ferry, the Twin Towers catching the sun, the date typed in. Voice: "At 8:46 a.m., an ordinary morning changed forever." The calm image and the exact time open the question "what happened at 8:46?", which the next scene answers on a clock.
+  B. The minute before: A clock reading 8:45 over the calm skyline, ticking. "In one minute, this skyline would change forever." Strong suspense, but it spends two seconds on a clock instead of the city.
+  C. 102 minutes: "In 102 minutes, the New York skyline changed forever." (8:46 to the North Tower's collapse at 10:28.) Precise and striking, but a number means little until the viewer knows what it measures.
+
+[SCENE 1 - THE OPENING  0.0-4.4 s]
+(00.35-04.31) At 8:46 a.m., an ordinary morning changed forever.
+
+[SCENE 2 - THE ATTACKS  4.4-9.4 s]
+(04.75-09.11) Two hijacked passenger planes struck the towers of the World Trade Center.
+
+[SCENE 3 - THE DISASTER SPREADS  9.4-15.2 s]
+(09.65-15.19) Another hit the Pentagon. A fourth crashed in Pennsylvania, after passengers and crew fought back.
+
+[SCENE 4 - THE AFTERMATH  15.2-22.2 s]
+(15.55-21.58) Both towers fell. Nearly 3,000 people were killed, leaving families and communities devastated.
+
+[SCENE 5 - THE FINAL MESSAGE  22.2-30.0 s]
+(22.60-24.82) And the world would never be the same.
+
+Total: 56 words. Every line is checked against sources.txt (section 4).

@@ -1,0 +1,74 @@
+SEPTEMBER 11, 2001: THE DAY THE WORLD STOOD STILL - RESEARCH AND SOURCES
+=========================================================================
+
+1. SOURCES
+----------
+[MEM]    National September 11 Memorial & Museum: timeline of the day, the Memorial (two reflecting pools in the
+         footprints of the Twin Towers; the names of the 2,977 victims of the attacks of September 11, 2001, and the six
+         of the 1993 bombing, inscribed in bronze parapets around the pools). https://www.911memorial.org
+[NPS]    National Park Service, Flight 93 National Memorial: 33 passengers and 7 crew; their collective action against
+         the hijackers; the crash near Shanksville, Pennsylvania at 10:03 a.m.
+         https://www.nps.gov/flni/learn/historyculture/index.htm  https://www.nps.gov/places/passenger-and-crew-members.htm
+[NPSB]   NPS Flight 93 National Memorial brochures (2012-2023). https://npshistory.com/publications/flni/index.htm
+[COMM]   The 9/11 Commission Report (2004), ch. 1 "We Have Some Planes": times of the four crashes (8:46:40 North Tower;
+         9:03:11 South Tower; 9:37:46 Pentagon; 10:03:11 Flight 93) and of the collapses (South Tower 9:58:59; North
+         Tower 10:28:22). https://www.9-11commission.gov/report/
+[PENT]   Pentagon Memorial: American Airlines Flight 77 struck the Pentagon's western facade at 9:37 a.m.; 184 lives lost.
+         https://pentagonmemorial.org
+[ABC]    ABC7 timeline of the day (compiled from the Memorial and the Commission; used only for cross-checking).
+         https://abc7news.com/911-timeline-anniversary-memorial/6411796/
+[SI]     Smithsonian National Museum of American History, "September 11: Bearing Witness to History".
+         https://americanhistory.si.edu/september-11
+
+
+2. VERIFIED FACTS USED
+----------------------
+- 19 al-Qaeda terrorists hijacked four commercial aircraft. [COMM, MEM]
+- 8:46 a.m.  American Airlines Flight 11 struck the North Tower (1 WTC), floors 93-99. [MEM, COMM]
+- 9:03 a.m.  United Airlines Flight 175 struck the South Tower (2 WTC), floors 77-85. [MEM, COMM]
+- 9:37 a.m.  American Airlines Flight 77 struck the Pentagon. [PENT, COMM]
+- 10:03 a.m. United Airlines Flight 93 crashed in a field near Shanksville, Pennsylvania, after passengers and crew
+             fought back against the hijackers. [NPS, COMM]
+- 9:59 a.m.  the South Tower collapsed; 10:28 a.m. the North Tower collapsed. [COMM, MEM]
+- 2,977 people were killed (the 19 hijackers are not counted). [MEM]
+- The 9/11 Memorial's two pools sit in the footprints of the Twin Towers; water falls down their walls; the victims'
+  names are inscribed in bronze around them. [MEM]
+- The Tribute in Light: two vertical beams of light shown over Lower Manhattan each year on the anniversary. [MEM]
+
+
+3. CLAIM-BY-CLAIM CHECK
+-----------------------
+"At 8:46 a.m., an ordinary morning changed forever."  8:46 [MEM, COMM]. On screen: New York City / September 11, 2001.
+"Two hijacked passenger planes struck the towers of the World Trade Center."  [MEM, COMM]
+    On screen: 8:46 North Tower, 9:03 South Tower; "American 11 and United 175"; the marked bands are the floors
+    struck (93-99; 77-85).
+"Another hit the Pentagon. A fourth crashed in Pennsylvania, after passengers and crew fought back."  [PENT, NPS, COMM]
+    On screen: The Pentagon 9:37 AM; Shanksville, PA 10:03 AM; United Flight 93; "Passengers and crew fought back".
+"Both towers fell. Nearly 3,000 people were killed, leaving families and communities devastated."
+    [COMM, MEM]. On screen: South Tower 9:59 AM / North Tower 10:28 AM; 2,977 lives lost.
+"And the world would never be the same."  A closing reflection, not a factual claim.
+    On screen: The 9/11 Memorial, New York; We will never forget.
+
+
+4. HOW THE EVENTS ARE SHOWN (and what is reconstruction)
+--------------------------------------------------------
+- No aircraft, impact, fire, falling person or injury is shown. The attacks are told with a clock, a timeline, red
+  bands on line drawings of the towers at the floors struck, and thin grey smoke.
+- The skyline is a simplified illustration of Lower Manhattan seen across the Hudson; apart from the Twin Towers and
+  One World Trade Center, the buildings are generic, not portraits of particular buildings.
+- The towers are drawn to their real proportions (about 63 m wide, 415-417 m tall, the North Tower's antenna about
+  110 m) with the mechanical floors as bands; the façade is simplified.
+- The map is a simplified, schematic map of the eastern United States (coastline, lakes, the Pennsylvania border,
+  rivers as dashed lines); it is not a survey.
+- The responders and the people at the barrier are anonymous silhouettes; no real person is depicted or named.
+- The memorial view is an illustration of one pool, not an exact plan; One World Trade Center (completed 2014) stands
+  behind it. The Tribute in Light is the annual memorial installation, shown at night.
+- The attackers are not named, shown or described beyond the fact of the hijacking.
+- Nothing about who was responsible is speculated on beyond the established facts.
+
+
+5. FACTS CUT FOR TIME
+---------------------
+The exact seconds of each crash and collapse; the numbers aboard each flight; the 184 people killed at the Pentagon;
+the 40 passengers and crew of Flight 93; the collapse of 7 World Trade Center at 5:20 p.m.; the 343 FDNY firefighters
+and other first responders killed; the recovery at Ground Zero.

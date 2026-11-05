@@ -1,0 +1,343 @@
+"""Render the September 11 Short: every frame drawn in 2D with pycairo, finished with numpy,
+captioned with PIL and encoded with ffmpeg.
+
+  python render.py --stills 0.5,3,5.5          # look-dev stills -> build/stills/
+  python render.py --preview                   # 540x960 frames, upscaled -> renders/preview.mp4
+  python render.py                             # 1080x1920 -> final_video.mp4 (needs audio/mix_with_voice.wav)
+  python render.py --no-voice                  # music and sound only, no captions -> renders/final_video_no_voice.mp4
+  python render.py --range 0,6 --out build/s1.mp4   # one section
+Options: --workers N (default 4), --no-captions.
+"""
+import argparse
+import math
+import os
+import subprocess
+import sys
+import time
+from multiprocessing import Pool
+
+import numpy as np
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(ROOT, 'src'))
+
+import cairo  # noqa: E402
+
+from core import W, H, FPS, DURATION, NFRAMES, PAL, set_c, new_surface, surf_array, clamp, smooth, smoother, ease_out, ease_in, fbm2, ink_shape, hash01  # noqa: E402
+import post  # noqa: E402
+import text  # noqa: E402
+import scenes  # noqa: E402
+
+# Sub-scenes on the edit timeline: (key, start, end); each is drawn by scenes.scene_<key>
+TIMELINE = [
+    ('opening', 0.0, 4.4), ('attacks', 4.4, 9.4), ('map', 9.4, 15.2), ('skysmoke', 15.2, 18.4), ('responders', 18.4, 22.2),
+    ('memorial', 22.2, 26.0), ('tribute', 26.0, 28.4), ('logo', 28.4, DURATION + 0.5),
+]
+# transition at the START of each entry: (type, half-width in seconds)
+TRANS = {'attacks': ('slide', 0.35), 'map': ('zoom', 0.35), 'skysmoke': ('dissolve', 0.4), 'responders': ('dissolve', 0.35),
+         'memorial': ('dissolve', 0.6), 'tribute': ('dissolve', 0.5), 'logo': ('dissolve', 0.45)}
+
+
+def bind():
+    for i, e in enumerate(TIMELINE):
+        if len(e) == 3:
+            k, a, b = e
+            TIMELINE[i] = (k, a, b, getattr(scenes, 'scene_' + k, None) or placeholder(k))
+
+
+def placeholder(k):
+    def fn(ctx, t, os_):
+        set_c(ctx, PAL['parch2'])
+        ctx.paint()
+        return dict(dark=0.2)
+    return fn
+
+
+def render_scene(fn, t, os_):
+    w, h = int(W * os_), int(H * os_)
+    s = new_surface(w, h)
+    ctx = cairo.Context(s)
+    set_c(ctx, PAL['charcoal'])
+    ctx.paint()
+    look = fn(ctx, t, os_) or {}
+    rgb = post.finish(surf_array(s), os_, t, look)
+    return rgb
+
+
+_NOISE = {}
+
+
+def noise_tex(os_, seed=3, scale=110.0):
+    key = (os_, seed)
+    if key not in _NOISE:
+        w, h = int(W * os_), int(H * os_)
+        n = fbm2(h, w, seed, scale=scale * os_, octaves=5)
+        _NOISE[key] = n
+    return _NOISE[key]
+
+
+def combine(kind, A, B, u, os_, t):
+    """Blend outgoing frame A into incoming frame B; u runs 0 -> 1 across the transition."""
+    h, w = A.shape[:2]
+    fa = A.astype(np.float32)
+    fb = B.astype(np.float32)
+    if kind == 'dissolve':
+        k = smooth(u)
+        return (fa * (1 - k) + fb * k).astype(np.uint8)
+    if kind == 'slide':
+        # a clean vertical push: the outgoing frame slides up, the next rises in behind a soft dark edge
+        k = smoother(u)
+        off = int(h * k)
+        out = np.empty_like(fa)
+        out[:h - off] = fa[off:]
+        out[h - off:] = fb[:off] if off > 0 else out[h - off:]
+        edge = np.clip(1 - np.abs(np.arange(h) - (h - off))[:, None] / (60 * os_), 0, 1)
+        out = out * (1 - 0.5 * edge[..., None])
+        return np.clip(out, 0, 255).astype(np.uint8)
+    if kind == 'zoom':
+        # the outgoing frame scales up and fades while the next settles in from slightly larger
+        from PIL import Image
+        k = smoother(u)
+        sa = 1 + 0.25 * k
+        sb = 1.12 - 0.12 * k
+        def scl(img, sc):
+            im = Image.fromarray(img.astype(np.uint8)).resize((int(w * sc), int(h * sc)), Image.BILINEAR)
+            a_ = np.asarray(im, np.float32)
+            y0, x0 = (a_.shape[0] - h) // 2, (a_.shape[1] - w) // 2
+            return a_[y0:y0 + h, x0:x0 + w]
+        return np.clip(scl(fa, sa) * (1 - k) + scl(fb, sb) * k, 0, 255).astype(np.uint8)
+    if kind == 'flash':
+        # a burst of white light: the outgoing picture burns out, the next one comes up out of the glare
+        white = np.array([236, 226, 205], np.float32)
+        if u < 0.5:
+            k = smooth(u / 0.5)
+            return np.clip(fa * (1 - k) + white * k, 0, 255).astype(np.uint8)
+        k = smooth((u - 0.5) / 0.5)
+        return np.clip(white * (1 - k) + fb * k, 0, 255).astype(np.uint8)
+    if kind == 'ink':
+        # ink spreading across the page: a noise field thresholded by a growing blot from the centre
+        n = noise_tex(os_, 3)
+        yy, xx = np.ogrid[:h, :w]
+        r = np.sqrt(((xx - w * 0.5) / w) ** 2 + ((yy - h * 0.48) / h) ** 2 * 0.55) / 0.62
+        field = 0.62 * r + 0.38 * n
+        thr = -0.08 + 1.18 * smoother(u)
+        m = np.clip((thr - field) / 0.035, 0, 1)
+        edge = np.clip(1 - np.abs(thr - field) / 0.05, 0, 1) * (u < 0.995)
+        out = fa * (1 - m[..., None]) + fb * m[..., None]
+        ink = np.array([24, 19, 15], np.float32)
+        out = out * (1 - 0.92 * edge[..., None]) + ink * 0.92 * edge[..., None]
+        return np.clip(out, 0, 255).astype(np.uint8)
+    if kind == 'tear':
+        # the page tears from left to right along a ragged line and falls away
+        k = smoother(u)
+        xs = np.arange(w)
+        jag = np.zeros(w, np.float32)
+        for i, f in enumerate((0.011, 0.031, 0.09, 0.23)):
+            jag += np.sin(xs / os_ * f + i * 1.7) * (26 - i * 6) * os_
+        y_line = (h * (-0.25 + 1.5 * k) - xs * 0.35 + jag)[None, :]
+        yy = np.arange(h)[:, None].astype(np.float32)
+        m = (yy < y_line).astype(np.float32)
+        out = fa * (1 - m[..., None]) + fb * m[..., None]
+        fib = np.clip(1 - np.abs(yy - y_line - 7 * os_) / (7 * os_), 0, 1)
+        n = noise_tex(os_, 5, 6.0)
+        fib *= (0.6 + 0.4 * n)
+        paper = np.array([232, 220, 194], np.float32)
+        out = out * (1 - fib[..., None]) + paper * fib[..., None]
+        sh = np.clip(1 - (y_line - yy) / (28 * os_), 0, 1) * (yy < y_line)
+        out *= (1 - 0.45 * sh[..., None])
+        return np.clip(out, 0, 255).astype(np.uint8)
+    if kind == 'page':
+        # an illustrated page turn: the fold sweeps right to left, the page's parchment back crosses over
+        k = smoother(u)
+        xf = w * (1.0 - 1.45 * k)
+        flap = (w - xf) * 0.42
+        xs = np.arange(w, dtype=np.float32)
+        out = fa.copy()
+        mB = (xs >= xf)[None, :]
+        out = np.where(mB[..., None], fb, out)
+        # shadow cast on the new page beside the fold
+        sh = np.clip(1 - (xs - xf) / (90 * os_), 0, 1) * (xs >= xf)
+        out *= (1 - 0.55 * sh[None, :, None])
+        # the back of the page
+        inflap = (xs >= xf - flap) & (xs < xf)
+        g = np.clip((xf - xs) / max(flap, 1), 0, 1)
+        back = np.array([214, 198, 166], np.float32)[None, :]
+        shade = (0.72 + 0.28 * np.sin(g * math.pi * 0.9))[:, None]
+        col = back * shade
+        n = noise_tex(os_, 7, 40.0)
+        flapimg = col[None, :, :] * (0.9 + 0.1 * n[..., None])
+        out = np.where(inflap[None, :, None], flapimg, out)
+        edge = np.clip(1 - np.abs(xs - (xf - flap)) / (3 * os_), 0, 1) * (flap > 2)
+        out *= (1 - 0.7 * edge[None, :, None])
+        return np.clip(out, 0, 255).astype(np.uint8)
+    if kind == 'map':
+        # the stage shrinks into its place on the city plan while the plan takes over
+        from PIL import Image
+        k = smoother(u)
+        sc = 1.0 - 0.82 * k
+        im = Image.fromarray(A).resize((max(2, int(w * sc)), max(2, int(h * sc))), Image.BILINEAR)
+        a = np.asarray(im, np.float32)
+        out = fb.copy()
+        cx, cy = w * (0.5 + 0.06 * k), h * (0.5 + 0.05 * k)
+        x0, y0 = int(cx - a.shape[1] / 2), int(cy - a.shape[0] / 2)
+        al = 1 - smooth(clamp((u - 0.55) / 0.45))
+        ys, xs_ = slice(max(0, y0), min(h, y0 + a.shape[0])), slice(max(0, x0), min(w, x0 + a.shape[1]))
+        sub = a[ys.start - y0:ys.stop - y0, xs_.start - x0:xs_.stop - x0]
+        out[ys, xs_] = out[ys, xs_] * (1 - al) + sub * al
+        # an inked frame around the shrinking picture
+        bw = max(2, int(6 * os_))
+        for (yy0, yy1, xx0, xx1) in ((y0 - bw, y0, x0 - bw, x0 + a.shape[1] + bw), (y0 + a.shape[0], y0 + a.shape[0] + bw, x0 - bw, x0 + a.shape[1] + bw),
+                                     (y0, y0 + a.shape[0], x0 - bw, x0), (y0, y0 + a.shape[0], x0 + a.shape[1], x0 + a.shape[1] + bw)):
+            ys2, xs2 = slice(max(0, yy0), max(0, min(h, yy1))), slice(max(0, xx0), max(0, min(w, xx1)))
+            out[ys2, xs2] = out[ys2, xs2] * (1 - al) + np.array([24, 19, 15], np.float32) * al
+        return np.clip(out, 0, 255).astype(np.uint8)
+    if kind == 'wipe':
+        # a dark timber post sweeps across in the foreground; the cut hides behind it
+        k = smoother(u)
+        xe = w * (-0.35 + 1.7 * k)
+        xs = np.arange(w, dtype=np.float32)
+        m = (xs < xe)[None, :, None]
+        out = np.where(m, fb, fa).astype(np.float32)
+        half = 0.3 * w
+        post_m = np.clip(1 - np.abs(xs - xe) / half, 0, 1)
+        post_m = np.clip(post_m * 4, 0, 1)
+        wood = np.array([40, 31, 24], np.float32)
+        n = noise_tex(os_, 11, 14.0)
+        grain = (0.75 + 0.5 * n[:, :])[..., None]
+        out = out * (1 - post_m[None, :, None]) + (wood * grain) * post_m[None, :, None]
+        return np.clip(out, 0, 255).astype(np.uint8)
+    return B
+
+
+def frame_rgb(t, os_, captions=True):
+    idx = None
+    for i, (k, a, b, fn) in enumerate(TIMELINE):
+        if a <= t < b:
+            idx = i
+            break
+    if idx is None:
+        idx = len(TIMELINE) - 1
+    k, a, b, fn = TIMELINE[idx]
+    rgb = None
+    # incoming transition into this entry
+    tr = TRANS.get(k)
+    if tr and tr[1] > 0 and idx > 0 and t < a + tr[1]:
+        pk, pa, pb, pfn = TIMELINE[idx - 1]
+        u = (t - (a - tr[1])) / (2 * tr[1])
+        rgb = combine(tr[0], render_scene(pfn, t, os_), render_scene(fn, t, os_), u, os_, t)
+    # outgoing transition into the next entry
+    if rgb is None and idx + 1 < len(TIMELINE):
+        nk, na, nb, nfn = TIMELINE[idx + 1]
+        tr = TRANS.get(nk)
+        if tr and tr[1] > 0 and t >= na - tr[1]:
+            u = (t - (na - tr[1])) / (2 * tr[1])
+            rgb = combine(tr[0], render_scene(fn, t, os_), render_scene(nfn, t, os_), u, os_, t)
+    if rgb is None:
+        rgb = render_scene(fn, t, os_)
+    # the very first frames fade up from black; the end fades out
+    if t < 0.12:
+        rgb = (rgb.astype(np.float32) * smooth(t / 0.12)).astype(np.uint8)
+    if t > DURATION - 0.5:
+        rgb = (rgb.astype(np.float32) * (1 - smooth((t - (DURATION - 0.5)) / 0.5))).astype(np.uint8)
+    rgb = np.ascontiguousarray(rgb)
+    text.draw_titles(rgb, t, os_)
+    if captions:
+        text.draw_captions(rgb, t, os_)
+    return rgb
+
+
+def _init():
+    bind()
+
+
+def _render_chunk(args):
+    f0, f1, os_, path, captions = args
+    bind()
+    w, h = int(W * os_), int(H * os_)
+    cmd = ['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{w}x{h}', '-r', str(FPS), '-i', '-',
+           '-c:v', 'libx264', '-preset', 'medium', '-crf', '12', '-pix_fmt', 'yuv420p', path]
+    pr = subprocess.Popen(cmd, stdin=subprocess.PIPE)
+    t0 = time.time()
+    for f in range(f0, f1):
+        rgb = frame_rgb(f / FPS, os_, captions)
+        pr.stdin.write(rgb.tobytes())
+        if (f - f0) % 30 == 0:
+            print(f'  frame {f} ({(time.time() - t0) / max(1, f - f0 + 1):.2f} s/frame)', flush=True)
+    pr.stdin.close()
+    pr.wait()
+    return path
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--stills', default=None)
+    ap.add_argument('--preview', action='store_true')
+    ap.add_argument('--no-voice', action='store_true')
+    ap.add_argument('--no-captions', action='store_true')
+    ap.add_argument('--range', default=None)
+    ap.add_argument('--out', default=None)
+    ap.add_argument('--workers', type=int, default=4)
+    ap.add_argument('--scale', type=float, default=None)
+    args = ap.parse_args()
+    bind()
+    os_ = args.scale or (0.5 if (args.preview or args.stills) else 1.0)
+    captions = not (args.no_captions or args.no_voice)
+    if args.stills:
+        from PIL import Image
+        d = os.path.join(ROOT, 'build', 'stills')
+        os.makedirs(d, exist_ok=True)
+        for s in args.stills.split(','):
+            t = float(s)
+            t0 = time.time()
+            rgb = frame_rgb(t, os_, captions)
+            Image.fromarray(rgb).save(os.path.join(d, f'still_{t:06.2f}.png'))
+            print(f'still {t:.2f}s  {time.time() - t0:.2f}s')
+        return
+    f_a, f_b = 0, NFRAMES
+    if args.range:
+        a, b = [float(v) for v in args.range.split(',')]
+        f_a, f_b = int(round(a * FPS)), int(round(b * FPS))
+    seg_dir = os.path.join(ROOT, 'build', 'segments')
+    os.makedirs(seg_dir, exist_ok=True)
+    n = max(1, args.workers)
+    per = math.ceil((f_b - f_a) / n)
+    jobs = []
+    tag = 'p' if args.preview else ('nv' if args.no_voice else 'f')
+    for i in range(n):
+        a, b = f_a + i * per, min(f_b, f_a + (i + 1) * per)
+        if a < b:
+            jobs.append((a, b, os_, os.path.join(seg_dir, f'{tag}_{i:02d}.mp4'), captions))
+    t0 = time.time()
+    with Pool(len(jobs)) as pool:
+        paths = pool.map(_render_chunk, jobs)
+    print(f'rendered {f_b - f_a} frames in {time.time() - t0:.0f} s')
+    lst = os.path.join(seg_dir, f'{tag}_list.txt')
+    with open(lst, 'w') as fh:
+        for p in paths:
+            fh.write(f"file '{p}'\n")
+    if args.out:
+        out = os.path.join(ROOT, args.out)
+    elif args.preview:
+        out = os.path.join(ROOT, 'renders', 'preview.mp4')
+    elif args.no_voice:
+        out = os.path.join(ROOT, 'renders', 'final_video_no_voice.mp4')
+    else:
+        out = os.path.join(ROOT, 'final_video.mp4')
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    audio = os.path.join(ROOT, 'audio', 'mix_no_voice.wav' if args.no_voice else 'mix_with_voice.wav')
+    cmd = ['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', lst]
+    has_audio = os.path.exists(audio) and not args.range
+    if has_audio:
+        cmd += ['-i', audio]
+    vf = 'scale=1080:1920:flags=lanczos' if os_ != 1.0 else 'null'
+    cmd += ['-vf', vf, '-c:v', 'libx264', '-preset', 'slow', '-crf', '19', '-maxrate', '9M', '-bufsize', '18M',
+            '-pix_fmt', 'yuv420p', '-r', str(FPS)]
+    if has_audio:
+        cmd += ['-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-shortest']
+    cmd += ['-movflags', '+faststart', out]
+    subprocess.run(cmd, check=True)
+    print('wrote', out)
+
+
+if __name__ == '__main__':
+    main()

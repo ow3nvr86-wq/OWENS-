@@ -1,0 +1,209 @@
+{
+ "title": "SEPTEMBER 11, 2001: THE DAY THE WORLD STOOD STILL",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "duration": 30.0,
+ "scenes": [
+  {
+   "id": 1,
+   "key": "opening",
+   "name": "THE OPENING",
+   "start": 0.0,
+   "end": 4.4,
+   "in": "cut",
+   "camera": "a slow push across the Hudson toward Lower Manhattan on a clear morning"
+  },
+  {
+   "id": 2,
+   "key": "attacks",
+   "name": "THE ATTACKS",
+   "start": 4.4,
+   "end": 9.4,
+   "in": "wipe",
+   "camera": "the skyline as architectural silhouettes; a clock and a timeline mark 8:46 and 9:03"
+  },
+  {
+   "id": 3,
+   "key": "map",
+   "name": "THE DISASTER SPREADS",
+   "start": 9.4,
+   "end": 15.2,
+   "in": "zoom",
+   "camera": "a map of the eastern United States: New York, Washington, Shanksville"
+  },
+  {
+   "id": 4,
+   "key": "aftermath",
+   "name": "THE AFTERMATH",
+   "start": 15.2,
+   "end": 22.2,
+   "in": "dissolve",
+   "camera": "the skyline under a cloud of smoke; then responders and people in the dust"
+  },
+  {
+   "id": 5,
+   "key": "memorial",
+   "name": "THE FINAL MESSAGE",
+   "start": 22.2,
+   "end": 30.0,
+   "in": "dissolve",
+   "camera": "the memorial pools; twin beams of light; the words; the channel's mark"
+  }
+ ],
+ "lines": [
+  {
+   "scene": 1,
+   "start": 0.35,
+   "deadline": 4.35,
+   "text": "At 8:46 a.m., an ordinary morning changed forever.",
+   "tts": "At eight forty-six a.m., an ordinary morning changed forever.",
+   "hl": [
+    "8:46",
+    "A.M.,"
+   ]
+  },
+  {
+   "scene": 2,
+   "start": 4.75,
+   "deadline": 9.25,
+   "text": "Two hijacked passenger planes struck the towers of the World Trade Center.",
+   "tts": "Two hijacked passenger planes struck the towers of the World Trade Center.",
+   "hl": [
+    "HIJACKED",
+    "TOWERS"
+   ]
+  },
+  {
+   "scene": 3,
+   "start": 9.65,
+   "deadline": 15.15,
+   "text": "Another hit the Pentagon. A fourth crashed in Pennsylvania, after passengers and crew fought back.",
+   "tts": "Another hit the Pentagon. A fourth crashed in Pennsylvania, after passengers and crew fought back.",
+   "hl": [
+    "PENTAGON.",
+    "FOUGHT",
+    "BACK."
+   ]
+  },
+  {
+   "scene": 4,
+   "start": 15.55,
+   "deadline": 22.0,
+   "text": "Both towers fell. Nearly 3,000 people were killed, leaving families and communities devastated.",
+   "tts": "Both towers fell. Nearly three thousand people were killed, leaving families and communities devastated.",
+   "hl": [
+    "3,000"
+   ]
+  },
+  {
+   "scene": 5,
+   "start": 22.6,
+   "deadline": 26.4,
+   "text": "And the world would never be the same.",
+   "tts": "And the world... would never be the same.",
+   "hl": [
+    "NEVER"
+   ]
+  }
+ ],
+ "titles": [
+  {
+   "start": 0.5,
+   "end": 4.2,
+   "style": "kicker",
+   "text": "NEW YORK CITY"
+  },
+  {
+   "start": 0.75,
+   "end": 4.2,
+   "style": "date",
+   "text": "SEPTEMBER 11, 2001"
+  },
+  {
+   "start": 5.3,
+   "end": 7.2,
+   "style": "clock",
+   "text": "8:46",
+   "y": 0.17
+  },
+  {
+   "start": 5.45,
+   "end": 7.2,
+   "style": "event",
+   "text": "NORTH TOWER",
+   "y": 0.27
+  },
+  {
+   "start": 7.3,
+   "end": 9.2,
+   "style": "clock",
+   "text": "9:03",
+   "y": 0.17
+  },
+  {
+   "start": 7.45,
+   "end": 9.2,
+   "style": "event",
+   "text": "SOUTH TOWER",
+   "y": 0.27
+  },
+  {
+   "start": 4.6,
+   "end": 9.2,
+   "style": "kicker",
+   "text": "AMERICAN 11 AND UNITED 175",
+   "y": 0.12
+  },
+  {
+   "start": 13.3,
+   "end": 15.0,
+   "style": "label",
+   "text": "PASSENGERS AND CREW FOUGHT BACK",
+   "y": 0.2
+  },
+  {
+   "start": 15.4,
+   "end": 16.8,
+   "style": "kicker",
+   "text": "SOUTH TOWER 9:59 AM  /  NORTH TOWER 10:28 AM",
+   "y": 0.17
+  },
+  {
+   "start": 16.95,
+   "end": 21.9,
+   "style": "big",
+   "text": "2,977",
+   "y": 0.2
+  },
+  {
+   "start": 17.1,
+   "end": 21.9,
+   "style": "sub",
+   "text": "LIVES LOST",
+   "y": 0.315
+  },
+  {
+   "start": 22.5,
+   "end": 25.9,
+   "style": "kicker",
+   "text": "THE 9/11 MEMORIAL, NEW YORK",
+   "y": 0.17
+  },
+  {
+   "start": 26.3,
+   "end": 28.3,
+   "style": "endline",
+   "text": "WE WILL|NEVER FORGET.",
+   "y": 0.25
+  }
+ ],
+ "events": {
+  "date": 0.75,
+  "north": 5.3,
+  "south": 7.3,
+  "nyc": 9.55,
+  "dc": 10.35,
+  "pa": 11.95
+ }
+}
