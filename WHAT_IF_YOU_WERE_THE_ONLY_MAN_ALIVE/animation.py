@@ -3769,10 +3769,11 @@ def update_world(t, shot):
     # helicopters circling the tower
     for k, h in enumerate(S['helis']):
         if shot in ('heli', 'reporters', 'curtain'):
-            a = t * (0.35 + 0.05 * k) + k * 2.1
-            r = 24 + 5 * k
-            h['root'].location = (r * math.cos(a), 10 + r * math.sin(a), 47 + 4 * k + 1.5 * math.sin(t + k))
-            h['root'].rotation_euler = (R(-6), R(10), a + math.pi)
+            # hovering in front of the tower (between it and the camera's arc), drifting slowly
+            base = ((-16.0, -14.0, 49.0), (13.0, -22.0, 45.0), (2.0, -4.0, 56.0))[k]
+            dx = 4.0 * math.sin(0.4 * t + k)
+            h['root'].location = (base[0] + dx, base[1] + 2.0 * math.cos(0.3 * t + k), base[2] + 0.8 * math.sin(t + k))
+            h['root'].rotation_euler = (R(-5), R(6 * math.sin(t + k)), R(35 + 120 * k) + 0.1 * math.sin(0.3 * t))
             h['rotor'].rotation_euler = (0, 0, t * 40.0 + k)
         else:
             h['root'].location = (0, 0, -100)
@@ -3908,6 +3909,9 @@ def future_facade(name, glass, frame, mull=1.6, floor=4.2, band=(0.55, 0.8, 1.0)
     wn = nd(nt, 'ShaderNodeTexWhiteNoise', p_noise_dimensions='3D', Vector=cell)
     gcol = mixc(nt, mth(nt, 'MULTIPLY', wn.outputs['Value'], 0.6), rgba(glass), rgba([min(1, c * 1.6) for c in glass]))
     col = mixc(nt, pane, rgba(frame), gcol)
+    roof = mth(nt, 'GREATER_THAN', mth(nt, 'ABSOLUTE', sep(nt, nd(nt, 'ShaderNodeNewGeometry').outputs['Normal']).outputs['Z']), 0.5)
+    col = mixc(nt, roof, col, (0.28, 0.28, 0.3, 1))
+    pane = mth(nt, 'MULTIPLY', pane, mth(nt, 'SUBTRACT', 1.0, roof))
     rough = mth(nt, 'ADD', mth(nt, 'MULTIPLY', pane, -0.6), 0.7)
     p = principled(nt, out, **{'Base Color': col, 'Roughness': rough, 'Metallic': mth(nt, 'MULTIPLY', pane, 0.0 if stone else 0.6),
                                'Specular IOR Level': 0.6})

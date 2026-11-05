@@ -1,0 +1,64 @@
+WHAT IF YOU WERE THE ONLY MAN ALIVE? - SOUND DESIGN, MUSIC AND TIMING
+============================================================
+
+Everything below is synthesised by code in animation.py --stage audio (numpy only: oscillators, filtered noise,
+envelopes, convolution reverb). No samples, recordings, stock sound or copyrighted music. The narration is a
+synthetic voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py. Music, ambience and effects duck under
+the voice so the narration always stays on top.
+
+THE IDEA: a breaking-news story that turns out not to be a disaster. A sleepy morning pad is cut dead by an impact on
+"Except you."; a driving news pulse with stings and whooshes builds with every cut as the world finds out; the search
+adds drums, tremolo strings, helicopter rotors and camera shutters; then the twist - "The world doesn't stop." -
+flips the music to something light and ordinary (marimba and claps) over traffic, office chatter, a pager, a gavel
+and a train. A warm swell carries the last line and stops on the last word, leaving one soft alert chime as his eyes
+close (the film loops to the alarm).
+
+Files: audio/mix_with_voice.wav (final mix, -14 LUFS), audio/mix_no_voice.wav (music + sound only, -14 LUFS),
+audio/narration.wav (voice only).
+
+CUE SHEET (generated)
+------------------------------------------------------------
+  0.00 s  [ambience ] Bedroom: quiet room tone, birds outside
+  0.00 s  [music    ] MUSIC: a soft, sleepy morning pad (A major)
+  0.20 s  [voice    ] NARRATION: "You wake up, and every man on Earth has disappeared. Except you." (to 3.72 s)
+  1.50 s  [sfx      ] Phone: a breaking-news alert chime
+  2.55 s  [sfx      ] Duvet whoosh as he sits bolt upright
+  2.95 s  [music    ] IMPACT on "Except you." - the morning pad is cut off
+  3.80 s  [sfx      ] A fast whoosh on every cut
+  3.95 s  [music    ] MUSIC: a driving news pulse (D minor, 128 bpm) with kick and shaker, building cut by cut
+  3.97 s  [music    ] A breaking-news sting on the TV; another on "the only man alive"
+  3.97 s  [voice    ] NARRATION: "Suddenly, news stations worldwide are reporting the same thing. You're officially the only man alive." (to 9.50 s)
+  3.97 s  [ambience ] The TV: a newsroom murmur (no words)
+  5.25 s  [ambience ] The square: a huge crowd murmuring, gasping at the screens
+  6.60 s  [ambience ] Newsroom: busy murmur, keyboards, phones
+  9.85 s  [ambience ] Bathroom: the tap running, water splashing
+  9.85 s  [music    ] MUSIC: tension - heavier drums, tremolo strings rising as the whole world searches
+  9.85 s  [voice    ] NARRATION: "At first, you think you're dreaming. But governments are searching for answers, scientists want to understand what happened, and the entire world is trying to find you." (to 17.89 s)
+ 11.55 s  [ambience ] Helicopter rotors overhead
+ 13.50 s  [ambience ] Lab: equipment hum and bleeps
+ 15.80 s  [ambience ] Reporters shouting questions (indistinct)
+ 15.90 s  [sfx      ] Camera shutters firing
+ 18.15 s  [ambience ] Street: traffic and footsteps, an ordinary morning
+ 18.16 s  [music    ] MUSIC: the twist - suddenly light and upbeat (A major marimba, claps): life simply carries on
+ 18.16 s  [voice    ] NARRATION: "But here's the strange part. The world doesn't stop. Women keep running businesses, hospitals, governments, and everything else." (to 24.95 s)
+ 20.90 s  [ambience ] Office: chatter and keyboards
+ 22.50 s  [ambience ] Hospital corridor hum
+ 22.60 s  [sfx      ] A hospital pager
+ 23.20 s  [ambience ] Parliament: a chamber murmur
+ 23.35 s  [sfx      ] A gavel
+ 23.90 s  [ambience ] The train braking into the platform
+ 24.75 s  [sfx      ] The train doors hiss open
+ 25.25 s  [ambience ] Dusk: the city outside, faintly
+ 25.26 s  [music    ] MUSIC: a wide, warm swell (D major) under the last line; it stops on "on it" (29.3 s)
+ 25.26 s  [voice    ] NARRATION: "You're not suddenly in charge of the planet. You're just the biggest mystery on it." (to 29.28 s)
+ 29.45 s  [music    ] A last soft news-alert chime as the eyes close (it loops back to the alarm)
+
+MUSIC GUIDE (if you re-score it in CapCut or another editor)
+------------------------------------------------------------
+- 0-3 s: soft and sleepy; a hard hit on "Except you." (3.0 s).
+- 4-10 s: news-channel energy - a driving minor-key pulse (120-130 bpm), stings on the TV and on "the only man alive".
+- 10-18 s: tension rising - add drums and strings; helicopter and press-pack sound effects.
+- 18 s: switch to something light, bright and everyday for "The world doesn't stop." (the joke of the twist).
+- 25-29 s: one warm swell under the last line; stop on the last word.
+- Keep the narration 10-15 dB above the music; YouTube Shorts plays back at about -14 LUFS.
+- Use only music you have the rights to (your own, a licensed library, or YouTube Audio Library tracks).
