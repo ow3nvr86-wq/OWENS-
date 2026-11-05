@@ -52,13 +52,51 @@ class KokoroVoice:
     # pronunciations the voice gets wrong, fixed in its phonemes before synthesis
     FIXES = [('pˈɛntaɡən', 'pˈɛntəɡən')]           # 'Pentagon' with a schwa: PEN-tuh-gon
 
+    @staticmethod
+    def tighten(a, sr, n_sentence_breaks, short=0.16, long=0.30, thr=0.004):
+        """Shorten the silences inside a line: commas and hesitations to `short`, the breaks between sentences to
+        `long`. Only true silence is cut (with short crossfades), so no word is touched."""
+        e = np.convolve(np.abs(a), np.ones(int(0.01 * sr)) / (0.01 * sr), 'same')
+        q = e < thr
+        runs, i = [], 0
+        while i < len(q):
+            if q[i]:
+                j = i
+                while j < len(q) and q[j]:
+                    j += 1
+                if i > 0 and j < len(q) and (j - i) / sr > short:
+                    runs.append((i, j))
+                i = j
+            else:
+                i += 1
+        keep_long = set(sorted(range(len(runs)), key=lambda k: runs[k][1] - runs[k][0], reverse=True)[:n_sentence_breaks])
+        out, last = [], 0
+        for k, (i, j) in enumerate(runs):
+            target = int((long if k in keep_long else short) * sr)
+            if j - i <= target:
+                continue
+            mid = i + target // 2
+            out.append(a[last:mid])
+            last = j - (target - target // 2)
+        out.append(a[last:])
+        return np.concatenate(out)
+
     def synth(self, text, scale):
         ph = self.k.tokenizer.phonemize(text, self.lang)
         for bad, good in self.FIXES:
             ph = ph.replace(bad, good)
-        a, sr = self.k.create(ph, voice=self.name, speed=1.0 / scale, lang=self.lang, is_phonemes=True,
-                              sentence_pause=0.14, clause_pause=0.05)
+        # the whole line in ONE pass of the model, so the intonation runs on across commas and full stops
+        # (the library would otherwise synthesise each sentence separately and glue them together)
+        try:
+            ph = ' '.join(ph.split())
+            a, _ = self.k._create_batch(ph, self.k.get_voice_style(self.name), 1.0 / scale, True)
+            sr = 24000
+        except Exception:
+            a, sr = self.k.create(ph, voice=self.name, speed=1.0 / scale, lang=self.lang, is_phonemes=True,
+                                  sentence_pause=0.14, clause_pause=0.05)
         a = np.asarray(a, np.float32)
+        import re as _re
+        a = self.tighten(a, sr, len(_re.findall(r'[.?!](?=\s)', text.strip())))
         nz = np.nonzero(np.abs(a) > 0.01)[0]
         a = a[max(nz[0] - int(0.02 * sr), 0): nz[-1] + int(0.06 * sr)]
         n = int(len(a) * SR / sr)

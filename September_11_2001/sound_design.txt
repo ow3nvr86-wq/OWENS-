@@ -8,11 +8,11 @@ the times are marked by soft, low swells and quiet interface tones.
 Mix: music and ambience are ducked about 7 dB under the narration; both mixes are normalised to -14 LUFS (true peak -1.5 dB).
 
 NARRATION (Kokoro-82M, voice bm_george)
-    0.35 -   4.26  At 8:46 a.m., an ordinary morning changed forever.
-    4.75 -   9.11  Two hijacked passenger planes struck the towers of the World Trade Center.
-    9.40 -  15.32  Another hit the Pentagon. A fourth crashed in Pennsylvania, after passengers and crew fought back.
-   15.55 -  21.58  Both towers fell. Nearly 3,000 people were killed, leaving families and communities devastated.
-   22.60 -  24.68  And the world would never be the same.
+    0.35 -   4.14  At 8:46 a.m., an ordinary morning changed forever.
+    4.75 -   8.98  Two hijacked passenger planes struck the towers of the World Trade Center.
+    9.40 -  15.27  Another hit the Pentagon. A fourth crashed in Pennsylvania, after passengers and crew fought back.
+   15.55 -  21.38  Both towers fell. Nearly 3,000 people were killed, leaving families and communities devastated.
+   22.60 -  24.67  And the world would never be the same.
 
 CUES (time in seconds, layer, description)
     0.00  ambience  A quiet city morning across the water: distant traffic, voices, water, a few birds
