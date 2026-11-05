@@ -1,0 +1,244 @@
+{
+ "fps": 30,
+ "duration": 30.0,
+ "render_end": 30.0,
+ "scenes": [
+  {
+   "id": 1,
+   "name": "YOU WAKE UP",
+   "start": 0.0,
+   "end": 3.97,
+   "desc": "Morning. An extreme close-up of a man's eyes opening on the pillow. His phone buzzes: a BREAKING NEWS alert - every man on Earth has disappeared. He sits bolt upright in bed.",
+   "actions": "The main character (the only man in the film): early thirties, short dark hair, light stubble, grey T-shirt, dark sweatpants. Sleepy -> puzzled -> shocked.",
+   "lighting": "Soft morning light through the blinds; the phone's glow on his face.",
+   "sfx": "A phone buzz and a news-alert chime; a breaking-news sting on \"Except you.\"",
+   "edit": "No introduction: the first frame is his eyes opening. Fast cuts. Key caption: EXCEPT YOU.",
+   "shots": [
+    {
+     "name": "wake",
+     "start": 0.0,
+     "end": 1.45,
+     "camera": "extreme close-up of the eyes opening; slow drift"
+    },
+    {
+     "name": "phone",
+     "start": 1.45,
+     "end": 2.55,
+     "camera": "over the shoulder onto the phone screen: BREAKING NEWS alert"
+    },
+    {
+     "name": "sit",
+     "start": 2.55,
+     "end": 3.97,
+     "camera": "medium shot from the foot of the bed as he sits up; quick push in"
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "THE WORLD FINDS OUT",
+   "start": 3.97,
+   "end": 9.85,
+   "desc": "The TV on his wall: a news presenter in front of BREAKING NEWS graphics. A city square full of women staring up at giant screens. A newsroom wall of screens: a world map lit up with alerts. Then his own ID photo on the news: THE ONLY MAN ALIVE.",
+   "actions": "He stares at the TV, frozen. The crowds look up; the presenter talks.",
+   "lighting": "Cold TV light; daylight in the square; newsroom blues and reds.",
+   "sfx": "News stings, a crowd murmur in the square, a whoosh on every cut, the music building.",
+   "edit": "Very fast broadcast-style cuts with glitches. Key caption: THE ONLY MAN ALIVE.",
+   "shots": [
+    {
+     "name": "tv",
+     "start": 3.97,
+     "end": 5.25,
+     "camera": "over his shoulder to the TV; slow push"
+    },
+    {
+     "name": "square",
+     "start": 5.25,
+     "end": 6.6,
+     "camera": "low, looking up past the crowd at the giant screens; crane up"
+    },
+    {
+     "name": "newsroom",
+     "start": 6.6,
+     "end": 7.45,
+     "camera": "tracking along the newsroom wall of screens"
+    },
+    {
+     "name": "only",
+     "start": 7.45,
+     "end": 9.85,
+     "camera": "close on a screen with his ID photo, pulling back to reveal it is on every screen"
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "name": "THE SEARCH",
+   "start": 9.85,
+   "end": 18.15,
+   "desc": "In the bathroom mirror he splashes his face - not a dream. Helicopters circle his apartment tower. Scientists study his scans on a wall of screens. Reporters and camera crews pack the street below. He peeks through the curtains.",
+   "actions": "Splashing water, staring at himself; peeking out, confused.",
+   "lighting": "Bright bathroom; overcast daylight outside; a white lab with blue screens.",
+   "sfx": "Running water; helicopter rotors; lab beeps; a crowd of reporters shouting (indistinct), camera shutters.",
+   "edit": "Cuts on the beat; the music grows. ",
+   "shots": [
+    {
+     "name": "mirror",
+     "start": 9.85,
+     "end": 11.55,
+     "camera": "over his shoulder into the mirror; slow push"
+    },
+    {
+     "name": "heli",
+     "start": 11.55,
+     "end": 13.5,
+     "camera": "aerial orbit: helicopters around his tower"
+    },
+    {
+     "name": "lab",
+     "start": 13.5,
+     "end": 15.8,
+     "camera": "slow dolly behind scientists at a wall of screens"
+    },
+    {
+     "name": "reporters",
+     "start": 15.8,
+     "end": 17.0,
+     "camera": "low among the reporters, cameras pointed up at his window"
+    },
+    {
+     "name": "curtain",
+     "start": 17.0,
+     "end": 18.15,
+     "camera": "close on his face peeking between the curtains"
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "name": "THE WORLD DOES NOT STOP",
+   "start": 18.15,
+   "end": 25.25,
+   "desc": "The twist: everything keeps running. A busy street with traffic and women walking to work; an office; a hospital corridor; a parliament in session; a train pulling in, packed with commuters.",
+   "actions": "Everyday life: walking, working, debating, commuting.",
+   "lighting": "Bright, warm, ordinary daylight - the opposite of a disaster film.",
+   "sfx": "City traffic, office chatter (indistinct), a hospital pager, a gavel, a train arriving; upbeat music.",
+   "edit": "A rhythmic montage, one cut per word. Key caption: THE WORLD DOESN'T STOP.",
+   "shots": [
+    {
+     "name": "street",
+     "start": 18.15,
+     "end": 20.9,
+     "camera": "tracking along a busy pavement"
+    },
+    {
+     "name": "office",
+     "start": 20.9,
+     "end": 22.5,
+     "camera": "slow slide along the desks"
+    },
+    {
+     "name": "hospital",
+     "start": 22.5,
+     "end": 23.2,
+     "camera": "walking backwards ahead of doctors"
+    },
+    {
+     "name": "parliament",
+     "start": 23.2,
+     "end": 23.9,
+     "camera": "wide crane over the chamber"
+    },
+    {
+     "name": "train",
+     "start": 23.9,
+     "end": 25.25,
+     "camera": "platform-level as the train pulls in"
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "name": "THE PAYOFF",
+   "start": 25.25,
+   "end": 30.0,
+   "desc": "Dusk in his flat. He stands with his back to the window; across the street a giant screen shows his face and THE LAST MAN ALIVE. The camera pushes in until only his eyes fill the frame (the first shot is his eyes, so it loops).",
+   "actions": "Hands in pockets, a small, bewildered half-smile; he looks straight at us.",
+   "lighting": "Blue dusk outside; the screen's light on his back; a warm lamp on his face.",
+   "sfx": "The music swells and stops; a last news-alert chime.",
+   "edit": "One long push-in. Key caption: THE BIGGEST MYSTERY ON IT.",
+   "shots": [
+    {
+     "name": "payoff",
+     "start": 25.25,
+     "end": 30.0,
+     "camera": "slow push from a wide shot to an extreme close-up of his eyes"
+    }
+   ]
+  }
+ ],
+ "lines": [
+  {
+   "scene": 1,
+   "start": 0.2,
+   "deadline": 4.02,
+   "text": "You wake up, and every man on Earth has disappeared. Except you.",
+   "tts": "You wake up, and every man on Earth has disappeared. Except you."
+  },
+  {
+   "scene": 2,
+   "start": 3.97,
+   "deadline": 9.85,
+   "text": "Suddenly, news stations worldwide are reporting the same thing. You're officially the only man alive.",
+   "tts": "Suddenly, news stations worldwide are reporting the same thing. You're officially the only man alive."
+  },
+  {
+   "scene": 3,
+   "start": 9.85,
+   "deadline": 18.21,
+   "text": "At first, you think you're dreaming. But governments are searching for answers, scientists want to understand what happened, and the entire world is trying to find you.",
+   "tts": "At first, you think you're dreaming. But governments are searching for answers, scientists want to understand what happened, and the entire world is trying to find you."
+  },
+  {
+   "scene": 4,
+   "start": 18.16,
+   "deadline": 25.31,
+   "text": "But here's the strange part. The world doesn't stop. Women keep running businesses, hospitals, governments, and everything else.",
+   "tts": "But here's the strange part. The world doesn't stop. Women keep running businesses, hospitals, governments, and everything else."
+  },
+  {
+   "scene": 5,
+   "start": 25.26,
+   "deadline": 29.56,
+   "text": "You're not suddenly in charge of the planet. You're just the biggest mystery on it.",
+   "tts": "You're not suddenly in charge of the planet. You're just the biggest mystery on it."
+  }
+ ],
+ "titles": [
+  {
+   "text": "A HYPOTHETICAL SCENARIO",
+   "start": 0.2,
+   "end": 3.9,
+   "style": "tag"
+  }
+ ],
+ "keys": [
+  {
+   "text": "EXCEPT|YOU.",
+   "match": "Except you."
+  },
+  {
+   "text": "THE ONLY|MAN ALIVE.",
+   "match": "the only man alive."
+  },
+  {
+   "text": "THE WORLD|DOESN'T STOP.",
+   "match": "The world doesn't stop."
+  },
+  {
+   "text": "THE BIGGEST|MYSTERY ON IT.",
+   "match": "the biggest mystery on it."
+  }
+ ],
+ "events": {}
+}
