@@ -93,7 +93,19 @@ marks them done; delete it to render them again after changing the characters).
 To edit in CapCut instead: render the frames, run the audio stage, import renders/final_video_no_voice.mp4 (or the
 frames plus audio/mix_no_voice.wav), add audio/narration.wav and use subtitles.srt for the captions.
 
-RENDER_TIMES_PLACEHOLDER
+RENDER TIMES (4 CPU cores, no GPU, Cycles CPU)
+----------------------------------------------
+  ID portrait + presenter feed (once)          under 1 min (rendered automatically before the first frame)
+  Look-dev stills (270x480, 4 samples)         about 3-6 s per frame, plus about 1.5 min of scene building per run
+                                               (the people, their strand hair and the baked crowds are built every run)
+  Preview, 900 frames (270x480, 4 samples)     26 min (about 1.5 s per frame)
+  Final, 900 frames (540x960, 6 samples)       1 h 49 min, about 7 s per frame on average, in a single background run
+  Audio stage                                  about 8 s
+  Edit stage (final_video.mp4)                 1 min 53 s
+  Edit stage --no-voice                        1 min 40 s
+
+  final_video.mp4                   1080x1920, 30 fps, 30.0 s, H.264 + AAC 48 kHz, 29.7 MB, -13.9 LUFS (peak -2.9 dBFS)
+  renders/final_video_no_voice.mp4  1080x1920, 30 fps, 30.0 s, H.264 + AAC 48 kHz, 30.2 MB, -13.7 LUFS (peak -2.0 dBFS)
 
 
 HOW REALISTIC ARE THE PEOPLE? (limitations)
