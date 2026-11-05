@@ -168,7 +168,7 @@ def scene_attacks(ctx, t, os_):
 # ----------------------------------------------------------------------------------------------
 def scene_map(ctx, t, os_):
     u = t - 9.4
-    lat0, lon0, k = keys(u, [(-0.4, (40.71, -74.0, 620.0)), (0.5, (40.71, -74.0, 620.0)), (2.4, (39.75, -76.45, 182.0)), (6.2, (39.75, -76.45, 195.0))],
+    lat0, lon0, k = keys(u, [(-0.4, (40.71, -74.0, 620.0)), (0.5, (40.71, -74.0, 620.0)), (1.7, (39.75, -76.75, 182.0)), (6.2, (39.75, -76.7, 192.0))],
                          smoother)
     P = G.MapProj(lat0, lon0, k, 540, 830)
     s = screen(ctx, os_)
@@ -183,7 +183,7 @@ def scene_map(ctx, t, os_):
     G.marker(s, *pts['nyc'], t, 9.55)
     G.marker(s, *pts['dc'], t, 10.35)
     G.marker(s, *pts['shanksville'], t, 11.95)
-    labels = [('nyc', 9.7, 'NEW YORK CITY', '8:46 / 9:03 AM', -1), ('dc', 10.5, 'THE PENTAGON', '9:37 AM', -1),
+    labels = [('nyc', 9.7, 'NEW YORK CITY', '8:46 / 9:03 AM', -1), ('dc', 10.8, 'THE PENTAGON', '9:37 AM', -1),
               ('shanksville', 12.1, 'SHANKSVILLE, PA', '10:03 AM', 1)]
     for n, t0, name, tm, side in labels:
         kk = smooth(ramp(t, t0, t0 + 0.35))
@@ -195,7 +195,7 @@ def scene_map(ctx, t, os_):
         G.text(s, x + ox + (1 - kk) * 20 * side, y - 8, 34, name, (*C['white'][:3], kk), align=al, track=0.08)
         G.text(s, x + ox + (1 - kk) * 20 * side, y + 34, 30, tm, (*C['red2'][:3], kk), align=al, track=0.06)
     # the Pentagon drawn as a small inset beside Washington
-    kp = smooth(ramp(t, 10.6, 11.0))
+    kp = smooth(ramp(t, 10.85, 11.25))
     if kp > 0:
         x, y = pts['dc']
         G.pentagon_icon(s, x - 60, y + 120, 60 * kp, C['white'], lw=3, a=kp)
