@@ -1,0 +1,46 @@
+WHAT IF YOU WERE THE ONLY MAN ALIVE? - SOURCES, CLAIMS AND WHAT IS INVENTED
+===========================================================================
+
+This Short is FICTION: a hypothetical scenario, labelled on screen ("A HYPOTHETICAL SCENARIO") for its first scene. The
+narration is the script supplied in the brief, word for word. It describes an imagined event; it makes no real-world
+statistical or historical claims.
+
+
+1. CLAIM TABLE
+--------------
+Said or shown                                         Status        Notes
+----------------------------------------------------  ------------  -------------------------------------------------------
+"every man on Earth has disappeared. Except you."     FICTION       The premise.
+"news stations worldwide are reporting the same       FICTION       The news channel (GLOBAL 24) and its graphics are invented.
+ thing"
+"governments are searching... scientists want to      FICTION       Plausible reactions in the story, not reports.
+ understand... the entire world is trying to find you"
+"Women keep running businesses, hospitals,            FICTION /     Shown as everyday life continuing. It reflects that women
+ governments, and everything else."                   REASONABLE    already work in every one of these fields; it is not a
+                                                                    claim about any specific workforce figure.
+On a lab screen: "Y CHROMOSOME: PRESENT"              CONFIRMED     Biology: males have one X and one Y chromosome, females
+                                                      (as biology)  two X. National Human Genome Research Institute,
+                                                                    genome.gov, "Y chromosome" fact sheet; Live Science,
+                                                                    "The human Y chromosome has finally been fully sequenced"
+                                                                    (2023). The scene itself is fiction.
+On the phone: date "Tuesday, 14 May", time 07:41      ILLUSTRATIVE  An invented phone screen.
+"MEN FOUND: 1", "MATCH: 0 RECORDS", "AGE: 30-35"      ILLUSTRATIVE  Invented on-screen props, part of the story.
+
+Speculation presented as fact: none - the whole film is framed as "what if", in the second person.
+
+
+2. CHECKED BUT NOT USED
+-----------------------
+- Hook 3's "4 billion women": the UN's World Population Prospects 2024 puts the world population at about 8.2 billion
+  in 2024 (UN press release, July 2024), and women are just under half of it - about 49.7-49.8 % (Statistics Times,
+  from UN WPP data; World Bank indicator "Population, female (% of total population)"), i.e. roughly 4.0-4.1 billion.
+  "About 4 billion" would be accurate, but the brief selected Hook 2, so no number is used in the film.
+
+
+3. WHAT IS INVENTED (and made with code)
+----------------------------------------
+- The main character, every woman on screen, the crowds, the news presenter and the scientists, doctors, office workers,
+  members of parliament and commuters: all procedural 3D people made by animation.py (build_human). Nobody real is
+  depicted or imitated.
+- The city, the tower, the flat, the square, the newsroom, the lab, the office, the hospital, the parliament
+  ("The Assembly"), the train and every screen graphic (tools/textures.py), including the channel GLOBAL 24.
