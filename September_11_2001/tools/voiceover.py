@@ -49,8 +49,15 @@ class KokoroVoice:
         self.name = name
         self.lang = 'en-gb' if name[:1] == 'b' else 'en-us'
 
+    # pronunciations the voice gets wrong, fixed in its phonemes before synthesis
+    FIXES = [('pˈɛntaɡən', 'pˈɛntəɡən')]           # 'Pentagon' with a schwa: PEN-tuh-gon
+
     def synth(self, text, scale):
-        a, sr = self.k.create(text, voice=self.name, speed=1.0 / scale, lang=self.lang)
+        ph = self.k.tokenizer.phonemize(text, self.lang)
+        for bad, good in self.FIXES:
+            ph = ph.replace(bad, good)
+        a, sr = self.k.create(ph, voice=self.name, speed=1.0 / scale, lang=self.lang, is_phonemes=True,
+                              sentence_pause=0.14, clause_pause=0.05)
         a = np.asarray(a, np.float32)
         nz = np.nonzero(np.abs(a) > 0.01)[0]
         a = a[max(nz[0] - int(0.02 * sr), 0): nz[-1] + int(0.06 * sr)]

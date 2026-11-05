@@ -57,7 +57,7 @@
    "start": 0.35,
    "deadline": 4.35,
    "text": "At 8:46 a.m., an ordinary morning changed forever.",
-   "tts": "At eight forty-six a.m., an ordinary morning changed forever.",
+   "tts": "At eight forty-six AM an ordinary morning changed forever.",
    "hl": [
     "8:46",
     "A.M.,"
@@ -76,8 +76,8 @@
   },
   {
    "scene": 3,
-   "start": 9.65,
-   "deadline": 15.15,
+   "start": 9.4,
+   "deadline": 15.45,
    "text": "Another hit the Pentagon. A fourth crashed in Pennsylvania, after passengers and crew fought back.",
    "tts": "Another hit the Pentagon. A fourth crashed in Pennsylvania, after passengers and crew fought back.",
    "hl": [
@@ -101,7 +101,7 @@
    "start": 22.6,
    "deadline": 26.4,
    "text": "And the world would never be the same.",
-   "tts": "And the world... would never be the same.",
+   "tts": "And the world would never be the same.",
    "hl": [
     "NEVER"
    ]
