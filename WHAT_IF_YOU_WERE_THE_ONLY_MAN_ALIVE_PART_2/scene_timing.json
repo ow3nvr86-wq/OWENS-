@@ -1,0 +1,237 @@
+{
+ "fps": 30,
+ "duration": 30.0,
+ "render_end": 30.0,
+ "scenes": [
+  {
+   "id": 1,
+   "name": "THE SEARCH BEGINS",
+   "start": 0.0,
+   "end": 4.15,
+   "desc": "The day after Part 1. He walks down his near-empty street (same man, same grey T-shirt). The giant billboard across the street flickers on: his face, THE ENTIRE WORLD IS SEARCHING FOR YOU. He stops and looks up.",
+   "actions": "The main character from Part 1, unchanged (only trainers added to go outside). Walking, stopping, looking up: unease.",
+   "lighting": "Cool blue-grey morning; the billboard floods his face with white-blue light.",
+   "sfx": "Footsteps, a distant siren, the billboard powering on (an electrical clunk and hum), a news-alert chime.",
+   "edit": "Opens mid-walk (no recap). Fast push to the billboard, then a cut to his face. Key caption: THE WORLD IS SEARCHING.",
+   "shots": [
+    {
+     "name": "walk",
+     "start": 0.0,
+     "end": 1.5,
+     "camera": "low tracking shot walking backwards in front of him"
+    },
+    {
+     "name": "billboard",
+     "start": 1.5,
+     "end": 2.6,
+     "camera": "fast push toward the billboard as it switches on"
+    },
+    {
+     "name": "lookup",
+     "start": 2.6,
+     "end": 4.15,
+     "camera": "close-up of his face looking up, slow push"
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "GLOBAL ATTENTION",
+   "start": 4.15,
+   "end": 10.45,
+   "desc": "A news presenter at the GLOBAL 24 desk with his photo behind her. The square's giant screens all show his face. Faces in the crowd look up. A government situation room: an URGENT message on the wall. Scientists at screens of worldwide disappearance data.",
+   "actions": "The presenter talks; the crowd stares; officials lean over the table; scientists point at data.",
+   "lighting": "Studio light; overcast daylight; red alert light in the situation room; blue lab light.",
+   "sfx": "News stings, crowd murmur, notification pings, a teleprinter-like data chatter, a low bass pulse that grows.",
+   "edit": "Quick cuts on the beat with glitches. Key captions: BILLIONS ARE WATCHING. / SCIENTISTS WANT ANSWERS.",
+   "shots": [
+    {
+     "name": "anchor",
+     "start": 4.15,
+     "end": 5.25,
+     "camera": "slow push on the presenter at the desk"
+    },
+    {
+     "name": "screens",
+     "start": 5.25,
+     "end": 5.9,
+     "camera": "crane up past the crowd to the giant screens"
+    },
+    {
+     "name": "crowd",
+     "start": 5.9,
+     "end": 6.4,
+     "camera": "low lateral slide past faces looking up"
+    },
+    {
+     "name": "gov",
+     "start": 6.4,
+     "end": 8.1,
+     "camera": "overhead push down onto the situation-room table"
+    },
+    {
+     "name": "scidata",
+     "start": 8.1,
+     "end": 10.45,
+     "camera": "dolly behind scientists at the data wall"
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "name": "THE INVITATION",
+   "start": 10.45,
+   "end": 19.15,
+   "desc": "A black government vehicle with blue light strips glides up to his tower and its door opens. He walks into an enormous research facility: a holographic globe, walls of displays, scientists everywhere. In a glass research room the lead scientist welcomes him.",
+   "actions": "He gets into the car, then walks in slowly, looking around; the scientist offers her hand and gestures to a seat.",
+   "lighting": "Cool blue facility light with subtle purple; the hologram's glow.",
+   "sfx": "A smooth electric vehicle arriving, a door sliding, footsteps on a polished floor, electronic doors, interface beeps.",
+   "edit": "Longer, grander moves. ",
+   "shots": [
+    {
+     "name": "car",
+     "start": 10.45,
+     "end": 12.6,
+     "camera": "low wide shot as the vehicle glides in and stops"
+    },
+    {
+     "name": "enter",
+     "start": 12.6,
+     "end": 15.1,
+     "camera": "huge reveal: crane up and back as he walks into the facility"
+    },
+    {
+     "name": "welcome",
+     "start": 15.1,
+     "end": 19.15,
+     "camera": "slow arc round him and the scientist in the research room"
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "name": "SOMETHING IS DIFFERENT",
+   "start": 19.15,
+   "end": 23.5,
+   "desc": "The lead scientist studies a massive digital timeline: one vertical spike - billions of people gone at exactly the same moment. Then her eyes narrow: one record does not fit. The screen highlights his photo: ANOMALY.",
+   "actions": "She swipes the timeline, stops, leans closer.",
+   "lighting": "The timeline's cyan light; a red highlight.",
+   "sfx": "Interface swipes and beeps, a data-scan sweep, rising strings and bass.",
+   "edit": "Music builds. Key caption: SOMETHING IS DIFFERENT.",
+   "shots": [
+    {
+     "name": "timeline",
+     "start": 19.15,
+     "end": 21.3,
+     "camera": "over her shoulder along the timeline wall"
+    },
+    {
+     "name": "notice",
+     "start": 21.3,
+     "end": 23.5,
+     "camera": "push in to the screen as his photo is highlighted"
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "name": "THE CLIFFHANGER",
+   "start": 23.5,
+   "end": 30.0,
+   "desc": "The scientist turns to him. The lights in the room dim. The giant screen shows a mysterious symbol. He looks confused. The screen glitches - PART 3?",
+   "actions": "She turns slowly; he stares at the symbol, frowning, lips parted.",
+   "lighting": "The room goes dark; the symbol's violet-white glow on his face.",
+   "sfx": "Power-down thunk as the lights dim, a deep drone, the symbol's tone, a final digital glitch and silence.",
+   "edit": "Slow pushes; a hard glitch to black; PART 3? Key caption: PART 3?",
+   "shots": [
+    {
+     "name": "turn",
+     "start": 23.5,
+     "end": 25.0,
+     "camera": "close on the scientist turning toward him; lights dim behind"
+    },
+    {
+     "name": "symbol",
+     "start": 25.0,
+     "end": 26.9,
+     "camera": "low push up the giant screen as the symbol appears; him small in front"
+    },
+    {
+     "name": "stare",
+     "start": 26.9,
+     "end": 30.0,
+     "camera": "close-up of his confused face in the symbol's light; the image glitches"
+    }
+   ]
+  }
+ ],
+ "lines": [
+  {
+   "scene": 1,
+   "start": 0.25,
+   "deadline": 4.32,
+   "text": "You're the only man alive... and now the entire world is looking for you.",
+   "tts": "You're the only man alive... and now the entire world is looking for you."
+  },
+  {
+   "scene": 2,
+   "start": 4.27,
+   "deadline": 10.54,
+   "text": "Your face is on every news channel. Governments are sending messages, and scientists desperately want answers.",
+   "tts": "Your face is on every news channel. Governments are sending messages, and scientists desperately want answers."
+  },
+  {
+   "scene": 3,
+   "start": 10.5,
+   "deadline": 19.22,
+   "text": "Suddenly, you're invited to the most important scientific meeting in human history. Everyone wants answers, but you have absolutely no idea what happened.",
+   "tts": "Suddenly, you're invited to the most important scientific meeting in human history. Everyone wants answers, but you have absolutely no idea what happened."
+  },
+  {
+   "scene": 4,
+   "start": 19.2,
+   "deadline": 23.53,
+   "text": "Then scientists discover something shocking. You're not just the last man alive...",
+   "tts": "Then scientists discover something shocking. You're not just the last man alive..."
+  },
+  {
+   "scene": 5,
+   "start": 23.6,
+   "deadline": 27.43,
+   "text": "You're the only person who might know why everyone else disappeared.",
+   "tts": "You're the only person who might know why everyone else disappeared."
+  }
+ ],
+ "titles": [
+  {
+   "text": "PART 2",
+   "start": 0.25,
+   "end": 3.9,
+   "style": "tag"
+  }
+ ],
+ "keys": [
+  {
+   "text": "THE WORLD IS|SEARCHING.",
+   "match": "the entire world is looking for you."
+  },
+  {
+   "text": "BILLIONS ARE|WATCHING.",
+   "match": "Your face is on every news channel."
+  },
+  {
+   "text": "SCIENTISTS|WANT ANSWERS.",
+   "match": "scientists desperately want answers."
+  },
+  {
+   "text": "SOMETHING IS|DIFFERENT.",
+   "match": "Then scientists discover something shocking."
+  },
+  {
+   "text": "PART 3?",
+   "start": 28.2,
+   "end": 30.0
+  }
+ ],
+ "events": {}
+}
