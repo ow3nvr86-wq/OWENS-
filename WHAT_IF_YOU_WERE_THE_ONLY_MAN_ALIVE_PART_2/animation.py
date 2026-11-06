@@ -3744,10 +3744,10 @@ def chor_anchor(t, shot):
 
 def chor_lab2(t, shot):
     O = LAB
-    P = merge(dict(loc=tuple(O + Vector((-0.6, 2.25, 0))), yaw=-35), idle(t, 2.0), BUSY, TALK(t, 13.0))
+    P = merge(dict(loc=tuple(O + Vector((0.4, 4.25, 0))), yaw=-165), idle(t, 2.0), BUSY, TALK(t, 13.0))
     pose('sci2', P)
-    P['shR'], P['elR'] = reach('sci2', 'R', O + Vector((-0.25 + 0.06 * math.sin(t * 2.3), 2.55, 1.15)))
-    P.update(look_at('sci2', O + Vector((1.0, 1.0, 1.6)), head=0.5))
+    P['shR'], P['elR'] = reach('sci2', 'R', O + Vector((-0.2, 4.45 + 0.05 * math.sin(t * 2.3), 1.45)))
+    P.update(look_at('sci2', O + Vector((1.5, 0.6, 1.6)), head=0.5))
     pose('sci2', P)
 
 
@@ -3818,13 +3818,13 @@ def build_cameras():
     camera_shot('gov', 22, [(0, S_ + V3(0.3, -5.6, 2.3)), (1, S_ + V3(0.1, -3.9, 1.75))],
                 [(0, S_ + V3(0.0, 5.88, 1.7)), (1, S_ + V3(0.0, 5.88, 1.9))], fstop=5.6)
     L_ = LAB
-    camera_shot('scidata', 26, [(0, L_ + V3(2.4, 1.6, 1.7)), (1, L_ + V3(1.7, 1.9, 1.65))],
-                [(0, L_ + V3(-0.6, 1.95, 1.5)), (1, L_ + V3(-0.65, 2.05, 1.55))], fstop=3.5)
+    camera_shot('scidata', 28, [(0, L_ + V3(2.0, 0.2, 1.65)), (1, L_ + V3(1.3, 0.9, 1.6))],
+                [(0, L_ + V3(0.1, 4.6, 1.65)), (1, L_ + V3(0.2, 4.6, 1.7))], fstop=3.5)
     # SCENE 3 - the car, the facility, the welcome
     camera_shot('car', 30, [(0, V3(10.0, -8.6, 0.55)), (1, V3(8.6, -8.0, 0.75))],
                 [(0, V3(-8.0, -6.0, 0.9)), (1, V3(1.0, -4.6, 1.1))], fstop=5.6)
     F = FACI
-    camera_shot('enter', 20, [(0, F + V3(8.5, -11.0, 13.0)), (1, F + V3(6.6, -9.0, 3.4))],
+    camera_shot('enter', 20, [(0, F + V3(5.6, -11.5, 13.0)), (1, F + V3(5.3, -9.5, 3.4))],
                 [(0, F + V3(2.0, 20.0, 4.0)), (1, F + V3(3.0, 14.0, 4.5))], fstop=60, ease='EASE_IN_OUT')
     Rr = RROOM
     mid = Rr + V3(-1.8, -2.3, 1.55)
