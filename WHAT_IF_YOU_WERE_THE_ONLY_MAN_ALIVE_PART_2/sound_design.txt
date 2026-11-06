@@ -1,0 +1,68 @@
+WHAT IF YOU WERE THE ONLY MAN ALIVE? PART 2 - SOUND DESIGN, MUSIC AND TIMING
+============================================================
+
+Everything below is synthesised by code in animation.py --stage audio (numpy only: oscillators, filtered noise,
+envelopes, convolution reverb). No samples, recordings, stock sound or copyrighted music. The narration is a
+synthetic voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py. Music, ambience and effects duck under
+the voice so the narration always stays on top.
+
+THE IDEA: bigger than Part 1. A cold drone on an eerily quiet street; the giant screen powers on with a relay clunk
+and an electrical hum, and an impact lands as his face appears. The world finds out over a driving news pulse with
+stings, static and a storm of phone notifications. The pulse stops dead for the black car (engine, braking, a
+sliding door). The facility is vast and cold: electronic doors, echoing footsteps, interface bleeps, a choir in a
+long reverb. The timeline ticks; a stab and alert beeps find his photo. Then rising suspense: a faster heartbeat,
+the lights powering down, a sub boom and a dissonant choir under the symbol - and a digital glitch cuts everything
+to one last low hit under PART 3?
+
+Files: audio/mix_with_voice.wav (final mix, -14 LUFS), audio/mix_no_voice.wav (music + sound only, -14 LUFS),
+audio/narration.wav (voice only).
+
+CUE SHEET (generated)
+------------------------------------------------------------
+  0.00 s  [music    ] MUSIC: a cold low drone (C sharp minor) with a slow heartbeat bass
+  0.00 s  [ambience ] Street: wind, distant traffic, a few far-off voices - eerily quiet
+  0.12 s  [sfx      ] His footsteps on the pavement
+  0.25 s  [voice    ] NARRATION: "You're the only man alive... and now the entire world is looking for you." (to 4.02 s)
+  1.35 s  [sfx      ] A whoosh on every cut (a big one on the push to the giant screen)
+  1.62 s  [sfx      ] The giant screen switches on: a relay clunk, a rising electrical hum and crackle
+  1.98 s  [music    ] IMPACT as the giant screen comes fully on with his face
+  4.15 s  [music    ] Breaking-news stings on the presenter and on the government urgent report
+  4.15 s  [music    ] MUSIC: a driving news pulse (C sharp minor, 128 bpm), kick, snare and shaker, building cut by cut
+  4.15 s  [ambience ] Newsroom: busy murmur, keyboards, phones
+  4.27 s  [voice    ] NARRATION: "Your face is on every news channel. Governments are sending messages, and scientists desperately want answers." (to 10.24 s)
+  4.30 s  [sfx      ] Phone notifications everywhere, faster and faster
+  5.25 s  [ambience ] The square: a huge crowd murmuring at the giant screens
+  6.40 s  [ambience ] Situation room: hum, data chirps
+  6.55 s  [sfx      ] An urgent alert tone in the situation room
+  8.10 s  [ambience ] Lab: equipment hum and bleeps
+ 10.45 s  [music    ] MUSIC: the pulse stops dead; a sub-bass boom and a low drone as the government car arrives
+ 10.45 s  [sfx      ] The government car: engine, a pass-by whoosh, hard braking; its door slides open (12.0 s)
+ 10.50 s  [voice    ] NARRATION: "Suddenly, you're invited to the most important scientific meeting in human history. Everyone wants answers, but you have absolutely no idea what happened." (to 18.93 s)
+ 12.60 s  [ambience ] Facility: a deep air-handling hum, servers, distant interface bleeps
+ 12.60 s  [music    ] MUSIC: vast and cold - choir and pads in a long reverb, a slow glassy arpeggio
+ 12.65 s  [sfx      ] Electronic doors open into the facility
+ 12.90 s  [sfx      ] Footsteps echoing across the hall
+ 15.15 s  [sfx      ] The glass research room door; interface bleeps
+ 19.15 s  [music    ] MUSIC: a clock-like ticking pulse and rising tremolo strings over the timeline
+ 19.15 s  [ambience ] Research room: a low hum
+ 19.20 s  [voice    ] NARRATION: "Then scientists discover something shocking. You're not just the last man alive..." (to 23.23 s)
+ 19.40 s  [sfx      ] Interface swipes as the scientist scrolls the timeline
+ 21.60 s  [sfx      ] A data glitch and a triple alert beep: ANOMALY - SUBJECT 001
+ 21.60 s  [music    ] A stab as the timeline finds the one man it missed - his photo
+ 23.50 s  [music    ] MUSIC: rising suspense - a faster heartbeat bass, then an eerie dissonant choir and a long riser under the symbol
+ 23.60 s  [voice    ] NARRATION: "You're the only person who might know why everyone else disappeared." (to 27.13 s)
+ 24.00 s  [sfx      ] The lights go down: a falling whine and a heavy relay
+ 25.30 s  [music    ] A deep sub boom as the symbol appears
+ 27.86 s  [sfx      ] DIGITAL GLITCH: stuttering square-wave bursts and static as the picture breaks up
+ 27.90 s  [music    ] MUSIC CUTS on the digital glitch; one last low hit under "PART 3?" (28.2 s), then its tail
+
+MUSIC GUIDE (if you re-score it in CapCut or another editor)
+------------------------------------------------------------
+- 0-2 s: a cold, low drone; a big hit when the giant screen comes on (2.0 s).
+- 4-10.5 s: news-channel energy - a driving minor-key pulse (120-130 bpm) that builds with every cut.
+- 10.5 s: stop the pulse dead for the car; low bass only.
+- 12.6-19 s: something vast and cold (pads, choir, long reverb) for the facility.
+- 19-23.5 s: a ticking pulse and rising strings; a stab at 21.6 s when his photo is highlighted.
+- 23.5-27.9 s: rising suspense; cut everything on the glitch at 27.9 s, one low hit under PART 3?.
+- Keep the narration 10-15 dB above the music; YouTube Shorts plays back at about -14 LUFS.
+- Use only music you have the rights to (your own, a licensed library, or YouTube Audio Library tracks).
