@@ -3655,8 +3655,8 @@ def chor_street(t, shot):
         P.update(look_at(YOU, Vector((8.0, GIANT['y'], 13.0)), head=0.8))
         pose(YOU, P)
     elif shot == 'car':
-        p = Vector((3.3, -3.1, 0.15))
-        P = merge(dict(loc=tuple(p), yaw=125), idle(t), UNEASY)
+        p = Vector((1.8, -3.5, 0.15))
+        P = merge(dict(loc=tuple(p), yaw=140), idle(t), UNEASY)
         pose(YOU, P)
         P.update(look_at(YOU, Vector((car_x(t), -6.6, 1.2)), head=0.6))
         pose(YOU, P)
@@ -3819,10 +3819,10 @@ def build_cameras():
                 [(0, S_ + V3(0.0, 5.88, 1.7)), (1, S_ + V3(0.0, 5.88, 1.9))], fstop=5.6)
     L_ = LAB
     camera_shot('scidata', 26, [(0, L_ + V3(2.4, 1.6, 1.7)), (1, L_ + V3(1.7, 1.9, 1.65))],
-                [(0, L_ + V3(-1.3, 3.2, 1.55)), (1, L_ + V3(-1.3, 3.3, 1.6))], fstop=3.5)
+                [(0, L_ + V3(-0.6, 1.95, 1.5)), (1, L_ + V3(-0.65, 2.05, 1.55))], fstop=3.5)
     # SCENE 3 - the car, the facility, the welcome
-    camera_shot('car', 28, [(0, V3(11.0, -12.4, 1.4)), (1, V3(8.6, -11.6, 1.6))],
-                [(0, V3(-1.0, -5.0, 0.95)), (1, V3(1.2, -4.6, 1.05))], fstop=5.6)
+    camera_shot('car', 30, [(0, V3(10.0, -8.6, 0.55)), (1, V3(8.6, -8.0, 0.75))],
+                [(0, V3(-8.0, -6.0, 0.9)), (1, V3(1.0, -4.6, 1.1))], fstop=5.6)
     F = FACI
     camera_shot('enter', 20, [(0, F + V3(8.5, -11.0, 13.0)), (1, F + V3(6.6, -9.0, 3.4))],
                 [(0, F + V3(2.0, 20.0, 4.0)), (1, F + V3(3.0, 14.0, 4.5))], fstop=60, ease='EASE_IN_OUT')
@@ -4317,7 +4317,8 @@ SHOTCFG = {
     'crowd': cfg(L_NIGHT, 'steel', ['Square'], exposure=0.3),
     'gov': cfg(L_INT, 'steel', ['Sit'], exposure=0.1),
     'scidata': cfg(L_INT, 'steel', ['Lab'], exposure=0.1),
-    'car': cfg(L_STREET, 'steel', ['City', 'Chars'], exposure=0.1, hide=['Van', 'Heli']),
+    'car': cfg(L_STREET, 'steel', ['City', 'Chars'], exposure=0.1,
+               hide=['Van', 'Heli', 'City_crown1_6', 'City_trunk1_6', 'City_crown1_7', 'City_trunk1_7']),
     'enter': cfg(L_DARK, 'violet', ['Faci', 'Chars'], exposure=0.3),
     'welcome': cfg(L_DARK, 'violet', ['Faci', 'Chars'], exposure=0.3),
     'timeline': cfg(L_DARK, 'violet', ['Faci', 'Chars'], exposure=0.2),
@@ -5802,8 +5803,13 @@ def stage_edit():
                 st.location = (0.5, st.location[1] - dy)
     if caps:
         cdir = os.path.join(BUILD, 'captions')
+        words = sorted(c['start'] for c in caps if not c.get('key'))
         for k, c in enumerate(caps):
-            f0, f1 = frame(c['start']), max(frame(c['end']), frame(c['start']) + 1)
+            end = c['end']
+            if c.get('key'):    # a key caption gives way to the next spoken caption
+                nxt = [w for w in words if c['start'] + 0.3 < w < end]
+                end = min([end] + nxt)
+            f0, f1 = frame(c['start']), max(frame(end), frame(c['start']) + 1)
             st = se.sequences.new_image(f'Cap{k}', os.path.join(cdir, c['file']), channel=(22 if c.get('key') else 20 + k % 2),
                                         frame_start=f0, fit_method='ORIGINAL')
             st.frame_final_end = f1
