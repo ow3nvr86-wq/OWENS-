@@ -1,0 +1,108 @@
+{
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "durationSeconds": 32,
+  "durationFrames": 960,
+  "scenes": [
+    {
+      "id": "hook",
+      "title": "The Hook",
+      "start": 0,
+      "end": 3
+    },
+    {
+      "id": "start",
+      "title": "The Challenge Begins",
+      "start": 3,
+      "end": 8
+    },
+    {
+      "id": "obstacles",
+      "title": "The First Obstacle",
+      "start": 8,
+      "end": 14
+    },
+    {
+      "id": "disaster",
+      "title": "The Near Disaster",
+      "start": 14,
+      "end": 20
+    },
+    {
+      "id": "win",
+      "title": "The Win",
+      "start": 20,
+      "end": 25
+    },
+    {
+      "id": "donation",
+      "title": "The Unexpected Ending",
+      "start": 25,
+      "end": 32
+    }
+  ],
+  "beats": {
+    "hookImpact": 0.0,
+    "cashRegister": 0.45,
+    "titleSlam": 0.4,
+    "eyesWiden": 0.95,
+    "countdownAppear": 1.9,
+    "floorOpen": 3.05,
+    "panStart": 3.35,
+    "panEnd": 4.85,
+    "beep3": 5.15,
+    "beep2": 5.45,
+    "beep1": 5.75,
+    "go": 6.05,
+    "launch": 6.6,
+    "hammer1Duck": 9.0,
+    "jumpTakeoff": 10.35,
+    "jumpLand": 11.0,
+    "hammer2NearMiss": 12.4,
+    "bridgeStep": 14.15,
+    "slip": 14.55,
+    "grab": 15.9,
+    "closeUpStart": 16.2,
+    "closeUpEnd": 17.5,
+    "musicPauseStart": 18.4,
+    "musicPauseEnd": 18.9,
+    "pullUp": 19.0,
+    "onPlatform": 20.1,
+    "buttonSlam": 20.45,
+    "youWon": 20.9,
+    "celebrateJump1": 21.35,
+    "celebrateJump2": 23.1,
+    "lookMoney": 25.0,
+    "lookCommunity": 25.8,
+    "lookBack": 26.95,
+    "smile": 27.3,
+    "donatePress": 27.9,
+    "transferStart": 28.0,
+    "transferEnd": 29.3,
+    "donatedText": 29.35,
+    "wave": 30.15,
+    "realWinner": 30.7
+  },
+  "timer": {
+    "comment": "Challenge clock shown on screen (cartoon time). Piecewise-linear map from video seconds to displayed seconds remaining.",
+    "keys": [
+      [
+        6.05,
+        30.0
+      ],
+      [
+        14.0,
+        5.0
+      ],
+      [
+        16.5,
+        4.2
+      ],
+      [
+        20.45,
+        0.3
+      ]
+    ]
+  }
+}

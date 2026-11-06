@@ -1,0 +1,24 @@
+{
+  "name": "bolt-shorts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BOLT animated YouTube Shorts — Remotion + SVG production",
+  "scripts": {
+    "studio": "remotion studio",
+    "audio": "python3 scripts/build_audio.py",
+    "render": "remotion render MainVideo out/bolt_001_100k_challenge.mp4",
+    "thumbnail": "remotion still Thumbnail out/bolt_001_thumbnail.png",
+    "reference": "remotion still BoltReference public/characters/bolt-reference.png"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.536",
+    "@remotion/fonts": "4.0.536",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.536"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "typescript": "5.6.3"
+  }
+}

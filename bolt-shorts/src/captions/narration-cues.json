@@ -1,0 +1,68 @@
+{
+  "voice": "Original energetic narrator: clear, expressive, conversational, fast but understandable. Not an imitation of any real person.",
+  "lines": [
+    {
+      "id": "n1", "scene": "hook", "start": 0.25, "end": 2.9,
+      "text": "This robot has 30 seconds to win ONE HUNDRED THOUSAND DOLLARS!",
+      "delivery": "Punchy hook, rising excitement, hit 'ONE HUNDRED THOUSAND DOLLARS' hard.",
+      "chunks": [
+        { "start": 0.25, "end": 0.85, "text": "THIS ROBOT HAS" },
+        { "start": 0.85, "end": 1.35, "text": "*30 SECONDS*" },
+        { "start": 1.35, "end": 1.65, "text": "TO WIN" },
+        { "start": 1.65, "end": 2.9,  "text": "*ONE HUNDRED THOUSAND DOLLARS!*" }
+      ]
+    },
+    {
+      "id": "n2", "scene": "start", "start": 3.1, "end": 5.05,
+      "text": "All he has to do is survive the obstacle course!",
+      "delivery": "Quick, playful, slight dare in the voice. Finish before the countdown beeps at 5.15s.",
+      "chunks": [
+        { "start": 3.1,  "end": 3.85, "text": "ALL HE HAS TO DO" },
+        { "start": 3.85, "end": 4.3,  "text": "IS SURVIVE" },
+        { "start": 4.3,  "end": 5.05, "text": "THE OBSTACLE COURSE!" }
+      ]
+    },
+    {
+      "id": "n3", "scene": "obstacles", "start": 8.3, "end": 11.4,
+      "text": "He dodged the hammers, jumped the platforms...",
+      "delivery": "Fast, rhythmic, riding the percussion. Trail off on 'platforms...' into the near-miss.",
+      "chunks": [
+        { "start": 8.3,  "end": 8.9,  "text": "HE DODGED" },
+        { "start": 8.9,  "end": 9.6,  "text": "THE HAMMERS," },
+        { "start": 10.0, "end": 10.5, "text": "JUMPED" },
+        { "start": 10.5, "end": 11.4, "text": "THE PLATFORMS..." }
+      ]
+    },
+    {
+      "id": "n4", "scene": "disaster", "start": 14.3, "end": 18.3,
+      "text": "But with seconds left... HE ALMOST LOST EVERYTHING!",
+      "delivery": "Drop to a tense near-whisper on 'But with seconds left...', then explode on 'HE ALMOST LOST EVERYTHING!'. Silence 18.4-18.9s.",
+      "chunks": [
+        { "start": 14.3, "end": 15.0, "text": "BUT WITH" },
+        { "start": 15.0, "end": 15.75, "text": "SECONDS LEFT..." },
+        { "start": 16.6, "end": 17.25, "text": "HE *ALMOST*" },
+        { "start": 17.25, "end": 18.3, "text": "*LOST EVERYTHING!*" }
+      ]
+    },
+    {
+      "id": "n5", "scene": "win", "start": 20.75, "end": 23.4,
+      "text": "AND HE DID IT! ONE HUNDRED THOUSAND DOLLARS!",
+      "delivery": "Full celebration, big smile in the voice, shouted over the fanfare.",
+      "chunks": [
+        { "start": 20.75, "end": 21.6, "text": "AND *HE DID IT!*" },
+        { "start": 21.8,  "end": 23.4, "text": "*ONE HUNDRED THOUSAND DOLLARS!*" }
+      ]
+    },
+    {
+      "id": "n6", "scene": "donation", "start": 25.3, "end": 30.4,
+      "text": "But Bolt didn't keep a single dollar. He donated ALL of it to help others.",
+      "delivery": "Warm, sincere, slower. Small pause before 'He donated', land 'ALL of it' with heart.",
+      "chunks": [
+        { "start": 25.3, "end": 26.2, "text": "BUT BOLT DIDN'T KEEP" },
+        { "start": 26.2, "end": 27.0, "text": "A SINGLE DOLLAR." },
+        { "start": 28.2, "end": 29.5, "text": "HE *DONATED ALL OF IT*" },
+        { "start": 29.5, "end": 30.4, "text": "TO HELP OTHERS." }
+      ]
+    }
+  ]
+}
