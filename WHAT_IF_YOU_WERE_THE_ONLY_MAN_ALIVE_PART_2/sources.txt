@@ -1,0 +1,64 @@
+WHAT IF YOU WERE THE ONLY MAN ALIVE? PART 2 - SOURCES, CLAIMS AND WHAT IS INVENTED
+==================================================================================
+
+This Short is FICTION: a hypothetical scenario that continues Part 1, labelled on screen ("PART 2 - A HYPOTHETICAL
+SCENARIO") for its first scene. It describes an imagined event in the second person ("you"). It makes no real-world
+statistical or historical claims in the narration.
+
+
+1. CLAIM TABLE
+--------------
+Said or shown                                         Status        Notes
+----------------------------------------------------  ------------  -------------------------------------------------------
+"You're the only man alive..."                        FICTION       The premise, carried over from Part 1.
+"the entire world is looking for you" / "Your face    FICTION       The story's events. The channel GLOBAL 24, the giant
+ is on every news channel" / "Governments are                       screens, the situation room and the lab are invented.
+ sending messages" / "scientists desperately want
+ answers"
+"the most important scientific meeting in human       FICTION       A line of the story, not a claim about any real event.
+ history"
+"You're the only person who might know why everyone   FICTION /     Deliberately unanswered (the cliffhanger). The film never
+ else disappeared."                                   SPECULATION   says why, and never presents a cause as fact.
+ IN THE STORY
+Timeline screen: "ABOUT 4 BILLION GONE - SAME         FICTION, with The event is fiction. The size is real-world-consistent:
+ INSTANT", the line labelled GLOBAL POPULATION -      a REAL scale  the UN's World Population Prospects 2024 puts the world
+ MALE dropping to zero                                              population at about 8.2 billion in 2024 (UN press
+                                                                    release, 11 July 2024) and men are just over half of
+                                                                    it (about 50.2-50.3 %: World Bank indicator "Population,
+                                                                    male (% of total)"; Statistics Times from UN WPP data),
+                                                                    i.e. roughly 4.1 billion. "About 4 billion" is a fair
+                                                                    round figure. The narration only says "everyone else".
+Situation room screen: "193 MESSAGES"                 ILLUSTRATIVE  Invented prop. The number was chosen to echo the 193
+                                                                    member states of the United Nations (un.org, "Member
+                                                                    States"; Encyclopaedia Britannica, "United Nations";
+                                                                    Worldometer, "Countries in the UN" - South Sudan, the
+                                                                    most recent, joined in 2011).
+                                                                    The film does not claim 193 governments did anything.
+"04:17:09.000 UTC", "07:12 UTC", "MEN FOUND: 1",      ILLUSTRATIVE  Invented on-screen props, part of the story.
+"SIMULTANEOUS IN ALL TIME ZONES", "ANOMALY -
+SUBJECT 001 - NOT AFFECTED", the region names on the
+urgent report, the reports-by-region chart
+The symbol on the research-room wall                  INVENTED      An original abstract mark (ring, line, triangle, three
+                                                                    dots) drawn by tools/textures.py. It means nothing and is
+                                                                    not based on any real organisation, religion or logo.
+The lab screens ("Y CHROMOSOME: PRESENT")             CONFIRMED     Reused from Part 1. Basic biology: males have one X and
+                                                      (as biology)  one Y chromosome (National Human Genome Research
+                                                                    Institute, genome.gov "Y chromosome"; Live Science, 2023).
+
+Speculation presented as fact: none. The cause of the disappearance is never stated; the only "explanation" is a
+question ("might know why").
+
+
+2. CHECKED BUT NOT USED
+-----------------------
+- A spoken population figure ("4 billion men vanished") was considered for the timeline beat. It is about right (see
+  above) but was kept to the screen graphic only, as "ABOUT 4 BILLION", so the narration stays clearly hypothetical.
+
+
+3. WHAT IS INVENTED (and made with code)
+----------------------------------------
+- The main character (the same procedural figure as Part 1, built by build_human with the same specification), the
+  scientists, the facility director, the news presenter, the officials, the facility staff and the crowds: all
+  procedural 3D people made by animation.py. Nobody real is depicted or imitated.
+- The city street, the giant screen, the government car, the square, the newsroom, the situation room, the lab, the
+  research facility and every screen graphic (tools/textures.py), including the channel GLOBAL 24.
