@@ -103,7 +103,35 @@ frames plus audio/mix_no_voice.wav), add audio/narration.wav and use subtitles.s
 
 RENDER TIMES (4 CPU cores, no GPU, Cycles CPU)
 ----------------------------------------------
-@TIMES@
+  Look-dev stills (270x480, 4 samples)         about 3-6 s per frame, plus about 1.5-2 min of scene building per run
+                                               (the people, their strand hair and the baked crowds are built every run)
+  Preview, 900 frames (270x480, 4 samples)     33 min (about 2 s per frame, including scene building per chunk)
+  Final, 900 frames (540x960, 6 samples)       about 2 h 40 min of rendering, about 8.3 s per frame on average. It ran
+                                               as two background runs (the first stopped at the 2-hour task limit
+                                               after 781 frames and was resumed); 165 frames of three shots (the
+                                               square, the lab, the facility crane) were re-rendered after QC.
+  Audio stage                                  about 10 s
+  Edit stage (final_video.mp4)                 2 min 15 s
+  Edit stage --no-voice                        2 min 1 s
+
+  final_video.mp4                   1080x1920, 30 fps, 30.0 s, H.264 + AAC 48 kHz, 29.3 MB, -13.7 LUFS (peak -2.7 dBFS)
+  renders/final_video_no_voice.mp4  1080x1920, 30 fps, 30.0 s, H.264 + AAC 48 kHz, 29.8 MB, -14.0 LUFS (peak -1.5 dBFS)
+
+
+QUALITY CHECK (against the brief)
+---------------------------------
+- Same main character as Part 1: the same build_human specification (only trainers added) and the same ID portrait.
+- Visual-first hook (Hook 2): the giant screen switches on with his face and THE ENTIRE WORLD IS SEARCHING FOR YOU. at
+  1.6-2.0 s, a fast push to the screen, then a cut to him looking up.
+- All five scenes as briefed; camera movement in every one of the 16 shots; cool blue, grey and subtle purple grade.
+- Bigger than Part 1: a square of thousands, an enormous facility (56 x 74 m hall, 20 m high) with a holographic globe,
+  and a planet-wide timeline.
+- Key captions: THE WORLD IS SEARCHING. / BILLIONS ARE WATCHING. / SCIENTISTS WANT ANSWERS. / SOMETHING IS DIFFERENT. /
+  PART 3?. Word captions: Anton, uppercase, white with a black outline, active word amber, max 3 words, about 64% down.
+  The captions match the narration word for word (76 words).
+- Sound: news ambience, notifications, low bass, the vehicle, footsteps, electronic doors, interface sounds, rising
+  suspense and a digital glitch at the end, ducked under the voice; -14 LUFS.
+- The ending does not reveal the answer.
 
 
 LIMITATIONS (what this code can and cannot do)
