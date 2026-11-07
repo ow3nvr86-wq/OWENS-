@@ -1,25 +1,36 @@
 WHAT IF YOU WERE THE ONLY MAN ALIVE? PART 2 - OPENING HOOKS AND ENDING
 =====================================================================
 
-Three hooks were written for Part 2. Scores are this production's own assessment (25 = best), weighing how fast the
-first two seconds grab, how clearly they continue Part 1, and whether the picture works with the sound off.
+The hook was rebuilt after the first delivery. What was wrong with the first version (kept here so it isn't repeated):
+- Frame 1 was a dim tracking shot of a man walking; nothing happened for 1.6 s, and the payoff (his face on the giant
+  screen) only arrived at 2.0 s.
+- The first words - "You're the only man alive..." - were recap of Part 1. The new information ("the entire world is
+  looking for you") only arrived at about 2.5 s.
+- "PART 2" was a tiny tag that nobody would read; with the sound off, the first second said nothing.
+- The sound opened on a quiet drone; the first hit came at 2.0 s.
 
-HOOK 1  (verbal)  "Every camera on Earth is pointed at one man. You."
-        Punchy and personal, but it depends on the words: with the sound off, the first frames would be an ordinary
-        street.                                                                                       Score 19/25
-HOOK 2  (visual-first)                                                                                (SELECTED)
-        Picture: an eerily quiet street; he walks alone; a giant dark screen across the road stutters on with HIS FACE
-        and "THE ENTIRE WORLD IS SEARCHING FOR YOU." - a fast push into the screen, then a cut to him looking up.
-        Words: "You're the only man alive... and now the entire world is looking for you."
-        It works with the sound off (the on-screen text and his face tell the story in under 2 seconds), it connects
-        to Part 1 in its first four words, and the impact lands on the frame where the screen comes fully on.
+Three hooks for the rebuilt opening. Scores are this production's own (25 = best), weighing the first second above all:
+does frame 1 stop the scroll, do the first words say something new, and does it work with the sound off.
+
+HOOK A  (picture + number)                                                                          (SELECTED)
+        Frame 1: across an empty street a building-sized screen glitches on with HIS FACE and THE ENTIRE WORLD IS
+        SEARCHING FOR YOU; he is a tiny figure standing alone in the road beneath it. PART 2 in large amber type is on
+        screen from frame 1. A hard hit on frame 1; a riser; a fast push into his face on the screen at 1.4 s; a
+        close-up of him staring up at 2.5 s.
+        Words (from 0.12 s): "4 billion people are searching for one man... you."
+        Why it wins: the payoff image is the first frame, the first word is a number, the twist word lands last, and
+        it reads completely with the sound off (title, on-screen text, his face, the caption "4 BILLION PEOPLE").
                                                                                                       Score 24/25
-HOOK 3  (question)  "What happens after you become the last man on Earth?"
-        Clear continuity, but a question is a set-up: it promises the story instead of starting it. Score 18/25
+HOOK B  (picture + statement)  Same picture. "Every screen on Earth just switched to your face."
+        Strong and visual, but it describes what we can already see; it adds no stakes.            Score 21/25
+HOOK C  (the original)  A walking shot, the screen switching on at 1.6 s. "You're the only man alive... and now the
+        entire world is looking for you."
+        Recap first, payoff late.                                                                   Score 15/25
 
 RETENTION
-- No introduction: frame 1 is already moving (a tracking shot as he walks); the screen switches on at 1.6 s and is
-  fully on at 2.0 s with a musical impact; the key caption THE WORLD IS SEARCHING. lands at the end of the first line.
+- 0.0 s: the screen is already on with his face (glitching), PART 2 on screen, impact. 0.12 s: "4 BILLION PEOPLE".
+- 1.4 s: cut - a fast push into his face on the screen. 2.5 s: cut - the close-up of him looking up; THE WORLD IS
+  SEARCHING. lands as the line ends.
 - Fast cuts through the montage (4.2-10.4 s): presenter, giant screens, a sea of people, a situation room, a lab -
   a new shot every 0.5-2.3 s, with stings, static, glitches and a storm of phone notifications.
 - Scale goes up scene by scene so Part 2 feels bigger than Part 1: a street, then a square of thousands, then an

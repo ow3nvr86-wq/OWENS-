@@ -22,7 +22,7 @@ If the variables are missing, run the hook script yourself (it is idempotent). T
 Work through these stages in order and don't stop after the storyboard - the deliverable is the finished MP4.
 
 1. **Research** (`research/sources.md`). Pick the most surprising, visual angle. Verify every on-screen number in 2+ sources (WebSearch/WebFetch); where sources disagree, phrase it honestly ("up to", "around", "estimated"). Keep a table: claim -> value used -> sources -> notes. Note facts you cut. Never present speculation as fact.
-2. **Script** (`scripts/script.json` + `storyboard/voiceover_script.md`). Hook (0-3 s) / setup (to ~12 s) / story (to ~40 s) / payoff (to ~55 s) / ending question. ~150-165 words. Captions can spell numbers as digits while the narration spells them out (see `captions` map in the reference script.json).
+2. **Script** (`scripts/script.json` + `storyboard/voiceover_script.md`). Hook (0-3 s, see "The hook" below) / setup (to ~12 s) / story (to ~40 s) / payoff (to ~55 s) / ending question. ~150-165 words. Captions can spell numbers as digits while the narration spells them out (see `captions` map in the reference script.json).
 3. **Voiceover** (`scripts/voiceover.py`). Synthesize per line, trim silence, write `build/timeline.json`. **Every later stage reads this timeline**, so do it before any animation work; cuts are derived from real line timings, never guessed. Check total duration: narration + ~1.6 s end hold must stay <= 60 s. Tune with `--length-scale` and the per-line `pause` values.
 4. **Physics (optional but powerful)**. If the topic has a physical event (flood, collapse, explosion, orbit, crowd), simulate it in numpy and stream the result into Blender each frame (see `simulate_flood.py`: 2D shallow water, rigid debris advected by the flow). Real simulation beats hand-keyed motion and is a great talking point. Document any visual exaggeration.
 5. **3D scene** (`scripts/animation.py`). Procedural everything: bmesh geometry, node-based materials, cameras on keyframed rigs with Track-To targets, one camera per shot bound via timeline markers, a `frame_change_pre` handler for data-driven motion, keyframed `hide_render` for per-shot visibility, an ENV node group for globally animated material values (night, frost, paint wipe...). Export cue times and 3D->screen anchor points with `--export-events` so audio and graphics sync exactly.
@@ -33,6 +33,26 @@ Work through these stages in order and don't stop after the storyboard - the del
 10. **QC on the actual MP4**: ffprobe (1080x1920, 30 fps, duration), a contact sheet of decoded frames across every shot, captions matching narration, EBU R128 loudness ~-14 LUFS. Then commit and push, and send the MP4 to the user (SendUserFile).
 
 Deliverable folder layout (one folder per video, e.g. `youtube_short_<slug>/`): `research/`, `storyboard/`, `scripts/`, `audio/{vo,music,sfx}`, `assets/fonts/`, `renders/` (MP4 committed, `frames/` git-ignored), `build/` (git-ignored), `README.md` with rendering instructions and honesty notes, `requirements.txt`.
+
+## The hook (first 3 seconds) - the user's top priority
+
+The user has asked for stronger hooks. Every new script and storyboard must pass all of these before any rendering:
+
+- **Frame 1 is the payoff image, not a build-up.** Open on the single most striking picture in the film (the giant screen
+  already showing his face, the wave already breaking), with the camera already moving. No walking-in, establishing
+  shots, slow fades or dark frames first. Pull the "reveal" moment to 0 s rather than building to it.
+- **The first spoken words are new, concrete information**, never recap, scene-setting or "imagine...". Lead with a
+  specific number, a shock statement or the stakes, and land the twist word last (e.g. "4 billion people are searching
+  for one man... you."). Start speaking within ~0.15 s. The hook line should be under ~3 s.
+- **It must work muted.** Frame 1 carries big, readable on-screen text (the title or a stat, about 170-190 px Anton on a
+  dark plate) that is fully on at frame 1 (no fade-in), plus the first caption by ~0.15 s.
+- **Sound hits on frame 1**: an impact or a stinger on the first frame, then a riser into the next cut by ~1.4 s. No
+  quiet drone intro.
+- **Cut by ~1.4 s**, then cut again by ~2.5 s.
+- **Write three hooks and score them** (hooks.txt): picture-first vs line-first, and say why the winner is stronger in
+  the first second. Render the first 4 s at preview quality and look at frames 1, 5, 20 and 40 before anything else.
+- **Look at frame 1 itself** in the edited MP4 (no glitch flash or fade washing it out; title, image and caption all
+  readable) as part of QC.
 
 ## Defaults and preferences
 

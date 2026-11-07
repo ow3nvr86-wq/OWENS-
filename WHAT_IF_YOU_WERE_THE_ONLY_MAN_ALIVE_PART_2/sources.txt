@@ -10,7 +10,15 @@ statistical or historical claims in the narration.
 --------------
 Said or shown                                         Status        Notes
 ----------------------------------------------------  ------------  -------------------------------------------------------
-"You're the only man alive..."                        FICTION       The premise, carried over from Part 1.
+"4 billion people are searching for one man...       FICTION, with The search is fiction. The number is real-world-consistent:
+ you." (the first line; spoken "Four billion")       a REAL scale  in the story every man has vanished, so the people left are
+                                                                    the world's women. About 8.2 billion people in 2024 (UN
+                                                                    World Population Prospects 2024; Statistics Times: 8.23
+                                                                    billion) x about 49.7-49.8 % women (Statistics Times
+                                                                    from UN data; World Bank "Population, female (% of
+                                                                    total)") = about 4.1 billion. "4 billion" is a fair,
+                                                                    slightly rounded-down figure.
+"the last man alive" (line 4) / the premise          FICTION       Carried over from Part 1.
 "the entire world is looking for you" / "Your face    FICTION       The story's events. The channel GLOBAL 24, the giant
  is on every news channel" / "Governments are                       screens, the situation room and the lab are invented.
  sending messages" / "scientists desperately want
@@ -51,8 +59,8 @@ question ("might know why").
 
 2. CHECKED BUT NOT USED
 -----------------------
-- A spoken population figure ("4 billion men vanished") was considered for the timeline beat. It is about right (see
-  above) but was kept to the screen graphic only, as "ABOUT 4 BILLION", so the narration stays clearly hypothetical.
+- "8 billion people are searching for you" was considered for the hook and rejected: 8.2 billion is the world's whole
+  population, but in the story every man (about half of it) has gone, so only about 4 billion are left to search.
 
 
 3. WHAT IS INVENTED (and made with code)
