@@ -113,12 +113,13 @@ RENDER TIMES (4 CPU cores, no GPU, Cycles CPU)
                                                as two background runs (the first stopped at the 2-hour task limit
                                                after 781 frames and was resumed); 165 frames of three shots (the
                                                square, the lab, the facility crane) were re-rendered after QC.
+  Hook rebuild: opening re-render (125 frames) 14 min at final quality (about 6.7 s per frame), 3 min at preview
   Audio stage                                  about 10 s
-  Edit stage (final_video.mp4)                 2 min 15 s
-  Edit stage --no-voice                        2 min 1 s
+  Edit stage (final_video.mp4)                 2 min
+  Edit stage --no-voice                        1 min 48 s
 
-  final_video.mp4                   1080x1920, 30 fps, 30.0 s, H.264 + AAC 48 kHz, 29.3 MB, -13.7 LUFS (peak -2.7 dBFS)
-  renders/final_video_no_voice.mp4  1080x1920, 30 fps, 30.0 s, H.264 + AAC 48 kHz, 29.8 MB, -14.0 LUFS (peak -1.5 dBFS)
+  final_video.mp4                   1080x1920, 30 fps, 30.0 s, H.264 + AAC 48 kHz, 29.2 MB, -13.7 LUFS (peak -2.8 dBFS)
+  renders/final_video_no_voice.mp4  1080x1920, 30 fps, 30.0 s, H.264 + AAC 48 kHz, 29.8 MB, -13.9 LUFS (peak -1.9 dBFS)
 
 
 QUALITY CHECK (against the brief)
