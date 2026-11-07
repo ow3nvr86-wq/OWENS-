@@ -7,17 +7,18 @@ Every shot is rendered in Blender from animation.py; transitions, titles, captio
 
 SCENE 1 - THE SEARCH BEGINS  (0.0-4.2 s, frames 1-125)
 ------------------------------------------------------------
-Visual: The day after Part 1. He walks down his near-empty street (same man, same grey T-shirt). The giant billboard across the street flickers on: his face, THE ENTIRE WORLD IS SEARCHING FOR YOU. He stops and looks up.
-Characters: The main character from Part 1, unchanged (only trainers added to go outside). Walking, stopping, looking up: unease.
+Visual: Frame 1 is the payoff: across his empty street a building-sized screen glitches on with HIS FACE and THE ENTIRE WORLD IS SEARCHING FOR YOU. He stands small beneath it, looking up. A fast push into the face on the screen, then a close-up of him staring up at it.
+Characters: The main character from Part 1, unchanged (only trainers added). Already stopped, staring up: disbelief, unease.
 Lighting: Cool blue-grey morning; the billboard floods his face with white-blue light.
-Sound: Footsteps, a distant siren, the billboard powering on (an electrical clunk and hum), a news-alert chime.
-  Shot "walk" 0.0-1.5 s (frames 1-45): low tracking shot walking backwards in front of him
-  Shot "billboard" 1.5-2.6 s (frames 46-78): fast push toward the billboard as it switches on
-  Shot "lookup" 2.6-4.2 s (frames 79-125): close-up of his face looking up, slow push
-  VO 0.25-4.02: "You're the only man alive... and now the entire world is looking for you."
-  TEXT 0.2-3.9 [tag]: PART 2
+Sound: A hard hit on frame 1 as the screen powers on (relay clunk, electrical hum, static), a riser and a big whoosh into the push.
+  Shot "reveal" 0.0-1.4 s (frames 1-42): low wide from behind him as the giant screen glitches on; rising push
+  Shot "billboard" 1.4-2.5 s (frames 43-75): fast push into his face on the screen
+  Shot "lookup" 2.5-4.2 s (frames 76-125): low close-up of his face looking up, slow push
+  VO 0.12-3.14: "4 billion people are searching for one man... you."
+  TEXT 0.0-2.5 [hero]: PART 2
+  TEXT 0.0-3.9 [tag]: A HYPOTHETICAL SCENARIO
   KEY CAPTION (large, amber, replaces the word captions): THE WORLD IS SEARCHING.
-  Transition / edit: Opens mid-walk (no recap). Fast push to the billboard, then a cut to his face. Key caption: THE WORLD IS SEARCHING.
+  Transition / edit: No build-up: the most striking image is the first frame. PART 2 in large type at the top from frame 1. Key caption THE WORLD IS SEARCHING. after the line lands.
 
 SCENE 2 - GLOBAL ATTENTION  (4.2-10.4 s, frames 126-314)
 ------------------------------------------------------------

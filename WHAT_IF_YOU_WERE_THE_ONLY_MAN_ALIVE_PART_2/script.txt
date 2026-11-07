@@ -1,10 +1,10 @@
-WHAT IF YOU WERE THE ONLY MAN ALIVE? PART 2 - NARRATION SCRIPT (30.0 seconds, 76 words)
+WHAT IF YOU WERE THE ONLY MAN ALIVE? PART 2 - NARRATION SCRIPT (30.0 seconds, 71 words)
 Voice: Kokoro-82M bm_george. Start and end times are measured from the synthesised voice.
 Same narrator and pace as Part 1. Read low and suspenseful: second person ("you"), short sentences, a held
 beat on the ellipses ("...looking for you", "...the last man alive..."), and the last line almost a whisper.
 
 [SCENE 1 - THE SEARCH BEGINS  0.0-4.2 s]
-(00.25-04.02) You're the only man alive... and now the entire world is looking for you.
+(00.12-03.14) 4 billion people are searching for one man... you.
 
 [SCENE 2 - GLOBAL ATTENTION  4.2-10.4 s]
 (04.27-10.24) Your face is on every news channel. Governments are sending messages, and scientists desperately want answers.
@@ -18,4 +18,4 @@ beat on the ellipses ("...looking for you", "...the last man alive..."), and the
 [SCENE 5 - THE CLIFFHANGER  23.5-30.0 s]
 (23.60-27.13) You're the only person who might know why everyone else disappeared.
 
-Total: 76 words.
+Total: 71 words.

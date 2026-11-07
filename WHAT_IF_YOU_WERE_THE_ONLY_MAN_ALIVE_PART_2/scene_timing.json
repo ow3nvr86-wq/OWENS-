@@ -8,29 +8,29 @@
    "name": "THE SEARCH BEGINS",
    "start": 0.0,
    "end": 4.15,
-   "desc": "The day after Part 1. He walks down his near-empty street (same man, same grey T-shirt). The giant billboard across the street flickers on: his face, THE ENTIRE WORLD IS SEARCHING FOR YOU. He stops and looks up.",
-   "actions": "The main character from Part 1, unchanged (only trainers added to go outside). Walking, stopping, looking up: unease.",
+   "desc": "Frame 1 is the payoff: across his empty street a building-sized screen glitches on with HIS FACE and THE ENTIRE WORLD IS SEARCHING FOR YOU. He stands small beneath it, looking up. A fast push into the face on the screen, then a close-up of him staring up at it.",
+   "actions": "The main character from Part 1, unchanged (only trainers added). Already stopped, staring up: disbelief, unease.",
    "lighting": "Cool blue-grey morning; the billboard floods his face with white-blue light.",
-   "sfx": "Footsteps, a distant siren, the billboard powering on (an electrical clunk and hum), a news-alert chime.",
-   "edit": "Opens mid-walk (no recap). Fast push to the billboard, then a cut to his face. Key caption: THE WORLD IS SEARCHING.",
+   "sfx": "A hard hit on frame 1 as the screen powers on (relay clunk, electrical hum, static), a riser and a big whoosh into the push.",
+   "edit": "No build-up: the most striking image is the first frame. PART 2 in large type at the top from frame 1. Key caption THE WORLD IS SEARCHING. after the line lands.",
    "shots": [
     {
-     "name": "walk",
+     "name": "reveal",
      "start": 0.0,
-     "end": 1.5,
-     "camera": "low tracking shot walking backwards in front of him"
+     "end": 1.4,
+     "camera": "low wide from behind him as the giant screen glitches on; rising push"
     },
     {
      "name": "billboard",
-     "start": 1.5,
-     "end": 2.6,
-     "camera": "fast push toward the billboard as it switches on"
+     "start": 1.4,
+     "end": 2.5,
+     "camera": "fast push into his face on the screen"
     },
     {
      "name": "lookup",
-     "start": 2.6,
+     "start": 2.5,
      "end": 4.15,
-     "camera": "close-up of his face looking up, slow push"
+     "camera": "low close-up of his face looking up, slow push"
     }
    ]
   },
@@ -168,10 +168,10 @@
  "lines": [
   {
    "scene": 1,
-   "start": 0.25,
+   "start": 0.12,
    "deadline": 4.32,
-   "text": "You're the only man alive... and now the entire world is looking for you.",
-   "tts": "You're the only man alive... and now the entire world is looking for you."
+   "text": "4 billion people are searching for one man... you.",
+   "tts": "Four billion people are searching for one man... you."
   },
   {
    "scene": 2,
@@ -204,8 +204,14 @@
  ],
  "titles": [
   {
-   "text": "PART 2  -  A HYPOTHETICAL SCENARIO",
-   "start": 0.25,
+   "text": "PART 2",
+   "start": 0.0,
+   "end": 2.45,
+   "style": "part"
+  },
+  {
+   "text": "A HYPOTHETICAL SCENARIO",
+   "start": 0.0,
    "end": 3.9,
    "style": "tag"
   }
@@ -213,7 +219,8 @@
  "keys": [
   {
    "text": "THE WORLD IS|SEARCHING.",
-   "match": "the entire world is looking for you."
+   "start": 3.0,
+   "end": 4.27
   },
   {
    "text": "BILLIONS ARE|WATCHING.",

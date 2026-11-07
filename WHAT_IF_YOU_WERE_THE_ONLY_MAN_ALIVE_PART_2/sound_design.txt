@@ -6,8 +6,8 @@ envelopes, convolution reverb). No samples, recordings, stock sound or copyright
 synthetic voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py. Music, ambience and effects duck under
 the voice so the narration always stays on top.
 
-THE IDEA: bigger than Part 1. A cold drone on an eerily quiet street; the giant screen powers on with a relay clunk
-and an electrical hum, and an impact lands as his face appears. The world finds out over a driving news pulse with
+THE IDEA: bigger than Part 1, and no build-up: an impact lands on the very first frame as a giant screen glitches on
+with his face over an empty street (relay clunk, electrical hum, static). The world finds out over a driving news pulse with
 stings, static and a storm of phone notifications. The pulse stops dead for the black car (engine, braking, a
 sliding door). The facility is vast and cold: electronic doors, echoing footsteps, interface bleeps, a choir in a
 long reverb. The timeline ticks; a stab and alert beeps find his photo. Then rising suspense: a faster heartbeat,
@@ -19,13 +19,13 @@ audio/narration.wav (voice only).
 
 CUE SHEET (generated)
 ------------------------------------------------------------
-  0.00 s  [music    ] MUSIC: a cold low drone (C sharp minor) with a slow heartbeat bass
+  0.00 s  [music    ] IMPACT on frame 1 as the giant screen glitches on with his face (no build-up)
+  0.00 s  [music    ] MUSIC: a cold low drone (C sharp minor) under the hit, then a heartbeat bass
   0.00 s  [ambience ] Street: wind, distant traffic, a few far-off voices - eerily quiet
-  0.12 s  [sfx      ] His footsteps on the pavement
-  0.25 s  [voice    ] NARRATION: "You're the only man alive... and now the entire world is looking for you." (to 4.02 s)
-  1.35 s  [sfx      ] A whoosh on every cut (a big one on the push to the giant screen)
-  1.62 s  [sfx      ] The giant screen switches on: a relay clunk, a rising electrical hum and crackle
-  1.98 s  [music    ] IMPACT as the giant screen comes fully on with his face
+  0.00 s  [sfx      ] The giant screen glitches on: a relay clunk, electrical hum and crackle
+  0.12 s  [voice    ] NARRATION: "4 billion people are searching for one man... you." (to 3.14 s)
+  0.50 s  [music    ] A riser into the push to his face on the screen; a low boom on the cut (1.4 s)
+  1.25 s  [sfx      ] A whoosh on every cut (a big one on the push to the giant screen)
   4.15 s  [music    ] Breaking-news stings on the presenter and on the government urgent report
   4.15 s  [music    ] MUSIC: a driving news pulse (C sharp minor, 128 bpm), kick, snare and shaker, building cut by cut
   4.15 s  [ambience ] Newsroom: busy murmur, keyboards, phones
@@ -58,7 +58,7 @@ CUE SHEET (generated)
 
 MUSIC GUIDE (if you re-score it in CapCut or another editor)
 ------------------------------------------------------------
-- 0-2 s: a cold, low drone; a big hit when the giant screen comes on (2.0 s).
+- 0 s: a hard hit on the very first frame as the giant screen comes on; a riser into the push (1.4 s).
 - 4-10.5 s: news-channel energy - a driving minor-key pulse (120-130 bpm) that builds with every cut.
 - 10.5 s: stop the pulse dead for the car; low bass only.
 - 12.6-19 s: something vast and cold (pads, choir, long reverb) for the facility.

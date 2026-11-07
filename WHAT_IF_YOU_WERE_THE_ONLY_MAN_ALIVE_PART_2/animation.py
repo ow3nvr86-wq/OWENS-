@@ -3634,25 +3634,18 @@ def hide_phone():
 
 
 # --- the main character ----------------------------------------------------------------------------------------------
-WALK_Y = -2.0
-LOOKUP_X = -15.0 + 1.15 * 3.0
+HERO_P = (-12.0, -7.0, 0.0)      # where he stands in the opening (the road is empty)
+HERO_YAW = -125.0
 
 
 def chor_street(t, shot):
     hide_phone()
-    if shot in ('walk', 'billboard'):
-        P, mv = walk_along([(-15.0, WALK_Y), (-6.0, WALK_Y)], t, -0.4, 1.15, amp=0.85)
-        P['loc'] = (P['loc'][0], P['loc'][1], 0.15)
-        P = merge(P, blend_face(PUZZLED, UNEASY, ramp(t, 0.6, 1.4)))
+    if shot in ('reveal', 'billboard', 'lookup'):
+        # alone in the middle of the empty road, staring up at his own face on the giant screen
+        P = merge(dict(loc=HERO_P, yaw=HERO_YAW, lean=-2.0 * ramp(t, 0.0, 1.0)), idle(t),
+                  blend_face(UNEASY, STUNNED, ramp(t, 0.2, 3.4)))
         pose(YOU, P)
-        P.update(look_at(YOU, Vector((P['loc'][0] + 6, WALK_Y - 6, 1.6)), head=0.4))
-        pose(YOU, P)
-    elif shot == 'lookup':
-        x = LOOKUP_X
-        u = smooth(ramp(t, 2.6, 3.3))
-        P = merge(dict(loc=(x, WALK_Y, 0.15), yaw=-90 - 75 * u), idle(t), blend_face(UNEASY, STUNNED, ramp(t, 2.9, 3.6)))
-        pose(YOU, P)
-        P.update(look_at(YOU, Vector((8.0, GIANT['y'], 13.0)), head=0.8))
+        P.update(look_at(YOU, Vector((8.0, GIANT['y'], 13.0)), head=0.85))
         pose(YOU, P)
     elif shot == 'car':
         p = Vector((1.8, -3.5, 0.15))
@@ -3752,7 +3745,7 @@ def chor_lab2(t, shot):
 
 
 AWE_F = dict(brow=0.6, btilt=0.1, lid=0.25, open=0.15, smile=0.0)
-CHOR = {'walk': chor_street, 'billboard': chor_street, 'lookup': chor_street, 'car': chor_street,
+CHOR = {'reveal': chor_street, 'billboard': chor_street, 'lookup': chor_street, 'car': chor_street,
         'enter': chor_enter, 'welcome': chor_room, 'timeline': chor_room, 'notice': chor_room,
         'turn': chor_room, 'symbol': chor_room, 'stare': chor_room}
 CHOR_PEOPLE = {'anchor': chor_anchor, 'scidata': chor_lab2}
@@ -3790,19 +3783,19 @@ def car_x(t):
 
 def build_cameras():
     # where the main character's eyes are in each set-up
-    look_e = landmark(YOU, dict(loc=(LOOKUP_X, WALK_Y, 0.15), yaw=-165))
+    look_e = landmark(YOU, dict(loc=HERO_P, yaw=HERO_YAW))
     stare_e = landmark(YOU, dict(loc=tuple(RROOM + V3(1.6, -2.4, 0)), yaw=-70))
     sci_e = landmark('sci1', dict(loc=tuple(RROOM + V3(4.0, -0.6, 0)), yaw=-233))
     # SCENE 1 - the street, the giant screen switches on
-    x0 = -15.0 + 1.15 * 0.4
-    camera_shot('walk', 35, [(0, V3(x0 + 4.2, -2.9, 1.25)), (1, V3(x0 + 4.9, -2.85, 1.3))],
-                [(0, V3(x0, WALK_Y, 1.45)), (1, V3(x0 + 1.7, WALK_Y, 1.5))], fstop=2.8, ease=False)
+    # the hook: frame 1 is already the payoff - a low wide from behind him as the giant screen glitches on with his face
+    camera_shot('reveal', 16, [(0, V3(-16.5, -1.2, 0.5)), (1, V3(-16.0, -1.5, 1.2))],
+                [(0, V3(9.5, GIANT['y'], 12.0)), (1, V3(6.5, GIANT['y'], 12.6))], fstop=60, lenses=[(0, 16), (1, 17)])
     G = GIANT
     gc = V3(0.0, G['y'], (G['z0'] + G['z1']) / 2)
     pc = V3(G['x1'] - (G['x1'] - G['x0']) * 440 / 2048, G['y'], G['z1'] - (G['z1'] - G['z0']) * 630 / 1152)   # his face on it
-    camera_shot('billboard', 24, [(0, V3(-8.0, -2.6, 1.7)), (1, V3(5.0, -7.0, 10.8))],
-                [(0, gc + V3(-1, 0, -1)), (1, pc + V3(0, 0, 0.4))], fstop=60, lenses=[(0, 20), (1, 26)], ease='EASE_IN')
-    d = fwd(-165)                                             # his facing direction once he has turned
+    camera_shot('billboard', 22, [(0, V3(-10.0, -9.0, 1.6)), (1, V3(5.0, -9.5, 10.8))],
+                [(0, gc + V3(-1, 0, -1)), (1, pc + V3(0, 0, 0.4))], fstop=60, lenses=[(0, 20), (1, 22)], ease='EASE_IN')
+    d = fwd(HERO_YAW)                                         # his facing direction
     camera_shot('lookup', 40, [(0, look_e + d * 1.6 + V3(0.35, 0, -0.75)), (1, look_e + d * 1.05 + V3(0.25, 0, -0.55))],
                 [(0, look_e + V3(0, 0, -0.08)), (1, look_e + V3(0, 0, -0.03))], fstop=2.4)
     # SCENE 2 - the world finds out
@@ -3857,14 +3850,14 @@ def SV(key, v):
 
 
 def flicker_on(t, a, b):
-    """A big LED screen powering up: dark, a few stuttering flashes, then on."""
+    """A big LED screen stuttering on: on from the first frame, a few drop-outs, then steady."""
     if t < a:
         return 0.0
     if t >= b:
         return 1.0
     u = (t - a) / (b - a)
     k = int(u * 9)
-    return (0.0, 0.7, 0.05, 0.0, 0.9, 0.2, 1.0, 0.6, 1.0)[k] * (0.4 + 0.6 * u)
+    return (0.9, 0.25, 1.0, 0.45, 1.0, 0.7, 1.0, 0.85, 1.0)[k]
 
 
 def rr_image(t):
@@ -3875,10 +3868,10 @@ def update_world(t, shot):
     S = SETS
     SV('gtime', t)
     # the giant screen across the street powers on with his face
-    on = flicker_on(t, 1.62, 1.98)
+    on = flicker_on(t, 0.0, 0.3)
     SV('giant_on', on)
-    SV('g_giant', 0.6 if 0.0 < on < 1.0 else (0.25 if 1.98 <= t < 2.2 else 0.0))
-    S['giant_light'].data.energy = (6e3 if shot == 'lookup' else 1.4e4) * on if shot in ('billboard', 'lookup', 'car') else 0.0
+    SV('g_giant', 0.6 if t < 0.3 else (0.25 if t < 0.5 else 0.0))
+    S['giant_light'].data.energy = (6e3 if shot == 'lookup' else 1.4e4) * on if shot in ('reveal', 'billboard', 'lookup', 'car') else 0.0
     S['giant_light'].data.color = (0.75, 0.85, 1.0)
     for h in S['helis']:
         h['root'].location = (0, 0, -100)
@@ -4308,9 +4301,11 @@ GRADE.update({
     'steel':  ((0.985, 1.0, 1.03), (0.97, 0.99, 1.04), (0.98, 1.0, 1.05), 0.88),
     'violet': ((1.0, 0.98, 1.04), (0.98, 0.98, 1.05), (1.0, 0.98, 1.05), 0.92),
 })
+# kerb trees and lamps that would block the opening's view of the giant screen
+OPEN_TREES = [f'City_{p}{s}_{k}' for p in ('crown', 'trunk') for s in (1, 2) for k in (5, 6, 7)]
 SHOTCFG = {
-    'walk': cfg(L_STREET, 'steel', ['City', 'Chars'], exposure=0.45, hide=['Van', 'Heli']),
-    'billboard': cfg(L_STREET, 'steel', ['City', 'Chars'], exposure=0.0, hide=['Van', 'Heli']),
+    'reveal': cfg(L_STREET, 'steel', ['City', 'Chars'], exposure=0.15, hide=['Van', 'Heli', 'City_lamps1'] + OPEN_TREES),
+    'billboard': cfg(L_STREET, 'steel', ['City', 'Chars'], exposure=0.0, hide=['Van', 'Heli', 'City_lamps1'] + OPEN_TREES),
     'lookup': cfg(L_STREET, 'steel', ['City', 'Chars'], exposure=-0.35, hide=['Van', 'Heli']),
     'anchor': cfg(L_INT, 'news', ['News'], exposure=0.0),
     'screens': cfg(L_NIGHT, 'steel', ['Square'], exposure=0.2),
@@ -5337,15 +5332,17 @@ def _music(N, cues):
     mus = np.zeros((2, N))
     S_ = {s['name']: (s['t0'], s['t1']) for s in SHOTS}
     # 0-4 s: a cold, low drone; the screen powers on; an impact as his face appears
+    _place(mus, _hit(2, 1.2), 0.0, 0.8)
+    cues.append((0.0, 'IMPACT on frame 1 as the giant screen glitches on with his face (no build-up)', 'music'))
     y = _pad([_mtof(m) for m in (37, 44, 49, 52)], 4.2, seed=1, cutoff=700)
-    _place(mus, y * _env(_tt2(4.2), [(0, 0), (0.3, 0.8), (1.6, 0.8), (2.0, 1.0), (4.2, 0.3)]), 0.0, 0.3)
-    _place(mus, _heartbeat(1.6, 70), 0.05, 0.25)
-    cues.append((0.0, 'MUSIC: a cold low drone (C sharp minor) with a slow heartbeat bass', 'music'))
-    _place(mus, _riser(0.9, 2, 150, 3500), 1.08, 0.3)
-    _place(mus, _hit(2, 1.1), 1.98, 0.75)
-    cues.append((1.98, 'IMPACT as the giant screen comes fully on with his face', 'music'))
-    st = _tremolo_strings((49, 52, 56, 61), 2.3, 3)
-    _place(mus, st * _env(_tt2(2.3), [(0, 0), (0.3, 0.7), (2.0, 0.9), (2.3, 0)]), 2.1, 0.2)
+    _place(mus, y * _env(_tt2(4.2), [(0, 0.5), (0.3, 0.9), (2.5, 1.0), (4.2, 0.3)]), 0.0, 0.3)
+    _place(mus, _heartbeat(3.4, 76), 0.6, 0.25)
+    cues.append((0.0, 'MUSIC: a cold low drone (C sharp minor) under the hit, then a heartbeat bass', 'music'))
+    _place(mus, _riser(0.9, 2, 150, 3500), 0.5, 0.3)
+    _place(mus, _boom(1.6, 60, 30, 4), 1.4, 0.4)
+    cues.append((0.5, 'A riser into the push to his face on the screen; a low boom on the cut (1.4 s)', 'music'))
+    st = _tremolo_strings((49, 52, 56, 61), 2.0, 3)
+    _place(mus, st * _env(_tt2(2.0), [(0, 0), (0.3, 0.7), (1.7, 0.9), (2.0, 0)]), 2.4, 0.2)
     # 4-10.45 s: the world finds out - a driving news pulse that grows with every cut
     a, b = S_['anchor'][0], S_['car'][0]
     _place(mus, _ostinato(b - a, 37, 128, pattern=(0, 0, 12, 0, 7, 0, 10, 12), bright=1300, gain_curve=lambda u: 0.5 + 0.5 * u), a, 0.34)
@@ -5425,7 +5422,7 @@ def stage_audio():
             y = fn(n, abs(hash(nm)) % 1000) * _env(np.arange(n) / SR, [(0, 0), (0.03, 1), ((b - a) - 0.03, 1), (b - a, 0)])
             _place(amb, y, a, gain, pan=pan)
         cue(S_[names[0]][0], what, 'ambience')
-    bed(['walk', 'billboard', 'lookup', 'car'], lambda n, s: _wind(n, s, 150, 900, 0.2) * 0.5 + _engine(n, s, 40.0) * 0.3 + _crowd(n, s, 0.3) * 0.2,
+    bed(['reveal', 'billboard', 'lookup', 'car'], lambda n, s: _wind(n, s, 150, 900, 0.2) * 0.5 + _engine(n, s, 40.0) * 0.3 + _crowd(n, s, 0.3) * 0.2,
         0.16, 'Street: wind, distant traffic, a few far-off voices - eerily quiet')
     bed(['anchor'], lambda n, s: _crowd(n, s, 0.8) * 0.5 + _servers(n, s) * 0.5, 0.16, 'Newsroom: busy murmur, keyboards, phones')
     bed(['screens', 'crowd'], lambda n, s: _crowd(n, s, 1.8), 0.32, 'The square: a huge crowd murmuring at the giant screens')
@@ -5435,15 +5432,12 @@ def stage_audio():
         'Facility: a deep air-handling hum, servers, distant interface bleeps')
     bed(['timeline', 'notice', 'turn', 'symbol', 'stare'], lambda n, s: _hum_bed(n, s, 55.0, 0.1), 0.1, 'Research room: a low hum')
     # effects
-    for k in range(4):
-        _place(sfx, _step(10 + k), 0.12 + k * 0.48, 0.2, pan=0.1)
-    cue(0.12, 'His footsteps on the pavement')
-    _place(sfx, _power_on(3), 1.62, 0.4)
-    cue(1.62, 'The giant screen switches on: a relay clunk, a rising electrical hum and crackle')
-    _place(sfx, _static(0.35, 4, 1.4), 1.62, 0.18)
+    _place(sfx, _power_on(3), 0.0, 0.45)
+    cue(0.0, 'The giant screen glitches on: a relay clunk, electrical hum and crackle')
+    _place(sfx, _static(0.35, 4, 1.4), 0.0, 0.22)
     for nm in ('billboard', 'lookup', 'anchor', 'screens', 'crowd', 'gov', 'scidata', 'car', 'enter', 'welcome', 'timeline', 'notice', 'turn', 'symbol', 'stare'):
         _place(sfx, _whoosh(0.35, len(nm)), S_[nm][0] - 0.15, 0.14 if nm not in ('billboard',) else 0.3)
-    cue(1.35, 'A whoosh on every cut (a big one on the push to the giant screen)')
+    cue(1.25, 'A whoosh on every cut (a big one on the push to the giant screen)')
     rng = np.random.default_rng(5)
     tm = 4.3
     while tm < 10.2:
@@ -5549,8 +5543,8 @@ def write_sound_design(cues):
          'synthetic voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py. Music, ambience and effects duck under',
          'the voice so the narration always stays on top.',
          '',
-         'THE IDEA: bigger than Part 1. A cold drone on an eerily quiet street; the giant screen powers on with a relay clunk',
-         'and an electrical hum, and an impact lands as his face appears. The world finds out over a driving news pulse with',
+         'THE IDEA: bigger than Part 1, and no build-up: an impact lands on the very first frame as a giant screen glitches on',
+         'with his face over an empty street (relay clunk, electrical hum, static). The world finds out over a driving news pulse with',
          'stings, static and a storm of phone notifications. The pulse stops dead for the black car (engine, braking, a',
          'sliding door). The facility is vast and cold: electronic doors, echoing footsteps, interface bleeps, a choir in a',
          'long reverb. The timeline ticks; a stab and alert beeps find his photo. Then rising suspense: a faster heartbeat,',
@@ -5568,7 +5562,7 @@ def write_sound_design(cues):
     for tm, what, layer in sorted(cues):
         L.append(f'{tm:6.2f} s  [{layer:9s}] {what}')
     L += ['', 'MUSIC GUIDE (if you re-score it in CapCut or another editor)', '-' * 60,
-          '- 0-2 s: a cold, low drone; a big hit when the giant screen comes on (2.0 s).',
+          '- 0 s: a hard hit on the very first frame as the giant screen comes on; a riser into the push (1.4 s).',
           '- 4-10.5 s: news-channel energy - a driving minor-key pulse (120-130 bpm) that builds with every cut.',
           '- 10.5 s: stop the pulse dead for the car; low bass only.',
           '- 12.6-19 s: something vast and cold (pads, choir, long reverb) for the facility.',
@@ -5611,6 +5605,7 @@ TITLE_STYLE = {
     'item':   (FONT_TITLE, 60, (1.0, 1.0, 1.0, 1.0), 0.855, 0.07, True),
     'tag':    (FONT_TITLE, 34, (0.95, 0.92, 0.85, 1.0), 0.905, 0.0, True),
     'count':  (FONT_TITLE, 330, (1.0, 0.74, 0.16, 1.0), 0.775, 0.035, False),
+    'part':   (FONT_TITLE, 190, (1.0, 0.74, 0.16, 1.0), 0.80, 0.045, True),
 }
 _FONTS = {}
 
@@ -5687,7 +5682,9 @@ def add_text(se, name, text, t0, t1, style, channel, fade=4, rise=0.01, y=None):
         st.box_margin = 0.014
     st.blend_type = 'ALPHA_OVER'
     fade = min(fade, max(1, (f1 - f0) // 3))
-    key_alpha(st, [(f0, 0.0), (f0 + fade, 1.0), (f1 - fade, 1.0), (f1, 0.0)])
+    # a title that starts the film is fully on from frame 1 (the hook frame must already carry it)
+    key_alpha(st, [(f0, 1.0 if t0 <= 0 else 0.0), (f0 + fade, 1.0), (f1 - fade, 1.0), (f1, 0.0)])
+    rise = 0.0 if t0 <= 0 else rise
     st.location = (0.5, y - rise)
     if rise > 0:
         st.keyframe_insert('location', frame=f0)
@@ -5759,7 +5756,7 @@ def stage_edit():
             fl.color = (0.85, 0.95, 1.0)
             fl.blend_type = 'ADD'
             fl.blend_alpha = flash
-    G = [('g_board', 1.62, 1.75, 0.02, 0.25), ('g_anchor', SHOT['anchor']['t0'], SHOT['anchor']['t0'] + 0.1, 0.03, 0.35),
+    G = [('g_board', 0.0, 0.1, 0.03, 0.0), ('g_board2', 0.27, 0.33, 0.02, 0.15), ('g_anchor', SHOT['anchor']['t0'], SHOT['anchor']['t0'] + 0.1, 0.03, 0.35),
          ('g_screens', SHOT['screens']['t0'], SHOT['screens']['t0'] + 0.08, 0.025, 0.25),
          ('g_gov', SHOT['gov']['t0'], SHOT['gov']['t0'] + 0.1, 0.03, 0.3), ('g_sci', SHOT['scidata']['t0'], SHOT['scidata']['t0'] + 0.07, 0.02, 0.2),
          ('g_anom', 21.6, 21.7, 0.02, 0.2), ('g_sym', 25.3, 25.4, 0.03, 0.25),
