@@ -301,6 +301,20 @@ kbd {
 .wp.false { background: var(--bad); border-color: var(--bad); color: var(--surface); }
 .wp.missed { border: 2.5px dashed var(--accent); background: var(--accent-soft); color: var(--ink); }
 
+/* Echo */
+.pads { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; width: min(100%, 320px); }
+.pad {
+  aspect-ratio: 1; cursor: pointer;
+  border: 2px solid var(--pc); border-radius: 18px;
+  background: color-mix(in srgb, var(--pc) 22%, var(--surface));
+  color: var(--ink); font: 700 22px/1 var(--f-mono);
+  transition: background-color .1s, transform .1s;
+}
+.pad:hover { background: color-mix(in srgb, var(--pc) 40%, var(--surface)); }
+.pad.on { background: var(--pc); color: var(--surface); transform: scale(1.04); }
+.pads.showing .pad { cursor: default; }
+.pads.showing .pad:not(.on):hover { background: color-mix(in srgb, var(--pc) 22%, var(--surface)); }
+
 /* Odd one out */
 .oddgrid { display: grid; gap: 6px; width: min(100%, 420px); }
 .oddgrid.locked .cell { cursor: default; opacity: .6; }
@@ -582,6 +596,12 @@ kbd {
       glyph: 'b b d b', mono: true,
       how: 'A grid fills with one character, except for <b>one look-alike</b> hiding somewhere: a d among b\'s, a Q among O\'s. Tap the odd one out. Find as many as you can in 45 seconds. The grid gets bigger as you go, and a wrong tap freezes the grid for a second.',
       keys: 'Tap or click the odd one out.', run: runOdd
+    },
+    echo: {
+      name: 'Echo', trains: 'Sequence memory', time: '~90 s', unit: 'steps', higher: true,
+      glyph: '<span style="color:var(--c-red)">●</span><span style="color:var(--c-blue)">●</span><span style="color:var(--c-red)">●</span><span style="color:var(--c-green)">●</span>',
+      how: 'Four coloured pads light up in a sequence. When it ends, <b>tap the pads in the same order</b>. Each sequence you get right repeats with one more step added on the end. Two misses ends the drill.',
+      keys: 'Tap the pads, or press keys 1 to 4.', run: runEcho
     },
     anagram: {
       name: 'Unscramble', trains: 'Verbal fluency', time: '60 s', unit: 'words', higher: true,
@@ -1355,6 +1375,69 @@ kbd {
         ? `${wrong} wrong tap${wrong === 1 ? '' : 's'} · ${(mean(times) / 1000).toFixed(1)} s per find on average. Scanning in rows beats darting around.`
         : 'None found this time. Try scanning row by row instead of looking all over.'
     }));
+  }
+
+  // ---------- 5g. Echo ----------
+  // Simon-style: one growing sequence of pad flashes, repeated back in order. Two misses ends it.
+  function runEcho(arena, done) {
+    const PADS = [['red', 'Red'], ['blue', 'Blue'], ['green', 'Green'], ['purple', 'Purple']];
+    arena.innerHTML = `<div class="play">
+      <p class="hint" id="eh" aria-live="polite"></p>
+      <div class="pads showing" id="ep" role="group" aria-label="Pads">${PADS.map((c, i) =>
+        `<button type="button" class="pad" data-i="${i}" style="--pc:var(--c-${c[0]})" aria-label="${c[1]} pad, key ${i + 1}">${i + 1}</button>`).join('')}</div>
+    </div>`;
+    const padsEl = $('#ep', arena), hint = $('#eh', arena);
+    const pads = [...padsEl.children];
+    const seq = [];
+    let pos = 0, accepting = false, misses = 0, best = 0;
+    timerLabel.textContent = 'Length';
+    const grow = () => { let n; do { n = rand(4); } while (seq.length >= 2 && n === seq[seq.length - 1] && n === seq[seq.length - 2]); seq.push(n); };
+    for (let k = 0; k < 3; k++) grow();
+
+    const lightUp = (i, ms) => { pads[i].classList.add('on'); later(() => pads[i].classList.remove('on'), ms); };
+    const play = () => {
+      accepting = false;
+      pos = 0;
+      padsEl.classList.add('showing');
+      hudTimer(String(seq.length));
+      hint.textContent = 'Watch the sequence.';
+      const on = Math.max(300, 560 - seq.length * 20), gap = 180;
+      seq.forEach((n, k) => later(() => lightUp(n, on), 600 + k * (on + gap)));
+      later(() => {
+        accepting = true;
+        padsEl.classList.remove('showing');
+        hint.textContent = `Your turn: ${seq.length} steps.`;
+      }, 600 + seq.length * (on + gap));
+    };
+    const finishEcho = () => done({
+      score: best,
+      detail: best ? `You repeated a sequence of ${best} steps in order.` : 'Three steps is a fine start. Try naming the colours under your breath as they flash.'
+    });
+    const press = i => {
+      if (!accepting) return;
+      lightUp(i, 180);
+      if (i === seq[pos]) {
+        pos++;
+        if (pos < seq.length) return;
+        accepting = false;
+        best = seq.length;
+        hudScore(String(best));
+        hint.textContent = 'Correct. One more step.';
+        grow();
+        later(play, 900);
+      } else {
+        accepting = false;
+        misses++;
+        flash(padsEl, false);
+        if (misses >= 2) { hint.textContent = 'Second miss. That ends the drill.'; later(finishEcho, 1400); return; }
+        hint.textContent = 'Not that one. Watch it again; one miss left.';
+        later(play, 1500);
+      }
+    };
+    padsEl.addEventListener('click', e => { const b = e.target.closest('.pad'); if (b) press(+b.dataset.i); });
+    onKey(e => { const n = +e.key; if (n >= 1 && n <= 4) { e.preventDefault(); press(n - 1); } });
+    hudScore('0');
+    play();
   }
 
   // ---------- 6. Anagrams ----------
