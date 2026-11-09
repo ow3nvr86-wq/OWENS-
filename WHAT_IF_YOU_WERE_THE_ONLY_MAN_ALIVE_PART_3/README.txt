@@ -114,7 +114,17 @@ frames plus audio/mix_no_voice.wav), add audio/narration.wav and use subtitles.s
 
 RENDER TIMES (4 CPU cores, no GPU, Cycles CPU)
 ----------------------------------------------
-@TIMES@
+  Preview, 858 frames at 270x480, 4 spp:          33 min
+  Final, frames 1-430 at 540x960, 6 spp:           72 min
+  Final, frames 431-858 at 540x960, 6 spp:         75 min  (about 10-19 s a frame)
+  Final total:                                    147 min  (2 h 27 min, two background runs)
+  Edit stage, final_video.mp4:                    about 2 min 10 s
+  Edit stage, final_video_no_voice.mp4:           about 2 min
+  final_video.mp4:            27.8 MB, 1080x1920, 30 fps, 900 frames, 30.0 s, -14.0 LUFS, true peak -2.4 dBFS
+  final_video_no_voice.mp4:   28.2 MB, 1080x1920, 30 fps, 900 frames, 30.0 s, -14.0 LUFS, true peak -1.8 dBFS
+  Captions vs narration: all 75 words match.
+  QC note: in the first final edit the PART 3 / THEY FOUND SOMETHING. plates covered his photo on frame 1;
+  the opening titles were moved higher (y 0.96 / 0.885 / 0.795) so frame 1 shows his face and the pattern.
 
 
 QUALITY CHECK (the brief's questions)

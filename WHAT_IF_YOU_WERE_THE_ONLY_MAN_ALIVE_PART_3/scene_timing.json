@@ -219,20 +219,22 @@
    "text": "PART 3",
    "start": 0.0,
    "end": 2.45,
-   "style": "part"
+   "style": "part",
+   "y": 0.885
   },
   {
    "text": "A HYPOTHETICAL SCENARIO",
    "start": 0.0,
    "end": 3.9,
-   "style": "tag"
+   "style": "tag",
+   "y": 0.96
   },
   {
    "text": "THEY FOUND SOMETHING.",
    "start": 0.0,
    "end": 3.9,
    "style": "hero",
-   "y": 0.7
+   "y": 0.795
   },
   {
    "text": "THE SIGNAL IS COMING FROM YOU.",
