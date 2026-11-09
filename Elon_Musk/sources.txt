@@ -1,0 +1,59 @@
+ELON MUSK: ONE CONTINUOUS JOURNEY - RESEARCH AND SOURCES
+========================================================
+
+1. SOURCES
+----------
+[BIZ]    Wikipedia, "Business career of Elon Musk" (index to primary reporting). https://en.wikipedia.org/wiki/Business_career_of_Elon_Musk
+[TIME]   TIME, "Elon Musk's business timeline". https://time.com/6170834/elon-musk-business-timeline-twitter
+[BUILT]  Built In, "Tesla, SpaceX, Neuralink and more: a guide to Elon Musk's tech empire". https://builtin.com/articles/elon-musk-companies
+[NASA]   NASA APOD, 28 Dec 2015, "Falcon 9 first stage landing". https://science.nasa.gov/image-article/apod-2015-december-28-falcon-9-first-stage-landing/
+[SF]     45th Space Wing, Dec 2015: ORBCOMM launch, first stage booster landed. https://www.patrick.spaceforce.mil/News/Photos/igphoto/2001488270/
+[KT]     KeepTrack, Starlink satellite count (11,214 in orbit, Nov 2026). https://keeptrack.space/starlink-satellite-count
+[AZ]     azmth.space, Starlink count from CelesTrak (11,206 active, 6 Nov 2026). https://azmth.space/answers/how-many-starlink-satellites
+[CNBC]   CNBC, 3 Feb 2026, "Musk's xAI, SpaceX combo is the biggest merger of all time". https://www.cnbc.com/2026/02/03/musk-xai-spacex-biggest-merger-ever.html
+[XAI]    xAI, "xAI joins SpaceX". https://x.ai/news/xai-joins-spacex
+[FORBES] Forbes, 4 Nov 2026, on Musk's spending in the 2026 US elections (context for "his politics").
+         https://www.forbes.com/sites/maryroeloffs/2026/11/04/did-musk-delete-his-vote-red-today-post-grok-says-yes-after-major-republican-losses/
+
+2. FACTS USED
+-------------
+- Born 1971 in Pretoria, South Africa (not stated in the video).
+- 1999: co-founded X.com, the online bank; it merged with Confinity in 2000 and became PayPal. [BIZ, TIME]
+- 2002: eBay bought PayPal for $1.5 billion in stock (Oct 2002). [BIZ, TIME]
+- 2002: founded SpaceX. [BIZ, BUILT]
+- 2004: led Tesla's early funding round and became chairman; CEO since 2008. [BIZ, BUILT]
+- Dec 2015: the first landing of an orbital-class booster (Falcon 9, Landing Zone 1); boosters have since been reflown
+  many times. [NASA, SF]
+- Nov 2026: about 11,200 Starlink satellites in orbit ("over 10,000"). [KT, AZ]
+- 2022: bought Twitter for about $44 billion; renamed X in 2023. [BIZ, TIME]
+- 2023: founded xAI; SpaceX acquired xAI in Feb 2026. [CNBC, XAI]
+- His politics (including his role in the US government in 2025 and spending in US elections) and his ownership of
+  X have drawn strong support and strong criticism. [FORBES, BIZ]
+
+3. CLAIM-BY-CLAIM CHECK
+-----------------------
+"Rockets. Electric cars. Satellites. AI. One man is behind them all."  SpaceX, Tesla, Starlink (SpaceX), xAI. [above]
+"Elon Musk's big break was PayPal, sold to eBay for $1.5 billion."  [BIZ, TIME]  On screen: X.com 1999 / PayPal /
+    sold to eBay 2002; $1.5B. (His first company, Zip2, sold in 1999 for a smaller sum; PayPal was the breakthrough.)
+"He bet that fortune on Tesla, and helped make electric cars mainstream."  He invested heavily in Tesla from 2004 and
+    has led it since 2008; "helped" because many companies and policies drove EV adoption. On screen: Tesla /
+    investor 2004 / CEO since 2008.
+"At SpaceX, rockets learned to land and fly again."  [NASA, SF]  On screen: SpaceX / founded 2002; first orbital
+    booster landing / 2015.
+"Over 10,000 Starlink satellites now circle the Earth."  [KT, AZ]  On screen: 10,000+.
+"Now he's racing into AI, while his takeover of Twitter and his politics make him deeply divisive."  xAI 2023 [CNBC];
+    Twitter 2022 [BIZ]; the division of opinion is shown as a network splitting in two, not as a verdict. On screen:
+    xAI / founded 2023; Twitter / bought 2022 for $44B / now X.
+"So how much of the future can one person shape?"  A question, not a claim.
+
+4. FAIRNESS AND RECONSTRUCTION
+------------------------------
+- Achievements and controversies are both named; no motive, quote or private thought is invented.
+- The portrait is an illustrated, stylised likeness drawn for this video, not a photograph.
+- The car, rocket, satellites and city are generic designs, not exact replicas or logos of any company's products.
+- Numbers that change (satellite count) are rounded down and dated in sources.txt.
+
+5. CUT FOR TIME
+---------------
+Zip2 (1995-1999); his ousting as PayPal CEO in 2000; Falcon 1 reaching orbit in 2008; Crew Dragon (2020); Neuralink
+(2016) and The Boring Company (2016); OpenAI (co-founder 2015, left its board 2018); the 2018 SEC settlement; Starship.

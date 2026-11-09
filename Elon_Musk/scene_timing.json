@@ -1,0 +1,251 @@
+{
+ "title": "ELON MUSK: ONE CONTINUOUS JOURNEY",
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "duration": 32.0,
+ "scenes": [
+  {
+   "id": 1,
+   "key": "portrait",
+   "name": "OPENING",
+   "start": 0.0,
+   "end": 4.75,
+   "in": "none",
+   "camera": "push toward the portrait; interface rings and icons"
+  },
+  {
+   "id": 2,
+   "key": "paypal",
+   "name": "PAYPAL",
+   "start": 4.75,
+   "end": 10.25,
+   "in": "morph",
+   "camera": "the rings unspool into flowing payment streams"
+  },
+  {
+   "id": 3,
+   "key": "tesla",
+   "name": "TESLA",
+   "start": 10.25,
+   "end": 14.8,
+   "in": "morph",
+   "camera": "the streams straighten into road markings; track an electric car through a city"
+  },
+  {
+   "id": 4,
+   "key": "spacex",
+   "name": "SPACEX",
+   "start": 14.8,
+   "end": 18.1,
+   "in": "morph",
+   "camera": "headlights become engine light; follow the rocket up; the booster lands"
+  },
+  {
+   "id": 5,
+   "key": "orbit",
+   "name": "SPACE",
+   "start": 18.1,
+   "end": 21.8,
+   "in": "morph",
+   "camera": "into orbit above Earth; trains of satellites"
+  },
+  {
+   "id": 6,
+   "key": "ai",
+   "name": "AI AND THE FUTURE",
+   "start": 21.8,
+   "end": 27.9,
+   "in": "morph",
+   "camera": "the satellite links become a neural network; it splits in two"
+  },
+  {
+   "id": 7,
+   "key": "ending",
+   "name": "ENDING",
+   "start": 27.9,
+   "end": 32.0,
+   "in": "morph",
+   "camera": "pull back to a connected world; the question"
+  }
+ ],
+ "lines": [
+  {
+   "scene": 1,
+   "start": 0.05,
+   "deadline": 7.05,
+   "text": "Rockets. Electric cars. Satellites. AI. One man is behind them all.",
+   "tts": "Rockets. Electric cars. Satellites. AI. One man is behind them all.",
+   "hl": [
+    "ROCKETS.",
+    "AI.",
+    "ONE",
+    "MAN"
+   ]
+  },
+  {
+   "scene": 2,
+   "start": 4.9,
+   "deadline": 11.9,
+   "text": "Elon Musk's big break was PayPal, sold to eBay for $1.5 billion.",
+   "tts": "Elon Musk's big break was PayPal, sold to eBay for one point five billion dollars.",
+   "hl": [
+    "PAYPAL,",
+    "$1.5",
+    "BILLION."
+   ]
+  },
+  {
+   "scene": 3,
+   "start": 10.38,
+   "deadline": 17.380000000000003,
+   "text": "He bet that fortune on Tesla, and helped make electric cars mainstream.",
+   "tts": "He bet that fortune on Tesla, and helped make electric cars mainstream.",
+   "hl": [
+    "TESLA,"
+   ]
+  },
+  {
+   "scene": 4,
+   "start": 14.94,
+   "deadline": 21.939999999999998,
+   "text": "At SpaceX, rockets learned to land and fly again.",
+   "tts": "At SpaceX, rockets learned to land, and fly again.",
+   "hl": [
+    "SPACEX,",
+    "LAND"
+   ]
+  },
+  {
+   "scene": 5,
+   "start": 18.21,
+   "deadline": 25.21,
+   "text": "Over 10,000 Starlink satellites now circle the Earth.",
+   "tts": "Over ten thousand Starlink satellites now circle the Earth.",
+   "hl": [
+    "10,000"
+   ]
+  },
+  {
+   "scene": 6,
+   "start": 21.95,
+   "deadline": 28.95,
+   "text": "Now he's racing into AI, while his takeover of Twitter and his politics make him deeply divisive.",
+   "tts": "Now he's racing into AI, while his takeover of Twitter and his politics make him deeply divisive.",
+   "hl": [
+    "AI,",
+    "DIVISIVE."
+   ]
+  },
+  {
+   "scene": 7,
+   "start": 28.03,
+   "deadline": 35.03,
+   "text": "So how much of the future can one person shape?",
+   "tts": "So how much of the future can one person shape?",
+   "hl": [
+    "ONE",
+    "PERSON"
+   ],
+   "nocap": true
+  }
+ ],
+ "titles": [
+  {
+   "start": 0.15,
+   "end": 4.4,
+   "style": "kicker",
+   "text": "ELON MUSK",
+   "y": 0.12
+  },
+  {
+   "start": 5.6,
+   "end": 9.6,
+   "style": "kicker",
+   "text": "X.COM 1999  /  PAYPAL  /  SOLD TO EBAY 2002",
+   "y": 0.15
+  },
+  {
+   "start": 7.9,
+   "end": 9.6,
+   "style": "big",
+   "text": "$1.5B",
+   "y": 0.22
+  },
+  {
+   "start": 10.6,
+   "end": 14.1,
+   "style": "kicker",
+   "text": "TESLA  /  INVESTOR 2004  /  CEO SINCE 2008",
+   "y": 0.15
+  },
+  {
+   "start": 15.4,
+   "end": 17.2,
+   "style": "kicker",
+   "text": "SPACEX  /  FOUNDED 2002",
+   "y": 0.15
+  },
+  {
+   "start": 17.0,
+   "end": 18.4,
+   "style": "kicker",
+   "text": "FIRST ORBITAL BOOSTER LANDING  /  2015",
+   "y": 0.15
+  },
+  {
+   "start": 18.7,
+   "end": 21.6,
+   "style": "big",
+   "text": "10,000+",
+   "y": 0.2
+  },
+  {
+   "start": 18.9,
+   "end": 21.6,
+   "style": "sub",
+   "text": "STARLINK SATELLITES IN ORBIT",
+   "y": 0.29
+  },
+  {
+   "start": 22.3,
+   "end": 24.0,
+   "style": "kicker",
+   "text": "xAI  /  FOUNDED 2023",
+   "y": 0.15
+  },
+  {
+   "start": 24.2,
+   "end": 27.6,
+   "style": "kicker",
+   "text": "TWITTER  /  BOUGHT 2022 FOR $44B  /  NOW X",
+   "y": 0.15
+  },
+  {
+   "start": 28.2,
+   "end": 31.4,
+   "style": "endline",
+   "text": "HOW MUCH OF THE FUTURE|CAN ONE PERSON SHAPE?",
+   "y": 0.2
+  }
+ ],
+ "events": {
+  "hook": [
+   0.05,
+   0.79,
+   1.78,
+   2.65
+  ],
+  "unspool": 4.6,
+  "lanes": 9.3,
+  "dive": 14.25,
+  "swap": 14.95,
+  "lift": 15.05,
+  "sep": 16.25,
+  "land": 17.45,
+  "orbit": 18.6,
+  "push": 21.55,
+  "split": 24.0,
+  "fold": 27.55
+ }
+}
