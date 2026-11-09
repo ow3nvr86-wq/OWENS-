@@ -1,0 +1,50 @@
+WHAT IF YOU WERE THE ONLY MAN ALIVE? PART 3 - SOURCES, CLAIMS AND WHAT IS INVENTED
+==================================================================================
+
+This Short is FICTION: a hypothetical science-fiction scenario continuing Parts 1 and 2, labelled on screen ("A
+HYPOTHETICAL SCENARIO") for its first scene. It describes an imagined event in the second person ("you"). The narration
+makes no real-world scientific, statistical or historical claims, and nothing in it should be taken as a description of
+real science: there is no known signal, real or proposed, of the kind shown here.
+
+
+1. CLAIM TABLE
+--------------
+Said or shown                                         Status        Notes
+----------------------------------------------------  ------------  -------------------------------------------------------
+"Scientists just found why you're the only man        FICTION       The story's premise and its (unexplained) answer.
+ left... and it isn't on Earth."
+"After months of testing... Every other man vanished  FICTION       Events of the story (Part 2 showed the same instant on its
+ at the exact same moment."                                         timeline).
+"an unexplained signal coming from deep in space...   FICTION       Invented. The signal, its 3 + 1 pulse pattern, its path and
+ it matches the exact moment everyone vanished"                     its timing are made up for the story.
+"Suddenly, the signal changes direction."             FICTION
+"it's coming from you."                               FICTION /     The cliffhanger. Deliberately unexplained: the film never
+                                                      SPECULATION   says what the signal is or why it comes from him.
+                                                      IN THE STORY
+On screens: "04:17:09.000 UTC", "OFFSET 0.000 s",      ILLUSTRATIVE  Invented on-screen props. "04:17:09.000 UTC" matches the
+"SCANS 41", "PATTERN 3 + 1 PULSES, REPEATING",                      instant shown in Part 2 (continuity, not a fact).
+"DISTANCE: 0 m", "SOURCE: SUBJECT 001", "PATTERN
+MATCH 100%", "FACILITY 7 - HALL A"
+The symbol on the monitor                             INVENTED      The same invented symbol as Part 2 (a ring, a line, a
+                                                                    triangle, three dots). It means nothing and is not based on
+                                                                    any real organisation, religion or logo.
+Earth from orbit, the Moon, the stars                 ILLUSTRATIVE  Drawn by code. Earth's coastlines are rough outlines typed in
+                                                                    by hand (tools/textures.py), roughened with noise: it reads
+                                                                    as Earth, but it is not an accurate map. Sizes and distances
+                                                                    are not to scale (the Moon is placed far closer than it is).
+
+Speculation presented as fact: none. Every story event is framed as "what if"; the cause is never stated.
+
+
+2. CHECKED BUT NOT USED
+-----------------------
+- Part 2's "4 billion" figure (the world's women, about 4.1 billion) was not repeated; Part 3 states no numbers about the
+  real world.
+
+
+3. WHAT IS INVENTED (and made with code)
+----------------------------------------
+- The main character, the lead scientist, the second scientist, the facility director and the lab staff: procedural 3D
+  people made by animation.py (build_human), the same characters as in Part 2. Nobody real is depicted or imitated.
+- The research facility (from Part 2), its city, the signal, every screen graphic (tools/textures.py), the Earth texture,
+  the clouds and the star field.
