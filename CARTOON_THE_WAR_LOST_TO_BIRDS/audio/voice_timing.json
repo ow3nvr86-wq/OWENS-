@@ -1,0 +1,73 @@
+{
+ "voice": "Kokoro-82M bm_george",
+ "speed": 1.1,
+ "duration": 29.907,
+ "sentences": [
+  {
+   "i": 0,
+   "text": "In nineteen thirty-two, Australia sent soldiers with machine guns to fight birds.",
+   "start": 0.1,
+   "end": 5.309
+  },
+  {
+   "i": 1,
+   "text": "The birds won.",
+   "start": 5.549,
+   "end": 6.561
+  },
+  {
+   "i": 2,
+   "text": "About twenty thousand emus were eating the farmers' wheat.",
+   "start": 6.801,
+   "end": 10.255
+  },
+  {
+   "i": 3,
+   "text": "So the army sent a major, two machine guns, and ten thousand bullets.",
+   "start": 10.495,
+   "end": 14.882
+  },
+  {
+   "i": 4,
+   "text": "The plan: herd them together, then fire.",
+   "start": 15.122,
+   "end": 17.581
+  },
+  {
+   "i": 5,
+   "text": "But emus don't do plans.",
+   "start": 17.821,
+   "end": 19.759
+  },
+  {
+   "i": 6,
+   "text": "They scattered.",
+   "start": 19.999,
+   "end": 20.942
+  },
+  {
+   "i": 7,
+   "text": "One gun jammed.",
+   "start": 21.182,
+   "end": 22.514
+  },
+  {
+   "i": 8,
+   "text": "The army left, came back, and tried again.",
+   "start": 22.754,
+   "end": 25.432
+  },
+  {
+   "i": 9,
+   "text": "By the major's own count, that's ten bullets.",
+   "start": 25.672,
+   "end": 28.395
+  },
+  {
+   "i": 10,
+   "text": "Per bird.",
+   "start": 28.845,
+   "end": 29.657
+  }
+ ]
+}
