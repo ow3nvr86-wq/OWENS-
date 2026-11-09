@@ -1,0 +1,32 @@
+VOICE SAMPLES - The War Lost to Birds (same 72-word script in every file)
+
+00_COMPARE_ALL_VOICES.mp3   first half of every voice back to back, a short beep before each
+                            (0:00 01, 0:16 02, 0:32 03, 0:46 04, 1:01 05, 1:17 06, 1:33 07, 1:49 08, 2:04 09, 2:20 10, 2:34 11)
+
+ #  file                          engine                      style / what it is modelled on
+01  george_kokoro_natural         Kokoro bm_george            the current narrator, re-read with the less robotic pipeline
+02  george_expressive             Chatterbox, George timbre   British storyteller, more human phrasing
+03  deep_documentary_us           Chatterbox, am_onyx timbre  deep, authoritative US narrator (the "Adam"-type documentary voice)
+04  warm_storyteller_us           Chatterbox, am_michael      warm conversational US male (the "Brian / Liam" storytelling type)
+05  gravel_dramatic_us            Chatterbox, am_fenrir       gravelly, dramatic US male
+06  chatterbox_own_voice          Chatterbox built-in voice   neutral, natural default voice
+07  upbeat_social_female          Chatterbox, af_bella        energetic social-media female (the TikTok "Jessie"-type energy)
+08  warm_female_us                Chatterbox, af_heart        warm, calm US female
+09  british_female                Chatterbox, bf_emma         British female narrator
+10  young_british_male            Chatterbox, bm_fable        lighter, younger British male
+11  heart_kokoro_natural          Kokoro af_heart             Kokoro's highest-rated voice, less robotic pipeline
+
+These are open models (Kokoro-82M Apache-2.0; Chatterbox MIT), NOT the ElevenLabs or TikTok voices themselves -
+the "type" column only says which popular style each one is aimed at. Chatterbox adds Resemble AI's inaudible
+Perth watermark to its output.
+
+What makes them less robotic:
+- Chatterbox is an expressive model (emotion "exaggeration" 0.5-0.75) that phrases like a person; Kokoro only
+  supplies each voice's timbre as a 9-11 s reference clip (refs/).
+- Each script LINE is read in one go (not sentence by sentence), so intonation carries across short sentences.
+- Pauses vary slightly line to line; Kokoro reads get a per-line pace (brisk hook, slower payoff).
+- Finishing chain like a voiceover booth: rumble cut, a little warmth and presence, soft de-ess, light
+  compression, a very short room, -16 LUFS.
+- Every file was transcribed with Whisper and matches the script word for word.
+
+Tools: tools/make_refs.py, tools/chatterbox_read.py, tools/kokoro_natural.py, tools/voice_common.py
