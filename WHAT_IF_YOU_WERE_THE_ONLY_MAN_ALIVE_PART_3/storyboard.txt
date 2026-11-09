@@ -30,6 +30,7 @@ Sound: Interface swipes, data chatter, a rising pulse; a bright tone on the sign
   Shot "spike" 6.5-8.3 s (frames 196-249): fast push into the moment: population drop and signal spike line up
   Shot "compare" 8.3-10.0 s (frames 250-300): slow push past two scientists at a console comparing the traces
   VO 4.10-9.75: "After months of testing, they discover something strange. Every other man vanished at the exact same moment."
+  KEY CAPTION (large, amber, replaces the word captions): THE SAME EXACT MOMENT.
   Transition / edit: Key caption: THE SAME EXACT MOMENT.
 
 SCENE 3 - THE SIGNAL  (10.0-17.0 s, frames 301-510)
@@ -47,7 +48,7 @@ Sound: Deep electronic pulses, satellite communication chirps, rising cinematic 
 
 SCENE 4 - THE TWIST  (17.0-24.0 s, frames 511-720)
 ------------------------------------------------------------
-Visual: The signal stops - and reverses: now it streams out FROM Earth. The view dives after it, back to Earth, through the atmosphere, down over the city to the facility roof where a column of blue light shoots into the sky, and down through the hall onto him: rings of blue light pulse out across the floor from where he stands. The scientists turn toward him. The monitors read THE SIGNAL IS COMING FROM YOU.
+Visual: The signal stops - and reverses: now it streams out FROM Earth. The view dives after it, back to Earth, through the atmosphere, down over the city to the facility roof where a column of blue light shoots into the sky, and down through the hall onto him: rings of blue light pulse out across the floor from where he stands. The scientists turn toward him; behind them every screen now reads SOURCE: SUBJECT 001. On screen: THE SIGNAL IS COMING FROM YOU.
 Characters: He looks down at the rings, then up; the scientists turn, one by one.
 Lighting: The blue signal everywhere; the hall lights dip.
 Sound: The signal reversing (a tape-stop and a rising tone), a whoosh through the atmosphere, a deep bass hit when the view arrives at him.
@@ -57,12 +58,13 @@ Sound: The signal reversing (a tape-stop and a rising tone), a whoosh through th
   Shot "inside" 21.3-22.8 s (frames 640-684): straight down from the hall ceiling onto him, rings pulsing out from him
   Shot "turn" 22.8-24.0 s (frames 685-720): past him to the scientists turning toward him; monitors behind them
   VO 17.15-22.73: "Suddenly, the signal changes direction. Scientists stare at their screens in complete disbelief."
+  TEXT 22.9-23.9 [label]: THE SIGNAL IS COMING FROM YOU.
   KEY CAPTION (large, amber, replaces the word captions): IT CHANGED DIRECTION.
   Transition / edit: One continuous dive cut together with fast zoom transitions. Key caption: IT CHANGED DIRECTION.
 
 SCENE 5 - FINAL PAYOFF  (24.0-30.0 s, frames 721-900)
 ------------------------------------------------------------
-Visual: He looks at the lead scientist. A monitor close-up: the mysterious symbol from Part 2 appears beside THE SIGNAL IS COMING FROM YOU. The lights flicker; she steps backward. The camera pushes into his face - blackout.
+Visual: He looks at the lead scientist. A monitor close-up: the mysterious symbol from Part 2 appears beside the signal's mark - PATTERN MATCH 100%. The lights flicker; she steps backward. The camera pushes into his face - blackout.
 Characters: He looks from her to the monitor, confused and afraid; she backs away a step.
 Lighting: Flickering hall lights; the symbol's blue-violet glow; the final push in near darkness.
 Sound: Lights buzzing and failing, a last deep pulse, a bass impact on "you" - then sudden silence.

@@ -7,7 +7,7 @@ set -u
 cd "$(dirname "$0")"
 Q=${1:-final}
 A=${2:-1}
-B=${3:-900}
+B=${3:-858}
 OUT=renders/frames
 [ "$Q" = preview ] && OUT=renders/preview_frames
 BL=${BLENDER:-/opt/shorts/blender-4.2.3-linux-x64/blender}

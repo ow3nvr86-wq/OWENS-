@@ -101,7 +101,7 @@
    "name": "THE TWIST",
    "start": 17.0,
    "end": 24.0,
-   "desc": "The signal stops - and reverses: now it streams out FROM Earth. The view dives after it, back to Earth, through the atmosphere, down over the city to the facility roof where a column of blue light shoots into the sky, and down through the hall onto him: rings of blue light pulse out across the floor from where he stands. The scientists turn toward him. The monitors read THE SIGNAL IS COMING FROM YOU.",
+   "desc": "The signal stops - and reverses: now it streams out FROM Earth. The view dives after it, back to Earth, through the atmosphere, down over the city to the facility roof where a column of blue light shoots into the sky, and down through the hall onto him: rings of blue light pulse out across the floor from where he stands. The scientists turn toward him; behind them every screen now reads SOURCE: SUBJECT 001. On screen: THE SIGNAL IS COMING FROM YOU.",
    "actions": "He looks down at the rings, then up; the scientists turn, one by one.",
    "lighting": "The blue signal everywhere; the hall lights dip.",
    "sfx": "The signal reversing (a tape-stop and a rising tone), a whoosh through the atmosphere, a deep bass hit when the view arrives at him.",
@@ -144,7 +144,7 @@
    "name": "FINAL PAYOFF",
    "start": 24.0,
    "end": 30.0,
-   "desc": "He looks at the lead scientist. A monitor close-up: the mysterious symbol from Part 2 appears beside THE SIGNAL IS COMING FROM YOU. The lights flicker; she steps backward. The camera pushes into his face - blackout.",
+   "desc": "He looks at the lead scientist. A monitor close-up: the mysterious symbol from Part 2 appears beside the signal's mark - PATTERN MATCH 100%. The lights flicker; she steps backward. The camera pushes into his face - blackout.",
    "actions": "He looks from her to the monitor, confused and afraid; she backs away a step.",
    "lighting": "Flickering hall lights; the symbol's blue-violet glow; the final push in near darkness.",
    "sfx": "Lights buzzing and failing, a last deep pulse, a bass impact on \"you\" - then sudden silence.",
@@ -233,6 +233,12 @@
    "end": 3.9,
    "style": "hero",
    "y": 0.7
+  },
+  {
+   "text": "THE SIGNAL IS COMING FROM YOU.",
+   "start": 22.85,
+   "end": 23.95,
+   "style": "label"
   }
  ],
  "keys": [

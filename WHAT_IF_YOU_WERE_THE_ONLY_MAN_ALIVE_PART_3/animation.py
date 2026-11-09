@@ -4968,78 +4968,119 @@ def _brakes(seed):
     return _norm(_norm(sq) * 0.35 + _norm(rumble) * 0.8)
 
 
+def _sig_pulses(dur, t0=0.0, rate=0.8, f_short=1320.0, f_long=660.0, bright=1.0):
+    """The signal's voice: its 3 + 1 rhythm (three short pings, one long tone) - the same rhythm as on the screens."""
+    t = _tt2(dur)
+    u = ((t + t0) * rate) % 1.0
+    y = np.zeros(len(t))
+    for c in (0.06, 0.19, 0.32):
+        env = np.exp(-((u - c) / 0.018) ** 2)
+        y += env * (np.sin(2 * np.pi * f_short * t) + 0.3 * bright * np.sin(2 * np.pi * f_short * 2.01 * t))
+    lg = np.clip(np.minimum((u - 0.48) / 0.02, (0.7 - u) / 0.04), 0, 1)
+    fm = np.sin(2 * np.pi * f_long * t + 1.2 * np.sin(2 * np.pi * 5.0 * t))
+    y += lg * (fm + 0.4 * np.sin(2 * np.pi * f_long * 0.5 * t)) * 0.8
+    return _norm(y)
+
+
+def _sub_pulse(dur, t0=0.0, rate=0.8):
+    """A deep electronic pulse on every long tone of the signal."""
+    out = np.zeros(int(dur * SR))
+    period = 1.0 / rate
+    k0 = math.ceil((t0 * rate - 0.48))
+    tm = (k0 + 0.48) / rate - t0
+    while tm < dur:
+        if tm >= 0:
+            b = _boom(0.9, 70, 38, int(tm * 10) + 3)
+            i = int(tm * SR)
+            m = min(len(b), len(out) - i)
+            out[i:i + m] += b[:m]
+        tm += period
+    return _norm(out)
+
+
+def _chirps(dur, seed):
+    """Satellite communication: data chirps, short bursts of filtered noise and a carrier whine."""
+    rng = np.random.default_rng(seed)
+    n = int(dur * SR)
+    y = np.zeros(n)
+    t = np.arange(n) / SR
+    y += 0.15 * np.sin(2 * np.pi * (2400 + 30 * np.sin(2 * np.pi * 0.7 * t)) * t)
+    for _ in range(int(dur * 6)):
+        i = int(rng.uniform(0, max(1, n - 0.2 * SR)))
+        if rng.random() < 0.5:
+            c = _countbeep(rng.choice([1800, 2200, 2900, 3400]), rng.uniform(0.02, 0.06))
+        else:
+            c = _bandpass(_noise(int(0.08 * SR), int(rng.integers(1000))), 1200, 5000) * np.hanning(int(0.08 * SR))
+        y[i:i + len(c)] += c * 0.6
+    return _norm(y)
+
+
+def _tape_stop(sig, dur=0.35):
+    """Slow a sound to a halt (the signal stopping before it reverses)."""
+    n = int(dur * SR)
+    rate = np.linspace(1.0, 0.0, n) ** 1.3
+    pos = np.cumsum(rate)
+    pos = np.clip(pos, 0, len(sig) - 2)
+    i = pos.astype(int)
+    f = pos - i
+    return sig[i] * (1 - f) + sig[i + 1] * f
+
+
+def _buzz(dur, seed):
+    """Failing fluorescent lights: mains buzz with random drop-outs."""
+    t = _tt2(dur)
+    y = np.sign(np.sin(2 * np.pi * 100 * t)) * 0.4 + np.sin(2 * np.pi * 50 * t)
+    rng = np.random.default_rng(seed)
+    gate = np.repeat(rng.choice([0.0, 0.3, 1.0], size=int(dur * 22) + 1, p=[0.3, 0.25, 0.45]), int(SR / 22) + 1)[:len(t)]
+    return _norm(_bandpass(y, 80, 4000)) * gate
+
+
 def _music(N, cues):
     mus = np.zeros((2, N))
     S_ = {s['name']: (s['t0'], s['t1']) for s in SHOTS}
-    # 0-4 s: a cold, low drone; the screen powers on; an impact as his face appears
+    # 0 s: a hard impact on frame 1; a dark pad and deep pulses under the discovery
     _place(mus, _hit(2, 1.2), 0.0, 0.8)
-    cues.append((0.0, 'IMPACT on frame 1 as the giant screen glitches on with his face (no build-up)', 'music'))
-    y = _pad([_mtof(m) for m in (37, 44, 49, 52)], 4.2, seed=1, cutoff=700)
-    _place(mus, y * _env(_tt2(4.2), [(0, 0.5), (0.3, 0.9), (2.5, 1.0), (4.2, 0.3)]), 0.0, 0.3)
-    _place(mus, _heartbeat(3.4, 76), 0.6, 0.25)
-    cues.append((0.0, 'MUSIC: a cold low drone (C sharp minor) under the hit, then a heartbeat bass', 'music'))
-    _place(mus, _riser(0.9, 2, 150, 3500), 0.5, 0.3)
-    _place(mus, _boom(1.6, 60, 30, 4), 1.4, 0.4)
-    cues.append((0.5, 'A riser into the push to his face on the screen; a low boom on the cut (1.4 s)', 'music'))
-    st = _tremolo_strings((49, 52, 56, 61), 2.0, 3)
-    _place(mus, st * _env(_tt2(2.0), [(0, 0), (0.3, 0.7), (1.7, 0.9), (2.0, 0)]), 2.4, 0.2)
-    # 4-10.45 s: the world finds out - a driving news pulse that grows with every cut
-    a, b = S_['anchor'][0], S_['car'][0]
-    _place(mus, _ostinato(b - a, 37, 128, pattern=(0, 0, 12, 0, 7, 0, 10, 12), bright=1300, gain_curve=lambda u: 0.5 + 0.5 * u), a, 0.34)
-    for k in range(int((b - a) / 0.469)):
-        _place(mus, _kick(0.3), a + k * 0.469, 0.24 + 0.1 * k / 13)
-        _place(mus, _shaker(400 + k), a + k * 0.469 + 0.234, 0.06)
-        if k % 2:
-            _place(mus, _snare(500 + k, 0.8), a + k * 0.469, 0.08 + 0.06 * k / 13)
-    for k, ch in enumerate(((49, 56, 61, 64), (45, 52, 57, 61), (47, 54, 59, 63), (44, 51, 56, 60))):
-        seg = (b - a) / 4
-        yy = _pad([_mtof(m) for m in ch], seg + 0.3, seed=10 + k, cutoff=1500)
-        _place(mus, yy * _env(_tt2(seg + 0.3), [(0, 0), (0.15, 1), (seg, 1), (seg + 0.3, 0)]), a + k * seg, 0.26 + 0.04 * k)
-    _place(mus, _sting(5, True), a + 0.02, 0.5)
-    _place(mus, _sting(7, False), S_['gov'][0] + 0.02, 0.45)
-    _place(mus, _riser(1.6, 6, 200, 4500), b - 1.6, 0.32)
-    cues.append((a, 'MUSIC: a driving news pulse (C sharp minor, 128 bpm), kick, snare and shaker, building cut by cut', 'music'))
-    cues.append((a, 'Breaking-news stings on the presenter and on the government urgent report', 'music'))
-    # 10.45 s: the pulse stops dead; low bass under the car's arrival
-    _place(mus, _boom(2.5, 50, 28, 9), b, 0.45)
-    y = _pad([_mtof(m) for m in (25, 32, 37)], 2.3, seed=12, cutoff=300)
-    _place(mus, y * _env(_tt2(2.3), [(0, 0), (0.1, 1), (2.0, 1), (2.3, 0)]), b, 0.4)
-    cues.append((b, 'MUSIC: the pulse stops dead; a sub-bass boom and a low drone as the government car arrives', 'music'))
-    # 12.6-19.15 s: the facility - vast, cold, reverberant; a choir swell when the hall opens up
-    a, b = S_['enter'][0], S_['timeline'][0]
-    for k, ch in enumerate(((37, 44, 49, 56, 61), (35, 42, 47, 54, 59), (33, 40, 45, 52, 57))):
+    cues.append((0.0, 'IMPACT on frame 1 as the pattern glitches onto the monitor beside his photo (no build-up)', 'music'))
+    y = _pad([_mtof(m) for m in (38, 45, 50, 53)], 4.3, seed=1, cutoff=700)
+    _place(mus, y * _env(_tt2(4.3), [(0, 0.5), (0.3, 0.9), (4.0, 1.0), (4.3, 0.2)]), 0.0, 0.3)
+    _place(mus, _sub_pulse(4.0), 0.0, 0.35)
+    cues.append((0.0, 'MUSIC: a dark pad (D minor) and a deep electronic pulse on every long tone of the signal', 'music'))
+    # 4-10 s: the timeline - a rising synth pulse that builds to the instant; a bright tone and boom on the spike
+    a, b = 4.0, 10.0
+    _place(mus, _ostinato(b - a, 38, 120, pattern=(0, 12, 7, 12, 0, 12, 10, 12), bright=1400, gain_curve=lambda u: 0.35 + 0.65 * u), a, 0.28)
+    for k in range(int((b - a) / 0.5)):
+        _place(mus, _kick(0.3), a + k * 0.5, 0.18 + 0.12 * k / 12)
+    for k, ch in enumerate(((50, 57, 62, 65), (46, 53, 58, 62), (48, 55, 60, 63))):
         seg = (b - a) / 3
-        yy = _choir(ch, seg + 0.8, seed=30 + k) * 0.55 + _pad([_mtof(m) for m in ch], seg + 0.8, seed=34 + k, cutoff=1400) * 0.7
-        _place(mus, _reverb(yy * _env(_tt2(seg + 0.8), [(0, 0), (0.6, 1), (seg, 1), (seg + 0.8, 0)]), 3.5, 30 + k) * 0.8, a + k * seg, 0.3)
-    j, tm = 0, a + 0.2
-    while tm < b - 0.3:
-        _place(mus, _pluck(_mtof((73, 76, 80, 85, 80, 76)[j % 6]), 1.2, 0.6), tm, 0.06, pan=0.4 * math.sin(j))
-        tm += 0.469
-        j += 1
-    cues.append((a, 'MUSIC: vast and cold - choir and pads in a long reverb, a slow glassy arpeggio', 'music'))
-    # 19.15-23.5 s: the timeline - a ticking pulse and rising strings; a stab when his photo is found
-    a, b = S_['timeline'][0], S_['turn'][0]
-    for k in range(int((b - a) / 0.234)):
-        _place(mus, _tick(k, 1.0), a + k * 0.234, 0.07)
-    st = _tremolo_strings((49, 52, 56, 61, 64), b - a + 0.5, 40)
-    _place(mus, st * _env(_tt2(b - a + 0.5), [(0, 0), (0.6, 0.5), (b - a, 1.0), (b - a + 0.5, 0.6)]), a, 0.26)
-    _place(mus, _hit(41, 0.7), 21.6, 0.5)
-    cues.append((a, 'MUSIC: a clock-like ticking pulse and rising tremolo strings over the timeline', 'music'))
-    cues.append((21.6, 'A stab as the timeline finds the one man it missed - his photo', 'music'))
-    # 23.5-27.9 s: rising suspense into the symbol
-    a, b = S_['turn'][0], 27.88
-    _place(mus, _heartbeat(b - a, 84), a, 0.35)
-    _place(mus, _riser(b - 25.3, 50, 120, 6000), 25.3, 0.38)
-    y = _choir((37, 38, 44), b - 25.3 + 0.2, seed=51) * 0.7 + _pad([_mtof(m) for m in (25, 37, 38)], b - 25.3 + 0.2, seed=52, cutoff=500)
-    _place(mus, y * _env(_tt2(b - 25.3 + 0.2), [(0, 0), (0.4, 1), (b - 25.3, 1), (b - 25.3 + 0.2, 0)]), 25.3, 0.36)
-    _place(mus, _boom(3.0, 45, 24, 53), 25.3, 0.55)
-    cues.append((a, 'MUSIC: rising suspense - a faster heartbeat bass, then an eerie dissonant choir and a long riser under the symbol', 'music'))
-    cues.append((25.3, 'A deep sub boom as the symbol appears', 'music'))
-    # 27.9 s: everything cuts on the glitch; one last low hit under PART 3?
-    i = int(27.9 * SR)
-    mus[:, i:] *= 0.0
-    _place(mus, _hit(60, 0.9), 28.22, 0.6)
-    cues.append((27.9, 'MUSIC CUTS on the digital glitch; one last low hit under "PART 3?" (28.2 s), then its tail', 'music'))
+        yy = _pad([_mtof(m) for m in ch], seg + 0.4, seed=10 + k, cutoff=1500)
+        _place(mus, yy * _env(_tt2(seg + 0.4), [(0, 0), (0.2, 1), (seg, 1), (seg + 0.4, 0)]), a + k * seg, 0.24 + 0.04 * k)
+    _place(mus, _boom(2.4, 60, 30, 7), 7.3, 0.5)
+    _place(mus, _bell(_mtof(86), 3.0), 7.3, 0.25)
+    cues.append((a, 'MUSIC: a rising synth pulse (D minor, 120 bpm) as the timeline unrolls', 'music'))
+    cues.append((7.3, 'A boom and a bright bell tone on the instant: population drop and signal spike line up', 'music'))
+    # 10-17 s: the signal - a vast, rising pad with choir; the signal's own tone, reverberant
+    a, b = 10.0, 17.0
+    for k, ch in enumerate(((38, 45, 50, 57, 62), (36, 43, 48, 55, 60), (34, 41, 46, 53, 58))):
+        seg = (b - a) / 3
+        yy = _choir(ch, seg + 0.8, seed=30 + k) * 0.6 + _pad([_mtof(m) for m in ch], seg + 0.8, seed=34 + k, cutoff=1300) * 0.7
+        _place(mus, _reverb(yy * _env(_tt2(seg + 0.8), [(0, 0), (0.5, 1), (seg, 1), (seg + 0.8, 0)]), 3.0, 30 + k) * 0.8,
+               a + k * seg, 0.3 + 0.04 * k)
+    _place(mus, _riser(b - a - 0.4, 35, 120, 3000) * 0.6, a, 0.25)
+    cues.append((a, 'MUSIC: a vast, rising pad and choir in a long reverb as the view pulls out into deep space', 'music'))
+    # 17-24 s: the twist - everything stops with the signal; then the dive; a bass hit when the view reaches him
+    _place(mus, _boom(3.0, 55, 26, 41), 21.3, 0.75)
+    st = _tremolo_strings((38, 41, 45, 50, 51), 2.8, 42)
+    _place(mus, st * _env(_tt2(2.8), [(0, 0), (0.3, 0.8), (2.5, 1.0), (2.8, 0.4)]), 21.3, 0.26)
+    cues.append((21.3, 'A deep bass hit as the dive arrives at him; trembling dissonant strings', 'music'))
+    # 24-28.15 s: rising suspense into the last word; the impact on "you"; then silence
+    a = 24.0
+    yy = _choir((38, 39, 45), 3.7, seed=51) * 0.6 + _pad([_mtof(m) for m in (26, 38, 39)], 3.7, seed=52, cutoff=500)
+    _place(mus, yy * _env(_tt2(3.7), [(0, 0), (0.5, 0.8), (3.5, 1.0), (3.7, 0)]), a, 0.34)
+    _place(mus, _riser(3.6, 50, 100, 6000), a + 0.05, 0.35)
+    _place(mus, _heartbeat(3.6, 96), a, 0.32)
+    _place(mus, _hit(60, 1.3), 27.65, 0.95)
+    cues.append((24.0, 'MUSIC: rising suspense - a dissonant choir, a long riser and a racing heartbeat bass', 'music'))
+    cues.append((27.65, 'THE BIGGEST HIT of the film on "you"', 'music'))
     return mus
 
 
@@ -5062,78 +5103,70 @@ def stage_audio():
             y = fn(n, abs(hash(nm)) % 1000) * _env(np.arange(n) / SR, [(0, 0), (0.03, 1), ((b - a) - 0.03, 1), (b - a, 0)])
             _place(amb, y, a, gain, pan=pan)
         cue(S_[names[0]][0], what, 'ambience')
-    bed(['reveal', 'billboard', 'lookup', 'car'], lambda n, s: _wind(n, s, 150, 900, 0.2) * 0.5 + _engine(n, s, 40.0) * 0.3 + _crowd(n, s, 0.3) * 0.2,
-        0.16, 'Street: wind, distant traffic, a few far-off voices - eerily quiet')
-    bed(['anchor'], lambda n, s: _crowd(n, s, 0.8) * 0.5 + _servers(n, s) * 0.5, 0.16, 'Newsroom: busy murmur, keyboards, phones')
-    bed(['screens', 'crowd'], lambda n, s: _crowd(n, s, 1.8), 0.32, 'The square: a huge crowd murmuring at the giant screens')
-    bed(['gov'], lambda n, s: _servers(n, s) * 0.6 + _hum_bed(n, s, 50.0, 0.2) * 0.4, 0.14, 'Situation room: hum, data chirps')
-    bed(['scidata'], lambda n, s: _servers(n, s), 0.16, 'Lab: equipment hum and bleeps')
-    bed(['enter', 'welcome'], lambda n, s: _hum_bed(n, s, 55.0, 0.15) * 0.5 + _servers(n, s) * 0.5, 0.15,
-        'Facility: a deep air-handling hum, servers, distant interface bleeps')
-    bed(['timeline', 'notice', 'turn', 'symbol', 'stare'], lambda n, s: _hum_bed(n, s, 55.0, 0.1), 0.1, 'Research room: a low hum')
-    # effects
-    _place(sfx, _power_on(3), 0.0, 0.45)
-    cue(0.0, 'The giant screen glitches on: a relay clunk, electrical hum and crackle')
-    _place(sfx, _static(0.35, 4, 1.4), 0.0, 0.22)
-    for nm in ('billboard', 'lookup', 'anchor', 'screens', 'crowd', 'gov', 'scidata', 'car', 'enter', 'welcome', 'timeline', 'notice', 'turn', 'symbol', 'stare'):
-        _place(sfx, _whoosh(0.35, len(nm)), S_[nm][0] - 0.15, 0.14 if nm not in ('billboard',) else 0.3)
-    cue(1.25, 'A whoosh on every cut (a big one on the push to the giant screen)')
-    rng = np.random.default_rng(5)
-    tm = 4.3
-    while tm < 10.2:
-        _place(sfx, _notify(int(rng.integers(4))), tm, 0.08 + 0.06 * rng.random(), pan=rng.uniform(-0.6, 0.6))
-        tm += rng.uniform(0.18, 0.55)
-    cue(4.3, 'Phone notifications everywhere, faster and faster')
-    _place(sfx, _static(0.25, 9, 1.0), S_['anchor'][0], 0.18)
-    _place(sfx, _static(0.25, 10, 1.0), S_['screens'][0], 0.16)
-    for k in range(3):
-        _place(sfx, _countbeep(880, 0.25), S_['gov'][0] + 0.15 + k * 0.5, 0.12)
-    cue(S_['gov'][0] + 0.15, 'An urgent alert tone in the situation room')
-    for k in range(5):
-        _place(sfx, _countbeep(2000 + 300 * k, 0.06), S_['scidata'][0] + 0.3 + k * 0.45, 0.08)
-    # the car
-    a = S_['car'][0]
-    n = int(1.9 * SR)
-    eng = _engine(n, 21, 44.0) * _env(np.arange(n) / SR, [(0, 0.3), (0.6, 1.0), (1.35, 0.7), (1.9, 0.15)])
-    _place(sfx, eng, a, 0.45, pan=-0.3)
-    _place(sfx, _whoosh(0.6, 22), a + 0.35, 0.3, pan=-0.2)
-    _place(sfx, _brakes(23), a + 0.55, 0.3)
-    _place(sfx, _door_slide(24), 12.0, 0.35, pan=-0.1)
-    cue(a, 'The government car: engine, a pass-by whoosh, hard braking; its door slides open (12.0 s)')
-    # the facility
-    _place(sfx, _door_slide(25), S_['enter'][0] + 0.05, 0.35)
-    cue(S_['enter'][0] + 0.05, 'Electronic doors open into the facility')
-    for k in range(5):
-        st_ = np.concatenate([_step(30 + k), np.zeros(int(1.2 * SR))])
-        y = _reverb(st_, 2.5, k) * 0.6
-        y[:len(st_)] += st_
-        _place(sfx, _norm(y), S_['enter'][0] + 0.3 + k * 0.52, 0.25)
-    cue(S_['enter'][0] + 0.3, 'Footsteps echoing across the hall')
-    for k in range(4):
-        _place(sfx, _countbeep(2600 - 200 * k, 0.05), S_['enter'][0] + 0.8 + k * 0.6, 0.07, pan=0.5 * math.sin(k))
-    _place(sfx, _door_slide(26), S_['welcome'][0] + 0.05, 0.25)
-    cue(S_['welcome'][0] + 0.05, 'The glass research room door; interface bleeps')
-    for k, tm in enumerate((19.4, 19.95, 20.5)):
-        _place(sfx, _swipe(40 + k), tm, 0.2, pan=0.3)
-    cue(19.4, 'Interface swipes as the scientist scrolls the timeline')
-    _place(sfx, _glitch(0.25, 44), 21.58, 0.12)
-    for k in range(3):
-        _place(sfx, _countbeep(1175, 0.12), 21.7 + k * 0.3, 0.16)
-    cue(21.6, 'A data glitch and a triple alert beep: ANOMALY - SUBJECT 001')
-    _place(sfx, _power_down(50), 24.0, 0.4)
-    cue(24.0, 'The lights go down: a falling whine and a heavy relay')
-    _place(sfx, _glitch(0.2, 51), 25.25, 0.16)
-    _place(sfx, _glitch(0.4, 60), 27.86, 0.45)
-    _place(sfx, _static(0.4, 61, 2.0), 27.86, 0.35)
-    cue(27.86, 'DIGITAL GLITCH: stuttering square-wave bursts and static as the picture breaks up')
-    _place(sfx, _glitch(0.12, 62), 29.7, 0.2)
-
+    lab = ['monitor', 'eyes', 'look', 'timeline', 'spike', 'compare', 'watch', 'inside', 'turn', 'face', 'symbol', 'step', 'push']
+    bed(lab, lambda n, s: _hum_bed(n, s, 55.0, 0.15) * 0.5 + _servers(n, s) * 0.5, 0.13,
+        'Laboratory: a deep air-handling hum, servers, distant interface bleeps')
+    bed(['earth', 'deepspace', 'reverse'], lambda n, s: _chirps(n / SR, s)[:n], 0.12, 'Space: satellite communication chirps and a carrier whine')
+    bed(['dive', 'city'], lambda n, s: _wind(n, s, 150, 2500, 0.5), 0.3, 'The dive: rushing wind through the atmosphere')
+    # the signal's own sound, wherever it is seen
+    for nm, g, f in (('monitor', 0.16, 1320.0), ('eyes', 0.12, 1320.0), ('look', 0.1, 1320.0), ('spike', 0.14, 1320.0),
+                     ('earth', 0.22, 1100.0), ('deepspace', 0.2, 1100.0), ('watch', 0.12, 1100.0)):
+        a, b = S_[nm]
+        y = _sig_pulses(b - a, a, f_short=f, f_long=f / 2)
+        if nm in ('earth', 'deepspace'):
+            y = _reverb(y, 2.5, 3) * 0.7 + y * 0.6
+        _place(sfx, y, a, g)
+    cue(0.0, 'THE SIGNAL: three short pings and one long tone, repeating - the same rhythm as on the screens')
+    # the reversal: the signal winds down to a stop, a beat of nothing, then streams back out, rising
+    a = S_['reverse'][0]
+    y = _sig_pulses(17.55 - a, a, f_short=1100.0, f_long=550.0)
+    _place(sfx, y, a, 0.22)
+    _place(sfx, _tape_stop(_sig_pulses(1.0, 17.55, f_short=1100.0, f_long=550.0)), 17.55, 0.25)
+    rev = _sig_pulses(21.3 - 17.8, 17.8, rate=1.3, f_short=1500.0, f_long=750.0)
+    rev *= np.linspace(0.6, 1.0, len(rev))
+    _place(sfx, rev, 17.8, 0.22)
+    _place(sfx, _riser(1.0, 44, 300, 5000), 17.8, 0.25)
+    cue(17.55, 'The signal winds down to a stop (17.55 s), a beat of silence, then streams back out faster (17.8 s)')
+    _place(sfx, _whoosh(1.4, 45), 18.65, 0.4)
+    _place(sfx, _riser(1.2, 46, 400, 7000), 20.0, 0.3)
+    _place(sfx, _whoosh(0.7, 47), 20.95, 0.4)
+    cue(18.65, 'Whooshes and a rising roar as the view dives through the atmosphere and over the city')
+    # from him: the signal, close and dry
+    _place(sfx, _sig_pulses(28.15 - 21.3, 21.3, f_short=1320.0, f_long=660.0) * np.linspace(1.0, 0.6, int((28.15 - 21.3) * SR)), 21.3, 0.17)
+    cue(21.3, 'The signal again - close and dry now, coming from him')
+    # interface sounds
+    for k, tm in enumerate((0.3, 0.9, 1.6, 4.4, 4.9, 5.6, 6.2, 8.4, 8.9, 9.4)):
+        _place(sfx, _countbeep((2200, 2600, 1900)[k % 3], 0.05), tm, 0.08, pan=0.4 * math.sin(k))
+    for k, tm in enumerate((4.2, 5.4, 6.6, 8.35)):
+        _place(sfx, _swipe(60 + k), tm, 0.16, pan=0.3)
+    cue(4.2, 'Interface swipes and bleeps along the timeline and at the console')
+    for nm in ('eyes', 'look', 'timeline', 'spike', 'compare', 'earth', 'deepspace', 'watch', 'reverse', 'turn', 'face', 'symbol', 'step', 'push'):
+        _place(sfx, _whoosh(0.35, len(nm)), S_[nm][0] - 0.15, 0.12)
+    cue(1.25, 'A short whoosh on the cuts')
+    # glitches
+    _place(sfx, _glitch(0.3, 70), 0.0, 0.35)
+    _place(sfx, _static(0.3, 71, 1.4), 0.0, 0.2)
+    _place(sfx, _glitch(0.25, 72), 21.3, 0.2)
+    _place(sfx, _glitch(0.25, 73), 25.35, 0.25)
+    _place(sfx, _glitch(0.12, 74), 27.0, 0.2)
+    cue(0.0, 'Digital glitches: the pattern appearing (0 s), the screens switching (21.3 s), the symbol (25.4 s)')
+    # the lights fail
+    _place(sfx, _buzz(28.15 - 25.9, 80), 25.9, 0.18)
+    _place(sfx, _power_down(81), 26.6, 0.25)
+    cue(25.9, 'The lights buzz and fail; a heavy relay as she steps back')
+    # sudden silence at the blackout
     vo = np.zeros(N)
     vpath = os.path.join(ROOT, 'audio', 'narration.wav')
     if os.path.exists(vpath):
         with wave.open(vpath) as w:
             a_ = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float64) / 32768
         vo[:min(N, len(a_))] = a_[:N]
+    cut = int(28.15 * SR)
+    tail = int(0.05 * SR)
+    for buf in (music, amb, sfx):
+        buf[:, cut:cut + tail] *= np.linspace(1, 0, tail)
+        buf[:, cut + tail:] = 0.0
+    cue(28.15, 'BLACKOUT: everything cuts to silence; WHAT HAPPENS NEXT? plays over silence', 'music')
     env = np.abs(vo)
     k = int(0.03 * SR)
     env = np.convolve(env, np.ones(k) / k, mode='same')
@@ -5176,20 +5209,20 @@ def stage_audio():
 
 
 def write_sound_design(cues):
-    L = ['WHAT IF YOU WERE THE ONLY MAN ALIVE? PART 2 - SOUND DESIGN, MUSIC AND TIMING',
+    L = ['WHAT IF YOU WERE THE ONLY MAN ALIVE? PART 3 - SOUND DESIGN, MUSIC AND TIMING',
          '=' * 60, '',
          'Everything below is synthesised by code in animation.py --stage audio (numpy only: oscillators, filtered noise,',
          'envelopes, convolution reverb). No samples, recordings, stock sound or copyrighted music. The narration is a',
          'synthetic voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py. Music, ambience and effects duck under',
          'the voice so the narration always stays on top.',
          '',
-         'THE IDEA: bigger than Part 1, and no build-up: an impact lands on the very first frame as a giant screen glitches on',
-         'with his face over an empty street (relay clunk, electrical hum, static). The world finds out over a driving news pulse with',
-         'stings, static and a storm of phone notifications. The pulse stops dead for the black car (engine, braking, a',
-         'sliding door). The facility is vast and cold: electronic doors, echoing footsteps, interface bleeps, a choir in a',
-         'long reverb. The timeline ticks; a stab and alert beeps find his photo. Then rising suspense: a faster heartbeat,',
-         'the lights powering down, a sub boom and a dissonant choir under the symbol - and a digital glitch cuts everything',
-         'to one last low hit under PART 3?',
+         'THE IDEA: the signal has a voice - three short pings and one long tone, repeating, the same 3 + 1 rhythm as on every',
+         'screen - so the ear recognises it before the eye does. An impact lands on frame 1. Deep electronic pulses sit on every',
+         'long tone. The timeline builds a synth pulse to a boom on the instant; space is vast and reverberant, full of',
+         'satellite chirps. When the signal changes direction it winds down to a stop, a beat of silence, then streams back out',
+         'faster; the dive roars through the atmosphere; a bass hit lands as the view reaches him, and from then on the signal',
+         'is close and dry - it is coming from him. The lights buzz and fail, the suspense rises, the biggest hit of the film',
+         'lands on the last word, "you" - and then sudden silence under WHAT HAPPENS NEXT?',
          '',
          'Files: audio/mix_with_voice.wav (final mix, -14 LUFS), audio/mix_no_voice.wav (music + sound only, -14 LUFS),',
          'audio/narration.wav (voice only).',
@@ -5202,12 +5235,12 @@ def write_sound_design(cues):
     for tm, what, layer in sorted(cues):
         L.append(f'{tm:6.2f} s  [{layer:9s}] {what}')
     L += ['', 'MUSIC GUIDE (if you re-score it in CapCut or another editor)', '-' * 60,
-          '- 0 s: a hard hit on the very first frame as the giant screen comes on; a riser into the push (1.4 s).',
-          '- 4-10.5 s: news-channel energy - a driving minor-key pulse (120-130 bpm) that builds with every cut.',
-          '- 10.5 s: stop the pulse dead for the car; low bass only.',
-          '- 12.6-19 s: something vast and cold (pads, choir, long reverb) for the facility.',
-          '- 19-23.5 s: a ticking pulse and rising strings; a stab at 21.6 s when his photo is highlighted.',
-          '- 23.5-27.9 s: rising suspense; cut everything on the glitch at 27.9 s, one low hit under PART 3?.',
+          '- 0 s: a hard hit on frame 1; a dark, low pad with deep pulses.',
+          '- 4-10 s: a rising electronic pulse; a big accent at 7.3 s (the instant on the timeline).',
+          '- 10-17 s: vast and rising (pads, choir, reverb).',
+          '- 17.5 s: stop everything for a beat when the signal stops; build again from 17.8 s through the dive.',
+          '- 21.3 s: a deep bass hit; then tension and a long riser to the last word.',
+          '- 27.65 s: the biggest impact on "you"; cut to total silence at 28.15 s (the blackout).',
           '- Keep the narration 10-15 dB above the music; YouTube Shorts plays back at about -14 LUFS.',
           '- Use only music you have the rights to (your own, a licensed library, or YouTube Audio Library tracks).']
     with open(os.path.join(ROOT, 'sound_design.txt'), 'w') as fh:
@@ -5396,33 +5429,22 @@ def stage_edit():
             fl.color = (0.85, 0.95, 1.0)
             fl.blend_type = 'ADD'
             fl.blend_alpha = flash
-    G = [('g_board', 0.0, 0.1, 0.03, 0.0), ('g_board2', 0.27, 0.33, 0.02, 0.15), ('g_anchor', SHOT['anchor']['t0'], SHOT['anchor']['t0'] + 0.1, 0.03, 0.35),
-         ('g_screens', SHOT['screens']['t0'], SHOT['screens']['t0'] + 0.08, 0.025, 0.25),
-         ('g_gov', SHOT['gov']['t0'], SHOT['gov']['t0'] + 0.1, 0.03, 0.3), ('g_sci', SHOT['scidata']['t0'], SHOT['scidata']['t0'] + 0.07, 0.02, 0.2),
-         ('g_anom', 21.6, 21.7, 0.02, 0.2), ('g_sym', 25.3, 25.4, 0.03, 0.25),
-         ('g_end1', 27.86, 28.0, 0.05, 0.45), ('g_end2', 28.0, 28.12, -0.08, 0.3), ('g_end3', 28.12, 28.22, 0.11, 0.6),
-         ('g_tail', 29.7, 29.76, 0.03, 0.15)]
+    G = [('g_open', 0.0, 0.1, 0.03, 0.0), ('g_open2', 0.2, 0.27, 0.02, 0.12),
+         ('g_spike', 7.3, 7.38, 0.03, 0.35), ('g_stop', 17.55, 17.68, 0.05, 0.0), ('g_rev', 17.8, 17.88, 0.04, 0.4),
+         ('g_city', SHOT['city']['t0'], SHOT['city']['t0'] + 0.1, 0.05, 0.7), ('g_in', SHOT['inside']['t0'], SHOT['inside']['t0'] + 0.1, 0.04, 0.6),
+         ('g_sym', 25.38, 25.5, 0.03, 0.3), ('g_flick', 27.0, 27.07, 0.03, 0.0), ('g_last', 28.0, 28.15, 0.08, 0.5)]
     for name_, a_, b_, dx_, fl_ in G:
         glitch(name_, a_, b_, dx_, fl_)
-    # after the final glitch the picture drops almost to black under PART 3?
-    dk = se.sequences.new_effect('Dark', type='COLOR', channel=7, frame_start=frame(28.22), frame_end=LAST_FRAME + 1)
+    # a white-blue flash stitches the dive from space into the city and from the roof into the hall
+    for k, tc in enumerate((SHOT['city']['t0'], SHOT['inside']['t0'])):
+        fl = se.sequences.new_effect(f'DiveFlash{k}', type='COLOR', channel=7, frame_start=frame(tc) - 2, frame_end=frame(tc) + 3)
+        fl.color = (0.75, 0.88, 1.0)
+        fl.blend_type = 'ADD'
+        key_alpha(fl, [(frame(tc) - 2, 0.0), (frame(tc), 0.9), (frame(tc) + 3, 0.0)])
+    # the blackout on the last word: full black, and silence (the audio stage cuts the sound at the same moment)
+    dk = se.sequences.new_effect('Blackout', type='COLOR', channel=8, frame_start=frame(28.15), frame_end=LAST_FRAME + 1)
     dk.color = (0.0, 0.0, 0.0)
     dk.blend_type = 'ALPHA_OVER'
-    key_alpha(dk, [(frame(28.22), 0.55), (frame(28.6), 0.7), (LAST_FRAME, 0.75)])
-    # a broadcast "LIVE" bug while the world watches (scene 2)
-    for k, (a_, b_) in enumerate(((SHOT['anchor']['t0'], SHOT['crowd']['t1']),)):
-        st = se.sequences.new_effect(f'Live{k}', type='TEXT', channel=8, frame_start=frame(a_), frame_end=frame(b_))
-        st.text = '  LIVE   GLOBAL 24  '
-        st.font = font(FONT_TITLE)
-        st.font_size = 40
-        st.color = (1, 1, 1, 1)
-        st.align_x = 'LEFT'
-        st.align_y = 'CENTER'
-        st.location = (0.06, 0.945)
-        st.use_box = True
-        st.box_color = (0.85, 0.08, 0.06, 0.92)
-        st.box_margin = 0.01
-        st.blend_type = 'ALPHA_OVER'
     ch = 9
     for k, tl in enumerate(TIMING['titles']):
         for j, line in enumerate(tl['text'].split('|')):

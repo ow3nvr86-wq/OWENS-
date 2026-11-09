@@ -1,0 +1,57 @@
+WHAT IF YOU WERE THE ONLY MAN ALIVE? PART 3 - SOUND DESIGN, MUSIC AND TIMING
+============================================================
+
+Everything below is synthesised by code in animation.py --stage audio (numpy only: oscillators, filtered noise,
+envelopes, convolution reverb). No samples, recordings, stock sound or copyrighted music. The narration is a
+synthetic voice (Kokoro-82M, voice bm_george) made by tools/voiceover.py. Music, ambience and effects duck under
+the voice so the narration always stays on top.
+
+THE IDEA: the signal has a voice - three short pings and one long tone, repeating, the same 3 + 1 rhythm as on every
+screen - so the ear recognises it before the eye does. An impact lands on frame 1. Deep electronic pulses sit on every
+long tone. The timeline builds a synth pulse to a boom on the instant; space is vast and reverberant, full of
+satellite chirps. When the signal changes direction it winds down to a stop, a beat of silence, then streams back out
+faster; the dive roars through the atmosphere; a bass hit lands as the view reaches him, and from then on the signal
+is close and dry - it is coming from him. The lights buzz and fail, the suspense rises, the biggest hit of the film
+lands on the last word, "you" - and then sudden silence under WHAT HAPPENS NEXT?
+
+Files: audio/mix_with_voice.wav (final mix, -14 LUFS), audio/mix_no_voice.wav (music + sound only, -14 LUFS),
+audio/narration.wav (voice only).
+
+CUE SHEET (generated)
+------------------------------------------------------------
+  0.00 s  [sfx      ] Digital glitches: the pattern appearing (0 s), the screens switching (21.3 s), the symbol (25.4 s)
+  0.00 s  [music    ] IMPACT on frame 1 as the pattern glitches onto the monitor beside his photo (no build-up)
+  0.00 s  [ambience ] Laboratory: a deep air-handling hum, servers, distant interface bleeps
+  0.00 s  [music    ] MUSIC: a dark pad (D minor) and a deep electronic pulse on every long tone of the signal
+  0.00 s  [sfx      ] THE SIGNAL: three short pings and one long tone, repeating - the same rhythm as on the screens
+  0.12 s  [voice    ] NARRATION: "Scientists just found why you're the only man left... and it isn't on Earth." (to 3.90 s)
+  1.25 s  [sfx      ] A short whoosh on the cuts
+  4.00 s  [music    ] MUSIC: a rising synth pulse (D minor, 120 bpm) as the timeline unrolls
+  4.10 s  [voice    ] NARRATION: "After months of testing, they discover something strange. Every other man vanished at the exact same moment." (to 9.75 s)
+  4.20 s  [sfx      ] Interface swipes and bleeps along the timeline and at the console
+  7.30 s  [music    ] A boom and a bright bell tone on the instant: population drop and signal spike line up
+ 10.00 s  [music    ] MUSIC: a vast, rising pad and choir in a long reverb as the view pulls out into deep space
+ 10.00 s  [ambience ] Space: satellite communication chirps and a carrier whine
+ 10.20 s  [voice    ] NARRATION: "Then they find an unexplained signal coming from deep in space. And it matches the exact moment everyone vanished." (to 16.63 s)
+ 17.15 s  [voice    ] NARRATION: "Suddenly, the signal changes direction. Scientists stare at their screens in complete disbelief." (to 22.73 s)
+ 17.55 s  [sfx      ] The signal winds down to a stop (17.55 s), a beat of silence, then streams back out faster (17.8 s)
+ 18.65 s  [sfx      ] Whooshes and a rising roar as the view dives through the atmosphere and over the city
+ 18.70 s  [ambience ] The dive: rushing wind through the atmosphere
+ 21.30 s  [music    ] A deep bass hit as the dive arrives at him; trembling dissonant strings
+ 21.30 s  [sfx      ] The signal again - close and dry now, coming from him
+ 24.00 s  [music    ] MUSIC: rising suspense - a dissonant choir, a long riser and a racing heartbeat bass
+ 24.30 s  [voice    ] NARRATION: "Because the signal isn't coming from space anymore... it's coming from you." (to 28.10 s)
+ 25.90 s  [sfx      ] The lights buzz and fail; a heavy relay as she steps back
+ 27.65 s  [music    ] THE BIGGEST HIT of the film on "you"
+ 28.15 s  [music    ] BLACKOUT: everything cuts to silence; WHAT HAPPENS NEXT? plays over silence
+
+MUSIC GUIDE (if you re-score it in CapCut or another editor)
+------------------------------------------------------------
+- 0 s: a hard hit on frame 1; a dark, low pad with deep pulses.
+- 4-10 s: a rising electronic pulse; a big accent at 7.3 s (the instant on the timeline).
+- 10-17 s: vast and rising (pads, choir, reverb).
+- 17.5 s: stop everything for a beat when the signal stops; build again from 17.8 s through the dive.
+- 21.3 s: a deep bass hit; then tension and a long riser to the last word.
+- 27.65 s: the biggest impact on "you"; cut to total silence at 28.15 s (the blackout).
+- Keep the narration 10-15 dB above the music; YouTube Shorts plays back at about -14 LUFS.
+- Use only music you have the rights to (your own, a licensed library, or YouTube Audio Library tracks).
