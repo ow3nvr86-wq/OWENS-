@@ -5,6 +5,10 @@ A 32-second vertical Short in modern 2D motion graphics, made entirely with code
 1080 x 1920 (9:16), 30 fps, 32.0 s, H.264 + AAC, -14 LUFS. Narration: Kokoro am_michael (a
 modern, young American male voice), every line at his natural pace; captions and the hook icons are timed from
 the speech onsets measured in the narration audio (tools/voiceover.py writes them into scene_timing.json).
+Pronunciation: kokoro-onnx feeds the voice raw eSpeak phonemes, which are partly British (no 'r' in learned, Earth,
+person, world's) and split the diphthongs; tools/voiceover.py converts them to the American phoneme set the voice was
+trained on, says 'Elon' as EE-lon, and keeps the soft first sound of each line. Checked with an offline speech
+recogniser (faster-whisper small.en): every word of every line is recognised.
 
 HOW THE ONE SHOT IS BUILT (src/journey.py)
 - The timeline has a single entry; render.py makes no transitions between clips.

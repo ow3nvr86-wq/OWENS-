@@ -148,7 +148,7 @@
     "ONE",
     "PERSON"
    ],
-   "nocap_after": 29.073999999999998
+   "nocap_after": 29.067999999999998
   }
  ],
  "titles": [
@@ -231,7 +231,7 @@
   },
   {
    "start": 27.55,
-   "end": 29.034,
+   "end": 29.03,
    "style": "kicker",
    "text": "THE WORLD'S RICHEST PERSON  /  FORBES 2026",
    "y": 0.15
@@ -240,9 +240,9 @@
  "events": {
   "hook": [
    0.05,
-   0.772,
-   1.501,
-   2.383
+   0.812,
+   1.626,
+   2.398
   ],
   "unspool": 4.6,
   "lanes": 9.3,
@@ -255,6 +255,6 @@
   "push": 21.55,
   "split": 24.0,
   "fold": 27.55,
-  "one_man": 3.103
+  "one_man": 3.108
  }
 }

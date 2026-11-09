@@ -20,8 +20,8 @@ import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SR = 48000
-BASE_SCALE = 0.84   # Michael at 1.19x: a brisk, modern read
-MIN_SCALE = 0.84
+BASE_SCALE = 0.90   # Michael at 1.11x: brisk but unhurried; a line speeds up only if it must fit its slot
+MIN_SCALE = 0.80
 
 HOOKS = [
     ('A', 'The list (CHOSEN)',
@@ -50,7 +50,24 @@ class KokoroVoice:
         self.lang = 'en-gb' if name[:1] == 'b' else 'en-us'
 
     # pronunciations the voice gets wrong, fixed in its phonemes before synthesis
-    FIXES = [('pˈɛntaɡən', 'pˈɛntəɡən')]           # 'Pentagon' with a schwa: PEN-tuh-gon
+    FIXES = [('pˈɛntaɡən', 'pˈɛntəɡən'),           # 'Pentagon' with a schwa: PEN-tuh-gon
+             ('ᵻlˈɑːn', 'ˈiːlɑːn')]                 # 'Elon' as EE-lon, not ih-LON
+
+    # Kokoro's American voices were trained on misaki's American phoneme set, but kokoro-onnx hands them raw
+    # eSpeak IPA, which is partly British (non-rhotic 'ɜː' in learned/Earth/person, long marks) and splits
+    # diphthongs. This is the conversion misaki itself applies to eSpeak output for American English.
+    US = [('ʔn', 'tᵊn'), ('ʔ', 't'), ('aɪ', 'I'), ('aʊ', 'W'), ('eɪ', 'A'), ('ɔɪ', 'Y'), ('oʊ', 'O'),
+          ('dʒ', 'ʤ'), ('tʃ', 'ʧ'), ('ɐ', 'ə'), ('ɚɹ', 'əɹ'), ('ɚ', 'əɹ'), ('ɜːɹ', 'ɜɹ'), ('ɜː', 'ɜɹ'), ('ɪə', 'iə'),
+          ('r', 'ɹ'), ('ː', '')]
+
+    def phonemes(self, text):
+        ph = self.k.tokenizer.phonemize(text, self.lang)
+        for bad, good in self.FIXES:
+            ph = ph.replace(bad, good)
+        if self.lang == 'en-us':
+            for a, b in self.US:
+                ph = ph.replace(a, b)
+        return ' '.join(ph.split())
 
     @staticmethod
     def tighten(a, sr, n_sentence_breaks, short=0.16, long=0.30, thr=0.004):
@@ -82,13 +99,10 @@ class KokoroVoice:
         return np.concatenate(out)
 
     def synth(self, text, scale):
-        ph = self.k.tokenizer.phonemize(text, self.lang)
-        for bad, good in self.FIXES:
-            ph = ph.replace(bad, good)
+        ph = self.phonemes(text)
         # the whole line in ONE pass of the model, so the intonation runs on across commas and full stops
         # (the library would otherwise synthesise each sentence separately and glue them together)
         try:
-            ph = ' '.join(ph.split())
             a, _ = self.k._create_batch(ph, self.k.get_voice_style(self.name), 1.0 / scale, True)
             sr = 24000
         except Exception:
@@ -97,8 +111,13 @@ class KokoroVoice:
         a = np.asarray(a, np.float32)
         import re as _re
         a = self.tighten(a, sr, len(_re.findall(r'[.?!](?=\s)', text.strip())))
-        nz = np.nonzero(np.abs(a) > 0.01)[0]
-        a = a[max(nz[0] - int(0.02 * sr), 0): nz[-1] + int(0.06 * sr)]
+        # trim the lead-in and tail generously: soft first sounds ('th' in 'The', 'h' in 'He') sit below the
+        # loudness of the vowel after them, and clipping them makes the line start sound chopped
+        nz = np.nonzero(np.abs(a) > 0.003)[0]
+        a = a[max(nz[0] - int(0.05 * sr), 0): nz[-1] + int(0.12 * sr)].copy()
+        f = int(0.012 * sr)
+        a[:f] *= np.linspace(0, 1, f)
+        a[-f:] *= np.linspace(1, 0, f)
         n = int(len(a) * SR / sr)
         return np.interp(np.linspace(0, len(a) - 1, n), np.arange(len(a)), a).astype(np.float32)
 
@@ -174,7 +193,9 @@ def main():
     track = np.zeros(int(T['duration'] * SR), np.float32)
     timed = []
     for i, ln in enumerate(T['lines']):
-        slot = ln['deadline'] - ln['start']
+        # a line must finish before the next one begins (the visual beats are fixed), with a breath between
+        nxt = T['lines'][i + 1]['start'] - 0.25 if i + 1 < len(T['lines']) else T['duration'] - 0.45
+        slot = min(ln['deadline'], nxt) - ln['start']
         if voice is None:
             dur, scale = len(ln['text'].split()) / 2.7, None
         else:
