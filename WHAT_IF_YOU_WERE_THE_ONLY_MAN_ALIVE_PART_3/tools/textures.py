@@ -575,33 +575,28 @@ def sig_glyph(d, cx, cy, r, col=SIG, width=10):
     d.ellipse([cx - r * 0.12, cy - r * 0.12, cx + r * 0.12, cy + r * 0.12], fill=(235, 248, 255))
 
 
-def subject_card(d, x, y):
-    """SUBJECT 001: a photo frame (the 3D portrait is laid over it) and data rows. Photo frame: x+40..x+400, y+90..y+540."""
-    d.rectangle([x, y, x + 820, y + 640], fill=(8, 16, 30), outline=(60, 120, 180), width=3)
-    d.text((x + 30, y + 46), 'SUBJECT 001', font=F(BOLD, 52), fill=(255, 255, 255), anchor='lm')
-    d.rectangle([x + 40, y + 90, x + 400, y + 540], outline=(230, 240, 255), width=5)
-    for k, (a, b) in enumerate((('STATUS', 'UNAFFECTED'), ('AGE', '30-35'), ('MATCHES', '0 RECORDS'), ('SCANS', '41'))):
-        d.text((x + 440, y + 140 + k * 92), a, font=F(BOLD, 34), fill=(110, 160, 210), anchor='lm')
-        d.text((x + 440, y + 184 + k * 92), b, font=F(BOLD, 44), fill=(235, 245, 255), anchor='lm')
-
-
 def sig_monitor(pattern):
-    w, h = 1600, 900
+    """The lead scientist's vertical monitor (900 x 1600): SUBJECT 001 on top (photo frame x 70..500, y 170..710 - the 3D
+    portrait is laid over it), and below it the unidentified pattern appearing beside his data."""
+    w, h = 900, 1600
     im = Image.new('RGB', (w, h), (3, 8, 18))
     d = ImageDraw.Draw(im)
-    d.text((40, 50), 'CROSS-REFERENCE  -  DISAPPEARANCE EVENT', font=F(BOLD, 44), fill=(140, 200, 255), anchor='lm')
-    subject_card(d, 40, 120)
+    d.text((40, 60), 'CROSS-REFERENCE', font=F(BOLD, 52), fill=(140, 200, 255), anchor='lm')
+    d.text((40, 116), 'DISAPPEARANCE EVENT  -  SUBJECT 001', font=F(BOLD, 34), fill=(90, 140, 190), anchor='lm')
+    d.rectangle([70, 170, 500, 710], outline=(230, 240, 255), width=6)
+    for k, (a_, b_) in enumerate((('STATUS', 'UNAFFECTED'), ('AGE', '30-35'), ('MATCHES', '0'), ('SCANS', '41'))):
+        d.text((540, 220 + k * 120), a_, font=F(BOLD, 34), fill=(110, 160, 210), anchor='lm')
+        d.text((540, 270 + k * 120), b_, font=F(BOLD, 50), fill=(235, 245, 255), anchor='lm')
     if pattern:
-        d.rectangle([900, 120, 1560, 760], fill=(4, 18, 40), outline=SIG, width=4)
-        d.text((930, 166), 'UNIDENTIFIED PATTERN', font=F(BOLD, 46), fill=SIG, anchor='lm')
-        sig_glyph(d, 1230, 400, 150, width=14)
-        sig_wave(d, 940, 660, 580, 70, width=6, reps=2)
-        d.text((930, 730), 'LINKED TO SUBJECT 001', font=F(BOLD, 36), fill=(255, 200, 80), anchor='lm')
+        d.rectangle([40, 770, 860, 1520], fill=(4, 18, 40), outline=SIG, width=5)
+        d.text((450, 830), 'UNIDENTIFIED PATTERN', font=F(BOLD, 58), fill=SIG, anchor='mm')
+        sig_glyph(d, 450, 1100, 200, width=18)
+        sig_wave(d, 90, 1400, 720, 70, width=7, reps=2)
+        d.text((450, 1480), 'LINKED TO SUBJECT 001', font=F(BOLD, 40), fill=(255, 200, 80), anchor='mm')
     else:
-        d.rectangle([900, 120, 1560, 760], fill=(6, 12, 22), outline=(40, 70, 100), width=3)
-        d.text((1230, 440), 'SEARCHING...', font=F(BOLD, 56), fill=(70, 110, 150), anchor='mm')
-    d.text((40, 840), 'FACILITY 7  -  RESTRICTED', font=F(BOLD, 34), fill=(90, 130, 170), anchor='lm')
-    save(scan(glow(im, 12, 0.5 if pattern else 0.3), 0.1), 'sigmon_b' if pattern else 'sigmon_a')
+        d.rectangle([40, 770, 860, 1520], fill=(6, 12, 22), outline=(40, 70, 100), width=3)
+        d.text((450, 1140), 'SEARCHING...', font=F(BOLD, 64), fill=(70, 110, 150), anchor='mm')
+    save(scan(glow(im, 12, 0.6 if pattern else 0.3), 0.1), 'sigmon_b' if pattern else 'sigmon_a')
 
 
 def timeline3():
@@ -696,22 +691,36 @@ def source(reversed_=False):
 
 
 def symbol_screen():
-    """The Part 2 symbol on a lab monitor, now beside the signal's mark."""
-    w, h = 1600, 900
+    """The Part 2 symbol on the vertical monitor, now beside the signal's mark (900 x 1600)."""
+    w, h = 900, 1600
     im = Image.new('RGB', (w, h), (4, 3, 10))
     d = ImageDraw.Draw(im)
     VIO = (190, 120, 255)
-    cx, cy = 520, 450
+    cx, cy = 450, 520
     d.arc([cx - 300, cy - 300, cx + 300, cy + 300], -60, 240, fill=VIO, width=20)
     d.line([(cx, cy - 380), (cx, cy + 370)], fill=VIO, width=16)
     d.polygon([(cx - 95, cy - 55), (cx + 95, cy - 55), (cx, cy + 95)], outline=VIO, width=13)
     for k in range(3):
         y = cy + 160 + k * 56
         d.ellipse([cx + 120 - 20, y - 20, cx + 120 + 20, y + 20], fill=(240, 220, 255))
-    sig_glyph(d, 1180, 330, 170, width=14)
-    d.text((1180, 600), 'PATTERN MATCH', font=F(BOLD, 60), fill=(255, 255, 255), anchor='mm')
-    d.text((1180, 690), '100%', font=F(BOLD, 110), fill=(255, 200, 80), anchor='mm')
+    sig_glyph(d, 450, 1130, 170, width=14)
+    d.text((450, 1380), 'PATTERN MATCH', font=F(BOLD, 64), fill=(255, 255, 255), anchor='mm')
+    d.text((450, 1490), '100%', font=F(BOLD, 110), fill=(255, 200, 80), anchor='mm')
     save(glow(glow(im, 26, 0.7), 8, 0.4), 'symbol2')
+
+
+def sig_strip():
+    """The signal's signature as a 1-D strip (3 short pulses + 1 long, then a gap) for the beam shader."""
+    w = 1024
+    a = np.zeros(w)
+    u = w / 10.0
+    x = np.arange(w)
+    for k in range(3):
+        a += np.exp(-((x - (0.6 + k * 1.3) * u) / (0.18 * u)) ** 2)
+    c0, c1 = 4.8 * u, 7.0 * u
+    a += np.clip(np.minimum((x - c0) / (0.25 * u), (c1 - x) / (0.25 * u)), 0, 1)
+    img = np.repeat((np.clip(a, 0, 1) * 255).astype(np.uint8)[None, :], 4, axis=0)
+    save(Image.fromarray(img, 'L'), 'sigstrip')
 
 
 def main():
@@ -738,6 +747,7 @@ def main():
     sigmap()
     source()
     symbol_screen()
+    sig_strip()
     if not os.path.exists(os.path.join(OUT, 'portrait.png')):
         placeholder('portrait', 480, 600, '?')
     print('textures ->', OUT)
