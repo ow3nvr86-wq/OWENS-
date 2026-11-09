@@ -732,8 +732,8 @@ def build():
     # --- the end: the fold, a resolving chord, fade
     place(sfx, whoosh(1.6, 44, 3000, 200, up=False), E['fold'], 0.18)
     for j, f in enumerate((146.83, 220.0, 293.66, 440.0)):
-        place(mus, reverb(np.pad(piano(f, 3.5, 70 + j), (0, SR)), 3.0, 80 + j, mix=0.5), 28.1 + j * 0.06, 0.12)
-    cue(28.1, 'The question: a resolving piano chord over the pad; fade to silence', 'music')
+        place(mus, reverb(np.pad(piano(f, 3.5, 70 + j), (0, SR)), 3.0, 80 + j, mix=0.5), 29.05 + j * 0.06, 0.12)
+    cue(29.05, 'The question: a resolving piano chord over the pad; fade to silence', 'music')
     fade = env(t_all, [(0, 1), (DUR - 1.0, 1), (DUR, 0)])
     out = (mus * 0.9 + amb * 0.8 + sfx * 0.9) * fade[None, :]
     return out, mus, amb, sfx
@@ -792,7 +792,7 @@ def write_sound_design():
          'drops away in orbit, tightens for the AI section and resolves on a piano chord. Effects follow the camera:',
          'interface blips, payment chimes, an electric whoosh, ignition, the landing burn, data ticks.',
          'Mix: music and ambience are ducked about 7 dB under the narration; both mixes are normalised to -14 LUFS (true peak -1.5 dB).',
-        '', 'NARRATION (Kokoro-82M, voice bm_george)']
+        '', 'NARRATION (Kokoro-82M, voice am_michael)']
     for ln in vo:
         L.append(f'  {ln["start"]:6.2f} - {ln["end"]:6.2f}  {ln["text"]}')
     L += ['', 'CUES (time in seconds, layer, description)']

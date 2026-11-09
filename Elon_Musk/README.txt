@@ -2,7 +2,9 @@ ELON MUSK: ONE CONTINUOUS JOURNEY
 A 32-second vertical Short in modern 2D motion graphics, made entirely with code: ONE CONTINUOUS SHOT, NO CUTS
 ==============================================================================================================
 
-1080 x 1920 (9:16), 30 fps, 32.0 s, H.264 + AAC, -14 LUFS. Narration: Kokoro bm_george, every line at his natural pace.
+1080 x 1920 (9:16), 30 fps, 32.0 s, H.264 + AAC, -14 LUFS. Narration: Kokoro am_michael (a
+modern, young American male voice), every line at his natural pace; captions and the hook icons are timed from
+the speech onsets measured in the narration audio (tools/voiceover.py writes them into scene_timing.json).
 
 HOW THE ONE SHOT IS BUILT (src/journey.py)
 - The timeline has a single entry; render.py makes no transitions between clips.

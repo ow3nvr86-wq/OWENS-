@@ -193,8 +193,11 @@ def draw_captions(rgb, t, os_):
         hl = [h.upper() for h in ln.get('hl', [])]
         cs = ln['chunks']
         nxt = min([l2['start'] for l2 in _VO if l2['start'] > ln['start']] or [1e9])
+        cut = next((l2.get('nocap_after') for l2 in TIMING['lines'] if l2['text'] == ln['text']), None)
         for i, c in enumerate(cs):
             a = c['start']
+            if cut is not None and a >= cut:
+                continue
             b = cs[i + 1]['start'] if i + 1 < len(cs) else min(c['end'] + 0.35, nxt - 0.02)
             if not (a <= t < b):
                 continue

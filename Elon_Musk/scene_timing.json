@@ -73,7 +73,7 @@
   {
    "scene": 1,
    "start": 0.05,
-   "deadline": 7.05,
+   "deadline": 6.05,
    "text": "Rockets. Electric cars. Satellites. AI. One man is behind them all.",
    "tts": "Rockets. Electric cars. Satellites. AI. One man is behind them all.",
    "hl": [
@@ -86,7 +86,7 @@
   {
    "scene": 2,
    "start": 4.9,
-   "deadline": 11.9,
+   "deadline": 10.9,
    "text": "Elon Musk's big break was PayPal, sold to eBay for $1.5 billion.",
    "tts": "Elon Musk's big break was PayPal, sold to eBay for one point five billion dollars.",
    "hl": [
@@ -98,7 +98,7 @@
   {
    "scene": 3,
    "start": 10.38,
-   "deadline": 17.380000000000003,
+   "deadline": 16.380000000000003,
    "text": "He bet that fortune on Tesla, and helped make electric cars mainstream.",
    "tts": "He bet that fortune on Tesla, and helped make electric cars mainstream.",
    "hl": [
@@ -108,7 +108,7 @@
   {
    "scene": 4,
    "start": 14.94,
-   "deadline": 21.939999999999998,
+   "deadline": 20.939999999999998,
    "text": "At SpaceX, rockets learned to land and fly again.",
    "tts": "At SpaceX, rockets learned to land, and fly again.",
    "hl": [
@@ -119,7 +119,7 @@
   {
    "scene": 5,
    "start": 18.21,
-   "deadline": 25.21,
+   "deadline": 24.21,
    "text": "Over 10,000 Starlink satellites now circle the Earth.",
    "tts": "Over ten thousand Starlink satellites now circle the Earth.",
    "hl": [
@@ -128,8 +128,8 @@
   },
   {
    "scene": 6,
-   "start": 21.95,
-   "deadline": 28.95,
+   "start": 21.85,
+   "deadline": 27.85,
    "text": "Now he's racing into AI, while his takeover of Twitter and his politics make him deeply divisive.",
    "tts": "Now he's racing into AI, while his takeover of Twitter and his politics make him deeply divisive.",
    "hl": [
@@ -139,15 +139,16 @@
   },
   {
    "scene": 7,
-   "start": 28.03,
-   "deadline": 35.03,
-   "text": "So how much of the future can one person shape?",
-   "tts": "So how much of the future can one person shape?",
+   "start": 27.45,
+   "deadline": 33.45,
+   "text": "The world's richest person. So how much of the future can one person shape?",
+   "tts": "The world's richest person. So how much of the future can one person shape?",
    "hl": [
+    "RICHEST",
     "ONE",
     "PERSON"
    ],
-   "nocap": true
+   "nocap_after": 29.073999999999998
   }
  ],
  "titles": [
@@ -222,19 +223,26 @@
    "y": 0.15
   },
   {
-   "start": 28.2,
+   "start": 29.08,
    "end": 31.4,
    "style": "endline",
    "text": "HOW MUCH OF THE FUTURE|CAN ONE PERSON SHAPE?",
    "y": 0.2
+  },
+  {
+   "start": 27.55,
+   "end": 29.034,
+   "style": "kicker",
+   "text": "THE WORLD'S RICHEST PERSON  /  FORBES 2026",
+   "y": 0.15
   }
  ],
  "events": {
   "hook": [
    0.05,
-   0.79,
-   1.78,
-   2.65
+   0.772,
+   1.501,
+   2.383
   ],
   "unspool": 4.6,
   "lanes": 9.3,
@@ -246,6 +254,7 @@
   "orbit": 18.6,
   "push": 21.55,
   "split": 24.0,
-  "fold": 27.55
+  "fold": 27.55,
+  "one_man": 3.103
  }
 }

@@ -20,7 +20,7 @@ import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SR = 48000
-BASE_SCALE = 0.87   # George at 1.15x: serious, measured and unhurried
+BASE_SCALE = 0.84   # Michael at 1.19x: a brisk, modern read
 MIN_SCALE = 0.84
 
 HOOKS = [
@@ -126,6 +126,24 @@ def weight(s):
     return len(s) + 6 * len(re.findall(r'[,:;]', s)) + 9 * len(re.findall(r'[.?!]', s)) + 10 * s.count('...')
 
 
+def onsets(a, sr=SR, thr=0.004, min_gap=0.06):
+    """Times (s) where speech resumes after a pause, found from the audio's energy."""
+    e = np.convolve(np.abs(a), np.ones(int(0.01 * sr)) / (0.01 * sr), 'same')
+    q = e < thr
+    out, i = [], 0
+    while i < len(q):
+        if q[i]:
+            j = i
+            while j < len(q) and q[j]:
+                j += 1
+            if i > 0 and j < len(q) and (j - i) / sr >= min_gap:
+                out.append(j / sr)
+            i = j
+        else:
+            i += 1
+    return np.array(out)
+
+
 def srt_time(t):
     ms = int(round(t * 1000))
     h, ms = divmod(ms, 3600000)
@@ -144,7 +162,7 @@ def write_wav(path, a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--kokoro-voice', default='bm_george')
+    ap.add_argument('--kokoro-voice', default='am_michael')
     ap.add_argument('--kokoro-dir', default=os.environ.get('KOKORO_DIR', '/opt/shorts/kokoro'))
     ap.add_argument('--no-tts', action='store_true')
     args = ap.parse_args()
@@ -175,6 +193,14 @@ def main():
         cs = chunks(ln['text'])
         ws = np.array([weight(c) for c in cs], float)
         edges = ln['start'] + np.concatenate([[0], np.cumsum(ws)]) / ws.sum() * dur
+        if voice is not None:
+            ons = onsets(a) + ln['start']
+            for k in range(1, len(cs)):
+                if re.search(r'[.,:;?!]$', cs[k - 1]) and len(ons):
+                    j = int(np.argmin(np.abs(ons - edges[k])))
+                    if abs(ons[j] - edges[k]) < 0.3:
+                        edges[k] = ons[j]
+            edges[1:-1] = np.maximum.accumulate(edges[1:-1])
         timed.append({'scene': ln['scene'], 'text': ln['text'], 'start': round(ln['start'], 3),
                       'end': round(end, 3), 'length_scale': scale, 'hl': ln.get('hl', []),
                       'chunks': [{'text': c, 'start': round(edges[k], 3), 'end': round(edges[k + 1], 3)}
@@ -186,6 +212,16 @@ def main():
         write_wav(os.path.join(ROOT, 'audio', 'narration.wav'), track)
     with open(os.path.join(ROOT, 'build', 'vo_timing.json'), 'w') as fh:
         json.dump({'voice': voice_name, 'lines': timed}, fh, indent=1)
+    if voice is not None:
+        # the hook: the onset of each listed word in the first line (Rockets / Electric cars / Satellites / AI)
+        a0 = np.frombuffer(wave.open(os.path.join(ROOT, 'build', 'vo_00.wav')).readframes(10 ** 9), np.int16).astype(np.float32) / 32768
+        on0 = onsets(a0) + T['lines'][0]['start']
+        est = [c['start'] for c in timed[0]['chunks'][1:4]]
+        hook = [T['lines'][0]['start']] + [float(on0[int(np.argmin(np.abs(on0 - e)))]) for e in est]
+        T['events']['hook'] = [round(x, 3) for x in hook]
+        with open(os.path.join(ROOT, 'scene_timing.json'), 'w') as fh:
+            json.dump(T, fh, indent=1)
+        print('hook onsets', T['events']['hook'])
 
     with open(os.path.join(ROOT, 'subtitles.srt'), 'w') as fh:
         n = 1

@@ -7,14 +7,14 @@ drops away in orbit, tightens for the AI section and resolves on a piano chord. 
 interface blips, payment chimes, an electric whoosh, ignition, the landing burn, data ticks.
 Mix: music and ambience are ducked about 7 dB under the narration; both mixes are normalised to -14 LUFS (true peak -1.5 dB).
 
-NARRATION (Kokoro-82M, voice bm_george)
-    0.05 -   4.68  Rockets. Electric cars. Satellites. AI. One man is behind them all.
-    4.90 -  10.16  Elon Musk's big break was PayPal, sold to eBay for $1.5 billion.
-   10.38 -  14.72  He bet that fortune on Tesla, and helped make electric cars mainstream.
-   14.94 -  17.99  At SpaceX, rockets learned to land and fly again.
-   18.21 -  21.73  Over 10,000 Starlink satellites now circle the Earth.
-   21.95 -  27.78  Now he's racing into AI, while his takeover of Twitter and his politics make him deeply divisive.
-   28.03 -  30.89  So how much of the future can one person shape?
+NARRATION (Kokoro-82M, voice am_michael)
+    0.05 -   4.50  Rockets. Electric cars. Satellites. AI. One man is behind them all.
+    4.90 -  10.02  Elon Musk's big break was PayPal, sold to eBay for $1.5 billion.
+   10.38 -  14.35  He bet that fortune on Tesla, and helped make electric cars mainstream.
+   14.94 -  17.78  At SpaceX, rockets learned to land and fly again.
+   18.21 -  21.36  Over 10,000 Starlink satellites now circle the Earth.
+   21.85 -  27.31  Now he's racing into AI, while his takeover of Twitter and his politics make him deeply divisive.
+   27.45 -  31.38  The world's richest person. So how much of the future can one person shape?
 
 CUES (time in seconds, layer, description)
     0.00  music     Score: a modern pad in D minor with a sub-bass pulse; it builds to the launch, hushes in orbit, tightens for the AI section, resolves at the end
@@ -27,7 +27,7 @@ CUES (time in seconds, layer, description)
    16.90  sfx       Stage separation; the booster's landing burn and touchdown
    18.60  music     Orbit: the beat drops away; a hush and faint satellite pings
    24.00  music     The network splits: a low drone and an uneasy tone
-   28.10  music     The question: a resolving piano chord over the pad; fade to silence
+   29.05  music     The question: a resolving piano chord over the pad; fade to silence
 
 SUGGESTED ASSETS FOR A RE-SCORE (licence-free options)
   - Music: a solo piano or string piece of your own, or a CC0 recording.

@@ -14,6 +14,10 @@ ELON MUSK: ONE CONTINUOUS JOURNEY - RESEARCH AND SOURCES
 [XAI]    xAI, "xAI joins SpaceX". https://x.ai/news/xai-joins-spacex
 [FORBES] Forbes, 4 Nov 2026, on Musk's spending in the 2026 US elections (context for "his politics").
          https://www.forbes.com/sites/maryroeloffs/2026/11/04/did-musk-delete-his-vote-red-today-post-grok-says-yes-after-major-republican-losses/
+[RICH1]  Forbes 2026 World's Billionaires List (March 2026): Musk first, about $839 billion, as reported by
+         The Express Tribune, 13 Apr 2026. https://tribune.com.pk/story/2596877/elon-musk-worth-839b-in-new-forbes-list
+[RICH2]  Forbes 400 (Sept 2026): Musk first for the fifth year, about $908 billion, as reported by WOWT, 19 Sep 2026.
+         https://www.wowt.com/2026/09/19/elon-musk-jeff-bezos-among-richest-americans-forbes-2026-list-heres-how-much-theyre-worth/
 
 2. FACTS USED
 -------------
@@ -27,6 +31,8 @@ ELON MUSK: ONE CONTINUOUS JOURNEY - RESEARCH AND SOURCES
 - Nov 2026: about 11,200 Starlink satellites in orbit ("over 10,000"). [KT, AZ]
 - 2022: bought Twitter for about $44 billion; renamed X in 2023. [BIZ, TIME]
 - 2023: founded xAI; SpaceX acquired xAI in Feb 2026. [CNBC, XAI]
+- 2026: the world's richest person on Forbes' lists (about $839B in March 2026; about $908B in Sept 2026). No
+  figure is narrated because the number moves daily. [RICH1, RICH2]
 - His politics (including his role in the US government in 2025 and spending in US elections) and his ownership of
   X have drawn strong support and strong criticism. [FORBES, BIZ]
 
@@ -44,6 +50,7 @@ ELON MUSK: ONE CONTINUOUS JOURNEY - RESEARCH AND SOURCES
 "Now he's racing into AI, while his takeover of Twitter and his politics make him deeply divisive."  xAI 2023 [CNBC];
     Twitter 2022 [BIZ]; the division of opinion is shown as a network splitting in two, not as a verdict. On screen:
     xAI / founded 2023; Twitter / bought 2022 for $44B / now X.
+"The world's richest person."  Forbes 2026 lists [RICH1, RICH2]. On screen: THE WORLD'S RICHEST PERSON / FORBES 2026.
 "So how much of the future can one person shape?"  A question, not a claim.
 
 4. FAIRNESS AND RECONSTRUCTION

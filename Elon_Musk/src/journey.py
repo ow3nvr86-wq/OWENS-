@@ -16,7 +16,7 @@ import math
 import cairo
 import numpy as np
 
-from core import W, H, Camera, keys, smooth, smoother, ease_out, ease_in, clamp, ramp, lerp, hash01, vnoise
+from core import W, H, EV, Camera, keys, smooth, smoother, ease_out, ease_in, clamp, ramp, lerp, hash01, vnoise
 import gfx as G
 from gfx import C, mixc
 from portrait import portrait_duotone
@@ -27,7 +27,7 @@ RED = (0.88, 0.30, 0.30, 1.0)
 HEAD = (0.0, -110.0)                  # the face centre in space A
 RING_R = 430.0
 
-HOOK = [0.05, 0.79, 1.78, 2.65]       # 'Rockets.', 'Electric cars.', 'Satellites.', 'AI.'
+HOOK = EV.get('hook', [0.05, 0.79, 1.78, 2.65])   # onsets of 'Rockets.', 'Electric cars.', 'Satellites.', 'AI.' in the narration
 T_UNSPOOL, T_LANES, T_CAR = 4.6, 9.3, 10.25
 T_DIVE, T_SWAP = 14.25, 14.95         # the dive into the headlight; the hand-over to the launch
 T_LIFT, T_SEP, T_LAND, T_CLIMB = 15.05, 16.25, 17.45, 17.7
@@ -224,7 +224,7 @@ def draw_ring(c, t):
         c.stroke()
         icon(c, kind, px, py, 34 * kk * pop, C['white'], a)
     # 'One man is behind them all': lines from every icon converge on him
-    km = smooth(ramp(t, 2.95, 3.6)) * a
+    km = smooth(ramp(t, EV.get('one_man', 3.1), EV.get('one_man', 3.1) + 0.6)) * a
     if km > 0:
         for i in range(4):
             ang = math.radians(-135 + 90 * i)
