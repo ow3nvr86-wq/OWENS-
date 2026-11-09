@@ -30,3 +30,10 @@ What makes them less robotic:
 - Every file was transcribed with Whisper and matches the script word for word.
 
 Tools: tools/make_refs.py, tools/chatterbox_read.py, tools/kokoro_natural.py, tools/voice_common.py
+
+UPBEAT VERSIONS OF VOICE 5 (asked for: voice 5, more upbeat and enthusiastic)
+05b gravel_upbeat           Chatterbox, energetic am_fenrir reference, exaggeration 0.85, read from
+                            script_read_upbeat.txt (same words, exclamation marks). 26.5 s. Word check: exact.
+05c gravel_extra_upbeat     same, exaggeration 1.05, seed 11. 26.8 s. Word check: "The plan" comes out close to
+                            "Plan" (the "the" is swallowed or very quick). The first seed ad-libbed "oh"/"yeah",
+                            so it was regenerated.

@@ -30,7 +30,7 @@ for name, ref, ex, cfg, *rest in CONFIG:
     if only and not any(o in name for o in only):
         continue
     t0 = time.time()
-    torch.manual_seed(7)
+    torch.manual_seed(int(os.environ.get('SEED', 7)))
     m.prepare_conditionals(os.path.join(R, ref + '.wav'), exaggeration=ex) if ref else None
     parts = [np.zeros(2400, np.float32)]
     for i, line in enumerate(lines):
