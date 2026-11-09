@@ -1,0 +1,262 @@
+{
+ "fps": 30,
+ "duration": 30.0,
+ "render_end": 28.6,
+ "scenes": [
+  {
+   "id": 1,
+   "name": "THE DISCOVERY",
+   "start": 0.0,
+   "end": 4.0,
+   "desc": "Frame 1 is the payoff of the opening: a monitor filling the frame - his photo (SUBJECT 001) and, beside it, a glowing blue signal pattern pulsing into existence. Then an extreme close-up of the lead scientist's eyes lit by the screen, and she slowly turns to look at him across the dark lab.",
+   "actions": "The lead scientist from Part 2 stares, then turns her head slowly toward him. He stands in the background.",
+   "lighting": "Dark blue lab; the monitor's white-blue light on her face.",
+   "sfx": "A dramatic impact on frame 1, interface blips, a deep electronic pulse that repeats like a heartbeat.",
+   "edit": "No build-up. PART 3 and THEY FOUND SOMETHING. on screen from frame 1.",
+   "shots": [
+    {
+     "name": "monitor",
+     "start": 0.0,
+     "end": 1.4,
+     "camera": "extreme close-up push across the monitor: his photo, then the signal pattern"
+    },
+    {
+     "name": "eyes",
+     "start": 1.4,
+     "end": 2.6,
+     "camera": "extreme close-up of her eyes with the screen reflected; slow push"
+    },
+    {
+     "name": "look",
+     "start": 2.6,
+     "end": 4.0,
+     "camera": "over her shoulder as she turns; focus pulls from her to him"
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "THE TIMELINE",
+   "start": 4.0,
+   "end": 10.0,
+   "desc": "A massive holographic timeline unrolls across the whole lab, 40 metres long. The male population line drops to zero at one instant - and at exactly that instant a bright blue SIGNAL spike flashes. Scientists compare the two traces on their consoles.",
+   "actions": "Scientists walk along the timeline; the lead scientist lays the signal trace over the population trace.",
+   "lighting": "Bright white and cyan display light in the dark blue hall.",
+   "sfx": "Interface swipes, data chatter, a rising pulse; a bright tone on the signal spike.",
+   "edit": "Key caption: THE SAME EXACT MOMENT.",
+   "shots": [
+    {
+     "name": "timeline",
+     "start": 4.0,
+     "end": 6.5,
+     "camera": "low wide tracking along the floating timeline"
+    },
+    {
+     "name": "spike",
+     "start": 6.5,
+     "end": 8.3,
+     "camera": "fast push into the moment: population drop and signal spike line up"
+    },
+    {
+     "name": "compare",
+     "start": 8.3,
+     "end": 10.0,
+     "camera": "slow push past two scientists at a console comparing the traces"
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "name": "THE SIGNAL",
+   "start": 10.0,
+   "end": 17.0,
+   "desc": "A satellite view of Earth. A pulse of blue light arrives from deep space; the view pulls out from Earth past the Moon into the stars, following the pulses back along their path. In the lab, the scientists watch the signal pulse across the giant display in disbelief.",
+   "actions": "Scientists freeze; one covers her mouth; the lead scientist steps closer to the display.",
+   "lighting": "Deep black space, the blue signal; in the lab, the display's blue light on their faces.",
+   "sfx": "Deep electronic pulses, satellite communication chirps, rising cinematic music.",
+   "edit": "Key caption: A SIGNAL FROM SPACE.",
+   "shots": [
+    {
+     "name": "earth",
+     "start": 10.0,
+     "end": 12.2,
+     "camera": "slow drift over the satellite view of Earth as the first pulse arrives"
+    },
+    {
+     "name": "deepspace",
+     "start": 12.2,
+     "end": 14.8,
+     "camera": "pull-out from Earth into the stars along the signal path"
+    },
+    {
+     "name": "watch",
+     "start": 14.8,
+     "end": 17.0,
+     "camera": "slow push across the scientists watching the giant display"
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "name": "THE TWIST",
+   "start": 17.0,
+   "end": 24.0,
+   "desc": "The signal stops - and reverses: now it streams out FROM Earth. The view dives after it, back to Earth, through the atmosphere, down over the city to the facility roof where a column of blue light shoots into the sky, and down through the hall onto him: rings of blue light pulse out across the floor from where he stands. The scientists turn toward him. The monitors read THE SIGNAL IS COMING FROM YOU.",
+   "actions": "He looks down at the rings, then up; the scientists turn, one by one.",
+   "lighting": "The blue signal everywhere; the hall lights dip.",
+   "sfx": "The signal reversing (a tape-stop and a rising tone), a whoosh through the atmosphere, a deep bass hit when the view arrives at him.",
+   "edit": "One continuous dive cut together with fast zoom transitions. Key caption: IT CHANGED DIRECTION.",
+   "shots": [
+    {
+     "name": "reverse",
+     "start": 17.0,
+     "end": 18.7,
+     "camera": "wide in space: the pulses stop, then stream out from Earth"
+    },
+    {
+     "name": "dive",
+     "start": 18.7,
+     "end": 20.0,
+     "camera": "fast dive from space to the point on Earth where the signal rises"
+    },
+    {
+     "name": "city",
+     "start": 20.0,
+     "end": 21.3,
+     "camera": "vertical dive over the city to the facility roof and its column of light"
+    },
+    {
+     "name": "inside",
+     "start": 21.3,
+     "end": 22.8,
+     "camera": "straight down from the hall ceiling onto him, rings pulsing out from him"
+    },
+    {
+     "name": "turn",
+     "start": 22.8,
+     "end": 24.0,
+     "camera": "past him to the scientists turning toward him; monitors behind them"
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "name": "FINAL PAYOFF",
+   "start": 24.0,
+   "end": 30.0,
+   "desc": "He looks at the lead scientist. A monitor close-up: the mysterious symbol from Part 2 appears beside THE SIGNAL IS COMING FROM YOU. The lights flicker; she steps backward. The camera pushes into his face - blackout.",
+   "actions": "He looks from her to the monitor, confused and afraid; she backs away a step.",
+   "lighting": "Flickering hall lights; the symbol's blue-violet glow; the final push in near darkness.",
+   "sfx": "Lights buzzing and failing, a last deep pulse, a bass impact on \"you\" - then sudden silence.",
+   "edit": "Blackout on the last word; WHAT HAPPENS NEXT? on black. Key caption: IT'S COMING FROM YOU.",
+   "shots": [
+    {
+     "name": "face",
+     "start": 24.0,
+     "end": 25.4,
+     "camera": "close-up of him looking at her"
+    },
+    {
+     "name": "symbol",
+     "start": 25.4,
+     "end": 26.6,
+     "camera": "push into a monitor as the symbol appears"
+    },
+    {
+     "name": "step",
+     "start": 26.6,
+     "end": 27.5,
+     "camera": "medium shot: she steps back under flickering lights"
+    },
+    {
+     "name": "push",
+     "start": 27.5,
+     "end": 30.0,
+     "camera": "push into his face; blackout"
+    }
+   ]
+  }
+ ],
+ "lines": [
+  {
+   "scene": 1,
+   "start": 0.12,
+   "deadline": 3.98,
+   "text": "Scientists just found why you're the only man left... and it isn't on Earth.",
+   "tts": "Scientists just found why you're the only man left... and it isn't on Earth."
+  },
+  {
+   "scene": 2,
+   "start": 4.1,
+   "deadline": 9.95,
+   "text": "After months of testing, they discover something strange. Every other man vanished at the exact same moment.",
+   "tts": "After months of testing, they discover something strange. Every other man vanished at the exact same moment."
+  },
+  {
+   "scene": 3,
+   "start": 10.2,
+   "deadline": 16.9,
+   "text": "Then they find an unexplained signal coming from deep in space. And it matches the exact moment everyone vanished.",
+   "tts": "Then they find an unexplained signal coming from deep in space. And it matches the exact moment everyone vanished."
+  },
+  {
+   "scene": 4,
+   "start": 17.15,
+   "deadline": 23.9,
+   "text": "Suddenly, the signal changes direction. Scientists stare at their screens in complete disbelief.",
+   "tts": "Suddenly, the signal changes direction. Scientists stare at their screens in complete disbelief."
+  },
+  {
+   "scene": 5,
+   "start": 24.3,
+   "deadline": 28.45,
+   "text": "Because the signal isn't coming from space anymore... it's coming from you.",
+   "tts": "Because the signal isn't coming from space anymore... it's coming from you."
+  }
+ ],
+ "titles": [
+  {
+   "text": "PART 3",
+   "start": 0.0,
+   "end": 2.45,
+   "style": "part"
+  },
+  {
+   "text": "A HYPOTHETICAL SCENARIO",
+   "start": 0.0,
+   "end": 3.9,
+   "style": "tag"
+  },
+  {
+   "text": "THEY FOUND SOMETHING.",
+   "start": 0.0,
+   "end": 3.9,
+   "style": "hero",
+   "y": 0.7
+  }
+ ],
+ "keys": [
+  {
+   "text": "THE SAME|EXACT MOMENT.",
+   "match": "Every other man vanished at the exact same moment."
+  },
+  {
+   "text": "A SIGNAL|FROM SPACE.",
+   "match": "coming from deep in space."
+  },
+  {
+   "text": "IT CHANGED|DIRECTION.",
+   "match": "Suddenly, the signal changes direction."
+  },
+  {
+   "text": "IT'S COMING|FROM YOU.",
+   "match": "it's coming from you."
+  },
+  {
+   "text": "WHAT HAPPENS|NEXT?",
+   "start": 28.75,
+   "end": 30.0
+  }
+ ],
+ "events": {}
+}
