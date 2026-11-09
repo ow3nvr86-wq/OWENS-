@@ -1,0 +1,27 @@
+<!doctype html><html><head><meta charset="utf-8"><style>body{margin:0;background:#88a}</style></head><body>
+<canvas id="c" width="3000" height="2000"></canvas>
+<script type="module">
+import { drawHuman, drawEmu } from './cast.js';
+const c = document.getElementById('c'), g = c.getContext('2d');
+g.fillStyle = '#d9c9a0'; g.fillRect(0, 0, 3000, 2000);
+const cells = [
+  ['h', 'soldier', { face: 'shock', armR: 'grip', armL: 'flail' }],
+  ['h', 'soldier2', { face: 'squint', armR: 'grip', soot: true }],
+  ['h', 'major', { face: 'determined', armR: 'point' }],
+  ['h', 'major', { face: 'smug', armR: 'pencil', armL: 'notepad', prop: 'pencil', legs: 'sit' }],
+  ['h', 'farmer', { face: 'angry', armR: 'fist', f: 3 }],
+  ['h', 'farmer', { face: 'sad', armR: 'letter', prop: 'letter' }],
+  ['e', null, { face: 'smug' }],
+  ['e', null, { run: 0.25, face: 'alarm' }],
+  ['e', null, { run: 0.75 }],
+  ['e', null, { peck: 1 }],
+  ['e', null, { face: 'smug', chew: true, f: 2, hat: true, wheat: true, look: 1 }],
+  ['h', 'soldier', { face: 'happy', armR: 'salute', hat: false }],
+];
+cells.forEach(([k, o, p], i) => {
+  g.save(); g.translate((i % 6) * 500, Math.floor(i / 6) * 1000); g.scale(500 / 600, 1);
+  k === 'h' ? drawHuman(g, o, p) : drawEmu(g, p);
+  g.restore();
+});
+window.done = true;
+</script></body></html>

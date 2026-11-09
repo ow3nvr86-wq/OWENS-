@@ -3,3 +3,4 @@ frames/
 stills/
 *.raw.wav
 __pycache__/
+out/*.jpg.tmp

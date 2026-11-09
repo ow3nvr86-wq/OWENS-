@@ -1,0 +1,22 @@
+# The War Lost to Birds - shot plan (1256 frames, 30 fps, 41.87 s, timed to the user's narration)
+
+Word start frames come from Whisper word timestamps snapped to the narration's pauses (work/words.json).
+Every visual reaction lands 0-3 frames before its word.
+
+| # | Frames | Words | Setting | Light | Camera | Cast / action | FX + SFX |
+|---|---|---|---|---|---|---|---|
+| 1 | 0-127 | "A soldier is chasing emus in a truck with a machine gun on the back." | open paddock (chase zone) | day | low tracking alongside the moving truck; frame 0 = gunner mid-bounce behind the Lewis gun, emu sprinting in the foreground; drifts back to show the gun on the back (f98) | gunner (shock, flailing), driver; 6 emus running | engine rumble, rattles, bump thunks, dust puffs |
+| 2 | 128-182 | "The emus are winning." | same, continuous | day | glide forward past the cab to the lead emu, which glances back smugly at f150 | emus pull ahead | whoosh on the glide, comic ting on the glance |
+| 3 | 183-364 | "Western Australia, nineteen thirty-two. Twenty thousand emus are wrecking the wheat farms," | farm gate, wheat field, farmhouse, windmill | day | 6-frame white flash (time jump); close on the gate sign WESTERN AUSTRALIA / 1932, crane up and back over the fence at f262 to reveal the field full of emus | ~30 emus pecking and trampling | flash whoosh, windmill creak, pecks |
+| 4 | 365-490 | "so the farmers, many of them ex-soldiers, ask for machine guns." | at the fence | day | medium on the farmer, push in; at f441 push into the letter he holds up (PLEASE SEND MACHINE GUNS) | farmer angry fist (365), straightens + salute, medals glint (408), holds up letter (438) | ting on medals, paper rustle |
+| 5 | 491-618 | "The army sends a major, two guns, and ten thousand bullets." | dirt road at the gate | day | low wide as the army truck rolls in and stops in dust (f525); glide down the truck past the two Lewis guns (f537) and tilt up the wobbling tower of ammo crates (f565) | major points with his stick; crates wobble | engine, brakes, dust, two tings, crate wobble creak |
+| 6 | 619-705 | "The plan: herd the emus toward the guns." | camp table, top-down map insert | tent | top-down push on the map; arrows draw in from the emu dots to two gun marks (642-698); the major's stick taps the guns | stick taps | pencil scribble, taps |
+| 7 | 706-752 | "They scatter instead." | field edge, gun line | day | high wide; the flock heads for the guns, then bursts outward at f708 | 20 emus; 2 soldiers spin | burst whoosh, kick, scramble |
+| 8 | 753-793 | "One gun jams." | gun line close-up | day | close two-shot gunner + gun; puff at f762 | gunner squint, soot face after the puff | click-click, puff, metallic clunk |
+| 9 | 794-862 | "And the truck? Too bumpy to aim." | chase zone (callback) | day | side tracking; big bump at f819, flip-shake kick | gunner flies up, his hat flies off and tumbles behind | engine, big bump thunk, boing |
+| 10 | 863-989 | "The army pulls out, gets sent back in, and shoots for weeks." | road at the gate, then the gun position | day -> golden -> night -> day | wide: the truck drives off (863); white flash (903) and it races straight back; 938-989 time-lapse orbit at the gun line as the sun and moon sweep and the casings pile grows | soldiers at the guns | engine away/back, flash whoosh, rapid ticking, day/night swells |
+| 11 | 990-1094 | "The major's own tally? About ten bullets per emu." | top of the casings pile | golden | push in on the major on a mountain of brass casings, licking his pencil; at f1028 insert on his notepad, figures written in: ROUNDS 9,860 / EMUS 986 / = ABOUT 10 EACH | major tired, writes | pencil scratch, casings clink, sad trombone-ish bass |
+| 12 | 1095-1207 | "When farmers asked for the army again, the answer was no." | Defence office desk | tent | close on the desk as the farmer's letter (PLEASE SEND THE ARMY AGAIN) slides in; the rubber stamp lifts (1160) and slams NO at f1181 | - | paper slide, stamp thunk + dust puff + kick |
+| 13 | 1208-1255 | "The emus had won." | field at sunset | golden | sting: music stops, low hit; push in with a 4-degree roll on the lead emu wearing the soldier's lost slouch hat, chewing wheat; smug blink on "won" (f1235) | lead emu smug, chewing | low hit, drone, final ting on the blink |
+
+Text on screen is diegetic only (gate sign, letters, crate stencils, map labels, notepad, NO stamp) - no captions.
