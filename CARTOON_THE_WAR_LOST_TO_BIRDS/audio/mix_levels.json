@@ -1,0 +1,8 @@
+{
+ "voice_gated_rms_db": -18.41,
+ "voice_peak_db": -1.59,
+ "music_vs_voice_db": -6.02,
+ "sfx_vs_voice_db": -6.02,
+ "sfx_peak_vs_voice_peak": 0.649,
+ "mix_peak_db": 1.74
+}

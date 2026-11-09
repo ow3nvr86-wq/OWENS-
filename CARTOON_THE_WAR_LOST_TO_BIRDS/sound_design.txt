@@ -1,0 +1,34 @@
+SOUND DESIGN - The War Lost to Birds
+
+Narration: the user's own ElevenLabs recording ("Adam - Radio Announcer"), used unchanged (no edits, no re-timing).
+Music and SFX are synthesised in audio.py (numpy) and timed in frames from the picture.
+
+LEVELS (mix.py, measured)
+  music   = 50 % of the voice's gated RMS (-6.02 dB)
+  SFX     = 50 % of the voice's gated RMS (-6.02 dB), peaks capped at 0.7 x the voice peak (measured 0.65 x)
+  No ducking and no compression. finish.sh applies one linear gain to -14 LUFS and a -1 dBFS peak limiter to the
+  whole mix.
+
+MUSIC
+  A jaunty 116 bpm military march: kick on 1 and 3, snare on 2 and 4, an oom-pah tuba bass, brass chord stabs and a
+  piccolo tune (C major). It sits back a little under the farm set-up (f183-364) and lifts during the weeks-of-shooting
+  montage (f938-989). It stops dead on "The emus had won." (f1208): a low hit, then a soft drone, and a two-note
+  piccolo tag on the emu's smug blink (f1234-1240).
+
+SFX CUES (frame -> sound)
+  0-182      truck engine rumble with rattles; bump thunks at 12, 40, 63, 86, 110, 150
+  126, 180   whooshes on the camera glides; 150 a 'ting' on the emu's smug glance
+  183-364    windmill creaks; pecks from 268; a whoosh on the crane at 258
+  408-412    two tings on the farmer's medals; 436 paper rustle; 438 whoosh into the letter
+  491-530    engine in, brake squeal 518, stop thunk 528; crate tower creaks 532-590; tings on the two guns 537, 543
+  640-690    pencil scribbling the plan; taps 690, 697, 701
+  706-752    burst whoosh and thump, then ~70 fast footsteps as the flock scatters
+  755-766    click, click, smoke puff (762), metallic clunk - the jam
+  794-862    engine again; the big bump 818 with a boing 819; whoosh as the hat flies off 824
+  863-936    engine away (fading), flash whoosh 899, engine back (growing), stop thunk 934
+  940-989    distant rat-a-tat bursts through the time-lapse
+  992-1040   casings clinking; 1030-1078 pencil on the notepad
+  1095       paper slide; 1181 the stamp: a heavy thunk + click + small puff
+  1208       music stops: low hit, drone; 1235 final ting on the blink
+
+Claude cannot listen to audio: the mix was checked by measured levels, loudness and timing only.

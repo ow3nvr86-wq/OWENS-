@@ -1,0 +1,41 @@
+SOURCES AND CLAIM TABLE - The War Lost to Birds (the Emu War, Western Australia, 1932)
+
+Every factual claim in the narration was checked in at least two sources:
+  [W]  Wikipedia, "Emu War" - https://en.wikipedia.org/wiki/Emu_War
+  [B]  Encyclopaedia Britannica, "Emu War" - https://www.britannica.com/topic/Emu-War
+  [MF] Mental Floss, "When Australia went to war with its emus" - https://www.mentalfloss.com/history/when-australia-went-war-its-emus
+  [S]  Sigmalive "On this day" and Silicon Canals summaries (secondary, used only to cross-check)
+
+CONFIRMED (stated as fact in the script)
+  claim in script                                          value used            sources       notes
+  Western Australia, 1932                                  1932, Campion district W, B, MF      operation ran early Nov - 10 Dec 1932
+  about twenty thousand emus wrecking the wheat            ~20,000               W, S, MF      estimates vary ("20,000 upward")
+  farmers, many of them ex-soldiers, asked for guns        soldier settlers      W, B          WWI veterans settled on the land
+  the army sent a major, two guns, ten thousand bullets    Maj. G.P.W. Meredith, W, B          two Lewis guns, 10,000 rounds
+                                                           2 Lewis guns, 10,000
+  plan: herd the emus toward the guns; they scatter        -                     W, B, MF      attempts to drive the birds failed
+  one gun jams                                             -                     W, MF         a gun jammed during an ambush
+  the truck was too bumpy to aim                           gun mounted on truck  W, B, MF      rough ground; gunner couldn't fire
+  the army pulls out, is sent back in                      withdrawn 8 Nov,      W, B
+                                                           resumed 13 Nov
+  shoots for weeks                                         ~5 weeks              W, B
+  the major's own tally: about ten bullets per emu         986 kills claimed     W, B          his own figures; 9,860 rounds / 986
+                                                           with 9,860 rounds                   ~= 10 each (narration says "about")
+  farmers asked for the army again; the answer was no      later requests        W             requests for military help in later
+                                                           refused                             years were turned down
+
+NARRATOR'S VERDICT (opinion, framed as the story's conclusion)
+  "The emus had won." / "The emus are winning."  Britannica and others describe the campaign as a failure / defeat.
+
+ILLUSTRATIVE (shown on screen, not claimed as historical detail)
+  - The cartoon people, the farm, the truck design, the map, the camp, the Defence desk and the casings mountain.
+  - The letters ("PLEASE SEND MACHINE GUNS!", "PLEASE SEND THE ARMY AGAIN!") are invented props standing in for the
+    farmers' real requests; their wording is not a quotation.
+  - The notepad shows the major's claimed figures (9,860 rounds, 986 emus); the drawing itself is illustrative.
+  - The emu wearing the soldier's hat is a joke.
+  - The 'NO' stamp stands in for the government's refusals.
+
+CHECKED BUT CUT
+  - Meredith's famous quotation comparing emus to tanks (left out rather than risk misquoting it).
+  - The 2,500 wounded birds Meredith said later died (a claim, and not needed).
+  - The later bounty system that worked better than the army (would need its own line).
