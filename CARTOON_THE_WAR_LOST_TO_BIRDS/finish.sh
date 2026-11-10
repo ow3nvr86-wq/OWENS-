@@ -7,10 +7,16 @@ TITLE="${1:-The War Lost to Birds}"
 N=$(ls frames/f*.jpg | wc -l)
 mkdir -p out renders
 lufs() { ffmpeg -nostats -i "$1" -af ebur128 -f null - 2>&1 | awk '/Summary/{s=1} s&&/ I:/{print $2; exit}'; }
-master() {   # $1 raw wav -> $2 mastered wav
-  local I G; I=$(lufs "$1"); G=$(python3 -c "print(round(-14.0 - ($I), 2))")
-  echo "  $1: $I LUFS -> gain $G dB"
-  ffmpeg -v error -y -i "$1" -af "volume=${G}dB,alimiter=limit=0.891:attack=3:release=60:level=false" -ar 48000 -c:a pcm_s24le "$2"
+master() {   # $1 raw wav -> $2 mastered wav: one linear gain + a -3 dBFS peak limiter (headroom for AAC overshoot);
+  local I G I2 k                                                # the gain is refined until the limited mix sits on -14 LUFS
+  I=$(lufs "$1"); G=$(python3 -c "print(round(-14.0 - ($I), 2))")
+  for k in 1 2 3 4; do
+    ffmpeg -v error -y -i "$1" -af "volume=${G}dB,alimiter=limit=0.708:attack=3:release=60:level=false" -ar 48000 -c:a pcm_s24le "$2"
+    I2=$(lufs "$2")
+    python3 -c "import sys; sys.exit(0 if abs(-14.0 - ($I2)) <= 0.1 else 1)" && break
+    G=$(python3 -c "print(round($G + (-14.0 - ($I2)) * 1.15, 2))")
+  done
+  echo "  $1: $I LUFS -> gain $G dB -> $I2 LUFS"
 }
 encode() {   # $1 audio -> $2 mp4
   ffmpeg -v error -y -framerate 30 -i frames/f%04d.jpg -i "$1" -map 0:v -map 1:a -frames:v "$N" \
