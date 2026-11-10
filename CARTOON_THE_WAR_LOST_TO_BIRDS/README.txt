@@ -1,8 +1,8 @@
 THE WAR LOST TO BIRDS - a code-made cartoon Short (Emu War, Western Australia, 1932)
 
-final_video.mp4                 1080x1920, 30 fps, 1256 frames, 41.87 s, H.264 CRF 17 + AAC 192k, 42 MB,
+final_video.mp4                 1080x1920, 30 fps, 1256 frames, 41.87 s, H.264 CRF 17 + AAC 192k, 43 MB, captions burned in,
                                 -14.2 LUFS integrated, true peak -1.4 dBFS
-renders/final_video_no_voice.mp4  the same cut with music and SFX only (-14.2 LUFS, peak -0.3 dBFS)
+renders/final_video_no_voice.mp4  the same cut with music and SFX only, no captions (-14.2 LUFS, peak -0.3 dBFS)
 QA: no frozen spans >= 0.4 s, no black frames (ffmpeg freezedetect / blackdetect); out/qa_sheet.jpg
 
 HOW IT WAS MADE (cartoon-audio-short skill; the skill's kit was not supplied, so the engine was written for this video)
@@ -34,7 +34,7 @@ RUN IT
 RENDER TIMES (4 CPU cores, no GPU)
   look-dev stills (about 90 frames over 6 passes)   ~4 min of rendering
   full render, 1256 frames at 1080x1920              2634 s = 44 min (0.6-4.8 s a frame)
-  audio stems ~1 s; mix ~10 s; finish (mastering, two encodes, QA) ~2.5 min
+  audio stems ~1 s; mix ~10 s; captions ~1.3 min; finish (mastering, two encodes, QA) ~2.5 min
 
 AUDIO LEVELS (mix.py, measured)
   music -6.02 dB vs the voice's gated RMS (50 %); SFX -6.02 dB (50 %), SFX peak 0.65 x the voice peak.
@@ -43,8 +43,16 @@ AUDIO LEVELS (mix.py, measured)
 
 HONESTY
   Facts are in sources.txt (each checked in 2+ sources). The farm, people, letters, map, desk and the emu in the hat
-  are illustrative; the notepad shows the major's own claimed figures (9,860 rounds, 986 emus). No captions are burned
-  in (skill default); subtitles.srt is provided for YouTube closed captions.
+  are illustrative; the notepad shows the major's own claimed figures (9,860 rounds, 986 emus).
+
+CAPTIONS (added on request)
+  tools/captions.py burns word-by-word captions onto the rendered frames (build/frames_cap): Anton, uppercase, white with
+  a black outline and soft shadow, the spoken word in amber, max 3 words / 17 characters per chunk (each spoken phrase
+  split into balanced chunks), about 64 % down; 80 % down while a readable prop fills the frame (gate sign, letters,
+  map, notepad, desk). Numbers are shown as digits (1932, 20,000, 2, 10,000, 10). Timing from work/words.json; the
+  chunk list is in work/caption_chunks.json. Check: all 109 caption words match the narration. subtitles.srt is still
+  provided for YouTube closed captions.
+  Re-run:  $SHORTS_PY tools/captions.py && bash finish.sh "The War Lost to Birds"   (~1.5 min + ~2.5 min)
 
 LICENCES
   Code, drawings, textures and synthesised audio: made for this repository. three.js r160: MIT (web/vendor/THREE_LICENSE.txt).

@@ -4,6 +4,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 TITLE="${1:-The War Lost to Birds}"
+CAPS="${CAPS:-build/frames_cap}"          # captioned frames for the main video (tools/captions.py)
 N=$(ls frames/f*.jpg | wc -l)
 mkdir -p out renders
 lufs() { ffmpeg -nostats -i "$1" -af ebur128 -f null - 2>&1 | awk '/Summary/{s=1} s&&/ I:/{print $2; exit}'; }
@@ -18,13 +19,13 @@ master() {   # $1 raw wav -> $2 mastered wav: one linear gain + a -3 dBFS peak l
   done
   echo "  $1: $I LUFS -> gain $G dB -> $I2 LUFS"
 }
-encode() {   # $1 audio -> $2 mp4
-  ffmpeg -v error -y -framerate 30 -i frames/f%04d.jpg -i "$1" -map 0:v -map 1:a -frames:v "$N" \
+encode() {   # $1 audio -> $2 mp4 [$3 frames dir]
+  ffmpeg -v error -y -framerate 30 -i "${3:-frames}/f%04d.jpg" -i "$1" -map 0:v -map 1:a -frames:v "$N" \
     -c:v libx264 -preset slow -crf 17 -maxrate 14M -bufsize 28M -pix_fmt yuv420p -profile:v high -r 30 \
     -c:a aac -b:a 192k -ar 48000 -shortest -movflags +faststart -metadata title="$TITLE" "$2"
 }
 echo "mastering"; master audio/mix_raw.wav audio/mix_final.wav; master audio/bed_raw.wav audio/bed_final.wav
-echo "encoding $N frames"; encode audio/mix_final.wav final_video.mp4; encode audio/bed_final.wav renders/final_video_no_voice.mp4
+echo "encoding $N frames"; if [ -d "$CAPS" ] && [ "$(ls "$CAPS"/f*.jpg | wc -l)" = "$N" ]; then encode audio/mix_final.wav final_video.mp4 "$CAPS"; else encode audio/mix_final.wav final_video.mp4; fi; encode audio/bed_final.wav renders/final_video_no_voice.mp4
 echo "QA"
 for f in final_video.mp4 renders/final_video_no_voice.mp4; do
   echo "== $f  $(du -h "$f" | cut -f1)"
