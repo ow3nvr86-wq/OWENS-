@@ -99,7 +99,7 @@ def main():
     for k in range(len(caps)):
         nxt = caps[k + 1]['start'] if k + 1 < len(caps) else DURATION
         # a word stays up until the next one, or a short beat after it ends at a pause
-        caps[k]['until'] = round(min(nxt, caps[k]['end'] + 0.45), 3)
+        caps[k]['until'] = round(min(nxt, caps[k]['end'] + 0.45, cuts['end'] - 0.02), 3)
     json.dump({'captions': caps}, open(os.path.join(ROOT, 'build', 'vo_timing.json'), 'w'), indent=1)
 
     def srt(t):
