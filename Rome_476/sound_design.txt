@@ -1,0 +1,58 @@
+ROME NEVER FELL IN 476 - SOUND DESIGN TIMELINE
+==============================================
+
+Everything is synthesised in audio.py with numpy: no samples, no recordings, no third-party audio.
+Music: low war drums at 96 BPM over D minor drones, about 20% (-14 dB) under the narration and ducked further
+while he speaks. It builds through the height of power (9-15 s) with a brass fanfare, stays tense through the
+crack and the split, drops almost to silence as the West falls (from about 21.5 s), swells again with an A major
+choir and the counter (from about 25.5 s), and is gone before the loop.
+Every effect is placed on the word it belongs to, from the word timings measured on the narration.
+Both mixes are normalised to -14 LUFS (true peak -1.5 dB).
+
+NARRATION (Kokoro-82M am_michael, speed 1.19x)
+    0.12 -   2.47  You were taught Rome fell in 476.
+    2.65 -   3.46  That's wrong.
+    3.96 -   6.51  At its peak, Rome ruled from Britain to Egypt:
+    6.67 -   9.66  three continents, and maybe one in four people on Earth.
+   10.00 -  14.29  In 117 AD, under Emperor Trajan, it hit its biggest size ever.
+   14.63 -  15.53  Then it cracked.
+   15.99 -  17.00  Civil wars.
+   17.14 -  17.77  Plague.
+   17.91 -  19.58  Invaders on every border.
+   19.80 -  21.08  So Rome split in two.
+   21.48 -  23.64  In 476, the West collapsed.
+   23.80 -  25.16  But the East kept going.
+   25.52 -  28.83  For almost a thousand more years, until 1453.
+   29.17 -  30.77  So when did Rome really fall?
+
+CUES (time in seconds, layer, description)
+    0.00  sfx    Frame one: a low war-drum hit
+    0.00  music  Music: low war drums (frame drum / taiko style) at 96 BPM, about 20% under the narration
+    1.32  sfx    "476": stone stamp
+    2.83  sfx    "wrong": a sharp sword slash, then the stone cracks
+    3.51  sfx    The cracked frame shatters
+    3.71  sfx    Ink whoosh as the empire spreads out from Rome
+    4.86  sfx    Marching feet under the legion icons
+    4.86  sfx    Pop: label ROME
+    5.26  sfx    Pop: label HISPANIA
+    5.54  sfx    Pop: label BRITAIN
+    6.04  sfx    Pop: label EGYPT
+    6.67  sfx    Three soft pops: EUROPE, AFRICA, ASIA
+    8.46  sfx    One in four: a cascade of small bell tings as the figures light up
+    9.63  music  A brass fanfare swells into the hard cut to AD 117
+   10.07  sfx    "117 AD" slams in: deep boom
+   10.27  sfx    A gold shimmer as the roads light up
+   14.99  sfx    "cracked": the map cracks
+   16.30  sfx    "wars": swords clash
+   17.06  sfx    "Plague": an ominous low dissonant drone
+   17.93  sfx    Arrow whooshes, one per arrow, each landing with a thud on a border
+   20.22  sfx    "split": a loud paper rip
+   21.60  sfx    Fire crackle as the West burns
+   21.95  music  The music drops almost to silence: a faint low drone under the fall of the West
+   22.98  sfx    "collapsed": a heavy dramatic hit
+   23.80  music  Hopeful rising tone: an A major choir that swells with the counter
+   24.07  sfx    A golden shimmer as Constantinople rises
+   25.52  sfx    Rapid ticking as the counter spins from 476, slowing as it lands
+   27.66  sfx    "1453": a single deep bell toll
+   28.81  sfx    Ink bleed back to the legionary
+   31.07  music  Silence before the loop (the drum hit on frame one restarts it)

@@ -1,0 +1,50 @@
+ROME NEVER FELL IN 476 - STORYBOARD (9:16, 1080x1920, 30 fps, 32.0 s; times from scene_timing.json)
+=====================================================================================================
+Style: 2D illustrated documentary: aged-parchment maps with engraved water lines and an inked coastline, imperial
+red West (#B3121D), purple and gold East (#5B2A86 / #D4A017), near-black ink (#1A1410), marble and gold accents.
+Captions: word by word, Cinzel Black, centre of the lower third (y = 66%), dates and numbers in gold.
+Safe zones: titles at y >= 300 px, captions at y = 1277 px; nothing important in the top 250 or bottom 400 px.
+
+1. HOOK (0.00-3.71)  "You were taught Rome fell in 476. That's wrong."
+   Extreme close-up of a legionary's eyes under an Imperial Gallic helmet (bronze brow peak, cheek guards),
+   lit by fire, embers drifting; the camera creeps in from frame one (no fade-in). He blinks once.
+   "476": a red '476 AD' stamp slams onto the frame (stone stamp, camera shake).
+   "wrong": two thick red brush strokes slash an X through it (sword slash), his eyes narrow, and the frame cracks
+   like stone from the point of the blow (crack).
+   -> SHATTER: the cracked frame breaks along its cracks and the shards fly at the camera, revealing the map.
+
+2. THE SCALE (3.71-9.83)  "At its peak, Rome ruled from Britain to Egypt: three continents, and maybe one in four
+   people on Earth."
+   A fast pull-back from Rome to the whole Mediterranean (ease in-out) while the empire (AD 117 extent) floods out
+   from Rome like spilled ink (ink whoosh). Labels pop with a bounce on their words: ROME, HISPANIA, BRITAIN, EGYPT.
+   Small legion icons with gold shields march out (marching feet). "three continents": EUROPE / AFRICA / ASIA and the
+   title 3 CONTINENTS. "one in four": the map veils over, a crowd of 40 small figures pops up, and 10 of them,
+   scattered, light up red (bell tings); title ~1 IN 4 PEOPLE ON EARTH.
+   -> HARD CUT.
+
+3. THE HEIGHT OF POWER (9.83-15.91)  "In 117 AD, under Emperor Trajan, it hit its biggest size ever. Then it cracked."
+   The empire at its greatest extent, its border glowing and pulsing; a marble bust of Trajan (his straight fringe of
+   comma-shaped locks) slides in from the left with gold light behind him (brass fanfare). "117 AD / PEAK EXPANSION"
+   slams in gold (deep boom). The Roman road network (real routes) races out from Rome in gold like veins lighting up;
+   the camera pushes in slowly. Trajan slides out; "cracked": a crack tears down the map from top to bottom (crack).
+   -> HARD CUTS, one per phrase:
+
+4. CIVIL WARS (15.91-17.06)  Two legionaries in silhouette against a blood-orange sky lunge in; their swords meet on
+   "wars" in a burst of sparks and a white flash (sword clash, shake).
+5. PLAGUE (17.06-17.83)  Closer on the map: a dark shadow spreads across the empire from the east (low dissonant drone).
+6. INVADERS / THE SPLIT / THE FALL / 1453 (17.83-29.11, one continuous map shot)
+   "Invaders on every border": nine black arrows stab in, one after another, from the north, the east, the south and
+   Caledonia; each lands with a thud and a red ring on the border (arrow whooshes).
+   "So Rome split in two": on "split" the map tears down the middle along the line of 395 (paper rip); the halves pull
+   apart; the West stays red, the East turns purple with a gold border. WEST / EAST. Title "395 AD / THE SPLIT".
+   "In 476, the West collapsed": "476 AD / WESTERN ROME FALLS" (red); the West burns from its edges inward behind a
+   glowing fire front, leaving black ash (fire crackle); "collapsed": heavy hit. The music drops almost to silence.
+   "But the East kept going": the East glows brighter; golden Constantinople rises from the map at the Bosporus
+   (shimmer); title "THE EAST SURVIVES".
+   "For almost a thousand more years, until 1453": the camera moves onto the East; a gold year counter spins from 476
+   and lands on 1453 exactly on the word (rapid ticking, slowing); a single deep bell toll and a gold ring. The
+   purple empire then dissolves in spreading ink holes until only the parchment is left. The music swells and fades.
+   -> INK BLEED.
+7. THE QUESTION (29.11-32.00)  "So when did Rome really fall?"  Back on the legionary's eyes; title
+   "WHEN DID ROME / REALLY FALL?" with a bobbing gold arrow pointing down to the comments. The camera eases back to the
+   exact framing of the opening, so the last frame matches the first and the Short loops. Silence before the loop.

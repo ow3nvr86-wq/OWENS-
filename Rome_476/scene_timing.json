@@ -1,0 +1,243 @@
+{
+ "title": "Rome Never Fell in 476",
+ "duration": 32.0,
+ "scenes": [
+  {
+   "id": 1,
+   "key": "hook",
+   "name": "The hook",
+   "start": 0.0,
+   "end": 3.713
+  },
+  {
+   "id": 2,
+   "key": "scale",
+   "name": "The scale",
+   "start": 3.713,
+   "end": 9.833
+  },
+  {
+   "id": 3,
+   "key": "trajan",
+   "name": "The height of power",
+   "start": 9.833,
+   "end": 15.914
+  },
+  {
+   "id": 4,
+   "key": "clash",
+   "name": "The crack: civil wars",
+   "start": 15.914,
+   "end": 17.06
+  },
+  {
+   "id": 5,
+   "key": "plague",
+   "name": "The crack: plague",
+   "start": 17.06,
+   "end": 17.833
+  },
+  {
+   "id": 6,
+   "key": "divide",
+   "name": "Invaders, the split, the fall of the West, the East to 1453",
+   "start": 17.833,
+   "end": 29.108
+  },
+  {
+   "id": 7,
+   "key": "end",
+   "name": "The question (loops to the opening frame)",
+   "start": 29.108,
+   "end": 32.0
+  }
+ ],
+ "events": {
+  "drum0": 0.0,
+  "stamp": 1.322,
+  "slash": 2.831,
+  "line1_end": 3.463,
+  "peak": 4.2,
+  "rome": 4.86,
+  "hispania": 5.26,
+  "britain": 5.54,
+  "egypt": 6.038,
+  "continents": 6.667,
+  "crowd": 8.04,
+  "quarter": 8.46,
+  "earth": 9.254,
+  "y117": 10.073,
+  "ad": 10.743,
+  "trajan": 12.119,
+  "biggest": 13.137,
+  "ever": 13.78,
+  "cracked": 14.989,
+  "civil": 15.994,
+  "wars": 16.3,
+  "plague": 17.14,
+  "invaders": 17.913,
+  "every": 18.64,
+  "border": 18.98,
+  "so_split": 19.797,
+  "split": 20.22,
+  "two": 20.665,
+  "in476": 21.553,
+  "collapsed": 22.977,
+  "but": 23.799,
+  "east": 24.067,
+  "going": 24.584,
+  "for": 25.519,
+  "thousand": 26.291,
+  "until": 27.202,
+  "y1453": 27.66,
+  "question": 29.168,
+  "when": 29.238,
+  "fall": 30.26,
+  "voice_end": 30.768
+ },
+ "cuts": {
+  "scale": 3.713,
+  "trajan": 9.833,
+  "clash": 15.914,
+  "plague": 17.06,
+  "divide": 17.833,
+  "end": 29.108
+ },
+ "titles": [
+  {
+   "start": 6.717,
+   "end": 7.989999999999999,
+   "style": "gold",
+   "text": "3 CONTINENTS",
+   "y": 0.175
+  },
+  {
+   "start": 8.360000000000001,
+   "end": 9.833,
+   "style": "gold",
+   "text": "~1 IN 4 PEOPLE|ON EARTH",
+   "y": 0.19
+  },
+  {
+   "start": 10.073,
+   "end": 14.33,
+   "style": "slam",
+   "text": "117 AD|PEAK EXPANSION",
+   "y": 0.19
+  },
+  {
+   "start": 20.279999999999998,
+   "end": 21.473000000000003,
+   "style": "slam",
+   "text": "395 AD|THE SPLIT",
+   "y": 0.19
+  },
+  {
+   "start": 21.553,
+   "end": 23.739,
+   "style": "slam_red",
+   "text": "476 AD|WESTERN ROME FALLS",
+   "y": 0.19
+  },
+  {
+   "start": 23.849,
+   "end": 25.468999999999998,
+   "style": "slam_purple",
+   "text": "THE EAST|SURVIVES",
+   "y": 0.19
+  },
+  {
+   "start": 29.247999999999998,
+   "end": 31.55,
+   "style": "question",
+   "text": "WHEN DID ROME|REALLY FALL?",
+   "y": 0.215
+  }
+ ],
+ "lines": [
+  {
+   "scene": null,
+   "text": "You were taught Rome fell in 476.",
+   "start": 0.12,
+   "end": 2.467
+  },
+  {
+   "scene": null,
+   "text": "That's wrong.",
+   "start": 2.647,
+   "end": 3.463
+  },
+  {
+   "scene": null,
+   "text": "At its peak, Rome ruled from Britain to Egypt:",
+   "start": 3.963,
+   "end": 6.507
+  },
+  {
+   "scene": null,
+   "text": "three continents, and maybe one in four people on Earth.",
+   "start": 6.667,
+   "end": 9.663
+  },
+  {
+   "scene": null,
+   "text": "In 117 AD, under Emperor Trajan, it hit its biggest size ever.",
+   "start": 10.003,
+   "end": 14.29
+  },
+  {
+   "scene": null,
+   "text": "Then it cracked.",
+   "start": 14.63,
+   "end": 15.534
+  },
+  {
+   "scene": null,
+   "text": "Civil wars.",
+   "start": 15.994,
+   "end": 17.0
+  },
+  {
+   "scene": null,
+   "text": "Plague.",
+   "start": 17.14,
+   "end": 17.773
+  },
+  {
+   "scene": null,
+   "text": "Invaders on every border.",
+   "start": 17.913,
+   "end": 19.577
+  },
+  {
+   "scene": null,
+   "text": "So Rome split in two.",
+   "start": 19.797,
+   "end": 21.083
+  },
+  {
+   "scene": null,
+   "text": "In 476, the West collapsed.",
+   "start": 21.483,
+   "end": 23.639
+  },
+  {
+   "scene": null,
+   "text": "But the East kept going.",
+   "start": 23.799,
+   "end": 25.159
+  },
+  {
+   "scene": null,
+   "text": "For almost a thousand more years, until 1453.",
+   "start": 25.519,
+   "end": 28.828
+  },
+  {
+   "scene": null,
+   "text": "So when did Rome really fall?",
+   "start": 29.168,
+   "end": 30.768
+  }
+ ]
+}

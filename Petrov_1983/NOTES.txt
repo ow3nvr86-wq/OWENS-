@@ -1,0 +1,19 @@
+PETROV 1983 ("PREVENTED WORLD WAR III") - PAUSED
+The brief (30-35 s, one continuous 2D shot, Hidden Archives) was started and then paused for the Rome Short.
+Plan: build on the Elon_Musk/ one-shot engine (src/journey.py style).
+
+Research gathered so far:
+- NPS (https://www.nps.gov/people/stanislav_petrov.htm): Lieutenant Colonel Petrov was "the duty officer at the command
+  center for the Oko nuclear early-warning system" on 26 Sept 1983; "the system reported that five missiles had been
+  launched from the United States"; he "judged the reports to be a false alarm"; "his decision is credited with having
+  prevented an erroneous retaliatory nuclear attack ... that could have resulted in large-scale nuclear war." He was
+  later reassigned and took early retirement.
+- NTI, "The Man Who Saved the World" (https://www.nti.org/analysis/articles/the-man-who-saved-the-world/): flagged the
+  incident as a false alarm despite protocol; the satellite system had malfunctioned; his decision "may have saved"
+  the world from all-out nuclear war.
+- Chatham House, "12 Times We Came Close to Using Nuclear Weapons"
+  (https://www.chathamhouse.org/2016/07/12-times-we-came-close-using-nuclear-weapons): five Minuteman ICBMs reported;
+  NOTE it dates the event 25 September (the 26th is the usual date: just after midnight Moscow time on the 26th).
+- Wikipedia (cross-check): Serpukhov-15 bunker near Moscow; "shortly after midnight"; one ICBM reported, then four
+  more; cause "a rare alignment of sunlight on high-altitude clouds and the satellites' Molniya orbits"; his reasoning
+  that a US first strike would be massive; ground radar showed nothing; accounts differ on exactly how he reported it.

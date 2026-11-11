@@ -1,0 +1,52 @@
+ROME NEVER FELL IN 476 - RESEARCH AND SOURCES
+=============================================
+
+1. SOURCES
+[BRIT1] Encyclopaedia Britannica, "Roman Empire: Height and decline of imperial Rome" (Trajan, 98-117, under whom the
+        empire reached its greatest extent; Odoacer deposed Romulus Augustulus in 476).
+        https://www.britannica.com/place/Roman-Empire/Height-and-decline-of-imperial-Rome
+[BRIT2] Encyclopaedia Britannica, "Timeline of the Roman Empire". https://www.britannica.com/place/Timeline-of-the-Roman-Empire
+[BRIT3] Encyclopaedia Britannica, "Fall of Constantinople" (29 May 1453, Mehmed II). https://www.britannica.com/event/Fall-of-Constantinople-1453
+[SCH]   W. Scheidel, "Roman population size: the logic of the debate" (Princeton/Stanford Working Papers in Classics, 2007).
+        https://homepages.uc.edu/~martinj/Latin/Roman_Population/Scheildel%20-%20Roman%20population%20Size.pdf
+[MIL]   B. Milanovic, "Income level and income inequality in the Euro-Mediterranean region, c. 14-700" (2019), citing
+        Scheidel: the empire held "between 20 and 30 percent" of the world's people.
+        https://stonecenter.gc.cuny.edu/files/2019/03/Milanovic-income-level-and-income-inequality-in-the-euro-mediterranean-region-c-14-700-2019.pdf
+[AWMC]  Ancient World Mapping Center (UNC), geodata: the Roman Empire at its greatest extent, AD 117, and Roman roads,
+        derived from the Barrington Atlas of the Greek and Roman World. ODbL. https://github.com/AWMC/geodata
+[NE]    Natural Earth, 1:50m land (coastlines). Public domain. https://www.naturalearthdata.com
+
+2. CLAIM-BY-CLAIM CHECK
+"You were taught Rome fell in 476."  476 is the traditional date for the end of the Western Empire: Odoacer deposed
+    Romulus Augustulus. [BRIT1]
+"That's wrong."  The hook's framing: the Eastern Roman Empire (called 'Byzantine' only by later historians; its
+    people called themselves Romans) continued until 1453, so 476 ended only the western half. [BRIT1, BRIT3]
+"At its peak, Rome ruled from Britain to Egypt: three continents"  Europe, Africa and Asia. [BRIT1, AWMC]
+"and maybe one in four people on Earth."  Estimates of the empire's share of the world's population at its height run
+    from about 20% to 30% [MIL, SCH]; hence "maybe" in the narration and "~1 IN 4" on screen.
+"In 117 AD, under Emperor Trajan, it hit its biggest size ever."  Greatest extent at Trajan's death in 117, after the
+    conquest of Dacia and the advance into Armenia and Mesopotamia. [BRIT1, BRIT2]; the map is the AWMC 117 extent.
+"Then it cracked. Civil wars. Plague. Invaders on every border."  The Antonine Plague (from 165) and the Plague of
+    Cyprian (from 249); the Crisis of the Third Century (235-284) with its usurpers and civil wars, and pressure on the
+    Rhine, Danube and eastern frontiers. [BRIT1, BRIT2]
+"So Rome split in two."  The division into East and West became permanent at the death of Theodosius I in 395
+    (on screen: 395 AD / THE SPLIT). [BRIT1, BRIT2]
+"In 476, the West collapsed. But the East kept going."  [BRIT1]
+"For almost a thousand more years, until 1453."  476 to 1453 is 977 years. [BRIT3]
+"So when did Rome really fall?"  A question, not a claim.
+
+3. NUANCE (not narrated)
+- Historians also date the West's end to 480 (death of Julius Nepos), and Roman successor states lasted past 1453
+  (Trebizond to 1461). The film uses the two standard dates.
+- Earlier divisions of rule (Diocletian's tetrarchy, 293) preceded the permanent split of 395.
+
+4. MAPS AND RECONSTRUCTION
+- Coastlines are real (Natural Earth). The empire of AD 117 and the roads are AWMC data.
+- The empire of AD 395 is the 117 extent minus the lands given up by then: Dacia (c. 271-275), the Agri Decumates
+  (c. 260) and the lands beyond the Euphrates (363, 387). The East-West line follows the boundary between the
+  prefectures of Italy and Illyricum (the Drina valley; the Altars of the Philaeni in Libya); it is approximate.
+- In the scale scene the AD 117 extent stands for "at its peak".
+- Arrows, the plague shadow and the burning of the West are symbols, not maps of real campaigns or epidemics.
+- The legionary wears an Imperial Gallic helmet (1st-2nd century AD) and stands for Rome throughout. Trajan's bust is a
+  stylised drawing after his portrait type (the straight fringe of comma-shaped locks). Constantinople is an
+  illustration (walls, towers, domes, a column), not a plan.

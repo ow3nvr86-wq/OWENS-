@@ -1,0 +1,29 @@
+ROME NEVER FELL IN 476 - NARRATION SCRIPT (32.0 s, 79 words, narration 0.12-30.77 s)
+Voice: Kokoro-82M am_michael at 1.19x (confident, fast, slightly dramatic), American phoneme set; 'Trajan' as TRAY-jun.
+Times are measured from the synthesised voice; word times (build/words.json) come from an offline speech recogniser,
+which heard every one of the 79 words as written.
+
+THE HOOK (the brief's own, used as written; the pattern interrupt works in under 3 s)
+  "You were taught Rome fell in 476. That's wrong."
+  Alternatives considered:
+  B. "Rome didn't fall in 476. Half of it lasted another thousand years."  (gives the payoff away)
+  C. "Everything you learned about the fall of Rome is off by a thousand years."  (vaguer, no date to stamp)
+
+(00.12-02.47) You were taught Rome fell in 476.
+(02.65-03.46) That's wrong.
+(03.96-06.51) At its peak, Rome ruled from Britain to Egypt:
+(06.67-09.66) three continents, and maybe one in four people on Earth.
+(10.00-14.29) In 117 AD, under Emperor Trajan, it hit its biggest size ever.
+(14.63-15.53) Then it cracked.
+(15.99-17.00) Civil wars.
+(17.14-17.77) Plague.
+(17.91-19.58) Invaders on every border.
+(19.80-21.08) So Rome split in two.
+(21.48-23.64) In 476, the West collapsed.
+(23.80-25.16) But the East kept going.
+(25.52-28.83) For almost a thousand more years, until 1453.
+(29.17-30.77) So when did Rome really fall?
+
+Pacing review: hook done by 3.5 s; every sentence adds a new fact; short punchy beats after
+"That's wrong." and "Then it cracked."; the payoff (1453) lands at 27.7 s; the closing question ends at
+30.8 s, leaving a silent beat on the legionary's eyes so the Short loops into its own first frame.
