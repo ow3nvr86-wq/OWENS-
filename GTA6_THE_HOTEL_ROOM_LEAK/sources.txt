@@ -1,0 +1,24 @@
+SOURCES - GTA 6: the hotel-room leak (checked 2026-11-11)
+
+CONFIRMED (2+ sources)
+  hacker was 18, on bail for earlier hacks (Lapsus$)        NME; GamesRadar; Engadget; Yahoo (citing BBC court reporting)
+  police moved him to a Travelodge (Bicester) for his
+    own safety after he was doxxed; laptop confiscated     NME; Yahoo; Engadget; ITPro
+  hacked Rockstar with an Amazon Fire Stick, the hotel
+    TV and a mobile phone                                   NME; Engadget; Yahoo; Gfinity
+  ~90 videos of an early GTA 6 build leaked (Sept 2022)     TechRadar; VGC; Dexerto
+  Rockstar told the court recovery cost about $5m           Yahoo; ITPro
+  indefinite hospital order, Dec 2023 (a jury found he did
+    the acts; he was ruled unfit to stand trial)             TechRadar; VGC; Press Start; Dexerto
+  trailer 1 leaked, Rockstar released it early (Dec 2023)   GameSpot; TechCrunch; PC Gamer
+  ~90 million views in 24 h (Guinness: 90,421,491; YouTube
+    reported 93m+ on the official channel)                  Push Square; GameSpot; Guinness via Geek Culture
+  release date November 19, 2026; game has gone gold        Push Square (Nov 2026); Xbox Wire (Nov 10, 2026)
+
+CAVEATS
+  - One single-source report says he has since left the hospital to face trial; unverified, so the script only says
+    what the court ordered in 2023.
+  - "Biggest leak in gaming history" is how it is widely described, framed as the narrator's verdict.
+  - The final line is time-sensitive: re-check before posting if it goes up after November 19, 2026.
+  - He is not named in the script; any animation should not depict his likeness, and should not use Rockstar or GTA
+    logos or trailer art.
