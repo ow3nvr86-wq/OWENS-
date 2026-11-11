@@ -1,0 +1,672 @@
+{
+ "duration": 42.919,
+ "frames": 1288,
+ "words": [
+  {
+   "word": "He",
+   "line": 0,
+   "start": 0.0,
+   "end": 0.2
+  },
+  {
+   "word": "beat",
+   "line": 0,
+   "start": 0.2,
+   "end": 0.36
+  },
+  {
+   "word": "a",
+   "line": 0,
+   "start": 0.36,
+   "end": 0.56
+  },
+  {
+   "word": "Cyclops,",
+   "line": 0,
+   "start": 0.56,
+   "end": 1.268
+  },
+  {
+   "word": "a",
+   "line": 0,
+   "start": 1.423,
+   "end": 1.54
+  },
+  {
+   "word": "witch",
+   "line": 0,
+   "start": 1.54,
+   "end": 2.12
+  },
+  {
+   "word": "and",
+   "line": 0,
+   "start": 2.12,
+   "end": 2.28
+  },
+  {
+   "word": "the",
+   "line": 0,
+   "start": 2.28,
+   "end": 2.42
+  },
+  {
+   "word": "land",
+   "line": 0,
+   "start": 2.42,
+   "end": 2.64
+  },
+  {
+   "word": "of",
+   "line": 0,
+   "start": 2.64,
+   "end": 2.82
+  },
+  {
+   "word": "the",
+   "line": 0,
+   "start": 2.82,
+   "end": 2.98
+  },
+  {
+   "word": "dead.",
+   "line": 0,
+   "start": 2.98,
+   "end": 3.347
+  },
+  {
+   "word": "But",
+   "line": 0,
+   "start": 3.951,
+   "end": 4.08
+  },
+  {
+   "word": "the",
+   "line": 0,
+   "start": 4.08,
+   "end": 4.2
+  },
+  {
+   "word": "real",
+   "line": 0,
+   "start": 4.2,
+   "end": 4.48
+  },
+  {
+   "word": "monster...",
+   "line": 0,
+   "start": 4.48,
+   "end": 4.94
+  },
+  {
+   "word": "was",
+   "line": 0,
+   "start": 5.608,
+   "end": 5.74
+  },
+  {
+   "word": "him.",
+   "line": 0,
+   "start": 5.74,
+   "end": 6.199
+  },
+  {
+   "word": "Troy",
+   "line": 1,
+   "start": 6.722,
+   "end": 7.04
+  },
+  {
+   "word": "has",
+   "line": 1,
+   "start": 7.04,
+   "end": 7.38
+  },
+  {
+   "word": "fallen.",
+   "line": 1,
+   "start": 7.38,
+   "end": 7.902
+  },
+  {
+   "word": "Odysseus",
+   "line": 1,
+   "start": 8.457,
+   "end": 9.12
+  },
+  {
+   "word": "just",
+   "line": 1,
+   "start": 9.12,
+   "end": 9.4
+  },
+  {
+   "word": "wants",
+   "line": 1,
+   "start": 9.4,
+   "end": 9.68
+  },
+  {
+   "word": "to",
+   "line": 1,
+   "start": 9.68,
+   "end": 9.88
+  },
+  {
+   "word": "go",
+   "line": 1,
+   "start": 9.88,
+   "end": 10.02
+  },
+  {
+   "word": "home.",
+   "line": 1,
+   "start": 10.02,
+   "end": 10.454
+  },
+  {
+   "word": "A",
+   "line": 2,
+   "start": 10.951,
+   "end": 11.1
+  },
+  {
+   "word": "Cyclops",
+   "line": 2,
+   "start": 11.1,
+   "end": 11.68
+  },
+  {
+   "word": "eats",
+   "line": 2,
+   "start": 11.68,
+   "end": 11.92
+  },
+  {
+   "word": "his",
+   "line": 2,
+   "start": 11.92,
+   "end": 12.12
+  },
+  {
+   "word": "men.",
+   "line": 2,
+   "start": 12.12,
+   "end": 12.528
+  },
+  {
+   "word": "Giants",
+   "line": 2,
+   "start": 13.4,
+   "end": 13.4
+  },
+  {
+   "word": "sink",
+   "line": 2,
+   "start": 13.4,
+   "end": 13.78
+  },
+  {
+   "word": "his",
+   "line": 2,
+   "start": 13.78,
+   "end": 13.98
+  },
+  {
+   "word": "ships.",
+   "line": 2,
+   "start": 13.98,
+   "end": 14.527
+  },
+  {
+   "word": "A",
+   "line": 2,
+   "start": 14.931,
+   "end": 15.04
+  },
+  {
+   "word": "witch",
+   "line": 2,
+   "start": 15.04,
+   "end": 15.32
+  },
+  {
+   "word": "turns",
+   "line": 2,
+   "start": 15.32,
+   "end": 15.64
+  },
+  {
+   "word": "his",
+   "line": 2,
+   "start": 15.64,
+   "end": 15.86
+  },
+  {
+   "word": "crew",
+   "line": 2,
+   "start": 15.86,
+   "end": 16.22
+  },
+  {
+   "word": "into",
+   "line": 2,
+   "start": 16.22,
+   "end": 16.54
+  },
+  {
+   "word": "pigs.",
+   "line": 2,
+   "start": 16.54,
+   "end": 17.167
+  },
+  {
+   "word": "He",
+   "line": 2,
+   "start": 17.596,
+   "end": 17.68
+  },
+  {
+   "word": "visits",
+   "line": 2,
+   "start": 17.68,
+   "end": 17.98
+  },
+  {
+   "word": "the",
+   "line": 2,
+   "start": 17.98,
+   "end": 18.22
+  },
+  {
+   "word": "dead,",
+   "line": 2,
+   "start": 18.22,
+   "end": 18.59
+  },
+  {
+   "word": "slips",
+   "line": 2,
+   "start": 18.834,
+   "end": 19.16
+  },
+  {
+   "word": "past",
+   "line": 2,
+   "start": 19.16,
+   "end": 19.44
+  },
+  {
+   "word": "the",
+   "line": 2,
+   "start": 19.44,
+   "end": 19.7
+  },
+  {
+   "word": "Sirens,",
+   "line": 2,
+   "start": 19.7,
+   "end": 20.295
+  },
+  {
+   "word": "and",
+   "line": 2,
+   "start": 20.464,
+   "end": 20.58
+  },
+  {
+   "word": "his",
+   "line": 2,
+   "start": 20.58,
+   "end": 20.72
+  },
+  {
+   "word": "starving",
+   "line": 2,
+   "start": 20.72,
+   "end": 21.14
+  },
+  {
+   "word": "men",
+   "line": 2,
+   "start": 21.14,
+   "end": 21.5
+  },
+  {
+   "word": "eat",
+   "line": 2,
+   "start": 21.5,
+   "end": 21.76
+  },
+  {
+   "word": "a",
+   "line": 2,
+   "start": 21.76,
+   "end": 22.04
+  },
+  {
+   "word": "god's",
+   "line": 2,
+   "start": 22.04,
+   "end": 22.32
+  },
+  {
+   "word": "cattle.",
+   "line": 2,
+   "start": 22.32,
+   "end": 22.729
+  },
+  {
+   "word": "A",
+   "line": 2,
+   "start": 23.178,
+   "end": 23.32
+  },
+  {
+   "word": "storm",
+   "line": 2,
+   "start": 23.32,
+   "end": 23.7
+  },
+  {
+   "word": "kills",
+   "line": 2,
+   "start": 23.7,
+   "end": 24.12
+  },
+  {
+   "word": "them",
+   "line": 2,
+   "start": 24.12,
+   "end": 24.36
+  },
+  {
+   "word": "all.",
+   "line": 2,
+   "start": 24.36,
+   "end": 24.654
+  },
+  {
+   "word": "A",
+   "line": 3,
+   "start": 25.102,
+   "end": 25.24
+  },
+  {
+   "word": "nymph",
+   "line": 3,
+   "start": 25.24,
+   "end": 25.54
+  },
+  {
+   "word": "feeds",
+   "line": 3,
+   "start": 25.54,
+   "end": 25.9
+  },
+  {
+   "word": "him",
+   "line": 3,
+   "start": 25.9,
+   "end": 26.14
+  },
+  {
+   "word": "lotus.",
+   "line": 3,
+   "start": 26.14,
+   "end": 26.67
+  },
+  {
+   "word": "He",
+   "line": 3,
+   "start": 27.043,
+   "end": 27.14
+  },
+  {
+   "word": "forgets",
+   "line": 3,
+   "start": 27.14,
+   "end": 27.5
+  },
+  {
+   "word": "home",
+   "line": 3,
+   "start": 27.5,
+   "end": 27.8
+  },
+  {
+   "word": "for",
+   "line": 3,
+   "start": 27.8,
+   "end": 28.06
+  },
+  {
+   "word": "seven",
+   "line": 3,
+   "start": 28.06,
+   "end": 28.48
+  },
+  {
+   "word": "years.",
+   "line": 3,
+   "start": 28.48,
+   "end": 29.195
+  },
+  {
+   "word": "Back",
+   "line": 4,
+   "start": 29.566,
+   "end": 29.72
+  },
+  {
+   "word": "home,",
+   "line": 4,
+   "start": 29.72,
+   "end": 30.158
+  },
+  {
+   "word": "suitors",
+   "line": 4,
+   "start": 30.356,
+   "end": 30.8
+  },
+  {
+   "word": "want",
+   "line": 4,
+   "start": 30.8,
+   "end": 31.04
+  },
+  {
+   "word": "his",
+   "line": 4,
+   "start": 31.04,
+   "end": 31.22
+  },
+  {
+   "word": "throne.",
+   "line": 4,
+   "start": 31.22,
+   "end": 31.684
+  },
+  {
+   "word": "He",
+   "line": 4,
+   "start": 32.103,
+   "end": 32.2
+  },
+  {
+   "word": "returns",
+   "line": 4,
+   "start": 32.2,
+   "end": 32.56
+  },
+  {
+   "word": "in",
+   "line": 4,
+   "start": 32.56,
+   "end": 32.8
+  },
+  {
+   "word": "disguise,",
+   "line": 4,
+   "start": 32.8,
+   "end": 33.487
+  },
+  {
+   "word": "strings",
+   "line": 4,
+   "start": 33.706,
+   "end": 34.04
+  },
+  {
+   "word": "the",
+   "line": 4,
+   "start": 34.04,
+   "end": 34.28
+  },
+  {
+   "word": "bow",
+   "line": 4,
+   "start": 34.28,
+   "end": 34.5
+  },
+  {
+   "word": "no",
+   "line": 4,
+   "start": 34.5,
+   "end": 34.84
+  },
+  {
+   "word": "one",
+   "line": 4,
+   "start": 34.84,
+   "end": 35.0
+  },
+  {
+   "word": "else",
+   "line": 4,
+   "start": 35.0,
+   "end": 35.18
+  },
+  {
+   "word": "can...",
+   "line": 4,
+   "start": 35.18,
+   "end": 35.709
+  },
+  {
+   "word": "and",
+   "line": 4,
+   "start": 36.048,
+   "end": 36.18
+  },
+  {
+   "word": "the",
+   "line": 4,
+   "start": 36.18,
+   "end": 36.32
+  },
+  {
+   "word": "suitors",
+   "line": 4,
+   "start": 36.32,
+   "end": 36.68
+  },
+  {
+   "word": "pay.",
+   "line": 4,
+   "start": 36.68,
+   "end": 37.112
+  },
+  {
+   "word": "The",
+   "line": 5,
+   "start": 37.568,
+   "end": 37.68
+  },
+  {
+   "word": "twist?",
+   "line": 5,
+   "start": 37.68,
+   "end": 38.122
+  },
+  {
+   "word": "The",
+   "line": 5,
+   "start": 38.528,
+   "end": 38.64
+  },
+  {
+   "word": "raiders",
+   "line": 5,
+   "start": 38.64,
+   "end": 39.02
+  },
+  {
+   "word": "from",
+   "line": 5,
+   "start": 39.02,
+   "end": 39.18
+  },
+  {
+   "word": "the",
+   "line": 5,
+   "start": 39.18,
+   "end": 39.36
+  },
+  {
+   "word": "sea",
+   "line": 5,
+   "start": 39.36,
+   "end": 39.58
+  },
+  {
+   "word": "everyone",
+   "line": 5,
+   "start": 39.58,
+   "end": 40.06
+  },
+  {
+   "word": "feared",
+   "line": 5,
+   "start": 40.06,
+   "end": 40.48
+  },
+  {
+   "word": "were",
+   "line": 5,
+   "start": 40.48,
+   "end": 40.88
+  },
+  {
+   "word": "the",
+   "line": 5,
+   "start": 40.88,
+   "end": 41.04
+  },
+  {
+   "word": "Greeks.",
+   "line": 5,
+   "start": 41.04,
+   "end": 41.601
+  },
+  {
+   "word": "They",
+   "line": 5,
+   "start": 42.053,
+   "end": 42.14
+  },
+  {
+   "word": "were",
+   "line": 5,
+   "start": 42.14,
+   "end": 42.32
+  },
+  {
+   "word": "him.",
+   "line": 5,
+   "start": 42.32,
+   "end": 42.679
+  }
+ ]
+}

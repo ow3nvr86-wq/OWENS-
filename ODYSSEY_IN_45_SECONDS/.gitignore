@@ -1,0 +1,5 @@
+build/
+frames/
+stills/
+__pycache__/
+*.raw.wav
