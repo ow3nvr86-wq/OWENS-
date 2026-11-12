@@ -1,0 +1,16 @@
+SOURCES - "What if you were trapped in Minecraft?" (checked 2026-11-12)
+
+FACTS USED
+  a full day-night cycle is 20 real minutes (24,000 ticks); daytime is about half of it -> "about ten minutes
+    until dark"                                                          Digital Trends; Shockbyte; Minecraft Wiki (via results)
+  a block is treated as 1 cubic metre                                    Minecraft Wiki / Gamepedia (via results)
+  64 m3 of stone at ~2.5-2.7 t/m3 = ~160-170 tonnes -> "over a hundred and fifty tonnes"   (arithmetic; granite/limestone density)
+  punching trees for wood; tree tops left floating; stacks of 64            core game mechanics
+  Herobrine: a 2010 fan hoax/creepypasta; Notch said there were no plans to add him; "Removed Herobrine"
+    became a running joke in update changelogs                            Wikipedia; PC Gamer; Know Your Meme; Prima Games
+
+FICTION: the viewer being trapped, and Herobrine watching - it's a joke about a legend that was never in the game.
+
+ANIMATION RIGHTS: original stick-figure hero and an original glowing-eyed stick "Herobrine"; a generic blocky world
+drawn in code. No Mojang art, textures, characters (no Steve, Creepers etc.), logos or music. Follows
+STICK_FIGURE_RULES.md (60 fps, motion blur, eased changes, ~12 shots, planted walks, calm grain).
