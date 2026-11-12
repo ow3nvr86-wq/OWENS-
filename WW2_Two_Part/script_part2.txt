@@ -1,0 +1,38 @@
+WORLD WAR II IN TWO PARTS - PART 2: HOW IT ALL FELL APART (1942-1945)
+Target 34-39 s. About 89 spoken words (numbers counted as said). Same brisk pace as Part 1.
+
+HOOK OPTIONS
+  A. "Part two. Hitler's empire looked unstoppable. Then, in one frozen city, it began to break."   <- CHOSEN (picks
+     up Part 1's cliffhanger and opens a new question at once)
+  B. "Part two. In December 1941, Germany and Japan looked unbeatable. Four years later, both had surrendered."
+  C. "Part two. The turning point of World War Two came down to one city, in the snow."
+
+SCRIPT
+0-5    Part two. Hitler's empire looked unstoppable. Then, in one frozen city, it began to break.
+5-10   Stalingrad, 1943: an entire German army surrenders.
+10-13  America fights back across the Pacific.
+13-21  June 6th, 1944. D-Day. About 156,000 Allied troops land in Normandy in a single day.
+21-28  Germany is crushed from both sides. In May 1945, with Soviet troops in Berlin, it surrenders.
+28-33  In August, two atomic bombs fall on Japan. By September, the war is over.
+33-37  An estimated 70 to 85 million people died.
+
+SAY IT AS: "nineteen forty-three", "June sixth, nineteen forty-four", "a hundred and fifty-six thousand",
+"nineteen forty-five", "seventy to eighty-five million".
+
+ANIMATION PLAN (maps throughout)
+- Hook: the Part 1 map, at its largest; snow; the camera dives to Stalingrad on the Volga.
+- Stalingrad: Soviet arrows close a ring around the city; the German symbol shatters; "FEB 1943".
+- Pacific: the camera slides across the globe; US arrows hop island to island towards Japan.
+- D-Day: back to Europe; the Channel fills with landing craft; five beach names light up (Utah, Omaha, Gold, Juno,
+  Sword); "156,000" counts up.
+- Collapse: red arrows from the east and blue from the west squeeze the grey back into Germany; they meet; Berlin
+  flashes; "MAY 8, 1945".
+- Japan: the globe turns; two flashes over Hiroshima and Nagasaki, shown with restraint (no casualties drawn);
+  "SEPT 2, 1945".
+- Ending: the map clears to its post-war shape; "70-85 MILLION" in quiet white; a slow fade.
+
+FACT NOTES (sources in sources.txt)
+- Stalingrad: the German Sixth Army surrendered on 31 Jan to 2 Feb 1943 (about 91,000 prisoners).
+- D-Day: about 156,000 troops landed on 6 June 1944 (some counts are nearly 160,000).
+- Germany surrendered on 7-8 May 1945; Japan announced its surrender on 15 Aug and signed it on 2 Sept 1945.
+- Deaths: estimates run from 70 to 85 million, soldiers and civilians.
