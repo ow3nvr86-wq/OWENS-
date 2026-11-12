@@ -76,7 +76,7 @@ def main():
     VZ = poly(VICHY, (-1.4, 42.7), (-1.4, 40.5), (11.0, 40.5), (11.0, 46.5), (6.3, 46.5))
     WEST_OF_FRONT = poly(FRONT_DEC41, (15.0, 40.0), (15.0, 59.75))
 
-    POL, RUS, LTU, BLR, UKR = C('POL'), C('RUS').intersection(box(-180, 30, 75, 85)), C('LTU'), C('BLR'), C('UKR')
+    POL, RUS, LTU, BLR, UKR = C('POL'), C('RUS').intersection(box(0, 30, 180, 78)), C('LTU'), C('BLR'), C('UKR')
     ger_east = unary_union([POL.intersection(A), unary_union([POL, RUS, LTU]).intersection(B)])
     R = {}
     R['GER'] = unary_union([C('DEU', 'AUT', 'CZE'), ger_east])
@@ -85,7 +85,7 @@ def main():
     R['POL_GER'] = pol_w.difference(SOVZ)
     R['POL_SOV'] = unary_union([pol_e, pol_w.intersection(SOVZ)])
     cu = UKR.intersection(CU)
-    R['USSR'] = unary_union([RUS.difference(B), BLR, UKR, C('GEO', 'ARM', 'AZE'), C('KAZ').intersection(europe)]).difference(PE).difference(CU)
+    R['USSR'] = unary_union([RUS.difference(B), BLR, UKR, C('GEO', 'ARM', 'AZE', 'KAZ', 'UZB', 'TKM', 'KGZ', 'TJK')]).difference(PE).difference(CU)
     R['LIT'] = LTU.difference(B).difference(PE)
     R['LAT'], R['EST'], R['FIN'], R['SWE'], R['DEN'] = C('LVA'), C('EST'), C('FIN', 'ALD'), C('SWE'), C('DNK')
     R['NOR'] = C('NOR').intersection(box(0, 55, 35, 72))

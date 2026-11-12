@@ -54,11 +54,11 @@ CAM = [
     (E['y1940'] + 0.6, 8.5, 56.5, 41), (E['tanks'] + 0.05, 6.6, 51.6, 62), (E['france2'] - 0.15, 4.2, 50.6, 78),
     (E['france2'] + 0.6, 2.6, 47.0, 66), (E['falls'], 2.6, 46.8, 70), (E['britain2'] - 0.15, 2.4, 46.6, 64),
     (E['britain2'] + 0.5, 0.2, 51.6, 100), (E['so'] - 0.05, 0.5, 51.4, 112),
-    (E['east'], 24.0, 49.6, 34), (E['pour'], 26.0, 50.6, 33), (E['by'], 30.0, 52.6, 34),
+    (E['east'], 24.0, 49.6, 34, 'out'), (E['pour'], 26.0, 50.6, 33), (E['by'], 30.0, 52.6, 34),
     (E['twenty'], 37.42, 55.86, 620), (E['then'], 37.45, 55.87, 690),
-    (E['then'] + 0.5, 110.0, 45.0, 14), (E['december7'] + 0.25, 165.0, 35.0, 17), (E['japan'] + 0.25, 167.0, 34.5, 17.5),
+    (E['december7'] + 0.25, 165.0, 35.0, 17, 'out'), (E['japan'] + 0.25, 167.0, 34.5, 17.5),
     (E['pearl'] + 0.1, 201.9, 20.9, 150), (E['part'] - 0.08, 202.0, 20.6, 172),
-    (E['part'] + 0.5, 17.0, 50.0, 30), (END, 17.6, 50.0, 34.5),
+    (E['part'] + 0.5, 17.0, 50.0, 30, 'out'), (END, 17.6, 50.0, 34.5),
 ]
 CAM[-1] = (max(E['voice_end'] + 1.5, CAM[-2][0] + 2.0), 17.6, 50.0, 33.5)
 SHAKES = [(E['first'], 12), (E['poland'], 18), (E['war'], 14), (E['y1940'], 10), (E['falls'], 12), (E['six'], 18), (E['surrender'], 10),
@@ -67,12 +67,16 @@ SHAKES = [(E['first'], 12), (E['poland'], 18), (E['war'], 14), (E['y1940'], 10),
 
 def cam_state(t):
     if t <= CAM[0][0]:
-        return CAM[0][1:]
-    for (t0, *a), (t1, *b) in zip(CAM, CAM[1:]):
+        return CAM[0][1:4]
+    for k0, k1 in zip(CAM, CAM[1:]):
+        (t0, *a), (t1, *b) = k0[:4], k1[:4]
         if t <= t1:
-            u = smoother((t - t0) / (t1 - t0))
-            return a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u, math.exp(math.log(a[2]) + (math.log(b[2]) - math.log(a[2])) * u)
-    return CAM[-1][1:]
+            x = (t - t0) / (t1 - t0)
+            u = smoother(x)
+            # a whip that pulls out: the zoom is done early, so the camera is already wide while it travels
+            uz = smoother(clamp(x * 1.7)) if len(k1) > 4 else u
+            return a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u, math.exp(math.log(a[2]) + (math.log(b[2]) - math.log(a[2])) * uz)
+    return CAM[-1][1:4]
 
 
 def shake(t):
@@ -781,6 +785,24 @@ def scene_main(ctx, t, os_):
     look = dict(dark=0.0, desat=0.02, bloom=0.3, vig=0.5, grain=0.03, tint=(1.0, 1.0, 1.03))
     if abs(bx) > 22 or abs(by) > 22:
         look['blur'] = (min(abs(bx), 420), min(abs(by), 240))
+        # speed streaks along the direction of travel
+        k = min(1.0, math.hypot(bx, by) / 260)
+        ang = math.atan2(by, bx)
+        ctx.save()
+        ctx.identity_matrix()
+        ctx.translate(540 * os_, 960 * os_)
+        ctx.rotate(ang)
+        for i in range(22):
+            f = int(t * 30)
+            y = (hash01(i, f) - 0.5) * 2200
+            x = (hash01(i, f + 7) - 0.5) * 1400
+            ln = 260 + 900 * hash01(i, f + 3)
+            set_c(ctx, WHITE, (0.06 + 0.2 * hash01(i, f + 5)) * k)
+            ctx.set_line_width((1.5 + 4 * hash01(i, f + 9)) * os_)
+            ctx.move_to((x - ln / 2) * os_, y * os_)
+            ctx.line_to((x + ln / 2) * os_, y * os_)
+            ctx.stroke()
+        ctx.restore()
     ks = sm(t, E['by'], E['by'] + 0.9) * (1 - sm(t, E['then'], E['then'] + 0.3))
     if ks > 0:
         look['tint'] = (1.0 - 0.06 * ks, 1.0, 1.03 + 0.05 * ks)

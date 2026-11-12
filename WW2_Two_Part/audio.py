@@ -896,7 +896,7 @@ def main():
     os.makedirs(os.path.join(PDIR, 'build'), exist_ok=True)
     write_wav(os.path.join(PDIR, 'build', 'mix_with_voice_raw.wav'), mix)
     write_wav(os.path.join(PDIR, 'build', 'music_sfx_raw.wav'), nv / max(1.0, np.abs(nv).max() / 0.95))
-    loudnorm(os.path.join(PDIR, 'build', 'mix_with_voice_raw.wav'), os.path.join(PDIR, 'audio', 'mix_with_voice.wav'))
+    loudnorm(os.path.join(PDIR, 'build', 'mix_with_voice_raw.wav'), os.path.join(PDIR, 'audio', 'mix_with_voice.wav'), -13.1)
     loudnorm(os.path.join(PDIR, 'build', 'music_sfx_raw.wav'), os.path.join(PDIR, 'audio', 'mix_no_voice.wav'))
     L = [f'{T["title"].upper()} - SOUND DESIGN TIMELINE', '', 'Narration: the supplied voiceover (pauses over 0.4 s shortened; nothing else changed).',
          'Music and effects are synthesised in audio.py with numpy: no samples or third-party audio.',
