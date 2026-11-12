@@ -130,7 +130,7 @@ def make_audio(path):
 # ----------------------------------------------------------------- video --
 #
 # Scene: a lake at night in light rain. A low moon behind drifting clouds,
-# faint stars, misty mountains, a pine shoreline and a small cabin with a
+# twinkling stars (and a shooting star), misty mountains, a pine shoreline and a small cabin with a
 # warm window. The lake mirrors it all, with rings where the rain lands.
 #
 # Every moving layer repeats a whole number of times in one loop, so the
@@ -268,15 +268,52 @@ def build_scene():
     S["cloud_band"] = (_smoothstep(0.62, 0.30, v[:HZ, :1]) * 0.9 + 0.1).astype(np.float32)
 
     # --- stars: twinkle at whole-number rates per loop ----------------------
-    n = 520
-    sy = (rng.uniform(0, 1, n) ** 1.4 * HZ * 0.80).astype(int)
+    # Most are faint pinpricks; a few hundred are brighter with a soft core,
+    # and the brightest couple of dozen carry a small glow. Each has its own
+    # colour, from cool blue-white to warm white.
+    n = 1500
+    sy = (rng.uniform(0, 1, n) ** 1.25 * HZ * 0.86).astype(int)
     sx = rng.integers(0, W, n)
-    keep = np.hypot(sx - mx, sy - my) > 150
+    keep = np.hypot(sx - mx, sy - my) > 120
+    sy, sx = sy[keep], sx[keep]
+    n = sy.size
+    b = rng.uniform(0, 1, n) ** 3.2
+    b *= _smoothstep(HZ * 0.92, HZ * 0.55, sy)          # fade into the haze
+    tint = np.where(rng.uniform(0, 1, n)[:, None] < 0.7,
+                    np.array([0.82, 0.90, 1.00]), np.array([1.00, 0.93, 0.82]))
+    py, px, pw, pid = [], [], [], []
+
+    def sprite(k, rad, sigma, gain):
+        o = np.arange(-rad, rad + 1)
+        oy, ox = np.meshgrid(o, o, indexing="ij")
+        w = np.exp(-(oy ** 2 + ox ** 2) / (2 * sigma ** 2)) * gain
+        y, x = sy[k] + oy.ravel(), sx[k] + ox.ravel()
+        ok = (y >= 0) & (y < HZ) & (x >= 0) & (x < W)
+        py.append(y[ok]); px.append(x[ok]); pw.append(w.ravel()[ok])
+        pid.append(np.full(ok.sum(), k))
+
+    order = np.argsort(-b)
+    for rank, k in enumerate(order):
+        if rank < 24:
+            sprite(k, 6, 2.2, 0.22)                        # glow
+            sprite(k, 2, 0.75, 1.0)                        # core
+        elif rank < 260:
+            sprite(k, 2, 0.6, 1.0)
+        else:
+            sprite(k, 0, 1.0, 1.0)
+    pid = np.concatenate(pid)
     S["stars"] = dict(
-        y=sy[keep], x=sx[keep],
-        b=(rng.uniform(0.15, 1, keep.sum()) ** 2.2).astype(np.float32),
-        c=rng.integers(3, 30, keep.sum()),
-        p=rng.uniform(0, 6.28, keep.sum()))
+        y=np.concatenate(py), x=np.concatenate(px),
+        w=(np.concatenate(pw)[:, None] * tint[pid]).astype(np.float32),
+        id=pid, b=b.astype(np.float32),
+        c=rng.integers(2, 36, n),
+        depth=rng.uniform(0.15, 0.45, n),
+        p=rng.uniform(0, 6.28, n))
+
+    # One slow shooting star per loop, high on the right, away from the moon.
+    S["meteor"] = dict(start=int(FRAMES * 0.58), frames=int(FPS * 1.1),
+                       p0=np.array([W * 0.62, H * 0.07]),
+                       p1=np.array([W * 0.80, H * 0.20]), tail=150)
 
     # --- silhouettes (premultiplied colour + alpha), top half only ---------
     sil_c = np.zeros((HZ, W, 3), np.float32)
@@ -402,13 +439,30 @@ def render_frame(S, i):
     # --- sky -----------------------------------------------------------------
     up = S["sky"].copy()
     st = S["stars"]
-    tw = st["b"] * (0.65 + 0.35 * np.sin(2 * np.pi * st["c"] * i / FRAMES + st["p"]))
-    star = np.zeros((HZ, W), np.float32)
-    np.add.at(star, (st["y"], st["x"]), tw)
+    tw = st["b"] * (1 - st["depth"] + st["depth"] * np.sin(2 * np.pi * st["c"] * i / FRAMES + st["p"]))
+    star = np.zeros((HZ, W, 3), np.float32)
+    vals = tw[st["id"]][:, None] * st["w"]
+    for ch in range(3):
+        np.add.at(star[..., ch], (st["y"], st["x"]), vals[:, ch])
+
+    m = S["meteor"]
+    prog = (i - m["start"]) / m["frames"]
+    if 0 <= prog <= 1:
+        env = np.sin(np.pi * prog) ** 1.5
+        head = m["p0"] + (m["p1"] - m["p0"]) * prog
+        dirv = (m["p1"] - m["p0"]) / np.linalg.norm(m["p1"] - m["p0"])
+        tl = m["tail"] * min(1.0, prog * 3)
+        for u in np.linspace(0, 1, 400):
+            q = head - dirv * tl * u
+            yq, xq = int(q[1]), int(q[0])
+            if 0 <= yq < HZ - 1 and 0 <= xq < W - 1:
+                v = env * (1 - u) ** 2 * 1.1
+                star[yq, xq] += v
+                star[yq + 1, xq] += v * 0.35
 
     cl = np.roll(S["clouds"], -i * 2, axis=1)[:, :W]
     dens = _smoothstep(0.40, 0.78, cl) * S["cloud_band"]
-    up += (star * (1 - dens) * 150)[..., None] * np.array([0.85, 0.9, 1.0], np.float32)
+    up += star * ((1 - dens) * 235)[..., None]
     a = dens * (0.88 - 0.35 * S["disc"])
     up *= 1 - a[..., None]
     up += a[..., None] * S["cloud_lit"]
@@ -440,8 +494,8 @@ def render_frame(S, i):
     water += np.array([4, 6, 13], np.float32)
 
     sp = S["sparkle"][((rm + i) % 480)[:, None], cm]
-    glint = np.clip((sp - 0.54) * 5, 0, 1) ** 2
-    water += (glint * S["moon_col"] * 150)[..., None] * MOONLIGHT / 255
+    glint = np.clip((sp - 0.57) * 5, 0, 1) ** 2
+    water += (glint * S["moon_col"] * 120)[..., None] * MOONLIGHT / 255
     water += (glint * S["warm_col"] * 190 * flicker)[..., None] * WARM / 255
 
     rp = S["ripples"]
