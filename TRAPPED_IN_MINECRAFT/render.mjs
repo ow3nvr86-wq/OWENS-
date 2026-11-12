@@ -20,7 +20,7 @@ const W = Math.round(1080 * scale), H = Math.round(1920 * scale);
 const p = await b.newPage({ viewport: { width: W, height: H } });
 p.on('console', m => { if (m.type() === 'error' || m.type() === 'warning') console.log('[page]', m.text()); });
 p.on('pageerror', e => { console.log('[pageerror]', e.message); process.exitCode = 2; });
-await p.goto(`http://127.0.0.1:${port}/index.html`);
+await p.goto(`http://127.0.0.1:${port}/index.html?scale=${scale}`);
 await p.waitForFunction('window.ready === true', null, { timeout: 300000 });
 const t0 = Date.now(); let n = 0;
 for (const f of frames) {

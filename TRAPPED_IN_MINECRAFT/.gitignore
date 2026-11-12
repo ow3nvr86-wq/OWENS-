@@ -3,3 +3,4 @@ frames/
 stills/
 __pycache__/
 *.raw.wav
+stick_figure_version/frames/
