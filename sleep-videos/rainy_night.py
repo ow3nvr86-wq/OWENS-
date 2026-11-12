@@ -128,23 +128,48 @@ def make_audio(path):
 
 
 # ----------------------------------------------------------------- video --
+#
+# Scene: a lake at night in light rain. A low moon behind drifting clouds,
+# faint stars, misty mountains, a pine shoreline and a small cabin with a
+# warm window. The lake mirrors it all, with rings where the rain lands.
+#
+# Every moving layer repeats a whole number of times in one loop, so the
+# last frame flows into the first.
 
-def _periodic_field(rng, h, w, cutoff, power=2.2):
-    """Tileable smooth noise in [0,1]; cutoff in cycles across the field."""
-    fy = np.fft.fftfreq(h)[:, None] * h
-    fx = np.fft.rfftfreq(w)[None, :] * w
-    r = np.sqrt((fy * w / h) ** 2 + fx ** 2) + 1e-6
-    g = r ** (-power) * np.exp(-((r / cutoff) ** 2))
+HZ = int(H * 0.60)            # waterline
+WH = H - HZ                   # water height in px
+MOON = (W * 0.27, H * 0.27, 44)
+WARM = np.array([255, 172, 92], np.float32)
+MOONLIGHT = np.array([225, 230, 245], np.float32)
+
+
+def _field(rng, h, w, size_px, aspect=1.0, power=1.6):
+    """Tileable smooth noise in [0,1]. size_px ~ feature size; aspect>1
+    stretches features horizontally."""
+    ky = np.fft.fftfreq(h)[:, None]
+    kx = np.fft.rfftfreq(w)[None, :] * aspect
+    r = np.sqrt(ky ** 2 + kx ** 2) + 1e-9
+    g = r ** (-power) * np.exp(-((r * size_px) ** 2))
     g[0, 0] = 0
-    spec = np.fft.rfft2(rng.standard_normal((h, w))) * g
-    x = np.fft.irfft2(spec, (h, w))
-    x = (x - x.min()) / (x.max() - x.min())
-    return x.astype(np.float32)
+    x = np.fft.irfft2(np.fft.rfft2(rng.standard_normal((h, w))) * g, (h, w))
+    lo, hi = np.percentile(x, [0.5, 99.5])
+    return np.clip((x - lo) / (hi - lo), 0, 1).astype(np.float32)
 
 
 def _smoothstep(a, b, x):
     t = np.clip((x - a) / (b - a), 0, 1)
     return t * t * (3 - 2 * t)
+
+
+def _cyc(i, cycles, phase=0.0):
+    """Sine with a whole number of cycles per loop, at frame i."""
+    return np.sin(2 * np.pi * cycles * i / FRAMES + phase)
+
+
+def _over(dst, col, a):
+    """Composite flat colour col with alpha a over dst, in place."""
+    dst *= 1 - a[..., None]
+    dst += a[..., None] * col
 
 
 def _rain_layer(rng, count, length, width, alpha):
@@ -164,90 +189,318 @@ def _rain_layer(rng, count, length, width, alpha):
     return sheet
 
 
+def _ridge(base, amp, seed, rough=1.9, detail=60):
+    """Natural mountain profile: 1/f noise with sharpened peaks."""
+    r = np.random.default_rng(seed)
+    k = np.arange(W // 2 + 1, dtype=np.float64)
+    spec = (r.standard_normal(k.size) + 1j * r.standard_normal(k.size))
+    spec *= np.where(k > 0, np.maximum(k, 1) ** (-rough), 0) * (k < detail)
+    y = np.fft.irfft(spec, W)
+    y = (y - y.min()) / (y.max() - y.min())
+    y = y ** 1.6                                   # sharper peaks, wide valleys
+    return (base - amp * y) * H
+
+
+def _pine(mask, x0, base, h, w):
+    """Draw one soft-edged pine silhouette into mask (max blend)."""
+    top = base - h
+    y0, y1 = max(int(top), 0), min(int(base) + 1, mask.shape[0])
+    x_lo, x_hi = max(int(x0 - w), 0), min(int(x0 + w) + 1, W)
+    if x_hi <= x_lo:
+        return
+    ys = np.arange(y0, y1, dtype=np.float32)[:, None]
+    xs = np.arange(x_lo, x_hi, dtype=np.float32)[None, :]
+    rel = np.clip((ys - top) / h, 0, 1)
+    tiers = 5
+    saw = (rel * tiers) % 1.0
+    half = (w / 2) * rel * (0.55 + 0.45 * saw) + 0.6
+    m = _smoothstep(half + 0.8, half - 0.8, np.abs(xs - x0))
+    trunk = (np.abs(xs - x0) < max(1.0, w * 0.05)) & (rel > 0.85)
+    m = np.maximum(m, trunk.astype(np.float32))
+    sub = mask[y0:y1, x_lo:x_hi]
+    np.maximum(sub, m, out=sub)
+
+
+def _stamp_disc(mask, cx, cy, r):
+    ri = int(np.ceil(r)) + 1
+    y0, y1 = max(int(cy) - ri, 0), min(int(cy) + ri + 1, mask.shape[0])
+    x0, x1 = max(int(cx) - ri, 0), min(int(cx) + ri + 1, mask.shape[1])
+    if y1 <= y0 or x1 <= x0:
+        return
+    ys = np.arange(y0, y1)[:, None]
+    xs = np.arange(x0, x1)[None, :]
+    d = np.sqrt((xs - cx) ** 2 + (ys - cy) ** 2)
+    m = _smoothstep(r + 0.7, r - 0.7, d).astype(np.float32)
+    sub = mask[y0:y1, x0:x1]
+    np.maximum(sub, m, out=sub)
+
+
 def build_scene():
     rng = np.random.default_rng(SEED)
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
     v = yy / H
+    S = {}
 
-    # Sky: deep navy at the top, sinking to near black.
-    top = np.array([16, 22, 40], np.float32)
-    bot = np.array([5, 7, 13], np.float32)
-    bg = top[None, None] * (1 - v[..., None]) + bot[None, None] * v[..., None]
+    # --- sky: indigo overhead, dusky violet at the horizon -----------------
+    stops = [0.0, 0.30, 0.48, 0.60]
+    cols = np.array([[7, 9, 24], [14, 18, 42], [30, 34, 68], [54, 54, 88]], np.float32)
+    sky = np.stack([np.interp(v[:, 0], stops, cols[:, c]) for c in range(3)], -1)
+    sky = np.broadcast_to(sky[:, None, :], (H, W, 3)).copy()
 
-    # Moon, low and soft, with a wide halo.
-    mx, my = W * 0.72, H * 0.26
+    mx, my, mr = MOON
     d = np.sqrt((xx - mx) ** 2 + (yy - my) ** 2)
-    halo = np.exp(-((d / 340) ** 2)) * 0.55 + np.exp(-((d / 120) ** 2)) * 0.6
-    disc = _smoothstep(60, 50, d)
-    moon_col = np.array([128, 140, 165], np.float32)
-    bg += halo[..., None] * np.array([26, 32, 48], np.float32)
-    bg = bg * (1 - disc[..., None] * 0.85) + disc[..., None] * moon_col * 0.85
+    halo_wide = np.exp(-((d / 460) ** 2))
+    sky += np.exp(-((d / 360) ** 2))[..., None] * np.array([30, 34, 60], np.float32)
+    sky += np.exp(-((d / 100) ** 2))[..., None] * np.array([60, 66, 96], np.float32) * 0.7
+    disc = _smoothstep(mr + 1.2, mr - 1.2, d)
+    tex = _field(rng, 128, 128, 10, power=1.2)
+    tx = ((xx - mx + 64) % 128).astype(int)
+    ty = ((yy - my + 64) % 128).astype(int)
+    shade = 0.80 + 0.2 * tex[ty, tx] - 0.10 * np.clip((xx - mx + yy - my) / mr, -1, 1)
+    sky = sky * (1 - disc[..., None]) + disc[..., None] * MOONLIGHT * 0.86 * shade[..., None]
+    S["sky"] = sky[:HZ]
+    S["disc"] = disc[:HZ]
+    S["cloud_lit"] = (np.array([22, 25, 46], np.float32)
+                      + halo_wide[:HZ, :, None] * np.array([105, 110, 135], np.float32))
 
-    # Fog: two tileable layers drifting left at different speeds (parallax).
-    # Widths are chosen so each moves exactly a whole tile in one loop.
-    fog_far = _periodic_field(rng, H, 1440, 5)      # 1 px/frame
-    fog_near = _periodic_field(rng, H, 2880, 6)     # 2 px/frame
-    band_far = _smoothstep(0.05, 0.35, v) * _smoothstep(0.85, 0.55, v)
-    band_near = _smoothstep(0.25, 0.6, v) * _smoothstep(1.0, 0.75, v)
+    # --- clouds: long wisps drifting right, 2 px/frame over a 2880 px tile -
+    S["clouds"] = _field(rng, HZ, 2880, 70, aspect=2.6)
+    S["cloud_band"] = (_smoothstep(0.62, 0.30, v[:HZ, :1]) * 0.9 + 0.1).astype(np.float32)
 
-    # Hills: two dark silhouettes along the bottom.
-    def ridge(base, amp, cyc, seed):
-        r = np.random.default_rng(seed)
-        x = np.arange(W) / W
-        y = np.zeros(W)
-        for k, c in enumerate(cyc):
-            y += amp / (k + 1) * np.sin(2 * np.pi * c * x + r.uniform(0, 6.28))
-        return (base + y) * H
+    # --- stars: twinkle at whole-number rates per loop ----------------------
+    n = 520
+    sy = (rng.uniform(0, 1, n) ** 1.4 * HZ * 0.80).astype(int)
+    sx = rng.integers(0, W, n)
+    keep = np.hypot(sx - mx, sy - my) > 150
+    S["stars"] = dict(
+        y=sy[keep], x=sx[keep],
+        b=(rng.uniform(0.15, 1, keep.sum()) ** 2.2).astype(np.float32),
+        c=rng.integers(3, 30, keep.sum()),
+        p=rng.uniform(0, 6.28, keep.sum()))
 
-    far_ridge = ridge(0.78, 0.035, [1.3, 3.1, 7.7], 1)
-    near_ridge = ridge(0.88, 0.03, [0.9, 2.4, 6.3, 13.0], 2)
-    far_mask = _smoothstep(-1.5, 1.5, yy - far_ridge[None, :])
-    near_mask = _smoothstep(-1.5, 1.5, yy - near_ridge[None, :])
+    # --- silhouettes (premultiplied colour + alpha), top half only ---------
+    sil_c = np.zeros((HZ, W, 3), np.float32)
+    sil_a = np.zeros((HZ, W), np.float32)
 
-    rain_far = _rain_layer(rng, 1400, (18, 34), 1, 0.16)
-    rain_near = _rain_layer(rng, 520, (40, 80), 2, 0.26)
+    def layer(mask, col):
+        nonlocal sil_c, sil_a
+        sil_c = sil_c * (1 - mask[..., None]) + mask[..., None] * col
+        sil_a = sil_a * (1 - mask) + mask
 
-    # Static dither frames to keep the dark gradients free of banding.
-    dither = [rng.uniform(-0.7, 0.7, (H, W, 1)).astype(np.float32) for _ in range(4)]
+    Y = yy[:HZ]
+    far = _ridge(0.58, 0.23, 11)
+    near = _ridge(0.595, 0.085, 14, rough=1.7, detail=90)
+    layer(_smoothstep(-1, 1, Y - far[None]) * 0.82, np.array([40, 44, 80], np.float32))
+    layer(_smoothstep(-1, 1, Y - near[None]) * 0.92, np.array([20, 23, 44], np.float32))
 
-    return dict(bg=bg, fog_far=fog_far, fog_near=fog_near,
-                band_far=band_far, band_near=band_near,
-                far_mask=far_mask, near_mask=near_mask,
-                rain_far=rain_far, rain_near=rain_near, dither=dither)
+    trees = np.zeros((HZ, W), np.float32)
+    trng = np.random.default_rng(21)
+    for x in np.arange(-20, W + 20, 9.0):
+        u = x / W
+        if 0.40 < u < 0.60 and trng.uniform() < 0.92:
+            continue                       # open water view in the middle
+        edge = max(0.0, abs(u - 0.5) - 0.1) / 0.4
+        h = trng.uniform(24, 60) + 70 * edge * trng.uniform(0.4, 1.0)
+        if trng.uniform() < 0.08:
+            h *= 1.5
+        x0 = x + trng.uniform(-4, 4)
+        _pine(trees, x0, HZ + 1, h, h * trng.uniform(0.32, 0.42))
+    trees[HZ - 3:HZ] = np.maximum(trees[HZ - 3:HZ], 1.0)     # dark shoreline
+
+    # Cabin on the right bank, in front of the trees.
+    cx, base = int(W * 0.70), HZ - 1
+    cab = np.zeros((HZ, W), np.float32)
+    cab[base - 46:base, cx:cx + 124] = 1
+    for k in range(44):                                      # gable roof
+        half = 72 - k * 72 / 44
+        cab[base - 46 - k, int(cx + 62 - half):int(cx + 62 + half)] = 1
+    cab[base - 96:base - 60, cx + 92:cx + 104] = 1           # chimney
+    trees = np.maximum(trees, cab)
+    layer(trees, np.array([6, 7, 14], np.float32))
+    S["sil_c"], S["sil_a"] = sil_c, sil_a
+
+    # Warm windows: flat glow plus a soft bloom, scaled each frame (flicker).
+    glow = np.zeros((HZ, W, 3), np.float32)
+    S["windows"] = []
+    for wx in (cx + 16, cx + 82):
+        wy0, wy1, wx1 = base - 34, base - 18, wx + 22
+        glow[wy0:wy1, wx:wx1] = WARM * 0.92
+        glow[wy0:wy1, wx + 10:wx + 12] *= 0.25               # mullion
+        glow[wy0 + 7:wy0 + 9, wx:wx1] *= 0.25
+        dd = np.hypot(xx[:HZ] - (wx + 11), (yy[:HZ] - (wy0 + 8)) * 1.3)
+        glow += (np.exp(-((dd / 22) ** 2)) * 0.30 + np.exp(-((dd / 110) ** 2)) * 0.10)[..., None] * WARM
+        S["windows"].append(wx + 11)
+    S["glow"] = glow
+
+    # Chimney smoke: a drifting plume textured by noise scrolling upward.
+    sx0, sy0 = cx + 98, base - 96
+    S["smoke_box"] = (sy0 - 300, sy0, sx0 - 60, sx0 + 240)
+    ys = np.arange(sy0 - 300, sy0, dtype=np.float32)[:, None]
+    xs = np.arange(sx0 - 60, sx0 + 240, dtype=np.float32)[None, :]
+    u = (sy0 - ys) / 300
+    centre = sx0 + 150 * u ** 1.6
+    width = 5 + 55 * u
+    S["smoke_mask"] = (np.exp(-(((xs - centre) / width) ** 2)) * (1 - u) ** 1.3
+                       * _smoothstep(0, 0.06, u)).astype(np.float32)
+    S["smoke_tex"] = _field(rng, 480, 300, 14)                # 1 px/frame up
+
+    # --- water ---------------------------------------------------------------
+    j = np.arange(WH, dtype=np.float32)
+    depth = ((j + 0.5) / WH)[:, None]                          # 0 far .. 1 near
+    S["depth"] = depth
+    S["row_map"] = (depth[:, 0] ** 1.7 * (WH - 1)).astype(np.int32)
+    xg = np.arange(W, dtype=np.float32)[None, :]
+    S["col_map"] = ((W / 2 + (xg - W / 2) * (2.6 - 1.6 * depth)) % W).astype(np.int32)
+    S["wave1"] = _field(rng, 480, W, 9, aspect=5)              # 1 px/frame
+    S["wave2"] = _field(rng, 720, W, 26, aspect=4)             # 2 px/frame
+    S["sparkle"] = _field(rng, 480, W, 2.5, aspect=3, power=1.0)
+    S["moon_col"] = np.exp(-(((xg - mx) / (26 + 190 * depth)) ** 2)) * (1.1 - 0.5 * depth)
+    S["warm_col"] = sum(np.exp(-(((xg - wx) / (3 + 26 * depth)) ** 2)) for wx in S["windows"]) \
+        * np.exp(-depth * 2.2)
+    S["refl_rows"] = (HZ - 1 - j).astype(np.int32)
+
+    # Rain rings: births spread over the loop; age wraps, so it loops.
+    n = 7 * LOOP_S
+    S["ripples"] = dict(
+        t0=rng.uniform(0, FRAMES, n),
+        x=rng.uniform(0, W, n),
+        d=rng.uniform(0.06, 1, n) ** 0.8)
+
+    # Mist sitting on the shoreline, drifting left 1 px/frame.
+    S["mist"] = _field(rng, 160, 1440, 40, aspect=3)
+    mrows = np.arange(HZ - 80, HZ + 80, dtype=np.float32)
+    S["mist_band"] = np.exp(-(((mrows - HZ + 6) / 34) ** 2))[:, None].astype(np.float32)
+
+    # --- foreground reeds, both bottom corners -----------------------------
+    reeds = np.zeros((H, W), np.float32)
+    rr = np.random.default_rng(31)
+    for _ in range(70):
+        left = rr.uniform() < 0.6
+        bx = rr.uniform(-20, 360) if left else rr.uniform(1640, W + 20)
+        h = rr.uniform(70, 280)
+        lean = rr.uniform(-0.5, 0.5) * h * (1 if left else -1) + (25 if left else -25)
+        steps = int(h)
+        for t in np.linspace(0, 1, steps):
+            px = bx + lean * t ** 2
+            py = H + 4 - h * t
+            _stamp_disc(reeds, px, py, 2.6 * (1 - t) + 0.5)
+    S["reeds"] = reeds
+
+    S["rain_far"] = _rain_layer(rng, 1300, (16, 30), 1, 0.13)
+    S["rain_near"] = _rain_layer(rng, 420, (40, 80), 2, 0.22)
+
+    # Vignette and dither.
+    r = np.sqrt(((xx - W / 2) / (W / 2)) ** 2 + ((yy - H / 2) / (H / 2)) ** 2 * 0.8)
+    S["vignette"] = (1 - 0.55 * _smoothstep(0.45, 1.35, r))[..., None].astype(np.float32)
+    S["dither"] = [rng.uniform(-0.7, 0.7, (H, W, 1)).astype(np.float32) for _ in range(4)]
+    return S
 
 
-def _tile_x(field, shift):
-    """Take a W-wide window from a horizontally tileable field."""
-    fw = field.shape[1]
-    idx = (np.arange(W) + shift) % fw
-    return field[:, idx]
+def render_frame(S, i):
+    flicker = 1 + 0.05 * _cyc(i, 13) + 0.035 * _cyc(i, 29, 1.0) + 0.025 * _cyc(i, 47, 2.0)
 
+    # --- sky -----------------------------------------------------------------
+    up = S["sky"].copy()
+    st = S["stars"]
+    tw = st["b"] * (0.65 + 0.35 * np.sin(2 * np.pi * st["c"] * i / FRAMES + st["p"]))
+    star = np.zeros((HZ, W), np.float32)
+    np.add.at(star, (st["y"], st["x"]), tw)
 
-def render_frame(s, i):
-    fog_col = np.array([60, 70, 92], np.float32)
-    far_fog = _tile_x(s["fog_far"], i * 1) ** 2.0 * s["band_far"]
-    near_fog = _tile_x(s["fog_near"], i * 2) ** 2.4 * s["band_near"]
+    cl = np.roll(S["clouds"], -i * 2, axis=1)[:, :W]
+    dens = _smoothstep(0.40, 0.78, cl) * S["cloud_band"]
+    up += (star * (1 - dens) * 150)[..., None] * np.array([0.85, 0.9, 1.0], np.float32)
+    a = dens * (0.88 - 0.35 * S["disc"])
+    up *= 1 - a[..., None]
+    up += a[..., None] * S["cloud_lit"]
 
-    img = s["bg"] + (0.5 * far_fog)[..., None] * fog_col
-    hill_far = np.array([9, 11, 18], np.float32)
-    img = img * (1 - s["far_mask"][..., None]) + s["far_mask"][..., None] * hill_far
-    img += (0.6 * near_fog)[..., None] * fog_col
-    hill_near = np.array([3, 4, 7], np.float32)
-    img = img * (1 - s["near_mask"][..., None]) + s["near_mask"][..., None] * hill_near
+    # --- land, cabin, window light, smoke ----------------------------------
+    up *= 1 - S["sil_a"][..., None]
+    up += S["sil_c"]
+    up += S["glow"] * flicker
 
-    # Rain: vertical scroll. 18 and 36 px/frame cover a whole number of
-    # screen heights per loop (1440*18 = 24*1080), so it wraps cleanly.
-    rf = np.roll(s["rain_far"], i * 18, axis=0)
-    rn = np.roll(s["rain_near"], i * 36, axis=0)
-    rain_col = np.array([150, 165, 190], np.float32)
-    img += (rf * 0.55 + rn)[..., None] * rain_col
+    y0, y1, x0, x1 = S["smoke_box"]
+    tex = np.roll(S["smoke_tex"], -i, axis=0)[: y1 - y0]
+    sm = S["smoke_mask"] * (0.25 + 1.1 * tex) * 0.28
+    region = up[y0:y1, x0:x1]
+    _over(region, np.array([78, 80, 96], np.float32), np.clip(sm, 0, 1))
 
-    img += s["dither"][i % 4]
+    # --- water: rippled mirror of everything above -------------------------
+    rm, cm = S["row_map"], S["col_map"]
+    w1 = S["wave1"][((rm + i) % 480)[:, None], cm]
+    w2 = S["wave2"][((rm + 2 * i) % 720)[:, None], cm]
+    depth = S["depth"]
+    amp = 1.5 + 11 * depth ** 1.3
+    dx = ((w1 - 0.5) * 2 + (w2 - 0.5)) * amp
+    dy = (w1 - 0.5) * (1 + 5 * depth)
+    src_y = np.clip(S["refl_rows"][:, None] + dy.astype(np.int32), 0, HZ - 1)
+    src_x = np.clip(np.arange(W)[None, :] + dx.astype(np.int32), 0, W - 1)
+    water = up[src_y, src_x]
+    shade = (0.60 - 0.22 * depth) * (0.82 + 0.40 * (w2 - 0.5) + 0.25 * (w1 - 0.5))
+    water *= shade[..., None]
+    water += np.array([4, 6, 13], np.float32)
+
+    sp = S["sparkle"][((rm + i) % 480)[:, None], cm]
+    glint = np.clip((sp - 0.54) * 5, 0, 1) ** 2
+    water += (glint * S["moon_col"] * 150)[..., None] * MOONLIGHT / 255
+    water += (glint * S["warm_col"] * 190 * flicker)[..., None] * WARM / 255
+
+    rp = S["ripples"]
+    life = 1.6 * FPS
+    age = (i - rp["t0"]) % FRAMES
+    ring = np.zeros((WH, W), np.float32)
+    for k in np.nonzero(age < life)[0]:
+        g = age[k] / life
+        dpt = rp["d"][k]
+        rad = (3 + 46 * g) * (0.25 + 0.9 * dpt)
+        ry = rad * (0.10 + 0.22 * dpt)
+        cy = dpt ** (1 / 1.7) * (WH - 1)
+        cx = rp["x"][k]
+        ya, yb = int(max(cy - ry - 3, 0)), int(min(cy + ry + 4, WH))
+        xa, xb = int(max(cx - rad - 3, 0)), int(min(cx + rad + 4, W))
+        if yb <= ya or xb <= xa:
+            continue
+        yy = np.arange(ya, yb, dtype=np.float32)[:, None]
+        xx = np.arange(xa, xb, dtype=np.float32)[None, :]
+        e = np.sqrt(((xx - cx) / rad) ** 2 + ((yy - cy) / max(ry, 0.5)) ** 2)
+        val = np.exp(-(((e - 1) * rad / (1.0 + 1.5 * dpt)) ** 2)) * (1 - g) ** 2
+        ring[ya:yb, xa:xb] += val
+    water += (ring * 55)[..., None] * np.array([0.85, 0.9, 1.0], np.float32)
+
+    img = np.concatenate([up, water], axis=0)
+
+    # --- mist, reeds, rain, finish -----------------------------------------
+    mist = np.roll(S["mist"], i, axis=1)
+    mist = np.concatenate([mist, mist[:, : W - mist.shape[1]]], axis=1)[:, :W]
+    ma = (mist ** 1.6) * S["mist_band"] * 0.45
+    _over(img[HZ - 80:HZ + 80], np.array([70, 76, 106], np.float32), ma)
+
+    _over(img, np.array([2, 3, 6], np.float32), S["reeds"])
+
+    rf = np.roll(S["rain_far"], i * 18, axis=0)
+    rn = np.roll(S["rain_near"], i * 36, axis=0)
+    img += (rf * 0.6 + rn)[..., None] * np.array([150, 160, 185], np.float32)
+
+    img *= S["vignette"]
+    img += S["dither"][i % 4]
     return np.clip(img, 0, 255).astype(np.uint8)
 
 
-def make_video(wav_path, mp4_path):
-    s = build_scene()
+_SCENE = None
+
+
+def _render_bytes(i):
+    return render_frame(_SCENE, i).tobytes()
+
+
+def save_still(i, path):
+    from PIL import Image
+    Image.fromarray(render_frame(build_scene(), i)).save(path)
+
+
+def make_video(wav_path, mp4_path, workers=None):
+    import multiprocessing as mp
+    global _SCENE
+    _SCENE = build_scene()
     cmd = ["ffmpeg", "-y", "-loglevel", "error",
            "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
            "-r", str(FPS), "-i", "-", "-i", wav_path,
@@ -256,14 +509,12 @@ def make_video(wav_path, mp4_path):
            "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart",
            mp4_path]
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
-    for i in range(FRAMES):
-        frame = render_frame(s, i)
-        if i == FRAMES // 3:
-            from PIL import Image
-            Image.fromarray(frame).save(os.path.join(OUT, "rainy-night-still.png"))
-        p.stdin.write(frame.tobytes())
-        if i % 120 == 0:
-            print(f"  frame {i}/{FRAMES}", flush=True)
+    ctx = mp.get_context("fork")
+    with ctx.Pool(workers or max(1, (os.cpu_count() or 2) - 1)) as pool:
+        for i, buf in enumerate(pool.imap(_render_bytes, range(FRAMES), chunksize=4)):
+            p.stdin.write(buf)
+            if i % 120 == 0:
+                print(f"  frame {i}/{FRAMES}", flush=True)
     p.stdin.close()
     if p.wait():
         sys.exit("ffmpeg failed")
@@ -283,17 +534,24 @@ def main():
     sub.add_parser("loop", help="render the seamless loop")
     ex = sub.add_parser("extend", help="repeat the loop out to a duration")
     ex.add_argument("duration", help="e.g. 2m, 1h, 8h")
+    stl = sub.add_parser("still", help="save one frame as a PNG (quick preview)")
+    stl.add_argument("frame", nargs="?", type=int, default=0)
     a = ap.parse_args()
 
     os.makedirs(OUT, exist_ok=True)
     wav = os.path.join(OUT, "rainy-night-loop.wav")
     loop = os.path.join(OUT, "rainy-night-loop.mp4")
 
-    if a.cmd == "loop":
+    if a.cmd == "still":
+        path = os.path.join(OUT, f"rainy-night-frame{a.frame}.png")
+        save_still(a.frame, path)
+        print("done:", path)
+    elif a.cmd == "loop":
         print("audio...", flush=True)
         make_audio(wav)
         print("video...", flush=True)
         make_video(wav, loop)
+        save_still(FRAMES // 3, os.path.join(OUT, "rainy-night-still.png"))
         print("done:", loop)
     else:
         secs = parse_duration(a.duration)
