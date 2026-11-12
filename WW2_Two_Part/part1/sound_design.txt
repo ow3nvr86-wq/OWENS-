@@ -1,0 +1,49 @@
+WORLD WAR II, PART 1: HOW HITLER TOOK EUROPE - SOUND DESIGN TIMELINE
+
+Narration: the supplied voiceover (pauses over 0.4 s shortened; nothing else changed).
+Music and effects are synthesised in audio.py with numpy: no samples or third-party audio.
+Mix: voice on top; music about 20% of the voice level and ducked while it speaks; -14 LUFS, true peak -1.5 dB.
+
+CUES (seconds, layer, description)
+    0.00  sfx    Frame one: a low boom as the map of 1939 opens
+    0.00  music  Music: a driving pulse at 104 BPM (low drums and a ticking clock) over a D minor drone
+    0.24  sfx    "1939" slams in
+    3.02  sfx    The year ticks to 1940
+    3.25  sfx    A rising rush as German control floods across Europe
+    3.54  sfx    ... and 1941
+    3.54  music  Low brass stab
+    5.69  sfx    Rewind: the map snaps back to 1939
+    6.35  sfx    "SEPT 1, 1939" slams in
+    6.35  music  Low brass stab
+    8.76  sfx    "invades": tanks rumble, arrows whoosh across the border
+    9.38  sfx    "Poland": shell bursts over Warsaw
+   10.18  sfx    Whip west; Britain and France light up blue
+   11.40  sfx    "war": a heavy stamp
+   11.40  music  Low brass stab
+   12.31  sfx    "1940" slams in
+   13.48  sfx    "tanks roll west": rumble and arrows through the Low Countries
+   16.16  sfx    Unit markers pop across France
+   18.46  sfx    "six weeks": a deep hit as "6 WEEKS" lands
+   18.46  music  Low brass stab
+   19.72  sfx    An air-raid siren and aero engines over the Channel
+   20.24  sfx    Fighters open fire
+   20.94  sfx    "surrender": two bombers go down; the rest turn back
+   21.80  sfx    "1941" slams in
+   21.85  sfx    Whip-pan east
+   23.70  sfx    "JUNE 22, 1941"
+   23.92  sfx    Rapid ticking as the counter runs up to 3,000,000
+   25.50  sfx    "pour": artillery and armour as three army groups cross the border
+   25.50  music  Low brass stab
+   27.20  music  The music drops out at the gates of Moscow: a sub drone, a heartbeat and the wind
+   27.20  sfx    Winter wind
+   27.33  sfx    "DECEMBER 1941"
+   28.94  sfx    "twenty miles": the distance lands
+   29.75  sfx    "Moscow": a single low bell
+   30.58  sfx    A long whip-pan across Asia to the Pacific
+   31.75  sfx    "DEC 7, 1941" slams in
+   32.82  sfx    "attacks": aero engines rise as the planes go in
+   33.60  sfx    "Harbor": explosions
+   34.41  sfx    "PART 2" slams in
+   34.41  music  Low brass stab
+   35.34  sfx    "HOW IT ALL FELL APART"
+   35.86  sfx    "fell apart": the red map cracks

@@ -1,0 +1,201 @@
+{
+ "title": "World War II, Part 1: How Hitler Took Europe",
+ "duration": 37.5,
+ "events": {
+  "y1939": 0.237,
+  "europe": 2.24,
+  "two": 3.0,
+  "later": 3.444,
+  "hitler": 4.177,
+  "most": 5.005,
+  "sept": 5.888,
+  "first": 6.35,
+  "y1939b": 6.98,
+  "germany": 8.341,
+  "invades": 8.76,
+  "poland": 9.26,
+  "britain": 10.178,
+  "france": 10.718,
+  "declare": 11.036,
+  "war": 11.402,
+  "in1940": 12.185,
+  "y1940": 12.311,
+  "tanks": 13.483,
+  "west": 14.06,
+  "france2": 14.97,
+  "biggest": 16.156,
+  "earth": 17.04,
+  "falls": 17.811,
+  "six": 18.462,
+  "weeks": 18.78,
+  "britain2": 19.721,
+  "refuses": 20.087,
+  "surrender": 20.94,
+  "so": 21.8,
+  "hitler2": 22.379,
+  "turns": 22.697,
+  "east": 22.967,
+  "over": 23.697,
+  "three": 23.919,
+  "million": 24.32,
+  "troops": 24.8,
+  "pour": 25.503,
+  "soviet": 26.22,
+  "by": 27.202,
+  "december": 27.328,
+  "less": 28.495,
+  "twenty": 28.939,
+  "miles": 29.257,
+  "moscow": 29.749,
+  "then": 30.581,
+  "december7": 31.333,
+  "seventh": 31.747,
+  "japan": 32.474,
+  "attacks": 32.82,
+  "pearl": 33.24,
+  "harbor": 33.6,
+  "part": 34.412,
+  "two2": 34.634,
+  "how": 35.343,
+  "fell": 35.86,
+  "apart": 36.082,
+  "voice_end": 36.4
+ },
+ "titles": [
+  {
+   "start": 0.237,
+   "end": 3.02,
+   "style": "year",
+   "text": "1939",
+   "y": 0.185
+  },
+  {
+   "start": 3.02,
+   "end": 3.544,
+   "style": "year",
+   "text": "1940",
+   "y": 0.185
+  },
+  {
+   "start": 3.544,
+   "end": 5.768,
+   "style": "year",
+   "text": "1941",
+   "y": 0.185
+  },
+  {
+   "start": 5.888,
+   "end": 10.098,
+   "style": "date",
+   "text": "SEPT 1, 1939",
+   "y": 0.185
+  },
+  {
+   "start": 10.178,
+   "end": 12.125,
+   "style": "date",
+   "text": "SEPT 3, 1939",
+   "y": 0.185
+  },
+  {
+   "start": 11.402,
+   "end": 12.125,
+   "style": "plateb",
+   "text": "BRITAIN AND FRANCE DECLARE WAR",
+   "y": 0.247
+  },
+  {
+   "start": 12.311,
+   "end": 14.89,
+   "style": "year",
+   "text": "1940",
+   "y": 0.185
+  },
+  {
+   "start": 14.97,
+   "end": 17.761,
+   "style": "date",
+   "text": "MAY 1940",
+   "y": 0.185
+  },
+  {
+   "start": 17.811,
+   "end": 18.432,
+   "style": "plate",
+   "text": "FRANCE FALLS",
+   "y": 0.185
+  },
+  {
+   "start": 18.462,
+   "end": 19.641000000000002,
+   "style": "big",
+   "text": "6 WEEKS|MAY 10 - JUNE 22, 1940",
+   "y": 0.197
+  },
+  {
+   "start": 19.721,
+   "end": 21.740000000000002,
+   "style": "date",
+   "text": "SUMMER 1940",
+   "y": 0.185
+  },
+  {
+   "start": 20.087,
+   "end": 21.740000000000002,
+   "style": "plateb",
+   "text": "THE BATTLE OF BRITAIN",
+   "y": 0.247
+  },
+  {
+   "start": 21.8,
+   "end": 23.637,
+   "style": "year",
+   "text": "1941",
+   "y": 0.185
+  },
+  {
+   "start": 23.697,
+   "end": 27.142000000000003,
+   "style": "plate",
+   "text": "JUNE 22, 1941",
+   "y": 0.152
+  },
+  {
+   "start": 27.328,
+   "end": 30.531,
+   "style": "date",
+   "text": "DECEMBER 1941",
+   "y": 0.185
+  },
+  {
+   "start": 31.333,
+   "end": 34.352,
+   "style": "date",
+   "text": "DEC 7, 1941",
+   "y": 0.185
+  },
+  {
+   "start": 34.412,
+   "end": 37.5,
+   "style": "part",
+   "text": "PART 2",
+   "y": 0.195
+  },
+  {
+   "start": 35.343,
+   "end": 37.5,
+   "style": "plate",
+   "text": "HOW IT ALL FELL APART",
+   "y": 0.29
+  }
+ ],
+ "scenes": [
+  {
+   "id": 1,
+   "key": "main",
+   "name": "One continuous map shot",
+   "start": 0.0,
+   "end": 37.5
+  }
+ ]
+}
