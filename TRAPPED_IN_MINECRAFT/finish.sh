@@ -24,7 +24,7 @@ encode() {   # $1 audio -> $2 mp4 [$3 frames dir]
     -c:a aac -b:a 192k -ar 48000 -shortest -movflags +faststart -metadata title="$TITLE" "$2"
 }
 echo "mastering"; master audio/mix_raw.wav audio/mix_final.wav; master audio/bed_raw.wav audio/bed_final.wav 0.56
-echo "encoding $N frames"; encode audio/mix_final.wav final_video.mp4; encode audio/bed_final.wav renders/final_video_no_voice.mp4
+echo "encoding $N frames"; encode audio/mix_final.wav final_video.mp4 build/frames_cap; encode audio/bed_final.wav renders/final_video_no_voice.mp4
 echo "QA"
 for f in final_video.mp4 renders/final_video_no_voice.mp4; do
   echo "== $f  $(du -h "$f" | cut -f1)"

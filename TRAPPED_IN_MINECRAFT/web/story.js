@@ -222,8 +222,8 @@ function shotBed(W, t, out) {
     { t: 32.95, pos: [rx + 0.4, 2.2, rz + 2.8], look: [rx - 0.6, 1.8, rz - 2.0], fov: 46 },
     { t: 35.1, pos: [rx + 2.3, 3.3, rz + 0.2], look: [W.gap[0] + 0.5, W.gap[1] + 0.5, rz - 3], fov: 40 },
     { t: 36.9, pos: [rx + 2.4, 3.4, rz - 0.6], look: [W.gap[0] + 0.5, W.gap[1] + 0.5, rz - 3], fov: 38 },
-    { t: 37.25, pos: [rx + 0.6, 2.0, rz + 3.4], look: [rx - 1.4, 1.3, rz - 1.6], fov: 48, ease: easeOut },
-    { t: 38.35, pos: [rx + 0.6, 2.0, rz + 3.2], look: [rx - 1.4, 1.3, rz - 1.6], fov: 48 },
+    { t: 37.25, pos: [rx - 1.5, 1.6, rz + 1.6], look: [rx - 2.85, 1.05, rz - 1.55], fov: 48, ease: easeOut },
+    { t: 38.35, pos: [rx - 1.6, 1.55, rz + 1.4], look: [rx - 2.85, 1.05, rz - 1.55], fov: 46 },
   ], t, { creep: 0.015 });
   out.light = 'room'; out.shadow = { center: [rx, 0, rz], radius: 8 };
   out.dof = t > 33.5 && t < 37.2 ? { focus: Math.hypot(CAM.pos[0] - (W.gap[0] + 0.5), CAM.pos[2] - (rz - 3)), cInf: 9 } : { focus: 4, cInf: 6 };
