@@ -126,7 +126,7 @@ def grms(x):
     e = e[e > 1e-7]; e = e[e > np.mean(e) * 0.1] if len(e) else e; return float(np.sqrt(np.mean(e))) if len(e) else 1e-9
 rv = grms(VO)
 level = S.get('music', {}).get('level_db', -20)
-music *= 10 ** ((level + 4) / 20) * rv / grms(music)                     # -16 dB in the gaps ...
+music *= 10 ** ((level + 2.5) / 20) * rv / grms(music)                     # about -17.5 dB in the gaps ...
 ve = lp(np.abs(VO), 6, 3); ve = np.clip(ve / max(1e-9, np.percentile(ve, 95)), 0, 1)
 music *= 1 - 0.37 * ve                                                     # ... about -20 dB under speech
 sfx *= 10 ** (-12 / 20) * rv / max(1e-9, grms(sfx)); sfx = np.clip(sfx, -0.95 * np.abs(VO).max(), 0.95 * np.abs(VO).max())
