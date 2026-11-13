@@ -112,12 +112,13 @@ def make_audio(path):
     for c in range(2):
         out[c] = np.fft.irfft(np.fft.rfft(out[c]) * tilt, n)
 
-    # Quiet, steady level: about -24 dBFS RMS, peaks held under -3 dBFS.
+    # Steady level for sleep (about -27 LUFS). The odd loud droplet is
+    # rounded off by a soft limiter rather than turning everything down,
+    # which also stops sharp ticks that could wake a light sleeper.
     rms = np.sqrt(np.mean(out ** 2))
-    out *= 10 ** (-24 / 20) / rms
-    peak = np.max(np.abs(out))
-    if peak > 10 ** (-3 / 20):
-        out *= 10 ** (-3 / 20) / peak
+    out *= 10 ** (-30 / 20) / rms
+    ceil = 10 ** (-9 / 20)
+    out = ceil * np.tanh(out / ceil)
 
     pcm = (out.T * 32767).astype(np.int16)
     with wave.open(path, "wb") as wf:
@@ -588,6 +589,7 @@ def main():
     sub.add_parser("loop", help="render the seamless loop")
     ex = sub.add_parser("extend", help="repeat the loop out to a duration")
     ex.add_argument("duration", help="e.g. 2m, 1h, 8h")
+    sub.add_parser("audio", help="remake the audio only and remux the loop")
     stl = sub.add_parser("still", help="save one frame as a PNG (quick preview)")
     stl.add_argument("frame", nargs="?", type=int, default=0)
     a = ap.parse_args()
@@ -600,6 +602,14 @@ def main():
         path = os.path.join(OUT, f"rainy-night-frame{a.frame}.png")
         save_still(a.frame, path)
         print("done:", path)
+    elif a.cmd == "audio":
+        make_audio(wav)
+        tmp = loop + ".tmp.mp4"
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", loop, "-i", wav,
+                        "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "aac",
+                        "-b:a", "192k", "-movflags", "+faststart", tmp], check=True)
+        os.replace(tmp, loop)
+        print("done:", loop)
     elif a.cmd == "loop":
         print("audio...", flush=True)
         make_audio(wav)

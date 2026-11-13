@@ -14,11 +14,15 @@ body that slowly swells, a fine distant hiss and three kinds of droplets.
 
 ```bash
 python3 rainy_night.py still 300     # quick preview of one frame
-python3 rainy_night.py loop          # render the 60 s seamless loop
+python3 rainy_night.py loop          # render the 60 s seamless loop (~4 min)
+python3 rainy_night.py audio         # remake just the sound, keep the video
 python3 rainy_night.py extend 2m     # test: loop it to 2 minutes
 python3 rainy_night.py extend 1h     # 1 hour
 python3 rainy_night.py extend 10h    # a full night
 ```
+
+Audio sits at about -27 LUFS, a typical level for sleep content, with a soft
+limiter so no single droplet ticks out loud.
 
 `extend` doesn't re-render. It copies the video stream and re-loops the
 audio from the WAV, so a 10-hour file takes minutes. Long versions get a
