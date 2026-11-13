@@ -1,0 +1,1138 @@
+{
+ "title": "How a Rocket Cart Stopped an Army",
+ "narration_file": "narration.txt",
+ "caption_y": 0.68,
+ "caption_swaps": {
+  "thirty thousand": "30,000",
+  "three thousand": "3,000",
+  "a hundred": "100",
+  "ten to one": "10:1"
+ },
+ "grade": "saturate(1.1) contrast(1.06) brightness(1.02)",
+ "thumbnail_cue": "Whoosh",
+ "music": {
+  "style": "march",
+  "bpm": 104,
+  "level_db": -20
+ },
+ "cast": {
+  "general": {
+   "costume": "armor_red",
+   "hat": "plume_helmet",
+   "facial": "moustache goatee",
+   "mood": "determined"
+  },
+  "defender": {
+   "costume": "armor_blue",
+   "hat": "joseon_helmet",
+   "mood": "neutral"
+  },
+  "defender2": {
+   "costume": "coat_green",
+   "hat": "gat",
+   "facial": "moustache",
+   "mood": "neutral"
+  },
+  "attacker": {
+   "costume": "ashigaru",
+   "hat": "jingasa",
+   "mood": "angry"
+  },
+  "samurai": {
+   "costume": "samurai",
+   "hat": "kabuto",
+   "facial": "moustache",
+   "mood": "angry"
+  }
+ },
+ "scenes": [
+  {
+   "cue": "How",
+   "bg": "valley_dawn.png",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.62
+    ]
+   },
+   "transition": "whip",
+   "crowds": [
+    {
+     "cast": [
+      "attacker",
+      "attacker",
+      "samurai"
+     ],
+     "count": 80,
+     "area": [
+      0.0,
+      0.66,
+      1.0,
+      0.82
+     ],
+     "scale": [
+      0.1,
+      0.26
+     ],
+     "speed": 0.03,
+     "wrap": true,
+     "action": "march"
+    }
+   ],
+   "sfx": [
+    {
+     "type": "drums",
+     "at": 0
+    }
+   ]
+  },
+  {
+   "cue": "with a cart",
+   "bg": "fort_wall.png",
+   "bgBlur": 3,
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.55
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "d1",
+     "cast": "defender",
+     "x": 0.5,
+     "y": 0.871,
+     "scale": 2.3,
+     "mood": "shocked",
+     "keys": [
+      {
+       "cue": "cart",
+       "action": "shrug",
+       "mood": "worried"
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "boing",
+     "at": "cart"
+    }
+   ]
+  },
+  {
+   "cue": "It's 1593",
+   "bg": "valley_dawn.png",
+   "camera": {
+    "move": "pan_right",
+    "focus": [
+     0.5,
+     0.6
+    ]
+   },
+   "transition": "cut",
+   "crowds": [
+    {
+     "cast": [
+      "attacker",
+      "samurai",
+      "attacker"
+     ],
+     "count": 100,
+     "area": [
+      -0.1,
+      0.64,
+      1.1,
+      0.8
+     ],
+     "scale": [
+      0.09,
+      0.24
+     ],
+     "speed": 0.025,
+     "wrap": true
+    }
+   ]
+  },
+  {
+   "cue": "A Japanese army",
+   "bg": "valley_dawn.png",
+   "bgBlur": 4,
+   "camera": {
+    "move": "drift",
+    "zoom": 1.25,
+    "focus": [
+     0.5,
+     0.7
+    ]
+   },
+   "transition": "whip",
+   "crowds": [
+    {
+     "cast": [
+      "attacker"
+     ],
+     "count": 26,
+     "area": [
+      -0.1,
+      0.7,
+      1.1,
+      0.76
+     ],
+     "scale": [
+      0.45,
+      0.6
+     ],
+     "speed": 0.02,
+     "wrap": true
+    }
+   ],
+   "characters": [
+    {
+     "id": "a1",
+     "cast": "attacker",
+     "x": 0.25,
+     "y": 0.734,
+     "scale": 1.45,
+     "action": "march"
+    },
+    {
+     "id": "s1",
+     "cast": "samurai",
+     "x": 0.52,
+     "y": 0.75,
+     "scale": 1.55,
+     "action": "march"
+    },
+    {
+     "id": "a2",
+     "cast": "attacker",
+     "x": 0.79,
+     "y": 0.734,
+     "scale": 1.45,
+     "action": "march"
+    }
+   ],
+   "sfx": [
+    {
+     "type": "march",
+     "at": 0
+    }
+   ]
+  },
+  {
+   "cue": "marches on",
+   "bg": "valley_dawn.png",
+   "camera": {
+    "move": "tilt_up",
+    "zoom": 1.15,
+    "focus": [
+     0.35,
+     0.45
+    ]
+   },
+   "transition": "cut",
+   "crowds": [
+    {
+     "cast": [
+      "attacker",
+      "samurai"
+     ],
+     "count": 60,
+     "area": [
+      0.0,
+      0.62,
+      1.0,
+      0.74
+     ],
+     "scale": [
+      0.07,
+      0.17
+     ],
+     "speed": 0.02,
+     "wrap": true
+    }
+   ]
+  },
+  {
+   "cue": "Inside are",
+   "bg": "fort_wall.png",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.75
+    ]
+   },
+   "transition": "cut",
+   "crowds": [
+    {
+     "cast": [
+      "defender",
+      "defender2",
+      "defender"
+     ],
+     "count": 24,
+     "area": [
+      0.05,
+      0.76,
+      0.95,
+      0.88
+     ],
+     "scale": [
+      0.42,
+      0.7
+     ],
+     "speed": 0,
+     "action": "idle",
+     "mood": "worried"
+    }
+   ]
+  },
+  {
+   "cue": "a wooden wall",
+   "bg": "fort_wall.png",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.4,
+     0.45
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "d2",
+     "cast": "defender2",
+     "x": 0.7,
+     "y": 0.75,
+     "scale": 1.55,
+     "flip": true,
+     "action": "point",
+     "mood": "smug"
+    }
+   ],
+   "sfx": [
+    {
+     "type": "knock",
+     "at": "wall"
+    }
+   ]
+  },
+  {
+   "cue": "and a general",
+   "bg": "fort_wall.png",
+   "bgBlur": 3,
+   "camera": {
+    "move": "punch",
+    "amount": 0.4,
+    "focus": [
+     0.5,
+     0.45
+    ]
+   },
+   "transition": "whip",
+   "characters": [
+    {
+     "id": "g1",
+     "cast": "general",
+     "x": 0.5,
+     "y": 0.839,
+     "scale": 2.1,
+     "action": "idle",
+     "keys": [
+      {
+       "cue": "refuses",
+       "action": "crossed",
+       "mood": "angry"
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "sting",
+     "at": "general"
+    }
+   ]
+  },
+  {
+   "cue": "The odds",
+   "bg": "hillside_down.png",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.45
+    ]
+   },
+   "transition": "cut",
+   "crowds": [
+    {
+     "cast": [
+      "attacker",
+      "attacker",
+      "samurai"
+     ],
+     "count": 110,
+     "scale": [
+      0.07,
+      0.3
+     ],
+     "speed": 0,
+     "action": "idle",
+     "mood": "angry",
+     "area": [
+      0.05,
+      0.29,
+      0.95,
+      0.6
+     ],
+     "taper": 0.22
+    }
+   ]
+  },
+  {
+   "cue": "Not great",
+   "bg": "fort_wall.png",
+   "bgBlur": 5,
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "d1",
+     "cast": "defender",
+     "x": 0.33,
+     "y": 0.823,
+     "scale": 2.0,
+     "mood": "worried",
+     "talk": [
+      "Not",
+      "great"
+     ]
+    },
+    {
+     "id": "d2",
+     "cast": "defender2",
+     "x": 0.74,
+     "y": 0.839,
+     "scale": 2.1,
+     "flip": true,
+     "mood": "scared",
+     "look": -0.6
+    }
+   ],
+   "sfx": [
+    {
+     "type": "gulp",
+     "at": "great"
+    }
+   ]
+  },
+  {
+   "cue": "But Kwon Yul",
+   "bg": "fort_wall.png",
+   "bgBlur": 5,
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.42
+    ]
+   },
+   "transition": "whip",
+   "characters": [
+    {
+     "id": "g1",
+     "cast": "general",
+     "x": 0.5,
+     "y": 0.92,
+     "scale": 2.6,
+     "mood": "smug",
+     "keys": [
+      {
+       "cue": "secret",
+       "headTilt": 0.08
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "ting",
+     "at": "secret"
+    }
+   ]
+  },
+  {
+   "cue": "It looks like",
+   "bg": "hwacha_closeup.png",
+   "camera": {
+    "move": "pull",
+    "focus": [
+     0.5,
+     0.55
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "d2",
+     "cast": "defender2",
+     "x": 0.2,
+     "y": 0.775,
+     "scale": 1.7,
+     "action": "present",
+     "mood": "smug"
+    }
+   ]
+  },
+  {
+   "cue": "with a giant honeycomb",
+   "bg": "hwacha_closeup.png",
+   "camera": {
+    "move": "punch",
+    "amount": 0.5,
+    "zoom": 1.9,
+    "focus": [
+     0.3,
+     0.24
+    ]
+   },
+   "transition": "whip",
+   "sfx": [
+    {
+     "type": "ting",
+     "at": "honeycomb"
+    }
+   ]
+  },
+  {
+   "cue": "It's called a hwacha",
+   "bg": "fort_wall.png",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.45,
+     0.62
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "d1",
+     "cast": "defender",
+     "x": 0.28,
+     "y": 0.758,
+     "scale": 1.6,
+     "action": "present",
+     "mood": "happy"
+    }
+   ],
+   "sfx": [
+    {
+     "type": "tada",
+     "at": "hwacha"
+    }
+   ]
+  },
+  {
+   "cue": "Every hole holds",
+   "bg": "hwacha_closeup.png",
+   "camera": {
+    "move": "pan_right",
+    "zoom": 1.6,
+    "focus": [
+     0.22,
+     0.3
+    ]
+   },
+   "transition": "cut"
+  },
+  {
+   "cue": "Light one fuse",
+   "bg": "hwacha_closeup.png",
+   "bgBlur": 2,
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.45,
+     0.5
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "d1",
+     "cast": "defender",
+     "x": 0.2,
+     "y": 0.855,
+     "scale": 2.2,
+     "action": "torch",
+     "prop": "torch",
+     "mood": "determined"
+    }
+   ],
+   "fx": [
+    {
+     "type": "sparks",
+     "at": "fuse",
+     "x": 0.55,
+     "y": 0.45
+    }
+   ],
+   "sfx": [
+    {
+     "type": "fuse",
+     "at": "fuse"
+    }
+   ]
+  },
+  {
+   "cue": "and up to a hundred",
+   "bg": "hillside_down.png",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.48
+    ]
+   },
+   "transition": "cut",
+   "crowds": [
+    {
+     "cast": [
+      "attacker",
+      "samurai"
+     ],
+     "count": 80,
+     "scale": [
+      0.07,
+      0.3
+     ],
+     "action": "march",
+     "dy": 0.012,
+     "wrapY": true,
+     "area": [
+      0.05,
+      0.29,
+      0.95,
+      0.6
+     ],
+     "taper": 0.22
+    }
+   ],
+   "fx": [
+    {
+     "type": "rockets",
+     "at": "arrows",
+     "from": [
+      0.5,
+      1.06
+     ],
+     "to": [
+      0.5,
+      0.42
+     ],
+     "count": 100,
+     "spread": 620,
+     "arc": -330,
+     "dur": 1.15,
+     "shake": 10,
+     "fromSpread": 700,
+     "persp": 0.4
+    },
+    {
+     "type": "glow",
+     "at": "scream",
+     "amount": 0.5
+    }
+   ],
+   "sfx": [
+    {
+     "type": "volley",
+     "at": "arrows"
+    }
+   ]
+  },
+  {
+   "cue": "The attackers charge",
+   "bg": "hillside_down.png",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.45
+    ]
+   },
+   "transition": "cut",
+   "crowds": [
+    {
+     "cast": [
+      "attacker",
+      "attacker",
+      "samurai"
+     ],
+     "count": 75,
+     "scale": [
+      0.07,
+      0.32
+     ],
+     "action": "run",
+     "dy": 0.07,
+     "wrapY": true,
+     "mood": "angry",
+     "area": [
+      0.05,
+      0.29,
+      0.95,
+      0.6
+     ],
+     "taper": 0.22
+    }
+   ],
+   "sfx": [
+    {
+     "type": "charge",
+     "at": "charge"
+    }
+   ]
+  },
+  {
+   "cue": "wave after wave",
+   "bg": "hillside_down.png",
+   "camera": {
+    "move": "push",
+    "zoom": 1.1,
+    "focus": [
+     0.5,
+     0.42
+    ]
+   },
+   "transition": "cut",
+   "crowds": [
+    {
+     "cast": [
+      "attacker",
+      "samurai"
+     ],
+     "count": 60,
+     "scale": [
+      0.07,
+      0.32
+     ],
+     "action": "run",
+     "dy": 0.08,
+     "wrapY": true,
+     "mood": "angry",
+     "area": [
+      0.05,
+      0.29,
+      0.95,
+      0.6
+     ],
+     "taper": 0.22
+    },
+    {
+     "cast": [
+      "attacker"
+     ],
+     "count": 45,
+     "scale": [
+      0.07,
+      0.32
+     ],
+     "action": "run",
+     "dy": 0.08,
+     "wrapY": true,
+     "seed": 5,
+     "mood": "determined",
+     "area": [
+      0.05,
+      0.29,
+      0.95,
+      0.6
+     ],
+     "taper": 0.22
+    }
+   ]
+  },
+  {
+   "cue": "Whoosh",
+   "bg": "hillside_down.png",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.45
+    ]
+   },
+   "transition": "cut",
+   "crowds": [
+    {
+     "cast": [
+      "attacker",
+      "samurai"
+     ],
+     "count": 75,
+     "scale": [
+      0.07,
+      0.32
+     ],
+     "action": "run",
+     "dy": 0.05,
+     "wrapY": true,
+     "mood": "angry",
+     "area": [
+      0.05,
+      0.29,
+      0.95,
+      0.6
+     ],
+     "taper": 0.22
+    }
+   ],
+   "fx": [
+    {
+     "type": "rockets",
+     "at": "Whoosh",
+     "from": [
+      0.5,
+      1.06
+     ],
+     "to": [
+      0.5,
+      0.44
+     ],
+     "count": 130,
+     "spread": 700,
+     "arc": -300,
+     "dur": 0.95,
+     "shake": 14,
+     "fromSpread": 800,
+     "persp": 0.4
+    },
+    {
+     "type": "glow",
+     "at": "fire",
+     "amount": 0.8
+    },
+    {
+     "type": "impact",
+     "at": "fills",
+     "x": 0.38,
+     "y": 0.42,
+     "r": 170
+    },
+    {
+     "type": "impact",
+     "at": "with",
+     "x": 0.62,
+     "y": 0.5,
+     "r": 210
+    }
+   ],
+   "sfx": [
+    {
+     "type": "volley",
+     "at": "Whoosh"
+    },
+    {
+     "type": "boom",
+     "at": "fire"
+    }
+   ]
+  },
+  {
+   "cue": "and the charge falls apart",
+   "bg": "hillside_down.png",
+   "bgBlur": 4,
+   "camera": {
+    "move": "push",
+    "zoom": 1.3,
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "transition": "whip",
+   "characters": [
+    {
+     "id": "a1",
+     "cast": "attacker",
+     "x": 0.3,
+     "y": 0.6,
+     "scale": 0.87,
+     "action": "run",
+     "mood": "scared",
+     "flip": true,
+     "move": {
+      "x": -0.2,
+      "from": 0,
+      "to": 1.8
+     }
+    },
+    {
+     "id": "s1",
+     "cast": "samurai",
+     "x": 0.55,
+     "y": 0.62,
+     "scale": 0.93,
+     "action": "flail",
+     "mood": "shocked",
+     "move": {
+      "x": 1.2,
+      "from": 0.3,
+      "to": 1.9
+     }
+    },
+    {
+     "id": "a2",
+     "cast": "attacker",
+     "x": 0.78,
+     "y": 0.59,
+     "scale": 0.84,
+     "action": "run",
+     "mood": "scared",
+     "move": {
+      "x": 1.3,
+      "from": 0.1,
+      "to": 1.6
+     }
+    }
+   ],
+   "sfx": [
+    {
+     "type": "scramble",
+     "at": "falls"
+    }
+   ]
+  },
+  {
+   "cue": "They charge again",
+   "bg": "hillside_down.png",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.45
+    ]
+   },
+   "transition": "cut",
+   "crowds": [
+    {
+     "cast": [
+      "attacker",
+      "samurai",
+      "attacker"
+     ],
+     "count": 85,
+     "scale": [
+      0.07,
+      0.32
+     ],
+     "action": "run",
+     "dy": 0.07,
+     "wrapY": true,
+     "seed": 9,
+     "mood": "angry",
+     "area": [
+      0.05,
+      0.29,
+      0.95,
+      0.6
+     ],
+     "taper": 0.22
+    }
+   ],
+   "fx": [
+    {
+     "type": "rockets",
+     "at": "again",
+     "from": [
+      0.5,
+      1.06
+     ],
+     "to": [
+      0.5,
+      0.43
+     ],
+     "count": 90,
+     "spread": 650,
+     "arc": -300,
+     "dur": 0.95,
+     "shake": 10,
+     "fromSpread": 750,
+     "persp": 0.4
+    }
+   ],
+   "sfx": [
+    {
+     "type": "volley",
+     "at": "again"
+    }
+   ]
+  },
+  {
+   "cue": "By the end",
+   "bg": "battle_sunset.png",
+   "camera": {
+    "move": "pull",
+    "focus": [
+     0.5,
+     0.65
+    ]
+   },
+   "transition": "cut",
+   "crowds": [
+    {
+     "cast": [
+      "attacker",
+      "samurai"
+     ],
+     "count": 45,
+     "area": [
+      0.15,
+      0.6,
+      0.95,
+      0.7
+     ],
+     "scale": [
+      0.12,
+      0.24
+     ],
+     "speed": -0.035,
+     "flip": true,
+     "action": "march",
+     "mood": "sad"
+    }
+   ],
+   "tint": "rgba(255,120,40,0.08)",
+   "bgFilter": "brightness(1.45)"
+  },
+  {
+   "cue": "Kwon Yul later",
+   "bg": "fort_wall.png",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.6
+    ]
+   },
+   "transition": "whip",
+   "tint": "rgba(255,130,50,0.16)",
+   "characters": [
+    {
+     "id": "g1",
+     "cast": "general",
+     "x": 0.62,
+     "y": 0.758,
+     "scale": 1.6,
+     "flip": true,
+     "action": "point",
+     "mood": "happy"
+    }
+   ],
+   "sfx": [
+    {
+     "type": "ting",
+     "at": "credit"
+    }
+   ]
+  },
+  {
+   "cue": "Ten to one odds",
+   "bg": "hwacha_closeup.png",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.45,
+     0.45
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "d1",
+     "cast": "defender",
+     "x": 0.16,
+     "y": 0.742,
+     "scale": 1.5,
+     "action": "idle",
+     "mood": "smug",
+     "keys": [
+      {
+       "cue": "sneezes",
+       "action": "cheer",
+       "mood": "happy"
+      }
+     ]
+    },
+    {
+     "id": "d2",
+     "cast": "defender2",
+     "x": 0.86,
+     "y": 0.75,
+     "scale": 1.55,
+     "flip": true,
+     "action": "idle",
+     "mood": "happy",
+     "keys": [
+      {
+       "cue": "sneezes",
+       "action": "cheer"
+      }
+     ]
+    }
+   ],
+   "fx": [
+    {
+     "type": "puff",
+     "at": "sneezes",
+     "x": 0.4,
+     "y": 0.36,
+     "n": 9,
+     "size": 90
+    },
+    {
+     "type": "rockets",
+     "at": "sneezes",
+     "from": [
+      0.4,
+      0.36
+     ],
+     "to": [
+      0.6,
+      -0.15
+     ],
+     "count": 24,
+     "spread": 500,
+     "arc": -60,
+     "dur": 0.8,
+     "fromSpread": 120,
+     "shake": 8
+    }
+   ],
+   "sfx": [
+    {
+     "type": "sneeze",
+     "at": "sneezes"
+    },
+    {
+     "type": "volley",
+     "at": "rockets"
+    }
+   ]
+  }
+ ]
+}

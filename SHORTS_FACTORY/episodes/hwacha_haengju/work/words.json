@@ -1,0 +1,943 @@
+{
+ "duration": 59.715,
+ "fps": 30,
+ "frames": 1791,
+ "words": [
+  {
+   "word": "How",
+   "line": 0,
+   "start": 0.0,
+   "end": 0.26
+  },
+  {
+   "word": "do",
+   "line": 0,
+   "start": 0.26,
+   "end": 0.36
+  },
+  {
+   "word": "you",
+   "line": 0,
+   "start": 0.36,
+   "end": 0.5
+  },
+  {
+   "word": "stop",
+   "line": 0,
+   "start": 0.5,
+   "end": 0.76
+  },
+  {
+   "word": "thirty",
+   "line": 0,
+   "start": 0.76,
+   "end": 1.24
+  },
+  {
+   "word": "thousand",
+   "line": 0,
+   "start": 1.24,
+   "end": 1.72
+  },
+  {
+   "word": "soldiers...",
+   "line": 0,
+   "start": 1.72,
+   "end": 2.16
+  },
+  {
+   "word": "with",
+   "line": 0,
+   "start": 2.16,
+   "end": 2.84
+  },
+  {
+   "word": "a",
+   "line": 0,
+   "start": 2.84,
+   "end": 3.06
+  },
+  {
+   "word": "cart?",
+   "line": 0,
+   "start": 3.06,
+   "end": 3.9
+  },
+  {
+   "word": "It's",
+   "line": 1,
+   "start": 3.887,
+   "end": 4.06
+  },
+  {
+   "word": "1593,",
+   "line": 1,
+   "start": 4.06,
+   "end": 5.28
+  },
+  {
+   "word": "in",
+   "line": 1,
+   "start": 5.28,
+   "end": 6.64
+  },
+  {
+   "word": "Korea.",
+   "line": 1,
+   "start": 6.64,
+   "end": 7.66
+  },
+  {
+   "word": "A",
+   "line": 1,
+   "start": 7.762,
+   "end": 7.84
+  },
+  {
+   "word": "Japanese",
+   "line": 1,
+   "start": 7.84,
+   "end": 8.24
+  },
+  {
+   "word": "army",
+   "line": 1,
+   "start": 8.24,
+   "end": 8.66
+  },
+  {
+   "word": "of",
+   "line": 1,
+   "start": 8.96,
+   "end": 9.12
+  },
+  {
+   "word": "around",
+   "line": 1,
+   "start": 9.12,
+   "end": 9.38
+  },
+  {
+   "word": "thirty",
+   "line": 1,
+   "start": 9.38,
+   "end": 9.81
+  },
+  {
+   "word": "thousand",
+   "line": 1,
+   "start": 9.81,
+   "end": 10.24
+  },
+  {
+   "word": "marches",
+   "line": 1,
+   "start": 10.24,
+   "end": 10.62
+  },
+  {
+   "word": "on",
+   "line": 1,
+   "start": 10.62,
+   "end": 11.2
+  },
+  {
+   "word": "a",
+   "line": 1,
+   "start": 11.2,
+   "end": 11.36
+  },
+  {
+   "word": "small",
+   "line": 1,
+   "start": 11.36,
+   "end": 11.58
+  },
+  {
+   "word": "hilltop",
+   "line": 1,
+   "start": 11.58,
+   "end": 12.04
+  },
+  {
+   "word": "fort",
+   "line": 1,
+   "start": 12.04,
+   "end": 12.4
+  },
+  {
+   "word": "called",
+   "line": 1,
+   "start": 12.4,
+   "end": 12.76
+  },
+  {
+   "word": "Haengju.",
+   "line": 1,
+   "start": 12.76,
+   "end": 13.52
+  },
+  {
+   "word": "Inside",
+   "line": 2,
+   "start": 13.724,
+   "end": 14.086
+  },
+  {
+   "word": "are",
+   "line": 2,
+   "start": 14.086,
+   "end": 14.386
+  },
+  {
+   "word": "about",
+   "line": 2,
+   "start": 14.386,
+   "end": 14.646
+  },
+  {
+   "word": "three",
+   "line": 2,
+   "start": 14.646,
+   "end": 15.066
+  },
+  {
+   "word": "thousand",
+   "line": 2,
+   "start": 15.066,
+   "end": 15.486
+  },
+  {
+   "word": "defenders,",
+   "line": 2,
+   "start": 15.486,
+   "end": 16.506
+  },
+  {
+   "word": "a",
+   "line": 2,
+   "start": 16.509,
+   "end": 16.586
+  },
+  {
+   "word": "wooden",
+   "line": 2,
+   "start": 16.586,
+   "end": 16.786
+  },
+  {
+   "word": "wall,",
+   "line": 2,
+   "start": 16.786,
+   "end": 17.646
+  },
+  {
+   "word": "and",
+   "line": 2,
+   "start": 17.636,
+   "end": 17.706
+  },
+  {
+   "word": "a",
+   "line": 2,
+   "start": 17.706,
+   "end": 17.826
+  },
+  {
+   "word": "general",
+   "line": 2,
+   "start": 17.826,
+   "end": 18.166
+  },
+  {
+   "word": "named",
+   "line": 2,
+   "start": 18.166,
+   "end": 18.586
+  },
+  {
+   "word": "Kwon",
+   "line": 2,
+   "start": 18.586,
+   "end": 18.886
+  },
+  {
+   "word": "Yul",
+   "line": 2,
+   "start": 18.886,
+   "end": 19.226
+  },
+  {
+   "word": "who",
+   "line": 2,
+   "start": 19.226,
+   "end": 19.626
+  },
+  {
+   "word": "refuses",
+   "line": 2,
+   "start": 19.626,
+   "end": 20.026
+  },
+  {
+   "word": "to",
+   "line": 2,
+   "start": 20.026,
+   "end": 20.346
+  },
+  {
+   "word": "leave.",
+   "line": 2,
+   "start": 20.346,
+   "end": 21.006
+  },
+  {
+   "word": "The",
+   "line": 3,
+   "start": 21.142,
+   "end": 21.226
+  },
+  {
+   "word": "odds?",
+   "line": 3,
+   "start": 21.226,
+   "end": 21.806
+  },
+  {
+   "word": "Roughly",
+   "line": 3,
+   "start": 21.828,
+   "end": 22.106
+  },
+  {
+   "word": "ten",
+   "line": 3,
+   "start": 22.106,
+   "end": 22.406
+  },
+  {
+   "word": "to",
+   "line": 3,
+   "start": 22.406,
+   "end": 22.546
+  },
+  {
+   "word": "one.",
+   "line": 3,
+   "start": 22.546,
+   "end": 23.026
+  },
+  {
+   "word": "Not",
+   "line": 3,
+   "start": 23.129,
+   "end": 23.266
+  },
+  {
+   "word": "great.",
+   "line": 3,
+   "start": 23.266,
+   "end": 24.046
+  },
+  {
+   "word": "But",
+   "line": 4,
+   "start": 24.135,
+   "end": 24.226
+  },
+  {
+   "word": "Kwon",
+   "line": 4,
+   "start": 24.226,
+   "end": 24.446
+  },
+  {
+   "word": "Yul",
+   "line": 4,
+   "start": 24.446,
+   "end": 24.746
+  },
+  {
+   "word": "has",
+   "line": 4,
+   "start": 24.746,
+   "end": 25.006
+  },
+  {
+   "word": "a",
+   "line": 4,
+   "start": 25.006,
+   "end": 25.226
+  },
+  {
+   "word": "secret",
+   "line": 4,
+   "start": 25.226,
+   "end": 25.506
+  },
+  {
+   "word": "weapon.",
+   "line": 4,
+   "start": 25.506,
+   "end": 26.206
+  },
+  {
+   "word": "It",
+   "line": 4,
+   "start": 26.391,
+   "end": 26.483
+  },
+  {
+   "word": "looks",
+   "line": 4,
+   "start": 26.483,
+   "end": 26.643
+  },
+  {
+   "word": "like",
+   "line": 4,
+   "start": 26.643,
+   "end": 26.903
+  },
+  {
+   "word": "a",
+   "line": 4,
+   "start": 26.903,
+   "end": 27.243
+  },
+  {
+   "word": "farm",
+   "line": 4,
+   "start": 27.243,
+   "end": 27.403
+  },
+  {
+   "word": "cart...",
+   "line": 4,
+   "start": 27.403,
+   "end": 27.803
+  },
+  {
+   "word": "with",
+   "line": 4,
+   "start": 27.803,
+   "end": 28.383
+  },
+  {
+   "word": "a",
+   "line": 4,
+   "start": 28.383,
+   "end": 28.603
+  },
+  {
+   "word": "giant",
+   "line": 4,
+   "start": 28.603,
+   "end": 28.863
+  },
+  {
+   "word": "honeycomb",
+   "line": 4,
+   "start": 28.863,
+   "end": 29.323
+  },
+  {
+   "word": "of",
+   "line": 4,
+   "start": 29.323,
+   "end": 29.583
+  },
+  {
+   "word": "holes",
+   "line": 4,
+   "start": 29.583,
+   "end": 29.783
+  },
+  {
+   "word": "on",
+   "line": 4,
+   "start": 29.783,
+   "end": 30.103
+  },
+  {
+   "word": "top.",
+   "line": 4,
+   "start": 30.103,
+   "end": 30.683
+  },
+  {
+   "word": "It's",
+   "line": 5,
+   "start": 30.762,
+   "end": 30.923
+  },
+  {
+   "word": "called",
+   "line": 5,
+   "start": 30.923,
+   "end": 31.163
+  },
+  {
+   "word": "a",
+   "line": 5,
+   "start": 31.163,
+   "end": 31.343
+  },
+  {
+   "word": "hwacha.",
+   "line": 5,
+   "start": 31.343,
+   "end": 32.563
+  },
+  {
+   "word": "Every",
+   "line": 5,
+   "start": 32.482,
+   "end": 32.683
+  },
+  {
+   "word": "hole",
+   "line": 5,
+   "start": 32.683,
+   "end": 32.943
+  },
+  {
+   "word": "holds",
+   "line": 5,
+   "start": 32.943,
+   "end": 33.303
+  },
+  {
+   "word": "a",
+   "line": 5,
+   "start": 33.303,
+   "end": 33.503
+  },
+  {
+   "word": "rocket-powered",
+   "line": 5,
+   "start": 33.503,
+   "end": 34.163
+  },
+  {
+   "word": "arrow.",
+   "line": 5,
+   "start": 34.163,
+   "end": 35.103
+  },
+  {
+   "word": "Light",
+   "line": 6,
+   "start": 35.096,
+   "end": 35.263
+  },
+  {
+   "word": "one",
+   "line": 6,
+   "start": 35.263,
+   "end": 35.523
+  },
+  {
+   "word": "fuse,",
+   "line": 6,
+   "start": 35.523,
+   "end": 35.923
+  },
+  {
+   "word": "and",
+   "line": 6,
+   "start": 36.39,
+   "end": 36.463
+  },
+  {
+   "word": "up",
+   "line": 6,
+   "start": 36.463,
+   "end": 36.603
+  },
+  {
+   "word": "to",
+   "line": 6,
+   "start": 36.603,
+   "end": 36.783
+  },
+  {
+   "word": "a",
+   "line": 6,
+   "start": 36.783,
+   "end": 36.863
+  },
+  {
+   "word": "hundred",
+   "line": 6,
+   "start": 36.863,
+   "end": 37.143
+  },
+  {
+   "word": "arrows",
+   "line": 6,
+   "start": 37.143,
+   "end": 37.603
+  },
+  {
+   "word": "scream",
+   "line": 6,
+   "start": 37.603,
+   "end": 37.943
+  },
+  {
+   "word": "out",
+   "line": 6,
+   "start": 37.943,
+   "end": 38.183
+  },
+  {
+   "word": "at",
+   "line": 6,
+   "start": 38.183,
+   "end": 38.323
+  },
+  {
+   "word": "once.",
+   "line": 6,
+   "start": 38.323,
+   "end": 38.923
+  },
+  {
+   "word": "The",
+   "line": 7,
+   "start": 39.119,
+   "end": 39.201
+  },
+  {
+   "word": "attackers",
+   "line": 7,
+   "start": 39.201,
+   "end": 39.641
+  },
+  {
+   "word": "charge",
+   "line": 7,
+   "start": 39.641,
+   "end": 40.121
+  },
+  {
+   "word": "up",
+   "line": 7,
+   "start": 40.121,
+   "end": 40.341
+  },
+  {
+   "word": "the",
+   "line": 7,
+   "start": 40.341,
+   "end": 40.501
+  },
+  {
+   "word": "hill,",
+   "line": 7,
+   "start": 40.501,
+   "end": 41.381
+  },
+  {
+   "word": "wave",
+   "line": 7,
+   "start": 41.12,
+   "end": 41.441
+  },
+  {
+   "word": "after",
+   "line": 7,
+   "start": 41.441,
+   "end": 41.761
+  },
+  {
+   "word": "wave.",
+   "line": 7,
+   "start": 41.761,
+   "end": 42.641
+  },
+  {
+   "word": "Whoosh.",
+   "line": 8,
+   "start": 42.689,
+   "end": 43.361
+  },
+  {
+   "word": "The",
+   "line": 8,
+   "start": 43.359,
+   "end": 43.441
+  },
+  {
+   "word": "sky",
+   "line": 8,
+   "start": 43.441,
+   "end": 43.721
+  },
+  {
+   "word": "fills",
+   "line": 8,
+   "start": 43.721,
+   "end": 44.061
+  },
+  {
+   "word": "with",
+   "line": 8,
+   "start": 44.061,
+   "end": 44.281
+  },
+  {
+   "word": "fire,",
+   "line": 8,
+   "start": 44.281,
+   "end": 44.621
+  },
+  {
+   "word": "and",
+   "line": 8,
+   "start": 44.98,
+   "end": 45.061
+  },
+  {
+   "word": "the",
+   "line": 8,
+   "start": 45.061,
+   "end": 45.181
+  },
+  {
+   "word": "charge",
+   "line": 8,
+   "start": 45.181,
+   "end": 45.521
+  },
+  {
+   "word": "falls",
+   "line": 8,
+   "start": 45.521,
+   "end": 45.841
+  },
+  {
+   "word": "apart.",
+   "line": 8,
+   "start": 45.841,
+   "end": 46.701
+  },
+  {
+   "word": "They",
+   "line": 9,
+   "start": 46.778,
+   "end": 46.881
+  },
+  {
+   "word": "charge",
+   "line": 9,
+   "start": 46.881,
+   "end": 47.201
+  },
+  {
+   "word": "again,",
+   "line": 9,
+   "start": 47.201,
+   "end": 47.601
+  },
+  {
+   "word": "and",
+   "line": 9,
+   "start": 47.935,
+   "end": 48.021
+  },
+  {
+   "word": "again.",
+   "line": 9,
+   "start": 48.021,
+   "end": 48.841
+  },
+  {
+   "word": "By",
+   "line": 9,
+   "start": 48.949,
+   "end": 49.041
+  },
+  {
+   "word": "the",
+   "line": 9,
+   "start": 49.041,
+   "end": 49.181
+  },
+  {
+   "word": "end",
+   "line": 9,
+   "start": 49.181,
+   "end": 49.341
+  },
+  {
+   "word": "of",
+   "line": 9,
+   "start": 49.341,
+   "end": 49.501
+  },
+  {
+   "word": "the",
+   "line": 9,
+   "start": 49.501,
+   "end": 49.601
+  },
+  {
+   "word": "day,",
+   "line": 9,
+   "start": 49.601,
+   "end": 50.061
+  },
+  {
+   "word": "the",
+   "line": 9,
+   "start": 50.061,
+   "end": 50.101
+  },
+  {
+   "word": "huge",
+   "line": 9,
+   "start": 50.101,
+   "end": 50.361
+  },
+  {
+   "word": "army",
+   "line": 9,
+   "start": 50.361,
+   "end": 50.741
+  },
+  {
+   "word": "pulls",
+   "line": 9,
+   "start": 50.741,
+   "end": 51.061
+  },
+  {
+   "word": "back.",
+   "line": 9,
+   "start": 51.061,
+   "end": 51.721
+  },
+  {
+   "word": "Kwon",
+   "line": 10,
+   "start": 51.908,
+   "end": 52.112
+  },
+  {
+   "word": "Yul",
+   "line": 10,
+   "start": 52.112,
+   "end": 52.332
+  },
+  {
+   "word": "later",
+   "line": 10,
+   "start": 52.332,
+   "end": 52.792
+  },
+  {
+   "word": "gave",
+   "line": 10,
+   "start": 52.792,
+   "end": 53.312
+  },
+  {
+   "word": "the",
+   "line": 10,
+   "start": 53.312,
+   "end": 53.752
+  },
+  {
+   "word": "carts",
+   "line": 10,
+   "start": 53.752,
+   "end": 53.772
+  },
+  {
+   "word": "the",
+   "line": 10,
+   "start": 53.772,
+   "end": 54.032
+  },
+  {
+   "word": "credit.",
+   "line": 10,
+   "start": 54.032,
+   "end": 54.812
+  },
+  {
+   "word": "Ten",
+   "line": 11,
+   "start": 54.856,
+   "end": 55.012
+  },
+  {
+   "word": "to",
+   "line": 11,
+   "start": 55.012,
+   "end": 55.172
+  },
+  {
+   "word": "one",
+   "line": 11,
+   "start": 55.172,
+   "end": 55.412
+  },
+  {
+   "word": "odds...",
+   "line": 11,
+   "start": 55.412,
+   "end": 56.292
+  },
+  {
+   "word": "beaten",
+   "line": 11,
+   "start": 56.244,
+   "end": 56.392
+  },
+  {
+   "word": "by",
+   "line": 11,
+   "start": 56.392,
+   "end": 56.712
+  },
+  {
+   "word": "a",
+   "line": 11,
+   "start": 56.712,
+   "end": 56.832
+  },
+  {
+   "word": "farm",
+   "line": 11,
+   "start": 56.832,
+   "end": 57.072
+  },
+  {
+   "word": "cart",
+   "line": 11,
+   "start": 57.072,
+   "end": 57.412
+  },
+  {
+   "word": "that",
+   "line": 11,
+   "start": 57.412,
+   "end": 57.652
+  },
+  {
+   "word": "sneezes",
+   "line": 11,
+   "start": 57.652,
+   "end": 58.212
+  },
+  {
+   "word": "rockets.",
+   "line": 11,
+   "start": 58.212,
+   "end": 59.692
+  }
+ ]
+}

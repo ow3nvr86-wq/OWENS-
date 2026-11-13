@@ -14,3 +14,6 @@ Lake_Nyos_Short/build/
 Lake_Nyos_Short/renders/frames/
 Lake_Nyos_Short/renders/preview_frames/
 Lake_Nyos_Short/audio/music_sfx_stem.wav
+SHORTS_FACTORY/build/
+SHORTS_FACTORY/episodes/*/work/frames/
+SHORTS_FACTORY/episodes/*/audio/*.wav
