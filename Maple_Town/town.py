@@ -91,9 +91,58 @@ def oval(name, rx, rz, loc, col, parent, emit=0.0):
     return o
 
 
+_FMAT = {}
+
+
+def face_plate(name, parent, expr, eyes, r=0.672, z0=0.06, z1=1.22, half=1.12):
+    """The painted face: a strip wrapped round the front of the head, textured with assets/faces/<expr>_<eyes>.png."""
+    import os
+    import bmesh
+    key = (expr, eyes)
+    if key not in _FMAT:
+        m = bpy.data.materials.new(f'face_{expr}_{eyes}')
+        m.use_nodes = True
+        nt = m.node_tree
+        bsdf = nt.nodes['Principled BSDF']
+        tex = nt.nodes.new('ShaderNodeTexImage')
+        tex.image = bpy.data.images.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets', 'faces', f'{expr}_{eyes}.png'))
+        nt.links.new(tex.outputs['Color'], bsdf.inputs['Base Color'])
+        nt.links.new(tex.outputs['Alpha'], bsdf.inputs['Alpha'])
+        bsdf.inputs['Roughness'].default_value = 0.6
+        m.blend_method = 'BLEND'
+        _FMAT[key] = m
+    me = bpy.data.meshes.new(name + '_face')
+    bm = bmesh.new()
+    uv = bm.loops.layers.uv.new()
+    n = 18
+    rows = []
+    for k in range(n + 1):
+        a = -half + 2 * half * k / n
+        x, y = math.sin(a) * r, -math.cos(a) * r
+        rows.append((bm.verts.new((x, y, z0)), bm.verts.new((x, y, z1)), k / n))
+    for (a0, a1, u0), (b0, b1, u1) in zip(rows, rows[1:]):
+        f = bm.faces.new((a0, b0, b1, a1))
+        for lp, (u, v) in zip(f.loops, ((u0, 0), (u1, 0), (u1, 1), (u0, 1))):
+            lp[uv].uv = (u, v)
+        f.smooth = True
+    bm.to_mesh(me)
+    bm.free()
+    o = bpy.data.objects.new(name + '_face', me)
+    bpy.context.collection.objects.link(o)
+    o.data.materials.append(_FMAT[key])
+    o.parent = parent
+    o.visible_shadow = False
+    return o
+
+
+def shade(col, k):
+    h = col.lstrip('#')
+    return ''.join(f'{max(0, min(255, int(int(h[i:i + 2], 16) * k))):02x}' for i in (0, 2, 4))
+
+
 def character(name, loc=(0, 0, 0), rot=0.0, skin='f2c39b', shirt='4b8fe2', pants='2c3350', shoes=None, hair=None,
               hair_style='swoop', hood=None, mask=False, hat=None, face='smile', scale=1.0, sleeves='long', logo=None,
-              stripe=None, acc=()):
+              stripe=None, acc=(), eyes='brown'):
     """A classic block avatar: torso 2 x 2 x 1, arms and legs 1 x 2 x 1, a small rounded head, a flat cartoon face.
     Customisable: skin, shirt (sleeves long/short, chest logo, stripe), pants, shoes, hair colour and style
     (swoop, spiky, flat, long, buns, buzz), face (smile, smirk, calm, happy, scared, angry), hood, mask, hat (cap,
@@ -107,6 +156,12 @@ def character(name, loc=(0, 0, 0), rot=0.0, skin='f2c39b', shirt='4b8fe2', pants
     B = 0.035
     P['torso'] = empty(name + '_torso', (0, 0, 2.0), root)
     box(name + '_body', (2.0, 1.0, 2.0), (0, 0, 1.0), shirt, P['torso'], B)
+    # clothing detail: collar, hem and belt, cuffs and soles
+    box(name + '_collar', (1.0, 1.02, 0.16), (0, 0, 1.94), shade(shirt, 0.72), P['torso'], 0.03)
+    box(name + '_hem', (2.02, 1.02, 0.14), (0, 0, 0.07), shade(shirt, 0.78), P['torso'], 0.0)
+    if not hood:
+        box(name + '_belt', (2.03, 1.03, 0.16), (0, 0, -0.02), '2a2622', P['torso'], 0.0)
+        box(name + '_buckle', (0.34, 0.05, 0.2), (0, -0.52, -0.02), 'e8c24a', P['torso'], 0.02, rough=0.25)
     if stripe:
         box(name + '_stripe', (2.02, 1.02, 0.34), (0, 0, 1.15), stripe, P['torso'], 0.0)
     if logo:
@@ -118,11 +173,14 @@ def character(name, loc=(0, 0, 0), rot=0.0, skin='f2c39b', shirt='4b8fe2', pants
             box(f'{name}_arm{side}', (0.98, 0.98, 1.2), (0, 0, -1.3), skin, P['arm_' + side], B)
         else:
             box(f'{name}_slv{side}', (1.0, 1.0, 1.62), (0, 0, -0.71), shirt, P['arm_' + side], B)
+            box(f'{name}_cuff{side}', (1.03, 1.03, 0.16), (0, 0, -1.46), shade(shirt, 0.75), P['arm_' + side], 0.02)
             box(f'{name}_hand{side}', (0.98, 0.98, 0.4), (0, 0, -1.7), skin, P['arm_' + side], B)
     for side, x in (('l', -0.5), ('r', 0.5)):
         P['leg_' + side] = empty(f'{name}_leg_{side}', (x, 0, 2.0), root)
         box(f'{name}_leg{side}', (0.98, 1.0, 1.55), (0, 0, -0.775), pants, P['leg_' + side], B)
-        box(f'{name}_shoe{side}', (0.99, 1.02, 0.47), (0, 0, -1.765), shoes, P['leg_' + side], B)
+        box(f'{name}_shoe{side}', (1.0, 1.12, 0.42), (0, -0.05, -1.72), shoes, P['leg_' + side], 0.08)
+        box(f'{name}_sole{side}', (1.02, 1.16, 0.12), (0, -0.05, -1.94), 'f4f4f4', P['leg_' + side], 0.03)
+        box(f'{name}_knee{side}', (1.0, 1.02, 0.06), (0, 0, -0.75), shade(pants, 0.8), P['leg_' + side], 0.0)
     P['head'] = empty(name + '_head', (0, 0, 4.0), root)
     hd = cyl(name + '_skull', 0.66, 1.22, (0, 0, 0.64), skin, P['head'], 40)
     md = hd.modifiers.new('bv', 'BEVEL')
@@ -133,36 +191,14 @@ def character(name, loc=(0, 0, 0), rot=0.0, skin='f2c39b', shirt='4b8fe2', pants
     dark = '17181d'
     if mask:
         box(name + '_mask', (1.36, 1.36, 0.5), (0, 0, 0.76), dark, P['head'], 0.12)
-    if face == 'scared':
-        for x in (-0.26, 0.26):
-            oval(name + '_eye', 0.2, 0.24, (x, fy, ey + 0.02), 'ffffff', P['head'])
-            oval(name + '_pupil', 0.075, 0.09, (x, fy - 0.012, ey), dark, P['head'])
-    else:
+    if mask:
         for x in (-0.25, 0.25):
-            if mask:
-                oval(name + '_eyew', 0.16, 0.16, (x, fy - 0.04, ey + 0.02), 'ffffff', P['head'])
-            oval(name + '_eye', 0.085, 0.15 if face != 'happy' else 0.11, (x, fy - (0.05 if mask else 0.012), ey), dark, P['head'])
-            oval(name + '_glint', 0.03, 0.04, (x + 0.03, fy - (0.06 if mask else 0.024), ey + 0.06), 'ffffff', P['head'])
-    tilt = {'smile': 0.0, 'calm': 0.0, 'happy': 0.12, 'smirk': -0.2, 'scared': 0.4, 'angry': -0.5}[face]
-    if face in ('angry', 'scared', 'smirk') and not mask:
-        for x, sg in ((-0.25, 1), (0.25, -1)):
-            box(name + '_brow', (0.26, 0.03, 0.06), (x, fy - 0.012, ey + (0.36 if face == 'scared' else 0.25)), dark, P['head'], 0.0, rot=(0, sg * tilt, 0))
-    if not mask:
-        if face in ('smile', 'happy', 'smirk'):
-            n = 7
-            for k in range(n):                       # a curved smile from short segments
-                u = k / (n - 1) - 0.5
-                w = 0.5 if face != 'smirk' else 0.34
-                x = u * w + (0.1 if face == 'smirk' else 0)
-                z = 0.36 + (u * u) * (1.1 if face != 'smirk' else 0.5) + (u * 0.25 if face == 'smirk' else 0)
-                box(name + '_m', (w / n * 1.5, 0.03, 0.055), (x, fy - 0.012, z), dark, P['head'], 0.0, rot=(0, -u * (2.2 if face != 'smirk' else 1.0), 0))
-        elif face == 'scared':
-            oval(name + '_mouth', 0.15, 0.13, (0, fy - 0.012, 0.3), dark, P['head'])
-        elif face == 'angry':
-            box(name + '_mouth', (0.34, 0.03, 0.14), (0, fy - 0.012, 0.32), dark, P['head'], 0.02)
-            box(name + '_teeth', (0.3, 0.035, 0.05), (0, fy - 0.014, 0.35), 'ffffff', P['head'], 0.0)
-        else:
-            box(name + '_mouth', (0.3, 0.03, 0.05), (0, fy - 0.012, 0.36), dark, P['head'], 0.0)
+            oval(name + '_eyew', 0.17, 0.17, (x, fy - 0.04, ey + 0.02), 'ffffff', P['head'])
+            oval(name + '_eye', 0.085, 0.11, (x, fy - 0.05, ey), dark, P['head'])
+            box(name + '_brow', (0.3, 0.03, 0.07), (x, fy - 0.05, ey + 0.2), 'ffffff', P['head'], 0.0, rot=(0, (0.45 if x < 0 else -0.45), 0))
+    else:
+        face_plate(name, P['head'], face, eyes)
+    P['head'].scale = (1.24, 1.24, 1.24)
     # ---- hair
     if hair and not hood and hat != 'beanie':
         if hair_style == 'spiky':
@@ -443,15 +479,16 @@ def setup(samples=24, scale=50):
     s.render.resolution_x, s.render.resolution_y = 1080, 1920
     s.render.resolution_percentage = scale
     s.render.fps = 30
-    s.view_settings.view_transform = 'Filmic'
+    s.view_settings.view_transform = 'Standard'
     s.view_settings.look = 'Medium High Contrast'
-    s.view_settings.exposure = 0.0
+    s.view_settings.exposure = -1.15
     s.render.threads_mode = 'AUTO'
 
 
 def reset():
     bpy.ops.wm.read_factory_settings(use_empty=True)
     _MATS.clear()
+    _FMAT.clear()
 
 
 def still(path):
@@ -498,7 +535,7 @@ def sheet(out):
     sc = bpy.context.scene
     sc.render.resolution_x, sc.render.resolution_y = 1920, 1080
     world()
-    box('floor', (400, 400, 1), (0, 0, -0.5), 'aab6c8', None, 0, rough=1.0)
+    box('floor', (400, 400, 1), (0, 0, -0.5), '6f86ad', None, 0, rough=1.0)
     cast = [
         dict(shirt='8b9099', pants='3a3f4a', shoes='e8e8ec', hood='8b9099', face='calm'),
         dict(shirt='e9ebf0', pants='1c1e24', shoes='aeb4c0', hair='7fa8e8', hair_style='spiky', face='smirk', logo='20242c', acc=('antlers',)),
@@ -508,10 +545,10 @@ def sheet(out):
         dict(shirt='23262e', pants='15171c', shoes='15171c', mask=True, face='angry', skin='e0b08a'),
     ]
     for i, kw in enumerate(cast):
-        c = character(f'c{i}', ((i - 2.5) * 4.6, 0, 0), 0.0, **kw)
+        c = character(f'c{i}', ((i - 2.5) * 4.5, 0, 0), 0.0, eyes=['grey', 'red', 'green', 'blue', 'brown', 'brown'][i], **kw)
         pose(c, arm_l=0.12, arm_r=-0.12, head=(0, 0, 0.12 if i % 2 else -0.12))
         c['root'].rotation_euler[2] = math.radians((i - 2.5) * -5)
-    camera((0, -40, 5.0), (0, 0, 2.7), 42)
+    camera((0, -36, 4.4), (0, 0, 3.0), 44)
     still(f'{out}/sheet.png')
 
 
