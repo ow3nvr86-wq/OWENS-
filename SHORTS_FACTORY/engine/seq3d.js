@@ -8,7 +8,19 @@ async function loadSeq(ep, dir) {
   if (SEQ[dir]) return;
   const meta = await (await fetch('../' + ep + '/' + dir + '/camera.json')).json(), imgs = new Array(meta.frames);
   await Promise.all([...Array(meta.frames).keys()].map(f => new Promise(res => { const im = new Image(); im.onload = () => { imgs[f] = im; res(); }; im.onerror = () => res(); im.src = '../' + ep + '/' + dir + '/f' + String(f).padStart(4, '0') + '.jpg'; })));
-  SEQ[dir] = { meta, imgs };
+  const masks = {};                                       // occlusion masks per actor prefix: {mh: [first, last]} -> mh####.png
+  for (const [pre, [a, b]] of Object.entries(meta.masks || {})) { masks[pre] = {};
+    await Promise.all([...Array(b - a + 1).keys()].map(k => new Promise(res => { const f = a + k, im = new Image(); im.onload = () => { masks[pre][f] = im; res(); }; im.onerror = () => res(); im.src = '../' + ep + '/' + dir + '/' + pre + String(f).padStart(4, '0') + '.png'; }))); }
+  SEQ[dir] = { meta, imgs, masks };
+}
+let OVL = null;
+function drawOccluders(g, S, pre, f, s) {                  // lay the 3D parts in front of an actor (mask) back over the drawn actor
+  const m = S.masks && S.masks[pre] && S.masks[pre][f], img = S.imgs[f]; if (!m || !img) return;
+  if (!OVL) { OVL = document.createElement('canvas'); OVL.width = W; OVL.height = H; }
+  const o = OVL.getContext('2d'); o.setTransform(1, 0, 0, 1, 0, 0); o.globalCompositeOperation = 'source-over'; o.clearRect(0, 0, W, H);
+  o.filter = (SCRIPT.grade || '') + (s.bgFilter ? ' ' + s.bgFilter : '') || 'none'; o.drawImage(img, 0, 0, W, H); o.filter = 'none';
+  o.globalCompositeOperation = 'destination-in'; o.drawImage(m, 0, 0, W, H); o.globalCompositeOperation = 'source-over';
+  g.drawImage(OVL, 0, 0);
 }
 function seqFrame(S, s, t) { return clamp((t - s.start - (s.bgseq.offset || 0)) * S.meta.fps, 0, S.meta.frames - 1); }
 function seqCam(S, x) {                                   // camera at a fractional frame (linear between rendered frames)
@@ -94,6 +106,12 @@ function seqActorState(ch, s, t, S, x, cam) {
     if (ch.autoFlip !== false && sp > 0.25) { const q = seqProject(cam, trackAt(S, ch.track, Math.min(S.meta.frames - 1, x + 4))); if (Math.abs(q[0] - p[0]) > 1.5) st.flip = q[0] < p[0]; }
   }
   if (ch.rollTrack && S.meta.roll) { let r = S.meta.roll[Math.min(S.meta.roll.length - 1, Math.round(x))] % (2 * Math.PI); if (r > Math.PI) r -= 2 * Math.PI; st.bodyRot = (st.bodyRot || 0) + r * (ch.rollSign || 1); }
+  if (st.action === 'ride' && ch.track) {                 // which way the bike points on screen, and the pedal angle
+    const fw = ch.rideFwd || [0, 1, 0], q = seqProject(cam, [P[0] + fw[0] * 0.6, P[1] + fw[1] * 0.6, P[2] + fw[2] * 0.6]), side = clamp((q[0] - p[0]) / (0.6 * p[2]), -1, 1);
+    st.flip = side < 0; st.rideSide = Math.abs(side);
+    S._ped = S._ped || {}; if (!S._ped[ch.track]) { const D = trackDist(S, ch.track), PH = [0]; for (let k = 1; k < D.length; k++) PH.push(PH[k - 1] + 2 * Math.PI * Math.min(1.7, (D[k] - D[k - 1]) * S.meta.fps / 2.2) / S.meta.fps); S._ped[ch.track] = PH; }
+    const PH = S._ped[ch.track], k0 = Math.min(PH.length - 2, Math.floor(x)); st.pedal = lerp(PH[k0], PH[k0 + 1], x - k0);
+  }
   st.depth = p[3];
   if (ch.nodAt) for (const c of [].concat(ch.nodT || [])) st.headTilt = (st.headTilt || 0) + 0.16 * pulse(t, c, 0.35) + 0.12 * pulse(t, c + 0.35, 0.3);
   if (p[3] > 0.4 && st.x > -300 && st.x < W + 300) ACT[ch.id] = { x: st.x, y: st.y, h: 555 * st.scale, s: st.scale };
@@ -121,10 +139,10 @@ renderShotSeq = (function (orig) {
       if (FEAT.crowdFX) st = crowdReact(st, s, t, 150);
       const def = Object.assign({ seed: ch.id.length }, CAST()[ch.cast || ch.id]);
       let clipY = null; if (ch.clipDoor) { const d = S.meta.door[Math.min(S.meta.door.length - 1, Math.round(x))]; clipY = seqProject(cam, [d[0], d[1], d[2] + 1.02])[1]; }
-      items.push({ d: st.depth, draw: () => { if (clipY != null) { g.beginPath(); g.rect(-W, -H, W * 3, clipY + H); g.clip(); } st._def = def; drawCharacter(g, def, st); if (st._post) st._post(g); } });
+      items.push({ d: st.depth, occ: ch.occlude, draw: () => { if (clipY != null) { g.beginPath(); g.rect(-W, -H, W * 3, clipY + H); g.clip(); } st._def = def; drawCharacter(g, def, st); if (st._post) st._post(g); } });
     }
     items.sort((a, b) => b.d - a.d);
-    for (const it of items) { g.save(); it.draw(); g.restore(); }
+    for (const it of items) { g.save(); it.draw(); g.restore(); if (it.occ) drawOccluders(g, S, it.occ, Math.round(x), s); }
     for (const fx of s.fx || []) if (!SCREEN_FX.has(fx.type)) { g.save(); fxDraw(g, fx, s, t); g.restore(); }
     g.setTransform(1, 0, 0, 1, 0, 0);
     for (const fx of s.fx || []) if (SCREEN_FX.has(fx.type)) { if (window.FX2 && FX2[fx.type]) FX2[fx.type](g, fx, s, t); }

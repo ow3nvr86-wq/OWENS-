@@ -71,13 +71,13 @@ def hero_pos(t):
     if t < 44.1: return (0, 0, 0), 0                                  # in the car (drawn from the seat track)
     (cx, cy, cz), hd, rl = car_state(t); return (cx - 1.6, cy - 0.6, 0.0), 1
 def hero_seat(t):
-    (cx, cy, cz), hd, rl = car_state(t); return (cx - 0.4, cy - 0.3, cz + 0.55), (1 if 27.0 <= t < 44.1 and not (math.radians(50) < car_state(t)[2] < math.radians(310)) else 0)
-PLAYER_PATH = [(0.0, (-4.0, 42.0, 0.0)), (21.9, (-4.0, 42.0, 0.0)), (23.3, (-3.0, 46.3, 0.0))]
+    (cx, cy, cz), hd, rl = car_state(t); return (cx - 0.4, cy - 0.3, cz + 0.32), (1 if 27.0 <= t < 44.1 and not (math.radians(50) < car_state(t)[2] < math.radians(310)) else 0)
+PLAYER_PATH = [(0.0, (-4.0, 42.0, 0.0)), (21.9, (-4.0, 42.0, 0.0)), (23.3, (-3.0, 46.76, 0.0))]
 def player_pos(t):
     if t < 20.4: return (0, 0, 0), 0
     if t < 23.3: return keyed(PLAYER_PATH, t), 1
     (bx, by, bz), _, _ = bike_state(t)
-    if t < 46.0: return (bx, by - 0.1, bz + 0.62), 1                 # riding
+    if t < 46.0: return (bx, by - 0.24, bz), 1                         # riding: anchored on the ground under the saddle
     return (-6.2, 326.5, 0.0), 1
 def mailman_pos(t):
     return keyed([(0.0, (-7.5, 40.0, 0.0)), (21.6, (-5.2, 43.2, 0.0))], t, lambda u: u), 1
@@ -175,7 +175,7 @@ def car(x, y, rot, col, convertible=False, lights=False):
     parts.append(bev(box(P(0, 0, 0.6), (1.95, 4.5, 0.62), cm, (0, 0, rot)), 0.18))
     parts.append(bev(box(P(0, 1.35, 0.95), (1.8, 1.6, 0.14), cm, (math.radians(-4), 0, rot)), 0.06))           # hood
     if convertible:
-        for dx in (-0.45, 0.45): parts.append(bev(box(P(dx, -0.2, 1.0), (0.7, 0.6, 0.3), seatm, (0, 0, rot)), 0.08)); parts.append(bev(box(P(dx, -0.45, 1.3), (0.7, 0.14, 0.6), seatm, (0, 0, rot)), 0.06))
+        for dx in (-0.45, 0.45): parts.append(bev(box(P(dx, -0.2, 0.75), (0.7, 0.6, 0.3), seatm, (0, 0, rot)), 0.08)); parts.append(bev(box(P(dx, -0.45, 1.07), (0.7, 0.14, 0.5), seatm, (0, 0, rot)), 0.06))   # low seats sunk into the tub
         parts.append(box(P(0, 0.62, 1.22), (1.75, 0.06, 0.5), glass, (math.radians(-25), 0, rot)))
         parts.append(box(P(0, 0.66, 1.48), (1.8, 0.06, 0.06), chrome, (math.radians(-25), 0, rot)))
     else:
@@ -248,27 +248,96 @@ rampm = m_brick('ramp', (0.2, 0.65, 0.25), (0.95, 0.95, 0.9), (0.15, 0.15, 0.15)
 L = math.hypot(RAMP1 - RAMP0, LIP_Z); box((3.0, (RAMP0 + RAMP1) / 2, LIP_Z / 2), (5.0, L, 0.3), rampm, (math.atan2(LIP_Z, RAMP1 - RAMP0), 0, 0))
 for sx in (-1, 1): box((3.0 + sx * 2.5, (RAMP0 + RAMP1) / 2, LIP_Z / 2 - 0.4), (0.3, L, LIP_Z * 0.6), dark, (math.atan2(LIP_Z, RAMP1 - RAMP0), 0, 0))
 concrete = m_noise('concrete', (0.36, 0.35, 0.34), (0.45, 0.44, 0.42), 4, 0.9, 0.1)
-ground(232, 240, -60, 60, concrete); ground(290, 300, -60, 60, concrete)
+ground(232, 240, -60, 60, concrete)
 box((0, 265, -8.05), (400, 50, 0.1), asphalt)
 for sy in (240, 290): box((0, sy, -4), (400, 0.8, 8), concrete)
 for k in range(40): box((-200 + k * 10, 265, -7.99), (3.0, 0.16, 0.01), white)
 for k in range(10): rig(car(random.uniform(-80, 80), random.choice([250, 258, 272, 280]), math.pi / 2, random.choice([(0.8, 0.8, 0.8), (0.2, 0.2, 0.25), (0.6, 0.1, 0.1), (0.2, 0.4, 0.7)])), 'fw%d' % k).location.z = -8
-# police station plaza (y 300..400)
-ground(300, 400, -60, 60, asphalt); ground(345, 352, -24, 24, concrete)
+# freeway dressing: guard rails on both banks, overhead sign gantries over the lanes
+for sy in (239.6, 290.4):
+    box((0, sy, 0.55), (400, 0.12, 0.22), chrome)
+    for k in range(80): box((-200 + k * 5, sy, 0.3), (0.1, 0.1, 0.6), dark)
+fwsign = m_plain('fwSign', (0.05, 0.36, 0.18), 0.5)
+for gx in (-46, 52):
+    for sy in (242.0, 288.0): cyl((gx, sy, -2.0), 0.25, 12.0, dark, v=8)
+    box((gx, 265, 3.7), (0.45, 46.5, 0.5), dark)
+    for dy in (-9.0, 0.0, 9.0):
+        for sx in (1, -1): box((gx + sx * 0.3, 265 + dy, 2.3), (0.12, 7.5, 2.4), fwsign); box((gx + sx * 0.37, 265 + dy, 2.6), (0.02, 6.4, 0.22), white); box((gx + sx * 0.37, 265 + dy, 1.9), (0.02, 4.0, 0.22), white)
+
+def m_windows(name, facade, win, sx=3.0, sz=3.4):
+    """a facade with a grid of windows, laid out in world space so every building gets the same window size"""
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; b = nt.nodes['Principled BSDF']
+    geo = nt.nodes.new('ShaderNodeNewGeometry'); sp = nt.nodes.new('ShaderNodeSeparateXYZ'); cb = nt.nodes.new('ShaderNodeCombineXYZ')
+    add = nt.nodes.new('ShaderNodeMath'); add.operation = 'ADD'
+    nt.links.new(geo.outputs['Position'], sp.inputs[0]); nt.links.new(sp.outputs['X'], add.inputs[0]); nt.links.new(sp.outputs['Y'], add.inputs[1])
+    dv = nt.nodes.new('ShaderNodeMath'); dv.operation = 'DIVIDE'; dv.inputs[1].default_value = sx; nt.links.new(add.outputs[0], dv.inputs[0]); nt.links.new(dv.outputs[0], cb.inputs['X'])
+    dz = nt.nodes.new('ShaderNodeMath'); dz.operation = 'DIVIDE'; dz.inputs[1].default_value = sz; nt.links.new(sp.outputs['Z'], dz.inputs[0]); nt.links.new(dz.outputs[0], cb.inputs['Y'])
+    br = nt.nodes.new('ShaderNodeTexBrick'); br.inputs['Scale'].default_value = 1.0; br.inputs['Brick Width'].default_value = 1.0; br.inputs['Row Height'].default_value = 1.0
+    br.inputs['Mortar Size'].default_value = 0.3; br.inputs['Mortar Smooth'].default_value = 0.0; br.offset = 0.0
+    br.inputs['Color1'].default_value = (*win, 1); br.inputs['Color2'].default_value = (*[v * 0.8 for v in win], 1); br.inputs['Mortar'].default_value = (*facade, 1)
+    nt.links.new(cb.outputs[0], br.inputs['Vector']); nt.links.new(br.outputs['Color'], b.inputs['Base Color'])
+    rr = nt.nodes.new('ShaderNodeMapRange'); rr.inputs['To Min'].default_value = 0.85; rr.inputs['To Max'].default_value = 0.15
+    nt.links.new(br.outputs['Fac'], rr.inputs['Value']); nt.links.new(rr.outputs['Result'], b.inputs['Roughness'])
+    return m
+towers = [m_windows('tower%d' % i, f, w) for i, (f, w) in enumerate([((0.78, 0.74, 0.66), (0.2, 0.3, 0.4)), ((0.62, 0.66, 0.7), (0.16, 0.26, 0.36)),
+          ((0.82, 0.6, 0.45), (0.22, 0.28, 0.34)), ((0.9, 0.88, 0.82), (0.25, 0.38, 0.5)), ((0.5, 0.45, 0.42), (0.18, 0.22, 0.28))])]
+roofm = m_plain('roof', (0.3, 0.3, 0.31), 0.9)
+def building(cx, cy, w, d, h, m):
+    box((cx, cy, h / 2), (w, d, h), m); box((cx, cy, h + 0.25), (w + 0.4, d + 0.4, 0.5), trim)
+    if h > 12: box((cx + w * 0.15, cy - d * 0.1, h + 1.2), (w * 0.3, d * 0.3, 2.0), roofm)          # rooftop plant room
+def fill(x0, x1, y0, y1, hlo, hhi, gap=2.0):
+    x = x0
+    while x < x1 - 4:
+        wd = min(random.uniform(11, 18), x1 - x); y = y0
+        while y < y1 - 4:
+            dd = min(random.uniform(11, 18), y1 - y); building(x + wd / 2, y + dd / 2, wd - gap, dd - gap, random.uniform(hlo, hhi), random.choice(towers + shopw)); y += dd
+        x += wd
+
+# the boulevard carries on past the freeway (y 290..336): a city block either side, then the station across a cross street
+ground(290, 440, -150, 150, asphalt)
+for side in (1, -1):
+    ground(292, 334, side * 8.0 if side > 0 else -150, 150 if side > 0 else -8.0, walk, 0.12)         # sidewalk and building lots
+    box((side * 8.0, 313, 0.06), (0.25, 42, 0.12), concrete)                                          # curb
+    y = 292.5
+    while y < 333:                                                                                   # shopfronts facing the boulevard
+        d = min(random.uniform(8, 12), 334 - y); h = random.choice([9, 12, 16, 20, 26]); x = side * 22.5
+        box((x, y + d / 2, h / 2), (14, d - 0.4, h), random.choice(towers if h > 12 else shopw)); box((x, y + d / 2, h + 0.2), (14.4, d, 0.4), trim)
+        box((x - side * 7.03, y + d / 2, 1.6), (0.1, d * 0.75, 2.4), glass)
+        box((x - side * 7.75, y + d / 2, 3.1), (1.4, d * 0.8, 0.12), m_plain('awnB%.0f%d' % (y, side), random.choice([(0.8, 0.15, 0.12), (0.12, 0.45, 0.4), (0.95, 0.75, 0.2), (0.2, 0.3, 0.6)]), 0.6), (0, -side * 0.3, 0))
+        box((x - side * 7.1, y + d / 2, 4.3), (0.25, d * 0.6, 0.9), m_emis('signB%.0f%d' % (y, side), random.choice([(0.95, 0.3, 0.2), (0.2, 0.7, 0.95), (0.98, 0.8, 0.2), (0.6, 0.3, 0.9)]), 1.2))
+        y += d
+    fill(30, 150, 292, 334, 10, 34) if side > 0 else fill(-150, -30, 292, 334, 10, 34)
+    for y in (297, 311, 325):                                                                        # street lamps
+        cyl((side * 12.9, y, 3.5), 0.1, 7, dark, v=8); box((side * 12.1, y, 7.0), (1.6, 0.12, 0.12), dark); box((side * 11.4, y, 6.85), (0.5, 0.3, 0.12), m_emis('streetlamp', (1.0, 0.9, 0.7), 1.5))
+    for k in range(9): box((side * 4.0, 294 + k * 4.6, 0.006), (0.14, 2.4, 0.01), white)                # lane dashes
+for y in (300, 314): palm(-11.2, y, random.uniform(9, 11))
+palm(14.0, 305, 10.5); palm(14.0, 331, 9.5)
+box((0.12, 313, 0.006), (0.12, 42, 0.01), yellow); box((-0.12, 313, 0.006), (0.12, 42, 0.01), yellow)
+for k in range(8): box((-7.0 + k * 2.0, 335.0, 0.007), (1.0, 2.2, 0.01), white)                      # crosswalk
+for k in range(30): box((-145 + k * 10, 341, 0.006), (3.0, 0.14, 0.01), white)                     # cross-street centre dashes
+for (x, y, col) in [(-6.6, 300.5, (0.2, 0.42, 0.72)), (-6.6, 311.0, (0.85, 0.85, 0.82))]: rig(car(x, y, 0, col), 'parkedB%.0f' % y)
+cyl((10.6, 335.4, 3.2), 0.13, 6.4, dark, v=8); box((6.6, 335.4, 6.2), (8.0, 0.18, 0.18), dark)       # traffic light over the boulevard
+for (lx, ly) in [(4.0, 335.4), (-1.0, 335.4)]:
+    box((lx, ly, 5.6), (0.5, 0.5, 1.3), dark)
+    for k, c in enumerate([(1.0, 0.1, 0.05), (1.0, 0.7, 0.1), (0.2, 1.0, 0.3)]): cyl((lx, ly - 0.26, 6.0 - k * 0.4), 0.13, 0.04, m_emis('tl%d' % k, c, 3.0 if k == 0 else 0.15), (math.pi / 2, 0, 0), 12)
+# the police station (y 352..392) on the far side of the cross street, between other buildings
+ground(346, 352, -150, 150, walk, 0.12); box((0, 346.0, 0.06), (300, 0.25, 0.12), concrete)
 station = m_brick('station', (0.78, 0.76, 0.72), (0.72, 0.7, 0.66), (0.6, 0.58, 0.55), 2.2)
 box((0, 372, 6.5), (44, 40, 13), station); box((0, 351.9, 2.0), (6, 0.2, 4), glass); box((0, 351.5, 4.6), (8, 1.4, 0.3), trim)
 for x in (-14, -7, 7, 14):
     for z in (3, 7, 10.5): box((x, 351.95, z), (3.0, 0.1, 1.6), glass)
 bpy.ops.object.text_add(location=(-6.3, 351.7, 8.6), rotation=(math.pi / 2, 0, 0)); tx = bpy.context.object; tx.data.body = 'POLICE'; tx.data.size = 2.6; tx.data.extrude = 0.12
 tx.data.materials.append(m_plain('policeTxt', (0.1, 0.18, 0.45), 0.4))
-for k in range(16): box((-30 + k * 4, 342, 0.01), (0.12, 5.0, 0.02), white)
-for (x, y) in [(-22, 330), (22, 330), (-22, 312), (22, 312)]: box((x, y, 0.4), (3.0, 3.0, 0.8), concrete); palm(x, y, 9)
-for (x, y) in [(-16, 320), (16, 320), (-16, 305), (16, 305)]: cyl((x, y, 3.0), 0.1, 6, dark, v=8); box((x, y, 6.0), (0.6, 0.6, 0.2), m_emis('plazaLamp', (1.0, 0.92, 0.75), 1.2))
-cyl((26, 350, 7), 0.08, 14, chrome, v=8); box((26.9, 350, 12.8), (1.8, 0.04, 1.1), m_plain('flag', (0.8, 0.15, 0.15), 0.7))
+cyl((15.0, 349.0, 7), 0.08, 14, chrome, v=8); box((15.9, 349.0, 12.8), (1.8, 0.04, 1.1), m_plain('flag', (0.8, 0.15, 0.15), 0.7))
 for k in range(4): box((0, 350.6 - k * 0.45, 0.12 + k * 0.12), (10, 0.45, 0.24), concrete)
 for (x, y) in [(-12, 344), (12, 343)]: rig(car(x, y, 0.2 if x < 0 else -0.2, (0.08, 0.08, 0.1), lights=True), 'pcar%d' % x)
 cops = [rig(car(0, 0, 0, (0.08, 0.08, 0.1), lights=True), 'chase%d' % i, (0, 0, 0.8)) for i in range(2)]
-for k in range(8): palm(random.choice([-1, 1]) * random.uniform(24, 40), random.uniform(305, 345), random.uniform(9, 12))
+for side in (1, -1):
+    x = side * 23.0
+    while abs(x) < 150:                                                                              # the rest of the station's block
+        wd = random.uniform(12, 20); h = random.uniform(10, 30); cx = x + side * wd / 2
+        building(cx, 374, wd - 1.5, 42, h, random.choice(towers)); x += side * wd
+fill(-150, 150, 398, 440, 28, 70, 4.0)                                                               # downtown towers behind
 
 # ------------------------------------------------------------------ animation ------------------------------
 for f in range(NF):
@@ -303,14 +372,52 @@ for ob in (cam, tgt, cam.data):
     for fc in ob.animation_data.action.fcurves:
         for kp in fc.keyframe_points: kp.interpolation = 'LINEAR'
 
+MASKS = {'mh': (1620, 2645), 'mp': (1398, 2759)}                    # frames with the hero in the car / the player on the bike
 # camera + actor tracks for the engine
 track, actors, vis = [], {k: [] for k in ACTORS}, {k: [] for k in ACTORS}
 for f in range(NF):
     sc.frame_set(f); M = cam.matrix_world; t = f / FPS
     track.append(dict(C=[round(v, 4) for v in M.translation], R=[[round(M[r][c], 5) for c in range(3)] for r in range(3)], tanh=round(12.0 / cam.data.lens, 6)))
     for k, fn in ACTORS.items(): p, v = fn(t); actors[k].append([round(c, 3) for c in p]); vis[k].append(v)
-json.dump(dict(fps=FPS, frames=NF, track=track, actors=actors, vis=vis, door=[[round(c, 3) for c in car_state(f / FPS)[0]] for f in range(NF)], roll=[round(car_state(f / FPS)[2], 4) for f in range(NF)]), open(os.path.join(OUT, 'camera.json'), 'w'))
+json.dump(dict(fps=FPS, frames=NF, track=track, actors=actors, vis=vis, door=[[round(c, 3) for c in car_state(f / FPS)[0]] for f in range(NF)], roll=[round(car_state(f / FPS)[2], 4) for f in range(NF)], masks=MASKS), open(os.path.join(OUT, 'camera.json'), 'w'))
 print('tracks written', NF, flush=True)
+
+# occlusion masks: the car and the bike, with a camera-facing holdout card where a 2D actor sits, so the engine can lay
+# the car parts that are in front of the actor (door, hood, seat back, front wheel...) back over the drawn character
+MASK = arg('--mask', '')
+if MASK:
+    keep = set(hero_car.children) | set(bike.children)
+    for ob in list(sc.objects):
+        if ob.type in ('MESH', 'FONT', 'CURVE') and (ob not in keep or (ob.active_material and ob.active_material.name.startswith('glass'))): ob.hide_render = True
+    em = bpy.data.materials.new('maskWhite'); em.use_nodes = True; en = em.node_tree.nodes; en.remove(en['Principled BSDF'])
+    e = en.new('ShaderNodeEmission'); em.node_tree.links.new(e.outputs[0], en['Material Output'].inputs['Surface'])
+    bpy.context.view_layer.material_override = em
+    sc.render.film_transparent = True; sc.cycles.samples = 8; sc.cycles.use_denoising = False; sc.cycles.max_bounces = 0
+    sc.render.image_settings.file_format = 'PNG'; sc.render.image_settings.color_mode = 'RGBA'
+    a0, a1 = MASKS[MASK]
+    if MASK == 'mh':                    # the driver's body: a holdout block in the driver's seat that moves and rolls with the car
+        sc.frame_set(0); card = box((CAR0[0] - 0.4, CAR0[1] + 0.035, 1.5), (1.04, 0.83, 2.4), dark); card.is_holdout = True; bpy.context.view_layer.update()
+        mw = card.matrix_world.copy(); card.parent = hero_car; card.matrix_world = mw; base = card.scale.copy()
+        for f in range(a0 - 2, a1 + 3):
+            v = hero_seat(f / FPS)[1]; card.scale = base if (v and a0 <= f <= a1) else base * 0.001; card.keyframe_insert('scale', frame=f)
+    else:                               # the rider: a camera-facing holdout card just in front of the bike's centre line
+        cw, ch_, off = 2.0, 2.5, 0.12
+        me = bpy.data.meshes.new('card'); me.from_pydata([(-cw / 2, -0.35, 0), (cw / 2, -0.35, 0), (cw / 2, ch_, 0), (-cw / 2, ch_, 0)], [], [(0, 1, 2, 3)])
+        card = bpy.data.objects.new('card', me); sc.collection.objects.link(card); card.is_holdout = True
+        cr = card.constraints.new('COPY_ROTATION'); cr.target = cam
+        for f in range(a0 - 2, a1 + 3):
+            t = f / FPS; pp, v = player_pos(t); C, _, _ = cam_at(t); dv = Vector(C) - Vector(pp); dv.normalize()
+            card.location = Vector(pp) + dv * off; card.scale = (1, 1, 1) if (v and a0 <= f <= a1) else (0.001, 0.001, 0.001)
+            card.keyframe_insert('location', frame=f); card.keyframe_insert('scale', frame=f)
+    for fc in card.animation_data.action.fcurves:
+        for kp in fc.keyframe_points: kp.interpolation = 'CONSTANT' if fc.data_path == 'scale' else 'LINEAR'
+    sc.frame_start, sc.frame_end = max(START, a0), min(END, a1); sc.render.use_persistent_data = True
+    LST = [int(v) for v in arg('--list', '').split(',') if v]
+    if LST:
+        for f in LST: sc.frame_set(f); sc.render.filepath = os.path.join(OUT, '%s%04d.png' % (MASK, f)); bpy.ops.render.render(write_still=True)
+    else:
+        sc.render.use_overwrite = False; sc.render.use_placeholder = True; sc.render.filepath = os.path.join(OUT, MASK + '####'); bpy.ops.render.render(animation=True)
+    print('masks done', flush=True); sys.exit(0)
 
 sc.frame_start, sc.frame_end = START, END; sc.render.use_persistent_data = True
 LIST = [int(v) for v in arg('--list', '').split(',') if v]

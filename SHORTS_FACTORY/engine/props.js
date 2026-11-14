@@ -80,7 +80,13 @@ function drawProp(g, p, s, t) {
 function drawHandProp(g, prop, hands, t, st) {
   const [hx, hy, ha] = hands[1], [lx, ly] = hands[0];
   g.save();
-  if (prop === 'glider') {                            // an umbrella-style glider above both hands
+  if (prop === 'wheel') {                             // a steering wheel held in both hands (only while driving)
+    if (st && st.action === 'drive') { const cx = (hx + lx) / 2, cy = (hy + ly) / 2, ang = Math.atan2(hy - ly, hx - lx);
+      g.translate(cx, cy); g.rotate(ang); g.lineCap = 'round';
+      for (const a of [0, 2.1, 4.2]) { g.beginPath(); g.moveTo(0, 0); g.lineTo(Math.cos(a + 1.57) * 62, Math.sin(a + 1.57) * 62); g.lineWidth = 9; g.strokeStyle = '#2b2b31'; g.stroke(); }
+      g.beginPath(); g.arc(0, 0, 70, 0, 7); g.lineWidth = 22; g.strokeStyle = C.ink; g.stroke(); g.lineWidth = 12; g.strokeStyle = '#3a3a42'; g.stroke();
+      g.beginPath(); g.arc(0, 0, 15, 0, 7); g.fillStyle = '#c8322a'; g.fill(); g.lineWidth = 5; g.strokeStyle = C.ink; g.stroke(); }
+  } else if (prop === 'glider') {                            // an umbrella-style glider above both hands
     const cx = (hx + lx) / 2, cy = Math.min(hy, ly) - 70;
     for (const [x, y] of [hands[0], hands[1]]) { g.beginPath(); g.moveTo(x, y); g.lineTo(cx + (x - cx) * 2.2, cy - 30); g.lineWidth = 4; g.strokeStyle = C.ink; g.stroke(); }
     g.translate(cx, cy - 40); g.rotate(Math.sin(t * 2) * 0.05);
@@ -257,7 +263,13 @@ drawHandProp = function (g, prop, hands, t, st) {
   if (!SPRITES[prop]) return _vecHand(g, prop, hands, t, st);
   const [hx, hy, ha] = hands[1], [lx, ly] = hands[0];
   g.save();
-  if (prop === 'glider') { g.translate((hx + lx) / 2, Math.min(hy, ly) - 10); g.rotate(Math.sin(t * 2) * 0.05); drawSprite(g, 'glider', 'gripL', SPRITE_SCALE.glider); }
+  if (prop === 'wheel') {                             // a steering wheel held in both hands (only while driving)
+    if (st && st.action === 'drive') { const cx = (hx + lx) / 2, cy = (hy + ly) / 2, ang = Math.atan2(hy - ly, hx - lx);
+      g.translate(cx, cy); g.rotate(ang); g.lineCap = 'round';
+      for (const a of [0, 2.1, 4.2]) { g.beginPath(); g.moveTo(0, 0); g.lineTo(Math.cos(a + 1.57) * 62, Math.sin(a + 1.57) * 62); g.lineWidth = 9; g.strokeStyle = '#2b2b31'; g.stroke(); }
+      g.beginPath(); g.arc(0, 0, 70, 0, 7); g.lineWidth = 22; g.strokeStyle = C.ink; g.stroke(); g.lineWidth = 12; g.strokeStyle = '#3a3a42'; g.stroke();
+      g.beginPath(); g.arc(0, 0, 15, 0, 7); g.fillStyle = '#c8322a'; g.fill(); g.lineWidth = 5; g.strokeStyle = C.ink; g.stroke(); }
+  } else if (prop === 'glider') { g.translate((hx + lx) / 2, Math.min(hy, ly) - 10); g.rotate(Math.sin(t * 2) * 0.05); drawSprite(g, 'glider', 'gripL', SPRITE_SCALE.glider); }
   else if (prop === 'hoprock') { g.translate(hx, hy - 6); drawSprite(g, 'hoprock', 'grip', SPRITE_SCALE.hoprock); }
   else { g.translate(hx, hy); g.rotate(Math.PI / 2 - ha); drawSprite(g, prop, 'grip', SPRITE_SCALE[prop] || 0.6); }
   g.restore();

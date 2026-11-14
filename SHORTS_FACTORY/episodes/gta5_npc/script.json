@@ -170,8 +170,9 @@
      "id": "heroCar",
      "cast": "hero",
      "track": "heroSeat",
-     "action": "sit",
-     "clipDoor": true,
+     "action": "drive",
+     "prop": "wheel",
+     "occlude": "mh",
      "rollTrack": true,
      "autoFlip": false,
      "flip": false,
@@ -209,7 +210,7 @@
        "cue": 40.07
       },
       {
-       "action": "sit",
+       "action": "drive",
        "mood": "shocked",
        "cue": 41.23
       },
@@ -319,6 +320,7 @@
      "cast": "player",
      "track": "player",
      "autoGait": true,
+     "occlude": "mp",
      "mood": "smug",
      "lookAt": "camera",
      "keys": [
@@ -338,7 +340,7 @@
        "cue": 21.95
       },
       {
-       "action": "sit",
+       "action": "ride",
        "mood": "smug",
        "lookAt": "camera",
        "cue": 23.3

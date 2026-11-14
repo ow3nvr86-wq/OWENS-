@@ -57,6 +57,15 @@ const POSES2 = {
   fall: (t) => ({ armL: -2.3 + Math.sin(t * 15) * 0.4, armR: 2.3 + Math.cos(t * 14) * 0.4, elL: 0.4, elR: -0.4, feet: [[-40 + Math.sin(t * 11) * 10, -26], [38 + Math.cos(t * 12) * 10, -12]] }),
   punch: (t) => ({ armL: 0.9, armR: 1.62, elL: -1.6, elR: 0.0 }),
   sit: (t) => ({ armL: 0.3, armR: -0.3, elL: 0.6, elR: -0.6, feet: [[30, -10], [44, -6]], hipDy: 34 }),
+  // driving: seated, both hands on a steering wheel at chest height that turns a little (rc rig: hand targets in body units)
+  drive: (t) => { const w = Math.sin(t * 1.9) * 0.12 + Math.sin(t * 4.3) * 0.05, r = 66;
+    return { armL: 0.3, armR: -0.3, elL: 0.6, elR: -0.6, feet: [[30, -10], [44, -6]], hipDy: 34, handsRC: [[-r * Math.cos(w), -262 - r * Math.sin(w)], [r * Math.cos(w), -262 + r * Math.sin(w)]] }; },
+  // riding a bike: anchored on the ground under the saddle; hips on the saddle, feet turning the pedals, hands on the bars.
+  // st.rideSide 0 = bike seen end-on (pedals pump up and down, hands wide), 1 = side-on (pedals circle, lean to the bars)
+  ride: (t, ph, st) => { const a = st ? clamp(st.rideSide ?? 0.6, 0, 1) : 0.6, p = st ? (st.pedal || 0) : 0;
+    const feetRC = [0, 1].map(k => { const q = p + k * Math.PI; return [43 * a + a * 52 * Math.cos(q) + (1 - a) * (k ? 36 : -36), -123 - 52 * Math.sin(q)]; });
+    const handsRC = [[-92 * (1 - a) + 190 * a - 8, -318], [92 * (1 - a) + 190 * a + 8, -318]];
+    return { armL: 0.5, armR: -0.5, elL: 0, elR: 0, feet: [[0, 0], [0, 0]], feetRC, hipRC: -293, handsRC, worldFrame: true, bodyRot: 0.42 * a }; },
   wave: (t) => ({ armL: -0.15, armR: 2.6 + Math.sin(t * 10) * 0.35, elL: 0.1, elR: 0.3 }),
   facepalm: (t) => ({ armL: -0.15, armR: 2.75, elL: 0.1, elR: -2.3 }),
 };

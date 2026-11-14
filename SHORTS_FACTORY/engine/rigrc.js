@@ -156,7 +156,7 @@ function rcHead(g, R, def, st, face) {
 function drawCharacterRC(g, def, st) {
   const cos = RC_COSTUMES[def.costume] || { body: (COSTUMES[def.costume] || COSTUMES.tunic).body, detail: 'tee', pants: '#2b2b33' };
   const s = st.scale || 1, t = st.t || 0, dbg = DEBUG.has('rig'), R = RC.R, LK = RC.leg / 118;
-  const pose = (POSES2[st.action] || POSES[st.action] || POSES.idle)(t, st.phase || 0);
+  const pose = (POSES2[st.action] || POSES[st.action] || POSES.idle)(t, st.phase || 0, st);
   let P = pose;
   if (st.prevAction && st.prevAction !== st.action && t - st.actionT < 0.32) {
     const Q = (POSES2[st.prevAction] || POSES[st.prevAction] || POSES.idle)(t, st.phase || 0), u = eBack(clamp((t - st.actionT) / 0.32), 1.3);
@@ -176,9 +176,10 @@ function drawCharacterRC(g, def, st) {
   const rot = (st.lean || 0) + (pose.bodyRot || 0) + (st.bodyRot || 0) + (st.action === 'run' ? 0.08 : 0);
   if (st.lying) g.translate(0, 230);
   if (rot) { g.translate(0, -330); g.rotate(rot); g.translate(0, 330); }
-  const hipY = -RC.leg + hipDy, top = hipY - RC.torsoH + 14;
+  const hipY = pose.hipRC != null ? pose.hipRC + hipDy - (pose.hipDy || 0) * LK : -RC.leg + hipDy, top = hipY - RC.torsoH + 14;
+  const toBody = q => { if (!pose.worldFrame || !rot) return q; const dx = q[0], dy = q[1] + 330, c = Math.cos(-rot), sn = Math.sin(-rot); return [dx * c - dy * sn, dx * sn + dy * c - 330]; };
   // legs: long thin sticks with small dark feet (planted gait scaled to the long legs)
-  const feet = pose.feet ? pose.feet.map(f => ({ x: f[0] * LK * 0.8, y: f[1] * LK, planted: false })) :
+  const feet = pose.feetRC ? pose.feetRC.map(f => { const q = toBody(f); return { x: q[0], y: q[1], planted: false }; }) : pose.feet ? pose.feet.map(f => ({ x: f[0] * LK * 0.8, y: f[1] * LK, planted: false })) :
     ga ? ga.feet.map((f, k) => ({ x: f.x * LK + (k ? 4 : -4), y: -f.lift * LK, planted: f.planted })) : [{ x: -18, y: 0, planted: true }, { x: 18, y: 0, planted: true }];
   if (st.ragdoll) { feet[0] = { x: -70 + Math.sin(t * 13) * 50, y: -60 + Math.cos(t * 11) * 40 }; feet[1] = { x: 70 + Math.cos(t * 12) * 50, y: -40 + Math.sin(t * 14) * 40 }; }
   feet.forEach((f, k) => {
@@ -196,6 +197,10 @@ function drawCharacterRC(g, def, st) {
   const arms = st.ragdoll ? [[-RC.torsoW / 2 + 4, sY, -2.3 + Math.sin(t * 15) * 0.7, 0.5], [RC.torsoW / 2 - 4, sY, 2.3 + Math.cos(t * 14) * 0.7, -0.5]]
     : [[-RC.torsoW / 2 + 4, sY, P.armL, P.elL], [RC.torsoW / 2 - 4, sY, P.armR, P.elR]];
   const A = RC.arm / 2;
+  if (P.handsRC && !st.ragdoll) for (let k = 0; k < 2; k++) {                     // two-bone IK to hand targets
+    const [sx, sy0] = arms[k], q = toBody(P.handsRC[k]); let dx = q[0] - sx, dy = q[1] - sy0; const d = Math.min(Math.hypot(dx, dy), 2 * A * 0.995) || 1e-3;
+    const phi = Math.atan2(dx, dy), b = Math.acos(d / (2 * A)), bend = k ? 1 : -1; arms[k][2] = phi + bend * b; arms[k][3] = -2 * bend * b;
+  }
   for (const [sx, sy0, a, e] of arms) {
     const ex = sx + Math.sin(a) * A, ey = sy0 + Math.cos(a) * A, ha = a + e, hx = ex + Math.sin(ha) * A, hy = ey + Math.cos(ha) * A;
     const side = Math.sign((hx - sx) * (ey - sy0) - (hy - sy0) * (ex - sx)) || 1;
