@@ -172,3 +172,48 @@ const FX2 = {
   },
 };
 window.FX2 = FX2; window.drawProp = drawProp; window.drawHandProp = drawHandProp;
+
+// ---------------- ROCKETS V2: ripple-fired rockets on gravity arcs (fx type "rockets2") ----------------
+// fx: {from:[x,y], to:[x,y], count, spread, ripple (s between launches), dur (flight s), arc (px apex height), seed,
+//      blastR (px, knock-back radius at each landing; 0 = none), z}
+function rocketsPlan(fx) {
+  const n = fx.count || 20, out = [], sd = (fx.seed || 1) * 7.31;
+  for (let i = 0; i < n; i++) {
+    const r = k => hash(sd + i * 3.77 + k * 11.3);
+    const t0 = fx.t0 + i * (fx.ripple ?? lerp(0.03, 0.06, r(1)));
+    const x0 = fx.from[0] * W + (r(2) - 0.5) * (fx.fromSpread ?? 60), y0 = fx.from[1] * H + (r(3) - 0.5) * 20;
+    const tx = fx.to[0] * W + (r(4) - 0.5) * (fx.spread ?? 400), ty = fx.to[1] * H + (r(5) - 0.5) * (fx.spread ?? 400) * 0.3;
+    const T = (fx.dur || 1.1) * (0.88 + r(6) * 0.24), arc = (fx.arc ?? 380) * (0.8 + r(7) * 0.4), g = 8 * arc / (T * T);
+    out.push({ t0, x0, y0, tx, ty, T, g, vx: (tx - x0) / T, vy: (ty - y0 - 0.5 * g * T * T) / T, i });
+  }
+  return out;
+}
+function rocketPos(p, tau) { return [p.x0 + p.vx * tau, p.y0 + p.vy * tau + 0.5 * p.g * tau * tau]; }
+FX2.rockets2 = function (g, fx, s, t) {
+  if (!fx._plan) fx._plan = rocketsPlan(fx);
+  for (const p of fx._plan) {
+    const tau = t - p.t0; if (tau < 0) continue;
+    const life = p.T + 1.8; if (tau > life) continue;
+    // launch: muzzle flash + smoke billowing backwards over the crew
+    if (tau < 0.09) glow2(g, p.x0, p.y0, 120, `rgba(255,236,170,${0.9 * (1 - tau / 0.09)})`);
+    if (tau < 1.0) for (let k = 0; k < 4; k++) { const a = Math.PI + Math.atan2(p.vy, p.vx) + (hash(p.i + k) - 0.5) * 1.2, d = 160 * eOut(tau);
+      g.beginPath(); g.arc(p.x0 + Math.cos(a) * d * (0.6 + hash(k) * 0.6) + WIND[0] * tau, p.y0 + Math.sin(a) * d * 0.5 - 30 * tau, 30 + 60 * tau, 0, 7); g.fillStyle = `rgba(225,220,212,${0.4 * (1 - tau)})`; g.fill(); }
+    // lingering smoke trail: puffs laid along the path, each growing and drifting with the wind
+    const tEnd = Math.min(tau, p.T);
+    for (let q = Math.max(0, tau - 1.8); q <= tEnd; q += 0.035) {
+      const age = tau - q, [x, y] = rocketPos(p, q), k = age / 1.8;
+      g.beginPath(); g.arc(x + WIND[0] * age, y + WIND[1] * age - 16 * age, 7 + 34 * age, 0, 7); g.fillStyle = `rgba(232,228,222,${0.3 * (1 - k) * (1 - k)})`; g.fill();
+    }
+    if (tau > p.T) { if (tau < p.T + 0.35) { const [x, y] = rocketPos(p, p.T), u = (tau - p.T) / 0.35; glow2(g, x, y - 20, 150 * (0.5 + u), `rgba(255,200,110,${0.9 * (1 - u)})`); dustPuff(g, x, y, tau - p.T, 1.2, 46, p.i * 9.1 + 3, 0.7, '120,105,95'); } continue; }
+    // the rocket: body turned along its velocity, a flickering tail flame
+    const [x, y] = rocketPos(p, tau), ang = Math.atan2(p.vy + p.g * tau, p.vx);
+    g.save(); g.translate(x, y); g.rotate(ang);
+    const fl = 0.75 + 0.25 * Math.sin(t * 60 + p.i * 2);
+    glow2(g, -22, 0, 60 * fl, 'rgba(255,170,60,0.85)');
+    g.beginPath(); g.moveTo(-14, -7); g.lineTo(-14 - 46 * fl, 0); g.lineTo(-14, 7); g.closePath(); g.fillStyle = '#ffd24a'; g.fill();
+    g.beginPath(); g.moveTo(-14, -4); g.lineTo(-14 - 24 * fl, 0); g.lineTo(-14, 4); g.closePath(); g.fillStyle = '#fff6d0'; g.fill();
+    inkRect(g, -16, -5, 34, 10, '#7a4a26', 3); g.beginPath(); g.moveTo(18, -6); g.lineTo(32, 0); g.lineTo(18, 6); g.closePath(); g.fillStyle = '#c9d0d8'; g.fill(); g.lineWidth = 3; g.strokeStyle = C.ink; g.stroke();
+    g.restore();
+  }
+};
+window.rocketsPlan = rocketsPlan;

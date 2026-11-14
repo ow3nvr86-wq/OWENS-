@@ -30,17 +30,18 @@ def dusk_world(sc, strength=1.0):
     w = bpy.data.worlds.new('dusk'); sc.world = w; w.use_nodes = True; nt = w.node_tree; nt.nodes.clear()
     out = nt.nodes.new('ShaderNodeOutputWorld'); bg = nt.nodes.new('ShaderNodeBackground'); tc = nt.nodes.new('ShaderNodeTexCoord')
     sep = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Generated'], sep.inputs[0])
-    ramp = nt.nodes.new('ShaderNodeValToRGB'); nt.links.new(sep.outputs['Z'], ramp.inputs['Fac'])
+    rm = nt.nodes.new('ShaderNodeMapRange'); rm.inputs['From Min'].default_value = -1; rm.inputs['From Max'].default_value = 1
+    nt.links.new(sep.outputs['Z'], rm.inputs['Value']); ramp = nt.nodes.new('ShaderNodeValToRGB'); nt.links.new(rm.outputs['Result'], ramp.inputs['Fac'])
     cr = ramp.color_ramp; cr.elements[0].position = 0.0; cr.elements[0].color = (0.02, 0.03, 0.05, 1)
     cr.elements[1].position = 1.0; cr.elements[1].color = (0.006, 0.004, 0.03, 1)
-    for p, c in [(0.495, (0.05, 0.03, 0.06)), (0.5, (1.0, 0.42, 0.16)), (0.52, (0.75, 0.16, 0.32)), (0.56, (0.26, 0.07, 0.36)), (0.66, (0.07, 0.025, 0.17)), (0.8, (0.02, 0.012, 0.07))]:
+    for p, c in [(0.497, (0.06, 0.035, 0.07)), (0.5, (1.0, 0.45, 0.16)), (0.51, (0.95, 0.28, 0.22)), (0.53, (0.7, 0.13, 0.36)), (0.57, (0.34, 0.08, 0.46)), (0.65, (0.13, 0.04, 0.28)), (0.78, (0.035, 0.018, 0.11))]:
         e = cr.elements.new(p); e.color = (*c, 1)
     # stars: tiny Voronoi cells above the horizon
     vor = nt.nodes.new('ShaderNodeTexVoronoi'); vor.inputs['Scale'].default_value = 420; vor.feature = 'F1'
     nt.links.new(tc.outputs['Generated'], vor.inputs['Vector'])
     thr = nt.nodes.new('ShaderNodeMath'); thr.operation = 'LESS_THAN'; thr.inputs[1].default_value = 0.045; nt.links.new(vor.outputs['Distance'], thr.inputs[0])
     rnd = nt.nodes.new('ShaderNodeMath'); rnd.operation = 'MULTIPLY'; nt.links.new(thr.outputs[0], rnd.inputs[0]); nt.links.new(vor.outputs['Color'], rnd.inputs[1])
-    hi = nt.nodes.new('ShaderNodeMath'); hi.operation = 'GREATER_THAN'; hi.inputs[1].default_value = 0.55; nt.links.new(sep.outputs['Z'], hi.inputs[0])
+    hi = nt.nodes.new('ShaderNodeMath'); hi.operation = 'GREATER_THAN'; hi.inputs[1].default_value = 0.09; nt.links.new(sep.outputs['Z'], hi.inputs[0])
     st = nt.nodes.new('ShaderNodeMath'); st.operation = 'MULTIPLY'; nt.links.new(rnd.outputs[0], st.inputs[0]); nt.links.new(hi.outputs[0], st.inputs[1])
     st2 = nt.nodes.new('ShaderNodeMath'); st2.operation = 'MULTIPLY'; st2.inputs[1].default_value = 2.5; nt.links.new(st.outputs[0], st2.inputs[0])
     add = nt.nodes.new('ShaderNodeMix'); add.data_type = 'RGBA'; add.blend_type = 'ADD'; add.inputs['Factor'].default_value = 1.0
@@ -57,7 +58,7 @@ def H(x, y):                                       # terrain height (metres)
     h = 2.6 * math.sin(x * 0.012 + 0.4) * math.cos(y * 0.0095) + 1.8 * math.sin((x + y) * 0.021) + 0.9 * math.sin(x * 0.05 - y * 0.03)
     h += 9 * math.exp(-((x - TOWN[0]) ** 2 + (y - TOWN[1]) ** 2) / 70 ** 2)          # the town hill
     h += 7 * math.exp(-((x - 160) ** 2 + (y - 75) ** 2) / 30 ** 2)                   # the rocky hill (final circle)
-    h += 0.02 * max(0, y - 250) + 0.0
+    h -= 0.09 * max(0.0, math.hypot(x, y - 120) - 360)                               # coastline: the island drops into the sea
     r = math.hypot(x - CR[0], y - CR[1])
     if r < 34: h = h * (r / 34) ** 2 - 7.5 * (1 - (r / 34) ** 2) * 1.0
     h += 2.2 * math.exp(-((r - 34) / 5.0) ** 2)                                        # crater rim
@@ -70,22 +71,31 @@ def grid(size, sub, mat, loc=(0, 0), fn=H):
     o.data.materials.append(mat); bpy.ops.object.shade_smooth(); return o
 
 
-def box(loc, size, m, rot=(0, 0, 0)):
-    bpy.ops.mesh.primitive_cube_add(size=1, location=loc, rotation=rot); o = bpy.context.object; o.scale = size; o.data.materials.append(m); return o
+_T = {}
 
 
-def cyl(loc, r, d, m, rot=(0, 0, 0), v=20):
-    bpy.ops.mesh.primitive_cylinder_add(radius=r, depth=d, location=loc, rotation=rot, vertices=v); o = bpy.context.object; o.data.materials.append(m); return o
+def _tmpl(kind):
+    if kind in _T: return _T[kind]
+    if kind == 'cube': bpy.ops.mesh.primitive_cube_add(size=1)
+    elif kind.startswith('cyl'): bpy.ops.mesh.primitive_cylinder_add(radius=1, depth=1, vertices=int(kind[3:]))
+    elif kind.startswith('cone'): bpy.ops.mesh.primitive_cone_add(radius1=1, depth=1, vertices=int(kind[4:]))
+    elif kind.startswith('ico'): bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=int(kind[3:]), radius=1)
+    o = bpy.context.object; me = o.data; bpy.data.objects.remove(o)
+    if kind.startswith('ico') or kind.startswith('cyl'):
+        for pl in me.polygons: pl.use_smooth = kind != 'ico1'
+    me.materials.append(bpy.data.materials.new('slot_' + kind)); _T[kind] = me; return me
 
 
-def cone(loc, r, d, m, v=12, rot=(0, 0, 0)):
-    bpy.ops.mesh.primitive_cone_add(radius1=r, depth=d, location=loc, vertices=v, rotation=rot); o = bpy.context.object; o.data.materials.append(m); return o
+def inst(kind, loc, scale, rot, m):
+    ob = bpy.data.objects.new(kind, _tmpl(kind)); bpy.context.scene.collection.objects.link(ob)
+    ob.location = loc; ob.scale = scale; ob.rotation_euler = rot
+    ob.material_slots[0].link = 'OBJECT'; ob.material_slots[0].material = m; return ob
 
 
-def ball(loc, r, m, sub=2, scale=(1, 1, 1), smooth=True):
-    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=sub, radius=r, location=loc); o = bpy.context.object; o.scale = scale; o.data.materials.append(m)
-    if smooth: bpy.ops.object.shade_smooth()
-    return o
+def box(loc, size, m, rot=(0, 0, 0)): return inst('cube', loc, size, rot, m)
+def cyl(loc, r, d, m, rot=(0, 0, 0), v=20): return inst('cyl%d' % v, loc, (r, r, d), rot, m)
+def cone(loc, r, d, m, v=12, rot=(0, 0, 0)): return inst('cone%d' % v, loc, (r, r, d), rot, m)
+def ball(loc, r, m, sub=2, scale=(1, 1, 1), smooth=True): return inst('ico%d' % (sub if smooth else 1), loc, (r * scale[0], r * scale[1], r * scale[2]), (0, 0, 0), m)
 
 
 def pine(x, y, h, mt, ml, ml2):
@@ -116,20 +126,21 @@ def build_world(M, Hh, view):
     floor = mat('floorD', (0.12, 0.065, 0.04), 0.95, True, (0.2, 0.11, 0.06), 0.8, 0.3)
     trunk = mat('trunkD', (0.16, 0.09, 0.05), 0.9); leaf = mat('leafD', (0.03, 0.12, 0.05), 0.85); leaf2 = mat('leafD2', (0.05, 0.16, 0.06), 0.85)
     rock = mat('rockD', (0.22, 0.2, 0.25), 0.85, True, (0.32, 0.3, 0.35), 2.0, 0.5)
-    meteor = m_emis('meteor', (0.55, 0.18, 1.0), 4.5, (0.4, 0.12, 0.8), 0.25)
-    crystal = m_emis('crystal', (0.5, 0.12, 1.0), 3.0, (0.35, 0.08, 0.7), 0.2)
+    meteor = m_emis('meteor', (0.5, 0.12, 1.0), 1.4, (0.38, 0.1, 0.78), 0.25)
+    crystal = m_emis('crystal', (0.5, 0.1, 1.0), 1.1, (0.35, 0.08, 0.7), 0.2)
     metal = mat('scaff', (0.75, 0.77, 0.82), 0.35); white = mat('domeW', (0.85, 0.86, 0.9), 0.3)
     walls = [mat('wall%d' % i, c, 0.85, True, tuple(v * 0.8 for v in c), 3.0, 0.15) for i, c in enumerate([(0.55, 0.36, 0.2), (0.42, 0.26, 0.15), (0.62, 0.43, 0.24), (0.36, 0.22, 0.13)])]
-    win = m_emis('winD', (1.0, 0.72, 0.28), 5.0, (0.9, 0.7, 0.3)); roof = mat('roofD', (0.16, 0.08, 0.05), 0.8)
+    win = m_emis('winD', (1.0, 0.7, 0.25), 2.5, (0.9, 0.7, 0.3)); roof = mat('roofD', (0.16, 0.08, 0.05), 0.8)
     wall_tank = mat('tank', (0.38, 0.2, 0.1), 0.8)
     # ground
     grid(900, 300, grass, (0, 120))
+    sea = mat('sea', (0.03, 0.04, 0.12), 0.06); bpy.ops.mesh.primitive_plane_add(size=30000, location=(0, 120, -6)); bpy.context.object.data.materials.append(sea)
     grid(80, 120, dirt, CR, fn=lambda x, y: H(x, y) + 0.02 if math.hypot(x - CR[0], y - CR[1]) < 39 else H(x, y) - 3)
     grid(56, 90, floor, CR, fn=lambda x, y: H(x, y) + 0.05 if math.hypot(x - CR[0], y - CR[1]) < 26 else H(x, y) - 3)
     # the meteor in scaffolding, lab domes, containers, crystals
     mz = H(*CR)
     o = ball((CR[0], CR[1], mz + 4.2), 1, meteor, 1, (6.0, 5.0, 5.4), smooth=False); o.rotation_euler = (0.3, 0.2, 0.5)
-    bpy.ops.object.light_add(type='POINT', location=(CR[0], CR[1] - 6, mz + 6)); L = bpy.context.object; L.data.energy = 9000; L.data.color = (0.6, 0.3, 1.0); L.data.shadow_soft_size = 4
+    bpy.ops.object.light_add(type='POINT', location=(CR[0], CR[1] - 6, mz + 6)); L = bpy.context.object; L.data.energy = 5000; L.data.color = (0.55, 0.25, 1.0); L.data.shadow_soft_size = 4
     for sx in (-1, 1):
         for sy in (-1, 1): cyl((CR[0] + sx * 7.5, CR[1] + sy * 7.5, mz + 5.5), 0.18, 11, metal, v=8)
     for zz in (mz + 2, mz + 6, mz + 10.8):
@@ -160,9 +171,9 @@ def build_world(M, Hh, view):
     sx, sy = -85.0, 110.0; sz = H(sx, sy)
     for dx in (-11, -4, 4, 11): cyl((sx + dx, sy + 0.6, sz + 4), 0.35, 8, roof, v=8)
     box((sx, sy + 0.4, sz + 13.5), (31, 0.8, 12), mat('screenFrame', (0.08, 0.06, 0.1), 0.6))
-    box((sx, sy, sz + 13.5), (29, 0.4, 10.4), m_emis('screen', (0.75, 0.78, 1.0), 0.9, (0.8, 0.8, 1.0)))
-    cyl((sx, sy - 0.3, sz + 15.5), 2.2, 0.2, m_emis('ssun', (1.0, 0.8, 0.3), 2.0), (math.pi / 2, 0, 0), 32)
-    bpy.ops.mesh.primitive_cone_add(radius1=8, depth=0.1, vertices=3, location=(sx - 3, sy - 0.32, sz + 11.0), rotation=(math.pi / 2, 0, 0)); bpy.context.object.data.materials.append(m_emis('smtn', (0.5, 0.42, 0.95), 1.2))
+    box((sx, sy, sz + 13.5), (29, 0.4, 10.4), m_emis('screen', (0.7, 0.72, 1.0), 0.3, (0.75, 0.76, 0.95)))
+    cyl((sx, sy - 0.3, sz + 15.5), 2.2, 0.2, m_emis('ssun', (1.0, 0.75, 0.25), 0.8), (math.pi / 2, 0, 0), 32)
+    bpy.ops.mesh.primitive_cone_add(radius1=6, depth=0.1, vertices=3, location=(sx + 4, sy - 0.32, sz + 10.6), rotation=(math.pi / 2, 0, 0)); bpy.context.object.data.materials.append(m_emis('smtn', (0.45, 0.35, 0.9), 0.5))
     for row, yy in enumerate((78, 88, 98)):
         for xx in (-98, -90, -82, -74):
             if random.random() < 0.65:
@@ -180,36 +191,37 @@ def build_world(M, Hh, view):
     for k in range(420):
         x, y = random.uniform(-250, 260), random.uniform(-80, 380)
         if math.hypot(x - CR[0], y - CR[1]) < 44 or (abs(x) < 52 and 135 < y < 190) or math.hypot(x - sx, y - 95) < 30 or math.hypot(x - 160, y - 75) < 14: continue
-        if view == 'b_town' and abs(x) < 10 and 90 < y < 135: continue
+        if view == 'b_town' and math.hypot(x - 30, y - 115) < 26: continue
         pine(x, y, random.uniform(7, 14), trunk, leaf, leaf2)
     # sky: shooting stars, the rocket and the crack
     star = m_emis('streak', (1.0, 0.92, 1.0), 12)
-    for (az, el, L_, rot) in [(-30, 38, 70, 0.5), (-12, 48, 90, 0.55), (8, 54, 60, 0.5), (24, 44, 55, 0.45), (-38, 26, 45, 0.6)]:
+    for (az, el, L_, rot) in [(-9, 18, 70, 0.5), (-3, 24, 90, 0.55), (4, 28, 60, 0.5), (10, 20, 55, 0.45), (-12, 13, 45, 0.6), (30, 22, 60, 0.5), (-30, 16, 50, 0.55)]:
         a, e = math.radians(az), math.radians(el); D = 1500
         p = Vector((math.sin(a) * math.cos(e), math.cos(a) * math.cos(e), math.sin(e))) * D + Vector((0, 60, 0))
         cyl(tuple(p), 0.9, L_, star, (math.radians(70), 0, rot + math.pi / 2), 6)
-    rk = Vector((330, 900, 620))
+    rk = Vector((-545, 1253, 360))
     body = m_emis('rocketW', (1, 1, 1), 0.6, (0.95, 0.95, 0.97)); red = mat('rocketR', (0.8, 0.12, 0.08), 0.5)
     cyl(tuple(rk), 4, 26, body, (0, math.radians(18), 0)); cone(tuple(rk + Vector((math.sin(math.radians(18)) * 16, 0, 16 * math.cos(math.radians(18))))), 4, 8, red, 16, (0, math.radians(18), 0))
     cone(tuple(rk - Vector((math.sin(math.radians(18)) * 15, 0, 15))), 3, 8, m_emis('flame', (1.0, 0.75, 0.2), 25), 12, (math.pi + math.radians(18), 0, 0))
     smoke = mat('smoke', (0.85, 0.82, 0.88), 1.0)
     for k in range(14): ball(tuple(rk - Vector((math.sin(math.radians(18)) * (22 + k * 11), random.uniform(-2, 2), 22 + k * 11))), 6 + k * 1.6, smoke, 2)
-    crack = m_emis('crack', (0.6, 0.85, 1.0), 30); halo = m_glow('crackHalo', (0.5, 0.75, 1.0), 6, 0.35)
+    crack = m_emis('crack', (0.55, 0.8, 1.0), 20); halo = m_glow('crackHalo', (0.3, 0.6, 1.0), 14, 0.55); halo2 = m_glow('crackHalo2', (0.25, 0.5, 1.0), 6, 0.25)
     pts = [(-260, -170), (-150, -110), (-90, -160), (40, -60), (120, -120), (250, -10), (320, -40), (430, 50)]
-    base = Vector((300, 1000, 880))
+    base = Vector((240, 1500, 560))
     for (a1, b1), (a2, b2) in zip(pts, pts[1:]):
         p1 = base + Vector((a1 * 0.9, 0, -b1 * 0.9)); p2 = base + Vector((a2 * 0.9, 0, -b2 * 0.9)); dv = p2 - p1
-        for r, m in [(2.2, crack), (9, halo)]:
+        for r, m in [(2.2, crack), (6, halo), (16, halo2)]:
             cyl(tuple((p1 + p2) / 2), r, dv.length, m, (0, math.atan2(dv.x, dv.z), 0), 8)
     # dusk lighting: warm low sun from the camera side, cool purple sky fill
-    sunlight(9, 200, 3.2, (1.0, 0.62, 0.38)); sunlight(40, 20, 0.5, (0.45, 0.4, 1.0))
+    sunlight(12, 25, 5.5, (1.0, 0.64, 0.4)); sunlight(30, 200, 2.0, (0.55, 0.42, 1.0))
     return grass
 
 
 def build(preset, sc, M, Hh):
     if preset not in NAMES: return False
+    _T.clear()                                          # the scene was reset: template meshes are gone
     cam = Hh['cam']
-    sc.view_settings.look = 'AgX - Punchy'; sc.view_settings.exposure = 0.2
+    sc.view_settings.look = 'AgX - Punchy'; sc.view_settings.exposure = 0.55
     if preset == 'b_lobby':
         dusk_world(sc, 0.6)
         mat = Hh['mat']; floor = mat('lfloor', (0.04, 0.03, 0.09), 0.25)
@@ -226,19 +238,20 @@ def build(preset, sc, M, Hh):
         return True
     dusk_world(sc, 1.0)
     build_world(M, Hh, preset)
+    at = lambda x, y, dz: (x, y, H(x, y) + dz)
     if preset == 'b_town':
-        cam(sc, (4, 92, 3.2), (0, 150, 17), lens=24, focus=38, fstop=8)
+        cam(sc, at(45, 96, 2.6), at(0, 156, 15), lens=22, focus=60, fstop=8)
     elif preset == 'b_crater':
-        cam(sc, (0, 14, 12), (0, 64, 0), lens=22, focus=48, fstop=11)
+        cam(sc, at(0, 16, 9), (0, 74, H(0, 64) + 3), lens=22, focus=48, fstop=11)
     elif preset == 'b_field':
-        cam(sc, (128, 18, 3.4), (162, 90, 8), lens=26, focus=55, fstop=8)
+        cam(sc, at(128, 18, 2.4), at(162, 90, 6), lens=26, focus=55, fstop=8)
     elif preset == 'b_drivein':
-        cam(sc, (-85, 62, 3.2), (-85, 112, 10), lens=24, focus=36, fstop=8)
+        cam(sc, at(-85, 64, 2.4), at(-85, 112, 9), lens=24, focus=36, fstop=8)
     elif preset == 'b_sky':
         cam(sc, (0, -230, 230), (0, 150, 30), lens=30, focus=300, fstop=22)
         cl = Hh['mat']('cloudD', (0.55, 0.42, 0.62), 1.0)
-        for (d, n, r) in [(60, 3, 14), (120, 4, 26), (220, 5, 40), (380, 5, 60)]:
+        for (d, n, r) in [(80, 2, 6), (150, 2, 11), (260, 3, 18)]:
             for k in range(n):
-                a = random.uniform(-0.5, 0.5); p = Vector((0, -230, 230)) + Vector((math.sin(a) * d * 1.1, d, -d * 0.45 + random.uniform(-0.12, 0.12) * d))
+                a = random.choice([-1, 1]) * random.uniform(0.25, 0.5); p = Vector((0, -230, 230)) + Vector((math.sin(a) * d * 1.1, d, -d * 0.45 + random.uniform(-0.12, 0.12) * d))
                 for j in range(6): ball(tuple(p + Vector((random.uniform(-1.2, 1.2) * r, random.uniform(-0.4, 0.4) * r, random.uniform(-0.2, 0.3) * r))), r * random.uniform(0.5, 0.9), cl, 2, (1, 0.8, 0.6))
     return True

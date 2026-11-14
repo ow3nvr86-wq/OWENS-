@@ -67,6 +67,28 @@ def music_march(dur, bpm):
         if b % 2 == 0: put(out, flute(mtof(MEL[(b // 2) % 16]), beat * 1.7), tb, 0.12)
     return out
 
+def sq(f, d, duty=0.5):                                   # a soft square-ish lead
+    t = t_(d); x = np.sign(np.sin(2 * np.pi * f * t) - (1 - 2 * duty) * 0.0); return lp(x, 3500) * env(len(t), 0.005, 0.06)
+def clap(d=0.2): t = t_(d); return bp(noise(d), 900, 4000) * (np.exp(-t * 30) + 0.5 * np.exp(-np.maximum(0, t - 0.012) * 40))
+
+
+def music_bouncy(dur, bpm):
+    """upbeat game-show bounce: four-on-the-floor kick, claps, an octave bass, a square-lead hook"""
+    out = np.zeros(int(dur * SR)); beat = 60 / bpm
+    PROG = [48, 45, 41, 43]                               # C Am F G
+    HOOK = [72, 76, 79, 76, 77, 76, 74, 72, 69, 72, 76, 72, 71, 74, 79, 74]
+    for b in range(int(dur / beat)):
+        tb = b * beat; bar = (b // 4) % 4; root = PROG[bar]
+        put(out, kick(0.25), tb, 0.85)
+        if b % 2: put(out, clap(), tb, 0.45)
+        put(out, snare(0.04), tb + beat / 2, 0.12)
+        for k, off in enumerate((0, 0.5)): put(out, pluck(mtof(root - 12 + 12 * k), 0.3), tb + off * beat, 0.5)
+        if b % 2 == 0: put(out, sq(mtof(HOOK[(b // 2) % 16]), beat * 0.9, 0.25), tb, 0.07)
+        if b % 4 == 0:
+            for n in (root + 12, root + 16 - (1 if bar == 1 else 0), root + 19): put(out, sq(mtof(n), beat * 3.6), tb, 0.025)
+    return out
+
+
 # ---------------- SFX ----------------
 def whoosh(d=0.3): t = t_(d); n = noise(d); return (lp(n, 1500) * 0.7 + hp(n, 600) * 0.3) * np.sin(np.pi * np.clip(t / d, 0, 1)) ** 2
 def boing(d=0.5): t = t_(d); f = 230 + 160 * np.sin(2 * np.pi * 7 * t) * np.exp(-t * 3); return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 4)
@@ -112,7 +134,8 @@ def pop(): t = t_(0.08); return np.sin(2 * np.pi * 900 * t * np.exp(-t * 20)) * 
 SFX = dict(whoosh=whoosh, boing=boing, knock=knock, ting=ting, gulp=gulp, tada=tada, sting=sting, fuse=fuse, volley=volley, boom=boom,
            charge=charge, scramble=scramble, sneeze=sneeze, drums=drums, march=march_steps, pop=pop)
 
-music = music_march(N / SR + 1, S.get('music', {}).get('bpm', 104))[:N]
+style = S.get('music', {}).get('style', 'march')
+music = (music_bouncy if style == 'bouncy' else music_march)(N / SR + 1, S.get('music', {}).get('bpm', 104))[:N]
 sfx = np.zeros(N)
 for i, sc in enumerate(S['scenes']):
     st, wi = starts[i]

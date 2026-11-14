@@ -44,6 +44,11 @@ function resolve() {
       s._impacts.push({ x: fx.x * W, y: fx.y * H, t0: fx.t0, r: fx.r || 260, force: fx.force || 1, z });
       s._shakes.push({ t0: fx.t0, amp: (fx.shake ?? 24) * clamp(150 / z, 0.4, 2.5) });
     }
+    for (const fx of s.fx || []) if (fx.type === 'rockets2' && window.rocketsPlan && (fx.blastR ?? 90) > 0) {
+      const z = typeof zOf === 'function' ? zOf(fx.z ?? fx.layer) : 150;
+      for (const p of rocketsPlan(fx)) { s._impacts.push({ x: p.tx, y: p.ty, t0: p.t0 + p.T, r: fx.blastR ?? 90, force: fx.force ?? 0.7, z }); }
+      s._shakes.push({ t0: fx.t0 + (fx.dur || 1.1), amp: (fx.shake ?? 14) * clamp(150 / z, 0.4, 2.5) });
+    }
   }
 }
 // ---------------- captions: 1-2 words, synced to word times ----------------
