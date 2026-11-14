@@ -217,3 +217,68 @@ FX2.rockets2 = function (g, fx, s, t) {
   }
 };
 window.rocketsPlan = rocketsPlan;
+
+// ---------------- 3D prop sprites (tools/props_blender.py) ----------------
+// script.json "sprites": "props" loads <episode>/props/sprites.json + PNGs. A prop or hand prop with a sprite of the
+// same name is drawn from it (anchored at its 'base' / 'grip' point); otherwise the vector version is used.
+const SPRITES = {};
+async function loadSprites(ep, dir) {
+  try {
+    const meta = await (await fetch('../' + ep + '/' + dir + '/sprites.json')).json();
+    await Promise.all(Object.entries(meta).map(([k, m]) => new Promise(res => { const im = new Image(); im.onload = () => { SPRITES[k] = Object.assign({ img: im }, m); res(); }; im.onerror = () => res(); im.src = '../' + ep + '/' + dir + '/' + k + '.png'; })));
+  } catch (e) { console.error('no sprites: ' + e.message); }
+}
+const SPRITE_SCALE = { shotgun: 0.56, sniper: 0.66, hoprock: 0.42, glider: 1.15, wall: 0.62, ramp: 0.62, stairs: 0.62, bus: 0.5 };
+function drawSprite(g, name, anchor, k = 1) {
+  const S = SPRITES[name]; if (!S) return false; const a = S[anchor] || [S.w / 2, S.h];
+  g.save(); g.scale(k, k); g.drawImage(S.img, -a[0], -a[1]); g.restore(); return true;
+}
+const _vecProps = Object.assign({}, PROPS);
+for (const name of ['wall', 'ramp', 'bus', 'hoprock']) PROPS[name] = function (g, p, s, t) {
+  if (!SPRITES[name]) return _vecProps[name](g, p, s, t);
+  const k = name === 'bus' ? 1 : popScale(t, p.t0); if (!k) return;
+  if (name === 'bus') g.translate(0, Math.sin(t * 1.7) * 10), g.rotate(Math.sin(t * 1.3) * 0.03);
+  g.scale(k, k); drawSprite(g, name, 'base', SPRITE_SCALE[name]);
+  if (name !== 'bus' && p.t0 != null && t - p.t0 < 0.45) dustPuff(g, 0, 0, t - p.t0, 0.45, 80, 3, 0.6);
+};
+PROPS.stairs = function (g, p, s, t) {                 // a staircase built from stacked 3D stair pieces
+  if (!SPRITES.stairs) return _vecProps.stairs(g, p, s, t);
+  const S = SPRITES.stairs, n = Math.max(1, Math.round((p.steps || 6) / 6)), sc = SPRITE_SCALE.stairs, dx = S.w * sc * 0.36, dy = S.h * sc * 0.58;
+  for (let i = 0; i < n; i++) { const k = popScale(t, p.t0 != null ? p.t0 + i * (p.rate || 0.05) * 6 : null); if (!k) continue;
+    g.save(); g.translate((i % 2 ? -dx : dx) * 0.0 + (i % 2) * dx * 0.2, -i * dy); g.scale(k, k); drawSprite(g, 'stairs', 'base', sc); g.restore(); }
+};
+const _vecHand = drawHandProp;
+drawHandProp = function (g, prop, hands, t, st) {
+  if (!SPRITES[prop]) return _vecHand(g, prop, hands, t, st);
+  const [hx, hy, ha] = hands[1], [lx, ly] = hands[0];
+  g.save();
+  if (prop === 'glider') { g.translate((hx + lx) / 2, Math.min(hy, ly) - 10); g.rotate(Math.sin(t * 2) * 0.05); drawSprite(g, 'glider', 'gripL', SPRITE_SCALE.glider); }
+  else if (prop === 'hoprock') { g.translate(hx, hy - 6); drawSprite(g, 'hoprock', 'grip', SPRITE_SCALE.hoprock); }
+  else { g.translate(hx, hy); g.rotate(Math.PI / 2 - ha); drawSprite(g, prop, 'grip', SPRITE_SCALE[prop] || 0.6); }
+  g.restore();
+};
+window.drawHandProp = drawHandProp;
+
+// ---------------- the logo slot and title text ----------------
+// fx {type:'logo', img:'props/logo.png', x, y, w}: draws the user's logo file if it exists, otherwise styled text
+const LOGOS = {};
+FX2.logo = function (g, fx, s, t) {
+  const k = popScale(t, fx.t0, 0.4); if (!k) return; const x = (fx.x ?? 0.5) * W, y = (fx.y ?? 0.2) * H;
+  g.save(); g.translate(x, y); g.scale(k, k); g.rotate(Math.sin((t - fx.t0) * 2) * 0.02);
+  const im = fx.img && LOGOS[fx.img];
+  if (im) { const w = (fx.w ?? 0.8) * W, h = w * im.height / im.width; g.drawImage(im, -w / 2, -h / 2, w, h); }
+  else {
+    const lines = String(fx.text || 'VICTORY ROYALE').split('|'), size = fx.size || 120;
+    g.font = `800 ${size}px Poppins`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineJoin = 'round';
+    lines.forEach((ln, i) => { const yy = (i - (lines.length - 1) / 2) * size * 1.02;
+      const gr = g.createLinearGradient(0, yy - size / 2, 0, yy + size / 2); gr.addColorStop(0, '#fff6c2'); gr.addColorStop(0.45, '#ffd23a'); gr.addColorStop(1, '#e08a12');
+      g.shadowColor = 'rgba(0,0,0,0.6)'; g.shadowBlur = 24; g.shadowOffsetY = 10; g.lineWidth = size * 0.2; g.strokeStyle = '#2a1640'; g.strokeText(ln, 0, yy);
+      g.shadowColor = 'transparent'; g.lineWidth = size * 0.07; g.strokeStyle = '#7a3a10'; g.strokeText(ln, 0, yy); g.fillStyle = gr; g.fillText(ln, 0, yy); });
+  }
+  g.restore();
+};
+async function loadLogos(ep, script) {
+  const names = new Set(); for (const sc of script.scenes) for (const fx of sc.fx || []) if (fx.type === 'logo' && fx.img) names.add(fx.img);
+  await Promise.all([...names].map(n => new Promise(res => { const im = new Image(); im.onload = () => { LOGOS[n] = im; res(); }; im.onerror = () => res(); im.src = '../' + ep + '/' + n; })));
+}
+window.loadSprites = loadSprites; window.loadLogos = loadLogos;

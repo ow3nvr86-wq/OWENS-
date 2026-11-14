@@ -69,15 +69,15 @@ function buildCaptions() {
     if (take === 2 && (clean(p[j].word) + clean(p[j + 1].word)).length > 14) take = 1; out.push(p.slice(j, j + take)); j += take; } }
   CHUNKS = out.map((c, k) => ({ text: c.map(w => clean(w.word)).join(' '), start: c[0].start - 0.03, end: Math.min(c[c.length - 1].end + 0.35, out[k + 1] ? out[k + 1][0].start - 0.03 : 1e9) }));
 }
-function clean(s) { return s.toUpperCase().replace(/(\d),(?=\d)/g, '$1\u0001').replace(/(\d):(?=\d)/g, '$1\u0002').replace(/\.\.\.|[.,?!:;"]/g, '').replace(/\u0001/g, ',').replace(/\u0002/g, ':').replace(/'/g, '’'); }
+function clean(s) { s = (SCRIPT.caption_case === 'lower') ? s.toLowerCase() : s.toUpperCase(); return s.replace(/(\d),(?=\d)/g, '$1\u0001').replace(/(\d):(?=\d)/g, '$1\u0002').replace(/\.\.\.|[.,?!:;"]/g, '').replace(/\u0001/g, ',').replace(/\u0002/g, ':').replace(/'/g, '’'); }
 function captions(t) {
   const ch = CHUNKS.find(c => t >= c.start && t < c.end); if (!ch) return;
   const age = (t - ch.start) * 30, sc = age >= 4 ? 1 : 0.85 + 0.15 * eOut(age / 4);
   const cy = H * (SCRIPT.caption_y ?? 0.68);
   X.save(); X.translate(W / 2, cy); X.scale(sc, sc);
-  X.font = '800 90px Poppins'; X.textAlign = 'center'; X.textBaseline = 'middle'; X.lineJoin = 'round'; X.miterLimit = 2;
+  const csz = SCRIPT.caption_size || 90; X.font = `800 ${csz}px Poppins`; X.textAlign = 'center'; X.textBaseline = 'middle'; X.lineJoin = 'round'; X.miterLimit = 2;
   X.shadowColor = 'rgba(0,0,0,0.55)'; X.shadowBlur = 22; X.shadowOffsetY = 8;
-  X.lineWidth = 20; X.strokeStyle = '#000'; X.strokeText(ch.text, 0, 0);
+  X.lineWidth = SCRIPT.caption_size ? csz * 0.22 : 20; X.strokeStyle = '#000'; X.strokeText(ch.text, 0, 0);
   X.shadowColor = 'transparent'; X.fillStyle = '#ffffff'; X.fillText(ch.text, 0, 0);
   X.restore();
 }
@@ -347,6 +347,8 @@ window.renderFrame = renderFrame;
   const names = bgs.concat(bgs.map(n => n.replace(/(\.\w+)$/, '_fg$1')));   // optional foreground layer: <bg>_fg.png
   await Promise.all(names.map(n => new Promise(res => { const im = new Image(); im.onload = () => { BG[n] = im; res(); }; im.onerror = () => res(); im.src = '../' + EP + '/backgrounds/' + n; })));
   if (FEAT.depth) await loadLocations(EP, SCRIPT);
+  if (SCRIPT.sprites && window.loadSprites) await loadSprites(EP, SCRIPT.sprites);
+  if (window.loadLogos) await loadLogos(EP, SCRIPT);
   if (FEAT.lipSync) { try { VISKEYS = (await (await fetch('../' + EP + '/work/visemes.json')).json()).keys; } catch (e) { console.error('no visemes.json: run tools/visemes.py'); } }
   await document.fonts.load('800 90px Poppins');
   window.SCENES = SCENES; window.CHUNKS = CHUNKS; window.ready = true;
