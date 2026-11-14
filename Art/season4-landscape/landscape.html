@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Season 4 Landscape</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #120d2e; overflow: hidden; }
+  svg { display: block; width: 100vw; height: 100vh; }
+  .twinkle { animation: tw 3s ease-in-out infinite alternate; }
+  @keyframes tw { from { opacity: .25 } to { opacity: 1 } }
+  .meteor { animation: fall 6s linear infinite; }
+  @keyframes fall { from { transform: translate(-300px,-200px); opacity: 0 } 10% { opacity: 1 } 70% { opacity: 1 } to { transform: translate(900px,600px); opacity: 0 } }
+  .float { animation: up 5s ease-in infinite; }
+  @keyframes up { from { transform: translateY(0); opacity: 0 } 20% { opacity: 1 } to { transform: translateY(-120px); opacity: 0 } }
+  .pulse { animation: pulse 2.4s ease-in-out infinite alternate; }
+  @keyframes pulse { from { opacity: .55 } to { opacity: 1 } }
+  .rocket { animation: climb 4s ease-in-out infinite alternate; }
+  @keyframes climb { from { transform: translateY(6px) } to { transform: translateY(-6px) } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#140f3c"/>
+      <stop offset=".3" stop-color="#3b2470"/>
+      <stop offset=".52" stop-color="#9a3f80"/>
+      <stop offset=".66" stop-color="#e9765f"/>
+      <stop offset=".78" stop-color="#ffc27a"/>
+      <stop offset="1" stop-color="#ffe2a6"/>
+    </linearGradient>
+    <radialGradient id="sun" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#fff4c9"/>
+      <stop offset=".35" stop-color="#ffd27e" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#ff9a5c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="far" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7a4f9c"/><stop offset="1" stop-color="#b56a8e"/>
+    </linearGradient>
+    <linearGradient id="mid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4d6f5a"/><stop offset="1" stop-color="#34503f"/>
+    </linearGradient>
+    <linearGradient id="near" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5f8f45"/><stop offset="1" stop-color="#2e4a26"/>
+    </linearGradient>
+    <linearGradient id="lair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a3a5e"/><stop offset="1" stop-color="#2b2338"/>
+    </linearGradient>
+    <radialGradient id="craterIn" cx=".5" cy=".35" r=".7">
+      <stop offset="0" stop-color="#7c5a3e"/><stop offset="1" stop-color="#3a271b"/>
+    </radialGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d1a674"/><stop offset="1" stop-color="#8a6443"/>
+    </linearGradient>
+    <linearGradient id="crystal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f1c6ff"/><stop offset=".45" stop-color="#b367ff"/><stop offset="1" stop-color="#4b1c8f"/>
+    </linearGradient>
+    <linearGradient id="meteorTail" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="1" stop-color="#ffe9ff" stop-opacity="1"/>
+    </linearGradient>
+    <linearGradient id="smoke" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".85"/><stop offset="1" stop-color="#ffffff" stop-opacity=".15"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="bigglow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="3"/></filter>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+  <g id="stars"></g>
+  <circle cx="760" cy="640" r="260" fill="url(#sun)"/>
+
+  <!-- The rift in the sky -->
+  <g id="rift">
+    <path d="M1380 70 L1440 110 L1470 92 L1530 150 L1580 128 L1640 180 L1700 160 L1770 210"
+          fill="none" stroke="#9fe8ff" stroke-width="40" stroke-linejoin="round" filter="url(#bigglow)" class="pulse"/>
+    <path d="M1380 70 L1440 110 L1470 92 L1530 150 L1580 128 L1640 180 L1700 160 L1770 210"
+          fill="none" stroke="#e8fbff" stroke-width="7" stroke-linejoin="round" filter="url(#glow)"/>
+    <path d="M1470 92 L1490 60 M1580 128 L1600 96 L1590 76 M1640 180 L1660 214 M1440 110 L1430 140"
+          fill="none" stroke="#d6f6ff" stroke-width="3" opacity=".85"/>
+  </g>
+
+  <!-- Meteors -->
+  <g id="meteors"></g>
+
+  <!-- Far mountains -->
+  <path id="farRidge" fill="url(#far)" opacity=".85"/>
+
+  <!-- Villain lair mountain + rocket -->
+  <g id="lairGroup">
+    <path d="M1260 640 L1420 520 L1500 470 L1560 430 L1610 438 L1660 470 L1760 540 L1920 600 L1920 760 L1260 760 Z" fill="url(#lair)"/>
+    <path d="M1560 430 L1610 438 L1598 452 L1572 450 Z" fill="#1c1626"/>
+    <rect x="1640" y="500" width="34" height="10" fill="#ffcf6b" opacity=".85"/>
+    <rect x="1500" y="520" width="26" height="8" fill="#ffcf6b" opacity=".75"/>
+    <rect x="1690" y="540" width="20" height="8" fill="#ff8a5c" opacity=".7"/>
+    <path d="M1586 440 C 1580 380, 1560 330, 1548 262" stroke="url(#smoke)" stroke-width="44" fill="none" stroke-linecap="round" filter="url(#soft)"/>
+    <g id="puffs" fill="#fff"></g>
+    <g class="rocket">
+      <g transform="translate(1546 226) rotate(-8)">
+        <path d="M-10 36 Q0 92 10 36 Z" fill="#ffd36b" filter="url(#glow)"/>
+        <path d="M-6 36 Q0 66 6 36 Z" fill="#fff6d0"/>
+        <path d="M-14 -40 Q0 -78 14 -40 L14 30 L-14 30 Z" fill="#eef0f5"/>
+        <path d="M-14 -40 Q0 -78 14 -40 L10 -38 Q0 -66 -10 -38 Z" fill="#d84a3c"/>
+        <circle cx="0" cy="-18" r="6" fill="#3a7fd0" stroke="#9aa3b5" stroke-width="2"/>
+        <path d="M-14 8 L-28 36 L-14 30 Z M14 8 L28 36 L14 30 Z" fill="#d84a3c"/>
+        <rect x="-14" y="26" width="28" height="8" fill="#9aa3b5"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Mid hills -->
+  <path id="midRidge" fill="url(#mid)"/>
+  <g id="midTrees"></g>
+
+  <!-- Tilted: the tall town on the hill -->
+  <g id="tilted"></g>
+  <g id="clockTower">
+    <rect x="925" y="455" width="56" height="280" fill="#d9c3a0" stroke="#5a4636" stroke-width="3"/>
+    <path d="M918 458 L953 408 L988 458 Z" fill="#7a3b2e" stroke="#4a241c" stroke-width="3"/>
+    <rect x="918" y="455" width="70" height="8" fill="#a88c6c"/>
+    <circle cx="953" cy="497" r="19" fill="#fff8e6" stroke="#5a4636" stroke-width="3"/>
+    <path d="M953 497 L953 483 M953 497 L963 502" stroke="#2c2220" stroke-width="2.5" stroke-linecap="round"/>
+    <rect x="943" y="530" width="20" height="30" rx="10" fill="#ffd27a"/>
+    <rect x="943" y="580" width="20" height="30" rx="10" fill="#3b2c3a"/>
+    <rect x="943" y="630" width="20" height="30" rx="10" fill="#ffd27a"/>
+  </g>
+
+  <!-- Drive-in movie screen on the hill -->
+  <g id="screen">
+    <rect x="236" y="470" width="8" height="120" fill="#2d2a33"/>
+    <rect x="396" y="470" width="8" height="120" fill="#2d2a33"/>
+    <rect x="300" y="480" width="40" height="110" fill="#26232c"/>
+    <rect x="214" y="398" width="212" height="112" fill="#e6e2ee" stroke="#2d2a33" stroke-width="8"/>
+    <rect x="222" y="406" width="196" height="96" fill="#c9d8ff" opacity=".8"/>
+    <circle cx="320" cy="454" r="26" fill="#ffd66b" opacity=".9"/>
+    <path d="M222 502 L280 460 L320 488 L370 446 L418 480 L418 502 Z" fill="#7a5bd1" opacity=".75"/>
+    <path d="M214 398 L426 398" stroke="#2d2a33" stroke-width="10"/>
+  </g>
+
+  <!-- Near ground -->
+  <path id="nearRidge" fill="url(#near)"/>
+  <g id="nearTrees"></g>
+
+  <!-- Dusty crater -->
+  <g id="crater">
+    <ellipse cx="960" cy="905" rx="640" ry="182" fill="#b88c5e" opacity=".55"/>
+    <ellipse cx="960" cy="900" rx="600" ry="165" fill="url(#rim)"/>
+    <ellipse cx="960" cy="912" rx="545" ry="138" fill="url(#craterIn)"/>
+    <ellipse cx="960" cy="940" rx="420" ry="90" fill="#2f2018" opacity=".45"/>
+
+    <!-- research tents and crates -->
+    <g>
+      <path d="M640 930 Q690 868 740 930 Z" fill="#e8edf3" stroke="#7d8b99" stroke-width="3"/>
+      <path d="M690 930 L690 885" stroke="#7d8b99" stroke-width="3"/>
+      <path d="M1170 925 Q1230 855 1290 925 Z" fill="#e8edf3" stroke="#7d8b99" stroke-width="3"/>
+      <path d="M1230 925 L1230 872" stroke="#7d8b99" stroke-width="3"/>
+      <rect x="780" y="955" width="70" height="38" fill="#3a78c2" stroke="#1f3e66" stroke-width="3"/>
+      <rect x="1085" y="960" width="82" height="36" fill="#d1643c" stroke="#6a2f1b" stroke-width="3"/>
+      <rect x="1100" y="930" width="56" height="30" fill="#e0b13e" stroke="#6a531b" stroke-width="3"/>
+      <rect x="560" y="900" width="48" height="26" fill="#d1643c" stroke="#6a2f1b" stroke-width="3"/>
+    </g>
+
+    <!-- giant meteor chunk -->
+    <ellipse cx="960" cy="900" rx="200" ry="90" fill="#b367ff" opacity=".55" filter="url(#bigglow)" class="pulse"/>
+    <path d="M870 935 L885 860 L930 820 L990 812 L1040 845 L1062 905 L1040 945 L960 958 Z" fill="url(#crystal)" filter="url(#glow)"/>
+    <path d="M930 820 L955 870 L990 812 M955 870 L1040 845 M955 870 L960 958 M955 870 L885 860" stroke="#f3dcff" stroke-width="3" fill="none" opacity=".7"/>
+    <!-- scaffolding -->
+    <g stroke="#c9ccd4" stroke-width="4" fill="none">
+      <path d="M850 960 L850 820 M1080 960 L1080 820 M850 820 L1080 820 M850 870 L1080 870 M850 915 L1080 915"/>
+      <path d="M850 820 L900 870 M1080 820 L1030 870" stroke-width="3"/>
+    </g>
+    <g id="hopRocks"></g>
+    <g id="sparkles" fill="#e7c6ff"></g>
+  </g>
+
+  <!-- Foreground framing -->
+  <path d="M0 1080 L0 930 Q120 900 230 955 Q300 990 330 1080 Z" fill="#203619"/>
+  <path d="M1920 1080 L1920 920 Q1800 895 1700 950 Q1620 995 1600 1080 Z" fill="#203619"/>
+  <g id="fgTrees"></g>
+
+  <g font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif" font-weight="900">
+    <text x="60" y="1018" font-size="58" fill="#1a1230" opacity=".55" transform="translate(4 4)">CHAPTER 1 · SEASON 4</text>
+    <text x="60" y="1018" font-size="58" fill="#fff4d6">CHAPTER 1 · SEASON 4</text>
+    <text x="64" y="1052" font-size="22" fill="#f1d9ff" letter-spacing="4" font-weight="700">THE METEOR HAS LANDED</text>
+  </g>
+</svg>
+
+<script>
+(function () {
+  const NS = 'http://www.w3.org/2000/svg';
+  let seed = 4;
+  const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+  const el = (tag, attrs, parent) => {
+    const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    parent.appendChild(n);
+    return n;
+  };
+  const $ = id => document.getElementById(id);
+
+  // Stars
+  for (let i = 0; i < 170; i++) {
+    const y = rnd() * 420, r = rnd() * 1.6 + .4;
+    const c = el('circle', { cx: rnd() * 1920, cy: y, r, fill: '#fff', opacity: (1 - y / 460).toFixed(2) }, $('stars'));
+    if (i % 3 === 0) { c.setAttribute('class', 'twinkle'); c.style.animationDelay = (rnd() * 3).toFixed(2) + 's'; }
+  }
+
+  // Meteors
+  const meteor = (x, y, len, w, delay, anim) => {
+    const g = el('g', {}, $('meteors'));
+    if (anim) { g.setAttribute('class', 'meteor'); g.style.animationDelay = delay + 's'; }
+    el('line', { x1: x - len, y1: y - len * .62, x2: x, y2: y, stroke: 'url(#meteorTail)', 'stroke-width': w, 'stroke-linecap': 'round' }, g);
+    el('circle', { cx: x, cy: y, r: w * .9, fill: '#f5d9ff', filter: 'url(#glow)' }, g);
+  };
+  meteor(520, 180, 260, 7, 0, false);
+  meteor(980, 110, 160, 4, 0, false);
+  meteor(260, 300, 120, 3, 0, false);
+  meteor(700, 60, 200, 4, 1.5, true);
+  meteor(300, 140, 160, 3, 3.8, true);
+
+  // Ridges
+  const ridge = (base, amp, f1, f2, ph) => {
+    let d = 'M0 1080 L0 ' + base;
+    for (let x = 0; x <= 1920; x += 16) {
+      const y = base + Math.sin(x * f1 + ph) * amp + Math.sin(x * f2 + ph * 2.3) * amp * .45;
+      d += ' L' + x + ' ' + y.toFixed(1);
+    }
+    return d + ' L1920 1080 Z';
+  };
+  const ridgeY = (base, amp, f1, f2, ph, x) => base + Math.sin(x * f1 + ph) * amp + Math.sin(x * f2 + ph * 2.3) * amp * .45;
+  $('farRidge').setAttribute('d', ridge(560, 55, .004, .011, 1.2));
+  $('midRidge').setAttribute('d', ridge(640, 38, .003, .009, 2.6));
+  $('nearRidge').setAttribute('d', ridge(740, 26, .0025, .008, .4));
+
+  // Pine trees
+  const pine = (x, y, h, col, parent) => {
+    const g = el('g', {}, parent);
+    el('rect', { x: x - h * .05, y: y - h * .2, width: h * .1, height: h * .22, fill: '#3a2a20' }, g);
+    for (let i = 0; i < 3; i++) {
+      const top = y - h + i * h * .25, bot = y - h * .15 - (2 - i) * h * .12, wd = h * (.22 + i * .1);
+      el('path', { d: `M${x} ${top} L${x + wd} ${bot} L${x - wd} ${bot} Z`, fill: col }, g);
+    }
+  };
+  for (let x = 20; x < 1920; x += 26 + rnd() * 40) {
+    if (x > 200 && x < 440) continue;
+    if (x > 1300 || (x > 640 && x < 1260)) continue;
+    const y = ridgeY(640, 38, .003, .009, 2.6, x) + 6;
+    pine(x, y, 34 + rnd() * 26, rnd() > .5 ? '#2c4a3a' : '#355a43', $('midTrees'));
+  }
+  for (let x = 10; x < 1920; x += 30 + rnd() * 60) {
+    if (x > 320 && x < 1600) continue;
+    const y = ridgeY(740, 26, .0025, .008, .4, x) + 10;
+    pine(x, y, 70 + rnd() * 50, rnd() > .5 ? '#24402a' : '#2d5233', $('nearTrees'));
+  }
+  [[60, 960, 170], [170, 990, 130], [1780, 955, 180], [1870, 990, 150], [1680, 1010, 120]]
+    .forEach(([x, y, h]) => pine(x, y, h, '#16291a', $('fgTrees')));
+
+  // Tilted: a cluster of tall buildings with lit windows
+  const building = (x, w, top, col, roof) => {
+    const g = el('g', {}, $('tilted'));
+    el('rect', { x, y: top, width: w, height: 760 - top, fill: col, stroke: '#3a2c2a', 'stroke-width': 3 }, g);
+    el('rect', { x: x - 4, y: top - 8, width: w + 8, height: 10, fill: '#5a4636' }, g);
+    for (let wy = top + 14; wy < 740; wy += 22)
+      for (let wx = x + 9; wx + 10 <= x + w - 6; wx += 18)
+        el('rect', { x: wx, y: wy, width: 10, height: 13, fill: rnd() < .45 ? '#ffd27a' : '#3b2c3a' }, g);
+    if (roof === 'tank') {
+      const cx = x + w * .65;
+      el('path', { d: `M${cx - 12} ${top - 8} L${cx - 10} ${top - 30} M${cx + 12} ${top - 8} L${cx + 10} ${top - 30}`, stroke: '#3a2c2a', 'stroke-width': 3 }, g);
+      el('rect', { x: cx - 16, y: top - 58, width: 32, height: 30, rx: 4, fill: '#8a5a3c', stroke: '#3a2c2a', 'stroke-width': 3 }, g);
+      el('path', { d: `M${cx - 18} ${top - 58} L${cx} ${top - 72} L${cx + 18} ${top - 58} Z`, fill: '#5a3a28' }, g);
+    }
+    if (roof === 'sign') {
+      el('rect', { x: x + 8, y: top - 34, width: w - 16, height: 22, fill: '#d84a3c', stroke: '#3a2c2a', 'stroke-width': 3 }, g);
+      el('path', { d: `M${x + 18} ${top - 12} L${x + 18} ${top - 8} M${x + w - 18} ${top - 12} L${x + w - 18} ${top - 8}`, stroke: '#3a2c2a', 'stroke-width': 3 }, g);
+    }
+  };
+  [[690, 64, 600, '#9b7a66'], [760, 74, 548, '#b98a6a', 'tank'], [838, 82, 505, '#8f6c5a'],
+   [990, 96, 520, '#a77a5c', 'sign'], [1090, 72, 568, '#c79b72'], [1166, 62, 612, '#8f6c5a', 'tank']]
+    .forEach(b => building(...b));
+
+  // Rocket smoke puffs
+  for (let i = 0; i < 16; i++) {
+    const t = i / 15;
+    const x = 1586 + (1548 - 1586) * t + (rnd() - .5) * 30, y = 440 + (262 - 440) * t;
+    el('circle', { cx: x, cy: y, r: 26 - t * 12 + rnd() * 10, opacity: (.75 - t * .5).toFixed(2) }, $('puffs'));
+  }
+
+  // Hop rocks: glowing purple crystals around the crater rim
+  const crystal = (x, y, s, parent) => {
+    const g = el('g', { filter: 'url(#glow)' }, parent);
+    el('path', { d: `M${x - s} ${y} L${x - s * .6} ${y - s * 1.4} L${x} ${y - s * 2.1} L${x + s * .5} ${y - s * 1.3} L${x + s} ${y} Z`, fill: 'url(#crystal)' }, g);
+    el('path', { d: `M${x} ${y - s * 2.1} L${x - s * .1} ${y}`, stroke: '#f6e3ff', 'stroke-width': 1.5, opacity: .7 }, g);
+  };
+  for (let i = 0; i < 26; i++) {
+    const a = rnd() * Math.PI * 2, k = .78 + rnd() * .3;
+    const x = 960 + Math.cos(a) * 590 * k, y = 905 + Math.sin(a) * 160 * k;
+    if (Math.abs(x - 960) < 140 && y < 960) continue;
+    crystal(x, y, 8 + rnd() * 10, $('hopRocks'));
+  }
+  [[1500, 1010, 20], [1450, 1050, 12]].forEach(([x, y, s]) => crystal(x, y, s, $('hopRocks')));
+
+  // Floating sparkles over the crater
+  for (let i = 0; i < 40; i++) {
+    const c = el('circle', { cx: 700 + rnd() * 520, cy: 800 + rnd() * 160, r: 1.5 + rnd() * 2.5, class: 'float' }, $('sparkles'));
+    c.style.animationDelay = (rnd() * 5).toFixed(2) + 's';
+  }
+})();
+</script>
+</body>
+</html>

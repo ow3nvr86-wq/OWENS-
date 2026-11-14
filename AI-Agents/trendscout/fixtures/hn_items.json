@@ -1,0 +1,10 @@
+{
+  "9001": {"id": 9001, "type": "story", "by": "sample_user1", "title": "Northwind Labs releases open-weights 3B model that runs on a Raspberry Pi 5", "url": "https://example.com/northwind-open-model", "score": 640, "descendants": 210, "time": "{{unix:5h}}"},
+  "9002": {"id": 9002, "type": "story", "by": "sample_user2", "title": "Show HN: A privacy-first password manager written in Rust", "url": "https://example.org/rust-vault", "score": 320, "descendants": 95, "time": "{{unix:8h}}"},
+  "9003": {"id": 9003, "type": "story", "by": "sample_user3", "title": "Contoso's browser will block third-party cookies by default", "url": "https://example.com/contoso-browser-cookies", "score": 410, "descendants": 180, "time": "{{unix:6h}}"},
+  "9004": {"id": 9004, "type": "story", "by": "sample_user4", "title": "Factory explosion kills 12 in industrial park", "url": "https://example.net/explosion", "score": 150, "descendants": 60, "time": "{{unix:3h}}"},
+  "9005": {"id": 9005, "type": "story", "by": "sample_user5", "title": "Ask HN: What is your favorite text editor?", "score": 90, "descendants": 300, "time": "{{unix:10h}}"},
+  "9006": {"id": 9006, "type": "story", "by": "sample_user6", "title": "Researchers demonstrate a battery cell that charges in five minutes", "url": "https://example.com/fast-charge-battery", "score": 280, "descendants": 120, "time": "{{unix:12h}}"},
+  "9007": {"id": 9007, "type": "story", "by": "sample_user7", "title": "Old story about floppy disks", "url": "https://example.org/floppy", "score": 900, "descendants": 400, "time": "{{unix:120h}}"},
+  "9008": {"id": 9008, "type": "story", "by": "sample_user8", "title": "Fabrikam CEO accused of fraud, allegedly hid losses from investors", "url": "https://example.net/fabrikam-ceo", "score": 200, "descendants": 140, "time": "{{unix:2h}}"}
+}

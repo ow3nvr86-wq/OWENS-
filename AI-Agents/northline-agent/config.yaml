@@ -1,0 +1,49 @@
+# Northline Athletic marketing agent settings.
+# Edit this file to change what the agent writes about and when it posts.
+# Anything marked TODO is a guess until you fill it in.
+
+brand:
+  name: Northline Athletic
+  handle: "@northlineathletic"          # TODO: your real handle
+  store_url: northlineathletic.com      # TODO: your real store address
+  # TODO: replace with what you actually sell and who it's for.
+  what_we_sell: >
+    Performance athletic wear and training gear built for athletes who
+    train hard year-round.
+  audience: >
+    Athletes aged 16-30 who train for a sport or lift seriously, care about
+    gear that performs, and follow training content on TikTok and Instagram.
+  voice: >
+    Confident, direct and motivating, like a good coach. Short sentences.
+    No corporate filler, no cringe slang, no fake hype.
+  content_pillars:
+    - Training tips and short workouts athletes can use today
+    - Mindset and discipline
+    - Product spotlights that show a real use for the gear
+    - Behind the brand and the people who wear it
+  rules:
+    - Never invent discounts, prices, sales or product features that aren't listed here.
+    - Never make medical or injury claims.
+    - At most one of the three daily posts is a direct product pitch.
+  products: []                          # TODO: e.g. - "Northline Training Tee: sweat-wicking, $35"
+  hashtags_always: ["#northlineathletic"]
+  colors:
+    background: "#0E1116"
+    text: "#F4F5F2"
+    accent: "#3FA7FF"
+
+schedule:
+  timezone: America/Toronto
+  plan_at: "07:00"                          # when the day's posts are written and sent to you
+  post_times: ["11:30", "16:30", "20:00"]  # three posts a day, same posts on every platform
+  slides_min: 5
+  slides_max: 8
+  # If you haven't approved a post this many minutes after its slot, it's skipped for the day.
+  expire_after_minutes: 240
+
+platforms:
+  instagram: true
+  facebook: true
+  tiktok: true
+
+model: claude-opus-5-5

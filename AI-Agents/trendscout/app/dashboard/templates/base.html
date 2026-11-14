@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Trend Scout{% endblock %}</title>
+<link rel="stylesheet" href="/static/style.css">
+<script src="/static/app.js" defer></script>
+</head>
+<body>
+{% if user %}
+<header class="top">
+  <a class="brand" href="/">Trend Scout</a>
+  <nav>
+    <a href="/">Overview</a>
+    <a href="/trends">Trends</a>
+    <a href="/drafts">Drafts{% if pending_count %} <span class="badge">{{ pending_count }}</span>{% endif %}</a>
+    <a href="/queue">Queue</a>
+    <a href="/published">Published</a>
+    <a href="/analytics">Analytics</a>
+    <a href="/logs">Logs</a>
+  </nav>
+  <form method="post" action="/logout" class="signout">
+    <input type="hidden" name="csrf_token" value="{{ csrf }}">
+    <button class="link">Sign out</button>
+  </form>
+</header>
+<div class="statusbar">
+  {% if paused %}<span class="pill danger">Publishing paused{% if pause_reason %}: {{ pause_reason }}{% endif %}</span>{% endif %}
+  {% if dry_run %}<span class="pill warn">Dry run: publishing is simulated</span>{% endif %}
+  {% if offline %}<span class="pill">Offline demo data</span>{% endif %}
+  <span class="pill {{ 'warn' if auto_publish else '' }}" title="{{ auto_reason }}">{{ 'Auto-publish on' if auto_publish else 'Human approval required' }}</span>
+  <span class="muted small">{{ settings.account.name }} · {{ settings.schedule.timezone }}</span>
+</div>
+{% endif %}
+<main>
+  {% if flash %}<div class="flash {{ flash.kind }}" role="status">{{ flash.text }}</div>{% endif %}
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>

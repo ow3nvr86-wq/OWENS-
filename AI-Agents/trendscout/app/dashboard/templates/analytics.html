@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Analytics · Trend Scout{% endblock %}
+{% block content %}
+<h1>Analytics</h1>
+<p class="small muted">Engagement is compared at the same post age (24 hours) and relative to each platform's median, so a small Bluesky account and a large LinkedIn page compare fairly. Missing numbers are never estimated.</p>
+<section class="grid two">
+  <div class="card"><h2>Scoring weights</h2>
+    <table>{% for k, v in weights.items() %}<tr><td>{{ k }}</td><td><meter min="0" max="0.5" value="{{ v }}"></meter> {{ '%.0f%%'|format(100 * v) }}</td></tr>{% endfor %}</table>
+    <p class="small muted">Edit [scoring.weights] in config/trendscout.toml.</p>
+  </div>
+  <div class="card"><h2>Learned adjustments</h2>
+    {% if not adjustments %}<p class="muted small">None yet. Learning starts after {{ settings.scoring.learning_min_posts }} measured posts in a category or source.</p>{% endif %}
+    <ul class="list">{% for a in adjustments %}<li><strong>{{ a.dimension }} {{ a.key }}</strong> ×{{ a.multiplier }} <span class="small muted">{{ a.created_at|local }}</span><div class="small">{{ a.reason }}</div></li>{% endfor %}</ul>
+  </div>
+</section>
+<section class="card"><h2>Performance ({{ report.posts_measured }} posts measured at 24h)</h2>
+  <div class="grid two">
+  {% for title, rows in [('By category', report.by_category), ('By platform', report.by_platform), ('By hour (local)', report.by_hour), ('By format', report.by_format)] %}
+    <div><h3>{{ title }}</h3>
+      {% if rows %}<table class="small"><thead><tr><th></th><th>Posts</th><th>× median</th><th>Avg likes</th></tr></thead>
+      {% for r in rows %}<tr><td>{{ r.key }}</td><td>{{ r.posts }}</td><td>{{ r.avg_ratio }}</td><td>{{ r.avg_likes }}</td></tr>{% endfor %}</table>
+      {% else %}<p class="muted small">No data yet.</p>{% endif %}
+    </div>
+  {% endfor %}
+  </div>
+</section>
+<section class="card"><h2>AI usage and estimated cost</h2>
+  <p>This month: <strong>${{ '%.2f'|format(spend) }}</strong> of the ${{ '%.2f'|format(settings.ai.monthly_budget_usd) }} budget.</p>
+  <div class="table-wrap"><table class="small">
+    <thead><tr><th>Day</th><th>Model</th><th>Calls</th><th>Input tokens</th><th>Output tokens</th><th>Web searches</th><th>Cost</th></tr></thead>
+    {% for u in usage %}<tr><td>{{ u.day }}</td><td>{{ u.model }}</td><td>{{ u.calls }}</td><td>{{ u.input_tokens }}</td><td>{{ u.output_tokens }}</td><td>{{ u.searches }}</td><td>${{ '%.4f'|format(u.cost or 0) }}</td></tr>{% endfor %}
+  </table></div>
+</section>
+{% endblock %}

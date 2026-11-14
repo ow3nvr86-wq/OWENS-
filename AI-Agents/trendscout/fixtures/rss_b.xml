@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Sample Science Wire</title><id>urn:sample:b</id><updated>{{iso:1h}}</updated>
+<entry><title>Five-minute charging battery shown in lab tests</title><link href="https://example.com/fast-charge-battery-lab"/><id>urn:sample:b:1</id><updated>{{iso:9h}}</updated><summary>A university team reports a cell that reached 80 percent charge in five minutes in lab conditions.</summary></entry>
+<entry><title>Guaranteed returns: this coin will go to the moon</title><link href="https://example.net/coin"/><id>urn:sample:b:2</id><updated>{{iso:2h}}</updated><summary>Price prediction promo.</summary></entry>
+</feed>
