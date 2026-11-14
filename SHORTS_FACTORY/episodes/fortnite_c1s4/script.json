@@ -1,6 +1,8 @@
 {
  "title": "Teleported into Fortnite (Chapter 1, Season 4)",
  "fps": 60,
+ "charStyle": "rc",
+ "sprites": "props",
  "features": {
   "depth": true,
   "motionBlur": true,
@@ -13,10 +15,12 @@
   "shutter": 0.5
  },
  "caption_y": 0.68,
+ "caption_case": "lower",
+ "caption_size": 78,
  "caption_swaps": {
   "ninety-nine": "99"
  },
- "grade": "saturate(1.18) contrast(1.06)",
+ "grade": "saturate(1.15) contrast(1.06)",
  "thumbnail_cue": "Victory",
  "music": {
   "style": "bouncy",
@@ -53,45 +57,68 @@
   "p1": {
    "costume": "tee_red",
    "hat": "cap",
-   "mood": "angry"
+   "mood": "neutral"
   },
   "p2": {
    "costume": "tee_blue",
    "hat": "headset",
-   "mood": "angry"
+   "mood": "neutral",
+   "hair": "#2a1a10"
   },
   "p3": {
    "costume": "vest_orange",
    "hat": "beanie",
-   "mood": "angry"
+   "mood": "neutral"
   },
   "p4": {
    "costume": "jacket_purple",
    "hat": "bandana",
-   "mood": "angry"
+   "mood": "neutral"
   }
  },
  "scenes": [
   {
    "cue": "You",
-   "loc": "b_sky",
+   "loc": "b2_bus",
    "camera": {
     "move": "push",
     "focus": [
      0.5,
-     0.42
+     0.36
     ]
    },
    "transition": "cut",
    "characters": [
     {
+     "id": "p2",
+     "cast": "p2",
+     "x": 0.16,
+     "y": 0.66,
+     "scale": 0.5,
+     "z": "mid",
+     "action": "sit",
+     "mood": "neutral",
+     "lookAt": "hero"
+    },
+    {
+     "id": "p3",
+     "cast": "p3",
+     "x": 0.84,
+     "y": 0.66,
+     "scale": 0.5,
+     "z": "mid",
+     "flip": true,
+     "action": "sit",
+     "mood": "neutral"
+    },
+    {
      "id": "hero",
      "cast": "hero",
      "x": 0.5,
-     "y": 0.84,
-     "scale": 2.6,
+     "y": 0.872,
+     "scale": 2.1,
      "z": "fg",
-     "mood": "neutral",
+     "mood": "sad",
      "keys": [
       {
        "cue": "blink",
@@ -100,25 +127,16 @@
       },
       {
        "cue": "and",
-       "lookAt": "camera"
+       "lookAt": "right"
       }
      ]
-    }
-   ],
-   "fx": [
-    {
-     "type": "rushclouds",
-     "at": 0,
-     "z": "near",
-     "n": 5,
-     "dir": -0.15
     }
    ],
    "sfx": [
     {
      "type": "whoosh",
      "at": 0.0,
-     "gain": 0.6
+     "gain": 0.5
     }
    ]
   },
@@ -126,8 +144,8 @@
    "cue": "and",
    "loc": "b_sky",
    "camera": {
-    "move": "pan_left",
-    "amount": 1.4,
+    "move": "push",
+    "amount": 1.2,
     "focus": [
      0.5,
      0.45
@@ -137,27 +155,10 @@
    "props": [
     {
      "type": "bus",
-     "x": 1.1,
-     "y": 0.52,
-     "scale": 0.8,
-     "z": "mid",
-     "move": {
-      "x": 0.5,
-      "to": "Fortnite",
-      "from": 0
-     }
-    }
-   ],
-   "characters": [
-    {
-     "id": "hero",
-     "cast": "hero",
-     "x": 1.1,
-     "y": 0.4575,
-     "scale": 0.42,
-     "z": "mid",
-     "action": "wave",
-     "mood": "happy",
+     "x": 1.15,
+     "y": 0.58,
+     "scale": 0.95,
+     "z": "fg",
      "move": {
       "x": 0.5,
       "to": "Fortnite",
@@ -169,7 +170,7 @@
     {
      "type": "boing",
      "at": "Bus",
-     "gain": 0.5
+     "gain": 0.4
     }
    ]
   },
@@ -190,12 +191,12 @@
      "id": "hero",
      "cast": "hero",
      "x": 0.5,
-     "y": 0.66,
-     "scale": 1.5,
+     "y": 0.82,
+     "scale": 1.4,
      "z": "fg",
      "action": "skydive",
      "mood": "happy",
-     "bodyRot": -1.0,
+     "bodyRot": -0.9,
      "lookAt": "down",
      "keys": [
       {
@@ -207,10 +208,30 @@
    ],
    "fx": [
     {
+     "type": "logo",
+     "at": "Fortnite",
+     "img": "props/logo_fortnite.png",
+     "text": "FORTNITE",
+     "size": 150,
+     "x": 0.5,
+     "y": 0.2,
+     "w": 0.8,
+     "z": "near"
+    },
+    {
+     "type": "logo",
+     "at": "Chapter",
+     "text": "CHAPTER 1 \u00b7 SEASON 4",
+     "size": 64,
+     "x": 0.5,
+     "y": 0.29,
+     "z": "near"
+    },
+    {
      "type": "rushclouds",
      "at": 0,
      "z": "near",
-     "n": 9,
+     "n": 8,
      "dir": -1
     }
    ],
@@ -218,6 +239,11 @@
     {
      "type": "whoosh",
      "at": 0.0
+    },
+    {
+     "type": "sting",
+     "at": "Fortnite",
+     "gain": 0.6
     }
    ]
   },
@@ -276,48 +302,145 @@
   },
   {
    "cue": "and",
-   "loc": "b_sky",
+   "loc": "b2_bus",
    "camera": {
-    "move": "push",
-    "amount": 1.3,
+    "move": "pull",
     "focus": [
      0.5,
-     0.5
+     0.55
     ]
    },
    "transition": "whip",
-   "crowds": [
+   "characters": [
     {
-     "cast": [
-      "p1",
-      "p2",
-      "p3",
-      "p4"
-     ],
-     "count": 70,
-     "area": [
-      0.0,
-      0.05,
-      1.0,
-      1.0
-     ],
-     "scale": [
-      0.12,
-      0.75
-     ],
-     "z": [
-      140,
-      50
-     ],
-     "action": "skydive",
-     "mood": "angry",
-     "dy": -0.03,
-     "seed": 4
+     "id": "g0",
+     "cast": "p1",
+     "x": 0.1,
+     "y": 0.6,
+     "scale": 0.42,
+     "z": "mid",
+     "flip": false,
+     "action": "sit",
+     "mood": "neutral",
+     "lookAt": "camera",
+     "keys": [
+      {
+       "cue": "want",
+       "mood": "angry"
+      }
+     ]
+    },
+    {
+     "id": "g1",
+     "cast": "p2",
+     "x": 0.9,
+     "y": 0.6,
+     "scale": 0.42,
+     "z": "mid",
+     "flip": true,
+     "action": "sit",
+     "mood": "neutral",
+     "lookAt": "camera",
+     "keys": [
+      {
+       "cue": "want",
+       "mood": "angry"
+      }
+     ]
+    },
+    {
+     "id": "g2",
+     "cast": "p3",
+     "x": 0.17,
+     "y": 0.57,
+     "scale": 0.33,
+     "z": "mid",
+     "flip": false,
+     "action": "sit",
+     "mood": "neutral",
+     "lookAt": "camera",
+     "keys": [
+      {
+       "cue": "want",
+       "mood": "angry"
+      }
+     ]
+    },
+    {
+     "id": "g3",
+     "cast": "p4",
+     "x": 0.83,
+     "y": 0.57,
+     "scale": 0.33,
+     "z": "mid",
+     "flip": true,
+     "action": "sit",
+     "mood": "neutral",
+     "lookAt": "camera",
+     "keys": [
+      {
+       "cue": "want",
+       "mood": "angry"
+      }
+     ]
+    },
+    {
+     "id": "g4",
+     "cast": "p1",
+     "x": 0.24,
+     "y": 0.545,
+     "scale": 0.24,
+     "z": "far",
+     "flip": false,
+     "action": "sit",
+     "mood": "neutral",
+     "lookAt": "camera",
+     "keys": [
+      {
+       "cue": "want",
+       "mood": "angry"
+      }
+     ]
+    },
+    {
+     "id": "g5",
+     "cast": "p2",
+     "x": 0.76,
+     "y": 0.545,
+     "scale": 0.24,
+     "z": "far",
+     "flip": true,
+     "action": "sit",
+     "mood": "neutral",
+     "lookAt": "camera",
+     "keys": [
+      {
+       "cue": "want",
+       "mood": "angry"
+      }
+     ]
+    },
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.5,
+     "y": 0.826,
+     "scale": 1.5,
+     "z": "fg",
+     "mood": "worried",
+     "lookAt": "left",
+     "keys": [
+      {
+       "cue": "gone",
+       "mood": "scared",
+       "lookAt": "right"
+      }
+     ]
     }
    ],
    "sfx": [
     {
-     "type": "charge",
+     "type": "sting",
      "at": "players",
      "gain": 0.7
     }
@@ -325,7 +448,7 @@
   },
   {
    "cue": "You drop",
-   "loc": "b_town",
+   "loc": "b2_town",
    "camera": {
     "move": "tilt_down",
     "amount": 1.0,
@@ -340,8 +463,8 @@
      "id": "hero",
      "cast": "hero",
      "x": 0.5,
-     "y": 0.86,
-     "scale": 0.95,
+     "y": 0.92,
+     "scale": 1.0,
      "z": "fg",
      "action": "glide",
      "prop": "glider",
@@ -349,7 +472,7 @@
      "air": [
       {
        "at": 0,
-       "h": 0.75
+       "h": 0.65
       },
       {
        "at": "Towers",
@@ -360,7 +483,8 @@
       {
        "cue": "Towers",
        "action": "idle",
-       "prop": null
+       "prop": null,
+       "mood": "happy"
       }
      ]
     }
@@ -374,12 +498,12 @@
   },
   {
    "cue": "So does",
-   "loc": "b_town",
+   "loc": "b2_town",
    "camera": {
     "move": "pull",
     "focus": [
      0.5,
-     0.55
+     0.5
     ]
    },
    "transition": "cut",
@@ -391,16 +515,16 @@
       "p3",
       "p4"
      ],
-     "count": 34,
+     "count": 26,
      "area": [
       0.05,
-      -0.35,
+      -0.4,
       0.95,
-      0.55
+      0.62
      ],
      "scale": [
-      0.2,
-      0.45
+      0.22,
+      0.5
      ],
      "z": [
       150,
@@ -409,35 +533,8 @@
      "action": "glide",
      "prop": "glider",
      "mood": "angry",
-     "dy": 0.33,
+     "dy": 0.34,
      "seed": 7
-    },
-    {
-     "cast": [
-      "p2",
-      "p4",
-      "p1"
-     ],
-     "count": 14,
-     "area": [
-      0.1,
-      0.7,
-      0.9,
-      0.95
-     ],
-     "scale": [
-      0.3,
-      0.6
-     ],
-     "z": [
-      150,
-      50
-     ],
-     "action": "run",
-     "mood": "angry",
-     "speed": 0.18,
-     "wrap": true,
-     "seed": 8
     }
    ],
    "characters": [
@@ -445,8 +542,8 @@
      "id": "hero",
      "cast": "hero",
      "x": 0.5,
-     "y": 0.93,
-     "scale": 1.1,
+     "y": 0.897,
+     "scale": 1.3,
      "z": "fg",
      "mood": "worried",
      "lookAt": "up",
@@ -467,12 +564,12 @@
   },
   {
    "cue": "A guy",
-   "loc": "b_town",
+   "loc": "b2_town",
    "camera": {
     "move": "push",
     "focus": [
-     0.7,
-     0.55
+     0.62,
+     0.42
     ]
    },
    "transition": "cut",
@@ -480,9 +577,9 @@
     {
      "id": "guy",
      "cast": "guy",
-     "x": 0.72,
-     "y": 0.778,
-     "scale": 1.6,
+     "x": 0.64,
+     "y": 0.823,
+     "scale": 1.9,
      "z": "fg",
      "flip": true,
      "action": "hold",
@@ -493,8 +590,8 @@
     {
      "id": "hero",
      "cast": "hero",
-     "x": 0.2,
-     "y": 0.798,
+     "x": 0.08,
+     "y": 0.85,
      "scale": 1.6,
      "z": "fg",
      "mood": "shocked",
@@ -517,13 +614,13 @@
   },
   {
    "cue": "You",
-   "loc": "b_town",
+   "loc": "b2_town",
    "camera": {
     "move": "punch",
     "amount": 0.6,
     "focus": [
      0.5,
-     0.45
+     0.4
     ]
    },
    "transition": "cut",
@@ -532,8 +629,8 @@
      "id": "hero",
      "cast": "hero",
      "x": 0.5,
-     "y": 0.838,
-     "scale": 2.4,
+     "y": 0.936,
+     "scale": 2.2,
      "z": "fg",
      "action": "build",
      "mood": "scared",
@@ -549,11 +646,11 @@
   },
   {
    "cue": "A wall",
-   "loc": "b_town",
+   "loc": "b2_town",
    "camera": {
     "move": "push",
     "focus": [
-     0.45,
+     0.5,
      0.6
     ]
    },
@@ -561,9 +658,9 @@
    "props": [
     {
      "type": "wall",
-     "x": 0.62,
-     "y": 0.9,
-     "scale": 1.25,
+     "x": 0.66,
+     "y": 0.95,
+     "scale": 1.0,
      "z": "fg",
      "at": "wall",
      "front": true
@@ -573,9 +670,9 @@
     {
      "id": "hero",
      "cast": "hero",
-     "x": 0.3,
-     "y": 0.88,
-     "scale": 1.15,
+     "x": 0.24,
+     "y": 0.95,
+     "scale": 1.1,
      "z": "fg",
      "action": "build",
      "mood": "scared",
@@ -591,7 +688,7 @@
   },
   {
    "cue": "A ramp",
-   "loc": "b_town",
+   "loc": "b2_town",
    "camera": {
     "move": "push",
     "focus": [
@@ -604,15 +701,15 @@
     {
      "type": "wall",
      "x": 0.78,
-     "y": 0.9,
-     "scale": 1.05,
+     "y": 0.95,
+     "scale": 0.85,
      "z": "fg"
     },
     {
      "type": "ramp",
      "x": 0.42,
-     "y": 0.9,
-     "scale": 1.05,
+     "y": 0.95,
+     "scale": 0.85,
      "z": "fg",
      "at": "ramp"
     }
@@ -621,15 +718,15 @@
     {
      "id": "hero",
      "cast": "hero",
-     "x": 0.2,
-     "y": 0.9,
-     "scale": 0.95,
+     "x": 0.16,
+     "y": 0.95,
+     "scale": 0.9,
      "z": "fg",
      "action": "run",
      "mood": "determined",
      "move": {
-      "x": 0.5,
-      "y": 0.7,
+      "x": 0.42,
+      "y": 0.74,
       "to": 0.62,
       "from": "ramp"
      }
@@ -644,13 +741,13 @@
   },
   {
    "cue": "A staircase",
-   "loc": "b_town",
+   "loc": "b2_town",
    "camera": {
     "move": "tilt_up",
     "amount": 1.0,
     "focus": [
      0.5,
-     0.35
+     0.4
     ]
    },
    "transition": "cut",
@@ -658,24 +755,23 @@
     {
      "type": "stairs",
      "x": 0.5,
-     "y": 0.95,
-     "scale": 0.62,
+     "y": 0.97,
+     "scale": 0.6,
      "z": "fg",
      "at": "staircase",
-     "steps": 60,
-     "rate": 0.025
+     "steps": 36,
+     "rate": 0.03
     }
    ],
    "characters": [
     {
      "id": "hero",
      "cast": "hero",
-     "x": 0.5,
-     "y": -0.008750000000000155,
-     "scale": 0.35,
+     "x": 0.56,
+     "y": 0.36,
+     "scale": 0.32,
      "z": "fg",
      "mood": "happy",
-     "action": "idle",
      "keys": [
       {
        "cue": "nowhere",
@@ -717,8 +813,8 @@
      "id": "hero",
      "cast": "hero",
      "x": 0.5,
-     "y": 0.7,
-     "scale": 1.6,
+     "y": 0.78,
+     "scale": 1.5,
      "z": "fg",
      "action": "jump",
      "mood": "happy",
@@ -753,12 +849,12 @@
   },
   {
    "cue": "and land",
-   "loc": "b_crater",
+   "loc": "b2_crater",
    "camera": {
     "move": "push",
     "focus": [
-     0.6,
-     0.7
+     0.45,
+     0.6
     ]
    },
    "transition": "cut",
@@ -766,16 +862,16 @@
     {
      "id": "hero",
      "cast": "hero",
-     "x": 0.62,
-     "y": 0.76,
-     "scale": 0.3,
-     "z": "mid",
+     "x": 0.4,
+     "y": 0.84,
+     "scale": 0.9,
+     "z": "fg",
      "action": "fall",
      "mood": "shocked",
      "air": [
       {
        "at": 0,
-       "h": 0.7
+       "h": 0.75
       },
       {
        "at": "crater",
@@ -796,10 +892,10 @@
     {
      "type": "blast",
      "at": "crater",
-     "x": 0.62,
-     "y": 0.76,
+     "x": 0.4,
+     "y": 0.84,
      "r": 60,
-     "z": "mid",
+     "z": "fg",
      "shake": 30
     }
    ],
@@ -812,10 +908,10 @@
   },
   {
    "cue": "The ground",
-   "loc": "b_crater",
+   "loc": "b2_crater",
    "camera": {
     "move": "push",
-    "amount": 1.3,
+    "amount": 1.2,
     "focus": [
      0.5,
      0.7
@@ -825,36 +921,28 @@
    "props": [
     {
      "type": "hoprock",
-     "x": 0.22,
-     "y": 0.97,
-     "scale": 1.6,
+     "x": 0.2,
+     "y": 0.98,
+     "scale": 2.2,
      "z": "near",
      "seed": 1
     },
     {
      "type": "hoprock",
-     "x": 0.8,
-     "y": 0.93,
-     "scale": 1.2,
+     "x": 0.82,
+     "y": 0.95,
+     "scale": 1.7,
      "z": "near",
      "seed": 4
-    },
-    {
-     "type": "hoprock",
-     "x": 0.62,
-     "y": 0.86,
-     "scale": 0.8,
-     "z": "fg",
-     "seed": 6
     }
    ],
    "characters": [
     {
      "id": "hero",
      "cast": "hero",
-     "x": 0.42,
-     "y": 0.84,
-     "scale": 0.9,
+     "x": 0.48,
+     "y": 0.9,
+     "scale": 1.0,
      "z": "fg",
      "mood": "neutral",
      "lookAt": "down",
@@ -875,12 +963,12 @@
   },
   {
    "cue": "Hop",
-   "loc": "b_crater",
+   "loc": "b2_crater",
    "camera": {
     "move": "push",
     "focus": [
      0.5,
-     0.45
+     0.42
     ]
    },
    "transition": "cut",
@@ -888,9 +976,9 @@
     {
      "id": "hero",
      "cast": "hero",
-     "x": 0.45,
-     "y": 0.824,
-     "scale": 2.5,
+     "x": 0.44,
+     "y": 0.961,
+     "scale": 2.3,
      "z": "fg",
      "action": "hold",
      "prop": "hoprock",
@@ -907,12 +995,12 @@
   },
   {
    "cue": "You crush",
-   "loc": "b_crater",
+   "loc": "b2_crater",
    "camera": {
     "move": "punch",
     "amount": 0.7,
     "focus": [
-     0.55,
+     0.56,
      0.4
     ]
    },
@@ -921,9 +1009,9 @@
     {
      "id": "hero",
      "cast": "hero",
-     "x": 0.45,
-     "y": 0.854,
-     "scale": 2.5,
+     "x": 0.44,
+     "y": 1.001,
+     "scale": 2.3,
      "z": "fg",
      "action": "crush",
      "mood": "determined",
@@ -960,7 +1048,7 @@
   },
   {
    "cue": "Gravity",
-   "loc": "b_crater",
+   "loc": "b2_crater",
    "camera": {
     "move": "tilt_up",
     "amount": 1.0,
@@ -975,8 +1063,8 @@
      "id": "hero",
      "cast": "hero",
      "x": 0.5,
-     "y": 0.82,
-     "scale": 0.9,
+     "y": 0.9,
+     "scale": 1.0,
      "z": "fg",
      "action": "float",
      "mood": "shocked",
@@ -987,7 +1075,7 @@
       },
       {
        "at": "You",
-       "h": 0.32
+       "h": 0.34
       }
      ],
      "keys": [
@@ -1023,14 +1111,14 @@
      "id": "hero",
      "cast": "hero",
      "x": 0.3,
-     "y": 0.62,
-     "scale": 1.3,
+     "y": 0.66,
+     "scale": 1.2,
      "z": "fg",
      "action": "float",
      "mood": "worried",
      "move": {
       "x": 0.7,
-      "y": 0.56,
+      "y": 0.6,
       "to": "Then",
       "from": 0
      },
@@ -1056,7 +1144,7 @@
   },
   {
    "cue": "Then the",
-   "loc": "b_field",
+   "loc": "b2_field",
    "camera": {
     "move": "push",
     "focus": [
@@ -1069,15 +1157,15 @@
     {
      "id": "hero",
      "cast": "hero",
-     "x": 0.62,
-     "y": 0.82,
-     "scale": 0.6,
+     "x": 0.66,
+     "y": 0.9,
+     "scale": 0.75,
      "z": "fg",
      "flip": true,
      "action": "run",
      "mood": "scared",
      "move": {
-      "x": 0.25,
+      "x": 0.28,
       "to": "Health",
       "from": 0.3
      }
@@ -1103,13 +1191,13 @@
   },
   {
    "cue": "Health",
-   "loc": "b_field",
+   "loc": "b2_field",
    "camera": {
     "move": "push",
     "amount": 1.2,
     "focus": [
      0.5,
-     0.45
+     0.42
     ]
    },
    "transition": "cut",
@@ -1118,8 +1206,8 @@
      "id": "hero",
      "cast": "hero",
      "x": 0.5,
-     "y": 0.805,
-     "scale": 2.2,
+     "y": 0.932,
+     "scale": 2.1,
      "z": "fg",
      "mood": "worried",
      "lookAt": "down",
@@ -1153,13 +1241,13 @@
   },
   {
    "cue": "Someone",
-   "loc": "b_drivein",
+   "loc": "b2_drivein",
    "camera": {
     "move": "push",
     "amount": 1.4,
     "focus": [
-     0.7,
-     0.62
+     0.72,
+     0.6
     ]
    },
    "transition": "cut",
@@ -1167,9 +1255,9 @@
     {
      "id": "dancer",
      "cast": "dancer",
-     "x": 0.8,
-     "y": 0.652,
-     "scale": 0.28,
+     "x": 0.82,
+     "y": 0.618,
+     "scale": 0.26,
      "z": "mid",
      "action": "dance",
      "mood": "happy",
@@ -1179,17 +1267,11 @@
      "id": "hero",
      "cast": "hero",
      "x": 0.2,
-     "y": 0.843,
-     "scale": 2.0,
+     "y": 0.963,
+     "scale": 1.9,
      "z": "fg",
      "mood": "angry",
-     "lookAt": "dancer",
-     "keys": [
-      {
-       "cue": "dancing",
-       "mood": "angry"
-      }
-     ]
+     "lookAt": "dancer"
     }
    ],
    "sfx": [
@@ -1202,12 +1284,12 @@
   },
   {
    "cue": "Final",
-   "loc": "b_field",
+   "loc": "b2_field",
    "camera": {
     "move": "pull",
     "focus": [
-     0.5,
-     0.6
+     0.6,
+     0.55
     ]
    },
    "transition": "cut",
@@ -1215,9 +1297,9 @@
     {
      "id": "hero",
      "cast": "hero",
-     "x": 0.28,
-     "y": 0.84,
-     "scale": 0.55,
+     "x": 0.24,
+     "y": 0.94,
+     "scale": 0.9,
      "z": "fg",
      "mood": "determined",
      "lookAt": "sniper"
@@ -1225,10 +1307,10 @@
     {
      "id": "sniper",
      "cast": "sniper",
-     "x": 0.6,
+     "x": 0.72,
      "y": 0.505,
-     "scale": 0.15,
-     "z": "mid",
+     "scale": 0.12,
+     "z": "far",
      "flip": true,
      "mood": "smug",
      "lookAt": "hero"
@@ -1239,16 +1321,16 @@
      "type": "storm",
      "at": 0,
      "z": "mid",
-     "x0": 0.92,
-     "x1": 0.86,
+     "x0": 0.95,
+     "x1": 0.88,
      "dur": 3
     },
     {
      "type": "glint",
      "at": "One",
-     "x": 0.585,
-     "y": 0.475,
-     "z": "mid"
+     "x": 0.705,
+     "y": 0.48,
+     "z": "far"
     }
    ],
    "sfx": [
@@ -1265,12 +1347,12 @@
   },
   {
    "cue": "He has",
-   "loc": "b_field",
+   "loc": "b2_field",
    "camera": {
     "move": "push",
     "focus": [
-     0.6,
-     0.45
+     0.58,
+     0.42
     ]
    },
    "transition": "cut",
@@ -1278,9 +1360,9 @@
     {
      "id": "sniper",
      "cast": "sniper",
-     "x": 0.6,
-     "y": 0.793,
-     "scale": 2.0,
+     "x": 0.62,
+     "y": 0.883,
+     "scale": 1.9,
      "z": "fg",
      "flip": true,
      "action": "aim",
@@ -1293,8 +1375,8 @@
     {
      "type": "glint",
      "at": "Sniper",
-     "x": 0.33,
-     "y": 0.38,
+     "x": 0.3,
+     "y": 0.44,
      "z": "fg"
     }
    ],
@@ -1307,12 +1389,12 @@
   },
   {
    "cue": "You have",
-   "loc": "b_field",
+   "loc": "b2_field",
    "camera": {
     "move": "push",
     "focus": [
      0.45,
-     0.45
+     0.42
     ]
    },
    "transition": "cut",
@@ -1321,8 +1403,8 @@
      "id": "hero",
      "cast": "hero",
      "x": 0.42,
-     "y": 0.815,
-     "scale": 2.2,
+     "y": 0.932,
+     "scale": 2.1,
      "z": "fg",
      "action": "hold",
      "prop": "shotgun",
@@ -1352,10 +1434,10 @@
   },
   {
    "cue": "You crush",
-   "loc": "b_field",
+   "loc": "b2_field",
    "camera": {
     "move": "tilt_up",
-    "amount": 1.0,
+    "amount": 0.8,
     "focus": [
      0.5,
      0.5
@@ -1366,9 +1448,9 @@
     {
      "id": "hero",
      "cast": "hero",
-     "x": 0.45,
-     "y": 0.85,
-     "scale": 1.2,
+     "x": 0.46,
+     "y": 0.94,
+     "scale": 1.1,
      "z": "fg",
      "action": "crush",
      "mood": "determined",
@@ -1383,7 +1465,7 @@
       },
       {
        "at": 1.65,
-       "h": 0.38
+       "h": 0.36
       }
      ],
      "keys": [
@@ -1399,7 +1481,7 @@
     {
      "type": "burst",
      "at": "crush",
-     "x": 0.53,
+     "x": 0.54,
      "y": 0.52,
      "z": "fg"
     }
@@ -1417,7 +1499,7 @@
   },
   {
    "cue": "He misses",
-   "loc": "b_field",
+   "loc": "b2_field",
    "camera": {
     "move": "push",
     "focus": [
@@ -1431,8 +1513,8 @@
      "id": "hero",
      "cast": "hero",
      "x": 0.45,
-     "y": 0.66,
-     "scale": 1.3,
+     "y": 0.7,
+     "scale": 1.2,
      "z": "fg",
      "action": "float",
      "mood": "smug",
@@ -1449,16 +1531,16 @@
     {
      "type": "tracer",
      "at": "misses",
+     "z": "fg",
+     "dur": 0.22,
      "from": [
       1.1,
-      0.6
+      0.55
      ],
      "to": [
       -0.1,
-      0.72
-     ],
-     "z": "fg",
-     "dur": 0.22
+      0.66
+     ]
     }
    ],
    "sfx": [
@@ -1470,11 +1552,11 @@
   },
   {
    "cue": "You don't",
-   "loc": "b_field",
+   "loc": "b2_field",
    "camera": {
     "move": "push",
     "focus": [
-     0.55,
+     0.6,
      0.55
     ]
    },
@@ -1483,9 +1565,9 @@
     {
      "id": "hero",
      "cast": "hero",
-     "x": 0.22,
-     "y": 0.86,
-     "scale": 1.3,
+     "x": 0.2,
+     "y": 0.886,
+     "scale": 1.5,
      "z": "fg",
      "action": "aim",
      "prop": "shotgun",
@@ -1495,9 +1577,9 @@
     {
      "id": "sniper",
      "cast": "sniper",
-     "x": 0.62,
-     "y": 0.505,
-     "scale": 0.22,
+     "x": 0.74,
+     "y": 0.62,
+     "scale": 0.5,
      "z": "mid",
      "flip": true,
      "action": "aim",
@@ -1522,12 +1604,11 @@
     {
      "type": "blast",
      "at": "don't",
-     "x": 0.62,
-     "y": 0.505,
-     "r": 90,
+     "x": 0.74,
+     "y": 0.62,
+     "r": 120,
      "z": "mid",
-     "shake": 28,
-     "force": 1.0
+     "shake": 28
     }
    ],
    "sfx": [
@@ -1539,7 +1620,7 @@
   },
   {
    "cue": "Victory",
-   "loc": "b_field",
+   "loc": "b2_field",
    "camera": {
     "move": "push",
     "focus": [
@@ -1553,8 +1634,8 @@
      "id": "hero",
      "cast": "hero",
      "x": 0.5,
-     "y": 0.823,
-     "scale": 2.0,
+     "y": 0.983,
+     "scale": 1.9,
      "z": "fg",
      "action": "cheer",
      "mood": "happy",
@@ -1571,9 +1652,15 @@
      "at": "Victory"
     },
     {
-     "type": "badge",
+     "type": "logo",
      "at": "Victory",
-     "y": 0.2
+     "img": "props/logo_victory.png",
+     "text": "VICTORY|ROYALE",
+     "size": 150,
+     "x": 0.5,
+     "y": 0.2,
+     "w": 0.86,
+     "z": "near"
     }
    ],
    "sfx": [
@@ -1590,7 +1677,7 @@
     "move": "push",
     "focus": [
      0.5,
-     0.62
+     0.6
     ]
    },
    "transition": "cut",
@@ -1599,8 +1686,8 @@
      "id": "hero",
      "cast": "hero",
      "x": 0.5,
-     "y": 0.75,
-     "scale": 0.95,
+     "y": 0.76,
+     "scale": 0.75,
      "z": "mid",
      "mood": "shocked",
      "lookAt": "left",
@@ -1633,7 +1720,7 @@
     "amount": 1.2,
     "focus": [
      0.5,
-     0.42
+     0.4
     ]
    },
    "transition": "cut",
@@ -1642,8 +1729,8 @@
      "id": "hero",
      "cast": "hero",
      "x": 0.5,
-     "y": 0.808,
-     "scale": 2.4,
+     "y": 0.936,
+     "scale": 2.2,
      "z": "fg",
      "mood": "smug",
      "lookAt": "camera",

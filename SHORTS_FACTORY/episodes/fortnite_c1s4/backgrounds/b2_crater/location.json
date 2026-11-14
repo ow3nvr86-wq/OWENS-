@@ -1,0 +1,32 @@
+{
+ "layers": [
+  {
+   "name": "sky",
+   "img": "b2_crater/sky.png",
+   "z": 1000
+  },
+  {
+   "name": "far",
+   "img": "b2_crater/far.png",
+   "z": 400
+  },
+  {
+   "name": "mid",
+   "img": "b2_crater/mid.png",
+   "z": 150
+  },
+  {
+   "name": "fg",
+   "img": "b2_crater/fg.png",
+   "z": 50
+  },
+  {
+   "name": "near",
+   "img": "b2_crater/near.png",
+   "z": 20
+  }
+ ],
+ "sky": "#1b1549",
+ "focus": "mid",
+ "focus_m": 10.0
+}
