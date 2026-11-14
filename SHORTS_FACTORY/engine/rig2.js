@@ -35,6 +35,7 @@ Object.assign(HATS, {
 });
 // poses: arm angles like rig v1 (+ optional foot targets [x, y] in body space, hip at (0,-118), y up = negative)
 const POSES2 = {
+  cheer: (t) => ({ armL: -2.25 + Math.sin(t * 12) * 0.15, armR: 2.25 - Math.sin(t * 12) * 0.15, elL: -0.55, elR: 0.55 }),
   skydive: (t) => ({ armL: -1.95 + Math.sin(t * 6) * 0.08, armR: 1.95 - Math.sin(t * 6) * 0.08, elL: -0.35, elR: 0.35, feet: [[-55, -40 + Math.sin(t * 5) * 6], [55, -40 - Math.sin(t * 5) * 6]] }),
   glide: (t) => ({ armL: -2.75, armR: 2.75, elL: 0.25, elR: -0.25, feet: [[-14 + Math.sin(t * 3) * 6, 0], [16 + Math.sin(t * 3 + 1) * 6, -4]] }),
   build: (t) => ({ armL: -0.3, armR: 1.35 + Math.sin(t * 16) * 0.55, elL: 0.2, elR: -0.7 - Math.sin(t * 16) * 0.3 }),

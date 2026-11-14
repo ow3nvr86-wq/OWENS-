@@ -87,8 +87,8 @@ sc.append(dict(cue='Gravity', loc='b_crater', camera=dict(move='tilt_up', amount
   characters=[ch(id='hero', cast='hero', x=0.5, y=0.82, scale=0.9, z='fg', action='float', mood='shocked', air=[dict(at=0, h=0.0), dict(at='You', h=0.32)], keys=[dict(cue='Gone', mood='happy')])],
   sfx=[dict(type='boing', at='Gravity', gain=0.6)]))
 # 19 You float across the map like a confused astronaut.
-sc.append(dict(cue='You float', loc='b_sky', camera=dict(move='truck_right', amount=1.6, focus=[0.5, 0.5]), transition='cut',
-  characters=[ch(id='hero', cast='hero', x=0.15, y=0.62, scale=1.3, z='fg', action='float', mood='worried', move=mv(x=0.8, y=0.56, f=0, to='Then'), keys=[dict(cue='confused', lookAt='left'), dict(cue='astronaut', lookAt='camera')])],
+sc.append(dict(cue='You float', loc='b_sky', camera=dict(move='truck_left', amount=1.2, focus=[0.5, 0.5]), transition='cut',
+  characters=[ch(id='hero', cast='hero', x=0.3, y=0.62, scale=1.3, z='fg', action='float', mood='worried', move=mv(x=0.7, y=0.56, f=0, to='Then'), keys=[dict(cue='confused', lookAt='left'), dict(cue='astronaut', lookAt='camera')])],
   sfx=[dict(type='whoosh', at='float', gain=0.4)]))
 # 20 Then the storm closes in.
 sc.append(dict(cue='Then the', loc='b_field', camera=dict(move='push', focus=[0.5, 0.6]), transition='whip',

@@ -81,7 +81,7 @@ function cam3At(s, t) {
   return { x: Cx, y: Cy, z: Cz, f, roll: roll * Math.PI / 180, hx: hx + rx, hy: hy + ry };
 }
 // the 2D affine of the plane at depth z: translate(c - C*f/(z-Cz)) . scale(k) . translate(-c)
-function planeK(cam, z) { const d = Math.max(1, z - cam.z); return { k: z * cam.f / (F0 * d), ox: -cam.x * cam.f / d, oy: -cam.y * cam.f / d }; }
+function planeK(cam, z) { const d = Math.max(z * 0.55, z - cam.z);   /* a dolly can't magnify a layer more than ~1.8x (keeps the nearest grass from ballooning) */ return { k: z * cam.f / (F0 * d), ox: -cam.x * cam.f / d, oy: -cam.y * cam.f / d }; }
 function setPlane(g, cam, z) {
   const { k, ox, oy } = planeK(cam, z), c = Math.cos(cam.roll), sn = Math.sin(cam.roll);
   // post: roll about the centre + handheld; then the plane projection

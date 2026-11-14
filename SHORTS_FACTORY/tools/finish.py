@@ -11,6 +11,14 @@ j = json.loads(m[m.rindex('{'):m.rindex('}') + 1])
 af = ('loudnorm=I=-14:TP=-1.5:LRA=11:linear=true:measured_I={input_i}:measured_TP={input_tp}:measured_LRA={input_lra}:'
       'measured_thresh={input_thresh}:offset={target_offset},aresample=48000').format(**j)
 run('ffmpeg', '-y', '-hide_banner', '-i', os.path.join(A, 'mix.wav'), '-af', af, '-ar', '48000', '-ac', '2', os.path.join(A, 'master.wav'))
+# loudnorm can land short of the target (it falls back when the true-peak limit binds): measure, fix the gain, limit
+def meas(path):
+    r = run('ffmpeg', '-hide_banner', '-i', path, '-af', 'ebur128=peak=true', '-f', 'null', '-').stderr
+    return float(re.findall(r'I:\s+(-?[\d.]+) LUFS', r)[-1])
+I0 = meas(os.path.join(A, 'master.wav'))
+if abs(I0 + 14) > 0.4:
+    run('ffmpeg', '-y', '-hide_banner', '-i', os.path.join(A, 'master.wav'), '-af', 'volume=%.2fdB,alimiter=limit=0.84:level=false' % (-14 - I0), '-ar', '48000', os.path.join(A, 'master2.wav'))
+    os.replace(os.path.join(A, 'master2.wav'), os.path.join(A, 'master.wav'))
 out = os.path.join(EP, 'final.mp4')
 run('ffmpeg', '-y', '-hide_banner', '-framerate', str(FPS), '-i', os.path.join(W, 'frames', 'f%05d.jpg'), '-i', os.path.join(A, 'master.wav'),
     '-c:v', 'libx264', '-preset', 'slow', '-crf', '19', '-maxrate', '9M', '-bufsize', '18M', '-pix_fmt', 'yuv420p', '-r', str(FPS),
