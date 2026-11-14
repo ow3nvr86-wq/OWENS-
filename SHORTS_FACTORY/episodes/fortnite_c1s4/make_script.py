@@ -66,9 +66,9 @@ sc.append(dict(cue='You jump', loc='b_sky', camera=dict(move='tilt_down', amount
   characters=[ch(id='hero', cast='hero', x=0.5, y=0.7, scale=1.6, z='fg', action='jump', mood='happy', keys=[dict(cue='top', action='fall', mood='shocked')])],
   fx=[dict(type='rushclouds', at='top', z='near', n=7, dir=-1)], sfx=[dict(type='boing', at='jump'), dict(type='whoosh', at='top')]))
 # 14 and land in the crater at Dusty Divot.
-sc.append(dict(cue='and land', loc='b_crater', camera=dict(move='push', focus=[0.45, 0.55]), transition='cut',
-  characters=[ch(id='hero', cast='hero', x=0.42, y=0.6, scale=0.4, z='mid', action='fall', mood='shocked', air=[dict(at=0, h=0.7), dict(at='crater', h=0.0, ease='linear')], keys=[dict(cue='crater', action='idle', mood='sad')])],
-  fx=[dict(type='blast', at='crater', x=0.42, y=0.6, r=60, z='mid', shake=30)], sfx=[dict(type='boom', at='crater')]))
+sc.append(dict(cue='and land', loc='b_crater', camera=dict(move='push', focus=[0.6, 0.7]), transition='cut',
+  characters=[ch(id='hero', cast='hero', x=0.62, y=0.76, scale=0.3, z='mid', action='fall', mood='shocked', air=[dict(at=0, h=0.7), dict(at='crater', h=0.0, ease='linear')], keys=[dict(cue='crater', action='idle', mood='sad')])],
+  fx=[dict(type='blast', at='crater', x=0.62, y=0.76, r=60, z='mid', shake=30)], sfx=[dict(type='boom', at='crater')]))
 # 15 The ground is covered in glowing purple rocks.
 sc.append(dict(cue='The ground', loc='b_crater', camera=dict(move='push', amount=1.3, focus=[0.5, 0.7]), transition='cut',
   props=[dict(type='hoprock', x=0.22, y=0.97, scale=1.6, z='near', seed=1), dict(type='hoprock', x=0.8, y=0.93, scale=1.2, z='near', seed=4), dict(type='hoprock', x=0.62, y=0.86, scale=0.8, z='fg', seed=6)],
