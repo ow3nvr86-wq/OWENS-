@@ -116,11 +116,11 @@ S(cue='You have', loc='b2_field', camera=dict(move='push', focus=[0.45, 0.42]), 
 # 26-28 the fight, in 3D: one moving-camera shot (tools/fight_blender.py), the 2D cast pinned to world positions
 HERO_W, SNIPER_W = [0.0, 8.0, 0.0], [5.0, 20.0, 1.15]
 S(cue='You crush', bgseq=dict(dir='fightseq'), transition='cut',
-  characters=[dict(id='sniper', cast='sniper', world=SNIPER_W, flip=True, action='aim', prop='sniper', mood='smug', lookAt='left', keys=[dict(cue="don't", mood='shocked')]),
+  characters=[dict(id='sniper', cast='sniper', world=SNIPER_W, size=1.6, flip=True, action='aim', prop='sniper', mood='smug', lookAt='left', keys=[dict(cue="don't", mood='shocked')]),
               dict(id='hero', cast='hero', world=HERO_W, action='crush', prop='hoprock', mood='determined', lookAt='right',
                    airW=[dict(at=0, h=0), dict(at='jump', h=0), dict(at='He', h=3.0), dict(at="don't", h=3.4), dict(at=4.0, h=3.0)],
                    keys=[dict(cue='crush', action='crush'), dict(cue='jump', action='jump', prop=None, mood='happy'), dict(cue='He', action='float', mood='smug'),
-                         dict(cue='You', action='aim', prop='shotgun', mood='determined')])],
+                         dict(cue="You don't", action='aim', prop='shotgun', mood='determined')])],
   fx=[dict(type='burst', at='crush', world=[0.35, 8.0, 1.6], dur=0.8), dict(type='speedlines', at='jump', dur=0.7),
       dict(type='tracer', at='misses', fromW=[4.4, 20.0, 1.9], toW=[-4.0, 5.0, 3.8], dur=0.28), dict(type='glint', at='He', world=[4.4, 20.0, 1.9]),
       dict(type='flash', at="don't", dur=0.2, amount=0.65), dict(type='impactframe', at="don't"),

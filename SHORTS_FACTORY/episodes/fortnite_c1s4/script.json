@@ -1444,6 +1444,7 @@
       20.0,
       1.15
      ],
+     "size": 1.6,
      "flip": true,
      "action": "aim",
      "prop": "sniper",
@@ -1507,7 +1508,7 @@
        "mood": "smug"
       },
       {
-       "cue": "You",
+       "cue": "You don't",
        "action": "aim",
        "prop": "shotgun",
        "mood": "determined"
