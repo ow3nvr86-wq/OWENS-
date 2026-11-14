@@ -45,6 +45,7 @@
    "mood": "angry"
   }
  },
+ "fps": 60,
  "scenes": [
   {
    "cue": "How",
@@ -113,7 +114,8 @@
        "action": "shrug",
        "mood": "worried"
       }
-     ]
+     ],
+     "enter": "pop"
     }
    ],
    "sfx": [
@@ -535,7 +537,8 @@
      "y": 0.758,
      "scale": 1.6,
      "action": "present",
-     "mood": "happy"
+     "mood": "happy",
+     "enter": "pop"
     }
    ],
    "sfx": [
@@ -1040,7 +1043,8 @@
      "scale": 1.6,
      "flip": true,
      "action": "point",
-     "mood": "happy"
+     "mood": "happy",
+     "enter": "slide"
     }
    ],
    "sfx": [

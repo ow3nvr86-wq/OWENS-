@@ -67,11 +67,12 @@ function drawFace(g, R, s) {
   // eyes: small black ovals (or blink lines)
   for (const k of [-1, 1]) {
     const ex = k * R * 0.32 + look * R * 0.12;
-    if (s.blink) { g.beginPath(); g.moveTo(ex - R * 0.08, eyY); g.lineTo(ex + R * 0.08, eyY); g.lineWidth = R * 0.07; g.strokeStyle = C.ink; g.lineCap = 'round'; g.stroke(); }
-    else { g.beginPath(); g.ellipse(ex, eyY, R * 0.075, R * (s.mood === 'shocked' || s.mood === 'scared' ? 0.12 : 0.1), 0, 0, 7); g.fillStyle = C.ink; g.fill(); }
+    const b = s.blink === true ? 1 : (s.blink || 0), ry = R * (s.mood === 'shocked' || s.mood === 'scared' ? 0.12 : 0.1) * (1 - b);
+    if (b > 0.8) { g.beginPath(); g.moveTo(ex - R * 0.08, eyY); g.lineTo(ex + R * 0.08, eyY); g.lineWidth = R * 0.07; g.strokeStyle = C.ink; g.lineCap = 'round'; g.stroke(); }
+    else { g.beginPath(); g.ellipse(ex, eyY + b * R * 0.03, R * 0.075, Math.max(R * 0.02, ry), 0, 0, 7); g.fillStyle = C.ink; g.fill(); }
   }
   // brows
-  const [bi, bo] = BROWS[s.mood] || BROWS.neutral;
+  const [bi, bo] = s.brow || BROWS[s.mood] || BROWS.neutral;
   for (const k of [-1, 1]) {
     const cx = k * R * 0.32 + look * R * 0.12, by = -R * 0.3;
     g.beginPath(); g.moveTo(cx - k * R * 0.16, by + bi * R); g.lineTo(cx + k * R * 0.18, by + bo * R);
@@ -80,8 +81,13 @@ function drawFace(g, R, s) {
   // mouth: talking overrides with 3 shapes from voice amplitude
   const mx = look * R * 0.08, my = R * 0.38;
   let shape = MOUTH_FOR[s.mood] || 'line';
-  if (s.talk != null) shape = s.talk > 0.55 ? 'open' : s.talk > 0.18 ? 'mid' : shape;
   g.lineWidth = R * 0.07; g.strokeStyle = C.ink; g.lineCap = 'round';
+  if (s.talk != null) {             // talking: one mouth that opens and closes smoothly with the voice
+    const o = clamp((s.talk - 0.06) / 0.62);
+    if (o > 0.04) { g.beginPath(); g.ellipse(mx, my + R * 0.01, R * (0.14 - 0.035 * o), R * (0.02 + 0.13 * o), 0, 0, 7); fo(g, '#4a1a24', R * 0.06);
+      if (o > 0.35) { g.save(); g.clip(); g.beginPath(); g.ellipse(mx, my + R * (0.02 + 0.13 * o), R * 0.08, R * 0.05, 0, 0, 7); g.fillStyle = '#d0505e'; g.fill(); g.restore(); }
+      return; }
+  }
   if (shape === 'smile') { g.beginPath(); g.arc(mx, my - R * 0.12, R * 0.2, 0.35, Math.PI - 0.35); g.stroke(); }
   else if (shape === 'smirk') { g.beginPath(); g.moveTo(mx - R * 0.16, my); g.quadraticCurveTo(mx + R * 0.05, my + R * 0.08, mx + R * 0.2, my - R * 0.08); g.stroke(); }
   else if (shape === 'frown') { g.beginPath(); g.arc(mx, my + R * 0.16, R * 0.17, Math.PI + 0.45, -0.45); g.stroke(); }
@@ -108,6 +114,7 @@ const POSES = {
   shrug: () => ({ armL: -1.1, armR: 1.1, elL: 1.4, elR: -1.4 }),
   flail: (t) => ({ armL: -2.2 + Math.sin(t * 18) * 0.5, armR: 2.2 + Math.cos(t * 17) * 0.5, elL: 0.3, elR: -0.3 }),
   torch: (t) => ({ armL: -0.15, armR: 1.2 + Math.sin(t * 2) * 0.05, elL: 0.1, elR: -0.9 }),
+  walk: (t, ph) => ({ armL: Math.sin(ph) * 0.35, armR: -Math.sin(ph) * 0.35, elL: 0.15, elR: -0.15 }),
   march: (t, ph) => ({ armL: Math.sin(ph) * 0.45, armR: -Math.sin(ph) * 0.45, elL: 0.2, elR: -0.2 }),
   run: (t, ph) => ({ armL: Math.sin(ph) * 0.9, armR: -Math.sin(ph) * 0.9, elL: 0.9, elR: -0.9 }),
   talk: (t) => ({ armL: -0.15, armR: 0.5 + Math.sin(t * 5) * 0.25, elL: 0.1, elR: -0.6 }),
@@ -119,8 +126,14 @@ function drawCharacter(g, def, st) {
   const s = st.scale || 1, t = st.t || 0;
   const moving = st.action === 'march' || st.action === 'run' || st.action === 'walk';
   const ph = st.phase || 0;
-  const bob = moving ? -Math.abs(Math.sin(ph)) * 10 : Math.sin(t * 2.4 + (def.seed || 0)) * 3;
-  g.save(); g.translate(st.x, st.y); g.scale((st.flip ? -1 : 1) * s, s);
+  const sd = (st.seed ?? def.seed ?? 0);
+  const amp_ = st.action === 'run' ? 12 : st.action === 'walk' ? 6 : 8;
+  const bob = moving ? -(1 - Math.cos(2 * ph)) * 0.5 * amp_ : Math.sin(t * 2.4 + sd) * 3;
+  // squash at each footfall / stretch mid-stride; slow breathing when standing; a little squash when the pose changes
+  let sy = moving ? 1 + 0.035 * Math.cos(2 * ph + Math.PI) : 1 + 0.012 * Math.sin(t * 2.2 + sd);
+  if (st.actionT != null) sy -= 0.06 * pulse(t, st.actionT, 0.22);
+  const pop = st.pop != null ? Math.max(0.001, eBack(st.pop, 2.2)) : 1;
+  g.save(); g.translate(st.x, st.y); g.scale((st.flip ? -1 : 1) * s * pop / Math.sqrt(sy), s * pop * sy);
   // soft drop shadow (sits the character in the 3D scene)
   const sh = g.createRadialGradient(0, 0, 4, 0, 0, 95); sh.addColorStop(0, 'rgba(10,8,12,0.42)'); sh.addColorStop(1, 'rgba(10,8,12,0)');
   g.save(); g.scale(1, 0.22); g.fillStyle = sh; g.beginPath(); g.arc(0, 0, 95, 0, 7); g.fill(); g.restore();
@@ -145,7 +158,11 @@ function drawCharacter(g, def, st) {
   g.beginPath(); g.rect(-45, hipY - 22, 90, 16); fo(g, cos.belt, 4);
   g.beginPath(); g.moveTo(-40, top); g.lineTo(0, top + 26); g.lineTo(40, top); g.lineWidth = 6; g.strokeStyle = cos.trim; g.stroke();
   // arms: thin sticks with small round hands
-  const P = (POSES[st.action] || POSES.idle)(t, ph);
+  let P = (POSES[st.action] || POSES.idle)(t, ph);
+  if (st.prevAction && st.prevAction !== st.action && t - st.actionT < 0.32) {
+    const Q = (POSES[st.prevAction] || POSES.idle)(t, ph), u = eBack(clamp((t - st.actionT) / 0.32), 1.3);
+    P = Object.fromEntries(Object.keys(P).map(k => [k, lerp(Q[k], P[k], u)]));
+  }
   const sh_ = [[-38, top + 14, P.armL, P.elL, -1], [38, top + 14, P.armR, P.elR, 1]];
   const hands = [];
   for (const [sx, sy, a, e, k] of sh_) {
@@ -160,10 +177,15 @@ function drawCharacter(g, def, st) {
   for (const [hx, hy] of hands) { g.beginPath(); g.arc(hx, hy, 11, 0, 7); fo(g, C.skin, 5); }
   // head: a big white egg (~40 % of the height)
   const R = 82, hcY = top - R * 0.95;
-  g.save(); g.translate(0, hcY); g.rotate(st.headTilt || 0);
+  let tilt = (st.headTilt || 0) + (moving ? 0.045 * Math.sin(2 * ph - 1.0) : 0.03 * Math.sin(t * 1.3 + sd * 1.7));
+  if (st.moodT != null) tilt += 0.07 * pulse(t, st.moodT, 0.3) * (hash(sd) > 0.5 ? 1 : -1);
+  g.save(); g.translate(0, hcY - (moving ? 0 : 1.5 * Math.sin(t * 2.2 + sd - 0.6))); g.rotate(tilt);
   if (def.hair) { g.beginPath(); g.arc(0, -R * 0.15, R * 1.04, Math.PI * 1.05, Math.PI * 1.95); g.closePath(); fo(g, def.hair); }
   g.beginPath(); g.ellipse(0, 0, R * 0.92, R * 1.08, 0, 0, 7); fo(g, C.skin);
-  drawFace(g, R, { mood: st.mood || def.mood || 'neutral', blink: st.blink, talk: st.talk, look: st.look });
+  const mood = st.mood || def.mood || 'neutral';
+  let brow = BROWS[mood] || BROWS.neutral;
+  if (st.prevMood && st.prevMood !== mood && t - st.moodT < 0.3) { const a = BROWS[st.prevMood] || BROWS.neutral, u = eBack(clamp((t - st.moodT) / 0.3), 1.6); brow = [lerp(a[0], brow[0], u), lerp(a[1], brow[1], u)]; }
+  drawFace(g, R, { mood, blink: st.blink, talk: st.talk, look: st.look, brow });
   facialHair(g, R, def.facial);
   (HATS[def.hat] || HATS.none)(g, R, { t, sway: st.hatSway || 0 });
   g.restore();

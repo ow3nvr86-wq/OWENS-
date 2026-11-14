@@ -1,11 +1,11 @@
 // Episode compositor: background -> crowd -> characters -> effects -> captions, with a camera move on every shot and
 // whip/zoom/cut transitions. Everything is driven by <episode>/script.json, work/words.json and work/amp.json.
-// Open as engine/index.html?ep=episodes/<name>. window.renderFrame(f) draws frame f (f / 30 s).
+// Open as engine/index.html?ep=episodes/<name>. window.renderFrame(f) draws frame f (f / FPS s; FPS = script.json fps, default 60).
 const cv = document.getElementById('c'), X = cv.getContext('2d');
 const mk = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return [c, c.getContext('2d')]; };
 const [A, AX] = mk(), [B, BX] = mk();
 const EP = new URLSearchParams(location.search).get('ep');
-let SCRIPT, WORDS, AMP, SCENES = [], CHUNKS = [], BG = {}, NORM = [];
+let AFPS = 30, SCRIPT, WORDS, AMP, SCENES = [], CHUNKS = [], BG = {}, NORM = [];
 
 const norm = s => s.toLowerCase().replace(/[^a-z0-9' ]/g, ' ').replace(/'/g, '').trim();
 // find the time of a cue phrase (first occurrence at or after word index `from`)
@@ -27,7 +27,7 @@ function resolve() {
   // resolve every cue inside a scene relative to its own words
   for (const s of SCENES) {
     const T = c => (c == null ? null : (typeof c === 'number' ? s.start + c : cueTime(c, s.wi)));
-    for (const ch of s.characters || []) { for (const k of ch.keys || []) k.t = T(k.cue); if (ch.talk) ch.talkT = ch.talk.map(T); if (ch.move) { ch.move.t0 = T(ch.move.from) ?? s.start; ch.move.t1 = T(ch.move.to) ?? s.end; } }
+    for (const ch of s.characters || []) { for (const k of ch.keys || []) k.t = T(k.cue); if (ch.talk) ch.talkT = ch.talk.map(T); if (ch.move) { ch.move.t0 = T(ch.move.from) ?? s.start; ch.move.t1 = T(ch.move.to) ?? s.end; } if (ch.enterAt) ch.enterT = T(ch.enterAt); }
     for (const fx of s.fx || []) { fx.t0 = T(fx.at) ?? s.start; fx.seed = fx.seed ?? (s.wi % 97); }
   }
 }
@@ -52,7 +52,7 @@ function buildCaptions() {
 function clean(s) { return s.toUpperCase().replace(/(\d),(?=\d)/g, '$1\u0001').replace(/(\d):(?=\d)/g, '$1\u0002').replace(/\.\.\.|[.,?!:;"]/g, '').replace(/\u0001/g, ',').replace(/\u0002/g, ':').replace(/'/g, '’'); }
 function captions(t) {
   const ch = CHUNKS.find(c => t >= c.start && t < c.end); if (!ch) return;
-  const age = (t - ch.start) * FPS, sc = age >= 4 ? 1 : 0.85 + 0.15 * eOut(age / 4);
+  const age = (t - ch.start) * 30, sc = age >= 4 ? 1 : 0.85 + 0.15 * eOut(age / 4);
   const cy = H * (SCRIPT.caption_y ?? 0.68);
   X.save(); X.translate(W / 2, cy); X.scale(sc, sc);
   X.font = '800 90px Poppins'; X.textAlign = 'center'; X.textBaseline = 'middle'; X.lineJoin = 'round'; X.miterLimit = 2;
@@ -69,7 +69,7 @@ const MOVES = {            // [scale0, scale1, dx0, dx1, dy0, dy1] (dx/dy in fra
 };
 function camAt(s, t) {
   const m = s.camera || {}; const base = MOVES[m.move || 'push'];
-  const u = ease(clamp((t - s.start) / Math.max(0.3, s.end - s.start)));
+  const v = clamp((t - s.start) / Math.max(0.3, s.end - s.start)), u = lerp(v, ease(v), 0.55);
   const k = m.amount ?? 1;
   const sc = lerp(1, lerp(base[0], base[1], u), k) * (m.zoom || 1);
   const fx = (m.focus || [0.5, 0.5]);
@@ -82,18 +82,42 @@ function camAt(s, t) {
 
 // ---------------- one shot ----------------
 const CAST = () => SCRIPT.cast;
-function amp(t) { return AMP[Math.min(AMP.length - 1, Math.max(0, Math.round(t * FPS)))] || 0; }
+function amp(t) { const x = Math.max(0, t * AFPS), i = Math.min(AMP.length - 2, Math.floor(x)); return Math.max(0, lerp(AMP[i] || 0, AMP[i + 1] || 0, x - i)); }
+// smooth blinks: eyelid closes and opens over ~0.14 s every 2-4 s (0 = open, 1 = shut)
+function blinkAt(t, seed) { const per = 2.2 + hash(seed) * 1.8, u = (t + hash(seed + 1) * per) % per; return u < 0.14 ? Math.sin(Math.PI * u / 0.14) : 0; }
 function charState(ch, s, t) {
   const st = { x: ch.x * W, y: ch.y * H, scale: ch.scale || 1, flip: !!ch.flip, mood: ch.mood, action: ch.action || 'idle', prop: ch.prop, look: ch.look || 0, headTilt: 0 };
-  for (const k of ch.keys || []) if (t >= k.t) Object.assign(st, Object.fromEntries(Object.entries(k).filter(([n]) => !['cue', 't'].includes(n))), k.x != null ? { x: k.x * W } : {}, k.y != null ? { y: k.y * H } : {});
-  if (ch.move) { const u = ease(clamp((t - ch.move.t0) / Math.max(0.2, ch.move.t1 - ch.move.t0))); st.x = lerp(ch.x, ch.move.x ?? ch.x, u) * W; st.y = lerp(ch.y, ch.move.y ?? ch.y, u) * H; st.phase = (t - ch.move.t0) * 9; }
-  if (st.action === 'march' || st.action === 'run' || st.action === 'walk') st.phase = st.phase ?? t * (st.action === 'run' ? 14 : 8);
-  // blink every 2-4 s; brow/mood changes happen inside a blink
-  const seed = (ch.id || '').length * 7.3;
-  const per = 2.2 + hash(seed) * 1.8; st.blink = ((t + hash(seed + 1) * per) % per) < 0.1;
-  for (const k of ch.keys || []) if (k.mood && Math.abs(t - k.t) < 0.05) st.blink = true;
-  if (ch.talkT && t >= ch.talkT[0] && t <= ch.talkT[1]) { st.talk = amp(t); if (st.action === 'idle') st.action = 'talk'; }
-  st.t = t; return st;
+  // keys switch pose/mood on a word; remember the previous ones so the change blends instead of snapping
+  st.prevAction = st.action; st.actionT = -9; st.prevMood = st.mood; st.moodT = -9;
+  for (const k of ch.keys || []) if (t >= k.t) {
+    if (k.action && k.action !== st.action) { st.prevAction = st.action; st.actionT = k.t; }
+    if (k.mood && k.mood !== st.mood) { st.prevMood = st.mood; st.moodT = k.t; }
+    Object.assign(st, Object.fromEntries(Object.entries(k).filter(([n]) => !['cue', 't', 'x', 'y'].includes(n))));
+    if (k.x != null || k.y != null) { st.keyFrom = [st.x, st.y]; st.keyT = k.t; if (k.x != null) st.x = k.x * W; if (k.y != null) st.y = k.y * H; }
+  }
+  if (st.keyFrom) { const u = ease5((t - st.keyT) / 0.45); st.x = lerp(st.keyFrom[0], st.x, u); st.y = lerp(st.keyFrom[1], st.y, u); }
+  if (ch.move) {
+    const d = Math.max(0.2, ch.move.t1 - ch.move.t0), u = ease5((t - ch.move.t0) / d);
+    const x0 = ch.x * W, y0 = ch.y * H, x1 = (ch.move.x ?? ch.x) * W, y1 = (ch.move.y ?? ch.y) * H;
+    st.x = lerp(x0, x1, u); st.y = lerp(y0, y1, u);
+    // feet step in time with the distance travelled (no skating); idle characters walk while they move
+    const dist = Math.hypot(st.x - x0, st.y - y0), strideP = 95 * st.scale;
+    st.phase = dist / strideP * Math.PI;
+    if (t > ch.move.t0 && t < ch.move.t1 && st.action === 'idle') st.action = 'walk';
+    st.lean = (st.action === 'run' ? 0.1 : 0.04) * Math.sign(x1 - x0) * (st.flip ? -1 : 1) * Math.sin(Math.PI * clamp((t - ch.move.t0) / d));
+  }
+  if (st.action === 'march' || st.action === 'run' || st.action === 'walk') st.phase = st.phase ?? t * (st.action === 'run' ? 14 : st.action === 'walk' ? 7 : 8);
+  // entrance: pop (springs up from the ground) or slide (in from the nearest side), on a cue or at the shot start
+  if (ch.enter) {
+    const t0 = ch.enterT ?? s.start, u = clamp((t - t0) / 0.42);
+    if (ch.enter === 'pop') st.pop = u;
+    if (ch.enter === 'slide') { const from = st.x < W / 2 ? -260 * st.scale : W + 260 * st.scale; st.x = lerp(from, st.x, eOut(u)); if (u < 1) { st.action = st.action === 'idle' ? 'walk' : st.action; st.phase = t * 10; } }
+  }
+  const seed = (ch.id || '').length * 7.3 + ch.x * 13;
+  st.blink = blinkAt(t, seed);
+  for (const k of ch.keys || []) if (k.mood && t >= k.t && t < k.t + 0.14) st.blink = Math.max(st.blink, Math.sin(Math.PI * (t - k.t) / 0.14));
+  if (ch.talkT && t >= ch.talkT[0] - 0.05 && t <= ch.talkT[1] + 0.25) { st.talk = amp(t); if (st.action === 'idle') st.action = 'talk'; }
+  st.t = t; st.seed = seed; return st;
 }
 function crowd(g, cr, s, t) {
   const n = cr.count || 40, [x0, y0, x1, y1] = cr.area, defs = [].concat(cr.cast).map(id => CAST()[id]);
@@ -114,7 +138,7 @@ function crowd(g, cr, s, t) {
   for (const p of list) {
     const action = cr.action || 'march';
     drawCharacter(g, Object.assign({ seed: p.i }, p.def), { x: p.x * W, y: p.y * H, scale: p.sc, flip: !!cr.flip, t: t + p.i * 0.13, mood: cr.mood || p.def.mood,
-      action, phase: t * (action === 'run' ? 13 : 7.5) + hash(p.i * 4.4) * 6.28, blink: ((t + hash(p.i) * 3) % 3) < 0.1, look: cr.look || 0, lean: action === 'run' ? (cr.flip ? 0.12 : -0.12) : 0 });
+      action, phase: t * (action === 'run' ? 13 : 7.5) + hash(p.i * 4.4) * 6.28, blink: blinkAt(t, p.i * 3.3 + 1), seed: p.i, look: cr.look || 0, lean: action === 'run' ? (cr.flip ? 0.12 : -0.12) : 0 });
   }
 }
 function drawBg(g, s, t, layer = '') {
@@ -178,8 +202,10 @@ window.renderFrame = renderFrame;
 (async () => {
   SCRIPT = await (await fetch('../' + EP + '/script.json')).json();
   const wj = await (await fetch('../' + EP + '/work/words.json')).json(); WORDS = wj.words; SCRIPT._duration = wj.duration;
-  AMP = await (await fetch('../' + EP + '/work/amp.json')).json();
-  window.FRAMES = Math.round(wj.duration * FPS);
+  AMP = await (await fetch('../' + EP + '/work/amp.json')).json(); AFPS = wj.fps || 30;
+  { let e = 0; AMP = AMP.map(v => (e = v > e ? lerp(e, v, 0.75) : lerp(e, v, 0.35))); }
+  FPS = SCRIPT.fps || 60;
+  window.FPS = FPS; window.FRAMES = Math.round(wj.duration * FPS);
   resolve(); buildCaptions();
   const bgs = [...new Set(SCRIPT.scenes.map(s => s.bg))];
   const names = bgs.concat(bgs.map(n => n.replace(/(\.\w+)$/, '_fg$1')));   // optional foreground layer: <bg>_fg.png

@@ -1,6 +1,6 @@
 // Shared helpers: easing, keyframes, noise and ink-outlined shapes. All drawing is in 1080x1920 frame pixels.
 const INK = '#221c22';
-const W = 1080, H = 1920, FPS = 30;
+const W = 1080, H = 1920; let FPS = 60;   // set from script.json "fps" at load
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const lerp = (a, b, t) => a + (b - a) * t;
 const ease = t => { t = clamp(t); return t * t * (3 - 2 * t); };
