@@ -1,0 +1,877 @@
+{
+ "duration": 56.999,
+ "fps": 30,
+ "frames": 1710,
+ "words": [
+  {
+   "word": "You",
+   "line": 0,
+   "start": 0.0,
+   "end": 0.22
+  },
+  {
+   "word": "blink...",
+   "line": 0,
+   "start": 0.22,
+   "end": 1.02
+  },
+  {
+   "word": "and",
+   "line": 0,
+   "start": 1.17,
+   "end": 1.5
+  },
+  {
+   "word": "you're",
+   "line": 0,
+   "start": 1.5,
+   "end": 1.88
+  },
+  {
+   "word": "on",
+   "line": 0,
+   "start": 1.88,
+   "end": 2.0
+  },
+  {
+   "word": "the",
+   "line": 0,
+   "start": 2.0,
+   "end": 2.12
+  },
+  {
+   "word": "Battle",
+   "line": 0,
+   "start": 2.12,
+   "end": 2.32
+  },
+  {
+   "word": "Bus.",
+   "line": 0,
+   "start": 2.32,
+   "end": 3.3
+  },
+  {
+   "word": "Fortnite.",
+   "line": 1,
+   "start": 3.197,
+   "end": 4.3
+  },
+  {
+   "word": "Chapter",
+   "line": 1,
+   "start": 4.126,
+   "end": 4.32
+  },
+  {
+   "word": "1,",
+   "line": 1,
+   "start": 4.32,
+   "end": 5.24
+  },
+  {
+   "word": "Season",
+   "line": 1,
+   "start": 5.24,
+   "end": 5.3
+  },
+  {
+   "word": "4.",
+   "line": 1,
+   "start": 5.3,
+   "end": 6.26
+  },
+  {
+   "word": "A",
+   "line": 1,
+   "start": 6.343,
+   "end": 6.44
+  },
+  {
+   "word": "comet",
+   "line": 1,
+   "start": 6.44,
+   "end": 6.76
+  },
+  {
+   "word": "just",
+   "line": 1,
+   "start": 6.76,
+   "end": 7.0
+  },
+  {
+   "word": "flattened",
+   "line": 1,
+   "start": 7.2,
+   "end": 7.54
+  },
+  {
+   "word": "Dusty",
+   "line": 1,
+   "start": 7.54,
+   "end": 8.0
+  },
+  {
+   "word": "Depot...",
+   "line": 1,
+   "start": 8.0,
+   "end": 8.68
+  },
+  {
+   "word": "and",
+   "line": 1,
+   "start": 8.795,
+   "end": 8.96
+  },
+  {
+   "word": "ninety-nine",
+   "line": 1,
+   "start": 8.96,
+   "end": 9.44
+  },
+  {
+   "word": "players",
+   "line": 1,
+   "start": 9.44,
+   "end": 9.84
+  },
+  {
+   "word": "want",
+   "line": 1,
+   "start": 9.84,
+   "end": 10.28
+  },
+  {
+   "word": "you",
+   "line": 1,
+   "start": 10.28,
+   "end": 10.54
+  },
+  {
+   "word": "gone.",
+   "line": 1,
+   "start": 10.54,
+   "end": 11.52
+  },
+  {
+   "word": "You",
+   "line": 2,
+   "start": 11.622,
+   "end": 11.72
+  },
+  {
+   "word": "drop",
+   "line": 2,
+   "start": 11.72,
+   "end": 11.94
+  },
+  {
+   "word": "into",
+   "line": 2,
+   "start": 11.94,
+   "end": 12.18
+  },
+  {
+   "word": "Tilted",
+   "line": 2,
+   "start": 12.18,
+   "end": 12.52
+  },
+  {
+   "word": "Towers.",
+   "line": 2,
+   "start": 12.52,
+   "end": 13.22
+  },
+  {
+   "word": "So",
+   "line": 2,
+   "start": 13.445,
+   "end": 13.686
+  },
+  {
+   "word": "does",
+   "line": 2,
+   "start": 13.686,
+   "end": 13.846
+  },
+  {
+   "word": "everyone",
+   "line": 2,
+   "start": 13.846,
+   "end": 14.266
+  },
+  {
+   "word": "else.",
+   "line": 2,
+   "start": 14.266,
+   "end": 15.166
+  },
+  {
+   "word": "A",
+   "line": 3,
+   "start": 15.257,
+   "end": 15.346
+  },
+  {
+   "word": "guy",
+   "line": 3,
+   "start": 15.346,
+   "end": 15.466
+  },
+  {
+   "word": "with",
+   "line": 3,
+   "start": 15.466,
+   "end": 15.626
+  },
+  {
+   "word": "a",
+   "line": 3,
+   "start": 15.626,
+   "end": 15.706
+  },
+  {
+   "word": "shotgun",
+   "line": 3,
+   "start": 15.706,
+   "end": 16.066
+  },
+  {
+   "word": "is",
+   "line": 3,
+   "start": 16.066,
+   "end": 16.326
+  },
+  {
+   "word": "already",
+   "line": 3,
+   "start": 16.326,
+   "end": 16.746
+  },
+  {
+   "word": "waiting.",
+   "line": 3,
+   "start": 16.746,
+   "end": 17.566
+  },
+  {
+   "word": "You",
+   "line": 4,
+   "start": 17.657,
+   "end": 17.766
+  },
+  {
+   "word": "panic-build.",
+   "line": 4,
+   "start": 17.766,
+   "end": 18.626
+  },
+  {
+   "word": "A",
+   "line": 4,
+   "start": 18.617,
+   "end": 18.766
+  },
+  {
+   "word": "wall.",
+   "line": 4,
+   "start": 18.766,
+   "end": 19.386
+  },
+  {
+   "word": "A",
+   "line": 4,
+   "start": 19.259,
+   "end": 19.426
+  },
+  {
+   "word": "ramp.",
+   "line": 4,
+   "start": 19.426,
+   "end": 20.086
+  },
+  {
+   "word": "A",
+   "line": 4,
+   "start": 20.07,
+   "end": 20.126
+  },
+  {
+   "word": "staircase",
+   "line": 4,
+   "start": 20.126,
+   "end": 20.426
+  },
+  {
+   "word": "to",
+   "line": 4,
+   "start": 20.426,
+   "end": 20.726
+  },
+  {
+   "word": "nowhere.",
+   "line": 4,
+   "start": 20.726,
+   "end": 21.606
+  },
+  {
+   "word": "You",
+   "line": 5,
+   "start": 21.71,
+   "end": 21.806
+  },
+  {
+   "word": "jump",
+   "line": 5,
+   "start": 21.806,
+   "end": 22.006
+  },
+  {
+   "word": "off",
+   "line": 5,
+   "start": 22.006,
+   "end": 22.166
+  },
+  {
+   "word": "the",
+   "line": 5,
+   "start": 22.166,
+   "end": 22.326
+  },
+  {
+   "word": "top...",
+   "line": 5,
+   "start": 22.326,
+   "end": 22.566
+  },
+  {
+   "word": "and",
+   "line": 5,
+   "start": 22.992,
+   "end": 23.086
+  },
+  {
+   "word": "land",
+   "line": 5,
+   "start": 23.086,
+   "end": 23.326
+  },
+  {
+   "word": "in",
+   "line": 5,
+   "start": 23.326,
+   "end": 23.466
+  },
+  {
+   "word": "the",
+   "line": 5,
+   "start": 23.466,
+   "end": 23.566
+  },
+  {
+   "word": "crater",
+   "line": 5,
+   "start": 23.566,
+   "end": 23.826
+  },
+  {
+   "word": "at",
+   "line": 5,
+   "start": 23.826,
+   "end": 24.086
+  },
+  {
+   "word": "Dusty",
+   "line": 5,
+   "start": 24.086,
+   "end": 24.446
+  },
+  {
+   "word": "Divot.",
+   "line": 5,
+   "start": 24.446,
+   "end": 25.166
+  },
+  {
+   "word": "The",
+   "line": 6,
+   "start": 25.296,
+   "end": 25.386
+  },
+  {
+   "word": "ground",
+   "line": 6,
+   "start": 25.386,
+   "end": 25.666
+  },
+  {
+   "word": "is",
+   "line": 6,
+   "start": 25.666,
+   "end": 25.866
+  },
+  {
+   "word": "covered",
+   "line": 6,
+   "start": 25.866,
+   "end": 26.286
+  },
+  {
+   "word": "in",
+   "line": 6,
+   "start": 26.286,
+   "end": 26.506
+  },
+  {
+   "word": "glowing",
+   "line": 6,
+   "start": 26.506,
+   "end": 26.866
+  },
+  {
+   "word": "purple",
+   "line": 6,
+   "start": 26.866,
+   "end": 27.226
+  },
+  {
+   "word": "rocks.",
+   "line": 6,
+   "start": 27.226,
+   "end": 27.986
+  },
+  {
+   "word": "Hop",
+   "line": 6,
+   "start": 28.207,
+   "end": 28.424
+  },
+  {
+   "word": "Rocks.",
+   "line": 6,
+   "start": 28.424,
+   "end": 29.224
+  },
+  {
+   "word": "You",
+   "line": 7,
+   "start": 29.251,
+   "end": 29.344
+  },
+  {
+   "word": "crush",
+   "line": 7,
+   "start": 29.344,
+   "end": 29.604
+  },
+  {
+   "word": "one.",
+   "line": 7,
+   "start": 29.604,
+   "end": 30.624
+  },
+  {
+   "word": "Gravity?",
+   "line": 7,
+   "start": 31.053,
+   "end": 31.084
+  },
+  {
+   "word": "Gone.",
+   "line": 7,
+   "start": 31.103,
+   "end": 31.984
+  },
+  {
+   "word": "You",
+   "line": 8,
+   "start": 31.995,
+   "end": 32.084
+  },
+  {
+   "word": "float",
+   "line": 8,
+   "start": 32.084,
+   "end": 32.424
+  },
+  {
+   "word": "across",
+   "line": 8,
+   "start": 32.424,
+   "end": 32.704
+  },
+  {
+   "word": "the",
+   "line": 8,
+   "start": 32.704,
+   "end": 32.944
+  },
+  {
+   "word": "map",
+   "line": 8,
+   "start": 32.944,
+   "end": 33.124
+  },
+  {
+   "word": "like",
+   "line": 8,
+   "start": 33.124,
+   "end": 33.304
+  },
+  {
+   "word": "a",
+   "line": 8,
+   "start": 33.304,
+   "end": 33.424
+  },
+  {
+   "word": "confused",
+   "line": 8,
+   "start": 33.424,
+   "end": 33.864
+  },
+  {
+   "word": "astronaut.",
+   "line": 8,
+   "start": 33.864,
+   "end": 35.044
+  },
+  {
+   "word": "Then",
+   "line": 9,
+   "start": 35.068,
+   "end": 35.324
+  },
+  {
+   "word": "the",
+   "line": 9,
+   "start": 35.324,
+   "end": 35.564
+  },
+  {
+   "word": "storm",
+   "line": 9,
+   "start": 35.564,
+   "end": 35.904
+  },
+  {
+   "word": "closes",
+   "line": 9,
+   "start": 35.904,
+   "end": 36.224
+  },
+  {
+   "word": "in.",
+   "line": 9,
+   "start": 36.224,
+   "end": 37.084
+  },
+  {
+   "word": "Health",
+   "line": 9,
+   "start": 36.982,
+   "end": 37.164
+  },
+  {
+   "word": "dropping.",
+   "line": 9,
+   "start": 37.164,
+   "end": 38.204
+  },
+  {
+   "word": "Someone",
+   "line": 9,
+   "start": 38.138,
+   "end": 38.404
+  },
+  {
+   "word": "at",
+   "line": 9,
+   "start": 38.404,
+   "end": 38.564
+  },
+  {
+   "word": "Risky",
+   "line": 9,
+   "start": 38.564,
+   "end": 38.984
+  },
+  {
+   "word": "Reels",
+   "line": 9,
+   "start": 38.984,
+   "end": 39.284
+  },
+  {
+   "word": "is",
+   "line": 9,
+   "start": 39.284,
+   "end": 39.444
+  },
+  {
+   "word": "dancing",
+   "line": 9,
+   "start": 39.444,
+   "end": 39.744
+  },
+  {
+   "word": "at",
+   "line": 9,
+   "start": 39.744,
+   "end": 40.104
+  },
+  {
+   "word": "you.",
+   "line": 9,
+   "start": 40.104,
+   "end": 40.504
+  },
+  {
+   "word": "Final",
+   "line": 10,
+   "start": 40.708,
+   "end": 41.036
+  },
+  {
+   "word": "circle.",
+   "line": 10,
+   "start": 41.036,
+   "end": 41.816
+  },
+  {
+   "word": "One",
+   "line": 10,
+   "start": 41.786,
+   "end": 42.036
+  },
+  {
+   "word": "player",
+   "line": 10,
+   "start": 42.036,
+   "end": 42.296
+  },
+  {
+   "word": "left.",
+   "line": 10,
+   "start": 42.296,
+   "end": 43.116
+  },
+  {
+   "word": "He",
+   "line": 10,
+   "start": 43.125,
+   "end": 43.216
+  },
+  {
+   "word": "has",
+   "line": 10,
+   "start": 43.216,
+   "end": 43.356
+  },
+  {
+   "word": "a",
+   "line": 10,
+   "start": 43.356,
+   "end": 43.616
+  },
+  {
+   "word": "Bolt-Action",
+   "line": 10,
+   "start": 43.616,
+   "end": 44.116
+  },
+  {
+   "word": "Sniper.",
+   "line": 10,
+   "start": 44.116,
+   "end": 45.076
+  },
+  {
+   "word": "You",
+   "line": 10,
+   "start": 45.123,
+   "end": 45.356
+  },
+  {
+   "word": "have",
+   "line": 10,
+   "start": 45.356,
+   "end": 45.636
+  },
+  {
+   "word": "a",
+   "line": 10,
+   "start": 45.636,
+   "end": 45.756
+  },
+  {
+   "word": "shotgun...",
+   "line": 10,
+   "start": 45.756,
+   "end": 46.596
+  },
+  {
+   "word": "and",
+   "line": 10,
+   "start": 46.659,
+   "end": 46.756
+  },
+  {
+   "word": "one",
+   "line": 10,
+   "start": 46.756,
+   "end": 47.056
+  },
+  {
+   "word": "last",
+   "line": 10,
+   "start": 47.056,
+   "end": 47.356
+  },
+  {
+   "word": "Hop",
+   "line": 10,
+   "start": 47.356,
+   "end": 47.616
+  },
+  {
+   "word": "Rock.",
+   "line": 10,
+   "start": 47.616,
+   "end": 48.236
+  },
+  {
+   "word": "You",
+   "line": 11,
+   "start": 48.309,
+   "end": 48.396
+  },
+  {
+   "word": "crush",
+   "line": 11,
+   "start": 48.396,
+   "end": 48.676
+  },
+  {
+   "word": "it.",
+   "line": 11,
+   "start": 48.676,
+   "end": 49.116
+  },
+  {
+   "word": "You",
+   "line": 11,
+   "start": 49.156,
+   "end": 49.296
+  },
+  {
+   "word": "jump.",
+   "line": 11,
+   "start": 49.296,
+   "end": 49.836
+  },
+  {
+   "word": "He",
+   "line": 11,
+   "start": 49.914,
+   "end": 50.036
+  },
+  {
+   "word": "misses.",
+   "line": 11,
+   "start": 50.036,
+   "end": 50.776
+  },
+  {
+   "word": "You",
+   "line": 11,
+   "start": 50.681,
+   "end": 50.976
+  },
+  {
+   "word": "don't.",
+   "line": 11,
+   "start": 50.976,
+   "end": 52.316
+  },
+  {
+   "word": "Victory",
+   "line": 12,
+   "start": 52.316,
+   "end": 52.316
+  },
+  {
+   "word": "Royale.",
+   "line": 12,
+   "start": 52.316,
+   "end": 53.136
+  },
+  {
+   "word": "Then",
+   "line": 13,
+   "start": 53.36,
+   "end": 53.619
+  },
+  {
+   "word": "you",
+   "line": 13,
+   "start": 53.619,
+   "end": 53.959
+  },
+  {
+   "word": "blink...",
+   "line": 13,
+   "start": 53.959,
+   "end": 54.679
+  },
+  {
+   "word": "and",
+   "line": 13,
+   "start": 54.775,
+   "end": 54.859
+  },
+  {
+   "word": "you're",
+   "line": 13,
+   "start": 54.859,
+   "end": 55.039
+  },
+  {
+   "word": "back",
+   "line": 13,
+   "start": 55.039,
+   "end": 55.219
+  },
+  {
+   "word": "in",
+   "line": 13,
+   "start": 55.219,
+   "end": 55.359
+  },
+  {
+   "word": "the",
+   "line": 13,
+   "start": 55.359,
+   "end": 55.479
+  },
+  {
+   "word": "lobby.",
+   "line": 13,
+   "start": 55.479,
+   "end": 56.359
+  },
+  {
+   "word": "Ready",
+   "line": 14,
+   "start": 56.386,
+   "end": 56.539
+  },
+  {
+   "word": "up?",
+   "line": 14,
+   "start": 56.539,
+   "end": 56.979
+  }
+ ]
+}

@@ -125,6 +125,31 @@ function charState(ch, s, t) {
   if (ch.talkT && t >= ch.talkT[0] - 0.05 && t <= ch.talkT[1] + 0.25) { st.talk = amp(t); if (st.action === 'idle') st.action = 'talk'; }
   st.t = t; st.seed = seed; return st;
 }
+function crowdMembers(cr, s, t) {
+  const n = cr.count || 40, [x0, y0, x1, y1] = cr.area, defs = [].concat(cr.cast).map(id => CAST()[id]);
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const rx = hash(i * 3.71 + (cr.seed || 1)), ry = hash(i * 9.13 + (cr.seed || 1));
+    const vary = FEAT.crowdFX ? crowdVariation(cr, i) : null;
+    const tt = vary ? Math.max(0, t - s.start - vary.delay) : t - s.start;
+    let x = lerp(x0, x1, rx), y = lerp(y0, y1, ry);
+    const spd = (cr.speed || 0) * (vary ? vary.speed : (0.85 + hash(i * 5.5) * 0.3)), dyv = (cr.dy || 0) * (vary ? vary.speed : (0.85 + hash(i * 2.2) * 0.3));
+    x += spd * tt; y += dyv * tt;
+    if (cr.wrap) { const w = x1 - x0; x = x0 + ((((x - x0) % w) + w) % w); }
+    if (cr.wrapY) { const h = y1 - y0; y = y0 + ((((y - y0) % h) + h) % h); }
+    const depth = clamp((y - y0) / Math.max(0.001, y1 - y0));
+    if (cr.taper != null) x = (x0 + x1) / 2 + (x - (x0 + x1) / 2) * lerp(cr.taper, 1, depth);
+    const sc = lerp(cr.scale[0], cr.scale[1], depth) * (vary ? vary.height : 1);
+    const z = Array.isArray(cr.z) ? lerp(zOf(cr.z[0]), zOf(cr.z[1]), depth) : zOf(cr.z ?? cr.layer);
+    const action = cr.action || 'march', def = Object.assign({ seed: i }, defs[i % defs.length], vary ? vary.def : {});
+    const dist = Math.hypot(spd * W, dyv * H) * tt;                    // distance walked (px), drives planted feet
+    const st = { x: x * W, y: y * H, scale: sc, flip: !!cr.flip, t: t + i * 0.13, mood: cr.mood || def.mood, action,
+      phase: t * (action === 'run' ? 13 : 7.5) * (vary ? vary.speed : 1) + hash(i * 4.4) * 6.28, blink: blinkAt(t, i * 3.3 + 1), seed: i, look: cr.look || 0,
+      lean: action === 'run' ? (cr.flip ? 0.12 : -0.12) : 0, id: (cr.seed || 1) * 1000 + i, dist, vel: [spd * W, dyv * H], cycle: vary ? vary.phase : hash(i * 4.4) };
+    out.push({ i, x, y, z, def, st });
+  }
+  return out.sort((a, b) => a.y - b.y);
+}
 function crowd(g, cr, s, t) {
   const n = cr.count || 40, [x0, y0, x1, y1] = cr.area, defs = [].concat(cr.cast).map(id => CAST()[id]);
   const list = [];
@@ -161,7 +186,40 @@ function drawBg(g, s, t, layer = '') {
   }
   return c;
 }
+function fxDraw(g, fx, s, t) {
+  if (fx.type === 'rockets') rocketVolley(g, Object.assign({}, fx, { from: [fx.from[0] * W, fx.from[1] * H], to: [fx.to[0] * W, fx.to[1] * H] }), t);
+  if (fx.type === 'puff') puffs(g, fx.x * W, fx.y * H, fx.t0, t, fx.n || 7, fx.size || 70, fx.col);
+  if (fx.type === 'sparks' && t >= fx.t0) sparks(g, fx.x * W, fx.y * H, t, 1);
+  if (fx.type === 'impact') impactBurst(g, fx.x * W, fx.y * H, fx.t0, t, fx.r || 220);
+  if (window.FX2 && FX2[fx.type]) FX2[fx.type](g, fx, s, t);
+}
+const SCREEN_FX = new Set(['glow', 'flash', 'tint', 'storm_tint', 'confetti', 'hud']);
+let CUR_CAM = null;
+function renderShotDepth(g, i, t) {
+  const s = SCENES[i], L = LOC[s.loc], cam = cam3At(s, t); CUR_CAM = { s, cam };
+  g.setTransform(1, 0, 0, 1, 0, 0); g.fillStyle = L.sky; g.fillRect(0, 0, W, H);
+  const items = [];
+  L.layers.forEach((ly, k) => items.push({ z: ly.z, o: 0, y: 0, draw: () => drawLayer(g, L, cam, ly) }));
+  for (const cr of s.crowds || []) for (const m of crowdMembers(cr, s, t)) {
+    const st = FEAT.crowdFX ? crowdReact(m.st, s, t, m.z) : m.st;
+    items.push({ z: m.z, o: 1, y: m.y, draw: () => { setPlane(g, cam, m.z); if (FEAT.crowdFX) crowdDust(g, m, s, t); drawCharacter(g, m.def, st); } });
+  }
+  for (const ch of s.characters || []) {
+    let st = charState(ch, s, t); const z = zOf(ch.z ?? ch.layer); st.id = ch.id;
+    if (FEAT.crowdFX) st = crowdReact(st, s, t, z);
+    const def = Object.assign({ seed: ch.id.length }, CAST()[ch.cast || ch.id]);
+    items.push({ z: z - 0.001, o: 2, y: st.y, draw: () => { setPlane(g, cam, z); if (FEAT.crowdFX) crowdDust(g, { st, def, z }, s, t); drawCharacter(g, def, st); } });
+  }
+  for (const pr of s.props || []) { const z = zOf(pr.z ?? pr.layer); items.push({ z: z - 0.002, o: pr.front ? 3 : 1, y: (pr.y || 0) * H, draw: () => { setPlane(g, cam, z); window.drawProp && drawProp(g, pr, s, t); } }); }
+  for (const fx of s.fx || []) if (!SCREEN_FX.has(fx.type)) { const z = zOf(fx.z ?? fx.layer); items.push({ z: z - 0.003, o: 4, y: 0, draw: () => { setPlane(g, cam, z); fxDraw(g, fx, s, t); } }); }
+  items.sort((a, b) => (b.z - a.z) || (a.o - b.o) || (a.y - b.y));
+  for (const it of items) { g.save(); it.draw(); g.restore(); }
+  g.setTransform(1, 0, 0, 1, 0, 0);
+  for (const fx of s.fx || []) if (SCREEN_FX.has(fx.type)) { if (fx.type === 'glow') fireGlow(g, clamp((t - fx.t0) / 0.6) * (fx.amount ?? 1), fx.col); else if (window.FX2 && FX2[fx.type]) FX2[fx.type](g, fx, s, t); }
+  if (s.tint) { g.fillStyle = s.tint; g.fillRect(0, 0, W, H); }
+}
 function renderShot(g, i, t) {
+  if (FEAT.depth && SCENES[i].loc && LOC[SCENES[i].loc]) return renderShotDepth(g, i, t);
   const s = SCENES[i]; g.setTransform(1, 0, 0, 1, 0, 0);
   const c = drawBg(g, s, t);
   for (const cr of s.crowds || []) crowd(g, cr, s, t);
@@ -207,6 +265,7 @@ function renderFrame(f) {
   const vg = X.createRadialGradient(W / 2, H / 2, H * 0.3, W / 2, H / 2, H * 0.75); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,0.38)');
   X.fillStyle = vg; X.fillRect(0, 0, W, H);
   captions(t);
+  if (DEBUG.has('depth') && FEAT.depth && CUR_CAM) depthDebug(X, CUR_CAM.s, CUR_CAM.cam);
   if (DEBUG.size && window.drawDebug) window.drawDebug(X, t);
   return true;
 }
@@ -256,9 +315,10 @@ window.renderFrame = renderFrame;
   FPS = SCRIPT.fps || 60; FEAT = Object.assign(FEAT, SCRIPT.features || {}); window.FEAT = FEAT; window.MODE = MODE;
   window.FPS = FPS; window.FRAMES = Math.round(wj.duration * FPS);
   resolve(); buildCaptions();
-  const bgs = [...new Set(SCRIPT.scenes.map(s => s.bg))];
+  const bgs = [...new Set(SCRIPT.scenes.map(s => s.bg).filter(Boolean))];
   const names = bgs.concat(bgs.map(n => n.replace(/(\.\w+)$/, '_fg$1')));   // optional foreground layer: <bg>_fg.png
   await Promise.all(names.map(n => new Promise(res => { const im = new Image(); im.onload = () => { BG[n] = im; res(); }; im.onerror = () => res(); im.src = '../' + EP + '/backgrounds/' + n; })));
+  if (FEAT.depth) await loadLocations(EP, SCRIPT);
   await document.fonts.load('800 90px Poppins');
   window.SCENES = SCENES; window.CHUNKS = CHUNKS; window.ready = true;
 })().catch(e => { console.error('compositor error: ' + e.message); window.loadError = e.message; });
