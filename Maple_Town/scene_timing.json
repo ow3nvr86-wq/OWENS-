@@ -1,0 +1,15 @@
+{
+ "title": "The New Kid in Maple Town",
+ "duration": 38.0,
+ "events": {},
+ "titles": [],
+ "scenes": [
+  {
+   "id": 1,
+   "key": "main",
+   "name": "story",
+   "start": 0,
+   "end": 38.0
+  }
+ ]
+}
