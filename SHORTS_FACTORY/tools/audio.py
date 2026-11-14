@@ -172,7 +172,7 @@ def punch(): t = t_(0.3); return lp(noise(0.3), 1200) * np.exp(-t * 35) + np.sin
 def scratch(d=0.5): t = t_(d); f = 700 + 600 * np.sin(2 * np.pi * 3.2 * t); return bp(noise(d), 500, 2500) * np.abs(np.sin(2 * np.pi * np.cumsum(f) / SR / 40)) * env(len(t), 0.01, 0.1) * 1.4
 def spawn(d=1.2): t = t_(d); f = 400 * 2 ** (t / d * 2.5); return (np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.5 + hp(noise(d), 4000) * 0.3) * env(len(t), 0.6, 0.3) * 0.7
 def crash(d=1.2): t = t_(d); return boom(d) * 0.8 + hp(noise(d), 2500) * np.exp(-t * 4) * 0.6 + bp(noise(d), 300, 1200) * np.exp(-t * 9) * 0.6
-def cuffs(): out = np.zeros(int(0.5 * SR)); [put(out, hp(noise(0.02), 3000) * np.exp(-t_(0.02) * 200) + ting(4200, 0.08) * 0.3, k * 0.06) for k in range(4)]; return out
+def cuffs(): out = np.zeros(int(0.5 * SR)); [(put(out, hp(noise(0.02), 3000) * np.exp(-t_(0.02) * 200), k * 0.06), put(out, ting(4200, 0.08) * 0.3, k * 0.06)) for k in range(4)]; return out
 def pop(): t = t_(0.08); return np.sin(2 * np.pi * 900 * t * np.exp(-t * 20)) * np.exp(-t * 50)
 SFX = dict(whoosh=whoosh, boing=boing, knock=knock, ting=ting, gulp=gulp, tada=tada, sting=sting, fuse=fuse, volley=volley, boom=boom,
            charge=charge, scramble=scramble, sneeze=sneeze, drums=drums, march=march_steps, pop=pop,
