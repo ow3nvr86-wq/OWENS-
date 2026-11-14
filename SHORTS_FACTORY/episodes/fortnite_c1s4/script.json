@@ -20,7 +20,7 @@
  "caption_swaps": {
   "ninety-nine": "99"
  },
- "grade": "brightness(1.14) saturate(1.32) contrast(1.05)",
+ "grade": "brightness(1.16) saturate(1.38) contrast(1.08)",
  "thumbnail_cue": "Victory",
  "music": {
   "style": "bouncy",
@@ -420,17 +420,17 @@
     {
      "id": "hero",
      "cast": "hero",
-     "x": 0.5,
-     "y": 0.826,
-     "scale": 1.5,
+     "x": 0.14,
+     "y": 0.834,
+     "scale": 1.7,
      "z": "fg",
      "mood": "worried",
-     "lookAt": "left",
+     "lookAt": "right",
      "keys": [
       {
        "cue": "gone",
        "mood": "scared",
-       "lookAt": "right"
+       "lookAt": "camera"
       }
      ]
     }
@@ -751,9 +751,9 @@
    "props": [
     {
      "type": "stairs",
-     "x": 0.5,
-     "y": 0.97,
-     "scale": 0.6,
+     "x": 0.22,
+     "y": 0.99,
+     "scale": 0.55,
      "z": "fg",
      "at": "staircase",
      "steps": 36,
@@ -1431,27 +1431,44 @@
   },
   {
    "cue": "You crush",
-   "loc": "b2_field",
-   "camera": {
-    "move": "tilt_up",
-    "amount": 0.8,
-    "focus": [
-     0.5,
-     0.5
-    ]
+   "bgseq": {
+    "dir": "fightseq"
    },
    "transition": "cut",
    "characters": [
     {
+     "id": "sniper",
+     "cast": "sniper",
+     "world": [
+      5.0,
+      20.0,
+      1.15
+     ],
+     "flip": true,
+     "action": "aim",
+     "prop": "sniper",
+     "mood": "smug",
+     "lookAt": "left",
+     "keys": [
+      {
+       "cue": "don't",
+       "mood": "shocked"
+      }
+     ]
+    },
+    {
      "id": "hero",
      "cast": "hero",
-     "x": 0.46,
-     "y": 0.94,
-     "scale": 1.1,
-     "z": "fg",
+     "world": [
+      0.0,
+      8.0,
+      0.0
+     ],
      "action": "crush",
+     "prop": "hoprock",
      "mood": "determined",
-     "air": [
+     "lookAt": "right",
+     "airW": [
       {
        "at": 0,
        "h": 0
@@ -1461,15 +1478,39 @@
        "h": 0
       },
       {
-       "at": 1.65,
-       "h": 0.36
+       "at": "He",
+       "h": 3.0
+      },
+      {
+       "at": "don't",
+       "h": 3.4
+      },
+      {
+       "at": 4.0,
+       "h": 3.0
       }
      ],
      "keys": [
       {
+       "cue": "crush",
+       "action": "crush"
+      },
+      {
        "cue": "jump",
        "action": "jump",
+       "prop": null,
        "mood": "happy"
+      },
+      {
+       "cue": "He",
+       "action": "float",
+       "mood": "smug"
+      },
+      {
+       "cue": "You",
+       "action": "aim",
+       "prop": "shotgun",
+       "mood": "determined"
       }
      ]
     }
@@ -1478,9 +1519,64 @@
     {
      "type": "burst",
      "at": "crush",
-     "x": 0.54,
-     "y": 0.52,
-     "z": "fg"
+     "world": [
+      0.35,
+      8.0,
+      1.6
+     ],
+     "dur": 0.8
+    },
+    {
+     "type": "speedlines",
+     "at": "jump",
+     "dur": 0.7
+    },
+    {
+     "type": "tracer",
+     "at": "misses",
+     "fromW": [
+      4.4,
+      20.0,
+      1.9
+     ],
+     "toW": [
+      -4.0,
+      5.0,
+      3.8
+     ],
+     "dur": 0.28
+    },
+    {
+     "type": "glint",
+     "at": "He",
+     "world": [
+      4.4,
+      20.0,
+      1.9
+     ]
+    },
+    {
+     "type": "flash",
+     "at": "don't",
+     "dur": 0.2,
+     "amount": 0.65
+    },
+    {
+     "type": "impactframe",
+     "at": "don't"
+    },
+    {
+     "type": "blast",
+     "at": "don't",
+     "world": [
+      5.0,
+      20.0,
+      1.15
+     ],
+     "rW": 2.2,
+     "r": 200,
+     "shake": 30,
+     "force": 1.1
     }
    ],
    "sfx": [
@@ -1491,124 +1587,11 @@
     {
      "type": "boing",
      "at": "jump"
-    }
-   ]
-  },
-  {
-   "cue": "He misses",
-   "loc": "b2_field",
-   "camera": {
-    "move": "push",
-    "focus": [
-     0.5,
-     0.45
-    ]
-   },
-   "transition": "cut",
-   "characters": [
-    {
-     "id": "hero",
-     "cast": "hero",
-     "x": 0.45,
-     "y": 0.7,
-     "scale": 1.2,
-     "z": "fg",
-     "action": "float",
-     "mood": "smug",
-     "air": [
-      {
-       "at": 0,
-       "h": 0.2
-      }
-     ],
-     "lookAt": "right"
-    }
-   ],
-   "fx": [
-    {
-     "type": "tracer",
-     "at": "misses",
-     "z": "fg",
-     "dur": 0.22,
-     "from": [
-      1.1,
-      0.55
-     ],
-     "to": [
-      -0.1,
-      0.66
-     ]
-    }
-   ],
-   "sfx": [
+    },
     {
      "type": "whoosh",
      "at": "misses"
-    }
-   ]
-  },
-  {
-   "cue": "You don't",
-   "loc": "b2_field",
-   "camera": {
-    "move": "push",
-    "focus": [
-     0.6,
-     0.55
-    ]
-   },
-   "transition": "cut",
-   "characters": [
-    {
-     "id": "hero",
-     "cast": "hero",
-     "x": 0.2,
-     "y": 0.886,
-     "scale": 1.5,
-     "z": "fg",
-     "action": "aim",
-     "prop": "shotgun",
-     "mood": "determined",
-     "lookAt": "sniper"
     },
-    {
-     "id": "sniper",
-     "cast": "sniper",
-     "x": 0.74,
-     "y": 0.62,
-     "scale": 0.5,
-     "z": "mid",
-     "flip": true,
-     "action": "aim",
-     "prop": "sniper",
-     "mood": "smug",
-     "lookAt": "hero",
-     "keys": [
-      {
-       "cue": "don't",
-       "mood": "shocked"
-      }
-     ]
-    }
-   ],
-   "fx": [
-    {
-     "type": "flash",
-     "at": "don't",
-     "dur": 0.18,
-     "amount": 0.6
-    },
-    {
-     "type": "blast",
-     "at": "don't",
-     "x": 0.74,
-     "y": 0.62,
-     "r": 120,
-     "z": "mid",
-     "shake": 28
-    }
-   ],
-   "sfx": [
     {
      "type": "boom",
      "at": "don't"
@@ -1656,7 +1639,13 @@
      "size": 140,
      "x": 0.5,
      "y": 0.2,
-     "w": 0.86
+     "w": 0.92
+    },
+    {
+     "type": "flash",
+     "at": "Victory",
+     "dur": 0.25,
+     "amount": 0.5
     }
    ],
    "sfx": [

@@ -33,7 +33,7 @@ S(cue='A comet', loc='b_sky', camera=dict(move='pull', focus=[0.5, 0.68]), trans
 S(cue='and', loc='b2_bus', camera=dict(move='pull', focus=[0.5, 0.55]), transition='whip',
   characters=[dict(id=f'g{i}', cast=['p1', 'p2', 'p3', 'p4'][i % 4], x=x, y=y, scale=s, z=z, flip=x > 0.5, mood='neutral', lookAt='hero',
                    keys=[dict(cue='want', mood='angry', lookAt='camera')]) for i, (x, y, s, z) in enumerate([(0.3, 0.74, 0.62, 'mid'), (0.7, 0.73, 0.6, 'mid'), (0.4, 0.66, 0.45, 'mid'), (0.6, 0.655, 0.43, 'mid'), (0.46, 0.6, 0.3, 'far'), (0.55, 0.595, 0.28, 'far')])]
-             + [dict(id='hero', cast='hero', x=0.5, y=feet(1.5, 0.46), scale=1.5, z='fg', mood='worried', lookAt='left', keys=[dict(cue='gone', mood='scared', lookAt='right')])],
+             + [dict(id='hero', cast='hero', x=0.14, y=feet(1.7, 0.42), scale=1.7, z='fg', mood='worried', lookAt='right', keys=[dict(cue='gone', mood='scared', lookAt='camera')])],
   sfx=[dict(type='sting', at='players', gain=0.7)])
 # 6  You drop into Tilted Towers.
 S(cue='You drop', loc='b2_town', camera=dict(move='tilt_down', amount=1.0, focus=[0.5, 0.6]), transition='cut',
@@ -61,7 +61,7 @@ S(cue='A ramp', loc='b2_town', camera=dict(move='push', focus=[0.5, 0.6]), trans
   props=[dict(type='wall', x=0.78, y=0.95, scale=0.85, z='fg'), dict(type='ramp', x=0.42, y=0.95, scale=0.85, z='fg', at='ramp')],
   characters=[dict(id='hero', cast='hero', x=0.16, y=0.95, scale=0.9, z='fg', action='run', mood='determined', move=mv(x=0.42, y=0.74, f='ramp', to=0.62))], sfx=[dict(type='knock', at='ramp')])
 S(cue='A staircase', loc='b2_town', camera=dict(move='tilt_up', amount=1.0, focus=[0.5, 0.4]), transition='cut',
-  props=[dict(type='stairs', x=0.5, y=0.97, scale=0.6, z='fg', at='staircase', steps=36, rate=0.03)],
+  props=[dict(type='stairs', x=0.22, y=0.99, scale=0.55, z='fg', at='staircase', steps=36, rate=0.03)],
   characters=[dict(id='hero', cast='hero', x=0.56, y=0.36, scale=0.32, z='fg', mood='happy', keys=[dict(cue='nowhere', mood='worried', lookAt='down')])],
   sfx=[dict(type='knock', at='staircase'), dict(type='pop', at='to'), dict(type='pop', at='nowhere')])
 # 13 You jump off the top...
@@ -113,20 +113,23 @@ S(cue='He has', loc='b2_field', camera=dict(move='push', focus=[0.58, 0.42]), tr
 S(cue='You have', loc='b2_field', camera=dict(move='push', focus=[0.45, 0.42]), transition='cut',
   characters=[dict(id='hero', cast='hero', x=0.42, y=feet(2.1, 0.42), scale=2.1, z='fg', action='hold', prop='shotgun', mood='determined', lookAt='right', keys=[dict(cue='and one', prop='hoprock', mood='smug', lookAt='camera')])],
   sfx=[dict(type='knock', at='shotgun', gain=0.6), dict(type='ting', at='Hop')])
-S(cue='You crush', loc='b2_field', camera=dict(move='tilt_up', amount=0.8, focus=[0.5, 0.5]), transition='cut',
-  characters=[dict(id='hero', cast='hero', x=0.46, y=0.94, scale=1.1, z='fg', action='crush', mood='determined', air=[dict(at=0, h=0), dict(at='jump', h=0), dict(at=1.65, h=0.36)], keys=[dict(cue='jump', action='jump', mood='happy')])],
-  fx=[dict(type='burst', at='crush', x=0.54, y=0.52, z='fg')], sfx=[dict(type='pop', at='crush'), dict(type='boing', at='jump')])
-S(cue='He misses', loc='b2_field', camera=dict(move='push', focus=[0.5, 0.45]), transition='cut',
-  characters=[dict(id='hero', cast='hero', x=0.45, y=0.7, scale=1.2, z='fg', action='float', mood='smug', air=[dict(at=0, h=0.2)], lookAt='right')],
-  fx=[dict(type='tracer', at='misses', z='fg', dur=0.22, **{'from': [1.1, 0.55], 'to': [-0.1, 0.66]})], sfx=[dict(type='whoosh', at='misses')])
-S(cue="You don't", loc='b2_field', camera=dict(move='push', focus=[0.6, 0.55]), transition='cut',
-  characters=[dict(id='hero', cast='hero', x=0.2, y=feet(1.5, 0.52), scale=1.5, z='fg', action='aim', prop='shotgun', mood='determined', lookAt='sniper'),
-              dict(id='sniper', cast='sniper', x=0.74, y=0.62, scale=0.5, z='mid', flip=True, action='aim', prop='sniper', mood='smug', lookAt='hero', keys=[dict(cue="don't", mood='shocked')])],
-  fx=[dict(type='flash', at="don't", dur=0.18, amount=0.6), dict(type='blast', at="don't", x=0.74, y=0.62, r=120, z='mid', shake=28)], sfx=[dict(type='boom', at="don't")])
+# 26-28 the fight, in 3D: one moving-camera shot (tools/fight_blender.py), the 2D cast pinned to world positions
+HERO_W, SNIPER_W = [0.0, 8.0, 0.0], [5.0, 20.0, 1.15]
+S(cue='You crush', bgseq=dict(dir='fightseq'), transition='cut',
+  characters=[dict(id='sniper', cast='sniper', world=SNIPER_W, flip=True, action='aim', prop='sniper', mood='smug', lookAt='left', keys=[dict(cue="don't", mood='shocked')]),
+              dict(id='hero', cast='hero', world=HERO_W, action='crush', prop='hoprock', mood='determined', lookAt='right',
+                   airW=[dict(at=0, h=0), dict(at='jump', h=0), dict(at='He', h=3.0), dict(at="don't", h=3.4), dict(at=4.0, h=3.0)],
+                   keys=[dict(cue='crush', action='crush'), dict(cue='jump', action='jump', prop=None, mood='happy'), dict(cue='He', action='float', mood='smug'),
+                         dict(cue='You', action='aim', prop='shotgun', mood='determined')])],
+  fx=[dict(type='burst', at='crush', world=[0.35, 8.0, 1.6], dur=0.8), dict(type='speedlines', at='jump', dur=0.7),
+      dict(type='tracer', at='misses', fromW=[4.4, 20.0, 1.9], toW=[-4.0, 5.0, 3.8], dur=0.28), dict(type='glint', at='He', world=[4.4, 20.0, 1.9]),
+      dict(type='flash', at="don't", dur=0.2, amount=0.65), dict(type='impactframe', at="don't"),
+      dict(type='blast', at="don't", world=SNIPER_W, rW=2.2, r=200, shake=30, force=1.1)],
+  sfx=[dict(type='pop', at='crush'), dict(type='boing', at='jump'), dict(type='whoosh', at='misses'), dict(type='boom', at="don't")])
 # 29 Victory Royale.
 S(cue='Victory', loc='b2_field', camera=dict(move='push', focus=[0.5, 0.45]), transition='zoom',
   characters=[dict(id='hero', cast='hero', x=0.5, y=feet(1.9, 0.52), scale=1.9, z='fg', action='cheer', mood='happy', lookAt='camera', talk=['Victory', 'Then'])],
-  fx=[dict(type='confetti', at='Victory'), dict(type='logo', at='Victory', img='props/logo_victory.png', text='VICTORY|ROYALE', size=140, x=0.5, y=0.2, w=0.86)], sfx=[dict(type='tada', at='Victory')])
+  fx=[dict(type='confetti', at='Victory'), dict(type='logo', at='Victory', img='props/logo_victory.png', text='VICTORY|ROYALE', size=140, x=0.5, y=0.2, w=0.92), dict(type='flash', at='Victory', dur=0.25, amount=0.5)], sfx=[dict(type='tada', at='Victory')])
 # 30 Then you blink... and you're back in the lobby.   31 Ready up?
 S(cue='Then you', loc='b_lobby', camera=dict(move='push', focus=[0.5, 0.6]), transition='cut',
   characters=[dict(id='hero', cast='hero', x=0.5, y=0.76, scale=0.75, z='mid', mood='shocked', lookAt='left', keys=[dict(cue='blink', mood='neutral', lookAt='camera'), dict(cue='lobby', mood='happy', lookAt='right')])],
@@ -137,7 +140,7 @@ S(cue='Ready', loc='b_lobby', camera=dict(move='push', amount=1.2, focus=[0.5, 0
 
 S_ = dict(title='Teleported into Fortnite (Chapter 1, Season 4)', fps=60, charStyle='rc', sprites='props',
   features=dict(depth=True, motionBlur=True, rigV2=True, lipSync=True, crowdFX=True), motion_blur=dict(samples=8, shutter=0.5),
-  caption_y=0.68, caption_case='lower', caption_size=78, caption_swaps={'ninety-nine': '99'}, grade='brightness(1.14) saturate(1.32) contrast(1.05)', thumbnail_cue='Victory',
+  caption_y=0.68, caption_case='lower', caption_size=78, caption_swaps={'ninety-nine': '99'}, grade='brightness(1.16) saturate(1.38) contrast(1.08)', thumbnail_cue='Victory',
   music=dict(style='bouncy', bpm=120, level_db=-20),
   cast=dict(hero=dict(costume='hoodie_green', hat='beanie', mood='neutral', hair='#4a2f1e', hatSpring=dict(freq=3.0, damping=0.18)),
             guy=dict(costume='jacket_purple', hat='cap', facial='moustache', mood='smug'),

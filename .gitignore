@@ -18,3 +18,4 @@ SHORTS_FACTORY/build/
 SHORTS_FACTORY/episodes/*/work/frames/
 SHORTS_FACTORY/episodes/*/audio/*.wav
 SHORTS_FACTORY/episodes/*/backgrounds/_rendering_/
+SHORTS_FACTORY/episodes/*/fightseq/

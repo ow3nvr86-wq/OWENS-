@@ -37,11 +37,11 @@ function resolve() {
     for (const fx of s.fx || []) { fx.t0 = T(fx.at) ?? s.start; fx.seed = fx.seed ?? (s.wi % 97); }
     // v2 extras: props on cues, height keyframes, blasts that knock characters back and shake the camera
     for (const p of s.props || []) { if (p.at != null) p.t0 = T(p.at); if (p.move) { p.move.t0 = T(p.move.from) ?? s.start; p.move.t1 = T(p.move.to) ?? s.end; } }
-    for (const ch of s.characters || []) for (const k of ch.air || []) k.t = T(k.cue ?? k.at);
+    for (const ch of s.characters || []) { for (const k of ch.air || []) k.t = T(k.cue ?? k.at); for (const k of ch.airW || []) k.t = T(k.cue ?? k.at); }
     s._impacts = []; s._shakes = [];
     for (const fx of s.fx || []) if (fx.type === 'blast') {
       const z = typeof zOf === 'function' ? zOf(fx.z ?? fx.layer) : 150;
-      s._impacts.push({ x: fx.x * W, y: fx.y * H, t0: fx.t0, r: fx.r || 260, force: fx.force || 1, z });
+      s._impacts.push({ x: (fx.x || 0) * W, y: (fx.y || 0) * H, t0: fx.t0, r: fx.r || 260, force: fx.force || 1, z, fx });
       s._shakes.push({ t0: fx.t0, amp: (fx.shake ?? 24) * clamp(150 / z, 0.4, 2.5) });
     }
     for (const fx of s.fx || []) if (fx.type === 'rockets2' && window.rocketsPlan && (fx.blastR ?? 90) > 0) {
@@ -221,7 +221,7 @@ function fxDraw(g, fx, s, t) {
   if (fx.type === 'impact') impactBurst(g, fx.x * W, fx.y * H, fx.t0, t, fx.r || 220);
   if (window.FX2 && FX2[fx.type]) FX2[fx.type](g, fx, s, t);
 }
-const SCREEN_FX = new Set(['glow', 'flash', 'tint', 'storm_tint', 'confetti', 'hud', 'logo']);
+const SCREEN_FX = new Set(['glow', 'flash', 'tint', 'storm_tint', 'confetti', 'hud', 'logo', 'speedlines', 'impactframe']);
 let CUR_CAM = null;
 function renderShotDepth(g, i, t) {
   const s = SCENES[i], L = LOC[s.loc], cam = cam3At(s, t); CUR_CAM = { s, cam };
@@ -247,6 +247,7 @@ function renderShotDepth(g, i, t) {
   if (s.tint) { g.fillStyle = s.tint; g.fillRect(0, 0, W, H); }
 }
 function renderShot(g, i, t) {
+  if (SCENES[i].bgseq && typeof SEQ !== 'undefined' && SEQ[SCENES[i].bgseq.dir]) return renderShotSeq(g, i, t);
   if (FEAT.depth && SCENES[i].loc && LOC[SCENES[i].loc]) return renderShotDepth(g, i, t);
   const s = SCENES[i]; g.setTransform(1, 0, 0, 1, 0, 0);
   const c = drawBg(g, s, t);
@@ -349,6 +350,7 @@ window.renderFrame = renderFrame;
   if (FEAT.depth) await loadLocations(EP, SCRIPT);
   if (SCRIPT.sprites && window.loadSprites) await loadSprites(EP, SCRIPT.sprites);
   if (window.loadLogos) await loadLogos(EP, SCRIPT);
+  for (const sc of SCRIPT.scenes) if (sc.bgseq && window.loadSeq) await loadSeq(EP, sc.bgseq.dir);
   if (FEAT.lipSync) { try { VISKEYS = (await (await fetch('../' + EP + '/work/visemes.json')).json()).keys; } catch (e) { console.error('no visemes.json: run tools/visemes.py'); } }
   await document.fonts.load('800 90px Poppins');
   window.SCENES = SCENES; window.CHUNKS = CHUNKS; window.ready = true;

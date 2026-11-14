@@ -244,9 +244,9 @@ for (const name of ['wall', 'ramp', 'bus', 'hoprock']) PROPS[name] = function (g
 PROPS.stairs = function (g, p, s, t) {                 // a staircase built from stacked 3D stair pieces
   if (!SPRITES.stairs) return _vecProps.stairs(g, p, s, t);
   const S = SPRITES.stairs, n = Math.max(1, Math.round((p.steps || 6) / 6)), sc = SPRITE_SCALE.stairs, dx = S.w * sc * 0.36, dy = S.h * sc * 0.58;
-  const dyT = S.h * sc * 0.74;                          // a zig-zag tower: every flight flips direction and sits on the last
+  const stepX = S.w * sc * 0.42, stepY = -S.h * sc * 0.62;   // one long staircase climbing out of frame, flight on flight
   for (let i = 0; i < n; i++) { const k = popScale(t, p.t0 != null ? p.t0 + i * (p.rate || 0.05) * 6 : null); if (!k) continue;
-    g.save(); g.translate(0, -i * dyT); g.scale((i % 2 ? -1 : 1) * k, k); drawSprite(g, 'stairs', 'base', sc); g.restore(); }
+    g.save(); g.translate(i * stepX, i * stepY); g.scale(k, k); drawSprite(g, 'stairs', 'base', sc); g.restore(); }
 };
 const _vecHand = drawHandProp;
 drawHandProp = function (g, prop, hands, t, st) {
