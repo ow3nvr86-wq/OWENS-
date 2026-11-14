@@ -227,15 +227,19 @@ def render_layers(sc, p):
         cam.data.clip_start = max(0.01, lo * 0.97)
         sc.use_nodes = True; nt = sc.node_tree; nt.nodes.clear()
         rl = nt.nodes.new('CompositorNodeRLayers'); comp = nt.nodes.new('CompositorNodeComposite')
+        img = rl.outputs['Image']
+        if sc.get('glow'):                          # keep the preset's bloom in every band
+            gl = nt.nodes.new('CompositorNodeGlare'); gl.glare_type = 'FOG_GLOW'; gl.quality = 'MEDIUM'; gl.threshold, gl.mix = sc['glow'][0], sc['glow'][1]; gl.size = 8
+            nt.links.new(img, gl.inputs['Image']); img = gl.outputs['Image']
         if name == 'sky':
-            sc.render.film_transparent = False; nt.links.new(rl.outputs['Image'], comp.inputs['Image'])
+            sc.render.film_transparent = False; nt.links.new(img, comp.inputs['Image'])
         else:
             sc.render.film_transparent = True
             sc.world.mist_settings.start = hi; sc.world.mist_settings.depth = 0.25 * hi; cam.data.clip_end = hi * 1.25
             inv = nt.nodes.new('CompositorNodeMath'); inv.operation = 'SUBTRACT'; inv.inputs[0].default_value = 1.0
             nt.links.new(rl.outputs['Mist'], inv.inputs[1])
             sa = nt.nodes.new('CompositorNodeSetAlpha'); sa.mode = 'APPLY'
-            nt.links.new(rl.outputs['Image'], sa.inputs['Image']); nt.links.new(inv.outputs[0], sa.inputs['Alpha'])
+            nt.links.new(img, sa.inputs['Image']); nt.links.new(inv.outputs[0], sa.inputs['Alpha'])
             nt.links.new(sa.outputs['Image'], comp.inputs['Image'])
         f = os.path.join(od, name + '.png'); sc.render.filepath = f
         bpy.ops.render.render(write_still=True); cam.data.clip_end = 1.0e6
