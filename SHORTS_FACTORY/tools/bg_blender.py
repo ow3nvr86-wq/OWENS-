@@ -1,6 +1,7 @@
 """Placeholder 3D backgrounds (realistic lighting, soft shadows, depth of field) rendered with Blender Cycles.
 Each preset is a small procedural scene. Output: 1242x2208 PNG (15 % bigger than 1080x1920, room for camera pushes).
-Run:  $BLENDER -b --factory-startup -P tools/bg_blender.py -- <out_dir> [preset ...] [--spp 48] [--scale 1.0]
+Run:  $BLENDER -b --factory-startup -P tools/bg_blender.py -- <out_dir> [preset ...] [--spp 48] [--scale 1.0] [--depth-only] [--fg-only]
+Each preset also writes <preset>_depth.bin/.json (a depth map the compositor uses for 3D parallax camera moves).
 Presets: valley_dawn, fort_wall, hillside_down, hwacha_closeup, battle_sunset
 Swap these for your own images: put PNG/JPGs in <episode>/backgrounds/ and name them in script.json."""
 import bpy, math, random, sys, os
@@ -197,12 +198,37 @@ def build(preset):
     return sc
 
 
+def render_depth(sc, p, w=248, h=442):
+    """Depth map for 2.5D parallax: <p>_depth.bin (float32, planar camera depth in metres, rows top to bottom)
+    plus <p>_depth.json with the size and the vertical field of view."""
+    import array, json
+    keep = (sc.render.resolution_x, sc.render.resolution_y, sc.cycles.samples, sc.render.filter_size)
+    cam = sc.camera; dof = cam.data.dof.use_dof
+    sc.render.resolution_x, sc.render.resolution_y = w, h; sc.cycles.samples = 1; sc.render.filter_size = 0.01
+    sc.cycles.use_denoising = False; cam.data.dof.use_dof = False
+    sc.view_layers[0].use_pass_z = True; sc.use_nodes = True; nt = sc.node_tree; nt.nodes.clear()
+    rl = nt.nodes.new('CompositorNodeRLayers'); comp = nt.nodes.new('CompositorNodeComposite'); vw = nt.nodes.new('CompositorNodeViewer')
+    nt.links.new(rl.outputs['Image'], comp.inputs['Image']); nt.links.new(rl.outputs['Depth'], vw.inputs['Image'])
+    sc.render.filepath = os.path.join(OUT, '_depth_tmp.png'); bpy.ops.render.render(write_still=True)
+    px = bpy.data.images['Viewer Node'].pixels[:]          # RGBA floats, rows bottom to top
+    d = [px[(y * w + x) * 4] for y in range(h - 1, -1, -1) for x in range(w)]
+    fov = 2 * math.atan(cam.data.sensor_height / 2 / cam.data.lens)
+    array.array('f', [min(v, 5000.0) for v in d]).tofile(open(os.path.join(OUT, p + '_depth.bin'), 'wb'))
+    json.dump(dict(w=w, h=h, fov_v=fov, lens=cam.data.lens, focus=cam.data.dof.focus_distance), open(os.path.join(OUT, p + '_depth.json'), 'w'))
+    os.remove(os.path.join(OUT, '_depth_tmp.png'))
+    sc.render.resolution_x, sc.render.resolution_y, sc.cycles.samples, sc.render.filter_size = keep
+    sc.cycles.use_denoising = True; cam.data.dof.use_dof = dof; sc.use_nodes = False
+    print('rendered', p + '_depth', flush=True)
+
+
 for p in PRESETS:
     sc = build(p)
-    if '--fg-only' not in argv:
+    if '--fg-only' not in argv and '--depth-only' not in argv:
         sc.render.filepath = os.path.join(OUT, p + '.png')
         bpy.ops.render.render(write_still=True)
         print('rendered', p, flush=True)
+    if '--fg-only' not in argv: render_depth(sc, p)
+    if '--depth-only' in argv: continue
     fg = [o for o in sc.objects if o.get('fg')]
     if fg:                       # foreground layer: same camera, everything else held out, transparent film
         sc.render.film_transparent = True

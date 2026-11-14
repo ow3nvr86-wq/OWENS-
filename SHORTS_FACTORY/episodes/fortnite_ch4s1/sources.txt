@@ -1,0 +1,17 @@
+Teleported into Fortnite (Chapter 4, Season 1) - fact check. Every game detail checked in 2+ sources.
+
+Claim (as narrated)                              | Sources / notes
+Chapter 4 Season 1 launched on a brand new island | fortnite.com/chapter-4-season-1 (Dec 4, 2022); Shacknews "Fortnite Chapter 4 brings dirt bikes, Geralt, and a new map"; mein-mmo.de map guide
+Frenzy Fields: farmland, houses and hay bales     | mein-mmo.de (DE + EN map guides); Sportskeeda full location list
+Anvil Square and The Citadel are named locations  | progameguides.com; twinfinite.net named-locations guide; mein-mmo.de
+Hurdling over obstacles was new                   | TheGamer "Fortnite Chapter 4 bikes, hurdling, randomised perk system"; Videogameschronicle "Fortnite Chapter 4 adds Doom Slayer, Augmented Abilities and more"
+Reality Augments: a choice of two at set points   | EGM "Chapter 4 Season 1 includes Geralt, Doom Slayer, new UE5 features"; Videogameschronicle; Shacknews "How to activate Reality Augments"
+"Supercharged" = vehicles use no fuel             | fortnite.com/chapter-4-season-1 (Day 1 augment list: no fuel use + extra vehicle health); Destructoid augment list
+  (one site said it wasn't available on day one; the official page lists it on Day 1, so we follow the official page)
+Dirt bikes were new                               | Shacknews; TheGamer
+Shockwave Hammer launches you through the air     | GameSpot "Where to get the Shockwave Hammer and how to use it"; GamesRadar Shockwave Hammer guide
+Up to 100 players (ninety-nine others), the storm, "Victory Royale" for a win | core battle-royale rules, described in every guide above
+
+Illustrative / comedy, not a real match: the whole run is a joke story told in second person ("you").
+On screen everything is drawn in the channel's own original cartoon style: no Epic Games logos, skins,
+map art, weapon models or music are copied. The game is named and described, not recreated.
