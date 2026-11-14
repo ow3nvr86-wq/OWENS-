@@ -1,0 +1,27 @@
+{
+ "layers": [
+  {
+   "name": "sky",
+   "img": "b_lobby/sky.png",
+   "z": 1000
+  },
+  {
+   "name": "far",
+   "img": "b_lobby/far.png",
+   "z": 400
+  },
+  {
+   "name": "mid",
+   "img": "b_lobby/mid.png",
+   "z": 150
+  },
+  {
+   "name": "fg",
+   "img": "b_lobby/fg.png",
+   "z": 50
+  }
+ ],
+ "sky": "#3e2465",
+ "focus": "mid",
+ "focus_m": 15.0
+}
