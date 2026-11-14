@@ -1,0 +1,1257 @@
+{
+ "title": "Stuck in GTA 5 as an NPC",
+ "fps": 60,
+ "charStyle": "rc",
+ "sprites": "props",
+ "features": {
+  "depth": true,
+  "motionBlur": true,
+  "rigV2": true,
+  "lipSync": true,
+  "crowdFX": true
+ },
+ "motion_blur": {
+  "samples": 8,
+  "shutter": 0.5
+ },
+ "caption_y": 0.72,
+ "caption_case": "lower",
+ "caption_size": 78,
+ "caption_swaps": {
+  "5.": "5."
+ },
+ "grade": "brightness(1.06) saturate(1.22) contrast(1.06)",
+ "thumbnail_cue": 42.3,
+ "music": {
+  "level_db": -19,
+  "segments": [
+   {
+    "style": "chill",
+    "bpm": 88,
+    "from": 0.0,
+    "to": 18.36
+   },
+   {
+    "style": "chase",
+    "bpm": 150,
+    "from": 18.36,
+    "to": 50.18
+   },
+   {
+    "style": "chill",
+    "bpm": 88,
+    "gain": 0.8,
+    "fadeIn": 0.6,
+    "from": 51.0
+   }
+  ]
+ },
+ "cast": {
+  "hero": {
+   "costume": "tee_white",
+   "hat": "none",
+   "mood": "neutral",
+   "hair": "#3a2618"
+  },
+  "player": {
+   "costume": "flannel_red",
+   "hat": "cap_back",
+   "facial": "moustache",
+   "mood": "smug",
+   "hair": "#2a1a10"
+  },
+  "mailman": {
+   "costume": "mail",
+   "hat": "mail_cap",
+   "mood": "happy",
+   "hair": "#6a6a6a"
+  },
+  "cop": {
+   "costume": "police",
+   "hat": "police_cap",
+   "mood": "angry",
+   "hair": "#2a1a10",
+   "hatSpring": {
+    "freq": 3.4,
+    "damping": 0.2
+   }
+  }
+ },
+ "scenes": [
+  {
+   "cue": "You",
+   "bgseq": {
+    "dir": "oneshot"
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "track": "hero",
+     "autoGait": true,
+     "mood": "neutral",
+     "lookAt": "camera",
+     "keys": [
+      {
+       "mood": "sad",
+       "cue": 4.86
+      },
+      {
+       "mood": "neutral",
+       "lookAt": "right",
+       "cue": 5.48
+      },
+      {
+       "mood": "worried",
+       "lookAt": "camera",
+       "cue": 7.48
+      },
+      {
+       "mood": "scared",
+       "lookAt": "down",
+       "cue": 8.46
+      },
+      {
+       "mood": "worried",
+       "lookAt": "camera",
+       "cue": 10.0
+      },
+      {
+       "mood": "shocked",
+       "lookAt": "left",
+       "cue": 12.2
+      },
+      {
+       "lookAt": "right",
+       "cue": 13.6
+      },
+      {
+       "mood": "sad",
+       "lookAt": "camera",
+       "cue": 14.77
+      },
+      {
+       "mood": "shocked",
+       "cue": 16.4
+      },
+      {
+       "mood": "worried",
+       "lookAt": "up",
+       "cue": 18.3
+      },
+      {
+       "mood": "scared",
+       "lookAt": "camera",
+       "cue": 26.0
+      },
+      {
+       "mood": "shocked",
+       "lookAt": "right",
+       "cue": 44.18
+      },
+      {
+       "mood": "scared",
+       "lookAt": "camera",
+       "cue": 45.23
+      },
+      {
+       "mood": "shocked",
+       "lookAt": "left",
+       "cue": 47.96
+      },
+      {
+       "mood": "happy",
+       "cue": 50.21
+      }
+     ]
+    },
+    {
+     "id": "heroCar",
+     "cast": "hero",
+     "track": "heroSeat",
+     "action": "sit",
+     "clipDoor": true,
+     "rollTrack": true,
+     "autoFlip": false,
+     "flip": false,
+     "mood": "scared",
+     "lookAt": "camera",
+     "keys": [
+      {
+       "mood": "determined",
+       "lookAt": "right",
+       "cue": 28.4
+      },
+      {
+       "mood": "scared",
+       "lookAt": "left",
+       "cue": 30.64
+      },
+      {
+       "mood": "worried",
+       "lookAt": "camera",
+       "cue": 32.04
+      },
+      {
+       "mood": "shocked",
+       "lookAt": "right",
+       "cue": 35.07
+      },
+      {
+       "mood": "determined",
+       "cue": 38.09
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "lookAt": "camera",
+       "cue": 40.07
+      },
+      {
+       "action": "sit",
+       "mood": "shocked",
+       "cue": 41.23
+      },
+      {
+       "mood": "happy",
+       "cue": 42.74
+      },
+      {
+       "mood": "worried",
+       "lookAt": "right",
+       "cue": 44.18
+      }
+     ]
+    },
+    {
+     "id": "clone0",
+     "cast": "hero",
+     "track": "clone0",
+     "autoGait": true,
+     "mood": "neutral",
+     "lookAt": "camera",
+     "keys": [
+      {
+       "mood": "happy",
+       "lookAt": "camera",
+       "cue": 12.62
+      }
+     ]
+    },
+    {
+     "id": "clone1",
+     "cast": "hero",
+     "track": "clone1",
+     "autoGait": true,
+     "mood": "neutral",
+     "lookAt": "camera",
+     "keys": [
+      {
+       "mood": "happy",
+       "lookAt": "camera",
+       "cue": 12.62
+      }
+     ]
+    },
+    {
+     "id": "clone2",
+     "cast": "hero",
+     "track": "clone2",
+     "autoGait": true,
+     "mood": "neutral",
+     "lookAt": "camera",
+     "keys": [
+      {
+       "mood": "happy",
+       "lookAt": "camera",
+       "cue": 12.62
+      }
+     ]
+    },
+    {
+     "id": "clone3",
+     "cast": "hero",
+     "track": "clone3",
+     "autoGait": true,
+     "mood": "neutral",
+     "lookAt": "camera",
+     "keys": [
+      {
+       "mood": "happy",
+       "lookAt": "camera",
+       "cue": 12.62
+      }
+     ]
+    },
+    {
+     "id": "clone4",
+     "cast": "hero",
+     "track": "clone4",
+     "autoGait": true,
+     "mood": "neutral",
+     "lookAt": "camera",
+     "keys": [
+      {
+       "mood": "happy",
+       "lookAt": "camera",
+       "cue": 12.62
+      }
+     ]
+    },
+    {
+     "id": "mailman",
+     "cast": "mailman",
+     "track": "mailman",
+     "autoGait": true,
+     "mood": "happy",
+     "lookAt": "left",
+     "keys": [
+      {
+       "mood": "shocked",
+       "lookAt": "camera",
+       "cue": 21.5
+      }
+     ]
+    },
+    {
+     "id": "player",
+     "cast": "player",
+     "track": "player",
+     "autoGait": true,
+     "mood": "smug",
+     "lookAt": "camera",
+     "keys": [
+      {
+       "mood": "angry",
+       "lookAt": "left",
+       "cue": 20.9
+      },
+      {
+       "action": "punch",
+       "mood": "angry",
+       "cue": 21.55
+      },
+      {
+       "action": "idle",
+       "mood": "smug",
+       "cue": 21.95
+      },
+      {
+       "action": "sit",
+       "mood": "smug",
+       "lookAt": "camera",
+       "cue": 23.3
+      },
+      {
+       "mood": "angry",
+       "lookAt": "camera",
+       "cue": 24.82
+      },
+      {
+       "mood": "angry",
+       "lookAt": "right",
+       "cue": 28.4
+      },
+      {
+       "action": "idle",
+       "mood": "shocked",
+       "lookAt": "camera",
+       "cue": 46.0
+      },
+      {
+       "mood": "scared",
+       "lookAt": "left",
+       "cue": 47.6
+      }
+     ]
+    },
+    {
+     "id": "cop0",
+     "cast": "cop",
+     "track": "cop0",
+     "autoGait": true,
+     "mood": "angry",
+     "lookAt": "camera",
+     "airW": [
+      {
+       "at": 45.24,
+       "h": 0.0
+      },
+      {
+       "at": 45.47,
+       "h": 0.75
+      },
+      {
+       "at": 45.75,
+       "h": 0.0
+      }
+     ],
+     "keys": [
+      {
+       "action": "aim",
+       "prop": "pistol",
+       "mood": "angry",
+       "cue": 46.45
+      },
+      {
+       "action": "idle",
+       "prop": null,
+       "lookAt": "left",
+       "cue": 47.37
+      },
+      {
+       "mood": "angry",
+       "lookAt": "down",
+       "cue": 49.3
+      }
+     ]
+    },
+    {
+     "id": "cop1",
+     "cast": "cop",
+     "track": "cop1",
+     "autoGait": true,
+     "mood": "angry",
+     "lookAt": "camera",
+     "airW": [
+      {
+       "at": 45.300000000000004,
+       "h": 0.0
+      },
+      {
+       "at": 45.53,
+       "h": 0.75
+      },
+      {
+       "at": 45.81,
+       "h": 0.0
+      }
+     ],
+     "keys": [
+      {
+       "action": "aim",
+       "prop": "pistol",
+       "mood": "angry",
+       "cue": 46.45
+      },
+      {
+       "action": "idle",
+       "prop": null,
+       "lookAt": "left",
+       "cue": 47.37
+      },
+      {
+       "mood": "angry",
+       "lookAt": "down",
+       "cue": 49.3
+      },
+      {
+       "mood": "neutral",
+       "lookAt": "camera",
+       "cue": 50.9
+      },
+      {
+       "mood": "happy",
+       "lookAt": "camera",
+       "cue": 52.4
+      }
+     ],
+     "nodAt": [
+      52.5
+     ],
+     "talk": [
+      "Same",
+      54.7
+     ]
+    },
+    {
+     "id": "cop2",
+     "cast": "cop",
+     "track": "cop2",
+     "autoGait": true,
+     "mood": "angry",
+     "lookAt": "camera",
+     "airW": [
+      {
+       "at": 45.36,
+       "h": 0.0
+      },
+      {
+       "at": 45.589999999999996,
+       "h": 0.75
+      },
+      {
+       "at": 45.87,
+       "h": 0.0
+      }
+     ],
+     "keys": [
+      {
+       "action": "aim",
+       "prop": "pistol",
+       "mood": "angry",
+       "cue": 46.45
+      },
+      {
+       "action": "idle",
+       "prop": null,
+       "lookAt": "left",
+       "cue": 47.37
+      },
+      {
+       "mood": "angry",
+       "lookAt": "down",
+       "cue": 49.3
+      }
+     ]
+    },
+    {
+     "id": "cop3",
+     "cast": "cop",
+     "track": "cop3",
+     "autoGait": true,
+     "mood": "angry",
+     "lookAt": "camera",
+     "airW": [
+      {
+       "at": 45.42,
+       "h": 0.0
+      },
+      {
+       "at": 45.65,
+       "h": 0.75
+      },
+      {
+       "at": 45.93,
+       "h": 0.0
+      }
+     ],
+     "keys": [
+      {
+       "action": "aim",
+       "prop": "pistol",
+       "mood": "angry",
+       "cue": 46.45
+      },
+      {
+       "action": "idle",
+       "prop": null,
+       "lookAt": "left",
+       "cue": 47.37
+      },
+      {
+       "mood": "angry",
+       "lookAt": "down",
+       "cue": 49.3
+      }
+     ]
+    },
+    {
+     "id": "cop4",
+     "cast": "cop",
+     "track": "cop4",
+     "autoGait": true,
+     "mood": "angry",
+     "lookAt": "camera",
+     "airW": [
+      {
+       "at": 45.480000000000004,
+       "h": 0.0
+      },
+      {
+       "at": 45.71,
+       "h": 0.75
+      },
+      {
+       "at": 45.99,
+       "h": 0.0
+      }
+     ],
+     "keys": [
+      {
+       "action": "aim",
+       "prop": "pistol",
+       "mood": "angry",
+       "cue": 46.45
+      },
+      {
+       "action": "idle",
+       "prop": null,
+       "lookAt": "left",
+       "cue": 47.37
+      },
+      {
+       "mood": "angry",
+       "lookAt": "down",
+       "cue": 49.3
+      }
+     ]
+    },
+    {
+     "id": "cop5",
+     "cast": "cop",
+     "track": "cop5",
+     "autoGait": true,
+     "mood": "angry",
+     "lookAt": "camera",
+     "airW": [
+      {
+       "at": 45.54,
+       "h": 0.0
+      },
+      {
+       "at": 45.769999999999996,
+       "h": 0.75
+      },
+      {
+       "at": 46.05,
+       "h": 0.0
+      }
+     ],
+     "keys": [
+      {
+       "action": "aim",
+       "prop": "pistol",
+       "mood": "angry",
+       "cue": 46.45
+      },
+      {
+       "action": "idle",
+       "prop": null,
+       "lookAt": "left",
+       "cue": 47.37
+      },
+      {
+       "mood": "angry",
+       "lookAt": "down",
+       "cue": 49.3
+      }
+     ]
+    },
+    {
+     "id": "cop6",
+     "cast": "cop",
+     "track": "cop6",
+     "autoGait": true,
+     "mood": "angry",
+     "lookAt": "camera",
+     "airW": [
+      {
+       "at": 45.6,
+       "h": 0.0
+      },
+      {
+       "at": 45.83,
+       "h": 0.75
+      },
+      {
+       "at": 46.11,
+       "h": 0.0
+      }
+     ],
+     "keys": [
+      {
+       "action": "aim",
+       "prop": "pistol",
+       "mood": "angry",
+       "cue": 46.45
+      },
+      {
+       "action": "idle",
+       "prop": null,
+       "lookAt": "left",
+       "cue": 47.37
+      },
+      {
+       "mood": "angry",
+       "lookAt": "down",
+       "cue": 49.3
+      }
+     ]
+    },
+    {
+     "id": "cop7",
+     "cast": "cop",
+     "track": "cop7",
+     "autoGait": true,
+     "mood": "angry",
+     "lookAt": "camera",
+     "airW": [
+      {
+       "at": 45.660000000000004,
+       "h": 0.0
+      },
+      {
+       "at": 45.89,
+       "h": 0.75
+      },
+      {
+       "at": 46.17,
+       "h": 0.0
+      }
+     ],
+     "keys": [
+      {
+       "action": "aim",
+       "prop": "pistol",
+       "mood": "angry",
+       "cue": 46.45
+      },
+      {
+       "action": "idle",
+       "prop": null,
+       "lookAt": "left",
+       "cue": 47.37
+      },
+      {
+       "mood": "angry",
+       "lookAt": "down",
+       "cue": 49.3
+      }
+     ]
+    },
+    {
+     "id": "cop8",
+     "cast": "cop",
+     "track": "cop8",
+     "autoGait": true,
+     "mood": "angry",
+     "lookAt": "camera",
+     "airW": [
+      {
+       "at": 45.72,
+       "h": 0.0
+      },
+      {
+       "at": 45.949999999999996,
+       "h": 0.75
+      },
+      {
+       "at": 46.23,
+       "h": 0.0
+      }
+     ],
+     "keys": [
+      {
+       "action": "aim",
+       "prop": "pistol",
+       "mood": "angry",
+       "cue": 46.45
+      },
+      {
+       "action": "idle",
+       "prop": null,
+       "lookAt": "left",
+       "cue": 47.37
+      },
+      {
+       "mood": "angry",
+       "lookAt": "down",
+       "cue": 49.3
+      }
+     ]
+    },
+    {
+     "id": "cop9",
+     "cast": "cop",
+     "track": "cop9",
+     "autoGait": true,
+     "mood": "angry",
+     "lookAt": "camera",
+     "airW": [
+      {
+       "at": 45.78,
+       "h": 0.0
+      },
+      {
+       "at": 46.01,
+       "h": 0.75
+      },
+      {
+       "at": 46.29,
+       "h": 0.0
+      }
+     ],
+     "keys": [
+      {
+       "action": "aim",
+       "prop": "pistol",
+       "mood": "angry",
+       "cue": 46.45
+      },
+      {
+       "action": "idle",
+       "prop": null,
+       "lookAt": "left",
+       "cue": 47.37
+      },
+      {
+       "mood": "angry",
+       "lookAt": "down",
+       "cue": 49.3
+      }
+     ]
+    }
+   ],
+   "fx": [
+    {
+     "type": "bubble",
+     "of": "hero",
+     "at": 10.56,
+     "dur": 0.75,
+     "text": "nice day!"
+    },
+    {
+     "type": "bubble",
+     "of": "hero",
+     "at": 11.05,
+     "dur": 0.75,
+     "text": "hey!",
+     "dx": -0.25,
+     "rot": 0.05
+    },
+    {
+     "type": "bubble",
+     "of": "hero",
+     "at": 11.5,
+     "dur": 0.8,
+     "text": "watch it, pal!"
+    },
+    {
+     "type": "tag",
+     "of": "hero",
+     "at": 16.4,
+     "text": "NPC",
+     "untilAt": 26.6
+    },
+    {
+     "type": "tag",
+     "of": "clone0",
+     "at": 16.55,
+     "text": "NPC",
+     "untilAt": 26.4
+    },
+    {
+     "type": "tag",
+     "of": "clone1",
+     "at": 16.63,
+     "text": "NPC",
+     "untilAt": 26.4
+    },
+    {
+     "type": "tag",
+     "of": "clone2",
+     "at": 16.71,
+     "text": "NPC",
+     "untilAt": 26.4
+    },
+    {
+     "type": "tag",
+     "of": "clone3",
+     "at": 16.79,
+     "text": "NPC",
+     "untilAt": 26.4
+    },
+    {
+     "type": "tag",
+     "of": "clone4",
+     "at": 16.87,
+     "text": "NPC",
+     "untilAt": 26.4
+    },
+    {
+     "type": "flash",
+     "at": 18.6,
+     "dur": 0.25,
+     "amount": 0.35
+    },
+    {
+     "type": "spawn",
+     "at": 20.35,
+     "world": [
+      -4.0,
+      42.0,
+      0.0
+     ]
+    },
+    {
+     "type": "flash",
+     "at": 20.56,
+     "dur": 0.2,
+     "amount": 0.5
+    },
+    {
+     "type": "blast",
+     "at": 21.7,
+     "actor": "mailman",
+     "off": [
+      0.7,
+      -0.7,
+      0.9
+     ],
+     "rW": 2.5,
+     "r": 250,
+     "only": [
+      "mailman"
+     ],
+     "force": 0.95,
+     "shake": 18,
+     "hidden": true
+    },
+    {
+     "type": "burst",
+     "at": 21.7,
+     "actor": "mailman",
+     "off": [
+      0.3,
+      -0.3,
+      1.3
+     ],
+     "dur": 0.5
+    },
+    {
+     "type": "impactframe",
+     "at": 21.7
+    },
+    {
+     "type": "stars",
+     "keys": [
+      {
+       "at": 28.4,
+       "n": 1
+      },
+      {
+       "at": 30.64,
+       "n": 2
+      },
+      {
+       "at": 32.04,
+       "n": 3
+      },
+      {
+       "at": 32.97,
+       "n": 4
+      },
+      {
+       "at": 33.55,
+       "n": 5
+      },
+      {
+       "at": 50.21,
+       "n": 0
+      }
+     ]
+    },
+    {
+     "type": "speedlines",
+     "at": 28.8,
+     "dur": 1.6
+    },
+    {
+     "type": "speedlines",
+     "at": 31.0,
+     "dur": 1.4
+    },
+    {
+     "type": "speedlines",
+     "at": 33.4,
+     "dur": 1.2
+    },
+    {
+     "type": "sirenglow",
+     "at": 30.64,
+     "untilAt": 50.1,
+     "amount": 0.22
+    },
+    {
+     "type": "speedlines",
+     "at": 38.2,
+     "dur": 0.9
+    },
+    {
+     "type": "flash",
+     "at": 38.6,
+     "dur": 0.2,
+     "amount": 0.4
+    },
+    {
+     "type": "speedlines",
+     "at": 39.9,
+     "dur": 1.0
+    },
+    {
+     "type": "blast",
+     "at": 42.75,
+     "world": [
+      3.0,
+      320.0,
+      0.0
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 34,
+     "hidden": true
+    },
+    {
+     "type": "impactframe",
+     "at": 42.75
+    },
+    {
+     "type": "flash",
+     "at": 42.75,
+     "dur": 0.2,
+     "amount": 0.55
+    },
+    {
+     "type": "blast",
+     "at": 48.94,
+     "actor": "player",
+     "off": [
+      0.4,
+      -0.4,
+      0.6
+     ],
+     "rW": 3.0,
+     "r": 300,
+     "only": [
+      "player"
+     ],
+     "force": 0.42,
+     "shake": 26,
+     "hidden": true,
+     "stay": true
+    },
+    {
+     "type": "burst",
+     "at": 48.94,
+     "actor": "player",
+     "off": [
+      0,
+      0,
+      0.8
+     ],
+     "dur": 0.6
+    },
+    {
+     "type": "impactframe",
+     "at": 48.94
+    },
+    {
+     "type": "flash",
+     "at": 50.21,
+     "dur": 0.25,
+     "amount": 0.5
+    },
+    {
+     "type": "title",
+     "at": 50.21,
+     "untilAt": 52.2,
+     "text": "BUSTED",
+     "y": 0.3,
+     "size": 200
+    }
+   ],
+   "sfx": [
+    {
+     "type": "whoosh",
+     "at": 0.0,
+     "gain": 0.6
+    },
+    {
+     "type": "siren",
+     "at": 2.6,
+     "dur": 2.2,
+     "gain": 0.25
+    },
+    {
+     "type": "ting",
+     "at": 4.86,
+     "gain": 0.5
+    },
+    {
+     "type": "gulp",
+     "at": 7.48,
+     "gain": 0.6
+    },
+    {
+     "type": "pop",
+     "at": 10.56
+    },
+    {
+     "type": "pop",
+     "at": 11.05
+    },
+    {
+     "type": "pop",
+     "at": 11.5
+    },
+    {
+     "type": "boing",
+     "at": 12.62,
+     "gain": 0.5
+    },
+    {
+     "type": "sting",
+     "at": 16.4,
+     "gain": 0.7
+    },
+    {
+     "type": "scratch",
+     "at": 18.35,
+     "gain": 0.8
+    },
+    {
+     "type": "spawn",
+     "at": 19.9,
+     "gain": 0.8
+    },
+    {
+     "type": "punch",
+     "at": 21.68
+    },
+    {
+     "type": "whoosh",
+     "at": 21.75,
+     "gain": 0.6
+    },
+    {
+     "type": "engine",
+     "at": 23.2,
+     "dur": 1.4,
+     "gain": 0.5
+    },
+    {
+     "type": "whoosh",
+     "at": 26.1,
+     "gain": 0.7
+    },
+    {
+     "type": "knock",
+     "at": 27.0,
+     "gain": 0.4
+    },
+    {
+     "type": "engine",
+     "at": 27.5,
+     "dur": 2.6,
+     "gain": 0.8
+    },
+    {
+     "type": "skid",
+     "at": 28.4,
+     "dur": 0.8,
+     "gain": 0.6
+    },
+    {
+     "type": "siren",
+     "at": 30.6,
+     "dur": 5.4,
+     "gain": 0.45
+    },
+    {
+     "type": "ting",
+     "at": 32.04,
+     "gain": 0.5
+    },
+    {
+     "type": "ting",
+     "at": 32.97,
+     "gain": 0.5
+    },
+    {
+     "type": "ting",
+     "at": 33.55,
+     "gain": 0.6
+    },
+    {
+     "type": "sting",
+     "at": 35.93,
+     "gain": 0.6
+    },
+    {
+     "type": "engine",
+     "at": 37.0,
+     "dur": 1.8,
+     "gain": 0.7
+    },
+    {
+     "type": "whoosh",
+     "at": 38.5,
+     "gain": 0.8
+    },
+    {
+     "type": "whoosh",
+     "at": 40.3,
+     "gain": 0.6
+    },
+    {
+     "type": "whoosh",
+     "at": 41.6
+    },
+    {
+     "type": "whoosh",
+     "at": 42.0,
+     "gain": 0.8
+    },
+    {
+     "type": "crash",
+     "at": 42.74
+    },
+    {
+     "type": "skid",
+     "at": 42.95,
+     "dur": 1.0,
+     "gain": 0.8
+    },
+    {
+     "type": "siren",
+     "at": 44.1,
+     "dur": 3.0,
+     "gain": 0.55
+    },
+    {
+     "type": "scramble",
+     "at": 45.23,
+     "gain": 0.8
+    },
+    {
+     "type": "cuffs",
+     "at": 46.5,
+     "gain": 0.5
+    },
+    {
+     "type": "scramble",
+     "at": 47.4,
+     "gain": 0.6
+    },
+    {
+     "type": "punch",
+     "at": 48.94
+    },
+    {
+     "type": "boom",
+     "at": 48.98,
+     "gain": 0.5
+    },
+    {
+     "type": "cuffs",
+     "at": 49.7,
+     "gain": 0.7
+    },
+    {
+     "type": "sting",
+     "at": 50.21,
+     "gain": 0.9
+    },
+    {
+     "type": "pop",
+     "at": 52.5,
+     "gain": 0.6
+    }
+   ]
+  }
+ ]
+}

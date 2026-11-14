@@ -25,7 +25,8 @@ run('ffmpeg', '-y', '-hide_banner', '-framerate', str(FPS), '-i', os.path.join(W
     '-vf', 'scale=1080:1920:flags=lanczos', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', out)
 # thumbnail
 cue = S.get('thumbnail_cue'); t = WJ['duration'] / 2
-if cue:
+if isinstance(cue, (int, float)): t = float(cue)
+elif cue:
     for w in WJ['words']:
         if re.sub(r'[^a-z0-9]', '', w['word'].lower()) == re.sub(r'[^a-z0-9]', '', cue.lower()): t = w['start'] + 0.4; break
 f = min(len(os.listdir(os.path.join(W, 'frames'))) - 1, round(t * FPS))

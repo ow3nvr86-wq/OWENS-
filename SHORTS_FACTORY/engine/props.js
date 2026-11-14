@@ -93,6 +93,10 @@ function drawHandProp(g, prop, hands, t, st) {
     inkRect(g, -14, -16, L, 18, '#2c2b31', 6);
     if (prop === 'shotgun') inkRect(g, 40, 2, 90, 16, '#7a4a26', 5);
     else { inkRect(g, 30, -44, 110, 22, '#1d1c22', 5); g.beginPath(); g.arc(140, -33, 12, 0, 7); g.fillStyle = '#9fd8ff'; g.fill(); g.stroke(); }
+  } else if (prop === 'pistol') {                    // a plain service pistol (generic, original drawing)
+    g.translate(hx, hy); g.rotate(Math.PI / 2 - ha);
+    g.beginPath(); g.moveTo(-6, -4); g.lineTo(8, -4); g.lineTo(2, 46); g.lineTo(-16, 44); g.closePath(); g.fillStyle = '#25262c'; g.fill(); g.lineWidth = 5; g.strokeStyle = C.ink; g.stroke();
+    inkRect(g, -12, -24, 104, 24, '#33353d', 5); g.fillStyle = '#5a5d68'; g.fillRect(-6, -20, 92, 5);
   } else if (prop === 'hoprock') {
     g.translate(hx, hy - 20); g.scale(0.55, 0.55); PROPS.hoprock(g, { seed: 3, size: 1 }, null, t);
   }
@@ -102,7 +106,7 @@ function drawHandProp(g, prop, hands, t, st) {
 // ---------------- FX2: world-plane and screen effects ----------------
 const FX2 = {
   blast(g, fx, s, t) {                                // flash + shockwave ring + dirt + smoke (the knock-back is crowdReact)
-    const u = t - fx.t0; if (u < 0 || u > 1.6) return; const x = fx.x * W, y = fx.y * H, r = fx.r || 260;
+    const u = t - fx.t0; if (fx.hidden || u < 0 || u > 1.6) return; const x = fx.x * W, y = fx.y * H, r = fx.r || 260;
     if (u < 0.12) glow2(g, x, y - 40, r * 1.6 * (1 - u / 0.12 * 0.3), `rgba(255,245,200,${0.9 * (1 - u / 0.12)})`);
     if (u < 0.5) { g.save(); g.translate(x, y); g.scale(1, 0.35); g.beginPath(); g.arc(0, 0, r * 1.4 * eOut(u / 0.5), 0, 7); g.lineWidth = 26 * (1 - u / 0.5); g.strokeStyle = `rgba(255,240,210,${0.8 * (1 - u / 0.5)})`; g.stroke(); g.restore(); }
     for (let k = 0; k < 16; k++) {                    // dirt clods on arcs

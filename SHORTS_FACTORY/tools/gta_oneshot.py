@@ -46,13 +46,16 @@ def car_state(t):
     u = min(1.0, (t - T_LAND) / (T_STOP - T_LAND)); y = LAND_Y + (STOP_Y - LAND_Y) * (1 - (1 - u) ** 2.4)
     return (3.0 - 0.8 * ease(u), y, 0.0), 0.32 * ease(u), 0.0
 def bike_state(t):
-    """the player's bike: parked across the street, then on the car's tail, jumps after it, stops near the station"""
-    if t < 27.0: return (-3.0, 47.0, 0.0), 0.0, 0.0
-    lag = 1.5; (cx, cy, cz), hd, rl = car_state(max(T_GO, t - lag))
-    blend = ease((t - 27.0) / 2.5); x = -3.0 + (cx - 2.2 - -3.0) * blend; y = max(47.0, 47.0 + (cy - 47.0) * blend) if t - lag < T_LAND else cy - 9
-    if t - lag >= T_LAND:
-        u = min(1.0, (t - lag - T_LAND) / 1.2); x = cx - 2.2 - 4.0 * ease(u); y = LAND_Y + 6 * ease(u)
-    return (x, y, cz), 0.25 * math.sin(t * 1.3) * (1 if T_GO < t - lag < T_RAMP else 0), 0.0
+    """the player's bike: parked across the street, then right on the car's tail (0.35 s behind), over the ramp too, skids to a stop"""
+    P0 = (-3.0, 47.0, 0.0); LAG = 0.35
+    if t < 28.4: return P0, 0.0, 0.0
+    tc = t - LAG
+    if tc < T_LAND:
+        (cx, cy, cz), _, _ = car_state(tc); k = 2.0
+        y = P0[1] + k * math.log1p(math.exp(min(50.0, (cy - P0[1]) / k)))            # waits for the car to pass, then launches after it
+        return (P0[0] + (cx - 2.4 - P0[0]) * ease((t - 28.4) / 2.6), y, cz), 0.0, 0.0
+    u = min(1.0, (tc - T_LAND) / 1.6); e = 1 - (1 - u) ** 2.2
+    return (0.6 + (-5.9 - 0.6) * e, LAND_Y + (325.6 - LAND_Y) * e, 0.0), 0.0, 0.0
 COPCARS = [(-1.0, -14.0), (6.5, -19.0)]                              # chasing police cars (x, distance behind the bike)
 def copcar_state(i, t):
     x, back = COPCARS[i]
@@ -68,7 +71,7 @@ def hero_pos(t):
     if t < 44.1: return (0, 0, 0), 0                                  # in the car (drawn from the seat track)
     (cx, cy, cz), hd, rl = car_state(t); return (cx - 1.6, cy - 0.6, 0.0), 1
 def hero_seat(t):
-    (cx, cy, cz), hd, rl = car_state(t); return (cx - 0.4, cy - 0.3, cz + 0.55), (1 if 27.0 <= t < 44.1 and not (41.15 < t < 42.65) else 0)
+    (cx, cy, cz), hd, rl = car_state(t); return (cx - 0.4, cy - 0.3, cz + 0.55), (1 if 27.0 <= t < 44.1 and not (math.radians(50) < car_state(t)[2] < math.radians(310)) else 0)
 PLAYER_PATH = [(0.0, (-4.0, 42.0, 0.0)), (21.9, (-4.0, 42.0, 0.0)), (23.3, (-3.0, 46.3, 0.0))]
 def player_pos(t):
     if t < 20.4: return (0, 0, 0), 0
@@ -81,13 +84,15 @@ def mailman_pos(t):
 CLONES = [((7.4, 40.0), -1.1, 0.0), ((7.6, 2.0), 1.05, 2.0), ((-6.5, 30.0), -0.9, 0.5), ((-6.8, 6.0), 1.0, 1.0), ((7.2, 60.0), -1.2, 4.0)]
 def clone_pos(i, t):
     (x, y), v, t0 = CLONES[i]; return (x, y + v * max(0.0, t - t0), 0.0), (1 if t < 26.5 else 0)
-STATION_DOOR = (0.0, 351.0); PILE = (-6.2, 326.5)
+NODDER = 1; STATION_DOOR = (0.0, 351.0); PILE = (-6.2, 326.5)
 def cop_pos(i, t):
     a = (-4.5 + i * 1.0, STATION_DOOR[1] - 0.5 - (i % 3) * 0.8, 0.0)
     ring = (PILE[0] + math.cos(i * 0.63) * (0.9 + 0.35 * (i % 3)), PILE[1] + math.sin(i * 0.63) * (0.7 + 0.3 * (i % 3)), 0.0)
     aim = (a[0] * 1.6, a[1] - 7.0 - (i % 2) * 1.5, 0.0)
     if t < 45.2: return a, 0
-    return keyed([(45.2, a), (46.3, aim), (47.4, aim), (48.95, ring)], t), 1
+    ks = [(45.2, a), (46.3, aim), (47.4, aim), (48.95, ring)]
+    if i == NODDER: ks += [(51.0, ring), (52.2, (-3.7, 329.7, 0.0))]
+    return keyed(ks, t), 1
 ACTORS = dict(hero=hero_pos, heroSeat=hero_seat, player=player_pos, mailman=mailman_pos)
 for i in range(len(CLONES)): ACTORS['clone%d' % i] = (lambda i: lambda t: clone_pos(i, t))(i)
 for i in range(10): ACTORS['cop%d' % i] = (lambda i: lambda t: cop_pos(i, t))(i)
@@ -102,12 +107,24 @@ CAM = [(0.0, (34, -70, 78), (4, 24, 0), 28), (2.6, (20, -22, 32), (6, 10, 2), 26
        hero_follow(16.6, 4.4, -4.2, 3.4, 0.5, 2.0) + (24,), (19.3, (8.4, 22.0, 2.3), (-4.0, 42.0, 1.4), 24), (21.4, (2.0, 35.5, 1.8), (-4.6, 43.0, 1.2), 24),
        (23.4, (1.0, 41.0, 1.7), (-3.0, 46.4, 1.2), 24), (25.5, (0.4, 40.6, 1.6), (-3.0, 46.6, 1.5), 26), (26.1, (9.6, 21.0, 1.7), (6.3, 25.0, 1.3), 24),
        (27.2, (8.8, 26.5, 1.8), (4.5, 33.0, 1.1), 24)]
-CAM += [follow(t, dx, dy, dz) + (24,) for (t, dx, dy, dz) in [(28.6, 6.0, -7.5, 2.4), (30.6, 5.5, -9.0, 2.2), (32.4, 6.5, -6.0, 2.0), (34.0, 4.5, -11.0, 2.6)]]
-CAM += [(35.6, follow(35.6, 0, 0, 0)[1][:2] + (7.5,), (-1.0, 236.0, 2.5), 24), follow(37.6, 5.0, -6.0, 2.8, 0, 18, 1.5) + (24,), (38.6, (8.0, 226.0, 4.0), (3.0, 238.0, 3.6), 24),
-        follow(40.3, 9.0, -2.0, 1.0, 0, 1.5, 0.6) + (24,), follow(41.9, 7.0, -6.5, 2.2, 0, 2.0, 0.5) + (24,), (42.75, (12.0, 314.0, 3.2), (3.0, 322.0, 1.0), 24),
+def R(*v): return ('car', v)
+CAM += [(28.4, R(4.6, -6.8, 1.5), R(0.0, 3.0, 0.9), 24),           # pulling away, the hero at the wheel
+        (30.2, R(2.6, 9.5, 1.3), R(-0.4, -5.0, 1.0), 24),          # swing in front: the hero driving at us, the bike on his tail
+        (32.2, R(-2.4, 10.5, 1.5), R(-0.6, -6.0, 1.0), 24),        # three stars, four...
+        (33.9, R(-3.6, 8.0, 2.2), R(-0.4, -4.0, 1.0), 24),         # five
+        (34.9, R(6.5, 0.5, 2.2), R(0.0, -0.5, 0.9), 24),            # round to the side
+        (35.4, R(4.5, -5.0, 3.2), R(-0.3, 2.0, 0.9), 24),
+        (35.9, R(1.5, -9.5, 4.2), R(-0.6, 8.0, 1.0), 24),          # rise behind: the stunt ramp over the freeway
+        (37.4, R(4.5, -6.5, 2.4), R(-1.0, 3.0, 1.2), 24),
+        (38.6, R(6.0, 1.5, 1.0), R(0.0, -0.6, 1.0), 22),            # low beside the car as it hits the lip
+        (40.3, R(9.0, -2.0, 1.0), R(0.0, -0.4, 0.7), 24),           # flying, side-on
+        (41.9, R(7.0, -6.5, 2.2), R(-0.3, 0.2, 0.6), 24),           # the barrel roll
+        (42.75, R(8.0, -5.0, 1.6), R(-0.3, 0.2, 0.6), 24),          # the landing
         (44.2, (10.0, 327.0, 2.2), (2.0, 337.0, 1.4), 24), (45.7, (8.5, 321.0, 1.7), (0.0, 350.0, 2.6), 22), (47.4, (7.0, 329.0, 1.8), (-2.0, 337.0, 1.4), 22),
-        (48.9, (-0.8, 316.5, 2.3), (-6.0, 327.0, 0.8), 22), (50.4, (-2.6, 320.0, 1.6), (-6.2, 327.0, 0.6), 24), (51.6, (-2.2, 321.2, 1.7), (-5.0, 328.0, 1.6), 26),
-        (DUR, (-3.3, 323.6, 1.7), (-5.0, 328.2, 1.75), 30)]
+        (48.9, (-0.8, 316.5, 2.3), (-6.0, 327.0, 0.8), 22), (50.4, (-2.6, 320.0, 1.6), (-6.2, 327.0, 0.6), 24),   # the tackle, BUSTED
+        (51.5, (0.8, 325.4, 1.9), (-5.0, 328.0, 0.9), 24),         # orbit round the pile
+        (52.4, (-0.6, 332.4, 1.75), (-3.7, 329.7, 1.4), 28),       # Steve's eye line: one cop turns back
+        (DUR, (-1.7, 332.9, 1.7), (-3.7, 329.7, 1.3), 32)]
 
 
 # ------------------------------------------------------------------ the city -------------------------------
@@ -269,8 +286,16 @@ cam.data.dof.use_dof = True; cam.data.dof.aperture_fstop = 6.0
 tgt = bpy.data.objects.new('camTarget', None); sc.collection.objects.link(tgt)
 tc = cam.constraints.new('TRACK_TO'); tc.target = tgt; tc.track_axis = 'TRACK_NEGATIVE_Z'; tc.up_axis = 'UP_Y'; cam.data.dof.focus_object = tgt
 CAM.sort(key=lambda k: k[0])
+def _val(v, t):
+    if isinstance(v, tuple) and v and v[0] == 'car': (cx, cy, cz), _, _ = car_state(t); return (cx + v[1][0], cy + v[1][1], cz + v[1][2])
+    return v
 def cam_at(t):
-    p = keyed([(k[0], k[1]) for k in CAM], t, ease); l = keyed([(k[0], k[2]) for k in CAM], t, ease); lens = keyed([(k[0], (k[3],)) for k in CAM], t, ease)[0]; return p, l, lens
+    ks = [(k[0], k[1], k[2], (k[3],)) for k in CAM]
+    if t <= ks[0][0]: i = 0; u = 0.0
+    elif t >= ks[-1][0]: i = len(ks) - 2; u = 1.0
+    else: i = max(j for j in range(len(ks) - 1) if ks[j][0] <= t); u = ease((t - ks[i][0]) / max(1e-6, ks[i + 1][0] - ks[i][0]))
+    a, b = ks[i], ks[i + 1]; mix = lambda A, B: tuple(x + (y - x) * u for x, y in zip(A, B))
+    return mix(_val(a[1], t), _val(b[1], t)), mix(_val(a[2], t), _val(b[2], t)), mix(a[3], b[3])[0]
 for f in range(NF):
     p, l, lens = cam_at(f / FPS); cam.location = p; tgt.location = l; cam.data.lens = lens
     cam.keyframe_insert('location', frame=f); tgt.keyframe_insert('location', frame=f); cam.data.keyframe_insert('lens', frame=f)
@@ -284,7 +309,7 @@ for f in range(NF):
     sc.frame_set(f); M = cam.matrix_world; t = f / FPS
     track.append(dict(C=[round(v, 4) for v in M.translation], R=[[round(M[r][c], 5) for c in range(3)] for r in range(3)], tanh=round(12.0 / cam.data.lens, 6)))
     for k, fn in ACTORS.items(): p, v = fn(t); actors[k].append([round(c, 3) for c in p]); vis[k].append(v)
-json.dump(dict(fps=FPS, frames=NF, track=track, actors=actors, vis=vis, door=[[round(c, 3) for c in car_state(f / FPS)[0]] for f in range(NF)]), open(os.path.join(OUT, 'camera.json'), 'w'))
+json.dump(dict(fps=FPS, frames=NF, track=track, actors=actors, vis=vis, door=[[round(c, 3) for c in car_state(f / FPS)[0]] for f in range(NF)], roll=[round(car_state(f / FPS)[2], 4) for f in range(NF)]), open(os.path.join(OUT, 'camera.json'), 'w'))
 print('tracks written', NF, flush=True)
 
 sc.frame_start, sc.frame_end = START, END; sc.render.use_persistent_data = True

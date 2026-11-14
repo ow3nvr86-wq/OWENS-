@@ -61,7 +61,7 @@ function crowdReact(st, s, t, z) {
     else { const u = tau0 - t2, sv = vx * 0.5, stop = Math.abs(sv) / 1800, us = Math.min(u, stop);
       x = x0 + vx * t1 + vx * 0.5 * (t2 - t1) + sv * us - Math.sign(sv) * 900 * us * us; air = 0; rot = Math.round((spin * t1) / (Math.PI)) * Math.PI + dir * Math.PI / 2; phase = 'slide'; }
     out.x = x; out.vel = null; out.air = Math.max(0, air) / sc; out.dist = undefined;
-    const lieT = tau0 - t2, getUp = sd > 0.45;                                     // some scramble up, some stay dazed
+    const lieT = tau0 - t2, getUp = !im.stay && sd > 0.45;                                     // some scramble up, some stay dazed
     if (phase !== 'slide') { out.ragdoll = true; out.action = 'fall'; out.bodyRot = rot; out.mood = 'shocked'; }
     else if (!getUp || lieT < 1.1) { out.lying = true; out.action = 'idle'; out.bodyRot = dir * Math.PI / 2; out.mood = 'sad'; out.y = st.y; out.blink = 0.9; }
     else if (lieT < 1.5) { const u = (lieT - 1.1) / 0.4; out.bodyRot = dir * Math.PI / 2 * (1 - eOut(u)); out.action = 'flail'; out.mood = 'scared'; }

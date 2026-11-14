@@ -89,13 +89,14 @@ function seqActorState(ch, s, t, S, x, cam) {
   if (ch.track) {
     const D = trackDist(S, ch.track), i = Math.min(D.length - 1, Math.floor(x)), d = lerp(D[i], D[Math.min(D.length - 1, i + 1)], x - i);
     const sp = (D[Math.min(D.length - 1, i + 3)] - D[Math.max(0, i - 3)]) / (6 / S.meta.fps);
-    if (ch.autoGait && !(POSES2[st.action] && POSES2[st.action](0, 0).feet)) st.action = sp > 3.2 ? 'run' : sp > 0.25 ? 'walk' : (ch.action || 'idle');
+    if (ch.autoGait && !(POSES2[st.action] && POSES2[st.action](0, 0).feet)) st.action = sp > 3.2 ? 'run' : sp > 0.25 ? 'walk' : (st.action === 'walk' || st.action === 'run' ? 'idle' : st.action);
     st.dist = d * 555 / 1.8 / (ch.size || 1); st.speedL = sp * 555 / 1.8; st.cycle = st.cycle || hash(ch.id.length * 3.3);
     if (ch.autoFlip !== false && sp > 0.25) { const q = seqProject(cam, trackAt(S, ch.track, Math.min(S.meta.frames - 1, x + 4))); if (Math.abs(q[0] - p[0]) > 1.5) st.flip = q[0] < p[0]; }
   }
+  if (ch.rollTrack && S.meta.roll) { let r = S.meta.roll[Math.min(S.meta.roll.length - 1, Math.round(x))] % (2 * Math.PI); if (r > Math.PI) r -= 2 * Math.PI; st.bodyRot = (st.bodyRot || 0) + r * (ch.rollSign || 1); }
   st.depth = p[3];
   if (ch.nodAt) for (const c of [].concat(ch.nodT || [])) st.headTilt = (st.headTilt || 0) + 0.16 * pulse(t, c, 0.35) + 0.12 * pulse(t, c + 0.35, 0.3);
-  ACT[ch.id] = { x: st.x, y: st.y, h: 555 * st.scale, s: st.scale };
+  if (p[3] > 0.4 && st.x > -300 && st.x < W + 300) ACT[ch.id] = { x: st.x, y: st.y, h: 555 * st.scale, s: st.scale };
   return st;
 }
 // replace the character pass of renderShotSeq with the track-aware one (also handles the car-door clip)
@@ -113,8 +114,8 @@ renderShotSeq = (function (orig) {
       else if (fx.world) { const p = seqProject(cam, fx.world); fx.x = p[0] / W; fx.y = p[1] / H; if (fx.rW) fx.r = fx.rW * p[2]; }
       if (fx.fromW) { const a = seqProject(cam, fx.fromW), b = seqProject(cam, fx.toW); fx.from = [a[0] / W, a[1] / H]; fx.to = [b[0] / W, b[1] / H]; }
     }
-    for (const im of s._impacts || []) if (im.fx && (im.fx.world || im.fx.actor)) { im.x = im.fx.x * W; im.y = im.fx.y * H; im.r = im.fx.r || im.r; im.only = im.fx.only; }
-    const items = [];
+    for (const im of s._impacts || []) if (im.fx && (im.fx.world || im.fx.actor)) { im.x = im.fx.x * W; im.y = im.fx.y * H; im.r = im.fx.r || im.r; im.only = im.fx.only; im.stay = im.fx.stay; }
+    const items = []; for (const k in ACT) delete ACT[k];
     for (const ch of s.characters || []) {
       let st = seqActorState(ch, s, t, S, x, cam); if (!st) continue;
       if (FEAT.crowdFX) st = crowdReact(st, s, t, 150);
@@ -158,4 +159,18 @@ FX2.title = function (g, fx, s, t) {                       // a big punchy title
   const gr = g.createLinearGradient(0, -90, 0, 90); (fx.grad || ['#fff2b0', '#ff8a1e', '#c8240c']).forEach((c, i, a) => gr.addColorStop(i / (a.length - 1), c));
   g.shadowColor = 'rgba(0,0,0,0.6)'; g.shadowBlur = 30; g.shadowOffsetY = 12; g.lineWidth = 34; g.strokeStyle = '#120a0a'; g.strokeText(fx.text, 0, 0);
   g.shadowColor = 'transparent'; g.fillStyle = gr; g.fillText(fx.text, 0, 0); g.restore();
+};
+
+FX2.bubble = function (g, fx, s, t) {                      // a speech bubble over an actor's head
+  const A = ACT[fx.of]; if (!A || t < fx.t0 || t > fx.t0 + (fx.dur || 0.9)) return; const k = popScale(t, fx.t0, 0.25), out = clamp((fx.t0 + (fx.dur || 0.9) - t) / 0.15, 0, 1);
+  g.save(); g.globalAlpha = out; g.translate(A.x + (fx.dx || 0.25) * A.h, A.y - A.h * 1.15); g.scale(k, k); g.rotate(fx.rot || -0.04);
+  g.font = `800 ${fx.size || 54}px Poppins`; g.textAlign = 'center'; g.textBaseline = 'middle'; const w = g.measureText(fx.text).width + 50;
+  g.beginPath(); g.roundRect(-w / 2, -44, w, 88, 40); g.moveTo(-w * 0.2, 36); g.lineTo(-w * 0.32, 78); g.lineTo(-w * 0.05, 40);
+  g.fillStyle = '#ffffff'; g.fill(); g.lineWidth = 7; g.strokeStyle = '#1d1719'; g.stroke(); g.fillStyle = '#1d1719'; g.fillText(fx.text, 0, 3); g.restore();
+};
+FX2.sirenglow = function (g, fx, s, t) {                   // red / blue light washing in from the frame edges
+  if (t < fx.t0 || (fx.until && t > fx.until)) return; const a = (fx.amount ?? 0.32) * clamp((t - fx.t0) / 0.4, 0, 1), ph = Math.floor(t * 5) % 2;
+  for (const [side, col] of [[0, ph ? '255,40,40' : '40,90,255'], [1, ph ? '40,90,255' : '255,40,40']]) {
+    const x0 = side ? W : 0, gr = g.createLinearGradient(x0, 0, side ? W * 0.55 : W * 0.45, 0); gr.addColorStop(0, `rgba(${col},${a})`); gr.addColorStop(1, `rgba(${col},0)`);
+    g.fillStyle = gr; g.fillRect(0, 0, W, H); }
 };

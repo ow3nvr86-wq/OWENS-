@@ -30,6 +30,13 @@ Object.assign(HATS, {
     g.beginPath(); g.moveTo(-R * 0.9, -R * 0.5); g.lineTo(-R * 1.35, -R * 0.2); g.lineTo(-R * 1.2, -R * 0.62); g.closePath(); fo(g, '#2f6fc0'); },
   hood_leafy(g, R) { g.beginPath(); g.moveTo(-R * 1.05, R * 0.2); g.quadraticCurveTo(-R * 1.15, -R * 1.35, 0, -R * 1.35); g.quadraticCurveTo(R * 1.15, -R * 1.35, R * 1.05, R * 0.2); g.quadraticCurveTo(R * 0.8, -R * 0.75, 0, -R * 0.82); g.quadraticCurveTo(-R * 0.8, -R * 0.75, -R * 1.05, R * 0.2); g.closePath(); fo(g, '#4f6b2e');
     for (let i = 0; i < 9; i++) { const a = -2.6 + i * 0.32; g.beginPath(); g.ellipse(Math.cos(a) * R * 1.12, Math.sin(a) * R * 1.12 - R * 0.15, R * 0.2, R * 0.08, a, 0, 7); fo(g, i % 2 ? '#6f8a3a' : '#3f5525', 4); } },
+  police_cap(g, R) { g.beginPath(); g.moveTo(-R * 1.0, -R * 0.55); g.lineTo(-R * 1.12, -R * 1.2); g.quadraticCurveTo(0, -R * 1.5, R * 1.12, -R * 1.2); g.lineTo(R * 1.0, -R * 0.55); g.closePath(); fo(g, '#26345e');
+    g.beginPath(); g.rect(-R * 1.0, -R * 0.72, R * 2.0, R * 0.2); fo(g, '#111318'); g.beginPath(); g.moveTo(-R * 0.9, -R * 0.55); g.quadraticCurveTo(0, -R * 0.2, R * 0.9, -R * 0.55); g.closePath(); fo(g, '#111318');
+    g.beginPath(); g.arc(0, -R * 1.0, R * 0.17, 0, 7); fo(g, '#e6c75a', 4); },
+  mail_cap(g, R) { g.beginPath(); g.moveTo(-R * 0.94, -R * 0.42); g.quadraticCurveTo(-R * 0.9, -R * 1.18, 0, -R * 1.18); g.quadraticCurveTo(R * 0.9, -R * 1.18, R * 0.94, -R * 0.42); g.closePath(); fo(g, '#8db3da');
+    g.beginPath(); g.moveTo(R * 0.4, -R * 0.45); g.quadraticCurveTo(R * 1.25, -R * 0.5, R * 1.55, -R * 0.32); g.lineTo(R * 0.5, -R * 0.3); g.closePath(); fo(g, '#2b3a5c'); },
+  cap_back(g, R) { g.beginPath(); g.moveTo(-R * 0.94, -R * 0.42); g.quadraticCurveTo(-R * 0.9, -R * 1.2, 0, -R * 1.2); g.quadraticCurveTo(R * 0.9, -R * 1.2, R * 0.94, -R * 0.42); g.closePath(); fo(g, '#e0e0e0');
+    g.beginPath(); g.moveTo(-R * 0.4, -R * 0.5); g.quadraticCurveTo(-R * 1.2, -R * 0.55, -R * 1.4, -R * 0.3); g.lineTo(-R * 0.5, -R * 0.36); g.closePath(); fo(g, '#b8322c'); },
   headset(g, R) { g.beginPath(); g.arc(0, -R * 0.1, R * 1.02, Math.PI * 1.08, Math.PI * 1.92); g.lineWidth = R * 0.14; g.strokeStyle = C.ink; g.stroke();
     for (const s of [-1, 1]) { g.beginPath(); g.ellipse(s * R * 0.98, -R * 0.05, R * 0.18, R * 0.3, 0, 0, 7); fo(g, '#2f6fc0'); } },
 });
@@ -48,6 +55,7 @@ const POSES2 = {
   crush: (t) => ({ armL: -0.2, armR: 2.2 + Math.sin(t * 40) * 0.04, elL: 0.1, elR: -1.3 }),
   jump: (t) => ({ armL: -2.6, armR: 2.6, elL: -0.2, elR: 0.2, feet: [[-24, -52], [26, -46]] }),
   fall: (t) => ({ armL: -2.3 + Math.sin(t * 15) * 0.4, armR: 2.3 + Math.cos(t * 14) * 0.4, elL: 0.4, elR: -0.4, feet: [[-40 + Math.sin(t * 11) * 10, -26], [38 + Math.cos(t * 12) * 10, -12]] }),
+  punch: (t) => ({ armL: 0.9, armR: 1.62, elL: -1.6, elR: 0.0 }),
   sit: (t) => ({ armL: 0.3, armR: -0.3, elL: 0.6, elR: -0.6, feet: [[30, -10], [44, -6]], hipDy: 34 }),
   wave: (t) => ({ armL: -0.15, armR: 2.6 + Math.sin(t * 10) * 0.35, elL: 0.1, elR: 0.3 }),
   facepalm: (t) => ({ armL: -0.15, armR: 2.75, elL: 0.1, elR: -2.3 }),

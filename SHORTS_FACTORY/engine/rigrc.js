@@ -26,6 +26,10 @@ const RC_COSTUMES = {
   tee_red: { body: '#cf3b33', detail: 'tee', pants: '#2c3a5c' },
   tee_blue: { body: '#2f72c4', detail: 'tee', pants: '#2b2b33' },
   vest_orange: { body: '#e47a2c', detail: 'vest', pants: '#4a4a52' },
+  tee_white: { body: '#efe9dc', detail: 'tee', pants: '#3a5c8e' },
+  flannel_red: { body: '#b8322c', detail: 'flannel', pants: '#22252e' },
+  police: { body: '#26345e', detail: 'police', pants: '#1b2240' },
+  mail: { body: '#8db3da', detail: 'mail', pants: '#2b3a5c' },
 };
 function rcTorso(g, cos, w, h, t) {
   const x = -w / 2, y = -h, r = w * 0.48;
@@ -66,6 +70,28 @@ function rcTorso(g, cos, w, h, t) {
     g.beginPath(); g.ellipse(0, y + 4, w * 0.3, 16, 0, 0, Math.PI); g.fillStyle = dark; g.fill();
     g.beginPath(); g.arc(0, y + h * 0.42, 22, 0, 7); g.fillStyle = light; g.fill(); g.beginPath(); g.moveTo(-10, y + h * 0.42); g.lineTo(0, y + h * 0.42 - 12); g.lineTo(10, y + h * 0.42); g.lineTo(0, y + h * 0.42 + 12); g.closePath(); g.fillStyle = dark; g.fill();
     stitch([[x + 6, y + h - 14], [x + w - 6, y + h - 14]]);
+  } else if (cos.detail === 'flannel') {
+    for (let k = 1; k < 6; k++) { g.fillStyle = 'rgba(20,10,10,0.28)'; g.fillRect(x + k * w / 6 - 5, y, 10, h); g.fillRect(x, y + k * h / 6 - 5, w, 10); }
+    for (let k = 1; k < 6; k++) { g.fillStyle = 'rgba(255,230,210,0.16)'; g.fillRect(x + k * w / 6 + 9, y, 3, h); }
+    g.beginPath(); g.moveTo(-w * 0.3, y); g.lineTo(0, y + 40); g.lineTo(w * 0.3, y); g.closePath(); g.fillStyle = '#2a2a30'; g.fill();          // tee under the open shirt
+    for (const sx of [-1, 1]) { g.beginPath(); g.moveTo(sx * 6, y + 38); g.lineTo(sx * 6, y + h); g.lineWidth = 4; g.strokeStyle = dark; g.stroke(); }
+  } else if (cos.detail === 'police' || cos.detail === 'mail') {
+    const pol = cos.detail === 'police';
+    g.beginPath(); g.moveTo(-w * 0.34, y); g.lineTo(0, y + 34); g.lineTo(w * 0.34, y); g.closePath(); g.fillStyle = dark; g.fill();             // collar
+    g.beginPath(); g.moveTo(0, y + 4); g.lineTo(0, y + h - 30); g.lineWidth = 3; g.strokeStyle = dark; g.stroke();                          // placket
+    for (let k = 0; k < 4; k++) { g.beginPath(); g.arc(4, y + 50 + k * 30, 3.5, 0, 7); g.fillStyle = pol ? '#d8c27a' : '#f2f2f2'; g.fill(); }
+    for (const sx of [-1, 1]) { g.beginPath(); g.roundRect(sx * w * 0.24 - 17, y + h * 0.26, 34, 30, 4); g.fillStyle = shade(cos.body, -0.12); g.fill(); g.lineWidth = 2.5; g.strokeStyle = dark; g.stroke(); }
+    if (pol) {
+      g.save(); g.translate(-w * 0.24, y + h * 0.22); g.beginPath(); for (let i = 0; i < 12; i++) { const a = -Math.PI / 2 + i * Math.PI / 6, rr = i % 2 ? 9 : 15; g.lineTo(Math.cos(a) * rr, Math.sin(a) * rr); }
+      g.closePath(); g.fillStyle = '#e6c75a'; g.fill(); g.lineWidth = 2; g.strokeStyle = '#7a5e1a'; g.stroke(); g.restore();                // badge
+      g.fillStyle = '#e6c75a'; g.fillRect(w * 0.12, y + h * 0.2, 30, 7);                                                                          // name bar
+      g.fillStyle = '#111318'; g.fillRect(x, y + h - 30, w, 24); g.fillStyle = '#c9c9c9'; g.fillRect(-12, y + h - 28, 24, 20);                   // duty belt
+      g.fillStyle = '#16181e'; g.fillRect(x + w - 26, y + h - 44, 20, 34);
+    } else {
+      g.beginPath(); g.moveTo(-w * 0.5, y + 6); g.lineTo(w * 0.5, y + h - 40); g.lineWidth = 12; g.strokeStyle = '#6b4a2a'; g.stroke();           // satchel strap
+      g.beginPath(); g.ellipse(-w * 0.26, y + h * 0.36, 16, 11, 0, 0, 7); g.fillStyle = '#ffffff'; g.fill(); g.beginPath(); g.moveTo(-w * 0.26 - 9, y + h * 0.36); g.lineTo(-w * 0.26 + 9, y + h * 0.36 - 6); g.lineWidth = 3; g.strokeStyle = '#2b4f8a'; g.stroke();
+      g.fillStyle = '#2b3a5c'; g.fillRect(x, y + h - 26, w, 20);
+    }
   } else if (cos.detail === 'vest') {
     g.fillStyle = '#2b2b33'; g.fillRect(-w * 0.16, y, w * 0.32, h);
     for (let k = 0; k < 4; k++) { g.beginPath(); g.roundRect(-w * 0.44 + (k % 2) * w * 0.6, y + h * (0.3 + Math.floor(k / 2) * 0.28), w * 0.28, h * 0.18, 6); g.fillStyle = dark; g.fill(); }

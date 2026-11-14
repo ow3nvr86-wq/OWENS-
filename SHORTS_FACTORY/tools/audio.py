@@ -89,6 +89,37 @@ def music_bouncy(dur, bpm):
     return out
 
 
+def hat(d=0.05): t = t_(d); return hp(noise(d), 7000) * np.exp(-t * 90)
+def music_chill(dur, bpm):
+    """lazy sunny-street groove: soft kick and rim, a warm electric-piano chord, a walking bass"""
+    out = np.zeros(int(dur * SR)); beat = 60 / bpm
+    PROG = [(41, [65, 69, 72, 76]), (40, [64, 67, 71, 74]), (38, [62, 65, 69, 72]), (43, [62, 67, 71, 74])]   # Fmaj7 Em7 Dm7 G
+    for b in range(int(dur / beat)):
+        tb = b * beat; root, ch = PROG[(b // 4) % 4]
+        if b % 4 in (0, 2): put(out, kick(0.3), tb, 0.6)
+        if b % 2: put(out, lp(snare(0.08), 3000), tb, 0.25)
+        put(out, hat(), tb + beat * 0.5, 0.18); put(out, hat(), tb + beat * 0.83, 0.1)
+        put(out, pluck(mtof(root - 12 + (0, 7, 12, 7)[b % 4]), beat * 0.9), tb, 0.45)
+        if b % 4 == 0:
+            for n in ch: put(out, lp(pluck(mtof(n), beat * 3.5), 1800), tb + 0.01 * (n % 3), 0.09)
+    return out
+def music_chase(dur, bpm):
+    """the chase: driving kick, snare on 2 and 4, sixteenth hats, a minor octave bass ostinato, brass stabs"""
+    out = np.zeros(int(dur * SR)); beat = 60 / bpm
+    BASS = [38, 38, 50, 38, 41, 38, 48, 38]; STAB = [(62, 65, 69), (60, 63, 67), (58, 62, 65), (57, 61, 64)]
+    for b in range(int(dur / beat)):
+        tb = b * beat; bar = (b // 4) % 4
+        put(out, kick(0.22), tb, 0.9)
+        if b % 2: put(out, snare(0.16), tb, 0.55); put(out, clap(), tb, 0.25)
+        for k in range(4): put(out, hat(), tb + k * beat / 4, 0.16 if k % 2 else 0.08)
+        for k in range(2): put(out, lp(sq(mtof(BASS[(b * 2 + k) % 8] - 12), beat * 0.45), 900), tb + k * beat / 2, 0.32)
+        if b % 4 == 0:
+            for n in STAB[bar]: put(out, brass(mtof(n), beat * 0.35), tb, 0.13)
+        if b % 4 == 3:
+            for n in STAB[bar]: put(out, brass(mtof(n), beat * 0.2), tb + beat * 0.5, 0.1)
+    return out
+MUSIC = dict(march=music_march, bouncy=music_bouncy, chill=music_chill, chase=music_chase)
+
 # ---------------- SFX ----------------
 def whoosh(d=0.3): t = t_(d); n = noise(d); return (lp(n, 1500) * 0.7 + hp(n, 600) * 0.3) * np.sin(np.pi * np.clip(t / d, 0, 1)) ** 2
 def boing(d=0.5): t = t_(d); f = 230 + 160 * np.sin(2 * np.pi * 7 * t) * np.exp(-t * 3); return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 4)
@@ -130,18 +161,37 @@ def march_steps(d=2.0):
     out = np.zeros(int(d * SR))
     for k in range(int(d / 0.29)): put(out, lp(noise(0.08), 500) * np.exp(-t_(0.08) * 45), k * 0.29, 0.8)
     return out
+def siren(d=3.0):
+    t = t_(d); f = np.where((t % 1.1) < 0.55, 960, 770) * (1 + 0.004 * np.sin(2 * np.pi * 6 * t))     # two-tone wail
+    x = sum(np.sin(2 * np.pi * np.cumsum(f * k) / SR) / k for k in (1, 2, 3)); return lp(x, 3000) * env(len(t), 0.3, 0.6) * 0.5
+def engine(d=2.2):
+    t = t_(d); f = 38 + 70 * (1 - np.exp(-t * 1.6)) + 6 * np.sin(2 * np.pi * 0.8 * t); ph = 2 * np.pi * np.cumsum(f) / SR
+    x = np.sign(np.sin(ph)) * 0.5 + np.sin(ph * 2) * 0.4 + lp(noise(d), 400) * 0.5; return lp(x, 1600) * env(len(t), 0.04, 0.5)
+def skid(d=1.0): t = t_(d); return bp(noise(d), 1800, 3500) * (0.6 + 0.4 * np.sin(2 * np.pi * 13 * t)) * env(len(t), 0.03, 0.35) * 0.9
+def punch(): t = t_(0.3); return lp(noise(0.3), 1200) * np.exp(-t * 35) + np.sin(2 * np.pi * np.cumsum(90 * (1 + 2 * np.exp(-t * 40))) / SR) * np.exp(-t * 14)
+def scratch(d=0.5): t = t_(d); f = 700 + 600 * np.sin(2 * np.pi * 3.2 * t); return bp(noise(d), 500, 2500) * np.abs(np.sin(2 * np.pi * np.cumsum(f) / SR / 40)) * env(len(t), 0.01, 0.1) * 1.4
+def spawn(d=1.2): t = t_(d); f = 400 * 2 ** (t / d * 2.5); return (np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.5 + hp(noise(d), 4000) * 0.3) * env(len(t), 0.6, 0.3) * 0.7
+def crash(d=1.2): t = t_(d); return boom(d) * 0.8 + hp(noise(d), 2500) * np.exp(-t * 4) * 0.6 + bp(noise(d), 300, 1200) * np.exp(-t * 9) * 0.6
+def cuffs(): out = np.zeros(int(0.5 * SR)); [put(out, hp(noise(0.02), 3000) * np.exp(-t_(0.02) * 200) + ting(4200, 0.08) * 0.3, k * 0.06) for k in range(4)]; return out
 def pop(): t = t_(0.08); return np.sin(2 * np.pi * 900 * t * np.exp(-t * 20)) * np.exp(-t * 50)
 SFX = dict(whoosh=whoosh, boing=boing, knock=knock, ting=ting, gulp=gulp, tada=tada, sting=sting, fuse=fuse, volley=volley, boom=boom,
-           charge=charge, scramble=scramble, sneeze=sneeze, drums=drums, march=march_steps, pop=pop)
+           charge=charge, scramble=scramble, sneeze=sneeze, drums=drums, march=march_steps, pop=pop,
+           siren=siren, engine=engine, skid=skid, punch=punch, scratch=scratch, spawn=spawn, crash=crash, cuffs=cuffs)
 
-style = S.get('music', {}).get('style', 'march')
-music = (music_bouncy if style == 'bouncy' else music_march)(N / SR + 1, S.get('music', {}).get('bpm', 104))[:N]
+M = S.get('music', {})
+if M.get('segments'):                                                    # several cues: [{style, bpm, from, to, gain}] (seconds), short fades
+    music = np.zeros(N)
+    for sg in M['segments']:
+        a, b = sg.get('from', 0.0), min(N / SR, sg.get('to', N / SR)); x = MUSIC[sg['style']](b - a + 0.1, sg.get('bpm', 110))[:int((b - a) * SR)]
+        x = x * env(len(x), sg.get('fadeIn', 0.02), sg.get('fadeOut', 0.08)) * sg.get('gain', 1.0); put(music, x, a)
+else:
+    music = MUSIC[M.get('style', 'march')](N / SR + 1, M.get('bpm', 104))[:N]
 sfx = np.zeros(N)
 for i, sc in enumerate(S['scenes']):
     st, wi = starts[i]
     for c in sc.get('sfx', []):
         at = st + c['at'] if isinstance(c['at'], (int, float)) else WORDS[cue_index(c['at'], wi)]['start'] - 0.04
-        put(sfx, SFX[c['type']](), at, c.get('gain', 1.0))
+        put(sfx, SFX[c['type']](*([c['dur']] if 'dur' in c else [])), at, c.get('gain', 1.0))
     if sc.get('transition') in ('whip', 'zoom') and i + 1 < len(starts): put(sfx, whoosh(0.32), starts[i + 1][0] - 0.16, 0.8)
 # levels: music ~-20 dB under the voice (ducked while speaking), SFX ~-12 dB
 def grms(x):
