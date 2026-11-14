@@ -21,10 +21,10 @@ sc.append(dict(cue='Fortnite', loc='b_sky', camera=dict(move='tilt_down', amount
   characters=[ch(id='hero', cast='hero', x=0.5, y=0.66, scale=1.5, z='fg', action='skydive', mood='happy', bodyRot=-1.0, lookAt='down', keys=[dict(cue='Chapter', mood='determined')])],
   fx=[dict(type='rushclouds', at=0, z='near', n=9, dir=-1)], sfx=[dict(type='whoosh', at=0.0)]))
 # 4  A comet just flattened Dusty Depot...
-sc.append(dict(cue='A comet', loc='b_sky', camera=dict(move='pull', focus=[0.72, 0.75]), transition='cut',
-  fx=[dict(type='comet', at='comet', from_=None, z='mid', dur=1.3), dict(type='blast', at='Dusty', x=0.78, y=0.8, r=110, z='far', shake=26), dict(type='flash', at='Dusty', dur=0.3, amount=0.7)],
+sc.append(dict(cue='A comet', loc='b_sky', camera=dict(move='pull', focus=[0.5, 0.68]), transition='cut',
+  fx=[dict(type='comet', at='comet', from_=None, z='mid', dur=1.3), dict(type='blast', at='Dusty', x=0.5, y=0.72, r=110, z='far', shake=26), dict(type='flash', at='Dusty', dur=0.3, amount=0.7)],
   sfx=[dict(type='whoosh', at='comet'), dict(type='boom', at='Dusty')]))
-sc[-1]['fx'][0].pop('from_'); sc[-1]['fx'][0].update({'from': [1.25, -0.15], 'to': [0.78, 0.79]})
+sc[-1]['fx'][0].pop('from_'); sc[-1]['fx'][0].update({'from': [1.25, -0.15], 'to': [0.5, 0.71]})
 # 5  and ninety-nine players want you gone. (crowd skydiving at every depth)
 sc.append(dict(cue='and', loc='b_sky', camera=dict(move='push', amount=1.3, focus=[0.5, 0.5]), transition='whip',
   crowds=[dict(cast=['p1', 'p2', 'p3', 'p4'], count=70, area=[0.0, 0.05, 1.0, 1.0], scale=[0.12, 0.75], z=[400, 50], action='skydive', mood='angry', dy=-0.03, seed=4)],
