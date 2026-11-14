@@ -221,7 +221,7 @@ function fxDraw(g, fx, s, t) {
   if (fx.type === 'impact') impactBurst(g, fx.x * W, fx.y * H, fx.t0, t, fx.r || 220);
   if (window.FX2 && FX2[fx.type]) FX2[fx.type](g, fx, s, t);
 }
-const SCREEN_FX = new Set(['glow', 'flash', 'tint', 'storm_tint', 'confetti', 'hud']);
+const SCREEN_FX = new Set(['glow', 'flash', 'tint', 'storm_tint', 'confetti', 'hud', 'logo']);
 let CUR_CAM = null;
 function renderShotDepth(g, i, t) {
   const s = SCENES[i], L = LOC[s.loc], cam = cam3At(s, t); CUR_CAM = { s, cam };

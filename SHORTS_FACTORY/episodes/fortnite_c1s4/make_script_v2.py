@@ -11,19 +11,19 @@ def S(**k): sc.append(k)
 
 # 1  You blink... : inside the bus, close on the hero in the aisle
 S(cue='You', loc='b2_bus', camera=dict(move='push', focus=[0.5, 0.36]), transition='cut',
-  characters=[dict(id='p2', cast='p2', x=0.16, y=0.66, scale=0.5, z='mid', action='sit', mood='neutral', lookAt='hero'),
-              dict(id='p3', cast='p3', x=0.84, y=0.66, scale=0.5, z='mid', flip=True, action='sit', mood='neutral'),
+  characters=[dict(id='p2', cast='p2', x=0.32, y=0.7, scale=0.55, z='mid', mood='neutral', lookAt='hero'),
+              dict(id='p3', cast='p3', x=0.7, y=0.68, scale=0.5, z='mid', flip=True, mood='neutral', lookAt='hero'),
               dict(id='hero', cast='hero', x=0.5, y=feet(2.1, 0.36), scale=2.1, z='fg', mood='sad', keys=[dict(cue='blink', mood='shocked', lookAt='left'), dict(cue='and', lookAt='right')])],
   sfx=[dict(type='whoosh', at=0.0, gain=0.5)])
 # 2  and you're on the Battle Bus : the bus in the sky (3D sprite)
 S(cue='and', loc='b_sky', camera=dict(move='push', amount=1.2, focus=[0.5, 0.45]), transition='whip',
-  props=[dict(type='bus', x=1.15, y=0.58, scale=0.95, z='fg', move=mv(x=0.5, f=0, to='Fortnite'))],
+  props=[dict(type='bus', x=1.2, y=0.62, scale=1.9, z='fg', move=mv(x=0.52, f=0, to='Fortnite'))],
   sfx=[dict(type='boing', at='Bus', gain=0.4)])
 # 3  Fortnite. Chapter 1, Season 4. : the title, the hero skydiving under it
 S(cue='Fortnite', loc='b_sky', camera=dict(move='tilt_down', amount=1.0, focus=[0.5, 0.5]), transition='cut',
   characters=[dict(id='hero', cast='hero', x=0.5, y=0.82, scale=1.4, z='fg', action='skydive', mood='happy', bodyRot=-0.9, lookAt='down', keys=[dict(cue='Chapter', mood='determined')])],
-  fx=[dict(type='logo', at='Fortnite', img='props/logo_fortnite.png', text='FORTNITE', size=150, x=0.5, y=0.2, w=0.8, z='near'),
-      dict(type='logo', at='Chapter', text='CHAPTER 1 · SEASON 4', size=64, x=0.5, y=0.29, z='near'), dict(type='rushclouds', at=0, z='near', n=8, dir=-1)],
+  fx=[dict(type='logo', at='Fortnite', img='props/logo_fortnite.png', text='FORTNITE', size=150, x=0.5, y=0.18, w=0.8),
+      dict(type='logo', at='Chapter', text='CHAPTER 1 · SEASON 4', size=58, x=0.5, y=0.27), dict(type='rushclouds', at=0, z='near', n=8, dir=-1)],
   sfx=[dict(type='whoosh', at=0.0), dict(type='sting', at='Fortnite', gain=0.6)])
 # 4  A comet just flattened Dusty Depot...
 S(cue='A comet', loc='b_sky', camera=dict(move='pull', focus=[0.5, 0.68]), transition='cut',
@@ -31,8 +31,8 @@ S(cue='A comet', loc='b_sky', camera=dict(move='pull', focus=[0.5, 0.68]), trans
   sfx=[dict(type='whoosh', at='comet'), dict(type='boom', at='Dusty')])
 # 5  and ninety-nine players want you gone. : back inside, every passenger turns to glare
 S(cue='and', loc='b2_bus', camera=dict(move='pull', focus=[0.5, 0.55]), transition='whip',
-  characters=[dict(id=f'g{i}', cast=['p1', 'p2', 'p3', 'p4'][i % 4], x=x, y=y, scale=s, z=z, flip=x > 0.5, action='sit', mood='neutral', lookAt='camera',
-                   keys=[dict(cue='want', mood='angry')]) for i, (x, y, s, z) in enumerate([(0.1, 0.6, 0.42, 'mid'), (0.9, 0.6, 0.42, 'mid'), (0.17, 0.57, 0.33, 'mid'), (0.83, 0.57, 0.33, 'mid'), (0.24, 0.545, 0.24, 'far'), (0.76, 0.545, 0.24, 'far')])]
+  characters=[dict(id=f'g{i}', cast=['p1', 'p2', 'p3', 'p4'][i % 4], x=x, y=y, scale=s, z=z, flip=x > 0.5, mood='neutral', lookAt='hero',
+                   keys=[dict(cue='want', mood='angry', lookAt='camera')]) for i, (x, y, s, z) in enumerate([(0.3, 0.74, 0.62, 'mid'), (0.7, 0.73, 0.6, 'mid'), (0.4, 0.66, 0.45, 'mid'), (0.6, 0.655, 0.43, 'mid'), (0.46, 0.6, 0.3, 'far'), (0.55, 0.595, 0.28, 'far')])]
              + [dict(id='hero', cast='hero', x=0.5, y=feet(1.5, 0.46), scale=1.5, z='fg', mood='worried', lookAt='left', keys=[dict(cue='gone', mood='scared', lookAt='right')])],
   sfx=[dict(type='sting', at='players', gain=0.7)])
 # 6  You drop into Tilted Towers.
@@ -126,7 +126,7 @@ S(cue="You don't", loc='b2_field', camera=dict(move='push', focus=[0.6, 0.55]), 
 # 29 Victory Royale.
 S(cue='Victory', loc='b2_field', camera=dict(move='push', focus=[0.5, 0.45]), transition='zoom',
   characters=[dict(id='hero', cast='hero', x=0.5, y=feet(1.9, 0.52), scale=1.9, z='fg', action='cheer', mood='happy', lookAt='camera', talk=['Victory', 'Then'])],
-  fx=[dict(type='confetti', at='Victory'), dict(type='logo', at='Victory', img='props/logo_victory.png', text='VICTORY|ROYALE', size=150, x=0.5, y=0.2, w=0.86, z='near')], sfx=[dict(type='tada', at='Victory')])
+  fx=[dict(type='confetti', at='Victory'), dict(type='logo', at='Victory', img='props/logo_victory.png', text='VICTORY|ROYALE', size=140, x=0.5, y=0.2, w=0.86)], sfx=[dict(type='tada', at='Victory')])
 # 30 Then you blink... and you're back in the lobby.   31 Ready up?
 S(cue='Then you', loc='b_lobby', camera=dict(move='push', focus=[0.5, 0.6]), transition='cut',
   characters=[dict(id='hero', cast='hero', x=0.5, y=0.76, scale=0.75, z='mid', mood='shocked', lookAt='left', keys=[dict(cue='blink', mood='neutral', lookAt='camera'), dict(cue='lobby', mood='happy', lookAt='right')])],
@@ -137,7 +137,7 @@ S(cue='Ready', loc='b_lobby', camera=dict(move='push', amount=1.2, focus=[0.5, 0
 
 S_ = dict(title='Teleported into Fortnite (Chapter 1, Season 4)', fps=60, charStyle='rc', sprites='props',
   features=dict(depth=True, motionBlur=True, rigV2=True, lipSync=True, crowdFX=True), motion_blur=dict(samples=8, shutter=0.5),
-  caption_y=0.68, caption_case='lower', caption_size=78, caption_swaps={'ninety-nine': '99'}, grade='saturate(1.15) contrast(1.06)', thumbnail_cue='Victory',
+  caption_y=0.68, caption_case='lower', caption_size=78, caption_swaps={'ninety-nine': '99'}, grade='brightness(1.14) saturate(1.32) contrast(1.05)', thumbnail_cue='Victory',
   music=dict(style='bouncy', bpm=120, level_db=-20),
   cast=dict(hero=dict(costume='hoodie_green', hat='beanie', mood='neutral', hair='#4a2f1e', hatSpring=dict(freq=3.0, damping=0.18)),
             guy=dict(costume='jacket_purple', hat='cap', facial='moustache', mood='smug'),

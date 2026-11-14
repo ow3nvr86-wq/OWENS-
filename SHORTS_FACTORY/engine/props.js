@@ -228,7 +228,7 @@ async function loadSprites(ep, dir) {
     await Promise.all(Object.entries(meta).map(([k, m]) => new Promise(res => { const im = new Image(); im.onload = () => { SPRITES[k] = Object.assign({ img: im }, m); res(); }; im.onerror = () => res(); im.src = '../' + ep + '/' + dir + '/' + k + '.png'; })));
   } catch (e) { console.error('no sprites: ' + e.message); }
 }
-const SPRITE_SCALE = { shotgun: 0.56, sniper: 0.66, hoprock: 0.42, glider: 1.15, wall: 0.62, ramp: 0.62, stairs: 0.62, bus: 0.5 };
+const SPRITE_SCALE = { shotgun: 0.4, sniper: 0.5, hoprock: 0.42, glider: 0.55, wall: 0.62, ramp: 0.62, stairs: 0.62, bus: 0.5 };
 function drawSprite(g, name, anchor, k = 1) {
   const S = SPRITES[name]; if (!S) return false; const a = S[anchor] || [S.w / 2, S.h];
   g.save(); g.scale(k, k); g.drawImage(S.img, -a[0], -a[1]); g.restore(); return true;
@@ -244,8 +244,9 @@ for (const name of ['wall', 'ramp', 'bus', 'hoprock']) PROPS[name] = function (g
 PROPS.stairs = function (g, p, s, t) {                 // a staircase built from stacked 3D stair pieces
   if (!SPRITES.stairs) return _vecProps.stairs(g, p, s, t);
   const S = SPRITES.stairs, n = Math.max(1, Math.round((p.steps || 6) / 6)), sc = SPRITE_SCALE.stairs, dx = S.w * sc * 0.36, dy = S.h * sc * 0.58;
+  const dyT = S.h * sc * 0.74;                          // a zig-zag tower: every flight flips direction and sits on the last
   for (let i = 0; i < n; i++) { const k = popScale(t, p.t0 != null ? p.t0 + i * (p.rate || 0.05) * 6 : null); if (!k) continue;
-    g.save(); g.translate((i % 2 ? -dx : dx) * 0.0 + (i % 2) * dx * 0.2, -i * dy); g.scale(k, k); drawSprite(g, 'stairs', 'base', sc); g.restore(); }
+    g.save(); g.translate(0, -i * dyT); g.scale((i % 2 ? -1 : 1) * k, k); drawSprite(g, 'stairs', 'base', sc); g.restore(); }
 };
 const _vecHand = drawHandProp;
 drawHandProp = function (g, prop, hands, t, st) {

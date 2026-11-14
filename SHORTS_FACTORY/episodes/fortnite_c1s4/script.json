@@ -20,7 +20,7 @@
  "caption_swaps": {
   "ninety-nine": "99"
  },
- "grade": "saturate(1.15) contrast(1.06)",
+ "grade": "brightness(1.14) saturate(1.32) contrast(1.05)",
  "thumbnail_cue": "Victory",
  "music": {
   "style": "bouncy",
@@ -92,24 +92,23 @@
     {
      "id": "p2",
      "cast": "p2",
-     "x": 0.16,
-     "y": 0.66,
-     "scale": 0.5,
+     "x": 0.32,
+     "y": 0.7,
+     "scale": 0.55,
      "z": "mid",
-     "action": "sit",
      "mood": "neutral",
      "lookAt": "hero"
     },
     {
      "id": "p3",
      "cast": "p3",
-     "x": 0.84,
-     "y": 0.66,
+     "x": 0.7,
+     "y": 0.68,
      "scale": 0.5,
      "z": "mid",
      "flip": true,
-     "action": "sit",
-     "mood": "neutral"
+     "mood": "neutral",
+     "lookAt": "hero"
     },
     {
      "id": "hero",
@@ -155,12 +154,12 @@
    "props": [
     {
      "type": "bus",
-     "x": 1.15,
-     "y": 0.58,
-     "scale": 0.95,
+     "x": 1.2,
+     "y": 0.62,
+     "scale": 1.9,
      "z": "fg",
      "move": {
-      "x": 0.5,
+      "x": 0.52,
       "to": "Fortnite",
       "from": 0
      }
@@ -214,18 +213,16 @@
      "text": "FORTNITE",
      "size": 150,
      "x": 0.5,
-     "y": 0.2,
-     "w": 0.8,
-     "z": "near"
+     "y": 0.18,
+     "w": 0.8
     },
     {
      "type": "logo",
      "at": "Chapter",
      "text": "CHAPTER 1 \u00b7 SEASON 4",
-     "size": 64,
+     "size": 58,
      "x": 0.5,
-     "y": 0.29,
-     "z": "near"
+     "y": 0.27
     },
     {
      "type": "rushclouds",
@@ -315,108 +312,108 @@
     {
      "id": "g0",
      "cast": "p1",
-     "x": 0.1,
-     "y": 0.6,
-     "scale": 0.42,
+     "x": 0.3,
+     "y": 0.74,
+     "scale": 0.62,
      "z": "mid",
      "flip": false,
-     "action": "sit",
      "mood": "neutral",
-     "lookAt": "camera",
+     "lookAt": "hero",
      "keys": [
       {
        "cue": "want",
-       "mood": "angry"
+       "mood": "angry",
+       "lookAt": "camera"
       }
      ]
     },
     {
      "id": "g1",
      "cast": "p2",
-     "x": 0.9,
-     "y": 0.6,
-     "scale": 0.42,
+     "x": 0.7,
+     "y": 0.73,
+     "scale": 0.6,
      "z": "mid",
      "flip": true,
-     "action": "sit",
      "mood": "neutral",
-     "lookAt": "camera",
+     "lookAt": "hero",
      "keys": [
       {
        "cue": "want",
-       "mood": "angry"
+       "mood": "angry",
+       "lookAt": "camera"
       }
      ]
     },
     {
      "id": "g2",
      "cast": "p3",
-     "x": 0.17,
-     "y": 0.57,
-     "scale": 0.33,
+     "x": 0.4,
+     "y": 0.66,
+     "scale": 0.45,
      "z": "mid",
      "flip": false,
-     "action": "sit",
      "mood": "neutral",
-     "lookAt": "camera",
+     "lookAt": "hero",
      "keys": [
       {
        "cue": "want",
-       "mood": "angry"
+       "mood": "angry",
+       "lookAt": "camera"
       }
      ]
     },
     {
      "id": "g3",
      "cast": "p4",
-     "x": 0.83,
-     "y": 0.57,
-     "scale": 0.33,
+     "x": 0.6,
+     "y": 0.655,
+     "scale": 0.43,
      "z": "mid",
      "flip": true,
-     "action": "sit",
      "mood": "neutral",
-     "lookAt": "camera",
+     "lookAt": "hero",
      "keys": [
       {
        "cue": "want",
-       "mood": "angry"
+       "mood": "angry",
+       "lookAt": "camera"
       }
      ]
     },
     {
      "id": "g4",
      "cast": "p1",
-     "x": 0.24,
-     "y": 0.545,
-     "scale": 0.24,
+     "x": 0.46,
+     "y": 0.6,
+     "scale": 0.3,
      "z": "far",
      "flip": false,
-     "action": "sit",
      "mood": "neutral",
-     "lookAt": "camera",
+     "lookAt": "hero",
      "keys": [
       {
        "cue": "want",
-       "mood": "angry"
+       "mood": "angry",
+       "lookAt": "camera"
       }
      ]
     },
     {
      "id": "g5",
      "cast": "p2",
-     "x": 0.76,
-     "y": 0.545,
-     "scale": 0.24,
+     "x": 0.55,
+     "y": 0.595,
+     "scale": 0.28,
      "z": "far",
      "flip": true,
-     "action": "sit",
      "mood": "neutral",
-     "lookAt": "camera",
+     "lookAt": "hero",
      "keys": [
       {
        "cue": "want",
-       "mood": "angry"
+       "mood": "angry",
+       "lookAt": "camera"
       }
      ]
     },
@@ -1656,11 +1653,10 @@
      "at": "Victory",
      "img": "props/logo_victory.png",
      "text": "VICTORY|ROYALE",
-     "size": 150,
+     "size": 140,
      "x": 0.5,
      "y": 0.2,
-     "w": 0.86,
-     "z": "near"
+     "w": 0.86
     }
    ],
    "sfx": [
