@@ -122,6 +122,7 @@ const POSES = {
 
 // draw one character. st: {x, y, scale, flip, t, mood, blink, talk, look, action, phase, lean, prop}
 function drawCharacter(g, def, st) {
+  if (typeof FEAT !== 'undefined' && FEAT.rigV2 && typeof drawCharacterV2 === 'function') return drawCharacterV2(g, def, st);
   const cos = COSTUMES[def.costume] || COSTUMES.tunic;
   const s = st.scale || 1, t = st.t || 0;
   const moving = st.action === 'march' || st.action === 'run' || st.action === 'walk';

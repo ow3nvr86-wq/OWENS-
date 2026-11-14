@@ -35,6 +35,15 @@ function resolve() {
     const T = c => (c == null ? null : (typeof c === 'number' ? s.start + c : cueTime(c, s.wi)));
     for (const ch of s.characters || []) { for (const k of ch.keys || []) k.t = T(k.cue); if (ch.talk) ch.talkT = ch.talk.map(T); if (ch.move) { ch.move.t0 = T(ch.move.from) ?? s.start; ch.move.t1 = T(ch.move.to) ?? s.end; } if (ch.enterAt) ch.enterT = T(ch.enterAt); }
     for (const fx of s.fx || []) { fx.t0 = T(fx.at) ?? s.start; fx.seed = fx.seed ?? (s.wi % 97); }
+    // v2 extras: props on cues, height keyframes, blasts that knock characters back and shake the camera
+    for (const p of s.props || []) { if (p.at != null) p.t0 = T(p.at); if (p.move) { p.move.t0 = T(p.move.from) ?? s.start; p.move.t1 = T(p.move.to) ?? s.end; } }
+    for (const ch of s.characters || []) for (const k of ch.air || []) k.t = T(k.cue ?? k.at);
+    s._impacts = []; s._shakes = [];
+    for (const fx of s.fx || []) if (fx.type === 'blast') {
+      const z = typeof zOf === 'function' ? zOf(fx.z ?? fx.layer) : 150;
+      s._impacts.push({ x: fx.x * W, y: fx.y * H, t0: fx.t0, r: fx.r || 260, force: fx.force || 1, z });
+      s._shakes.push({ t0: fx.t0, amp: (fx.shake ?? 24) * clamp(150 / z, 0.4, 2.5) });
+    }
   }
 }
 // ---------------- captions: 1-2 words, synced to word times ----------------
@@ -123,7 +132,20 @@ function charState(ch, s, t) {
   st.blink = blinkAt(t, seed);
   for (const k of ch.keys || []) if (k.mood && t >= k.t && t < k.t + 0.14) st.blink = Math.max(st.blink, Math.sin(Math.PI * (t - k.t) / 0.14));
   if (ch.talkT && t >= ch.talkT[0] - 0.05 && t <= ch.talkT[1] + 0.25) { st.talk = amp(t); if (st.action === 'idle') st.action = 'talk'; }
-  st.t = t; st.seed = seed; return st;
+  st.t = t; st.seed = seed;
+  if (FEAT.rigV2) {
+    if (ch.move && GAIT[st.action]) {
+      const d = Math.max(0.2, ch.move.t1 - ch.move.t0), x0 = ch.x * W, y0 = ch.y * H, x1 = (ch.move.x ?? ch.x) * W, y1 = (ch.move.y ?? ch.y) * H;
+      const at = tau => Math.hypot(x1 - x0, y1 - y0) * ease5((tau - ch.move.t0) / d) / st.scale;
+      st.dist = at(t); st.speedL = (at(t + 0.01) - at(t - 0.01)) / 0.02;
+    } else if (GAIT[st.action]) { st.speedL = ch.speed ?? (st.action === 'run' ? 520 : 260); st.dist = (t - s.start) * st.speedL; }
+    st.cycle = hash(seed * 1.3); st.air = 0;
+    if (ch.air) { let prev = { t: -1e9, h: 0 }; for (const k of ch.air) { if (t < k.t) { const u = (t - prev.t) / Math.max(0.05, k.t - prev.t); st.air = lerp(prev.h, k.h, k.ease === 'linear' ? clamp(u) : ease5(u)) * H / st.scale; prev = null; break; } prev = k; } if (prev) st.air = prev.h * H / st.scale; }
+    st.blinkKey = 0; for (const k of ch.keys || []) if (k.mood && t >= k.t && t < k.t + 0.14) st.blinkKey = Math.sin(Math.PI * (t - k.t) / 0.14);
+    lookState(ch, s, t, st);
+    if (FEAT.lipSync && window.lipAt) lipAt(ch, s, t, st);
+  }
+  return st;
 }
 function crowdMembers(cr, s, t) {
   const n = cr.count || 40, [x0, y0, x1, y1] = cr.area, defs = [].concat(cr.cast).map(id => CAST()[id]);
@@ -142,10 +164,10 @@ function crowdMembers(cr, s, t) {
     const sc = lerp(cr.scale[0], cr.scale[1], depth) * (vary ? vary.height : 1);
     const z = Array.isArray(cr.z) ? lerp(zOf(cr.z[0]), zOf(cr.z[1]), depth) : zOf(cr.z ?? cr.layer);
     const action = cr.action || 'march', def = Object.assign({ seed: i }, defs[i % defs.length], vary ? vary.def : {});
-    const dist = Math.hypot(spd * W, dyv * H) * tt;                    // distance walked (px), drives planted feet
+    const dist = Math.hypot(spd * W, dyv * H) * tt / Math.max(0.01, sc);  // distance walked (body units), drives planted feet
     const st = { x: x * W, y: y * H, scale: sc, flip: !!cr.flip, t: t + i * 0.13, mood: cr.mood || def.mood, action,
       phase: t * (action === 'run' ? 13 : 7.5) * (vary ? vary.speed : 1) + hash(i * 4.4) * 6.28, blink: blinkAt(t, i * 3.3 + 1), seed: i, look: cr.look || 0,
-      lean: action === 'run' ? (cr.flip ? 0.12 : -0.12) : 0, id: (cr.seed || 1) * 1000 + i, dist, vel: [spd * W, dyv * H], cycle: vary ? vary.phase : hash(i * 4.4) };
+      lean: action === 'run' ? (cr.flip ? 0.12 : -0.12) : 0, prop: cr.prop, id: (cr.seed || 1) * 1000 + i, dist: (spd || dyv) ? dist : undefined, speedL: Math.hypot(spd * W, dyv * H) / Math.max(0.01, sc), vel: [spd * W, dyv * H], cycle: vary ? vary.phase : hash(i * 4.4), crowd: true };
     out.push({ i, x, y, z, def, st });
   }
   return out.sort((a, b) => a.y - b.y);
@@ -202,13 +224,13 @@ function renderShotDepth(g, i, t) {
   L.layers.forEach((ly, k) => items.push({ z: ly.z, o: 0, y: 0, draw: () => drawLayer(g, L, cam, ly) }));
   for (const cr of s.crowds || []) for (const m of crowdMembers(cr, s, t)) {
     const st = FEAT.crowdFX ? crowdReact(m.st, s, t, m.z) : m.st;
-    items.push({ z: m.z, o: 1, y: m.y, draw: () => { setPlane(g, cam, m.z); if (FEAT.crowdFX) crowdDust(g, m, s, t); drawCharacter(g, m.def, st); } });
+    items.push({ z: m.z, o: 1, y: m.y, draw: () => { setPlane(g, cam, m.z); if (FEAT.crowdFX) crowdDust(g, m, s, t); st._def = m.def; drawCharacter(g, m.def, st); if (st._post) st._post(g); } });
   }
   for (const ch of s.characters || []) {
     let st = charState(ch, s, t); const z = zOf(ch.z ?? ch.layer); st.id = ch.id;
     if (FEAT.crowdFX) st = crowdReact(st, s, t, z);
     const def = Object.assign({ seed: ch.id.length }, CAST()[ch.cast || ch.id]);
-    items.push({ z: z - 0.001, o: 2, y: st.y, draw: () => { setPlane(g, cam, z); if (FEAT.crowdFX) crowdDust(g, { st, def, z }, s, t); drawCharacter(g, def, st); } });
+    items.push({ z: z - 0.001, o: 2, y: st.y, draw: () => { setPlane(g, cam, z); if (FEAT.crowdFX) crowdDust(g, { st, def, z }, s, t); st._def = def; drawCharacter(g, def, st); if (st._post) st._post(g); } });
   }
   for (const pr of s.props || []) { const z = zOf(pr.z ?? pr.layer); items.push({ z: z - 0.002, o: pr.front ? 3 : 1, y: (pr.y || 0) * H, draw: () => { setPlane(g, cam, z); window.drawProp && drawProp(g, pr, s, t); } }); }
   for (const fx of s.fx || []) if (!SCREEN_FX.has(fx.type)) { const z = zOf(fx.z ?? fx.layer); items.push({ z: z - 0.003, o: 4, y: 0, draw: () => { setPlane(g, cam, z); fxDraw(g, fx, s, t); } }); }
@@ -319,6 +341,7 @@ window.renderFrame = renderFrame;
   const names = bgs.concat(bgs.map(n => n.replace(/(\.\w+)$/, '_fg$1')));   // optional foreground layer: <bg>_fg.png
   await Promise.all(names.map(n => new Promise(res => { const im = new Image(); im.onload = () => { BG[n] = im; res(); }; im.onerror = () => res(); im.src = '../' + EP + '/backgrounds/' + n; })));
   if (FEAT.depth) await loadLocations(EP, SCRIPT);
+  if (FEAT.lipSync) { try { VISKEYS = (await (await fetch('../' + EP + '/work/visemes.json')).json()).keys; } catch (e) { console.error('no visemes.json: run tools/visemes.py'); } }
   await document.fonts.load('800 90px Poppins');
   window.SCENES = SCENES; window.CHUNKS = CHUNKS; window.ready = true;
 })().catch(e => { console.error('compositor error: ' + e.message); window.loadError = e.message; });

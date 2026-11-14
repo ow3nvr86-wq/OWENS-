@@ -1,0 +1,1665 @@
+{
+ "title": "Teleported into Fortnite (Chapter 1, Season 4)",
+ "fps": 60,
+ "features": {
+  "depth": true,
+  "motionBlur": true,
+  "rigV2": true,
+  "lipSync": true,
+  "crowdFX": true
+ },
+ "motion_blur": {
+  "samples": 8,
+  "shutter": 0.5
+ },
+ "caption_y": 0.68,
+ "caption_swaps": {
+  "ninety-nine": "99"
+ },
+ "grade": "saturate(1.18) contrast(1.06)",
+ "thumbnail_cue": "Victory",
+ "music": {
+  "style": "march",
+  "bpm": 118,
+  "level_db": -20
+ },
+ "cast": {
+  "hero": {
+   "costume": "hoodie_green",
+   "hat": "beanie",
+   "mood": "neutral",
+   "hair": "#4a2f1e",
+   "hatSpring": {
+    "freq": 3.0,
+    "damping": 0.18
+   }
+  },
+  "guy": {
+   "costume": "jacket_purple",
+   "hat": "cap",
+   "facial": "moustache",
+   "mood": "smug"
+  },
+  "sniper": {
+   "costume": "ghillie",
+   "hat": "hood_leafy",
+   "mood": "smug"
+  },
+  "dancer": {
+   "costume": "tracksuit_yellow",
+   "hat": "bandana",
+   "mood": "happy"
+  },
+  "p1": {
+   "costume": "tee_red",
+   "hat": "cap",
+   "mood": "angry"
+  },
+  "p2": {
+   "costume": "tee_blue",
+   "hat": "headset",
+   "mood": "angry"
+  },
+  "p3": {
+   "costume": "vest_orange",
+   "hat": "beanie",
+   "mood": "angry"
+  },
+  "p4": {
+   "costume": "jacket_purple",
+   "hat": "bandana",
+   "mood": "angry"
+  }
+ },
+ "scenes": [
+  {
+   "cue": "You",
+   "loc": "v_sky",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.42
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.5,
+     "y": 0.84,
+     "scale": 2.6,
+     "z": "fg",
+     "mood": "neutral",
+     "keys": [
+      {
+       "cue": "blink",
+       "mood": "shocked",
+       "lookAt": "left"
+      },
+      {
+       "cue": "and",
+       "lookAt": "camera"
+      }
+     ]
+    }
+   ],
+   "fx": [
+    {
+     "type": "rushclouds",
+     "at": 0,
+     "z": "near",
+     "n": 5,
+     "dir": -0.15
+    }
+   ],
+   "sfx": [
+    {
+     "type": "whoosh",
+     "at": 0.0,
+     "gain": 0.6
+    }
+   ]
+  },
+  {
+   "cue": "and",
+   "loc": "v_sky",
+   "camera": {
+    "move": "pan_left",
+    "amount": 1.4,
+    "focus": [
+     0.5,
+     0.45
+    ]
+   },
+   "transition": "whip",
+   "props": [
+    {
+     "type": "bus",
+     "x": 1.1,
+     "y": 0.52,
+     "scale": 0.8,
+     "z": "mid",
+     "move": {
+      "x": 0.5,
+      "to": "Fortnite",
+      "from": 0
+     }
+    }
+   ],
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 1.1,
+     "y": 0.4575,
+     "scale": 0.42,
+     "z": "mid",
+     "action": "wave",
+     "mood": "happy",
+     "move": {
+      "x": 0.5,
+      "to": "Fortnite",
+      "from": 0
+     }
+    }
+   ],
+   "sfx": [
+    {
+     "type": "boing",
+     "at": "Bus",
+     "gain": 0.5
+    }
+   ]
+  },
+  {
+   "cue": "Fortnite",
+   "loc": "v_sky",
+   "camera": {
+    "move": "tilt_down",
+    "amount": 1.5,
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.5,
+     "y": 0.66,
+     "scale": 1.5,
+     "z": "fg",
+     "action": "skydive",
+     "mood": "happy",
+     "bodyRot": -1.0,
+     "lookAt": "down",
+     "keys": [
+      {
+       "cue": "Chapter",
+       "mood": "determined"
+      }
+     ]
+    }
+   ],
+   "fx": [
+    {
+     "type": "rushclouds",
+     "at": 0,
+     "z": "near",
+     "n": 9,
+     "dir": -1
+    }
+   ],
+   "sfx": [
+    {
+     "type": "whoosh",
+     "at": 0.0
+    }
+   ]
+  },
+  {
+   "cue": "A comet",
+   "loc": "v_sky",
+   "camera": {
+    "move": "pull",
+    "focus": [
+     0.72,
+     0.75
+    ]
+   },
+   "transition": "cut",
+   "fx": [
+    {
+     "type": "comet",
+     "at": "comet",
+     "z": "mid",
+     "dur": 1.3,
+     "from": [
+      1.25,
+      -0.15
+     ],
+     "to": [
+      0.78,
+      0.79
+     ]
+    },
+    {
+     "type": "blast",
+     "at": "Dusty",
+     "x": 0.78,
+     "y": 0.8,
+     "r": 110,
+     "z": "far",
+     "shake": 26
+    },
+    {
+     "type": "flash",
+     "at": "Dusty",
+     "dur": 0.3,
+     "amount": 0.7
+    }
+   ],
+   "sfx": [
+    {
+     "type": "whoosh",
+     "at": "comet"
+    },
+    {
+     "type": "boom",
+     "at": "Dusty"
+    }
+   ]
+  },
+  {
+   "cue": "and",
+   "loc": "v_sky",
+   "camera": {
+    "move": "push",
+    "amount": 1.3,
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "transition": "whip",
+   "crowds": [
+    {
+     "cast": [
+      "p1",
+      "p2",
+      "p3",
+      "p4"
+     ],
+     "count": 70,
+     "area": [
+      0.0,
+      0.05,
+      1.0,
+      1.0
+     ],
+     "scale": [
+      0.12,
+      0.75
+     ],
+     "z": [
+      400,
+      50
+     ],
+     "action": "skydive",
+     "mood": "angry",
+     "dy": -0.03,
+     "seed": 4
+    }
+   ],
+   "sfx": [
+    {
+     "type": "charge",
+     "at": "players",
+     "gain": 0.7
+    }
+   ]
+  },
+  {
+   "cue": "You drop",
+   "loc": "v_town",
+   "camera": {
+    "move": "tilt_down",
+    "amount": 1.8,
+    "focus": [
+     0.5,
+     0.6
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.5,
+     "y": 0.86,
+     "scale": 0.95,
+     "z": "fg",
+     "action": "glide",
+     "prop": "glider",
+     "mood": "happy",
+     "air": [
+      {
+       "at": 0,
+       "h": 0.75
+      },
+      {
+       "at": "Towers",
+       "h": 0.0
+      }
+     ],
+     "keys": [
+      {
+       "cue": "Towers",
+       "action": "idle",
+       "prop": null
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "whoosh",
+     "at": 0.0
+    }
+   ]
+  },
+  {
+   "cue": "So does",
+   "loc": "v_town",
+   "camera": {
+    "move": "pull",
+    "focus": [
+     0.5,
+     0.55
+    ]
+   },
+   "transition": "cut",
+   "crowds": [
+    {
+     "cast": [
+      "p1",
+      "p2",
+      "p3",
+      "p4"
+     ],
+     "count": 34,
+     "area": [
+      0.05,
+      -0.35,
+      0.95,
+      0.55
+     ],
+     "scale": [
+      0.2,
+      0.45
+     ],
+     "z": [
+      150,
+      50
+     ],
+     "action": "glide",
+     "prop": "glider",
+     "mood": "angry",
+     "dy": 0.33,
+     "seed": 7
+    },
+    {
+     "cast": [
+      "p2",
+      "p4",
+      "p1"
+     ],
+     "count": 14,
+     "area": [
+      0.1,
+      0.7,
+      0.9,
+      0.95
+     ],
+     "scale": [
+      0.3,
+      0.6
+     ],
+     "z": [
+      150,
+      50
+     ],
+     "action": "run",
+     "mood": "angry",
+     "speed": 0.18,
+     "wrap": true,
+     "seed": 8
+    }
+   ],
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.5,
+     "y": 0.93,
+     "scale": 1.1,
+     "z": "fg",
+     "mood": "worried",
+     "lookAt": "up",
+     "keys": [
+      {
+       "cue": "everyone",
+       "mood": "scared"
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "scramble",
+     "at": "everyone"
+    }
+   ]
+  },
+  {
+   "cue": "A guy",
+   "loc": "v_town",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.7,
+     0.55
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "guy",
+     "cast": "guy",
+     "x": 0.72,
+     "y": 0.778,
+     "scale": 1.6,
+     "z": "fg",
+     "flip": true,
+     "action": "hold",
+     "prop": "shotgun",
+     "mood": "smug",
+     "lookAt": "hero"
+    },
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.2,
+     "y": 0.798,
+     "scale": 1.6,
+     "z": "fg",
+     "mood": "shocked",
+     "lookAt": "guy",
+     "keys": [
+      {
+       "cue": "waiting",
+       "mood": "scared"
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "sting",
+     "at": "shotgun",
+     "gain": 0.8
+    }
+   ]
+  },
+  {
+   "cue": "You",
+   "loc": "v_town",
+   "camera": {
+    "move": "punch",
+    "amount": 0.6,
+    "focus": [
+     0.5,
+     0.45
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.5,
+     "y": 0.838,
+     "scale": 2.4,
+     "z": "fg",
+     "action": "build",
+     "mood": "scared",
+     "lookAt": "camera"
+    }
+   ],
+   "sfx": [
+    {
+     "type": "knock",
+     "at": 0.1
+    }
+   ]
+  },
+  {
+   "cue": "A wall",
+   "loc": "v_town",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.45,
+     0.6
+    ]
+   },
+   "transition": "cut",
+   "props": [
+    {
+     "type": "wall",
+     "x": 0.62,
+     "y": 0.9,
+     "scale": 1.25,
+     "z": "fg",
+     "at": "wall",
+     "front": true
+    }
+   ],
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.3,
+     "y": 0.88,
+     "scale": 1.15,
+     "z": "fg",
+     "action": "build",
+     "mood": "scared",
+     "lookAt": "right"
+    }
+   ],
+   "sfx": [
+    {
+     "type": "knock",
+     "at": "wall"
+    }
+   ]
+  },
+  {
+   "cue": "A ramp",
+   "loc": "v_town",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.6
+    ]
+   },
+   "transition": "cut",
+   "props": [
+    {
+     "type": "wall",
+     "x": 0.78,
+     "y": 0.9,
+     "scale": 1.05,
+     "z": "fg"
+    },
+    {
+     "type": "ramp",
+     "x": 0.42,
+     "y": 0.9,
+     "scale": 1.05,
+     "z": "fg",
+     "at": "ramp"
+    }
+   ],
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.2,
+     "y": 0.9,
+     "scale": 0.95,
+     "z": "fg",
+     "action": "run",
+     "mood": "determined",
+     "move": {
+      "x": 0.5,
+      "y": 0.7,
+      "to": 0.62,
+      "from": "ramp"
+     }
+    }
+   ],
+   "sfx": [
+    {
+     "type": "knock",
+     "at": "ramp"
+    }
+   ]
+  },
+  {
+   "cue": "A staircase",
+   "loc": "v_town",
+   "camera": {
+    "move": "tilt_up",
+    "amount": 2.6,
+    "focus": [
+     0.5,
+     0.35
+    ]
+   },
+   "transition": "cut",
+   "props": [
+    {
+     "type": "stairs",
+     "x": 0.5,
+     "y": 0.95,
+     "scale": 0.62,
+     "z": "fg",
+     "at": "staircase",
+     "steps": 60,
+     "rate": 0.025
+    }
+   ],
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.5,
+     "y": -0.008750000000000155,
+     "scale": 0.35,
+     "z": "fg",
+     "mood": "happy",
+     "action": "idle",
+     "keys": [
+      {
+       "cue": "nowhere",
+       "mood": "worried",
+       "lookAt": "down"
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "knock",
+     "at": "staircase"
+    },
+    {
+     "type": "pop",
+     "at": "to"
+    },
+    {
+     "type": "pop",
+     "at": "nowhere"
+    }
+   ]
+  },
+  {
+   "cue": "You jump",
+   "loc": "v_sky",
+   "camera": {
+    "move": "tilt_down",
+    "amount": 1.6,
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "transition": "whip",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.5,
+     "y": 0.7,
+     "scale": 1.6,
+     "z": "fg",
+     "action": "jump",
+     "mood": "happy",
+     "keys": [
+      {
+       "cue": "top",
+       "action": "fall",
+       "mood": "shocked"
+      }
+     ]
+    }
+   ],
+   "fx": [
+    {
+     "type": "rushclouds",
+     "at": "top",
+     "z": "near",
+     "n": 7,
+     "dir": -1
+    }
+   ],
+   "sfx": [
+    {
+     "type": "boing",
+     "at": "jump"
+    },
+    {
+     "type": "whoosh",
+     "at": "top"
+    }
+   ]
+  },
+  {
+   "cue": "and land",
+   "loc": "v_crater",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.45,
+     0.55
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.42,
+     "y": 0.6,
+     "scale": 0.4,
+     "z": "mid",
+     "action": "fall",
+     "mood": "shocked",
+     "air": [
+      {
+       "at": 0,
+       "h": 0.7
+      },
+      {
+       "at": "crater",
+       "h": 0.0,
+       "ease": "linear"
+      }
+     ],
+     "keys": [
+      {
+       "cue": "crater",
+       "action": "idle",
+       "mood": "sad"
+      }
+     ]
+    }
+   ],
+   "fx": [
+    {
+     "type": "blast",
+     "at": "crater",
+     "x": 0.42,
+     "y": 0.6,
+     "r": 60,
+     "z": "mid",
+     "shake": 30
+    }
+   ],
+   "sfx": [
+    {
+     "type": "boom",
+     "at": "crater"
+    }
+   ]
+  },
+  {
+   "cue": "The ground",
+   "loc": "v_crater",
+   "camera": {
+    "move": "push",
+    "amount": 1.3,
+    "focus": [
+     0.5,
+     0.7
+    ]
+   },
+   "transition": "cut",
+   "props": [
+    {
+     "type": "hoprock",
+     "x": 0.22,
+     "y": 0.97,
+     "scale": 1.6,
+     "z": "near",
+     "seed": 1
+    },
+    {
+     "type": "hoprock",
+     "x": 0.8,
+     "y": 0.93,
+     "scale": 1.2,
+     "z": "near",
+     "seed": 4
+    },
+    {
+     "type": "hoprock",
+     "x": 0.62,
+     "y": 0.86,
+     "scale": 0.8,
+     "z": "fg",
+     "seed": 6
+    }
+   ],
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.42,
+     "y": 0.84,
+     "scale": 0.9,
+     "z": "fg",
+     "mood": "neutral",
+     "lookAt": "down",
+     "keys": [
+      {
+       "cue": "glowing",
+       "mood": "happy"
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "ting",
+     "at": "glowing"
+    }
+   ]
+  },
+  {
+   "cue": "Hop",
+   "loc": "v_crater",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.45
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.45,
+     "y": 0.824,
+     "scale": 2.5,
+     "z": "fg",
+     "action": "hold",
+     "prop": "hoprock",
+     "mood": "smug",
+     "lookAt": "camera"
+    }
+   ],
+   "sfx": [
+    {
+     "type": "ting",
+     "at": "Hop"
+    }
+   ]
+  },
+  {
+   "cue": "You crush",
+   "loc": "v_crater",
+   "camera": {
+    "move": "punch",
+    "amount": 0.7,
+    "focus": [
+     0.55,
+     0.4
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.45,
+     "y": 0.854,
+     "scale": 2.5,
+     "z": "fg",
+     "action": "crush",
+     "mood": "determined",
+     "lookAt": "right",
+     "keys": [
+      {
+       "cue": "one",
+       "mood": "happy"
+      }
+     ]
+    }
+   ],
+   "fx": [
+    {
+     "type": "burst",
+     "at": "crush",
+     "x": 0.62,
+     "y": 0.3,
+     "z": "fg",
+     "dur": 0.8
+    }
+   ],
+   "sfx": [
+    {
+     "type": "pop",
+     "at": "crush"
+    },
+    {
+     "type": "sting",
+     "at": "one",
+     "gain": 0.5
+    }
+   ]
+  },
+  {
+   "cue": "Gravity",
+   "loc": "v_crater",
+   "camera": {
+    "move": "tilt_up",
+    "amount": 1.6,
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.5,
+     "y": 0.82,
+     "scale": 0.9,
+     "z": "fg",
+     "action": "float",
+     "mood": "shocked",
+     "air": [
+      {
+       "at": 0,
+       "h": 0.0
+      },
+      {
+       "at": "You",
+       "h": 0.32
+      }
+     ],
+     "keys": [
+      {
+       "cue": "Gone",
+       "mood": "happy"
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "boing",
+     "at": "Gravity",
+     "gain": 0.6
+    }
+   ]
+  },
+  {
+   "cue": "You float",
+   "loc": "v_sky",
+   "camera": {
+    "move": "pan_right",
+    "amount": 1.6,
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.15,
+     "y": 0.62,
+     "scale": 1.3,
+     "z": "fg",
+     "action": "float",
+     "mood": "worried",
+     "move": {
+      "x": 0.8,
+      "y": 0.56,
+      "to": "Then",
+      "from": 0
+     },
+     "keys": [
+      {
+       "cue": "confused",
+       "lookAt": "left"
+      },
+      {
+       "cue": "astronaut",
+       "lookAt": "camera"
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "whoosh",
+     "at": "float",
+     "gain": 0.4
+    }
+   ]
+  },
+  {
+   "cue": "Then the",
+   "loc": "v_field",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.6
+    ]
+   },
+   "transition": "whip",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.62,
+     "y": 0.82,
+     "scale": 0.6,
+     "z": "fg",
+     "flip": true,
+     "action": "run",
+     "mood": "scared",
+     "move": {
+      "x": 0.25,
+      "to": "Health",
+      "from": 0.3
+     }
+    }
+   ],
+   "fx": [
+    {
+     "type": "storm",
+     "at": 0,
+     "z": "mid",
+     "x0": 1.0,
+     "x1": 0.55,
+     "dur": 1.8
+    }
+   ],
+   "sfx": [
+    {
+     "type": "drums",
+     "at": "storm",
+     "gain": 0.7
+    }
+   ]
+  },
+  {
+   "cue": "Health",
+   "loc": "v_field",
+   "camera": {
+    "move": "push",
+    "amount": 1.2,
+    "focus": [
+     0.5,
+     0.45
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.5,
+     "y": 0.805,
+     "scale": 2.2,
+     "z": "fg",
+     "mood": "worried",
+     "lookAt": "down",
+     "keys": [
+      {
+       "cue": "dropping",
+       "mood": "sad"
+      }
+     ]
+    }
+   ],
+   "fx": [
+    {
+     "type": "storm_tint",
+     "at": 0
+    },
+    {
+     "type": "hud",
+     "at": 0,
+     "to": 0.22,
+     "dur": 1.0,
+     "from": 0.7
+    }
+   ],
+   "sfx": [
+    {
+     "type": "gulp",
+     "at": "dropping"
+    }
+   ]
+  },
+  {
+   "cue": "Someone",
+   "loc": "v_drivein",
+   "camera": {
+    "move": "push",
+    "amount": 1.4,
+    "focus": [
+     0.45,
+     0.6
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "dancer",
+     "cast": "dancer",
+     "x": 0.435,
+     "y": 0.617,
+     "scale": 0.34,
+     "z": "mid",
+     "action": "dance",
+     "mood": "happy",
+     "lookAt": "camera"
+    },
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.2,
+     "y": 0.843,
+     "scale": 2.0,
+     "z": "fg",
+     "mood": "angry",
+     "lookAt": "dancer",
+     "keys": [
+      {
+       "cue": "dancing",
+       "mood": "angry"
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "tada",
+     "at": "dancing",
+     "gain": 0.5
+    }
+   ]
+  },
+  {
+   "cue": "Final",
+   "loc": "v_field",
+   "camera": {
+    "move": "pull",
+    "focus": [
+     0.5,
+     0.6
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.28,
+     "y": 0.84,
+     "scale": 0.55,
+     "z": "fg",
+     "mood": "determined",
+     "lookAt": "sniper"
+    },
+    {
+     "id": "sniper",
+     "cast": "sniper",
+     "x": 0.79,
+     "y": 0.54,
+     "scale": 0.17,
+     "z": "mid",
+     "flip": true,
+     "mood": "smug",
+     "lookAt": "hero"
+    }
+   ],
+   "fx": [
+    {
+     "type": "storm",
+     "at": 0,
+     "z": "mid",
+     "x0": 0.92,
+     "x1": 0.86,
+     "dur": 3
+    },
+    {
+     "type": "glint",
+     "at": "One",
+     "x": 0.77,
+     "y": 0.505,
+     "z": "mid"
+    }
+   ],
+   "sfx": [
+    {
+     "type": "drums",
+     "at": "Final",
+     "gain": 0.6
+    },
+    {
+     "type": "ting",
+     "at": "One"
+    }
+   ]
+  },
+  {
+   "cue": "He has",
+   "loc": "v_field",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.6,
+     0.45
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "sniper",
+     "cast": "sniper",
+     "x": 0.6,
+     "y": 0.793,
+     "scale": 2.0,
+     "z": "fg",
+     "flip": true,
+     "action": "aim",
+     "prop": "sniper",
+     "mood": "smug",
+     "lookAt": "left"
+    }
+   ],
+   "fx": [
+    {
+     "type": "glint",
+     "at": "Sniper",
+     "x": 0.33,
+     "y": 0.38,
+     "z": "fg"
+    }
+   ],
+   "sfx": [
+    {
+     "type": "ting",
+     "at": "Sniper"
+    }
+   ]
+  },
+  {
+   "cue": "You have",
+   "loc": "v_field",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.45,
+     0.45
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.42,
+     "y": 0.815,
+     "scale": 2.2,
+     "z": "fg",
+     "action": "hold",
+     "prop": "shotgun",
+     "mood": "determined",
+     "lookAt": "right",
+     "keys": [
+      {
+       "cue": "and one",
+       "prop": "hoprock",
+       "mood": "smug",
+       "lookAt": "camera"
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "knock",
+     "at": "shotgun",
+     "gain": 0.6
+    },
+    {
+     "type": "ting",
+     "at": "Hop"
+    }
+   ]
+  },
+  {
+   "cue": "You crush",
+   "loc": "v_field",
+   "camera": {
+    "move": "tilt_up",
+    "amount": 1.8,
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.45,
+     "y": 0.85,
+     "scale": 1.2,
+     "z": "fg",
+     "action": "crush",
+     "mood": "determined",
+     "air": [
+      {
+       "at": 0,
+       "h": 0
+      },
+      {
+       "at": "jump",
+       "h": 0
+      },
+      {
+       "at": 1.65,
+       "h": 0.38
+      }
+     ],
+     "keys": [
+      {
+       "cue": "jump",
+       "action": "jump",
+       "mood": "happy"
+      }
+     ]
+    }
+   ],
+   "fx": [
+    {
+     "type": "burst",
+     "at": "crush",
+     "x": 0.53,
+     "y": 0.52,
+     "z": "fg"
+    }
+   ],
+   "sfx": [
+    {
+     "type": "pop",
+     "at": "crush"
+    },
+    {
+     "type": "boing",
+     "at": "jump"
+    }
+   ]
+  },
+  {
+   "cue": "He misses",
+   "loc": "v_field",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.45
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.45,
+     "y": 0.66,
+     "scale": 1.3,
+     "z": "fg",
+     "action": "float",
+     "mood": "smug",
+     "air": [
+      {
+       "at": 0,
+       "h": 0.2
+      }
+     ],
+     "lookAt": "right"
+    }
+   ],
+   "fx": [
+    {
+     "type": "tracer",
+     "at": "misses",
+     "from": [
+      1.1,
+      0.6
+     ],
+     "to": [
+      -0.1,
+      0.72
+     ],
+     "z": "fg",
+     "dur": 0.22
+    }
+   ],
+   "sfx": [
+    {
+     "type": "whoosh",
+     "at": "misses"
+    }
+   ]
+  },
+  {
+   "cue": "You don't",
+   "loc": "v_field",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.6,
+     0.6
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.22,
+     "y": 0.86,
+     "scale": 1.3,
+     "z": "fg",
+     "action": "aim",
+     "prop": "shotgun",
+     "mood": "determined",
+     "lookAt": "sniper"
+    },
+    {
+     "id": "sniper",
+     "cast": "sniper",
+     "x": 0.79,
+     "y": 0.54,
+     "scale": 0.3,
+     "z": "mid",
+     "flip": true,
+     "action": "aim",
+     "prop": "sniper",
+     "mood": "smug",
+     "lookAt": "hero",
+     "keys": [
+      {
+       "cue": "don't",
+       "mood": "shocked"
+      }
+     ]
+    }
+   ],
+   "fx": [
+    {
+     "type": "flash",
+     "at": "don't",
+     "dur": 0.18,
+     "amount": 0.6
+    },
+    {
+     "type": "blast",
+     "at": "don't",
+     "x": 0.79,
+     "y": 0.54,
+     "r": 110,
+     "z": "mid",
+     "shake": 28,
+     "force": 1.0
+    }
+   ],
+   "sfx": [
+    {
+     "type": "boom",
+     "at": "don't"
+    }
+   ]
+  },
+  {
+   "cue": "Victory",
+   "loc": "v_field",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.45
+    ]
+   },
+   "transition": "zoom",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.5,
+     "y": 0.823,
+     "scale": 2.0,
+     "z": "fg",
+     "action": "cheer",
+     "mood": "happy",
+     "lookAt": "camera",
+     "talk": [
+      "Victory",
+      "Then"
+     ]
+    }
+   ],
+   "fx": [
+    {
+     "type": "confetti",
+     "at": "Victory"
+    },
+    {
+     "type": "badge",
+     "at": "Victory",
+     "y": 0.2
+    }
+   ],
+   "sfx": [
+    {
+     "type": "tada",
+     "at": "Victory"
+    }
+   ]
+  },
+  {
+   "cue": "Then you",
+   "loc": "v_lobby",
+   "camera": {
+    "move": "push",
+    "focus": [
+     0.5,
+     0.62
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.5,
+     "y": 0.75,
+     "scale": 0.95,
+     "z": "mid",
+     "mood": "shocked",
+     "lookAt": "left",
+     "keys": [
+      {
+       "cue": "blink",
+       "mood": "neutral",
+       "lookAt": "camera"
+      },
+      {
+       "cue": "lobby",
+       "mood": "happy",
+       "lookAt": "right"
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "ting",
+     "at": "blink"
+    }
+   ]
+  },
+  {
+   "cue": "Ready",
+   "loc": "v_lobby",
+   "camera": {
+    "move": "push",
+    "amount": 1.2,
+    "focus": [
+     0.5,
+     0.42
+    ]
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "hero",
+     "cast": "hero",
+     "x": 0.5,
+     "y": 0.808,
+     "scale": 2.4,
+     "z": "fg",
+     "mood": "smug",
+     "lookAt": "camera",
+     "action": "wave",
+     "talk": [
+      "Ready",
+      3
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "pop",
+     "at": "up"
+    }
+   ]
+  }
+ ]
+}

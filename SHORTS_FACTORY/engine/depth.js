@@ -22,7 +22,13 @@ function bakeLayer(img, z, sky, grade, opts = {}) {
   return c;
 }
 async function loadLocations(ep, script) {
-  const locs = script.locations || {};
+  const locs = Object.assign({}, script.locations || {});
+  // a scene can name a Blender location directly: backgrounds/<name>/location.json (written by bg_blender.py --layers)
+  for (const sc of script.scenes) if (sc.loc && !locs[sc.loc]) {
+    if (typeof VLOC !== 'undefined' && VLOC[sc.loc]) { if (!LOC[sc.loc]) LOC[sc.loc] = await buildVectorLocation(sc.loc, script); continue; }   // drawn in code
+    locs[sc.loc] = sc.loc;
+  }
+  for (const [k, v] of Object.entries(locs)) if (typeof v === 'string') { try { locs[k] = await (await fetch('../' + ep + '/backgrounds/' + v + '/location.json')).json(); } catch (e) { console.error('missing location ' + v); delete locs[k]; } }
   const loadImg = src => new Promise(res => { const im = new Image(); im.onload = () => res(im); im.onerror = () => res(null); im.src = src; });
   for (const [name, L] of Object.entries(locs)) {
     const sky = L.sky || '#a9c6e0', focusZ = zOf(L.focus, LAYER_Z.mid), layers = [];

@@ -1,7 +1,7 @@
 """Placeholder 3D backgrounds (realistic lighting, soft shadows, depth of field) rendered with Blender Cycles.
 Each preset is a small procedural scene. Output: 1242x2208 PNG (15 % bigger than 1080x1920, room for camera pushes).
-Run:  $BLENDER -b --factory-startup -P tools/bg_blender.py -- <out_dir> [preset ...] [--spp 48] [--scale 1.0] [--depth-only] [--fg-only]
-Each preset also writes <preset>_depth.bin/.json (a depth map the compositor uses for 3D parallax camera moves).
+Run:  $BLENDER -b --factory-startup -P tools/bg_blender.py -- <out_dir> [preset ...] [--spp 48] [--scale 1.0] [--fg-only] [--layers] [--extra presets.py]
+--layers renders depth layers (sky/far/mid/fg/near + location.json) for the multiplane camera instead of one image.
 Presets: valley_dawn, fort_wall, hillside_down, hwacha_closeup, battle_sunset
 Swap these for your own images: put PNG/JPGs in <episode>/backgrounds/ and name them in script.json."""
 import bpy, math, random, sys, os
@@ -12,7 +12,15 @@ OUT = argv[0] if argv else 'backgrounds'
 SPP = int(argv[argv.index('--spp') + 1]) if '--spp' in argv else 48
 SCALE = float(argv[argv.index('--scale') + 1]) if '--scale' in argv else 1.0
 ALL = ['valley_dawn', 'fort_wall', 'hillside_down', 'hwacha_closeup', 'battle_sunset']
-PRESETS = [a for a in argv[1:] if a in ALL] or ALL
+_VAL = {'--spp', '--scale', '--extra'}
+_names = [a for i, a in enumerate(argv[1:], 1) if not a.startswith('--') and argv[i - 1] not in _VAL]
+PRESETS = _names or ALL
+# extra preset modules (e.g. tools/presets_fortnite.py) define build(preset, sc, M, helpers) -> True if handled
+EXTRA = []
+if '--extra' in argv:
+    import importlib.util
+    for path in argv[argv.index('--extra') + 1].split(','):
+        spec = importlib.util.spec_from_file_location(os.path.basename(path)[:-3], path); mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod); EXTRA.append(mod)
 os.makedirs(OUT, exist_ok=True)
 
 
@@ -142,6 +150,8 @@ def common_mats():
 def build(preset):
     random.seed(7)
     sc = reset(); M = common_mats()
+    for mod in EXTRA:
+        if mod.build(preset, sc, M, globals()): return sc
     if preset == 'valley_dawn':          # wide establishing: a mountain valley, river, a road winding toward a hill
         sky(sc, 9, 70, 1.0, dust=2.0)
         terrain(400, 160, 8, 30, M['grass'], seed=1)
@@ -198,37 +208,60 @@ def build(preset):
     return sc
 
 
-def render_depth(sc, p, w=248, h=442):
-    """Depth map for 2.5D parallax: <p>_depth.bin (float32, planar camera depth in metres, rows top to bottom)
-    plus <p>_depth.json with the size and the vertical field of view."""
-    import array, json
-    keep = (sc.render.resolution_x, sc.render.resolution_y, sc.cycles.samples, sc.render.filter_size)
-    cam = sc.camera; dof = cam.data.dof.use_dof
-    sc.render.resolution_x, sc.render.resolution_y = w, h; sc.cycles.samples = 1; sc.render.filter_size = 0.01
-    sc.cycles.use_denoising = False; cam.data.dof.use_dof = False
-    sc.view_layers[0].use_pass_z = True; sc.use_nodes = True; nt = sc.node_tree; nt.nodes.clear()
-    rl = nt.nodes.new('CompositorNodeRLayers'); comp = nt.nodes.new('CompositorNodeComposite'); vw = nt.nodes.new('CompositorNodeViewer')
-    nt.links.new(rl.outputs['Image'], comp.inputs['Image']); nt.links.new(rl.outputs['Depth'], vw.inputs['Image'])
-    sc.render.filepath = os.path.join(OUT, '_depth_tmp.png'); bpy.ops.render.render(write_still=True)
-    px = bpy.data.images['Viewer Node'].pixels[:]          # RGBA floats, rows bottom to top
-    d = [px[(y * w + x) * 4] for y in range(h - 1, -1, -1) for x in range(w)]
-    fov = 2 * math.atan(cam.data.sensor_height / 2 / cam.data.lens)
-    array.array('f', [min(v, 5000.0) for v in d]).tofile(open(os.path.join(OUT, p + '_depth.bin'), 'wb'))
-    json.dump(dict(w=w, h=h, fov_v=fov, lens=cam.data.lens, focus=cam.data.dof.focus_distance), open(os.path.join(OUT, p + '_depth.json'), 'w'))
-    os.remove(os.path.join(OUT, '_depth_tmp.png'))
-    sc.render.resolution_x, sc.render.resolution_y, sc.cycles.samples, sc.render.filter_size = keep
-    sc.cycles.use_denoising = True; cam.data.dof.use_dof = dof; sc.use_nodes = False
-    print('rendered', p + '_depth', flush=True)
+def render_layers(sc, p):
+    """Depth layers for the multiplane camera: the scene is cut into 5 distance bands with the camera clip range
+    (sky / far / mid / fg / near). Each band's far edge is feathered with the mist pass so seams blend. Images are
+    30 % larger than the frame (same focal length, wider field of view). Writes <out>/<p>/<band>.png + location.json."""
+    import json
+    cam = sc.camera; d = cam.data.dof.focus_distance if cam.data.dof.use_dof else 20.0
+    B = [0.01, 0.21 * d, 0.58 * d, 1.63 * d, 4.2 * d, 1.0e6]
+    names, zs = ['near', 'fg', 'mid', 'far', 'sky'], [20, 50, 150, 400, 1000]
+    od = os.path.join(OUT, p); os.makedirs(od, exist_ok=True)
+    cam.data.sensor_height = 24 * 1.3; cam.data.clip_end = 1.0e6
+    sc.render.resolution_x, sc.render.resolution_y = int(1404 * SCALE), int(2496 * SCALE)
+    sc.view_layers[0].use_pass_mist = True; sc.world.mist_settings.falloff = 'LINEAR'
+    sc.render.image_settings.color_mode = 'RGBA'; sc.render.use_compositing = True
+    layers = []
+    for k, name in enumerate(names):
+        lo, hi = B[k], B[k + 1]
+        cam.data.clip_start = max(0.01, lo * 0.97)
+        sc.use_nodes = True; nt = sc.node_tree; nt.nodes.clear()
+        rl = nt.nodes.new('CompositorNodeRLayers'); comp = nt.nodes.new('CompositorNodeComposite')
+        if name == 'sky':
+            sc.render.film_transparent = False; nt.links.new(rl.outputs['Image'], comp.inputs['Image'])
+        else:
+            sc.render.film_transparent = True
+            sc.world.mist_settings.start = hi; sc.world.mist_settings.depth = 0.25 * hi; cam.data.clip_end = hi * 1.25
+            inv = nt.nodes.new('CompositorNodeMath'); inv.operation = 'SUBTRACT'; inv.inputs[0].default_value = 1.0
+            nt.links.new(rl.outputs['Mist'], inv.inputs[1])
+            sa = nt.nodes.new('CompositorNodeSetAlpha'); sa.mode = 'APPLY'
+            nt.links.new(rl.outputs['Image'], sa.inputs['Image']); nt.links.new(inv.outputs[0], sa.inputs['Alpha'])
+            nt.links.new(sa.outputs['Image'], comp.inputs['Image'])
+        f = os.path.join(od, name + '.png'); sc.render.filepath = f
+        bpy.ops.render.render(write_still=True); cam.data.clip_end = 1.0e6
+        im = bpy.data.images.load(f); px = im.pixels[:]; w, h = im.size
+        cover = sum(1 for i in range(3, len(px), 4 * 97) if px[i] > 0.02) / (len(px) / (4 * 97))
+        if name == 'sky':   # sky colour for the atmosphere tint: average of the top 6 % rows
+            n = 0; acc = [0, 0, 0]
+            for y in range(int(h * 0.94), h, 3):
+                for x in range(0, w, 7): i = (y * w + x) * 4; acc[0] += px[i]; acc[1] += px[i + 1]; acc[2] += px[i + 2]; n += 1
+            skyhex = '#%02x%02x%02x' % tuple(int(255 * min(1, c / n)) for c in acc)
+        bpy.data.images.remove(im)
+        if name != 'sky' and cover < 0.002: os.remove(f); print('empty band', p, name, flush=True); continue
+        layers.append(dict(name=name, img=p + '/' + name + '.png', z=zs[k]))
+        print('rendered', p, name, 'cover %.2f' % cover, flush=True)
+    sc.use_nodes = False
+    json.dump(dict(layers=layers[::-1], sky=skyhex, focus='mid', focus_m=d), open(os.path.join(od, 'location.json'), 'w'), indent=1)
 
 
 for p in PRESETS:
     sc = build(p)
-    if '--fg-only' not in argv and '--depth-only' not in argv:
+    if '--layers' in argv:
+        render_layers(sc, p); continue
+    if '--fg-only' not in argv:
         sc.render.filepath = os.path.join(OUT, p + '.png')
         bpy.ops.render.render(write_still=True)
         print('rendered', p, flush=True)
-    if '--fg-only' not in argv: render_depth(sc, p)
-    if '--depth-only' in argv: continue
     fg = [o for o in sc.objects if o.get('fg')]
     if fg:                       # foreground layer: same camera, everything else held out, transparent film
         sc.render.film_transparent = True
