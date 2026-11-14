@@ -144,7 +144,7 @@ FX2.spawn = function (g, fx, s, t) {                       // a player spawning 
   const u = t - fx.t0; if (u < -0.2 || u > 1.6) return; const x = fx.x * W, y = fx.y * H, k = Math.max(0, 1 - Math.max(0, u - 0.6));
   const gr = g.createLinearGradient(x - 70, 0, x + 70, 0); gr.addColorStop(0, 'rgba(120,220,255,0)'); gr.addColorStop(0.5, `rgba(200,245,255,${0.85 * k})`); gr.addColorStop(1, 'rgba(120,220,255,0)');
   g.fillStyle = gr; g.fillRect(x - 70, -100, 140, y + 100);
-  for (let r = 0; r < 3; r++) { const v = ((u * 1.4 + r / 3) % 1); g.save(); g.translate(x, y); g.scale(1, 0.3); g.beginPath(); g.arc(0, 0, 40 + v * 260, 0, 7); g.lineWidth = 10 * (1 - v); g.strokeStyle = `rgba(160,235,255,${(1 - v) * k})`; g.stroke(); g.restore(); }
+  for (let r = 0; r < 3; r++) { const v = (((u * 1.4 + r / 3) % 1) + 1) % 1; g.save(); g.translate(x, y); g.scale(1, 0.3); g.beginPath(); g.arc(0, 0, 40 + v * 260, 0, 7); g.lineWidth = 10 * (1 - v); g.strokeStyle = `rgba(160,235,255,${(1 - v) * k})`; g.stroke(); g.restore(); }
 };
 FX2.stars = function (g, fx, s, t) {                       // a wanted-level row of five stars (original design), filling on cues
   let n = 0; for (const k of fx.keys) if (t >= k.t) n = k.n; if (!n) return;
