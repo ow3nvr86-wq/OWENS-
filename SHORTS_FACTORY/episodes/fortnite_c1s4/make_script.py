@@ -100,8 +100,8 @@ sc.append(dict(cue='Health', loc='b_field', camera=dict(move='push', amount=1.2,
   fx=[dict(type='storm_tint', at=0), dict(type='hud', at=0, from_=0.7, to=0.22, dur=1.0)], sfx=[dict(type='gulp', at='dropping')]))
 sc[-1]['fx'][1]['from'] = sc[-1]['fx'][1].pop('from_')
 # 22 Someone at Risky Reels is dancing at you.
-sc.append(dict(cue='Someone', loc='b_drivein', camera=dict(move='push', amount=1.4, focus=[0.45, 0.6]), transition='cut',
-  characters=[ch(id='dancer', cast='dancer', x=0.435, y=0.617, scale=0.34, z='mid', action='dance', mood='happy', lookAt='camera'),
+sc.append(dict(cue='Someone', loc='b_drivein', camera=dict(move='push', amount=1.4, focus=[0.7, 0.62]), transition='cut',
+  characters=[ch(id='dancer', cast='dancer', x=0.8, y=0.652, scale=0.2, z='mid', action='dance', mood='happy', lookAt='camera'),
               ch(id='hero', cast='hero', x=0.2, y=hy(2.0, 0.52), scale=2.0, z='fg', mood='angry', lookAt='dancer', keys=[dict(cue='dancing', mood='angry')])],
   sfx=[dict(type='tada', at='dancing', gain=0.5)]))
 # 23 Final circle. One player left.

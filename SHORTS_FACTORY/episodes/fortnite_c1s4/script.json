@@ -1158,8 +1158,8 @@
     "move": "push",
     "amount": 1.4,
     "focus": [
-     0.45,
-     0.6
+     0.7,
+     0.62
     ]
    },
    "transition": "cut",
@@ -1167,9 +1167,9 @@
     {
      "id": "dancer",
      "cast": "dancer",
-     "x": 0.435,
-     "y": 0.617,
-     "scale": 0.34,
+     "x": 0.8,
+     "y": 0.652,
+     "scale": 0.2,
      "z": "mid",
      "action": "dance",
      "mood": "happy",
