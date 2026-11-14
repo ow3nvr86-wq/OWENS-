@@ -1,0 +1,37 @@
+WORLD WAR II, PART 2: HOW IT ALL FELL APART - SOUND DESIGN TIMELINE
+
+Narration: the supplied voiceover (pauses over 0.4 s shortened; nothing else changed).
+Music and effects are synthesised in audio.py with numpy: no samples or third-party audio.
+Mix: voice on top; music about 20% of the voice level and ducked while it speaks; -14 LUFS, true peak -1.5 dB.
+
+CUES (seconds, layer, description)
+    0.00  music  Music: the pulse of Part 1 returns (104 BPM drums and clock over a D minor drone)
+    0.11  sfx    "PART 2" slams in
+    0.11  music  Low brass
+    1.18  sfx    "1942"
+    3.58  sfx    The camera flies east to Stalingrad
+    4.02  sfx    Winter wind over the Volga
+    5.86  sfx    "break": cracks run through the red map
+    6.51  sfx    "STALINGRAD"
+    6.51  music  Low brass
+    9.87  sfx    The pincers meet: the ring closes
+   10.22  sfx    "surrenders": heavy hit
+   11.28  sfx    Whip-pan to the Pacific
+   11.74  sfx    Two drives across the ocean; a blip as each island is reached
+   13.95  sfx    "JUNE 6, 1944"
+   15.95  sfx    "D-DAY" slams in
+   15.95  music  Low brass
+   16.45  sfx    Surf, aircraft and naval gunfire as the fleet crosses
+   17.25  sfx    Rapid ticking as the counter runs up to 156,000
+   19.74  sfx    "land": five beaches, five arrows inland
+   22.80  sfx    "crushed"
+   22.80  sfx    Armour and artillery from both sides, rising to Berlin
+   22.80  music  Low brass
+   27.85  sfx    "it surrenders": a final hit
+   27.85  music  Low brass
+   29.53  sfx    Hiroshima, then Nagasaki: two deep, distant detonations; no music
+   31.81  sfx    "SEPT 2, 1945"
+   32.67  music  "the war is over": a quiet A major chord
+   33.07  sfx    "over": a single clear bell
+   34.45  sfx    A soft tick for each of the 85 dots: one million lives each
+   34.45  music  Single piano notes, descending, over a bare drone; fade to silence

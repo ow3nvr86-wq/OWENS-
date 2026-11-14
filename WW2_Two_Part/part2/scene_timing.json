@@ -1,0 +1,189 @@
+{
+ "title": "World War II, Part 2: How It All Fell Apart",
+ "duration": 38.5,
+ "events": {
+  "part": 0.11,
+  "two": 0.332,
+  "hitlers": 1.18,
+  "empire": 1.594,
+  "unstoppable": 2.543,
+  "then": 3.585,
+  "frozen": 4.22,
+  "city": 4.6,
+  "began": 5.426,
+  "brk": 5.86,
+  "stalingrad": 6.506,
+  "y1943": 7.393,
+  "an": 8.808,
+  "entire": 8.934,
+  "german": 9.551,
+  "army": 9.869,
+  "surrenders": 10.22,
+  "america": 11.275,
+  "fights": 11.641,
+  "across": 12.38,
+  "pacific": 12.9,
+  "june": 13.731,
+  "sixth": 13.953,
+  "y1944": 14.562,
+  "dday": 15.952,
+  "about": 16.928,
+  "n156": 17.248,
+  "allied": 18.78,
+  "troops": 19.098,
+  "land": 19.737,
+  "normandy": 20.12,
+  "single": 21.033,
+  "day": 21.351,
+  "germany": 22.082,
+  "crushed": 22.8,
+  "both": 23.388,
+  "sides": 23.61,
+  "inmay": 24.464,
+  "may": 24.59,
+  "y1945": 24.764,
+  "soviet": 26.203,
+  "berlin": 27.04,
+  "surrenders2": 27.854,
+  "august": 28.971,
+  "two2": 29.528,
+  "atomic": 29.702,
+  "bombs": 30.04,
+  "fall": 30.4,
+  "japan": 30.82,
+  "by": 31.683,
+  "september": 31.809,
+  "war": 32.773,
+  "over": 33.073,
+  "estimated": 33.984,
+  "seventy": 34.446,
+  "eightyfive": 35.24,
+  "million": 35.78,
+  "people": 36.146,
+  "died": 36.48,
+  "voice_end": 36.84
+ },
+ "titles": [
+  {
+   "start": 0.11,
+   "end": 1.1199999999999999,
+   "style": "part",
+   "text": "PART 2",
+   "y": 0.195
+  },
+  {
+   "start": 1.18,
+   "end": 3.525,
+   "style": "year",
+   "text": "1942",
+   "y": 0.185
+  },
+  {
+   "start": 1.594,
+   "end": 3.525,
+   "style": "plate",
+   "text": "HITLER'S EMPIRE AT ITS PEAK",
+   "y": 0.26
+  },
+  {
+   "start": 4.22,
+   "end": 6.456,
+   "style": "date",
+   "text": "WINTER 1942",
+   "y": 0.185
+  },
+  {
+   "start": 6.506,
+   "end": 11.195,
+   "style": "date",
+   "text": "STALINGRAD",
+   "y": 0.185
+  },
+  {
+   "start": 10.22,
+   "end": 11.195,
+   "style": "plateb",
+   "text": "FEB 2, 1943: THE GERMAN 6TH ARMY SURRENDERS",
+   "y": 0.247
+  },
+  {
+   "start": 11.625,
+   "end": 13.651,
+   "style": "date",
+   "text": "1942 - 1945",
+   "y": 0.185
+  },
+  {
+   "start": 11.941,
+   "end": 13.651,
+   "style": "plateb",
+   "text": "ISLAND BY ISLAND TOWARDS JAPAN",
+   "y": 0.247
+  },
+  {
+   "start": 13.731,
+   "end": 16.868000000000002,
+   "style": "date",
+   "text": "JUNE 6, 1944",
+   "y": 0.163
+  },
+  {
+   "start": 15.952,
+   "end": 16.868000000000002,
+   "style": "big",
+   "text": "D-DAY",
+   "y": 0.262
+  },
+  {
+   "start": 22.082,
+   "end": 24.54,
+   "style": "date",
+   "text": "1944 - 1945",
+   "y": 0.185
+  },
+  {
+   "start": 24.764,
+   "end": 28.891000000000002,
+   "style": "date",
+   "text": "MAY 8, 1945",
+   "y": 0.185
+  },
+  {
+   "start": 27.854,
+   "end": 28.891000000000002,
+   "style": "plateb",
+   "text": "GERMANY SURRENDERS",
+   "y": 0.247
+  },
+  {
+   "start": 28.971,
+   "end": 31.623,
+   "style": "date",
+   "text": "AUGUST 1945",
+   "y": 0.185
+  },
+  {
+   "start": 31.809,
+   "end": 33.924,
+   "style": "date",
+   "text": "SEPT 2, 1945",
+   "y": 0.185
+  },
+  {
+   "start": 32.773,
+   "end": 33.924,
+   "style": "plateb",
+   "text": "JAPAN SURRENDERS. THE WAR IS OVER.",
+   "y": 0.247
+  }
+ ],
+ "scenes": [
+  {
+   "id": 1,
+   "key": "main",
+   "name": "One continuous map shot",
+   "start": 0.0,
+   "end": 38.5
+  }
+ ]
+}

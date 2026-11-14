@@ -48,6 +48,14 @@ FRONT_DEC41 = [(29.7, 59.75), (29.7, 59.8), (30.4, 59.65), (31.0, 59.92), (32.3,
                (32.5, 57.6), (33.1, 57.1), (35.9, 56.85), (37.2, 56.3), (37.4, 56.0), (36.9, 55.7), (36.7, 55.4), (37.2, 54.9),
                (37.3, 54.4), (38.6, 54.1), (38.3, 53.3), (38.0, 52.5), (37.3, 51.7), (36.8, 50.6), (37.0, 49.9), (37.0, 49.2),
                (38.5, 48.3), (38.9, 47.6), (38.95, 47.2), (38.0, 46.6), (36.6, 45.4), (36.7, 44.5), (36.7, 40.0)]
+# the front at its furthest, November 1942: as in December 1941 in the north, then the Don, Stalingrad and the Caucasus
+FRONT_NOV42 = [(29.7, 59.75), (29.7, 59.8), (30.4, 59.65), (31.0, 59.92), (32.3, 59.9), (31.9, 59.0), (31.3, 58.5), (31.5, 58.0),
+               (32.5, 57.6), (33.1, 57.1), (34.3, 56.4), (34.9, 55.6), (35.3, 54.6), (36.6, 53.4), (37.9, 52.4), (39.15, 51.7),
+               (39.5, 51.0), (40.1, 50.45), (40.55, 49.95), (41.7, 49.6), (42.7, 49.6), (43.05, 49.3), (44.4, 48.9), (44.58, 48.72),
+               (44.45, 48.3), (44.3, 46.3), (44.65, 43.75), (44.4, 43.2), (43.0, 43.3), (42.4, 43.3), (41.0, 43.6), (39.5, 44.0),
+               (38.4, 44.4), (37.8, 44.7), (37.0, 44.0), (36.7, 40.0)]
+JAPAN_CHINA = [(119.5, 53.5), (135.5, 48.5), (131.0, 42.5), (122.0, 39.0), (122.5, 30.0), (121.0, 28.0), (114.0, 22.0), (110.0, 21.0),
+               (110.0, 23.5), (113.0, 24.5), (113.5, 30.0), (111.0, 34.5), (110.5, 40.0), (115.5, 43.0), (116.0, 48.0), (119.5, 50.0)]
 BORDER_JUN41 = [(21.0, 55.9), (22.6, 54.9), (22.8, 54.36), (23.5, 53.95), (22.8, 53.8), (21.85, 53.45), (21.88, 53.23), (22.3, 52.67),
                 (23.65, 52.07), (23.95, 50.85), (24.05, 50.5), (22.6, 50.2), (22.77, 49.78), (22.7, 49.1), (24.6, 48.05), (26.3, 48.2),
                 (28.1, 46.5), (28.2, 45.45), (29.7, 45.3)]
@@ -75,6 +83,7 @@ def main():
     SOVZ = poly(SOVZ_1939, (25.5, 49.0), (25.5, 54.0))
     VZ = poly(VICHY, (-1.4, 42.7), (-1.4, 40.5), (11.0, 40.5), (11.0, 46.5), (6.3, 46.5))
     WEST_OF_FRONT = poly(FRONT_DEC41, (15.0, 40.0), (15.0, 59.75))
+    WEST_OF_42 = poly(FRONT_NOV42, (15.0, 40.0), (15.0, 59.75))
 
     POL, RUS, LTU, BLR, UKR = C('POL'), C('RUS').intersection(box(0, 30, 180, 78)), C('LTU'), C('BLR'), C('UKR')
     ger_east = unary_union([POL.intersection(A), unary_union([POL, RUS, LTU]).intersection(B)])
@@ -104,12 +113,16 @@ def main():
     R['TUR'] = C('TUR', 'CYP', 'CYN')
     R['OCC_EAST'] = unary_union([R['USSR'], R['POL_SOV'], R['LIT'], R['LAT'], R['EST']]).intersection(WEST_OF_FRONT)
     R['JPN'] = C('JPN', 'KOR', 'PRK', 'TWN')
+    east_all = unary_union([R['USSR'], R['POL_SOV'], R['LIT'], R['LAT'], R['EST']])
+    R['OCC_42'] = east_all.intersection(WEST_OF_42)
+    R['JAP_EMPIRE'] = unary_union([C('JPN', 'KOR', 'PRK', 'TWN', 'VNM', 'LAO', 'KHM', 'THA', 'MYS', 'SGP', 'BRN', 'IDN', 'PHL', 'MMR', 'TLS'),
+                                   C('CHN').intersection(poly(JAPAN_CHINA))]).intersection(box(90, -12, 180, 60))
     R['HAWAII'] = affinity.translate(C('USA').intersection(box(-161, 18.5, -154.5, 22.6)), xoff=360)
 
     # land from the Atlantic to Hawaii: longitudes west of -30 are moved 360 degrees east
     land = unary_union([shape(f['geometry']).buffer(0) for f in json.load(open(os.path.join(src, 'ne_50m_land.geojson')))['features']])
-    east = land.intersection(box(-30, -5, 180, 78))
-    west = affinity.translate(land.intersection(box(-180, -5, -110, 78)), xoff=360)
+    east = land.intersection(box(-30, -50, 180, 78))
+    west = affinity.translate(land.intersection(box(-180, -50, -110, 78)), xoff=360)
     R['LAND'] = unary_union([east, west])
 
     def pj(g):
@@ -117,7 +130,7 @@ def main():
 
     out = {'proj': {'K': K, 'LON0': LON0, 'LAT0': LAT0, 'CLAT': CLAT}, 'regions': {}, 'lines': {}}
     for name, g in R.items():
-        tol, amin = (0.45, 1.5) if name in ('LAND', 'JPN') else (0.16, 0.25)
+        tol, amin = (0.45, 1.5) if name in ('LAND', 'JPN', 'JAP_EMPIRE') else (0.16, 0.25)
         g = pj(g).simplify(tol)
         polys = []
         for p in getattr(g, 'geoms', [g]):
@@ -126,7 +139,7 @@ def main():
             polys.append([[[round(x, 2), round(y, 2)] for x, y in r.coords] for r in [p.exterior] + list(p.interiors) if len(r.coords) > 3])
         out['regions'][name] = polys
         print(f'{name:10s} {len(polys):4d} polygons {sum(len(r) for p in polys for r in p):6d} points')
-    for name, pts in (('front_dec41', FRONT_DEC41[1:-3]), ('border_jun41', BORDER_JUN41), ('vichy', VICHY), ('split39', SOVZ_1939)):
+    for name, pts in (('front_dec41', FRONT_DEC41[1:-3]), ('front_nov42', FRONT_NOV42[1:-2]), ('border_jun41', BORDER_JUN41), ('vichy', VICHY), ('split39', SOVZ_1939)):
         out['lines'][name] = [[round((lo - LON0) * CLAT * K, 2), round(-(la - LAT0) * K, 2)] for lo, la in pts]
     os.makedirs(os.path.join(ROOT, 'assets', 'map'), exist_ok=True)
     p = os.path.join(ROOT, 'assets', 'map', 'ww2_map.json')

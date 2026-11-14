@@ -31,7 +31,7 @@ ARROW = hexc('ff4136')
 
 OCC = ['POL_GER', 'DEN', 'NOR', 'NLD', 'BEL', 'LUX', 'FRA_OCC', 'YUG', 'GRC', 'OCC_EAST']
 ALLY = ['ITA', 'HUN', 'ROU', 'BGR', 'FIN', 'FRA_VICHY']
-EUROPE = [n for n in M.R if n not in ('LAND', 'OCC_EAST', 'JPN', 'HAWAII')]
+EUROPE = [n for n in M.R if n not in ('LAND', 'OCC_EAST', 'OCC_42', 'JPN', 'JAP_EMPIRE', 'HAWAII')]
 BERLIN = (13.4, 52.5)
 MOSCOW = (37.62, 55.75)
 FRONT_TIP = (37.4, 56.0)

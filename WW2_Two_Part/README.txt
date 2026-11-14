@@ -2,7 +2,7 @@ WORLD WAR II IN TWO PARTS
 Two vertical Shorts in clean 2D motion graphics over real maps, made entirely with code
 ========================================================================================
 Part 1: How Hitler Took Europe (1939-1941)    part1/final_video.mp4   1080x1920, 30 fps, 37.5 s, -14 LUFS
-Part 2: How It All Fell Apart (1942-1945)     script ready (script_part2.txt); waiting for its voiceover
+Part 2: How It All Fell Apart (1942-1945)     part2/final_video.mp4   1080x1920, 30 fps, 38.5 s, -14 LUFS
 
 Each part is ONE CONTINUOUS SHOT over the map: the camera never cuts. It flies between the places in the story,
 territory floods with colour as it is taken, arrows and armour move with the words, and whip-pans (with motion blur
@@ -13,6 +13,10 @@ The narration is the supplied recording (partN/voiceover/). tools/voice_prep.py 
 0.4 s and sets the level. tools/words.py then times every word with an offline speech recogniser, corrected against
 the pauses in the audio, and tools/timing_p1.py places every camera move, flood, arrow, title, caption and sound on
 the word it belongs to.
+
+Part 1 uses the supplied recording. No recording arrived for Part 2, so it is narrated by the channel's narrator
+George (Kokoro-82M bm_george, Apache-2.0; tools/george_vo.py) and then goes through exactly the same steps; a supplied
+recording dropped into part2/voiceover/ would replace it.
 
 THE MAP
 Coastlines and countries: Natural Earth 1:50m (public domain). The borders of September 1939 are built from them by
@@ -27,8 +31,9 @@ FILES
   script_part1.txt, script_part2.txt, sources.txt
   part1/final_video.mp4, part1/final_video_no_voice.mp4, part1/sound_design.txt, part1/subtitles.srt,
   part1/scene_timing.json, part1/captions.txt, part1/voiceover/ (the supplied recording), part1/audio/
-  render.py, audio.py, src/part1.py (the shot), src/mapdata.py, src/text.py, src/core.py, src/post.py
-  tools/build_map.py, tools/voice_prep.py, tools/words.py, tools/timing_p1.py
+  part2/ (the same set of files for Part 2)
+  render.py, audio.py, src/part1.py and src/part2.py (the shots), src/common.py, src/mapdata.py, src/text.py, src/core.py, src/post.py
+  tools/build_map.py, tools/voice_prep.py, tools/words.py, tools/timing_p1.py, tools/timing_p2.py, tools/george_vo.py
   assets/map/ww2_map.json, assets/fonts/ (Inter, Anton; SIL OFL)
 
 RUN
@@ -38,6 +43,17 @@ RUN
   $SHORTS_PY audio.py part1
   $SHORTS_PY render.py part1 [--stills 1,9,20 | --no-voice]
 Requirements: Python 3 with numpy, scipy, pillow, pycairo (shapely only to rebuild the map); ffmpeg.
+
+PART 2 ON THE MAP
+- Hitler's Europe at its peak (November 1942): the front on the Don, at Stalingrad and in the Caucasus.
+- Stalingrad: the Soviet pincers of Operation Uranus (19-23 Nov 1942) meet at Kalach behind the German 6th Army,
+  which surrenders on 31 Jan - 2 Feb 1943.
+- The Pacific: the limit of Japan's conquests in 1942 (dashed) and the two American drives (central and south-west).
+- D-Day: the five beaches (Utah, Omaha, Gold, Juno, Sword), snapped to the map's coastline.
+- The fronts closing on Germany are schematic: a beachhead growing from Normandy, the advance up Italy, and the Soviet
+  front sweeping in from the east; liberated or Allied-held ground is shown in blue.
+- Hiroshima (6 Aug) and Nagasaki (9 Aug) are shown only as a flash and a widening ring.
+- The last image: 85 dots, one for each million of the estimated 70-85 million dead (70 solid, 15 outlined).
 
 ACCURACY NOTES
 - Every narrated claim is sourced in sources.txt.

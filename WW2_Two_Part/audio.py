@@ -856,6 +856,136 @@ def build_part1():
     return mus, sfx
 
 
+def build_part2():
+    mus = np.zeros((2, N))
+    sfx = np.zeros((2, N))
+    E = EV
+    BEAT = 60 / 104.0
+    q0, q1 = E['august'] - 0.2, DUR          # from Japan on, the pulse stops
+    lvl = [(0, 0.75), (E['then'], 0.8), (E['frozen'], 0.35), (E['entire'], 0.6), (E['america'], 0.85), (E['june'], 0.95), (E['germany'], 1.0),
+           (E['surrenders2'], 1.0), (E['surrenders2'] + 0.8, 0.5), (q0, 0.4), (q0 + 0.4, 0.0), (DUR, 0.0)]
+    t, k = 0.0, 0
+    while t < q0 + 0.3:
+        lv = env(t, lvl)
+        if lv > 0.2:
+            b = k % 8
+            if b in (0, 4) or (b == 6 and t > E['america']) or (b in (3, 7) and t > E['germany']):
+                place(mus, war_drum(k, 50 if b == 0 else 62), t, (0.95 if b == 0 else 0.6) * lv)
+            place(mus, tick(k) * (1.0 if b % 2 == 0 else 0.55), t, 0.22 * lv, pan=0.3 if k % 2 else -0.3)
+        t += BEAT / 2
+        k += 1
+    cue(0.0, 'Music: the pulse of Part 1 returns (104 BPM drums and clock over a D minor drone)', 'music')
+    for a, b, f, g in ((0.0, E['then'], 73.42, 0.34), (E['then'], E['america'], 69.3, 0.36), (E['america'], E['june'], 82.41, 0.36),
+                       (E['june'], E['germany'], 87.31, 0.38), (E['germany'], E['surrenders2'] + 0.6, 98.0, 0.42)):
+        d = b - a
+        place(mus, drone(f, d, int(a * 10) + 3, 420) * env(tt(d), [(0, 0), (0.25, 1), (d - 0.2, 1), (d, 0)]), a, g)
+    for tm, notes, g in ((E['part'], [73.42, 110.0, 146.83, 220.0], 0.5), (E['stalingrad'], [69.3, 103.83, 138.59], 0.4),
+                         (E['dday'], [87.31, 130.81, 174.61, 261.63], 0.55), (E['crushed'], [98.0, 146.83, 196.0], 0.45),
+                         (E['surrenders2'], [110.0, 164.81, 220.0, 277.18], 0.5)):
+        place(mus, brass(notes, 1.6, int(tm * 7)), tm, g)
+        cue(tm, 'Low brass', 'music')
+    # the ending: no drums; a low drone under Japan, then a quiet major chord for the peace, single piano notes for the dead
+    dj = E['by'] - q0
+    place(mus, drone(36.71, dj, 71, 150) * env(tt(dj), [(0, 0), (0.5, 1), (dj - 0.4, 1), (dj, 0)]), q0, 0.5)
+    dp = E['estimated'] - E['war'] + 0.6
+    place(mus, choir([110.0, 164.81, 220.0, 277.18], dp, 72) * 0.9, E['war'] - 0.1, 0.2)
+    cue(E['war'] - 0.1, '"the war is over": a quiet A major chord', 'music')
+    de = DUR - E['estimated']
+    place(mus, drone(55.0, de, 73, 220) * env(tt(de), [(0, 0), (0.8, 0.6), (de - 1.2, 0.6), (de, 0)]), E['estimated'], 0.3)
+    for j, (tm, f) in enumerate(((E['seventy'], 220.0), (E['eightyfive'], 196.0), (E['million'], 164.81), (E['people'], 146.83), (E['died'], 110.0))):
+        place(mus, reverb(np.pad(piano(f, 3.0, 300 + j), (0, SR)), 2.8, 60 + j, mix=0.5), tm, 0.2)
+    cue(E['seventy'], 'Single piano notes, descending, over a bare drone; fade to silence', 'music')
+
+    def hit(tm, what, g=0.8):
+        place(sfx, stamp_hit(int(tm * 13)), tm, g)
+        cue(tm, what, 'sfx')
+
+    place(sfx, boom(2.4, 60, 28, 1), E['part'], 1.0)
+    hit(E['part'], '"PART 2" slams in', 1.0)
+    hit(E['hitlers'], '"1942"', 0.7)
+    place(sfx, whoosh(1.2, 2, 250, 3500), E['then'], 0.7)
+    cue(E['then'], 'The camera flies east to Stalingrad', 'sfx')
+    dw = E['america'] - E['frozen'] + 0.4
+    place(sfx, wind(int(dw * SR), 3, 200, 900) * env(tt(dw), [(0, 0), (0.6, 1), (dw - 0.4, 1), (dw, 0)]), E['frozen'] - 0.2, 0.5)
+    cue(E['frozen'] - 0.2, 'Winter wind over the Volga', 'sfx')
+    place(sfx, stone_crack(4, 1.0), E['began'] + 0.1, 0.8)
+    place(sfx, stone_crack(5, 0.8), E['brk'], 0.8)
+    cue(E['brk'], '"break": cracks run through the red map', 'sfx')
+    hit(E['stalingrad'], '"STALINGRAD"', 0.8)
+    for i in range(2):
+        place(sfx, whoosh(0.7, 6 + i, 400, 3200), E['entire'] + i * 0.05, 0.5, pan=0.5 - i)
+    place(sfx, rumble(1.3, 8), E['entire'], 0.6)
+    place(sfx, clang(9), E['army'] + 0.02, 0.6)
+    cue(E['army'], 'The pincers meet: the ring closes', 'sfx')
+    for j in range(3):
+        place(sfx, cannon(10 + j), E['surrenders'] + j * 0.12, 0.6 - 0.1 * j)
+    place(sfx, boom(2.2, 55, 26, 13), E['surrenders'], 0.8)
+    cue(E['surrenders'], '"surrenders": heavy hit', 'sfx')
+    # Pacific
+    place(sfx, whoosh(1.0, 14, 200, 4000), E['america'] - 0.05, 0.8)
+    cue(E['america'], 'Whip-pan to the Pacific', 'sfx')
+    ds = E['june'] - E['america'] - 0.4
+    place(sfx, surf(int(ds * SR), 15, 0.45) * env(tt(ds), [(0, 0), (0.5, 1), (ds - 0.3, 1), (ds, 0)]), E['america'] + 0.5, 0.35)
+    place(sfx, cannon(16), E['fights'] + 0.05, 0.5)
+    for i, f in enumerate((0.22, 0.6, 0.8, 0.97)):
+        tm = E['fights'] + 0.1 + f * (E['pacific'] + 0.75 - E['fights'] - 0.1)
+        place(sfx, blip(20 + i, 560 + 60 * i), tm, 0.45)
+    place(sfx, ink_swoosh(2.0, 17), E['fights'] + 0.1, 0.5)
+    cue(E['fights'] + 0.1, 'Two drives across the ocean; a blip as each island is reached', 'sfx')
+    # D-Day
+    place(sfx, whoosh(1.0, 18, 200, 4000, up=False), E['june'] - 0.05, 0.8)
+    hit(E['sixth'], '"JUNE 6, 1944"', 0.7)
+    place(sfx, boom(2.6, 60, 26, 19), E['dday'], 1.0)
+    hit(E['dday'], '"D-DAY" slams in', 1.0)
+    dd = E['germany'] - E['june'] - 0.5
+    place(sfx, surf(int(dd * SR), 21, 0.5) * env(tt(dd), [(0, 0), (0.6, 1), (dd - 0.4, 1), (dd, 0)]), E['june'] + 0.5, 0.4)
+    place(sfx, engine(int(3.0 * SR), 22, 1700, 1.0) * env(tt(3.0), [(0, 0), (0.8, 1), (2.4, 1), (3.0, 0)]), E['sixth'], 0.3)
+    for j in range(7):
+        place(sfx, cannon(30 + j), E['dday'] + 0.5 + j * 0.42, 0.4, pan=(j % 3 - 1) * 0.6)
+    cue(E['dday'] + 0.5, 'Surf, aircraft and naval gunfire as the fleet crosses', 'sfx')
+    tm = E['n156']
+    while tm < E['allied']:
+        place(sfx, tick(int(tm * 100)), tm, 0.4)
+        tm += 0.045
+    place(sfx, boom(1.6, 70, 32, 23), E['allied'], 0.7)
+    cue(E['n156'], 'Rapid ticking as the counter runs up to 156,000', 'sfx')
+    for i in range(5):
+        place(sfx, blip(40 + i, 520 + 50 * i), E['allied'] - 0.15 + i * 0.14, 0.4)
+        place(sfx, whoosh(0.4, 45 + i, 500, 3500), E['land'] + i * 0.06, 0.3, pan=(i - 2) * 0.3)
+    cue(E['land'], '"land": five beaches, five arrows inland', 'sfx')
+    # the squeeze
+    place(sfx, whoosh(1.0, 50, 200, 3500, up=False), E['germany'] - 0.1, 0.7)
+    hit(E['crushed'], '"crushed"', 0.8)
+    dr = E['berlin'] - E['crushed']
+    place(sfx, rumble(dr, 51), E['crushed'], 0.8)
+    place(sfx, riser(dr, 52), E['crushed'], 0.35)
+    for j in range(8):
+        place(sfx, cannon(60 + j), E['crushed'] + 0.3 + j * dr / 9, 0.4, pan=-0.7 if j % 2 else 0.7)
+    cue(E['crushed'], 'Armour and artillery from both sides, rising to Berlin', 'sfx')
+    for j in range(4):
+        place(sfx, cannon(70 + j), E['berlin'] + 0.1 + j * 0.14, 0.7 - 0.1 * j)
+    hit(E['surrenders2'], '"it surrenders": a final hit', 1.0)
+    place(sfx, boom(3.0, 50, 24, 74), E['surrenders2'], 1.0)
+    place(sfx, reverb(np.pad(bell(98.0, 4.0), (0, SR)), 2.6, 75, mix=0.4), E['surrenders2'] + 0.15, 0.45)
+    # Japan
+    place(sfx, whoosh(1.0, 76, 200, 3500), E['august'] - 0.05, 0.6)
+    for j, tm in enumerate((E['two2'], E['bombs'])):
+        place(sfx, boom(4.0, 42, 20, 80 + j), tm, 1.0)
+        place(sfx, reverb(np.pad(bandpass(noise(int(1.2 * SR), 82 + j), 60, 900) * np.exp(-tt(1.2) * 3.5), (0, SR)), 3.0, 84 + j, mix=0.6), tm, 0.5)
+    cue(E['two2'], 'Hiroshima, then Nagasaki: two deep, distant detonations; no music', 'sfx')
+    hit(E['september'], '"SEPT 2, 1945"', 0.5)
+    place(sfx, reverb(np.pad(bell(196.0, 4.0), (0, SR)), 3.0, 86, mix=0.5), E['over'], 0.35)
+    cue(E['over'], '"over": a single clear bell', 'sfx')
+    for i in range(85):
+        if i < 70:
+            tm = E['seventy'] + (E['eightyfive'] - E['seventy']) * i / 70
+        else:
+            tm = E['eightyfive'] + (E['million'] + 0.2 - E['eightyfive']) * (i - 70) / 15
+        place(sfx, blip(100 + i, 900 + 6 * (i % 9)) * 0.6, tm, 0.1, pan=((i % 17) - 8) / 10)
+    cue(E['seventy'], 'A soft tick for each of the 85 dots: one million lives each', 'sfx')
+    return mus, sfx
+
+
 def read_wav(path):
     with wave.open(path) as w:
         a = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
@@ -875,6 +1005,17 @@ def write_wav(path, x):
 
 def loudnorm(src, dst, I=-14.0):
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-af', f'loudnorm=I={I}:TP=-1.5:LRA=11', '-ar', str(SR), dst], check=True)
+
+
+def trim_to(path, target=-14.0):
+    """One-pass loudnorm lands within a dB of its target; measure the result and trim it onto the target."""
+    import re
+    out = subprocess.run(['ffmpeg', '-hide_banner', '-nostats', '-i', path, '-af', 'ebur128', '-f', 'null', '-'], capture_output=True, text=True).stderr
+    m = re.findall(r'I:\s*(-?[0-9.]+) LUFS', out)
+    if m and abs(float(m[-1]) - target) > 0.15:
+        tmp = path + '.tmp.wav'
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', path, '-af', f'volume={target - float(m[-1]):.2f}dB,alimiter=limit=0.84:level=0', tmp], check=True)
+        os.replace(tmp, path)
 
 
 def main():
@@ -897,6 +1038,7 @@ def main():
     write_wav(os.path.join(PDIR, 'build', 'mix_with_voice_raw.wav'), mix)
     write_wav(os.path.join(PDIR, 'build', 'music_sfx_raw.wav'), nv / max(1.0, np.abs(nv).max() / 0.95))
     loudnorm(os.path.join(PDIR, 'build', 'mix_with_voice_raw.wav'), os.path.join(PDIR, 'audio', 'mix_with_voice.wav'), -13.1)
+    trim_to(os.path.join(PDIR, 'audio', 'mix_with_voice.wav'))
     loudnorm(os.path.join(PDIR, 'build', 'music_sfx_raw.wav'), os.path.join(PDIR, 'audio', 'mix_no_voice.wav'))
     L = [f'{T["title"].upper()} - SOUND DESIGN TIMELINE', '', 'Narration: the supplied voiceover (pauses over 0.4 s shortened; nothing else changed).',
          'Music and effects are synthesised in audio.py with numpy: no samples or third-party audio.',
