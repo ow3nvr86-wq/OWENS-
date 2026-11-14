@@ -3,6 +3,8 @@
 2D cartoon characters composited over 3D-rendered backgrounds, cut to the voice word by word.
 Output: `final.mp4` (H.264 1080x1920, 30 fps, AAC 48 kHz, about -14 LUFS) plus `thumbnail.png`.
 
+The crew (four agents: script writer, camera man, animator, editor) is described in `CREW.md`.
+
 Example episode: `episodes/hwacha_haengju/` ("How a Rocket Cart Stopped an Army", 59.7 s).
 
 ## Make a new episode: the files to swap
