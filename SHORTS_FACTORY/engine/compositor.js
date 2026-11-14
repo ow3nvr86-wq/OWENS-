@@ -37,7 +37,8 @@ function resolve() {
     for (const fx of s.fx || []) { fx.t0 = T(fx.at) ?? s.start; fx.seed = fx.seed ?? (s.wi % 97); }
     // v2 extras: props on cues, height keyframes, blasts that knock characters back and shake the camera
     for (const p of s.props || []) { if (p.at != null) p.t0 = T(p.at); if (p.move) { p.move.t0 = T(p.move.from) ?? s.start; p.move.t1 = T(p.move.to) ?? s.end; } }
-    for (const ch of s.characters || []) { for (const k of ch.air || []) k.t = T(k.cue ?? k.at); for (const k of ch.airW || []) k.t = T(k.cue ?? k.at); }
+    for (const ch of s.characters || []) { for (const k of ch.air || []) k.t = T(k.cue ?? k.at); for (const k of ch.airW || []) k.t = T(k.cue ?? k.at); if (ch.nodAt) ch.nodT = [].concat(ch.nodAt).map(T); }
+    for (const fx of s.fx || []) { for (const k of fx.keys || []) k.t = T(k.at); if (fx.untilAt != null) fx.until = T(fx.untilAt); }
     s._impacts = []; s._shakes = [];
     for (const fx of s.fx || []) if (fx.type === 'blast') {
       const z = typeof zOf === 'function' ? zOf(fx.z ?? fx.layer) : 150;
@@ -221,7 +222,7 @@ function fxDraw(g, fx, s, t) {
   if (fx.type === 'impact') impactBurst(g, fx.x * W, fx.y * H, fx.t0, t, fx.r || 220);
   if (window.FX2 && FX2[fx.type]) FX2[fx.type](g, fx, s, t);
 }
-const SCREEN_FX = new Set(['glow', 'flash', 'tint', 'storm_tint', 'confetti', 'hud', 'logo', 'speedlines', 'impactframe']);
+const SCREEN_FX = new Set(['glow', 'flash', 'tint', 'storm_tint', 'confetti', 'hud', 'logo', 'speedlines', 'impactframe', 'tag', 'stars', 'title']);
 let CUR_CAM = null;
 function renderShotDepth(g, i, t) {
   const s = SCENES[i], L = LOC[s.loc], cam = cam3At(s, t); CUR_CAM = { s, cam };

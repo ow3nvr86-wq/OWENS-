@@ -1,0 +1,907 @@
+{
+ "duration": 54.753,
+ "fps": 30,
+ "frames": 1643,
+ "words": [
+  {
+   "word": "You",
+   "line": 0,
+   "start": 0.0,
+   "end": 0.18
+  },
+  {
+   "word": "get",
+   "line": 0,
+   "start": 0.18,
+   "end": 0.36
+  },
+  {
+   "word": "one",
+   "line": 0,
+   "start": 0.36,
+   "end": 0.72
+  },
+  {
+   "word": "day",
+   "line": 0,
+   "start": 0.72,
+   "end": 1.08
+  },
+  {
+   "word": "in",
+   "line": 0,
+   "start": 1.08,
+   "end": 1.36
+  },
+  {
+   "word": "GTA",
+   "line": 0,
+   "start": 1.36,
+   "end": 1.66
+  },
+  {
+   "word": "5.",
+   "line": 0,
+   "start": 1.66,
+   "end": 2.54
+  },
+  {
+   "word": "The",
+   "line": 0,
+   "start": 2.58,
+   "end": 2.7
+  },
+  {
+   "word": "cops",
+   "line": 0,
+   "start": 2.7,
+   "end": 2.92
+  },
+  {
+   "word": "already",
+   "line": 0,
+   "start": 2.92,
+   "end": 3.42
+  },
+  {
+   "word": "know",
+   "line": 0,
+   "start": 3.42,
+   "end": 3.72
+  },
+  {
+   "word": "your",
+   "line": 0,
+   "start": 3.72,
+   "end": 3.92
+  },
+  {
+   "word": "name.",
+   "line": 0,
+   "start": 3.92,
+   "end": 4.74
+  },
+  {
+   "word": "You",
+   "line": 1,
+   "start": 4.743,
+   "end": 4.86
+  },
+  {
+   "word": "wake",
+   "line": 1,
+   "start": 4.86,
+   "end": 5.04
+  },
+  {
+   "word": "up",
+   "line": 1,
+   "start": 5.04,
+   "end": 5.22
+  },
+  {
+   "word": "on",
+   "line": 1,
+   "start": 5.22,
+   "end": 5.48
+  },
+  {
+   "word": "Grove",
+   "line": 1,
+   "start": 5.48,
+   "end": 5.66
+  },
+  {
+   "word": "Street...",
+   "line": 1,
+   "start": 5.66,
+   "end": 6.48
+  },
+  {
+   "word": "and",
+   "line": 1,
+   "start": 6.54,
+   "end": 6.86
+  },
+  {
+   "word": "something's",
+   "line": 1,
+   "start": 6.86,
+   "end": 7.48
+  },
+  {
+   "word": "wrong.",
+   "line": 1,
+   "start": 7.48,
+   "end": 8.32
+  },
+  {
+   "word": "You",
+   "line": 2,
+   "start": 8.354,
+   "end": 8.46
+  },
+  {
+   "word": "can't",
+   "line": 2,
+   "start": 8.46,
+   "end": 8.74
+  },
+  {
+   "word": "stop",
+   "line": 2,
+   "start": 8.74,
+   "end": 8.96
+  },
+  {
+   "word": "walking.",
+   "line": 2,
+   "start": 8.96,
+   "end": 9.86
+  },
+  {
+   "word": "You",
+   "line": 2,
+   "start": 9.882,
+   "end": 10.0
+  },
+  {
+   "word": "only",
+   "line": 2,
+   "start": 10.0,
+   "end": 10.32
+  },
+  {
+   "word": "know",
+   "line": 2,
+   "start": 10.32,
+   "end": 10.56
+  },
+  {
+   "word": "three",
+   "line": 2,
+   "start": 10.56,
+   "end": 10.96
+  },
+  {
+   "word": "sentences.",
+   "line": 2,
+   "start": 10.96,
+   "end": 12.02
+  },
+  {
+   "word": "And",
+   "line": 2,
+   "start": 12.055,
+   "end": 12.2
+  },
+  {
+   "word": "everyone",
+   "line": 2,
+   "start": 12.2,
+   "end": 12.62
+  },
+  {
+   "word": "looks",
+   "line": 2,
+   "start": 12.62,
+   "end": 13.04
+  },
+  {
+   "word": "exactly",
+   "line": 2,
+   "start": 13.04,
+   "end": 13.64
+  },
+  {
+   "word": "like",
+   "line": 2,
+   "start": 13.64,
+   "end": 14.1
+  },
+  {
+   "word": "you.",
+   "line": 2,
+   "start": 14.1,
+   "end": 14.56
+  },
+  {
+   "word": "You're",
+   "line": 3,
+   "start": 14.77,
+   "end": 14.92
+  },
+  {
+   "word": "not",
+   "line": 3,
+   "start": 14.92,
+   "end": 15.06
+  },
+  {
+   "word": "the",
+   "line": 3,
+   "start": 15.06,
+   "end": 15.24
+  },
+  {
+   "word": "player.",
+   "line": 3,
+   "start": 15.24,
+   "end": 16.02
+  },
+  {
+   "word": "You're",
+   "line": 3,
+   "start": 16.057,
+   "end": 16.26
+  },
+  {
+   "word": "an",
+   "line": 3,
+   "start": 16.26,
+   "end": 16.4
+  },
+  {
+   "word": "NPC.",
+   "line": 3,
+   "start": 16.4,
+   "end": 17.64
+  },
+  {
+   "word": "Then",
+   "line": 4,
+   "start": 17.656,
+   "end": 17.94
+  },
+  {
+   "word": "the",
+   "line": 4,
+   "start": 17.94,
+   "end": 18.3
+  },
+  {
+   "word": "music",
+   "line": 4,
+   "start": 18.3,
+   "end": 18.6
+  },
+  {
+   "word": "changes.",
+   "line": 4,
+   "start": 18.6,
+   "end": 19.56
+  },
+  {
+   "word": "A",
+   "line": 4,
+   "start": 19.556,
+   "end": 19.64
+  },
+  {
+   "word": "real",
+   "line": 4,
+   "start": 19.64,
+   "end": 19.98
+  },
+  {
+   "word": "player",
+   "line": 4,
+   "start": 19.98,
+   "end": 20.34
+  },
+  {
+   "word": "just",
+   "line": 4,
+   "start": 20.34,
+   "end": 20.56
+  },
+  {
+   "word": "spawned",
+   "line": 4,
+   "start": 20.56,
+   "end": 20.9
+  },
+  {
+   "word": "in.",
+   "line": 4,
+   "start": 20.9,
+   "end": 21.52
+  },
+  {
+   "word": "He",
+   "line": 5,
+   "start": 21.57,
+   "end": 21.68
+  },
+  {
+   "word": "punches",
+   "line": 5,
+   "start": 21.68,
+   "end": 21.98
+  },
+  {
+   "word": "a",
+   "line": 5,
+   "start": 21.98,
+   "end": 22.18
+  },
+  {
+   "word": "mailman.",
+   "line": 5,
+   "start": 22.18,
+   "end": 22.82
+  },
+  {
+   "word": "Steals",
+   "line": 5,
+   "start": 22.866,
+   "end": 23.16
+  },
+  {
+   "word": "a",
+   "line": 5,
+   "start": 23.16,
+   "end": 23.36
+  },
+  {
+   "word": "bike.",
+   "line": 5,
+   "start": 23.36,
+   "end": 23.96
+  },
+  {
+   "word": "And",
+   "line": 5,
+   "start": 23.94,
+   "end": 24.06
+  },
+  {
+   "word": "now",
+   "line": 5,
+   "start": 24.06,
+   "end": 24.42
+  },
+  {
+   "word": "he's",
+   "line": 5,
+   "start": 24.42,
+   "end": 24.82
+  },
+  {
+   "word": "staring",
+   "line": 5,
+   "start": 24.82,
+   "end": 25.16
+  },
+  {
+   "word": "at",
+   "line": 5,
+   "start": 25.16,
+   "end": 25.46
+  },
+  {
+   "word": "you.",
+   "line": 5,
+   "start": 25.46,
+   "end": 25.98
+  },
+  {
+   "word": "You",
+   "line": 6,
+   "start": 26.027,
+   "end": 26.18
+  },
+  {
+   "word": "run.",
+   "line": 6,
+   "start": 26.18,
+   "end": 26.7
+  },
+  {
+   "word": "You",
+   "line": 7,
+   "start": 26.828,
+   "end": 26.947
+  },
+  {
+   "word": "jump",
+   "line": 7,
+   "start": 26.947,
+   "end": 27.147
+  },
+  {
+   "word": "into",
+   "line": 7,
+   "start": 27.147,
+   "end": 27.347
+  },
+  {
+   "word": "the",
+   "line": 7,
+   "start": 27.347,
+   "end": 27.527
+  },
+  {
+   "word": "first",
+   "line": 7,
+   "start": 27.527,
+   "end": 27.767
+  },
+  {
+   "word": "car",
+   "line": 7,
+   "start": 27.767,
+   "end": 28.007
+  },
+  {
+   "word": "you",
+   "line": 7,
+   "start": 28.007,
+   "end": 28.167
+  },
+  {
+   "word": "see",
+   "line": 7,
+   "start": 28.167,
+   "end": 28.407
+  },
+  {
+   "word": "and",
+   "line": 7,
+   "start": 28.407,
+   "end": 28.627
+  },
+  {
+   "word": "floor",
+   "line": 7,
+   "start": 28.627,
+   "end": 29.027
+  },
+  {
+   "word": "it",
+   "line": 7,
+   "start": 29.027,
+   "end": 29.207
+  },
+  {
+   "word": "down",
+   "line": 7,
+   "start": 29.207,
+   "end": 29.407
+  },
+  {
+   "word": "Vinewood",
+   "line": 7,
+   "start": 29.407,
+   "end": 29.787
+  },
+  {
+   "word": "Boulevard.",
+   "line": 7,
+   "start": 29.787,
+   "end": 30.567
+  },
+  {
+   "word": "He's",
+   "line": 8,
+   "start": 30.637,
+   "end": 31.007
+  },
+  {
+   "word": "right",
+   "line": 8,
+   "start": 31.007,
+   "end": 31.147
+  },
+  {
+   "word": "behind",
+   "line": 8,
+   "start": 31.147,
+   "end": 31.547
+  },
+  {
+   "word": "you.",
+   "line": 8,
+   "start": 31.547,
+   "end": 31.987
+  },
+  {
+   "word": "Three",
+   "line": 8,
+   "start": 32.04,
+   "end": 32.287
+  },
+  {
+   "word": "stars.",
+   "line": 8,
+   "start": 32.287,
+   "end": 32.947
+  },
+  {
+   "word": "Four.",
+   "line": 8,
+   "start": 32.973,
+   "end": 33.547
+  },
+  {
+   "word": "Five.",
+   "line": 8,
+   "start": 33.547,
+   "end": 34.307
+  },
+  {
+   "word": "Then",
+   "line": 9,
+   "start": 34.291,
+   "end": 34.547
+  },
+  {
+   "word": "you",
+   "line": 9,
+   "start": 34.547,
+   "end": 34.747
+  },
+  {
+   "word": "see",
+   "line": 9,
+   "start": 34.747,
+   "end": 35.067
+  },
+  {
+   "word": "it.",
+   "line": 9,
+   "start": 35.067,
+   "end": 35.467
+  },
+  {
+   "word": "A",
+   "line": 9,
+   "start": 35.474,
+   "end": 35.587
+  },
+  {
+   "word": "stunt",
+   "line": 9,
+   "start": 35.587,
+   "end": 35.927
+  },
+  {
+   "word": "ramp...",
+   "line": 9,
+   "start": 35.927,
+   "end": 36.567
+  },
+  {
+   "word": "over",
+   "line": 9,
+   "start": 36.594,
+   "end": 36.807
+  },
+  {
+   "word": "the",
+   "line": 9,
+   "start": 36.807,
+   "end": 37.087
+  },
+  {
+   "word": "freeway.",
+   "line": 9,
+   "start": 37.087,
+   "end": 37.947
+  },
+  {
+   "word": "You",
+   "line": 10,
+   "start": 37.973,
+   "end": 38.087
+  },
+  {
+   "word": "hit",
+   "line": 10,
+   "start": 38.087,
+   "end": 38.267
+  },
+  {
+   "word": "it",
+   "line": 10,
+   "start": 38.267,
+   "end": 38.387
+  },
+  {
+   "word": "at",
+   "line": 10,
+   "start": 38.387,
+   "end": 38.527
+  },
+  {
+   "word": "a",
+   "line": 10,
+   "start": 38.527,
+   "end": 38.667
+  },
+  {
+   "word": "hundred",
+   "line": 10,
+   "start": 38.667,
+   "end": 39.027
+  },
+  {
+   "word": "miles",
+   "line": 10,
+   "start": 39.027,
+   "end": 39.267
+  },
+  {
+   "word": "an",
+   "line": 10,
+   "start": 39.267,
+   "end": 39.487
+  },
+  {
+   "word": "hour.",
+   "line": 10,
+   "start": 39.487,
+   "end": 39.947
+  },
+  {
+   "word": "You're",
+   "line": 10,
+   "start": 40.068,
+   "end": 40.32
+  },
+  {
+   "word": "flying.",
+   "line": 10,
+   "start": 40.32,
+   "end": 41.22
+  },
+  {
+   "word": "You",
+   "line": 11,
+   "start": 41.229,
+   "end": 41.4
+  },
+  {
+   "word": "land",
+   "line": 11,
+   "start": 41.4,
+   "end": 41.6
+  },
+  {
+   "word": "in",
+   "line": 11,
+   "start": 41.6,
+   "end": 41.8
+  },
+  {
+   "word": "a",
+   "line": 11,
+   "start": 41.8,
+   "end": 41.94
+  },
+  {
+   "word": "perfect",
+   "line": 11,
+   "start": 41.94,
+   "end": 42.36
+  },
+  {
+   "word": "barrel",
+   "line": 11,
+   "start": 42.36,
+   "end": 42.74
+  },
+  {
+   "word": "roll...",
+   "line": 11,
+   "start": 42.74,
+   "end": 43.38
+  },
+  {
+   "word": "right",
+   "line": 11,
+   "start": 43.302,
+   "end": 43.58
+  },
+  {
+   "word": "outside",
+   "line": 11,
+   "start": 43.58,
+   "end": 43.96
+  },
+  {
+   "word": "the",
+   "line": 11,
+   "start": 43.96,
+   "end": 44.18
+  },
+  {
+   "word": "police",
+   "line": 11,
+   "start": 44.18,
+   "end": 44.42
+  },
+  {
+   "word": "station.",
+   "line": 11,
+   "start": 44.42,
+   "end": 45.24
+  },
+  {
+   "word": "Ten",
+   "line": 12,
+   "start": 45.225,
+   "end": 45.48
+  },
+  {
+   "word": "cops",
+   "line": 12,
+   "start": 45.48,
+   "end": 45.76
+  },
+  {
+   "word": "jump",
+   "line": 12,
+   "start": 45.76,
+   "end": 46.04
+  },
+  {
+   "word": "out.",
+   "line": 12,
+   "start": 46.04,
+   "end": 46.56
+  },
+  {
+   "word": "Guns",
+   "line": 12,
+   "start": 46.447,
+   "end": 46.74
+  },
+  {
+   "word": "up.",
+   "line": 12,
+   "start": 46.74,
+   "end": 47.34
+  },
+  {
+   "word": "They",
+   "line": 13,
+   "start": 47.365,
+   "end": 47.46
+  },
+  {
+   "word": "run",
+   "line": 13,
+   "start": 47.46,
+   "end": 47.64
+  },
+  {
+   "word": "right",
+   "line": 13,
+   "start": 47.64,
+   "end": 47.96
+  },
+  {
+   "word": "past",
+   "line": 13,
+   "start": 47.96,
+   "end": 48.24
+  },
+  {
+   "word": "you...",
+   "line": 13,
+   "start": 48.24,
+   "end": 48.56
+  },
+  {
+   "word": "and",
+   "line": 13,
+   "start": 48.814,
+   "end": 48.941
+  },
+  {
+   "word": "tackle",
+   "line": 13,
+   "start": 48.941,
+   "end": 49.32
+  },
+  {
+   "word": "the",
+   "line": 13,
+   "start": 49.32,
+   "end": 49.52
+  },
+  {
+   "word": "player.",
+   "line": 13,
+   "start": 49.52,
+   "end": 50.32
+  },
+  {
+   "word": "Busted.",
+   "line": 14,
+   "start": 50.208,
+   "end": 51.14
+  },
+  {
+   "word": "One",
+   "line": 15,
+   "start": 51.128,
+   "end": 51.32
+  },
+  {
+   "word": "cop",
+   "line": 15,
+   "start": 51.32,
+   "end": 51.54
+  },
+  {
+   "word": "looks",
+   "line": 15,
+   "start": 51.54,
+   "end": 51.78
+  },
+  {
+   "word": "back",
+   "line": 15,
+   "start": 51.78,
+   "end": 52.12
+  },
+  {
+   "word": "and",
+   "line": 15,
+   "start": 52.12,
+   "end": 52.5
+  },
+  {
+   "word": "nods.",
+   "line": 15,
+   "start": 52.5,
+   "end": 53.12
+  },
+  {
+   "word": "Same",
+   "line": 15,
+   "start": 53.26,
+   "end": 53.46
+  },
+  {
+   "word": "time",
+   "line": 15,
+   "start": 53.46,
+   "end": 53.68
+  },
+  {
+   "word": "tomorrow,",
+   "line": 15,
+   "start": 53.68,
+   "end": 54.1
+  },
+  {
+   "word": "Steve?",
+   "line": 15,
+   "start": 54.1,
+   "end": 54.74
+  }
+ ]
+}

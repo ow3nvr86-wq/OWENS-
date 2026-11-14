@@ -46,7 +46,7 @@ function crowdDust(g, m, s, t) {
 const GRAV = 2600;                                     // px / s^2
 function crowdReact(st, s, t, z) {
   for (const im of s._impacts || []) {
-    if (t < im.t0) continue;
+    if (t < im.t0 || (im.only && !im.only.includes(st.id))) continue;
     const tau0 = t - im.t0;
     const x0 = st.x - (st.vel ? st.vel[0] * tau0 : 0), y0 = st.y - (st.vel ? st.vel[1] * tau0 : 0);
     const dx = x0 - im.x, dy = (y0 - im.y) * 1.6, d = Math.hypot(dx, dy);
