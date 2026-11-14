@@ -161,7 +161,7 @@ def character(name, loc=(0, 0, 0), rot=0.0, skin='f2c39b', shirt='4b8fe2', pants
     box(name + '_hem', (2.02, 1.02, 0.14), (0, 0, 0.07), shade(shirt, 0.78), P['torso'], 0.0)
     if not hood:
         box(name + '_belt', (2.03, 1.03, 0.16), (0, 0, -0.02), '2a2622', P['torso'], 0.0)
-        box(name + '_buckle', (0.34, 0.05, 0.2), (0, -0.52, -0.02), 'e8c24a', P['torso'], 0.02, rough=0.25)
+        box(name + '_buckle', (0.26, 0.04, 0.16), (0, -0.52, -0.02), '8a8f98', P['torso'], 0.02, rough=0.4)
     if stripe:
         box(name + '_stripe', (2.02, 1.02, 0.34), (0, 0, 1.15), stripe, P['torso'], 0.0)
     if logo:
@@ -180,7 +180,7 @@ def character(name, loc=(0, 0, 0), rot=0.0, skin='f2c39b', shirt='4b8fe2', pants
         box(f'{name}_leg{side}', (0.98, 1.0, 1.55), (0, 0, -0.775), pants, P['leg_' + side], B)
         box(f'{name}_shoe{side}', (1.0, 1.12, 0.42), (0, -0.05, -1.72), shoes, P['leg_' + side], 0.08)
         box(f'{name}_sole{side}', (1.02, 1.16, 0.12), (0, -0.05, -1.94), 'f4f4f4', P['leg_' + side], 0.03)
-        box(f'{name}_knee{side}', (1.0, 1.02, 0.06), (0, 0, -0.75), shade(pants, 0.8), P['leg_' + side], 0.0)
+
     P['head'] = empty(name + '_head', (0, 0, 4.0), root)
     hd = cyl(name + '_skull', 0.66, 1.22, (0, 0, 0.64), skin, P['head'], 40)
     md = hd.modifiers.new('bv', 'BEVEL')
@@ -198,7 +198,7 @@ def character(name, loc=(0, 0, 0), rot=0.0, skin='f2c39b', shirt='4b8fe2', pants
             box(name + '_brow', (0.3, 0.03, 0.07), (x, fy - 0.05, ey + 0.2), 'ffffff', P['head'], 0.0, rot=(0, (0.45 if x < 0 else -0.45), 0))
     else:
         face_plate(name, P['head'], face, eyes)
-    P['head'].scale = (1.24, 1.24, 1.24)
+    P['head'].scale = (1.06, 1.06, 1.06)
     # ---- hair
     if hair and not hood and hat != 'beanie':
         if hair_style == 'spiky':

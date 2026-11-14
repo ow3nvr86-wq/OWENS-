@@ -45,49 +45,43 @@ def brow(c, x, y, tilt, side, w=74):
 
 
 def face(expr, col):
+    """Classic block-avatar faces: small dark eyes with a tiny glint, thin brows only where the mood needs them, and a
+    simple line mouth. Flat and understated, like a printed decal."""
     s = cairo.ImageSurface(cairo.FORMAT_ARGB32, S, S)
     c = cairo.Context(s)
-    ex, ey = 104, 200
-    for sx in (-1, 1):                                     # blush
-        g = cairo.RadialGradient(256 + sx * 150, 318, 4, 256 + sx * 150, 318, 52)
-        g.add_color_stop_rgba(0, 1, 0.45, 0.45, 0.45); g.add_color_stop_rgba(1, 1, 0.45, 0.45, 0)
-        c.set_source(g); c.arc(256 + sx * 150, 318, 52, 0, 2 * math.pi); c.fill()
-    P = dict(smile=dict(lid=0, tilt=0.05, by=0), happy=dict(lid=0, tilt=0.12, by=-6), calm=dict(lid=0.3, tilt=0.0, by=6),
-             smirk=dict(lid=0.24, tilt=-0.18, by=4), scared=dict(lid=0, tilt=0.38, by=-22), angry=dict(lid=0.22, tilt=-0.42, by=14))[expr]
-    for sx in (-1, 1):
-        eye(c, 256 + sx * ex, ey, col, look=(0.25 if expr == 'smirk' else 0, 0), lid=P['lid'], wide=expr == 'scared',
-            h=86 if expr == 'scared' else 78)
-        brow(c, 256 + sx * ex, ey - 108 + P['by'], P['tilt'], -sx)
     c.set_line_cap(cairo.LINE_CAP_ROUND)
-    my = 372
-    if expr == 'happy':                                    # open grin: teeth and tongue
-        c.move_to(166, my - 14); c.curve_to(200, my + 86, 312, my + 86, 346, my - 14); c.close_path()
-        c.set_source_rgb(0.3, 0.07, 0.1); c.fill_preserve(); c.save(); c.clip()
-        c.set_source_rgb(1, 1, 1); c.rectangle(150, my - 20, 220, 30); c.fill()
-        c.set_source_rgb(0.95, 0.45, 0.5); ell(c, 256, my + 70, 56, 30); c.fill(); c.restore()
-        c.move_to(166, my - 14); c.curve_to(200, my + 86, 312, my + 86, 346, my - 14); c.close_path()
-        c.set_source_rgb(*INK); c.set_line_width(9); c.stroke()
-    elif expr == 'smile':
-        c.set_source_rgb(*INK); c.set_line_width(13); c.move_to(176, my); c.curve_to(214, my + 52, 298, my + 52, 336, my); c.stroke()
-        c.set_line_width(8); c.move_to(166, my - 8); c.line_to(180, my + 4); c.move_to(346, my - 8); c.line_to(332, my + 4); c.stroke()
-    elif expr == 'smirk':
-        c.set_source_rgb(*INK); c.set_line_width(13); c.move_to(200, my + 22); c.curve_to(250, my + 40, 310, my + 26, 344, my - 16); c.stroke()
+    ex, ey = 82, 214
+    eh = dict(smile=40, happy=30, calm=26, smirk=30, scared=46, angry=28)[expr]
+    for sx in (-1, 1):
+        x = 256 + sx * ex
+        if expr == 'scared':
+            ell(c, x, ey, 34, 44); c.set_source_rgb(1, 1, 1); c.fill_preserve(); c.set_source_rgb(*INK); c.set_line_width(7); c.stroke()
+            c.arc(x, ey + 4, 14, 0, 2 * math.pi); c.fill()
+        else:
+            ell(c, x, ey, 21, eh); c.set_source_rgb(*INK); c.fill()
+            c.set_source_rgb(1, 1, 1); ell(c, x + 6, ey - eh * 0.45, 6, 8); c.fill()
+            c.set_source_rgba(col[0], col[1], col[2], 0.55); ell(c, x, ey + eh * 0.45, 12, eh * 0.3); c.fill()
+        tilt = dict(smile=None, happy=None, calm=0.0, smirk=-0.16, scared=0.34, angry=-0.38)[expr]
+        if tilt is not None:
+            by = ey - eh - (34 if expr == 'scared' else 20)
+            c.save(); c.translate(x, by); c.rotate(-tilt * sx)
+            c.set_source_rgb(*INK); c.set_line_width(11); c.move_to(-34, 0); c.line_to(34, 0); c.stroke(); c.restore()
+    c.set_source_rgb(*INK); c.set_line_width(11)
+    my = 348
+    if expr == 'smile':
+        c.move_to(190, my); c.curve_to(222, my + 40, 290, my + 40, 322, my); c.stroke()
+    elif expr == 'happy':
+        c.move_to(182, my - 4); c.curve_to(214, my + 62, 298, my + 62, 330, my - 4); c.close_path()
+        c.set_source_rgb(0.32, 0.08, 0.1); c.fill_preserve(); c.set_source_rgb(*INK); c.stroke()
+        c.set_source_rgb(1, 1, 1); c.move_to(196, my + 2); c.line_to(316, my + 2); c.set_line_width(12); c.stroke()
     elif expr == 'calm':
-        c.set_source_rgb(*INK); c.set_line_width(12); c.move_to(210, my + 16); c.curve_to(240, my + 22, 272, my + 22, 302, my + 16); c.stroke()
+        c.move_to(214, my + 12); c.line_to(298, my + 12); c.stroke()
+    elif expr == 'smirk':
+        c.move_to(206, my + 18); c.curve_to(250, my + 30, 300, my + 20, 326, my - 12); c.stroke()
     elif expr == 'scared':
-        ell(c, 256, my + 26, 54, 62); c.set_source_rgb(0.3, 0.07, 0.1); c.fill_preserve(); c.save(); c.clip()
-        c.set_source_rgb(1, 1, 1); c.rectangle(190, my - 44, 132, 26); c.fill()
-        c.set_source_rgb(0.95, 0.45, 0.5); ell(c, 256, my + 84, 40, 26); c.fill(); c.restore()
-        ell(c, 256, my + 26, 54, 62); c.set_source_rgb(*INK); c.set_line_width(9); c.stroke()
-        c.set_source_rgba(0.5, 0.8, 1, 0.9); c.move_to(408, 150); c.curve_to(392, 180, 392, 196, 408, 200); c.curve_to(424, 196, 424, 180, 408, 150); c.fill()
-    else:                                                  # angry: gritted teeth
-        c.move_to(172, my - 6); c.curve_to(210, my - 22, 302, my - 22, 340, my - 6); c.line_to(332, my + 46)
-        c.curve_to(296, my + 34, 216, my + 34, 180, my + 46); c.close_path()
-        c.set_source_rgb(1, 1, 1); c.fill_preserve(); c.set_source_rgb(*INK); c.set_line_width(9); c.stroke()
-        c.set_line_width(5)
-        for k in range(1, 6):
-            c.move_to(172 + k * 28, my - 16); c.line_to(174 + k * 27.5, my + 38)
-        c.move_to(176, my + 16); c.line_to(336, my + 16); c.stroke()
+        ell(c, 256, my + 22, 34, 40); c.set_source_rgb(0.32, 0.08, 0.1); c.fill_preserve(); c.set_source_rgb(*INK); c.set_line_width(8); c.stroke()
+    else:
+        c.move_to(196, my + 30); c.curve_to(226, my - 4, 286, my - 4, 316, my + 30); c.stroke()
     return s
 
 
