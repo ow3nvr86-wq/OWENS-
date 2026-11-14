@@ -55,7 +55,9 @@ const POSES2 = {
 // ---------------- rubber-hose limb ----------------
 function hose(g, ax, ay, bx, by, L, side, w0, w1) {
   const dx = bx - ax, dy = by - ay, d = Math.hypot(dx, dy) || 1e-6;
-  const h = d >= L ? 0 : Math.sqrt((L * L - d * d) * 3 / 16);          // sag that keeps the arc length ~L
+  // control-point offset solved (bisection) so the curve's arc length is exactly L
+  const arcLen = c => { let s = 0, px = 0, py = 0; for (let i = 1; i <= 16; i++) { const u = i / 16, x = u * d, y = 2 * (1 - u) * u * c; s += Math.hypot(x - px, y - py); px = x; py = y; } return s; };
+  let h = 0; if (d < L) { let lo = 0, hi = L; for (let it = 0; it < 22; it++) { const mid = (lo + hi) / 2; if (arcLen(mid) < L) lo = mid; else hi = mid; } h = lo / 2; }
   const nx = -dy / d * side, ny = dx / d * side, cx = (ax + bx) / 2 + nx * 2 * h, cy = (ay + by) / 2 + ny * 2 * h;
   const N = 14, Lp = [], Rp = [];
   for (let i = 0; i <= N; i++) {

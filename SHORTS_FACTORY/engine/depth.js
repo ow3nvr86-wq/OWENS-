@@ -55,14 +55,18 @@ function cam3At(s, t) {
   const foc = m.focus || [0.5, 0.5], pfx = (foc[0] - 0.5) * W, pfy = (foc[1] - 0.5) * H;
   let f = F0 * (m.zoom || 1), Cx = 0, Cy = 0, Cz = 0;
   const move = m.move || 'push';
+  // pan / tilt are camera ROTATIONS: everything shifts together (no parallax); truck / pedestal / push are translations
+  const rotate = /^(pan|tilt)_/.test(move);
+  let rx = 0, ry = 0;
+  if (rotate) { rx = lerp(base[2], base[3], u) * k; ry = lerp(base[4], base[5], u) * k; }
   if (move === 'punch') f *= lerp(1, lerp(base[0], base[1], u), k);
   else {
     const sMid = lerp(1, lerp(base[0], base[1], u), k);              // wanted scale of the focus plane
     Cz = zf * (1 - 1 / sMid);                                          // dolly that gives it
     const kf = zf * f / (F0 * (zf - Cz));
     Cx = pfx * (kf - 1) * (zf - Cz) / f; Cy = pfy * (kf - 1) * (zf - Cz) / f;   // along the ray, so the focus point holds still
-    Cx -= lerp(base[2], base[3], u) * k * (zf - Cz) / f;                       // truck / pedestal (px at the focus plane)
-    Cy -= lerp(base[4], base[5], u) * k * (zf - Cz) / f;
+    if (!rotate) { Cx -= lerp(base[2], base[3], u) * k * (zf - Cz) / f;          // truck / pedestal (px at the focus plane)
+      Cy -= lerp(base[4], base[5], u) * k * (zf - Cz) / f; }
   }
   if (m.from || m.to) {                                                // explicit 3D move: {x, y, z, f, roll}
     const a = Object.assign({ x: 0, y: 0, z: 0, f: 1, roll: 0 }, m.from), b = Object.assign({}, a, m.to);
@@ -74,7 +78,7 @@ function cam3At(s, t) {
   let hx = noise(t * 0.45 + sd, 1) * 3.5 * hs, hy = noise(t * 0.4 + sd, 2) * 3.5 * hs;
   for (const fx2 of s.fx || []) if (fx2.shake && t > fx2.t0 && t < fx2.t0 + 0.6) { const a = fx2.shake * Math.exp(-(t - fx2.t0) * 8); hx += Math.sin(t * 90) * a; hy += Math.cos(t * 77) * a; }
   for (const sh of s._shakes || []) if (t > sh.t0 && t < sh.t0 + 0.7) { const a = sh.amp * Math.exp(-(t - sh.t0) * 7); hx += Math.sin(t * 83 + sh.t0) * a; hy += Math.cos(t * 71 + sh.t0) * a; }
-  return { x: Cx, y: Cy, z: Cz, f, roll: roll * Math.PI / 180, hx, hy };
+  return { x: Cx, y: Cy, z: Cz, f, roll: roll * Math.PI / 180, hx: hx + rx, hy: hy + ry };
 }
 // the 2D affine of the plane at depth z: translate(c - C*f/(z-Cz)) . scale(k) . translate(-c)
 function planeK(cam, z) { const d = Math.max(1, z - cam.z); return { k: z * cam.f / (F0 * d), ox: -cam.x * cam.f / d, oy: -cam.y * cam.f / d }; }

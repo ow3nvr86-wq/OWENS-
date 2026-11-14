@@ -178,7 +178,7 @@
    "loc": "b_sky",
    "camera": {
     "move": "tilt_down",
-    "amount": 1.5,
+    "amount": 1.0,
     "focus": [
      0.5,
      0.5
@@ -306,7 +306,7 @@
       0.75
      ],
      "z": [
-      400,
+      140,
       50
      ],
      "action": "skydive",
@@ -328,7 +328,7 @@
    "loc": "b_town",
    "camera": {
     "move": "tilt_down",
-    "amount": 1.8,
+    "amount": 1.0,
     "focus": [
      0.5,
      0.6
@@ -647,7 +647,7 @@
    "loc": "b_town",
    "camera": {
     "move": "tilt_up",
-    "amount": 2.6,
+    "amount": 1.0,
     "focus": [
      0.5,
      0.35
@@ -705,7 +705,7 @@
    "loc": "b_sky",
    "camera": {
     "move": "tilt_down",
-    "amount": 1.6,
+    "amount": 1.0,
     "focus": [
      0.5,
      0.5
@@ -963,7 +963,7 @@
    "loc": "b_crater",
    "camera": {
     "move": "tilt_up",
-    "amount": 1.6,
+    "amount": 1.0,
     "focus": [
      0.5,
      0.5
@@ -1010,7 +1010,7 @@
    "cue": "You float",
    "loc": "b_sky",
    "camera": {
-    "move": "pan_right",
+    "move": "truck_right",
     "amount": 1.6,
     "focus": [
      0.5,
@@ -1169,7 +1169,7 @@
      "cast": "dancer",
      "x": 0.8,
      "y": 0.652,
-     "scale": 0.2,
+     "scale": 0.28,
      "z": "mid",
      "action": "dance",
      "mood": "happy",
@@ -1355,7 +1355,7 @@
    "loc": "b_field",
    "camera": {
     "move": "tilt_up",
-    "amount": 1.8,
+    "amount": 1.0,
     "focus": [
      0.5,
      0.5

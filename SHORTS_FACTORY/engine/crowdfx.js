@@ -10,7 +10,7 @@ function crowdVariation(cr, i) {
   return {
     height: 1 + (r(1) - 0.5) * 0.16,                   // +-8 %
     speed: 1 + (r(2) - 0.5) * 0.2,                     // +-10 %
-    phase: r(3),                                       // gait cycle offset
+    phase: (i * 0.6180339887 + r(3) * 0.25) % 1,       // gait cycle offset: golden-ratio spread, so neighbours never sync
     delay: r(4) * 0.4,                                 // start delay 0-0.4 s
     def: Object.assign({ hatSpring: { freq: 2.6 + r(5) * 1.6, damping: 0.16 + r(6) * 0.14, mass: 0.8 + r(7) * 0.5 } },
       variants ? { costume: variants[Math.floor(r(8) * variants.length)] } : {}),

@@ -17,7 +17,7 @@ sc.append(dict(cue='and', loc='b_sky', camera=dict(move='pan_left', amount=1.4, 
   characters=[ch(id='hero', cast='hero', x=1.1, y=0.52 - 0.0625, scale=0.42, z='mid', action='wave', mood='happy', move=mv(x=0.5, f=0, to='Fortnite'))],
   sfx=[dict(type='boing', at='Bus', gain=0.5)]))
 # 3  Fortnite. Chapter 1, Season 4. (skydive)
-sc.append(dict(cue='Fortnite', loc='b_sky', camera=dict(move='tilt_down', amount=1.5, focus=[0.5, 0.5]), transition='cut',
+sc.append(dict(cue='Fortnite', loc='b_sky', camera=dict(move='tilt_down', amount=1.0, focus=[0.5, 0.5]), transition='cut',
   characters=[ch(id='hero', cast='hero', x=0.5, y=0.66, scale=1.5, z='fg', action='skydive', mood='happy', bodyRot=-1.0, lookAt='down', keys=[dict(cue='Chapter', mood='determined')])],
   fx=[dict(type='rushclouds', at=0, z='near', n=9, dir=-1)], sfx=[dict(type='whoosh', at=0.0)]))
 # 4  A comet just flattened Dusty Depot...
@@ -27,10 +27,10 @@ sc.append(dict(cue='A comet', loc='b_sky', camera=dict(move='pull', focus=[0.5, 
 sc[-1]['fx'][0].pop('from_'); sc[-1]['fx'][0].update({'from': [1.25, -0.15], 'to': [0.5, 0.71]})
 # 5  and ninety-nine players want you gone. (crowd skydiving at every depth)
 sc.append(dict(cue='and', loc='b_sky', camera=dict(move='push', amount=1.3, focus=[0.5, 0.5]), transition='whip',
-  crowds=[dict(cast=['p1', 'p2', 'p3', 'p4'], count=70, area=[0.0, 0.05, 1.0, 1.0], scale=[0.12, 0.75], z=[400, 50], action='skydive', mood='angry', dy=-0.03, seed=4)],
+  crowds=[dict(cast=['p1', 'p2', 'p3', 'p4'], count=70, area=[0.0, 0.05, 1.0, 1.0], scale=[0.12, 0.75], z=[140, 50], action='skydive', mood='angry', dy=-0.03, seed=4)],
   sfx=[dict(type='charge', at='players', gain=0.7)]))
 # 6  You drop into Tilted Towers.
-sc.append(dict(cue='You drop', loc='b_town', camera=dict(move='tilt_down', amount=1.8, focus=[0.5, 0.6]), transition='cut',
+sc.append(dict(cue='You drop', loc='b_town', camera=dict(move='tilt_down', amount=1.0, focus=[0.5, 0.6]), transition='cut',
   characters=[ch(id='hero', cast='hero', x=0.5, y=0.86, scale=0.95, z='fg', action='glide', prop='glider', mood='happy', air=[dict(at=0, h=0.75), dict(at='Towers', h=0.0)], keys=[dict(cue='Towers', action='idle', prop=None)])],
   sfx=[dict(type='whoosh', at=0.0)]))
 # 7  So does everyone else.
@@ -57,12 +57,12 @@ sc.append(dict(cue='A ramp', loc='b_town', camera=dict(move='push', focus=[0.5, 
   props=[dict(type='wall', x=0.78, y=0.9, scale=1.05, z='fg'), dict(type='ramp', x=0.42, y=0.9, scale=1.05, z='fg', at='ramp')],
   characters=[ch(id='hero', cast='hero', x=0.2, y=0.9, scale=0.95, z='fg', action='run', mood='determined', move=mv(x=0.5, y=0.7, f='ramp', to=0.62))],
   sfx=[dict(type='knock', at='ramp')]))
-sc.append(dict(cue='A staircase', loc='b_town', camera=dict(move='tilt_up', amount=2.6, focus=[0.5, 0.35]), transition='cut',
+sc.append(dict(cue='A staircase', loc='b_town', camera=dict(move='tilt_up', amount=1.0, focus=[0.5, 0.35]), transition='cut',
   props=[dict(type='stairs', x=0.5, y=0.95, scale=0.62, z='fg', at='staircase', steps=60, rate=0.025)],
   characters=[ch(id='hero', cast='hero', x=0.5, y=0.95 - 0.62 * 60 * 50 / 1920 + 0.01, scale=0.35, z='fg', mood='happy', action='idle', keys=[dict(cue='nowhere', mood='worried', lookAt='down')])],
   sfx=[dict(type='knock', at='staircase'), dict(type='pop', at='to'), dict(type='pop', at='nowhere')]))
 # 13 You jump off the top...
-sc.append(dict(cue='You jump', loc='b_sky', camera=dict(move='tilt_down', amount=1.6, focus=[0.5, 0.5]), transition='whip',
+sc.append(dict(cue='You jump', loc='b_sky', camera=dict(move='tilt_down', amount=1.0, focus=[0.5, 0.5]), transition='whip',
   characters=[ch(id='hero', cast='hero', x=0.5, y=0.7, scale=1.6, z='fg', action='jump', mood='happy', keys=[dict(cue='top', action='fall', mood='shocked')])],
   fx=[dict(type='rushclouds', at='top', z='near', n=7, dir=-1)], sfx=[dict(type='boing', at='jump'), dict(type='whoosh', at='top')]))
 # 14 and land in the crater at Dusty Divot.
@@ -83,11 +83,11 @@ sc.append(dict(cue='You crush', loc='b_crater', camera=dict(move='punch', amount
   characters=[ch(id='hero', cast='hero', x=0.45, y=hy(2.5, 0.45), scale=2.5, z='fg', action='crush', mood='determined', lookAt='right', keys=[dict(cue='one', mood='happy')])],
   fx=[dict(type='burst', at='crush', x=0.62, y=0.3, z='fg', dur=0.8)], sfx=[dict(type='pop', at='crush'), dict(type='sting', at='one', gain=0.5)]))
 # 18 Gravity? Gone.
-sc.append(dict(cue='Gravity', loc='b_crater', camera=dict(move='tilt_up', amount=1.6, focus=[0.5, 0.5]), transition='cut',
+sc.append(dict(cue='Gravity', loc='b_crater', camera=dict(move='tilt_up', amount=1.0, focus=[0.5, 0.5]), transition='cut',
   characters=[ch(id='hero', cast='hero', x=0.5, y=0.82, scale=0.9, z='fg', action='float', mood='shocked', air=[dict(at=0, h=0.0), dict(at='You', h=0.32)], keys=[dict(cue='Gone', mood='happy')])],
   sfx=[dict(type='boing', at='Gravity', gain=0.6)]))
 # 19 You float across the map like a confused astronaut.
-sc.append(dict(cue='You float', loc='b_sky', camera=dict(move='pan_right', amount=1.6, focus=[0.5, 0.5]), transition='cut',
+sc.append(dict(cue='You float', loc='b_sky', camera=dict(move='truck_right', amount=1.6, focus=[0.5, 0.5]), transition='cut',
   characters=[ch(id='hero', cast='hero', x=0.15, y=0.62, scale=1.3, z='fg', action='float', mood='worried', move=mv(x=0.8, y=0.56, f=0, to='Then'), keys=[dict(cue='confused', lookAt='left'), dict(cue='astronaut', lookAt='camera')])],
   sfx=[dict(type='whoosh', at='float', gain=0.4)]))
 # 20 Then the storm closes in.
@@ -101,7 +101,7 @@ sc.append(dict(cue='Health', loc='b_field', camera=dict(move='push', amount=1.2,
 sc[-1]['fx'][1]['from'] = sc[-1]['fx'][1].pop('from_')
 # 22 Someone at Risky Reels is dancing at you.
 sc.append(dict(cue='Someone', loc='b_drivein', camera=dict(move='push', amount=1.4, focus=[0.7, 0.62]), transition='cut',
-  characters=[ch(id='dancer', cast='dancer', x=0.8, y=0.652, scale=0.2, z='mid', action='dance', mood='happy', lookAt='camera'),
+  characters=[ch(id='dancer', cast='dancer', x=0.8, y=0.652, scale=0.28, z='mid', action='dance', mood='happy', lookAt='camera'),
               ch(id='hero', cast='hero', x=0.2, y=hy(2.0, 0.52), scale=2.0, z='fg', mood='angry', lookAt='dancer', keys=[dict(cue='dancing', mood='angry')])],
   sfx=[dict(type='tada', at='dancing', gain=0.5)]))
 # 23 Final circle. One player left.
@@ -120,7 +120,7 @@ sc.append(dict(cue='You have', loc='b_field', camera=dict(move='push', focus=[0.
                  keys=[dict(cue='and one', prop='hoprock', mood='smug', lookAt='camera')])],
   sfx=[dict(type='knock', at='shotgun', gain=0.6), dict(type='ting', at='Hop')]))
 # 26 You crush it. You jump.
-sc.append(dict(cue='You crush', loc='b_field', camera=dict(move='tilt_up', amount=1.8, focus=[0.5, 0.5]), transition='cut',
+sc.append(dict(cue='You crush', loc='b_field', camera=dict(move='tilt_up', amount=1.0, focus=[0.5, 0.5]), transition='cut',
   characters=[ch(id='hero', cast='hero', x=0.45, y=0.85, scale=1.2, z='fg', action='crush', mood='determined', air=[dict(at=0, h=0), dict(at='jump', h=0), dict(at=1.65, h=0.38)], keys=[dict(cue='jump', action='jump', mood='happy')])],
   fx=[dict(type='burst', at='crush', x=0.53, y=0.52, z='fg')], sfx=[dict(type='pop', at='crush'), dict(type='boing', at='jump')]))
 # 27 He misses.

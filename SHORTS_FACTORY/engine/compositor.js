@@ -86,6 +86,7 @@ function captions(t) {
 const MOVES = {            // [scale0, scale1, dx0, dx1, dy0, dy1] (dx/dy in frame px at the end of the shot)
   push: [1.0, 1.12, 0, 10, 0, -8], pull: [1.12, 1.0, 0, -10, -8, 0], pan_left: [1.1, 1.12, 60, -60, 0, 0], pan_right: [1.1, 1.12, -60, 60, 0, 0],
   tilt_up: [1.1, 1.12, 0, 0, 70, -50], tilt_down: [1.1, 1.12, 0, 0, -60, 60], drift: [1.04, 1.08, -20, 20, 0, 0], punch: [1.0, 1.25, 0, 0, 0, 0],
+  truck_left: [1.06, 1.08, 60, -60, 0, 0], truck_right: [1.06, 1.08, -60, 60, 0, 0], pedestal_up: [1.06, 1.08, 0, 0, 70, -50], pedestal_down: [1.06, 1.08, 0, 0, -60, 60],
 };
 function camAt(s, t) {
   const m = s.camera || {}; const base = MOVES[m.move || 'push'];
@@ -144,7 +145,7 @@ function charState(ch, s, t) {
       const at = tau => Math.hypot(x1 - x0, y1 - y0) * ease5((tau - ch.move.t0) / d) / st.scale;
       st.dist = at(t); st.speedL = (at(t + 0.01) - at(t - 0.01)) / 0.02;
     } else if (GAIT[st.action]) { st.speedL = ch.speed ?? (st.action === 'run' ? 520 : 260); st.dist = (t - s.start) * st.speedL; }
-    st.cycle = hash(seed * 1.3); st.air = 0;
+    st.cycle = hash(seed * 1.3); st.air = 0; if (ch.bodyRot != null && st.bodyRot == null) st.bodyRot = ch.bodyRot;
     if (ch.air) { let prev = { t: -1e9, h: 0 }; for (const k of ch.air) { if (t < k.t) { const u = (t - prev.t) / Math.max(0.05, k.t - prev.t); st.air = lerp(prev.h, k.h, k.ease === 'linear' ? clamp(u) : ease5(u)) * H / st.scale; prev = null; break; } prev = k; } if (prev) st.air = prev.h * H / st.scale; }
     st.blinkKey = 0; for (const k of ch.keys || []) if (k.mood && t >= k.t && t < k.t + 0.14) st.blinkKey = Math.sin(Math.PI * (t - k.t) / 0.14);
     lookState(ch, s, t, st);
