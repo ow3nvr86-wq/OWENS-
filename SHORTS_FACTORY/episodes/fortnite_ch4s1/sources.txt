@@ -10,8 +10,11 @@ Reality Augments: a choice of two at set points   | EGM "Chapter 4 Season 1 incl
   (one site said it wasn't available on day one; the official page lists it on Day 1, so we follow the official page)
 Dirt bikes were new                               | Shacknews; TheGamer
 Shockwave Hammer launches you through the air     | GameSpot "Where to get the Shockwave Hammer and how to use it"; GamesRadar Shockwave Hammer guide
-Up to 100 players (ninety-nine others), the storm, "Victory Royale" for a win | core battle-royale rules, described in every guide above
+Thunder Shotgun was new this season               | GameSpot "New weapons in Chapter 4 Season 1"; Twinfinite vaulted/unvaulted list
+No sniper rifle at launch; the DMR was the long-range option | Twinfinite / ProGameGuides weapon lists; WePC tier list
+Up to 100 players (ninety-nine others), the Battle Bus, the storm, emotes, the lobby, "Victory Royale" for a win | core game features, described in every guide above
 
 Illustrative / comedy, not a real match: the whole run is a joke story told in second person ("you").
+Script v2 uses only things that exist in the game this season (no sniper - the DMR instead; no couch ending - the lobby).
 On screen everything is drawn in the channel's own original cartoon style: no Epic Games logos, skins,
 map art, weapon models or music are copied. The game is named and described, not recreated.

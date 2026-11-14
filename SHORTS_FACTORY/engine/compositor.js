@@ -4,7 +4,13 @@
 const cv = document.getElementById('c'), X = cv.getContext('2d');
 const mk = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return [c, c.getContext('2d')]; };
 const [A, AX] = mk(), [B, BX] = mk();
-const EP = new URLSearchParams(location.search).get('ep');
+const QS = new URLSearchParams(location.search), EP = QS.get('ep');
+// render mode: 'final' (full quality) or 'draft' (no motion blur, half-resolution output)
+const MODE = QS.get('mode') === 'draft' ? 'draft' : 'final';
+// debug overlays: ?debug=depth,rig,lipsync,crowd,blur
+const DEBUG = new Set((QS.get('debug') || '').split(',').filter(Boolean));
+// feature flags (script.json "features"); every upgrade is OFF unless the episode turns it on
+let FEAT = { depth: false, motionBlur: false, rigV2: false, lipSync: false, crowdFX: false };
 let AFPS = 30, SCRIPT, WORDS, AMP, SCENES = [], CHUNKS = [], BG = {}, NORM = [];
 
 const norm = s => s.toLowerCase().replace(/[^a-z0-9' ]/g, ' ').replace(/'/g, '').trim();
@@ -179,8 +185,8 @@ function blurDraw(dst, src, x, y, amt, sc = 1) {
   dst.restore();
 }
 const TR = 0.15;
-function renderFrame(f) {
-  const t = f / FPS, i = shotIndex(t), s = SCENES[i], next = SCENES[i + 1], prev = SCENES[i - 1];
+function compose(t) {
+  const i = shotIndex(t), s = SCENES[i], next = SCENES[i + 1], prev = SCENES[i - 1];
   X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = '#000'; X.fillRect(0, 0, W, H);
   let p = null, a = i, b = i + 1, kind = null;
   if (next && (s.transition === 'whip' || s.transition === 'zoom') && t > s.end - TR) { p = (t - (s.end - TR)) / (2 * TR); kind = s.transition; }
@@ -192,19 +198,62 @@ function renderFrame(f) {
     if (kind === 'whip') { blurDraw(X, A, -e * W, 0, amt); blurDraw(X, B, W - e * W, 0, amt); }
     else { X.globalAlpha = 1; blurDraw(X, A, 0, 0, 0, 1 + e * 0.6); X.globalAlpha = e; X.drawImage(B, 0, 0); X.globalAlpha = 1; }
   }
-  // vignette + light grain
+}
+function renderFrame(f) {
+  const t = f / FPS;
+  if (FEAT.motionBlur && MODE === 'final') motionBlurFrame(t); else compose(t);
+  X.setTransform(1, 0, 0, 1, 0, 0); X.globalAlpha = 1; X.filter = 'none';
+  // vignette (after the blur, so it stays put), then sharp captions and debug overlays
   const vg = X.createRadialGradient(W / 2, H / 2, H * 0.3, W / 2, H / 2, H * 0.75); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,0.38)');
   X.fillStyle = vg; X.fillRect(0, 0, W, H);
   captions(t);
+  if (DEBUG.size && window.drawDebug) window.drawDebug(X, t);
   return true;
 }
+// ---------------- motion blur: N sub-frames across a 180-degree shutter, averaged in linear light ----------------
+const S2L = new Float32Array(256).map((_, i) => { const c = i / 255; return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); });
+const L2S = new Uint8ClampedArray(4096).map((_, i) => { const c = i / 4095; return Math.round(255 * (c <= 0.0031308 ? c * 12.92 : 1.055 * Math.pow(c, 1 / 2.4) - 0.055)); });
+let ACC = null, MBSTAT = { frames: 0, reused: 0 };
+const [TINY, TX] = (() => { const c = document.createElement('canvas'); c.width = 135; c.height = 240; return [c, c.getContext('2d', { willReadFrequently: true })]; })();
+function subTime(t, k, n, shutter) {
+  let ts = t + (n === 1 ? 0 : (k / (n - 1) - 0.5)) * shutter / FPS;
+  const i = shotIndex(t), j = shotIndex(ts), s = SCENES[i];
+  // never blend across a hard cut (whip/zoom transitions are continuous, so they may blur across)
+  if (j !== i) { const a = Math.min(i, j), cutT = SCENES[a].end, tr = SCENES[a].transition;
+    if (tr !== 'whip' && tr !== 'zoom') ts = j > i ? Math.min(ts, s.end - 1e-4) : Math.max(ts, s.start); }
+  return Math.max(0, ts);
+}
+function tinySnap() { TX.drawImage(cv, 0, 0, 135, 240); return TX.getImageData(0, 0, 135, 240).data; }
+function motionBlurFrame(t) {
+  const mb = SCRIPT.motion_blur || {}, n = Math.max(1, mb.samples || 8), shutter = mb.shutter ?? 0.5;
+  MBSTAT.frames++;
+  if (n === 1) return compose(t);
+  // speed-up: if nothing moved more than ~1 px across the shutter, reuse the sharp frame
+  compose(subTime(t, 0, n, shutter)); const a = tinySnap().slice();
+  compose(subTime(t, n - 1, n, shutter)); const b = tinySnap();
+  let moved = 0; for (let i = 0; i < a.length; i += 4) if (Math.abs(a[i] - b[i]) + Math.abs(a[i + 1] - b[i + 1]) + Math.abs(a[i + 2] - b[i + 2]) > 24) moved++;
+  if (moved < 6) { MBSTAT.reused++; return compose(t); }
+  if (!ACC) ACC = new Float32Array(W * H * 3);
+  ACC.fill(0);
+  const add = () => { const d = X.getImageData(0, 0, W, H).data;
+    for (let p = 0, q = 0; p < d.length; p += 4, q += 3) { ACC[q] += S2L[d[p]]; ACC[q + 1] += S2L[d[p + 1]]; ACC[q + 2] += S2L[d[p + 2]]; } };
+  add();                                                   // the last sub-frame is already on the canvas
+  for (let k = 0; k < n - 1; k++) { compose(subTime(t, k, n, shutter)); add(); }
+  const img = X.createImageData(W, H), o = img.data, kN = 4095 / n;
+  for (let p = 0, q = 0; p < o.length; p += 4, q += 3) { o[p] = L2S[Math.min(4095, (ACC[q] * kN) | 0)]; o[p + 1] = L2S[Math.min(4095, (ACC[q + 1] * kN) | 0)]; o[p + 2] = L2S[Math.min(4095, (ACC[q + 2] * kN) | 0)]; o[p + 3] = 255; }
+  X.setTransform(1, 0, 0, 1, 0, 0); X.putImageData(img, 0, 0);
+}
+// export: FINAL = full 1080x1920, DRAFT = half resolution
+const [HALF, HX] = (() => { const c = document.createElement('canvas'); c.width = W / 2; c.height = H / 2; return [c, c.getContext('2d')]; })();
+window.exportFrame = (f, q = 0.94) => { renderFrame(f); if (MODE === 'draft') { HX.drawImage(cv, 0, 0, W / 2, H / 2); return HALF.toDataURL('image/jpeg', q); } return cv.toDataURL('image/jpeg', q); };
+window.MBSTAT = MBSTAT;
 window.renderFrame = renderFrame;
 (async () => {
   SCRIPT = await (await fetch('../' + EP + '/script.json')).json();
   const wj = await (await fetch('../' + EP + '/work/words.json')).json(); WORDS = wj.words; SCRIPT._duration = wj.duration;
   AMP = await (await fetch('../' + EP + '/work/amp.json')).json(); AFPS = wj.fps || 30;
   { let e = 0; AMP = AMP.map(v => (e = v > e ? lerp(e, v, 0.75) : lerp(e, v, 0.35))); }
-  FPS = SCRIPT.fps || 60;
+  FPS = SCRIPT.fps || 60; FEAT = Object.assign(FEAT, SCRIPT.features || {}); window.FEAT = FEAT; window.MODE = MODE;
   window.FPS = FPS; window.FRAMES = Math.round(wj.duration * FPS);
   resolve(); buildCaptions();
   const bgs = [...new Set(SCRIPT.scenes.map(s => s.bg))];
