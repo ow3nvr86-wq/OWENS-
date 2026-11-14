@@ -1,2 +1,6 @@
 node_modules/
 dist/
+__pycache__/
+.venv/
+Apps/paper-portfolio/prices.json
+YouTube/tools/shorts-clipper/out/

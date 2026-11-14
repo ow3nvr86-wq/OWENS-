@@ -1,0 +1,5 @@
+anthropic>=2.3.0
+openai>=3.42.0
+pillow>=10.1
+imageio-ffmpeg>=0.5
+pydantic>=2

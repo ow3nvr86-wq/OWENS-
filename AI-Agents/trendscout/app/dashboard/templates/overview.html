@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% from "_macros.html" import status_pill %}
+{% block content %}
+<h1>Overview</h1>
+
+<section class="grid controls">
+  <div class="card">
+    <h2>Publishing</h2>
+    {% if paused %}
+      <p>All publishing is <strong>paused</strong>. Nothing is posted until you resume.</p>
+      <form method="post" action="/controls/resume" data-confirm="Resume publishing? Approved posts that are due will be published.">
+        <input type="hidden" name="csrf_token" value="{{ csrf }}"><button class="primary">Resume publishing</button>
+      </form>
+    {% else %}
+      <p>Publishing is active{% if dry_run %} in <strong>dry-run</strong> mode{% endif %}.</p>
+      <form method="post" action="/controls/pause" class="inline">
+        <input type="hidden" name="csrf_token" value="{{ csrf }}">
+        <input name="reason" placeholder="Reason (optional)" aria-label="Pause reason">
+        <button class="danger">Pause all publishing now</button>
+      </form>
+    {% endif %}
+    <p class="small muted">{{ auto_reason|capitalize }}.</p>
+    <form method="post" action="/controls/{{ 'auto-off' if auto_publish else 'auto-on' }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf }}">
+      <button>{{ 'Disable automatic publishing' if auto_publish else 'Allow automatic publishing (if the config permits it)' }}</button>
+    </form>
+  </div>
+  <div class="card">
+    <h2>Run now</h2>
+    {% if not ai_ready %}<p class="flash error small">ANTHROPIC_API_KEY is not set: discovery will collect and rank trends but cannot research or write.</p>{% endif %}
+    <div class="buttons">
+      {% for a, label in [('run-discovery', 'Discover trends'), ('run-publish', 'Publish due posts'), ('run-metrics', 'Collect metrics')] %}
+      <form method="post" action="/controls/{{ a }}"><input type="hidden" name="csrf_token" value="{{ csrf }}"><button>{{ label }}</button></form>
+      {% endfor %}
+    </div>
+    <p class="small muted">{{ running }} background task(s) running. Scheduled discovery: {{ settings.schedule.discovery_times|join(', ') }}.</p>
+    <p class="small">AI spend this month (estimate): <strong>${{ '%.2f'|format(spend) }}</strong> of ${{ '%.2f'|format(budget) }}</p>
+  </div>
+</section>
+
+<section class="grid stats">
+  {% for key, label in [('pending_approval', 'Awaiting approval'), ('approved', 'Approved'), ('published', 'Published'), ('rejected', 'Rejected by reviewer')] %}
+  <a class="card stat" href="/drafts?status={{ key }}"><span class="num">{{ counts.get(key, 0) }}</span><span>{{ label }}</span></a>
+  {% endfor %}
+  <a class="card stat {{ 'alert' if jobs.get('uncertain') }}" href="/queue"><span class="num">{{ jobs.get('uncertain', 0) }}</span><span>Uncertain publications</span></a>
+  <a class="card stat" href="/queue"><span class="num">{{ jobs.get('queued', 0) }}</span><span>Scheduled</span></a>
+</section>
+
+<section class="card">
+  <h2>Platforms</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Platform</th><th>Drafts</th><th>Credentials</th><th>Last check</th><th>Daily limit</th><th>Requirements</th></tr></thead>
+    <tbody>
+    {% for p in platforms %}
+      <tr>
+        <td><strong>{{ p.name }}</strong></td>
+        <td>{{ 'on' if p.enabled else 'off' }}</td>
+        <td>{% if p.configured %}<span class="pill ok">present</span>{% else %}<span class="pill">unconfigured</span>{% endif %}<div class="small muted">{{ p.detail }}</div></td>
+        <td>{{ p.verified or 'never (run python -m app doctor)' }}</td>
+        <td>{{ p.daily_limit }}</td>
+        <td class="small">{{ p.prerequisites }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+</section>
+
+<section class="grid two">
+  <div class="card">
+    <h2>Recent runs</h2>
+    <ul class="list">
+    {% for r in runs %}
+      <li>{{ status_pill(r.status) }} <strong>{{ r.kind }}</strong> · {{ r.started_at|local }} · {{ r.trigger }}{% if r.offline %} · offline{% endif %}
+        {% set st = r.stats_json|fromjson %}
+        {% if st.selected is defined %}<div class="small muted">{{ st['items'] }} items → {{ st.topics }} topics → {{ st.selected|length }} selected → {{ st.drafts }} drafts</div>{% endif %}
+        {% if r.error %}<div class="small error-text">{{ r.error }}</div>{% endif %}
+      </li>
+    {% else %}<li class="muted">No runs yet. Click “Discover trends”.</li>{% endfor %}
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Recent errors</h2>
+    <ul class="list">
+    {% for e in errors %}<li><span class="small muted">{{ e.ts|local }} · {{ e.component }}</span><div>{{ e.message }}</div></li>
+    {% else %}<li class="muted">No errors.</li>{% endfor %}
+    </ul>
+    <a href="/logs">All logs →</a>
+  </div>
+</section>
+{% endblock %}
