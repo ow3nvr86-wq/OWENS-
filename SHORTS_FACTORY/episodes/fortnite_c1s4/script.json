@@ -1225,9 +1225,9 @@
     {
      "id": "sniper",
      "cast": "sniper",
-     "x": 0.79,
-     "y": 0.54,
-     "scale": 0.17,
+     "x": 0.6,
+     "y": 0.505,
+     "scale": 0.15,
      "z": "mid",
      "flip": true,
      "mood": "smug",
@@ -1246,8 +1246,8 @@
     {
      "type": "glint",
      "at": "One",
-     "x": 0.77,
-     "y": 0.505,
+     "x": 0.585,
+     "y": 0.475,
      "z": "mid"
     }
    ],
@@ -1474,8 +1474,8 @@
    "camera": {
     "move": "push",
     "focus": [
-     0.6,
-     0.6
+     0.55,
+     0.55
     ]
    },
    "transition": "cut",
@@ -1495,9 +1495,9 @@
     {
      "id": "sniper",
      "cast": "sniper",
-     "x": 0.79,
-     "y": 0.54,
-     "scale": 0.3,
+     "x": 0.62,
+     "y": 0.505,
+     "scale": 0.22,
      "z": "mid",
      "flip": true,
      "action": "aim",
@@ -1522,9 +1522,9 @@
     {
      "type": "blast",
      "at": "don't",
-     "x": 0.79,
-     "y": 0.54,
-     "r": 110,
+     "x": 0.62,
+     "y": 0.505,
+     "r": 90,
      "z": "mid",
      "shake": 28,
      "force": 1.0

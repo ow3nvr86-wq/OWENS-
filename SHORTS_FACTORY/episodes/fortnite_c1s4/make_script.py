@@ -107,8 +107,8 @@ sc.append(dict(cue='Someone', loc='b_drivein', camera=dict(move='push', amount=1
 # 23 Final circle. One player left.
 sc.append(dict(cue='Final', loc='b_field', camera=dict(move='pull', focus=[0.5, 0.6]), transition='cut',
   characters=[ch(id='hero', cast='hero', x=0.28, y=0.84, scale=0.55, z='fg', mood='determined', lookAt='sniper'),
-              ch(id='sniper', cast='sniper', x=0.79, y=0.54, scale=0.17, z='mid', flip=True, mood='smug', lookAt='hero')],
-  fx=[dict(type='storm', at=0, z='mid', x0=0.92, x1=0.86, dur=3), dict(type='glint', at='One', x=0.77, y=0.505, z='mid')],
+              ch(id='sniper', cast='sniper', x=0.6, y=0.505, scale=0.15, z='mid', flip=True, mood='smug', lookAt='hero')],
+  fx=[dict(type='storm', at=0, z='mid', x0=0.92, x1=0.86, dur=3), dict(type='glint', at='One', x=0.585, y=0.475, z='mid')],
   sfx=[dict(type='drums', at='Final', gain=0.6), dict(type='ting', at='One')]))
 # 24 He has a Bolt-Action Sniper.
 sc.append(dict(cue='He has', loc='b_field', camera=dict(move='push', focus=[0.6, 0.45]), transition='cut',
@@ -128,10 +128,10 @@ sc.append(dict(cue='He misses', loc='b_field', camera=dict(move='push', focus=[0
   characters=[ch(id='hero', cast='hero', x=0.45, y=0.66, scale=1.3, z='fg', action='float', mood='smug', air=[dict(at=0, h=0.2)], lookAt='right')],
   fx=[dict(type='tracer', at='misses', **{'from': [1.1, 0.6], 'to': [-0.1, 0.72]}, z='fg', dur=0.22)], sfx=[dict(type='whoosh', at='misses')]))
 # 28 You don't.
-sc.append(dict(cue="You don't", loc='b_field', camera=dict(move='push', focus=[0.6, 0.6]), transition='cut',
+sc.append(dict(cue="You don't", loc='b_field', camera=dict(move='push', focus=[0.55, 0.55]), transition='cut',
   characters=[ch(id='hero', cast='hero', x=0.22, y=0.86, scale=1.3, z='fg', action='aim', prop='shotgun', mood='determined', lookAt='sniper'),
-              ch(id='sniper', cast='sniper', x=0.79, y=0.54, scale=0.3, z='mid', flip=True, action='aim', prop='sniper', mood='smug', lookAt='hero', keys=[dict(cue="don't", mood='shocked')])],
-  fx=[dict(type='flash', at="don't", dur=0.18, amount=0.6), dict(type='blast', at="don't", x=0.79, y=0.54, r=110, z='mid', shake=28, force=1.0)],
+              ch(id='sniper', cast='sniper', x=0.62, y=0.505, scale=0.22, z='mid', flip=True, action='aim', prop='sniper', mood='smug', lookAt='hero', keys=[dict(cue="don't", mood='shocked')])],
+  fx=[dict(type='flash', at="don't", dur=0.18, amount=0.6), dict(type='blast', at="don't", x=0.62, y=0.505, r=90, z='mid', shake=28, force=1.0)],
   sfx=[dict(type='boom', at="don't")]))
 # 29 Victory Royale.
 sc.append(dict(cue='Victory', loc='b_field', camera=dict(move='push', focus=[0.5, 0.45]), transition='zoom',
