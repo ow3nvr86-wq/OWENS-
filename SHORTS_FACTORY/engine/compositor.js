@@ -294,6 +294,7 @@ function renderFrame(f) {
   // vignette (after the blur, so it stays put), then sharp captions and debug overlays
   const vg = X.createRadialGradient(W / 2, H / 2, H * 0.3, W / 2, H / 2, H * 0.75); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,0.38)');
   X.fillStyle = vg; X.fillRect(0, 0, W, H);
+  if (window.applyLook) applyLook(X);                       // the house colour look (looks/*.json), before the sharp captions
   captions(t);
   if (DEBUG.has('depth') && FEAT.depth && CUR_CAM) depthDebug(X, CUR_CAM.s, CUR_CAM.cam);
   if (DEBUG.size && window.drawDebug) window.drawDebug(X, t);
@@ -354,5 +355,6 @@ window.renderFrame = renderFrame;
   for (const sc of SCRIPT.scenes) if (sc.bgseq && window.loadSeq) await loadSeq(EP, sc.bgseq.dir);
   if (FEAT.lipSync) { try { VISKEYS = (await (await fetch('../' + EP + '/work/visemes.json')).json()).keys; } catch (e) { console.error('no visemes.json: run tools/visemes.py'); } }
   await document.fonts.load('800 90px Poppins');
+  if (window.loadLook) await loadLook(SCRIPT.look || 'ricks_clips');
   window.SCENES = SCENES; window.CHUNKS = CHUNKS; window.ready = true;
 })().catch(e => { console.error('compositor error: ' + e.message); window.loadError = e.message; });

@@ -20,6 +20,7 @@ locked, and runs the sound and finishing steps at the end.
 - **Truth:** check every fact in 2+ credible sources. Never present speculation as fact. Never invent quotes, documents or statistics.
 - **People:** use stylised original characters only. Never use a real victim's likeness, and never copy an existing show's characters.
 - **Narrator:** the user's `voice.wav` when they supply one. Otherwise Kokoro `bm_george`.
+- **Colour:** every video uses the house look in `SHORTS_FACTORY/LOOK.md` (Rick's Clips colouring, `looks/ricks_clips.json`). The engine applies it by default. Other pipelines run `tools/look.py apply`. Light the 3D for contrast, so the grade has shadows to work with.
 - **Look-dev first:** check test stills on a contact sheet before any long render.
 - **Rendering:** run long renders as tracked background tasks. Never run two renders, or a render and an edit, at the same time.
 - **Git:** commit and push after each finished stage, to the session's branch. Use no AI model names in any repo file.

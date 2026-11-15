@@ -8,6 +8,8 @@ description: Make a vertical animated cartoon short. Offers 10 ideas, writes the
 The look: flat 2D bean-head cartoon characters (canvas-drawn "cards" with plum outlines) in a colourful 3D world with black ink outlines, painted textures, depth-of-field and gliding cameras. The output is 1080x1920, 30 fps, exactly as long as the voiceover. The user's voice is unchanged. The music bed and SFX are synthesized and sit at **50 % of the voice level**. Proven on "The Soldier Who Never Left" (19.7 s, 8 shots).
 
 ## Rules
+
+- **Colour look:** every video gets the house Rick's Clips look (`SHORTS_FACTORY/LOOK.md`). Grade each rendered frame with `SHORTS_FACTORY/tools/look.py apply SHORTS_FACTORY/looks/ricks_clips.json` (or the same maths in the page) before captions.
 - Stories, characters and shots are always original. Never recreate another creator's video shot for shot. Offer an original take on the same idea instead.
 - No real, named living people as characters, and no brand mascots or logos.
 - No captions unless the user asks. Diegetic text (a carved message, a sign) is fine, and it must read correctly (not mirrored).
