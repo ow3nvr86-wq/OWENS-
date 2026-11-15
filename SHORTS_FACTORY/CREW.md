@@ -1,13 +1,12 @@
 # The crew
 
-Five agents make each episode. Their definitions are in `.claude/agents/`. They work in this order, and each one
+Four agents make each episode. Their definitions are in `.claude/agents/`. They work in this order, and each one
 hands a finished set of files to the next.
 
 | Order | Agent | Owns | Hands over |
 |---|---|---|---|
 | 1 | `script-writer` | Research, the story, `narration.txt`, `sources.txt`, the shot list | A script with every fact checked, plus a beat list with a cue word for each shot |
 | 2 | `camera-man` | The backgrounds (`backgrounds/*.png`, `_fg.png`) and the camera block of every scene in `script.json` | Locations rendered, and each shot framed with its move, focus and transition |
-| 2b | `cinematographer` | Lighting and colour grade (`LOOK.md`, `grade`, sun/sky/exposure), one-shot camera rigs, look-dev stills, render budgets, frame QC and re-render ranges | A lit, graded world, a camera checked by projection, and frames verified after every render |
 | 3 | `animator` | The cast, characters, crowds, effects and poses in `script.json`, plus the engine (`engine/*.js`) and the frame render | Every frame rendered, with test stills checked |
 | 4 | `editor` | Voice, alignment, music and sound effects, mastering, `final.mp4`, the thumbnail, QC and delivery | The finished Short, committed and pushed, plus a description |
 
