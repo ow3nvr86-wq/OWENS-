@@ -1,5 +1,5 @@
 Hook options (2-3 s, first line of the voiceover). Default is 1.
-1. Nobody in this town is allowed outside.
+1. Nobody in the last town on Earth is allowed outside.
 2. This town locks its doors every night... from the outside.
 3. If you're outside after ten fifteen, you're gone.
 4. This whole town lives in one building... and they can't leave.

@@ -1,7 +1,7 @@
-"""PORT HOLLOW (dystopian town Short): ONE continuous camera move, no cuts. The 3D town, the tower and the floor-9 hallway
+"""THE LAST TOWN ON EARTH (dystopian town Short): ONE continuous camera move, no cuts. The 3D town, the tower and the floor-9 hallway
 are rendered by tools/town_oneshot.py into oneshot/ (frames + camera.json with the camera and the 2D actors' tracks).
 Every time below comes from a cue word in work/words.json (same resolver as the Blender script), so a new voiceover
-only needs: align -> this script -> re-render. Writes script.json.  FICTION: Port Hollow is made up (see story_notes.txt)."""
+only needs: align -> this script -> re-render. Writes script.json.  FICTION: the town is made up (see story_notes.txt)."""
 import json, os, re
 HERE = os.path.dirname(os.path.abspath(__file__)); P = os.path.join(HERE, 'script.json')
 WORDS = json.load(open(os.path.join(HERE, 'work', 'words.json')))
@@ -63,7 +63,7 @@ sfx = [dict(type='wind', at=0.0, dur=8.5, gain=0.6), dict(type='gust', at=b['one
        dict(type='whoosh', at=b['somebody'] + 0.4, gain=0.7), dict(type='hum', at=b['empty'], dur=4.0, gain=0.25), dict(type='creak', at=END - 1.35, dur=1.3, gain=0.9)]
 
 jump = lambda col, num, **k: dict(costume='jumpsuit', num=num, **k)
-S_ = dict(title='Port Hollow', fps=60, tail=1.2, charStyle='rc', sprites='props',
+S_ = dict(title='The Last Town on Earth', fps=60, tail=1.2, charStyle='rc', sprites='props',
   features=dict(depth=True, motionBlur=True, rigV2=True, lipSync=True, crowdFX=True), motion_blur=dict(samples=8, shutter=0.5),
   caption_y=0.72, caption_case='lower', caption_size=78, grade='brightness(1.02) saturate(1.08) contrast(1.06)', thumbnail_cue=b['seventyone'] + 0.3,
   music=dict(level_db=-18, segments=[dict(style='dread', bpm=64, fadeIn=1.0, fadeOut=1.2, **{'from': 0.0, 'to': b['except'] + 0.4}),

@@ -1,4 +1,4 @@
-"""PORT HOLLOW: one continuous camera shot (no cuts) for the dystopian town Short. An original, made-up Alaskan town:
+"""THE LAST TOWN ON EARTH: one continuous camera shot (no cuts) for the dystopian town Short. An original, made-up place:
 one 14-floor tower in a snowy fjord, a single tunnel out, a bay that breathes out the Whiteout every night.
   aerial dive -> in through the floor-9 end window -> down the hall (store, police, clinic, school) -> you at your door
   -> 10:15 clock, speakers, red lights -> back out of the window -> the steel shutters slam down floor by floor
@@ -105,7 +105,7 @@ sc.view_settings.view_transform = 'AgX'; sc.view_settings.look = 'AgX - Punchy'
 sc.render.image_settings.file_format = 'JPEG'; sc.render.image_settings.quality = 92; sc.render.fps = FPS
 sc.cycles.light_sampling_threshold = 0.05
 
-# sky: an overcast Alaskan day -> blue night -> cold pink morning (keyed)
+# sky: an overcast arctic day -> blue night -> cold pink morning (keyed)
 w = bpy.data.worlds.new('sky'); sc.world = w; w.use_nodes = True; nt = w.node_tree; bg = nt.nodes['Background']
 grad = nt.nodes.new('ShaderNodeTexGradient'); tc = nt.nodes.new('ShaderNodeTexCoord'); mp = nt.nodes.new('ShaderNodeMapping'); mp.inputs['Rotation'].default_value = (0, math.pi / 2, 0)
 ramp = nt.nodes.new('ShaderNodeValToRGB'); nt.links.new(tc.outputs['Generated'], mp.inputs[0]); nt.links.new(mp.outputs[0], grad.inputs[0]); nt.links.new(grad.outputs['Fac'], ramp.inputs[0])
@@ -216,7 +216,7 @@ for o in bolts:
     sx = 1 if o.location.x > 0 else -1; x1 = o.location.x
     for (t, x) in [(0, x1 + sx * 0.6), (B['lock'] - 0.05, x1 + sx * 0.6), (B['lock'] + 0.12, x1), (B['morning'] + 0.5, x1), (B['morning'] + 0.8, x1 + sx * 0.6)]:
         o.location.x = x; o.keyframe_insert('location', index=0, frame=int(t * FPS))
-bpy.ops.object.text_add(location=(-3.6, -11.3, 3.55), rotation=(math.pi / 2, 0, 0)); tx = bpy.context.object; tx.data.body = 'PORT HOLLOW TOWER'; tx.data.size = 0.5; tx.data.extrude = 0.04
+bpy.ops.object.text_add(location=(0, -11.3, 3.55), rotation=(math.pi / 2, 0, 0)); tx = bpy.context.object; tx.data.body = 'LAST TOWN ON EARTH'; tx.data.size = 0.36; tx.data.extrude = 0.04; tx.data.align_x = 'CENTER'
 tx.data.materials.append(m_emis('towerSign', (0.7, 0.9, 1.0), 3))
 lampE = m_emis('entranceLamp', (1.0, 0.8, 0.5), 6)
 for sx in (-1, 1): box((sx * 2.6, -8.3, 3.0), (0.4, 0.2, 0.3), lampE)

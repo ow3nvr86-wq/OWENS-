@@ -1,4 +1,4 @@
-FICTION. Port Hollow is a made-up town. The dystopian story (the Whiteout, the curfew, the count) is invented.
+FICTION. The town is unnamed: "the last town on Earth" (the Whiteout swallowed the rest of the world). It is made up. The dystopian story (the Whiteout, the curfew, the count) is invented.
 It is inspired by a real town, Whittier, Alaska, where almost everyone lives in one 14-story building and the only
 road in is a one-lane tunnel that closes at night (facts and sources in sources.txt). The video must not present the
 story as real or name Whittier as the setting. An optional pinned comment can say: "Inspired by a real town: Whittier, Alaska."
