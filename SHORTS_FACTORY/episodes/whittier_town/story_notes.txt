@@ -1,0 +1,14 @@
+FICTION. Port Hollow is a made-up town. The dystopian story (the Whiteout, the curfew, the count) is invented.
+It is inspired by a real town, Whittier, Alaska, where almost everyone lives in one 14-story building and the only
+road in is a one-lane tunnel that closes at night (facts and sources in sources.txt). The video must not present the
+story as real or name Whittier as the setting. An optional pinned comment can say: "Inspired by a real town: Whittier, Alaska."
+
+Why they can't leave: the Whiteout, a fog that rolls in off the bay every night. People caught outside come back changed
+or don't come back. So the Tower seals: steel shutters at 10:15 pm, the tunnel out of town closes, and every morning at
+6:00 a headcount runs over the speakers. Twist: one morning the count is 271, and someone new has moved in next door.
+
+Other reasons we generated (swap in if preferred):
+- The Freeze: the outside air drops to a deadly cold every night, and the Tower is the only heated place for miles.
+- The Contract: the company that owns the Tower owns everyone's debt; walk out the door and you lose your home forever.
+- The Signal: a broadcast says "Do not look out the windows"; something walks in the snow at night.
+- The Count (on its own): the building counts the residents every morning, and the number is always one more than live there.
