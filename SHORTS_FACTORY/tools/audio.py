@@ -10,7 +10,7 @@ S = json.load(open(os.path.join(EP, 'script.json'))); WJ = json.load(open(os.pat
 WORDS = WJ['words']
 def load(p):
     return np.frombuffer(subprocess.run(['ffmpeg', '-v', 'error', '-i', p, '-ac', '1', '-ar', str(SR), '-f', 'f32le', '-'], capture_output=True, check=True).stdout, np.float32).astype(np.float64)
-VO = load(os.path.join(EP, 'voice.wav')); N = len(VO)
+VO = load(os.path.join(EP, 'voice.wav')); VO = np.concatenate([VO, np.zeros(int(S.get('tail', 0) * SR))]); N = len(VO)   # tail: hold after the last word
 norm = lambda s: re.sub(r"[^a-z0-9 ]", ' ', s.lower().replace("'", '')).split()
 NORM = [''.join(norm(w['word'])) for w in WORDS]
 def cue_index(cue, frm=0):
@@ -118,7 +118,26 @@ def music_chase(dur, bpm):
         if b % 4 == 3:
             for n in STAB[bar]: put(out, brass(mtof(n), beat * 0.2), tb + beat * 0.5, 0.1)
     return out
-MUSIC = dict(march=music_march, bouncy=music_bouncy, chill=music_chill, chase=music_chase)
+def pad(fs, d, cut=900):                                  # a slow detuned string-ish pad
+    t = t_(d); x = sum(np.sin(2 * np.pi * f * t * (1 + dt)) for f in fs for dt in (-0.004, 0.0, 0.005)); return lp(x, cut) * env(len(t), d * 0.3, d * 0.3)
+def music_dread(dur, bpm):
+    """dystopian dread: a low drone, a slow heartbeat kick, a minor pad that shifts every 4 bars, high glassy tones"""
+    out = np.zeros(int(dur * SR)); beat = 60 / bpm; t = t_(dur)
+    out += (np.sin(2 * np.pi * 36.7 * t) * 0.5 + np.sin(2 * np.pi * 55 * t * (1 + 0.002 * np.sin(2 * np.pi * 0.1 * t))) * 0.3) * 0.5
+    out += lp(noise(dur), 200) * 0.08
+    CH = [(50, 53, 57), (49, 52, 56), (46, 50, 53), (48, 51, 55)]
+    for b in range(int(dur / beat)):
+        tb = b * beat
+        if b % 2 == 0: put(out, kick(0.35), tb, 0.55); put(out, kick(0.3), tb + beat * 0.32, 0.3)
+        if b % 16 == 0: put(out, pad([mtof(n) for n in CH[(b // 16) % 4]], beat * 16), tb, 0.12)
+        if b % 8 == 6: put(out, ting(mtof(86 + (b // 8) % 3), 1.6), tb, 0.06)
+    return out
+def music_reveal(dur, bpm):
+    """the twist: the drone drops out to a single high tone and a sub boom"""
+    out = np.zeros(int(dur * SR)); t = t_(dur)
+    out += np.sin(2 * np.pi * mtof(88) * t) * 0.05 * env(len(t), 0.5, 0.5); put(out, boom(1.8), 0, 0.6)
+    out += lp(noise(dur), 120) * 0.12 * env(len(t), 0.2, 0.6); return out
+MUSIC = dict(march=music_march, bouncy=music_bouncy, chill=music_chill, chase=music_chase, dread=music_dread, reveal=music_reveal)
 
 # ---------------- SFX ----------------
 def whoosh(d=0.3): t = t_(d); n = noise(d); return (lp(n, 1500) * 0.7 + hp(n, 600) * 0.3) * np.sin(np.pi * np.clip(t / d, 0, 1)) ** 2
@@ -174,9 +193,24 @@ def spawn(d=1.2): t = t_(d); f = 400 * 2 ** (t / d * 2.5); return (np.sin(2 * np
 def crash(d=1.2): t = t_(d); return boom(d) * 0.8 + hp(noise(d), 2500) * np.exp(-t * 4) * 0.6 + bp(noise(d), 300, 1200) * np.exp(-t * 9) * 0.6
 def cuffs(): out = np.zeros(int(0.5 * SR)); [(put(out, hp(noise(0.02), 3000) * np.exp(-t_(0.02) * 200), k * 0.06), put(out, ting(4200, 0.08) * 0.3, k * 0.06)) for k in range(4)]; return out
 def pop(): t = t_(0.08); return np.sin(2 * np.pi * 900 * t * np.exp(-t * 20)) * np.exp(-t * 50)
+def wind(d=4.0): t = t_(d); return bp(noise(d), 200, 900) * (0.6 + 0.4 * np.sin(2 * np.pi * 0.3 * t + 1)) * env(len(t), 0.8, 1.0)
+def crackle(d=1.2): t = t_(d); x = bp(noise(d), 800, 3500) * (rng.random(len(t)) > 0.985) * 3 + bp(noise(d), 300, 3000) * 0.2; return x * env(len(t), 0.02, 0.2)
+def alarm(d=1.6): t = t_(d); return np.sign(np.sin(2 * np.pi * 440 * t)) * (np.sin(2 * np.pi * 2 * t) > 0) * 0.35 * env(len(t), 0.01, 0.05)
+def slam(): t = t_(0.9); return boom(0.9) * 0.7 + bp(noise(0.9), 600, 4000) * np.exp(-t * 9) * 0.8 + sum(np.sin(2 * np.pi * f * t) for f in (310, 523, 811)) * np.exp(-t * 5) * 0.15
+def slams(d=1.8):                                          # a cascade of shutters, floor by floor
+    out = np.zeros(int((d + 1.0) * SR)); [put(out, slam(), k * d / 13, 0.8 - 0.03 * k) for k in range(14)]; return out
+def lock(): t = t_(0.4); return lp(noise(0.4), 2000) * np.exp(-t * 30) + np.sin(2 * np.pi * 140 * t) * np.exp(-t * 25) * 0.6
+def locks(): out = np.zeros(int(0.8 * SR)); [put(out, lock(), k * 0.09, 1 - 0.15 * k) for k in range(3)]; return out
+def beep(f=1320, d=0.12): t = t_(d); return np.sign(np.sin(2 * np.pi * f * t)) * 0.3 * env(len(t), 0.005, 0.02)
+def counter(d=1.4): out = np.zeros(int((d + 0.2) * SR)); [put(out, beep(1320 + 40 * (k % 3), 0.05), k * d / 14, 0.6) for k in range(14)]; return out
+def glitch(d=0.7): t = t_(d); x = np.sign(np.sin(2 * np.pi * (180 + 900 * rng.random(len(t)) * (rng.random(len(t)) > 0.97)).cumsum() / SR)); return x * (np.sin(2 * np.pi * 23 * t) > 0) * 0.4 * env(len(t), 0.005, 0.1)
+def creak(d=1.4): t = t_(d); f = 160 + 60 * np.sin(2 * np.pi * 0.7 * t) + 25 * np.sin(2 * np.pi * 9 * t); return bp(np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)), 300, 2400) * env(len(t), 0.1, 0.3) * 0.5
+def hum(d=4.0): t = t_(d); return (np.sin(2 * np.pi * 120 * t) + 0.3 * np.sin(2 * np.pi * 240 * t)) * 0.2 * env(len(t), 0.3, 0.3)
+def gust(d=2.5): t = t_(d); return lp(noise(d), 500) * np.sin(np.pi * np.clip(t / d, 0, 1)) ** 2
 SFX = dict(whoosh=whoosh, boing=boing, knock=knock, ting=ting, gulp=gulp, tada=tada, sting=sting, fuse=fuse, volley=volley, boom=boom,
            charge=charge, scramble=scramble, sneeze=sneeze, drums=drums, march=march_steps, pop=pop,
-           siren=siren, engine=engine, skid=skid, punch=punch, scratch=scratch, spawn=spawn, crash=crash, cuffs=cuffs)
+           siren=siren, engine=engine, skid=skid, punch=punch, scratch=scratch, spawn=spawn, crash=crash, cuffs=cuffs,
+           wind=wind, crackle=crackle, alarm=alarm, slam=slam, slams=slams, lock=locks, beep=beep, counter=counter, glitch=glitch, creak=creak, hum=hum, gust=gust)
 
 M = S.get('music', {})
 if M.get('segments'):                                                    # several cues: [{style, bpm, from, to, gain}] (seconds), short fades

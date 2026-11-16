@@ -29,7 +29,7 @@ function resolve() {
     const idx = i === 0 ? 0 : cueIndex(sc.cue, ptr); ptr = idx;
     return Object.assign({}, sc, { start: i === 0 ? 0 : WORDS[idx].start - 0.06, wi: idx });
   });
-  SCENES.forEach((s, i) => { s.end = i + 1 < SCENES.length ? SCENES[i + 1].start : SCRIPT._duration + 0.5; });
+  SCENES.forEach((s, i) => { s.end = i + 1 < SCENES.length ? SCENES[i + 1].start : SCRIPT._duration + 0.5 + (SCRIPT.tail || 0); });
   // resolve every cue inside a scene relative to its own words
   for (const s of SCENES) {
     const T = c => (c == null ? null : (typeof c === 'number' ? s.start + c : cueTime(c, s.wi)));
@@ -222,7 +222,7 @@ function fxDraw(g, fx, s, t) {
   if (fx.type === 'impact') impactBurst(g, fx.x * W, fx.y * H, fx.t0, t, fx.r || 220);
   if (window.FX2 && FX2[fx.type]) FX2[fx.type](g, fx, s, t);
 }
-const SCREEN_FX = new Set(['glow', 'flash', 'tint', 'storm_tint', 'confetti', 'hud', 'logo', 'speedlines', 'impactframe', 'tag', 'stars', 'title', 'bubble', 'sirenglow']);
+const SCREEN_FX = new Set(['glow', 'flash', 'tint', 'storm_tint', 'confetti', 'hud', 'logo', 'speedlines', 'impactframe', 'tag', 'stars', 'title', 'bubble', 'sirenglow', 'snow', 'fog', 'pa', 'waves', 'counter', 'silhouette', 'eyes', 'nametag', 'flicker', 'darken']);
 let CUR_CAM = null;
 function renderShotDepth(g, i, t) {
   const s = SCENES[i], L = LOC[s.loc], cam = cam3At(s, t); CUR_CAM = { s, cam };
@@ -344,7 +344,7 @@ window.renderFrame = renderFrame;
   AMP = await (await fetch('../' + EP + '/work/amp.json')).json(); AFPS = wj.fps || 30;
   { let e = 0; AMP = AMP.map(v => (e = v > e ? lerp(e, v, 0.75) : lerp(e, v, 0.35))); }
   FPS = SCRIPT.fps || 60; FEAT = Object.assign(FEAT, SCRIPT.features || {}); window.FEAT = FEAT; window.MODE = MODE;
-  window.FPS = FPS; window.FRAMES = Math.round(wj.duration * FPS);
+  window.FPS = FPS; window.FRAMES = Math.round((wj.duration + (SCRIPT.tail || 0)) * FPS);   // tail: seconds held after the last word
   resolve(); buildCaptions();
   const bgs = [...new Set(SCRIPT.scenes.map(s => s.bg).filter(Boolean))];
   const names = bgs.concat(bgs.map(n => n.replace(/(\.\w+)$/, '_fg$1')));   // optional foreground layer: <bg>_fg.png

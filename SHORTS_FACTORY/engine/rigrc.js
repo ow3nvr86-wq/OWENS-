@@ -30,6 +30,8 @@ const RC_COSTUMES = {
   flannel_red: { body: '#b8322c', detail: 'flannel', pants: '#22252e' },
   police: { body: '#26345e', detail: 'police', pants: '#1b2240' },
   mail: { body: '#8db3da', detail: 'mail', pants: '#2b3a5c' },
+  jumpsuit: { body: '#7f868d', detail: 'jumpsuit', pants: '#636a72' },
+  jumpsuit_snow: { body: '#8a9198', detail: 'jumpsuit', pants: '#6a7178', snow: true },
 };
 function rcTorso(g, cos, w, h, t) {
   const x = -w / 2, y = -h, r = w * 0.48;
@@ -92,6 +94,14 @@ function rcTorso(g, cos, w, h, t) {
       g.beginPath(); g.ellipse(-w * 0.26, y + h * 0.36, 16, 11, 0, 0, 7); g.fillStyle = '#ffffff'; g.fill(); g.beginPath(); g.moveTo(-w * 0.26 - 9, y + h * 0.36); g.lineTo(-w * 0.26 + 9, y + h * 0.36 - 6); g.lineWidth = 3; g.strokeStyle = '#2b4f8a'; g.stroke();
       g.fillStyle = '#2b3a5c'; g.fillRect(x, y + h - 26, w, 20);
     }
+  } else if (cos.detail === 'jumpsuit') {                                    // identical grey resident jumpsuits: zip, collar, a number patch
+    g.beginPath(); g.moveTo(-w * 0.3, y); g.lineTo(0, y + 26); g.lineTo(w * 0.3, y); g.closePath(); g.fillStyle = dark; g.fill();
+    g.beginPath(); g.moveTo(0, y + 24); g.lineTo(0, y + h); g.lineWidth = 3.5; g.strokeStyle = shade(cos.body, -0.3); g.stroke();
+    g.beginPath(); g.roundRect(w * 0.06, y + h * 0.22, 40, 26, 4); g.fillStyle = '#e9e4d6'; g.fill(); g.lineWidth = 2.5; g.strokeStyle = dark; g.stroke();
+    g.fillStyle = '#2a2a30'; g.font = '700 17px Poppins'; g.textAlign = 'left'; g.textBaseline = 'middle'; g.fillText(cos.num || '9-14', w * 0.06 + 4, y + h * 0.22 + 14);
+    g.fillStyle = shade(cos.body, -0.25); g.fillRect(x, y + h - 26, w, 18);
+    stitch([[x + 8, y + h * 0.5], [x + 8, y + h - 30]]); stitch([[x + w - 8, y + h * 0.5], [x + w - 8, y + h - 30]]);
+    if (cos.snow) for (let k = 0; k < 26; k++) { g.beginPath(); g.arc(x + hash(k * 4.1) * w, y + hash(k * 7.3) * h * 0.7, 3 + hash(k * 2.2) * 6, 0, 7); g.fillStyle = 'rgba(255,255,255,0.85)'; g.fill(); }
   } else if (cos.detail === 'vest') {
     g.fillStyle = '#2b2b33'; g.fillRect(-w * 0.16, y, w * 0.32, h);
     for (let k = 0; k < 4; k++) { g.beginPath(); g.roundRect(-w * 0.44 + (k % 2) * w * 0.6, y + h * (0.3 + Math.floor(k / 2) * 0.28), w * 0.28, h * 0.18, 6); g.fillStyle = dark; g.fill(); }
@@ -104,18 +114,18 @@ function rcTorso(g, cos, w, h, t) {
 }
 
 // ---- face (rc) ----
-const RC_LIDS = { smug: 0.5, determined: 0.38, angry: 0.42, sad: 0.32, neutral: 0.12, happy: 0, worried: 0.05, shocked: 0, scared: 0 };
+const RC_LIDS = { creepy: 0, smug: 0.5, determined: 0.38, angry: 0.42, sad: 0.32, neutral: 0.12, happy: 0, worried: 0.05, shocked: 0, scared: 0 };
 function rcFace(g, R, s) {
   const yaw = clamp(s.yaw || 0, -1, 1), pitch = s.pitch || 0, gz = s.gaze || [0, 0], mood = s.mood || 'neutral';
   const map = (x0, y0) => { const th = Math.asin(clamp(x0 / R, -1, 1)) + yaw * 0.8; return [Math.sin(th) * R, y0 + pitch * R * 0.28, Math.max(0.2, Math.cos(th))]; };
-  const b = s.blink === true ? 1 : (s.blink || 0), wide = mood === 'shocked' || mood === 'scared' || mood === 'worried';
+  const b = s.blink === true ? 1 : (s.blink || 0), wide = mood === 'shocked' || mood === 'scared' || mood === 'worried' || mood === 'creepy';
   const lid = Math.max(RC_LIDS[mood] ?? 0.12, b);
   for (const k of [-1, 1]) {
     const [ex, ey, sq] = map(k * R * 0.3, -R * 0.02), ox = gz[0] * R * 0.08 * sq, oy = gz[1] * R * 0.06;
     if (wide) {                                                         // ringed eye with a pupil
       const er = R * 0.2 * (mood === 'worried' ? 0.82 : 1);
       g.beginPath(); g.ellipse(ex, ey, er * sq, er * (1 - b * 0.9), 0, 0, 7); g.fillStyle = '#ffffff'; g.fill(); g.lineWidth = R * 0.055; g.strokeStyle = RC.ink; g.stroke();
-      if (b < 0.7) { g.beginPath(); g.arc(ex + ox, ey + oy, R * 0.07, 0, 7); g.fillStyle = RC.ink; g.fill(); }
+      if (b < 0.7) { g.beginPath(); g.arc(ex + ox, ey + oy, R * (mood === 'creepy' ? 0.035 : 0.07), 0, 7); g.fillStyle = RC.ink; g.fill(); }
     } else {
       const rx = R * 0.075 * sq, ry = R * 0.095;
       g.save(); g.beginPath(); g.rect(ex - R * 0.2, ey - ry + lid * 2 * ry, R * 0.4, R * 0.4); g.clip();
@@ -131,8 +141,13 @@ function rcFace(g, R, s) {
   const [mx, my, msq] = map(R * 0.04, R * 0.36);
   if (s.vis) { mouthV2(g, R * 0.85, mx, my, msq, s.vis, s.visOpen ?? 1); return; }
   g.lineCap = 'round'; g.strokeStyle = RC.ink; g.lineWidth = R * 0.05;
-  const shape = s.talk != null && s.talk > 0.1 ? 'talk' : ({ happy: 'smile', smug: 'smirk', angry: 'flat', determined: 'flat', worried: 'wavy', shocked: 'o', scared: 'o', sad: 'frown' }[mood] || 'small');
+  const shape = s.talk != null && s.talk > 0.1 ? 'talk' : ({ creepy: 'grin', happy: 'smile', smug: 'smirk', angry: 'flat', determined: 'flat', worried: 'wavy', shocked: 'o', scared: 'o', sad: 'frown' }[mood] || 'small');
   if (shape === 'talk' || shape === 'o') { const o = shape === 'o' ? 0.75 : clamp((s.talk - 0.08) / 0.6); g.beginPath(); g.ellipse(mx, my, R * 0.09 * msq, R * (0.05 + 0.09 * o), 0, 0, 7); g.fillStyle = '#3a1418'; g.fill(); }
+  else if (shape === 'grin') {                                         // a frozen, too-wide grin full of teeth
+    g.beginPath(); g.moveTo(mx - R * 0.3, my - R * 0.1); g.quadraticCurveTo(mx, my + R * 0.26, mx + R * 0.3, my - R * 0.1); g.quadraticCurveTo(mx, my + R * 0.04, mx - R * 0.3, my - R * 0.1); g.closePath();
+    g.fillStyle = '#fbf8ef'; g.fill(); g.lineWidth = R * 0.04; g.strokeStyle = RC.ink; g.stroke();
+    for (let i = -3; i <= 3; i++) { const tx = mx + i * R * 0.075; g.beginPath(); g.moveTo(tx, my - R * 0.04 + Math.abs(i) * R * 0.008); g.lineTo(tx, my + R * 0.1 - Math.abs(i) * R * 0.025); g.lineWidth = R * 0.018; g.stroke(); }
+    g.beginPath(); g.moveTo(mx - R * 0.27, my - R * 0.02); g.quadraticCurveTo(mx, my + R * 0.1, mx + R * 0.27, my - R * 0.02); g.lineWidth = R * 0.018; g.stroke(); }
   else if (shape === 'smile') { g.beginPath(); g.moveTo(mx - R * 0.15, my - R * 0.03); g.quadraticCurveTo(mx, my + R * 0.13, mx + R * 0.15, my - R * 0.03); g.closePath(); g.fillStyle = '#3a1418'; g.fill(); }
   else if (shape === 'smirk') { g.beginPath(); g.moveTo(mx - R * 0.1, my + R * 0.02); g.quadraticCurveTo(mx + R * 0.05, my + R * 0.05, mx + R * 0.13, my - R * 0.04); g.stroke(); }
   else if (shape === 'frown') { g.beginPath(); g.moveTo(mx - R * 0.11, my + R * 0.04); g.quadraticCurveTo(mx, my - R * 0.05, mx + R * 0.11, my + R * 0.04); g.stroke(); }
@@ -154,7 +169,7 @@ function rcHead(g, R, def, st, face) {
 
 // ---- the rc character ----
 function drawCharacterRC(g, def, st) {
-  const cos = RC_COSTUMES[def.costume] || { body: (COSTUMES[def.costume] || COSTUMES.tunic).body, detail: 'tee', pants: '#2b2b33' };
+  const cos = Object.assign({}, RC_COSTUMES[def.costume] || { body: (COSTUMES[def.costume] || COSTUMES.tunic).body, detail: 'tee', pants: '#2b2b33' }, def.num ? { num: def.num } : {});
   const s = st.scale || 1, t = st.t || 0, dbg = DEBUG.has('rig'), R = RC.R, LK = RC.leg / 118;
   const pose = (POSES2[st.action] || POSES[st.action] || POSES.idle)(t, st.phase || 0, st);
   let P = pose;

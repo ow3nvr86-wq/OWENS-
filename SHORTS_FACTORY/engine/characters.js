@@ -58,7 +58,7 @@ function fo(g, fill, w = OL) { g.fillStyle = fill; g.fill(); g.lineWidth = w; g.
 // each mood: [inner y, outer y] offsets (in head radii, + = down) and thickness
 const BROWS = {
   neutral: [0, 0], happy: [-0.04, 0.02], smug: [0.06, -0.08], angry: [0.16, -0.1], determined: [0.1, -0.04],
-  worried: [-0.12, 0.08], shocked: [-0.16, -0.12], sad: [-0.1, 0.12], scared: [-0.14, 0.06],
+  worried: [-0.12, 0.08], shocked: [-0.16, -0.12], sad: [-0.1, 0.12], scared: [-0.14, 0.06], creepy: [-0.2, -0.2],
 };
 const MOUTH_FOR = { neutral: 'line', happy: 'smile', smug: 'smirk', angry: 'frown', determined: 'line', worried: 'wobble', shocked: 'o', sad: 'frown', scared: 'o' };
 

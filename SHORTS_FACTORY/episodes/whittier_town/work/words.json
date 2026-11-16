@@ -1,0 +1,853 @@
+{
+ "duration": 54.485,
+ "fps": 30,
+ "frames": 1635,
+ "words": [
+  {
+   "word": "Nobody",
+   "line": 0,
+   "start": 0.0,
+   "end": 0.32
+  },
+  {
+   "word": "in",
+   "line": 0,
+   "start": 0.32,
+   "end": 0.74
+  },
+  {
+   "word": "this",
+   "line": 0,
+   "start": 0.74,
+   "end": 0.88
+  },
+  {
+   "word": "town",
+   "line": 0,
+   "start": 0.88,
+   "end": 1.22
+  },
+  {
+   "word": "is",
+   "line": 0,
+   "start": 1.22,
+   "end": 1.66
+  },
+  {
+   "word": "allowed",
+   "line": 0,
+   "start": 1.66,
+   "end": 2.06
+  },
+  {
+   "word": "outside.",
+   "line": 0,
+   "start": 2.06,
+   "end": 3.32
+  },
+  {
+   "word": "You",
+   "line": 1,
+   "start": 3.245,
+   "end": 3.32
+  },
+  {
+   "word": "live",
+   "line": 1,
+   "start": 3.32,
+   "end": 3.52
+  },
+  {
+   "word": "in",
+   "line": 1,
+   "start": 3.52,
+   "end": 3.74
+  },
+  {
+   "word": "Port",
+   "line": 1,
+   "start": 3.74,
+   "end": 3.98
+  },
+  {
+   "word": "Hollow,",
+   "line": 1,
+   "start": 3.98,
+   "end": 4.9
+  },
+  {
+   "word": "Alaska.",
+   "line": 1,
+   "start": 4.9,
+   "end": 5.54
+  },
+  {
+   "word": "Fourteen",
+   "line": 1,
+   "start": 5.447,
+   "end": 5.76
+  },
+  {
+   "word": "floors.",
+   "line": 1,
+   "start": 5.76,
+   "end": 6.6
+  },
+  {
+   "word": "Two",
+   "line": 1,
+   "start": 6.579,
+   "end": 6.7
+  },
+  {
+   "word": "hundred",
+   "line": 1,
+   "start": 6.7,
+   "end": 6.8
+  },
+  {
+   "word": "seventy",
+   "line": 1,
+   "start": 6.9,
+   "end": 7.0
+  },
+  {
+   "word": "people.",
+   "line": 1,
+   "start": 7.0,
+   "end": 8.08
+  },
+  {
+   "word": "One",
+   "line": 1,
+   "start": 8.083,
+   "end": 8.24
+  },
+  {
+   "word": "building.",
+   "line": 1,
+   "start": 8.24,
+   "end": 9.06
+  },
+  {
+   "word": "The",
+   "line": 2,
+   "start": 9.114,
+   "end": 9.2
+  },
+  {
+   "word": "store,",
+   "line": 2,
+   "start": 9.2,
+   "end": 9.7
+  },
+  {
+   "word": "the",
+   "line": 2,
+   "start": 9.7,
+   "end": 9.72
+  },
+  {
+   "word": "police,",
+   "line": 2,
+   "start": 9.72,
+   "end": 10.4
+  },
+  {
+   "word": "the",
+   "line": 2,
+   "start": 10.4,
+   "end": 10.42
+  },
+  {
+   "word": "clinic,",
+   "line": 2,
+   "start": 10.42,
+   "end": 10.94
+  },
+  {
+   "word": "the",
+   "line": 2,
+   "start": 10.94,
+   "end": 10.98
+  },
+  {
+   "word": "school...",
+   "line": 2,
+   "start": 10.98,
+   "end": 11.8
+  },
+  {
+   "word": "all",
+   "line": 2,
+   "start": 11.832,
+   "end": 11.98
+  },
+  {
+   "word": "down",
+   "line": 2,
+   "start": 11.98,
+   "end": 12.2
+  },
+  {
+   "word": "the",
+   "line": 2,
+   "start": 12.2,
+   "end": 12.34
+  },
+  {
+   "word": "hall.",
+   "line": 2,
+   "start": 12.34,
+   "end": 12.78
+  },
+  {
+   "word": "You",
+   "line": 2,
+   "start": 12.939,
+   "end": 13.01
+  },
+  {
+   "word": "never",
+   "line": 2,
+   "start": 13.01,
+   "end": 13.21
+  },
+  {
+   "word": "need",
+   "line": 2,
+   "start": 13.21,
+   "end": 13.47
+  },
+  {
+   "word": "to",
+   "line": 2,
+   "start": 13.47,
+   "end": 13.67
+  },
+  {
+   "word": "leave.",
+   "line": 2,
+   "start": 13.67,
+   "end": 14.65
+  },
+  {
+   "word": "Good.",
+   "line": 3,
+   "start": 14.444,
+   "end": 14.65
+  },
+  {
+   "word": "Because",
+   "line": 3,
+   "start": 14.494,
+   "end": 15.07
+  },
+  {
+   "word": "you",
+   "line": 3,
+   "start": 15.07,
+   "end": 15.35
+  },
+  {
+   "word": "can't.",
+   "line": 3,
+   "start": 15.35,
+   "end": 16.25
+  },
+  {
+   "word": "Every",
+   "line": 4,
+   "start": 16.259,
+   "end": 16.45
+  },
+  {
+   "word": "night",
+   "line": 4,
+   "start": 16.45,
+   "end": 16.69
+  },
+  {
+   "word": "at",
+   "line": 4,
+   "start": 16.69,
+   "end": 16.87
+  },
+  {
+   "word": "ten",
+   "line": 4,
+   "start": 16.87,
+   "end": 17.11
+  },
+  {
+   "word": "fifteen,",
+   "line": 4,
+   "start": 17.11,
+   "end": 17.45
+  },
+  {
+   "word": "the",
+   "line": 4,
+   "start": 17.45,
+   "end": 17.87
+  },
+  {
+   "word": "speakers",
+   "line": 4,
+   "start": 17.87,
+   "end": 18.27
+  },
+  {
+   "word": "crackle:",
+   "line": 4,
+   "start": 18.27,
+   "end": 19.25
+  },
+  {
+   "word": "\"Doors",
+   "line": 4,
+   "start": 19.25,
+   "end": 19.47
+  },
+  {
+   "word": "sealing.",
+   "line": 4,
+   "start": 19.47,
+   "end": 20.39
+  },
+  {
+   "word": "Return",
+   "line": 4,
+   "start": 20.372,
+   "end": 20.63
+  },
+  {
+   "word": "to",
+   "line": 4,
+   "start": 20.63,
+   "end": 20.87
+  },
+  {
+   "word": "your",
+   "line": 4,
+   "start": 20.87,
+   "end": 21.05
+  },
+  {
+   "word": "floor.\"",
+   "line": 4,
+   "start": 21.05,
+   "end": 21.81
+  },
+  {
+   "word": "Then",
+   "line": 5,
+   "start": 21.81,
+   "end": 21.93
+  },
+  {
+   "word": "the",
+   "line": 5,
+   "start": 21.93,
+   "end": 22.09
+  },
+  {
+   "word": "steel",
+   "line": 5,
+   "start": 22.09,
+   "end": 22.41
+  },
+  {
+   "word": "shutters",
+   "line": 5,
+   "start": 22.41,
+   "end": 22.89
+  },
+  {
+   "word": "slam",
+   "line": 5,
+   "start": 22.89,
+   "end": 23.25
+  },
+  {
+   "word": "down",
+   "line": 5,
+   "start": 23.25,
+   "end": 23.65
+  },
+  {
+   "word": "over",
+   "line": 5,
+   "start": 23.65,
+   "end": 23.99
+  },
+  {
+   "word": "every",
+   "line": 5,
+   "start": 23.99,
+   "end": 24.33
+  },
+  {
+   "word": "window.",
+   "line": 5,
+   "start": 24.33,
+   "end": 25.03
+  },
+  {
+   "word": "And",
+   "line": 5,
+   "start": 25.27,
+   "end": 25.338
+  },
+  {
+   "word": "the",
+   "line": 5,
+   "start": 25.338,
+   "end": 25.458
+  },
+  {
+   "word": "Whiteout",
+   "line": 5,
+   "start": 25.458,
+   "end": 25.918
+  },
+  {
+   "word": "rolls",
+   "line": 5,
+   "start": 25.918,
+   "end": 26.438
+  },
+  {
+   "word": "in",
+   "line": 5,
+   "start": 26.438,
+   "end": 26.718
+  },
+  {
+   "word": "off",
+   "line": 5,
+   "start": 26.718,
+   "end": 26.878
+  },
+  {
+   "word": "the",
+   "line": 5,
+   "start": 26.878,
+   "end": 27.038
+  },
+  {
+   "word": "bay.",
+   "line": 5,
+   "start": 27.038,
+   "end": 27.738
+  },
+  {
+   "word": "Nobody",
+   "line": 6,
+   "start": 27.764,
+   "end": 28.038
+  },
+  {
+   "word": "knows",
+   "line": 6,
+   "start": 28.038,
+   "end": 28.598
+  },
+  {
+   "word": "what's",
+   "line": 6,
+   "start": 28.598,
+   "end": 29.118
+  },
+  {
+   "word": "inside",
+   "line": 6,
+   "start": 29.118,
+   "end": 29.538
+  },
+  {
+   "word": "it.",
+   "line": 6,
+   "start": 29.538,
+   "end": 30.098
+  },
+  {
+   "word": "The",
+   "line": 7,
+   "start": 30.178,
+   "end": 30.238
+  },
+  {
+   "word": "last",
+   "line": 7,
+   "start": 30.238,
+   "end": 30.478
+  },
+  {
+   "word": "man",
+   "line": 7,
+   "start": 30.478,
+   "end": 30.758
+  },
+  {
+   "word": "who",
+   "line": 7,
+   "start": 30.758,
+   "end": 30.978
+  },
+  {
+   "word": "stayed",
+   "line": 7,
+   "start": 30.978,
+   "end": 31.198
+  },
+  {
+   "word": "out",
+   "line": 7,
+   "start": 31.298,
+   "end": 31.498
+  },
+  {
+   "word": "came",
+   "line": 7,
+   "start": 31.498,
+   "end": 31.678
+  },
+  {
+   "word": "back",
+   "line": 7,
+   "start": 31.678,
+   "end": 31.978
+  },
+  {
+   "word": "three",
+   "line": 7,
+   "start": 31.978,
+   "end": 32.238
+  },
+  {
+   "word": "days",
+   "line": 7,
+   "start": 32.238,
+   "end": 32.538
+  },
+  {
+   "word": "later...",
+   "line": 7,
+   "start": 32.538,
+   "end": 33.378
+  },
+  {
+   "word": "smiling.",
+   "line": 7,
+   "start": 33.424,
+   "end": 34.218
+  },
+  {
+   "word": "He",
+   "line": 7,
+   "start": 34.346,
+   "end": 34.418
+  },
+  {
+   "word": "didn't",
+   "line": 7,
+   "start": 34.418,
+   "end": 34.638
+  },
+  {
+   "word": "know",
+   "line": 7,
+   "start": 34.638,
+   "end": 34.818
+  },
+  {
+   "word": "his",
+   "line": 7,
+   "start": 34.818,
+   "end": 34.978
+  },
+  {
+   "word": "own",
+   "line": 7,
+   "start": 34.978,
+   "end": 35.218
+  },
+  {
+   "word": "name.",
+   "line": 7,
+   "start": 35.218,
+   "end": 35.898
+  },
+  {
+   "word": "So",
+   "line": 8,
+   "start": 36.049,
+   "end": 36.178
+  },
+  {
+   "word": "the",
+   "line": 8,
+   "start": 36.178,
+   "end": 36.318
+  },
+  {
+   "word": "doors",
+   "line": 8,
+   "start": 36.318,
+   "end": 36.598
+  },
+  {
+   "word": "lock.",
+   "line": 8,
+   "start": 36.598,
+   "end": 37.138
+  },
+  {
+   "word": "The",
+   "line": 8,
+   "start": 37.306,
+   "end": 37.365
+  },
+  {
+   "word": "only",
+   "line": 8,
+   "start": 37.365,
+   "end": 37.705
+  },
+  {
+   "word": "tunnel",
+   "line": 8,
+   "start": 37.705,
+   "end": 37.965
+  },
+  {
+   "word": "out",
+   "line": 8,
+   "start": 37.965,
+   "end": 38.245
+  },
+  {
+   "word": "of",
+   "line": 8,
+   "start": 38.245,
+   "end": 38.425
+  },
+  {
+   "word": "town",
+   "line": 8,
+   "start": 38.425,
+   "end": 38.705
+  },
+  {
+   "word": "shuts.",
+   "line": 8,
+   "start": 38.705,
+   "end": 39.685
+  },
+  {
+   "word": "And",
+   "line": 8,
+   "start": 39.634,
+   "end": 39.705
+  },
+  {
+   "word": "every",
+   "line": 8,
+   "start": 39.705,
+   "end": 39.945
+  },
+  {
+   "word": "morning",
+   "line": 8,
+   "start": 39.945,
+   "end": 40.145
+  },
+  {
+   "word": "at",
+   "line": 8,
+   "start": 40.145,
+   "end": 40.365
+  },
+  {
+   "word": "six,",
+   "line": 8,
+   "start": 40.365,
+   "end": 41.105
+  },
+  {
+   "word": "the",
+   "line": 8,
+   "start": 41.072,
+   "end": 41.145
+  },
+  {
+   "word": "Tower",
+   "line": 8,
+   "start": 41.145,
+   "end": 41.405
+  },
+  {
+   "word": "counts",
+   "line": 8,
+   "start": 41.405,
+   "end": 41.765
+  },
+  {
+   "word": "us.",
+   "line": 8,
+   "start": 41.765,
+   "end": 42.465
+  },
+  {
+   "word": "Two",
+   "line": 9,
+   "start": 42.528,
+   "end": 42.705
+  },
+  {
+   "word": "hundred",
+   "line": 9,
+   "start": 42.705,
+   "end": 43.025
+  },
+  {
+   "word": "seventy.",
+   "line": 9,
+   "start": 43.025,
+   "end": 44.065
+  },
+  {
+   "word": "Every",
+   "line": 10,
+   "start": 44.15,
+   "end": 44.365
+  },
+  {
+   "word": "single",
+   "line": 10,
+   "start": 44.365,
+   "end": 44.745
+  },
+  {
+   "word": "day.",
+   "line": 10,
+   "start": 44.745,
+   "end": 45.585
+  },
+  {
+   "word": "Except",
+   "line": 11,
+   "start": 45.683,
+   "end": 45.965
+  },
+  {
+   "word": "this",
+   "line": 11,
+   "start": 45.965,
+   "end": 46.285
+  },
+  {
+   "word": "morning...",
+   "line": 11,
+   "start": 46.285,
+   "end": 47.245
+  },
+  {
+   "word": "it",
+   "line": 12,
+   "start": 47.279,
+   "end": 47.345
+  },
+  {
+   "word": "counted",
+   "line": 12,
+   "start": 47.345,
+   "end": 47.705
+  },
+  {
+   "word": "two",
+   "line": 12,
+   "start": 47.705,
+   "end": 48.105
+  },
+  {
+   "word": "hundred",
+   "line": 12,
+   "start": 48.105,
+   "end": 48.465
+  },
+  {
+   "word": "seventy-one.",
+   "line": 12,
+   "start": 48.465,
+   "end": 49.545
+  },
+  {
+   "word": "And",
+   "line": 13,
+   "start": 49.739,
+   "end": 49.822
+  },
+  {
+   "word": "somebody",
+   "line": 13,
+   "start": 49.822,
+   "end": 50.222
+  },
+  {
+   "word": "just",
+   "line": 13,
+   "start": 50.222,
+   "end": 50.622
+  },
+  {
+   "word": "moved",
+   "line": 13,
+   "start": 50.622,
+   "end": 51.022
+  },
+  {
+   "word": "into",
+   "line": 13,
+   "start": 51.022,
+   "end": 51.282
+  },
+  {
+   "word": "the",
+   "line": 13,
+   "start": 51.282,
+   "end": 51.422
+  },
+  {
+   "word": "empty",
+   "line": 13,
+   "start": 51.422,
+   "end": 51.742
+  },
+  {
+   "word": "apartment",
+   "line": 13,
+   "start": 51.742,
+   "end": 52.282
+  },
+  {
+   "word": "next",
+   "line": 13,
+   "start": 52.282,
+   "end": 52.782
+  },
+  {
+   "word": "to",
+   "line": 13,
+   "start": 52.782,
+   "end": 53.062
+  },
+  {
+   "word": "yours.",
+   "line": 13,
+   "start": 53.062,
+   "end": 54.462
+  }
+ ]
+}

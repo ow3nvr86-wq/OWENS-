@@ -192,3 +192,74 @@ FX2.sirenglow = function (g, fx, s, t) {                   // red / blue light w
     const x0 = side ? W : 0, gr = g.createLinearGradient(x0, 0, side ? W * 0.55 : W * 0.45, 0); gr.addColorStop(0, `rgba(${col},${a})`); gr.addColorStop(1, `rgba(${col},0)`);
     g.fillStyle = gr; g.fillRect(0, 0, W, H); }
 };
+
+// ---- Port Hollow effects: snow, the Whiteout, the PA, the resident counter, a silhouette, eyes in the dark ----
+function keyAmt(keys, t) {                                    // [{t, a}] -> eased amount at time t
+  if (!keys || !keys.length) return 0; let p = { t: -1e9, a: keys[0].a ?? keys[0].n ?? 0 };
+  for (const k of keys) { const a = k.a ?? k.n ?? 0; if (t < k.t) return lerp(p.a, a, ease5(clamp((t - p.t) / Math.max(0.05, k.t - p.t)))); p = { t: k.t, a }; }
+  return p.a;
+}
+FX2.snow = function (g, fx, s, t) {                         // falling snow in three depth layers, drifting with the wind
+  const a = keyAmt(fx.keys, t); if (a <= 0.01) return;
+  for (let k = 0; k < 220; k++) {
+    const layer = k % 3, sz = [3, 6, 11][layer], sp = [90, 170, 320][layer], sd = hash(k * 7.13);
+    const x = ((hash(k * 3.7) * W + t * (40 + layer * 30) + Math.sin(t * 0.8 + sd * 6) * 30) % (W + 40) + W + 40) % (W + 40) - 20;
+    const y = ((hash(k * 5.9) * H + t * sp) % (H + 40)) - 20;
+    g.beginPath(); g.arc(x, y, sz, 0, 7); g.fillStyle = `rgba(245,248,255,${(0.35 + 0.25 * layer) * a})`; g.fill();
+  }
+};
+FX2.fog = function (g, fx, s, t) {                          // the Whiteout: a cold white wash with slow drifting banks
+  const a = keyAmt(fx.keys, t); if (a <= 0.01) return;
+  const gr = g.createLinearGradient(0, H, 0, 0); gr.addColorStop(0, `rgba(222,230,238,${0.85 * a})`); gr.addColorStop(0.55, `rgba(214,222,232,${0.55 * a})`); gr.addColorStop(1, `rgba(200,210,224,${0.3 * a})`);
+  g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  for (let k = 0; k < 9; k++) {
+    const x = ((hash(k * 2.3) * W * 1.6 + t * (25 + k * 6)) % (W * 1.6)) - W * 0.3, y = H * (0.25 + 0.65 * hash(k * 4.4)), r = 260 + 260 * hash(k * 1.7);
+    const rg = g.createRadialGradient(x, y, 10, x, y, r); rg.addColorStop(0, `rgba(240,244,250,${0.35 * a})`); rg.addColorStop(1, 'rgba(240,244,250,0)'); g.fillStyle = rg; g.fillRect(x - r, y - r, 2 * r, 2 * r);
+  }
+};
+FX2.pa = function (g, fx, s, t) {                           // a speaker announcement, pinned to the speaker, with crackle jitter
+  if (t < fx.t0 || t > fx.t0 + (fx.dur || 2)) return; const k = popScale(t, fx.t0, 0.2), out = clamp((fx.t0 + (fx.dur || 2) - t) / 0.2), j = (hash(Math.floor(t * 30)) - 0.5) * 6;
+  g.save(); g.globalAlpha = out; g.translate(fx.x * W + j, fx.y * H + (fx.dy || 120)); g.scale(k, k);
+  g.font = `800 ${fx.size || 54}px Poppins`; g.textAlign = 'center'; g.textBaseline = 'middle'; const w = g.measureText(fx.text).width + 60;
+  g.beginPath(); g.roundRect(-w / 2, -46, w, 92, 14); g.fillStyle = '#16181c'; g.fill(); g.lineWidth = 6; g.strokeStyle = '#ff3b2f'; g.stroke();
+  g.fillStyle = '#ff5a48'; g.fillText(fx.text, 0, 3); g.restore();
+};
+FX2.waves = function (g, fx, s, t) {                        // sound rings from a speaker
+  const u = t - fx.t0; if (u < 0 || u > (fx.dur || 2)) return;
+  for (let k = 0; k < 3; k++) { const v = ((u * 1.6 + k / 3) % 1); g.beginPath(); g.arc(fx.x * W, fx.y * H, 40 + v * 260, 0.2 * Math.PI, 0.8 * Math.PI); g.lineWidth = 9 * (1 - v); g.strokeStyle = `rgba(255,90,70,${0.8 * (1 - v)})`; g.stroke(); }
+};
+FX2.counter = function (g, fx, s, t) {                      // the resident counter: LED digits fitted to the roof panel
+  if (t < fx.t0 || (fx.until && t > fx.until)) return;
+  let n = fx.from ?? 0; for (const k of fx.keys) { if (t >= k.t) n = k.n; else { const p = fx.keys[fx.keys.indexOf(k) - 1]; if (p && k.count) n = Math.round(lerp(p.n, k.n, clamp((t - p.t) / (k.t - p.t)))); break; } }
+  const glitch = fx.glitchAt != null && t > fx.glitchAt && t < fx.glitchAt + 0.6, red = fx.redAt != null && t > fx.redAt;
+  const wpx = (fx.r || 400), txt = glitch && hash(Math.floor(t * 40)) > 0.5 ? String(n + (hash(Math.floor(t * 23)) > 0.5 ? 1 : -1) * Math.floor(hash(Math.floor(t * 17)) * 9)) : String(n);
+  g.save(); g.translate(fx.x * W + (glitch ? (hash(Math.floor(t * 60)) - 0.5) * 30 : 0), fx.y * H); g.font = `800 ${wpx * 0.36}px Poppins`; g.textAlign = 'center'; g.textBaseline = 'middle';
+  const col = red ? '#ff2a1e' : '#ffb03a'; g.shadowColor = col; g.shadowBlur = wpx * 0.08; g.fillStyle = col; g.fillText(txt, 0, wpx * 0.04);
+  g.shadowBlur = 0; g.restore();
+};
+FX2.silhouette = function (g, fx, s, t) {                   // a tall dark shape standing in the fog
+  const a = keyAmt(fx.keys, t); if (a <= 0.01) return; const h = fx.r || 300, x = fx.x * W, y = fx.y * H;
+  g.save(); g.globalAlpha = a; g.fillStyle = '#20242a'; g.beginPath(); g.ellipse(x, y - h * 0.92, h * 0.09, h * 0.1, 0, 0, 7); g.fill();
+  g.beginPath(); g.moveTo(x - h * 0.13, y - h * 0.8); g.quadraticCurveTo(x - h * 0.17, y - h * 0.3, x - h * 0.07, y); g.lineTo(x + h * 0.07, y); g.quadraticCurveTo(x + h * 0.17, y - h * 0.3, x + h * 0.13, y - h * 0.8); g.closePath(); g.fill();
+  for (const k of [-1, 1]) { g.beginPath(); g.arc(x + k * h * 0.035, y - h * 0.93, h * 0.012, 0, 7); g.fillStyle = `rgba(255,255,255,${0.9 * a})`; g.fill(); }
+  g.restore();
+};
+FX2.eyes = function (g, fx, s, t) {                         // two eyes opening in a dark doorway
+  if (t < fx.t0) return; const o = clamp((t - fx.t0) / 0.5), bl = (t - fx.t0) % 2.6 > 2.45 ? 0.1 : 1, r = (fx.r || 60) * 0.12;
+  for (const k of [-1, 1]) { g.save(); g.translate(fx.x * W + k * r * 2.6, fx.y * H); g.scale(1, o * bl);
+    const rg = g.createRadialGradient(0, 0, 1, 0, 0, r * 2.2); rg.addColorStop(0, 'rgba(255,255,240,0.95)'); rg.addColorStop(0.4, 'rgba(255,240,200,0.7)'); rg.addColorStop(1, 'rgba(255,220,160,0)');
+    g.fillStyle = rg; g.beginPath(); g.ellipse(0, 0, r * 2.2, r * 1.2, 0, 0, 7); g.fill(); g.fillStyle = '#0a0a0a'; g.beginPath(); g.arc(0, 0, r * 0.35, 0, 7); g.fill(); g.restore(); }
+};
+FX2.nametag = function (g, fx, s, t) {                      // a "HELLO my name is" sticker with nothing written on it
+  const A = ACT[fx.of]; if (!A || t < fx.t0 || (fx.until && t > fx.until)) return; const k = popScale(t, fx.t0, 0.3), sc = A.s * 1.0;
+  g.save(); g.translate(A.x + 34 * sc, A.y - A.h * 0.6); g.scale(k * sc, k * sc); g.rotate(-0.08);
+  g.beginPath(); g.roundRect(-70, -48, 140, 96, 10); g.fillStyle = '#d8342c'; g.fill(); g.fillStyle = '#ffffff'; g.fillRect(-62, -12, 124, 52);
+  g.font = '800 22px Poppins'; g.textAlign = 'center'; g.fillStyle = '#fff'; g.fillText('HELLO', 0, -26); g.font = '600 12px Poppins'; g.fillText('my name is', 0, -6);
+  g.font = '700 26px Poppins'; g.fillStyle = '#2a2a2a'; g.fillText('?', 0, 26); g.restore();
+};
+FX2.flicker = function (g, fx, s, t) {                      // the lights stutter (dark frames)
+  const u = t - fx.t0; if (u < 0 || u > (fx.dur || 0.8)) return; if (hash(Math.floor(t * 24) + 3.3) > 0.55) { g.fillStyle = 'rgba(0,0,0,0.72)'; g.fillRect(0, 0, W, H); }
+};
+FX2.darken = function (g, fx, s, t) {                       // a keyed black wash (fade the end to black)
+  const a = keyAmt(fx.keys, t); if (a > 0.01) { g.fillStyle = `rgba(0,0,0,${a})`; g.fillRect(0, 0, W, H); }
+};
