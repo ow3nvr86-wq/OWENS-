@@ -166,6 +166,8 @@ button, input { font: inherit; color: inherit; }
 .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 .btn.ghost { background: transparent; border-color: transparent; padding-inline: 8px; color: var(--muted); }
 .btn.ghost:hover { color: var(--ink); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn:disabled:hover { border-color: var(--accent); }
 kbd {
   font: 500 11px/1 var(--f-mono);
   padding: 3px 5px;
@@ -300,6 +302,14 @@ kbd {
 .wp.hit { background: var(--ok); border-color: var(--ok); color: var(--surface); }
 .wp.false { background: var(--bad); border-color: var(--bad); color: var(--surface); }
 .wp.missed { border: 2.5px dashed var(--accent); background: var(--accent-soft); color: var(--ink); }
+
+/* Keep track */
+.track { display: grid; gap: 14px; width: 100%; text-align: left; }
+.track-row { display: grid; gap: 6px; }
+.track-row h3 { margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); }
+.track-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.track-opts .wp { padding: 9px 14px; }
+.track-cat { font: 700 14px/1 var(--f-body); color: var(--muted); text-transform: uppercase; letter-spacing: .1em; min-height: 1em; }
 
 /* Echo */
 .pads { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; width: min(100%, 320px); }
@@ -602,6 +612,12 @@ kbd {
       glyph: '<span style="color:var(--c-red)">●</span><span style="color:var(--c-blue)">●</span><span style="color:var(--c-red)">●</span><span style="color:var(--c-green)">●</span>',
       how: 'Four coloured pads light up in a sequence. When it ends, <b>tap the pads in the same order</b>. Each sequence you get right repeats with one more step added on the end. Two misses ends the drill.',
       keys: 'Tap the pads, or press keys 1 to 4.', run: runEcho
+    },
+    track: {
+      name: 'Keep Track', trains: 'Updating memory', time: '~70 s', unit: 'of 6', higher: true,
+      glyph: 'fox → owl', mono: true,
+      how: 'Words from three groups, such as animals, fruit and colours, appear one at a time. <b>Keep only the latest word from each group</b> in mind, replacing the old one each time a new one comes. At the end, pick the last word shown in each group. Two rounds.',
+      keys: 'Pick one word per group, then press Check.', run: runTrack
     },
     anagram: {
       name: 'Unscramble', trains: 'Verbal fluency', time: '60 s', unit: 'words', higher: true,
@@ -1438,6 +1454,97 @@ kbd {
     onKey(e => { const n = +e.key; if (n >= 1 && n <= 4) { e.preventDefault(); press(n - 1); } });
     hudScore('0');
     play();
+  }
+
+  // ---------- 5h. Keep track ----------
+  // Words from three categories stream past; hold only the most recent word in each category.
+  function runTrack(arena, done) {
+    const CATS = {
+      Animals: ['fox', 'owl', 'bear', 'goat', 'seal', 'wolf', 'crab', 'deer'],
+      Fruit: ['plum', 'lime', 'pear', 'fig', 'kiwi', 'date', 'melon', 'grape'],
+      Colours: ['red', 'teal', 'gold', 'navy', 'pink', 'grey', 'cyan', 'olive'],
+      Tools: ['saw', 'drill', 'axe', 'wrench', 'chisel', 'rake', 'file', 'clamp'],
+      Weather: ['rain', 'fog', 'snow', 'hail', 'wind', 'frost', 'sleet', 'mist']
+    };
+    const ROUNDS = 2, LEN = 13, SHOW = 1150, GAP = 300;
+    let r = 0, score = 0;
+    const notes = [];
+    timerLabel.textContent = 'Round';
+    hudScore('0');
+
+    const round = () => {
+      hudTimer(`${r + 1}/${ROUNDS}`);
+      const cats = shuffle(Object.keys(CATS)).slice(0, 3);
+      // Each group appears at least three times, so the last one has to be tracked, not guessed.
+      let groups;
+      do { groups = Array.from({ length: LEN }, () => pick(cats)); } while (cats.some(c => groups.filter(g => g === c).length < 3));
+      const pools = Object.fromEntries(cats.map(c => [c, shuffle(CATS[c])]));
+      const used = Object.fromEntries(cats.map(c => [c, 0]));
+      const stream = groups.map(c => ({ c, w: pools[c][used[c]++] }));
+      const last = Object.fromEntries(cats.map(c => [c, stream.filter(x => x.c === c).pop().w]));
+
+      arena.innerHTML = `<div class="play">
+        <p class="hint" id="th" aria-live="polite">Groups this round: <b>${cats.join(', ')}</b>.</p>
+        <p class="track-cat" id="tc"></p>
+        <div class="stimulus" id="tw"></div>
+      </div>`;
+      const tw = $('#tw', arena), tc = $('#tc', arena);
+      let k = 0;
+      const show = () => {
+        if (k >= stream.length) { later(() => ask(cats, stream, last), 500); return; }
+        tc.textContent = stream[k].c;
+        tw.textContent = stream[k].w;
+        later(() => { tw.textContent = ''; tc.textContent = ''; }, SHOW);
+        k++;
+        later(show, SHOW + GAP);
+      };
+      later(show, 1800);
+    };
+
+    const ask = (cats, stream, last) => {
+      const picks = {};
+      arena.innerHTML = `<div class="play">
+        <p class="hint" id="th" aria-live="polite">Pick the last word shown in each group.</p>
+        <div class="track">${cats.map(c => `<div class="track-row" role="group" aria-label="${c}"><h3>${c}</h3><div class="track-opts">${
+          shuffle(stream.filter(x => x.c === c).map(x => x.w)).map(w => `<button type="button" class="wp" aria-pressed="false" data-c="${c}" data-w="${w}">${w}</button>`).join('')
+        }</div></div>`).join('')}</div>
+        <button class="btn primary" id="tk" type="button" disabled>Check</button>
+      </div>`;
+      const box = $('.track', arena), check = $('#tk', arena), hint = $('#th', arena);
+      let checked = false;
+      box.addEventListener('click', e => {
+        const b = e.target.closest('.wp');
+        if (!b || checked) return;
+        picks[b.dataset.c] = b.dataset.w;
+        box.querySelectorAll(`.wp[data-c="${b.dataset.c}"]`).forEach(o => o.setAttribute('aria-pressed', String(o === b)));
+        check.disabled = Object.keys(picks).length < cats.length;
+      });
+      check.addEventListener('click', () => {
+        if (checked) return;
+        checked = true;
+        let got = 0;
+        box.querySelectorAll('.wp').forEach(b => {
+          const right = last[b.dataset.c] === b.dataset.w, picked = picks[b.dataset.c] === b.dataset.w;
+          b.setAttribute('aria-disabled', 'true');
+          if (right && picked) b.classList.add('hit');
+          else if (picked) b.classList.add('false');
+          else if (right) b.classList.add('missed');
+        });
+        cats.forEach(c => { if (picks[c] === last[c]) got++; });
+        score += got;
+        notes.push(`${got}/3`);
+        hudScore(String(score));
+        check.hidden = true;
+        hint.textContent = `${got} of 3 right. Green: right. Red: your pick. Dashed: the last one shown.`;
+        r++;
+        later(r < ROUNDS ? round : () => done({
+          score,
+          detail: `Rounds: ${notes.join(' then ')}. The trick is to drop the old word the moment its replacement arrives.`
+        }), 2600);
+      });
+    };
+
+    round();
   }
 
   // ---------- 6. Anagrams ----------
