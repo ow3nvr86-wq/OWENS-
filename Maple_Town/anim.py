@@ -116,7 +116,7 @@ def s1():
             place(f, x, y + (1.6 if y > 0 else -1.6) * back, r)
             T.pose(f, arm_l=-2.5 * back, arm_r=-2.5 * back, lean=-0.18 * back, head=(0, 0, 0))
         e = sm(t, 0.0, d * 0.85)
-        cam(lerp((30, -34, 24), (9, -2.2, 4.0), e), lerp((-6, 0, 2), (-8, 0.2, 3.8), e), 28)
+        cam(lerp((36, -3.5, 15), (9, -2.2, 4.0), e), lerp((-6, 0, 2), (-8, 0.2, 3.8), e), 28)
     return upd
 
 
@@ -275,7 +275,7 @@ def s7():
                 walk(r, t * 13, 0.95, 0.25)
             drop = sm(t, t_run, t_run + 0.35)
             bag.location = (16.6, y0 * 1.2, 2.4 - 1.5 * drop)
-        cam(lerp((5.0, -8.2, 3.0), (6.4, -8.0, 3.4), sm(t, 0, d)), (14.2, 0.2, 3.4), 28)
+        cam(lerp((1.2, -6.2, 3.0), (2.6, -6.0, 3.3), sm(t, 0, d)), (14.0, 0.2, 3.4), 32)
     return upd
 
 
