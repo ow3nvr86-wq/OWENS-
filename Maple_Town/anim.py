@@ -116,7 +116,7 @@ def s1():
             place(f, x, y + (1.6 if y > 0 else -1.6) * back, r)
             T.pose(f, arm_l=-2.5 * back, arm_r=-2.5 * back, lean=-0.18 * back, head=(0, 0, 0))
         e = sm(t, 0.0, d * 0.85)
-        cam(lerp((30, -34, 40), (9, -2.2, 4.0), e), lerp((-6, 0, 2), (-8, 0.2, 3.8), e), 28)
+        cam(lerp((30, -34, 24), (9, -2.2, 4.0), e), lerp((-6, 0, 2), (-8, 0.2, 3.8), e), 28)
     return upd
 
 
@@ -140,7 +140,7 @@ def s2b():
         x = -14 + 10 * t / d
         place(k, x, -1.0, 90, 0.12)
         walk(k, t * 7.0, 0.5)
-        cam((x + 6.5, -7.5, 3.4), (x + 0.5, -1.0, 3.9), 38)
+        cam((x + 7.0, -3.7, 2.7), (x + 0.5, -1.0, 3.9), 34)
     return upd
 
 
@@ -245,11 +245,11 @@ def s6():
             place(r, 15.5, -2.2 + i * 4.4, 270, 0.12)
             T.pose(r, arm_l=-0.3, arm_r=-0.3)
             bag.location = (17, -3.8 + i * 7.6, 0.95)
-        cam(lerp((8.5, -4.3, 3.6), (10.6, -4.3, 3.2), sm(t, 0, d)), (13.6, 0.5, 4.1), 24)
+        cam(lerp((3.0, -5.6, 3.6), (5.0, -5.6, 3.4), sm(t, 0, d)), (13.0, 0.4, 3.9), 26)
         s = sm(t, tw * 0.72, tw * 0.82)
         bub.scale = tx.scale = (s, s, s)
-        bub.location = (x + 0.3, 0.1, 7.4)
-        tx.location = (x + 0.3, -0.25, 7.4)
+        bub.location = (x + 0.3, 0.1, 6.9)
+        tx.location = (x + 0.3, -0.25, 6.9)
         face_cam(tx)
         bub.rotation_euler[2] = tx.rotation_euler[2]
     return upd
@@ -275,7 +275,7 @@ def s7():
                 walk(r, t * 13, 0.95, 0.25)
             drop = sm(t, t_run, t_run + 0.35)
             bag.location = (16.6, y0 * 1.2, 2.4 - 1.5 * drop)
-        cam(lerp((10.6, -4.3, 2.8), (9.4, -4.3, 3.5), sm(t, 0, d)), (14.5, 0.3, 3.4), 24)
+        cam(lerp((5.0, -8.2, 3.0), (6.4, -8.0, 3.4), sm(t, 0, d)), (14.2, 0.2, 3.4), 28)
     return upd
 
 
@@ -314,19 +314,19 @@ def s8():
 def s9():
     base('day')
     k = T.character('kid', face='smile', **GREY)
-    place(k, 2, 0.0, 325, 0.12)
+    place(k, 1.2, 0.0, 325, 0.12)
     n = T.character('new', face='smile', shirt='4b8fe2', pants='4f9d4a', skin='f7d24a', shoes='4f9d4a')
     fs = folk([(-5, 5.6, 300), (8, 6.2, 230), (-3, -6.0, 60), (9, -5.8, 120)], face='happy')
 
     def upd(t, d):
         drop = sm(t, 0.2, 0.9)
-        place(n, -4, -0.6, 35, 0.12 + 9 * (1 - drop))
+        place(n, -2.6, -0.6, 35, 0.12 + 9 * (1 - drop))
         T.pose(n, arm_l=-0.3 * math.sin(t * 5), arm_r=-2.6 * sm(t, 1.4, 1.9) + 0.3 * math.sin(t * 9) * sm(t, 1.9, 2.0))
         T.pose(k, arm_r=-2.7 + 0.35 * math.sin(t * 9), head=(0, 0, 0.1))
         for i, f in enumerate(fs):
             T.pose(f, arm_l=-2.6 if i % 2 else 0, arm_r=-2.6, head=(0, 0, 0.2 * math.sin(t * 3 + i)))
             f['root'].location.z = 0.3 + 0.5 * abs(math.sin(t * 5 + i))
-        cam(lerp((-1, -4.0, 3.2), (15, -3.6, 15), sm(t, 0.8, d)), (-1, 0, 3.6), 28)
+        cam(lerp((-0.7, -7.2, 3.4), (15, -3.6, 15), sm(t, 0.8, d)), (-0.7, 0, 3.6), 26)
     return upd
 
 
