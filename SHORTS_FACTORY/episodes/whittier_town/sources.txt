@@ -1,0 +1,22 @@
+Whittier, Alaska - fact check (each claim in 2+ sources)
+
+1. Almost the whole town lives in one 14-story building (Begich Towers); 2020 census population 272.
+   - https://en.wikipedia.org/wiki/Whittier,_Alaska  (272 in 2020; almost all residents in Begich Towers)
+   - https://www.smithsonianmag.com/travel/visit-town-where-every-resident-lives-same-building-180959081/
+   - https://www.npr.org/2015/01/18/378162264/welcome-to-whittier-alaska-a-community-under-one-roof
+   - https://farandwide.com/s/the-town-in-alaska-where-the-entire-population-lives-inside-one-14-story-building
+   Note: other tallies give 278-279 for 2020, so the script says "about two hundred seventy".
+2. Post office, police station, clinic, store, church, laundromat and city offices are inside the building.
+   - Smithsonian (above); NPR (above); https://mymodernmet.com/whittier-alaska
+3. The school is across the street and is reached through an underground tunnel.
+   - Smithsonian; MyModernMet; https://en.wikipedia.org/wiki/Begich_Towers
+4. Built by the Army; completed 1957 (formerly the Hodge Building).
+   - https://en.wikipedia.org/wiki/Begich_Towers ; https://alaskarails.org/route-map/whittier.html
+5. Buckner Building: Army "city under one roof", completed 1953, abandoned, judged unlikely to be rehabilitated (2016 assessment).
+   - https://en.wikipedia.org/wiki/Buckner_Building ; https://www.onlyinyourstate.com/experiences/alaska/buckner-building-ak
+6. The only road in is the Anton Anderson Memorial Tunnel: about 2.5 miles, one lane, shared by cars and trains, traffic alternates.
+   - https://dot.alaska.gov/creg/whittiertunnel/ ; https://aaroads.com/guides/anton-anderson-mem-tunnel-whittier-ak ; https://atlasobscura.com/places/anton-anderson-memorial-tunnel
+7. The tunnel closes at night (summer: about 5:30 am to 11:15 pm; winter hours are shorter).
+   - https://dot.alaska.gov/creg/whittiertunnel/schedule.shtml ; https://www.whittieralaskachamber.org/info/whittier-alaska-tunnel/
+
+Cut / not used: snowfall totals (sources conflict, from 80 inches to "40 feet"); claims that residents never go outside all winter (not sourced).

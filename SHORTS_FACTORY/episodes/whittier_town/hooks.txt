@@ -1,0 +1,6 @@
+Hook options (2-3 s, first line of the voiceover). Pick one; the default is 1.
+1. This entire town lives in one building.
+2. Everyone in this town has the same address.
+3. Your whole town lives upstairs.
+4. There's one way out of this town... and it closes at night.
+5. In this town, the police station is down the hall.
