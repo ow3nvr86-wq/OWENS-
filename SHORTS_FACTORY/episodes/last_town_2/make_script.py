@@ -34,7 +34,7 @@ chars = [
              K(b['locked2'] - 0.25, action='rattle', mood='scared', lookAt='left'), K(b['through'] - 0.1, action='idle', mood='scared', lookAt='left'),
              K(b['home'], action='idle', mood='worried', lookAt='up'), K(b['why'], mood='scared', lookAt='up')]),
   dict(id='double', cast='double', track='double', autoGait=False, mood='creepy', lookAt='camera', blink=0, clipQuad=WINQ, nodAt=[b['smiling'] + 0.05]),
-  dict(id='double2', cast='double', track='double2', autoGait=False, mood='creepy', lookAt='camera', blink=0, clipQuad=FACQ,
+  dict(id='double2', cast='double', track='double2', autoGait=False, size=0.75, mood='creepy', lookAt='camera', blink=0, clipQuad=FACQ,
        keys=[K(b['own'] - 0.1, action='wave')]),
 ]
 

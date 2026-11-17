@@ -173,6 +173,7 @@
      "cast": "double",
      "track": "double2",
      "autoGait": false,
+     "size": 0.75,
      "mood": "creepy",
      "lookAt": "camera",
      "blink": 0,
