@@ -16,33 +16,15 @@
    "end": 0.66
   },
   {
-   "word": "the",
+   "word": "this",
    "line": 0,
    "start": 0.66,
-   "end": 0.752
+   "end": 0.8
   },
   {
-   "word": "last",
+   "word": "building",
    "line": 0,
-   "start": 0.752,
-   "end": 0.844
-  },
-  {
-   "word": "town",
-   "line": 0,
-   "start": 0.844,
-   "end": 0.936
-  },
-  {
-   "word": "on",
-   "line": 0,
-   "start": 0.936,
-   "end": 1.028
-  },
-  {
-   "word": "Earth",
-   "line": 0,
-   "start": 1.028,
+   "start": 0.8,
    "end": 1.12
   },
   {
