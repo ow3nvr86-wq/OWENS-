@@ -61,12 +61,12 @@ FACQ = [(HERO_DOOR - 0.8, -8.2, Z9 + 0.8), (HERO_DOOR + 0.8, -8.2, Z9 + 0.8), (H
 lin = lambda u: u
 def hero_pos(t):
     path = [(0.0, (HERO_DOOR, -0.95, Z9)), (B['counted'] + 0.2, (HERO_DOOR, -0.95, Z9)), (B['knock'] - 0.25, (VACANT_DOOR + 0.35, -0.85, Z9)),
-            (B['locked'] + 0.5, (VACANT_DOOR + 0.35, -0.85, Z9)), (B['inside'] + 0.6, (VACANT_DOOR, -2.0, Z9)), (B['bed'], (VACANT_DOOR - 0.15, -2.45, Z9)),
-            (B['run'] - 0.05, (VACANT_DOOR - 0.15, -2.45, Z9)), (B['run'] + 0.35, (VACANT_DOOR, -0.8, Z9)), (B['door2'] + 0.15, (HERO_DOOR - 0.5, -0.9, Z9))]
+            (B['locked'] + 0.5, (VACANT_DOOR + 0.35, -0.85, Z9)), (B['inside'] + 0.6, (VACANT_DOOR + 1.4, -1.95, Z9)), (B['bed'], (VACANT_DOOR + 1.35, -2.1, Z9)),
+            (B['run'] - 0.05, (VACANT_DOOR + 1.35, -2.1, Z9)), (B['run'] + 0.35, (VACANT_DOOR, -0.8, Z9)), (B['door2'] + 0.15, (HERO_DOOR - 0.5, -0.9, Z9))]
     if t < B['slam'] + 0.7: return keyed(path, t, lin), 1
     if t < B['home']: return (HERO_DOOR - 0.5, -0.9, Z9), 0
     return (-0.4, -32.0, 0.0), 1
-def double_pos(t): return (HERO_DOOR - 0.1, -2.7, Z9), (1 if B['through'] - 0.4 < t < B['slam'] + 0.7 else 0)
+def double_pos(t): return (HERO_DOOR - 0.05, -3.3, Z9), (1 if B['through'] - 0.4 < t < B['slam'] + 0.7 else 0)
 def double2_pos(t): return (HERO_DOOR, -8.35, Z9 + 0.15), (1 if t > B['home'] else 0)
 ACTORS = dict(hero=hero_pos, double=double_pos, double2=double2_pos)
 
@@ -81,15 +81,15 @@ CAM = [(0.0, (-5.6, 0.55, EYE), (VACANT_DOOR, -1.3, EYE - 0.3), 26), (b['empty']
        (b['clock'] + 0.1, (VACANT_DOOR + 0.05, -2.3, EYE + 0.15), (VACANT_DOOR, -3.83, Z9 + 2.0), 32), (b['fifteen'] + 0.4, (VACANT_DOOR + 0.05, -2.55, EYE + 0.2), (VACANT_DOOR, -3.83, Z9 + 2.0), 36),
        (b['jumpsuit'] + 0.1, (VACANT_DOOR + 0.6, -2.15, Z9 + 1.5), (VACANT_DOOR + 1.0, -3.0, Z9 + 0.6), 30), (b['number'] + 0.2, (VACANT_DOOR + 0.9, -2.5, Z9 + 1.2), (VACANT_DOOR + 1.0, -3.0, Z9 + 0.6), 32),
        (b['then'], (VACANT_DOOR + 0.92, -2.55, Z9 + 1.15), (VACANT_DOOR + 1.0, -3.0, Z9 + 0.6), 34), (b['speakers'] + 0.3, (VACANT_DOOR + 0.05, -2.4, EYE), (VACANT_DOOR + 0.3, 0.8, Z9 + 2.5), 24),
-       (b['ret'], (VACANT_DOOR + 0.1, -1.8, EYE), (HERO_DOOR, -1.0, EYE - 0.3), 24), (b['run'] + 0.2, (VACANT_DOOR - 0.2, 0.45, EYE), (HERO_DOOR, -1.0, EYE - 0.4), 24),
-       (b['door2'] + 0.2, (-0.5, 0.55, EYE), (HERO_DOOR - 0.1, -1.3, EYE - 0.3), 26), (b['from'], (0.3, 0.45, EYE), (HERO_DOOR, -1.3, EYE - 0.2), 28),
+       (b['ret'], (VACANT_DOOR + 0.1, -1.0, EYE), (HERO_DOOR, -1.0, EYE - 0.3), 24), (b['run'] + 0.2, (VACANT_DOOR - 0.2, 0.45, EYE), (HERO_DOOR, -1.0, EYE - 0.4), 24),
+       (b['door2'] + 0.2, (-1.8, 0.8, EYE), (HERO_DOOR - 0.1, -1.3, EYE - 0.3), 26), (b['from'], (-1.0, 0.85, EYE), (HERO_DOOR, -1.3, EYE - 0.2), 28),
        (b['little'], (HERO_DOOR + 0.05, -0.5, EYE), (HERO_DOOR, -1.4, Z9 + 1.57), 30), (b['standing'], (HERO_DOOR, -0.97, Z9 + 1.57), (HERO_DOOR, -2.6, Z9 + 1.55), 32),
        (b['smiling'] + 0.5, (HERO_DOOR, -1.02, Z9 + 1.57), (HERO_DOOR, -2.6, Z9 + 1.55), 34), (b['shutters'] + 0.1, (-5.0, 0.0, EYE), (10, 0, EYE - 0.2), 24),
        (b['slam'] + 0.35, (-19.0, 0.0, EYE), (10, 0, EYE - 0.2), 24), (b['slam'] + 0.65, (-28.0, -1.0, EYE + 0.4), (0, 0, EYE), 24),
        (b['die'] + 0.2, (-58, -20, 30), (0, 0, 22), 26), (b['cold'] + 0.9, (-40, -44, 20), (0, 0, 20), 24),
        (b['counts'], (13, -38, 38), (0, -8.6, SZ), 26), (b['seventy'], (7, -27, 44), (0, -8.6, SZ), 28), (b['home'], (4.5, -22, 45), (0, -8.6, SZ), 30),
-       (b['snow'], (-2.0, -38, 1.7), (-0.4, -32, 1.2), 24), (b['looking'] + 0.25, (-1.8, -37, 1.8), (HERO_DOOR, -8.2, Z9 + 1.55), 24),
-       (b['end'], (0.6, -26, 7.0), (HERO_DOOR, -8.2, Z9 + 1.5), 60)]
+       (b['snow'], (-1.6, -36.5, 1.5), (-0.4, -32, 1.0), 28), (b['looking'] + 0.25, (-1.8, -37, 1.8), (HERO_DOOR, -8.2, Z9 + 1.55), 24),
+       (b['end'], (1.2, -18, 12.0), (HERO_DOOR, -8.2, Z9 + 1.5), 70)]
 CAM.sort(key=lambda k: k[0])
 def cam_at(t):
     if t <= CAM[0][0]: return CAM[0][1], CAM[0][2], CAM[0][3]
@@ -313,7 +313,8 @@ def apartment(cx, lampE):                                                   # th
     box((cx + 1.0, -HW - 2.25, Z9 + 0.6), (0.9, 0.35, 0.12), m_plain('pillow', (0.9, 0.88, 0.82), 0.9))
     box((cx - 1.2, -HW - 2.3, Z9 + 0.5), (0.6, 0.5, 1.0), m_plain('dresser', (0.35, 0.22, 0.12), 0.7))
     cyl((cx - 1.2, -HW - 2.3, Z9 + 1.2), 0.03, 0.4, steel, v=8); cyl((cx - 1.2, -HW - 2.3, Z9 + 1.45), 0.15, 0.2, lampE, v=16)
-    bpy.ops.object.light_add(type='POINT', location=(cx - 1.2, -HW - 2.2, Z9 + 1.45)); al = bpy.context.object; al.data.energy = 60; al.data.color = (1.0, 0.65, 0.35); al.data.shadow_soft_size = 0.3
+    bpy.ops.object.light_add(type='POINT', location=(cx - 1.2, -HW - 2.2, Z9 + 1.45)); al = bpy.context.object; al.data.energy = 110; al.data.color = (1.0, 0.65, 0.35); al.data.shadow_soft_size = 0.3
+    bpy.ops.object.light_add(type='AREA', location=(cx, -HW - 1.3, Z9 + 2.75)); fl_ = bpy.context.object; fl_.data.size = 1.2; fl_.data.energy = 35; fl_.data.color = (1.0, 0.8, 0.6)
     ccx, ccz, wy = cx, Z9 + 2.0, -HW - 2.6 + 0.08                                           # wall clock on the back wall, stopped at 10:15
     cyl((ccx, wy + 0.01, ccz), 0.2, 0.04, m_plain('clockFace2', (0.92, 0.9, 0.84), 0.5), (math.pi / 2, 0, 0), 32); cyl((ccx, wy - 0.005, ccz), 0.22, 0.03, dark, (math.pi / 2, 0, 0), 32)
     for (ang_, L, wd) in [(10 * 30 + 15 * 0.5, 0.11, 0.025), (15 * 6, 0.17, 0.016)]:

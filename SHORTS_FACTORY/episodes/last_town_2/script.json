@@ -65,8 +65,8 @@
      "mood": "worried",
      "lookAt": "left",
      "nearFade": [
-      0.45,
-      1.1
+      0.6,
+      1.4
      ],
      "keys": [
       {

@@ -27,7 +27,7 @@ WINQ = [[HERO_DOOR - 0.16, -1.33, Z9 + 1.33], [HERO_DOOR + 0.16, -1.33, Z9 + 1.3
 FACQ = [[HERO_DOOR - 0.8, -8.23, Z9 + 0.8], [HERO_DOOR + 0.8, -8.23, Z9 + 0.8], [HERO_DOOR + 0.8, -8.23, Z9 + 2.3], [HERO_DOOR - 0.8, -8.23, Z9 + 2.3]]
 
 chars = [
-  dict(id='you', cast='you', track='hero', autoGait=True, mood='worried', lookAt='left', nearFade=[0.45, 1.1],
+  dict(id='you', cast='you', track='hero', autoGait=True, mood='worried', lookAt='left', nearFade=[0.6, 1.4],
        keys=[K(b['tonight'], mood='neutral', lookAt='left'), K(b['knock'] - 0.15, action='knock', lookAt='left'), K(b['answers'] + 0.35, action='idle', mood='worried'),
              K(b['door'], mood='scared', lookAt='left'), K(b['inside'] + 0.5, mood='worried', lookAt='camera'), K(b['jumpsuit'], mood='scared', lookAt='right'),
              K(b['speakers'], mood='scared', lookAt='up'), K(b['run'] - 0.1, mood='scared', lookAt='right'),
