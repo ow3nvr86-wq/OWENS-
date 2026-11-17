@@ -15,7 +15,7 @@
   "samples": 8,
   "shutter": 0.5
  },
- "caption_y": 0.72,
+ "caption_y": 0.765,
  "caption_case": "lower",
  "caption_size": 78,
  "grade": "brightness(1.02) saturate(1.08) contrast(1.06)",
@@ -138,6 +138,10 @@
      "cast": "res0",
      "track": "res0",
      "autoGait": true,
+     "nearFade": [
+      1.4,
+      3.0
+     ],
      "mood": "neutral",
      "lookAt": "left",
      "keys": [
@@ -158,6 +162,10 @@
      "cast": "res1",
      "track": "res1",
      "autoGait": true,
+     "nearFade": [
+      1.4,
+      3.0
+     ],
      "mood": "neutral",
      "lookAt": "camera",
      "keys": [
@@ -178,6 +186,10 @@
      "cast": "res2",
      "track": "res2",
      "autoGait": true,
+     "nearFade": [
+      1.4,
+      3.0
+     ],
      "mood": "neutral",
      "lookAt": "left",
      "keys": [
@@ -198,6 +210,10 @@
      "cast": "res3",
      "track": "res3",
      "autoGait": true,
+     "nearFade": [
+      1.4,
+      3.0
+     ],
      "mood": "neutral",
      "lookAt": "camera",
      "keys": [
@@ -218,6 +234,10 @@
      "cast": "res4",
      "track": "res4",
      "autoGait": true,
+     "nearFade": [
+      1.4,
+      3.0
+     ],
      "mood": "neutral",
      "lookAt": "left",
      "keys": [
@@ -238,6 +258,10 @@
      "cast": "res5",
      "track": "res5",
      "autoGait": true,
+     "nearFade": [
+      1.4,
+      3.0
+     ],
      "mood": "neutral",
      "lookAt": "camera",
      "keys": [

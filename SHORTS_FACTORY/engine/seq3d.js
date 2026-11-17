@@ -117,6 +117,7 @@ function seqActorState(ch, s, t, S, x, cam) {
   if (p[3] > 0.4 && st.x > -300 && st.x < W + 300) ACT[ch.id] = { x: st.x, y: st.y, h: 555 * st.scale, s: st.scale };
   return st;
 }
+let NEARBUF = null;
 // replace the character pass of renderShotSeq with the track-aware one (also handles the car-door clip)
 renderShotSeq = (function (orig) {
   return function (g, i, t) {
@@ -139,7 +140,13 @@ renderShotSeq = (function (orig) {
       if (FEAT.crowdFX) st = crowdReact(st, s, t, 150);
       const def = Object.assign({ seed: ch.id.length }, CAST()[ch.cast || ch.id]);
       let clipY = null; if (ch.clipDoor) { const d = S.meta.door[Math.min(S.meta.door.length - 1, Math.round(x))]; clipY = seqProject(cam, [d[0], d[1], d[2] + 1.02])[1]; }
-      items.push({ d: st.depth, occ: ch.occlude, draw: () => { if (clipY != null) { g.beginPath(); g.rect(-W, -H, W * 3, clipY + H); g.clip(); } st._def = def; drawCharacter(g, def, st); if (st._post) st._post(g); } });
+      const nf = ch.nearFade, na = nf ? clamp((st.depth - nf[0]) / (nf[1] - nf[0]), 0, 1) : 1;   // fade out as the camera flies through them
+      if (na <= 0.01) continue;
+      const drawCh = (gg) => { if (clipY != null) { gg.beginPath(); gg.rect(-W, -H, W * 3, clipY + H); gg.clip(); } st._def = def; drawCharacter(gg, def, st); if (st._post) st._post(gg); };
+      items.push({ d: st.depth, occ: ch.occlude, draw: na >= 0.99 ? () => drawCh(g) : () => {
+        const oc = NEARBUF || (NEARBUF = Object.assign(document.createElement('canvas'), { width: W, height: H })), og = oc.getContext('2d');
+        og.setTransform(1, 0, 0, 1, 0, 0); og.clearRect(0, 0, W, H); og.setTransform(g.getTransform()); og.save(); drawCh(og); og.restore();
+        g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = na; g.drawImage(oc, 0, 0); g.restore(); } });
     }
     items.sort((a, b) => b.d - a.d);
     for (const it of items) { g.save(); it.draw(); g.restore(); if (it.occ) drawOccluders(g, S, it.occ, Math.round(x), s); }
@@ -252,10 +259,10 @@ FX2.eyes = function (g, fx, s, t) {                         // two eyes opening 
 };
 FX2.nametag = function (g, fx, s, t) {                      // a "HELLO my name is" sticker with nothing written on it
   const A = ACT[fx.of]; if (!A || t < fx.t0 || (fx.until && t > fx.until)) return; const k = popScale(t, fx.t0, 0.3), sc = A.s * 1.0;
-  g.save(); g.translate(A.x + 34 * sc, A.y - A.h * 0.6); g.scale(k * sc, k * sc); g.rotate(-0.08);
-  g.beginPath(); g.roundRect(-70, -48, 140, 96, 10); g.fillStyle = '#d8342c'; g.fill(); g.fillStyle = '#ffffff'; g.fillRect(-62, -12, 124, 52);
-  g.font = '800 22px Poppins'; g.textAlign = 'center'; g.fillStyle = '#fff'; g.fillText('HELLO', 0, -26); g.font = '600 12px Poppins'; g.fillText('my name is', 0, -6);
-  g.font = '700 26px Poppins'; g.fillStyle = '#2a2a2a'; g.fillText('?', 0, 26); g.restore();
+  g.save(); g.translate(A.x + 62 * sc, A.y - A.h * 0.64); g.scale(k * sc, k * sc); g.rotate(-0.08);
+  g.beginPath(); g.roundRect(-70, -48, 140, 96, 10); g.fillStyle = '#d8342c'; g.fill(); g.fillStyle = '#ffffff'; g.fillRect(-62, 0, 124, 40);
+  g.font = '800 22px Poppins'; g.textAlign = 'center'; g.fillStyle = '#fff'; g.fillText('HELLO', 0, -24); g.font = '600 13px Poppins'; g.fillText('my name is', 0, -7);
+  g.font = '700 26px Poppins'; g.fillStyle = '#2a2a2a'; g.fillText('?', 0, 30); g.restore();
 };
 FX2.flicker = function (g, fx, s, t) {                      // the lights stutter (dark frames)
   const u = t - fx.t0; if (u < 0 || u > (fx.dur || 0.8)) return; if (hash(Math.floor(t * 24) + 3.3) > 0.55) { g.fillStyle = 'rgba(0,0,0,0.72)'; g.fillRect(0, 0, W, H); }

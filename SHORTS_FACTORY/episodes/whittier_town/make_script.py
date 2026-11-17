@@ -26,7 +26,7 @@ chars = [
   dict(id='you', cast='you', track='hero', autoGait=True, mood='neutral', lookAt='camera',
        keys=[K(b['never'] - 0.4, mood='neutral', lookAt='camera'), K(b['good'], mood='smug'), K(b['cant'], mood='worried', lookAt='camera'),
              K(b['night'] + 0.2, mood='worried', lookAt='up'), K(b['speakers'], mood='scared', lookAt='up'), K(b['sealing'], mood='scared', lookAt='camera')]),
-] + [dict(id='res%d' % i, cast='res%d' % i, track='res%d' % i, autoGait=True, mood='neutral', lookAt='camera' if i % 2 else 'left',
+] + [dict(id='res%d' % i, cast='res%d' % i, track='res%d' % i, autoGait=True, nearFade=[1.4, 3.0], mood='neutral', lookAt='camera' if i % 2 else 'left',
           keys=[K(b['speakers'] + 0.1 * i, mood='worried', lookAt='up'), K(b['ret'] + 0.05 * i, mood='scared', lookAt='right')]) for i in range(6)] + [
   dict(id='man', cast='man', track='man', autoGait=False, mood='creepy', lookAt='camera', blink=0,
        keys=[K(b['name'] - 0.2, lookAt='left'), K(b['name'] + 0.5, lookAt='camera')], nodAt=[b['name'] + 0.1]),
@@ -65,7 +65,7 @@ sfx = [dict(type='wind', at=0.0, dur=8.5, gain=0.6), dict(type='gust', at=b['one
 jump = lambda col, num, **k: dict(costume='jumpsuit', num=num, **k)
 S_ = dict(title='The Last Town on Earth', fps=60, tail=1.2, charStyle='rc', sprites='props',
   features=dict(depth=True, motionBlur=True, rigV2=True, lipSync=True, crowdFX=True), motion_blur=dict(samples=8, shutter=0.5),
-  caption_y=0.72, caption_case='lower', caption_size=78, grade='brightness(1.02) saturate(1.08) contrast(1.06)', thumbnail_cue=b['seventyone'] + 0.3,
+  caption_y=0.765, caption_case='lower', caption_size=78, grade='brightness(1.02) saturate(1.08) contrast(1.06)', thumbnail_cue=b['seventyone'] + 0.3,
   music=dict(level_db=-25, segments=[dict(file='music/six_forty_seven.mp3', offset=0.0, fadeIn=0.8, fadeOut=1.5, **{'from': 0.0, 'to': END})]),   # your track, kept light under the voice
   cast=dict(you=dict(costume='jumpsuit', num='9-14', hat='beanie', mood='neutral', hair='#3a2618'),
             res0=jump(0, '9-03', hat='none', hair='#2a1a10'), res1=jump(0, '9-07', hat='cap', hair='#6a4a2a'), res2=jump(0, '9-10', hat='none', hair='#c9a35a'),
