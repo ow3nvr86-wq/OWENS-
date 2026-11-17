@@ -216,7 +216,12 @@ M = S.get('music', {})
 if M.get('segments'):                                                    # several cues: [{style, bpm, from, to, gain}] (seconds), short fades
     music = np.zeros(N)
     for sg in M['segments']:
-        a, b = sg.get('from', 0.0), min(N / SR, sg.get('to', N / SR)); x = MUSIC[sg['style']](b - a + 0.1, sg.get('bpm', 110))[:int((b - a) * SR)]
+        a, b = sg.get('from', 0.0), min(N / SR, sg.get('to', N / SR))
+        if sg.get('file'):                                               # a music track you supplied: {file, offset (s into the track)}
+            raw = subprocess.run(['ffmpeg', '-v', 'error', '-ss', str(sg.get('offset', 0.0)), '-t', str(b - a), '-i', os.path.join(EP, sg['file']),
+                                  '-ac', '1', '-ar', str(SR), '-f', 'f32le', '-'], capture_output=True, check=True).stdout
+            x = np.frombuffer(raw, np.float32).astype(np.float64)[:int((b - a) * SR)]
+        else: x = MUSIC[sg['style']](b - a + 0.1, sg.get('bpm', 110))[:int((b - a) * SR)]
         x = x * env(len(x), sg.get('fadeIn', 0.02), sg.get('fadeOut', 0.08)) * sg.get('gain', 1.0); put(music, x, a)
 else:
     music = MUSIC[M.get('style', 'march')](N / SR + 1, M.get('bpm', 104))[:N]

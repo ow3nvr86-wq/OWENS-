@@ -66,8 +66,7 @@ jump = lambda col, num, **k: dict(costume='jumpsuit', num=num, **k)
 S_ = dict(title='The Last Town on Earth', fps=60, tail=1.2, charStyle='rc', sprites='props',
   features=dict(depth=True, motionBlur=True, rigV2=True, lipSync=True, crowdFX=True), motion_blur=dict(samples=8, shutter=0.5),
   caption_y=0.72, caption_case='lower', caption_size=78, grade='brightness(1.02) saturate(1.08) contrast(1.06)', thumbnail_cue=b['seventyone'] + 0.3,
-  music=dict(level_db=-18, segments=[dict(style='dread', bpm=64, fadeIn=1.0, fadeOut=1.2, **{'from': 0.0, 'to': b['except'] + 0.4}),
-                                     dict(style='reveal', bpm=60, fadeIn=0.05, fadeOut=0.8, **{'from': b['seventyone'] - 0.05, 'to': END})]),
+  music=dict(level_db=-25, segments=[dict(file='music/six_forty_seven.mp3', offset=0.0, fadeIn=0.8, fadeOut=1.5, **{'from': 0.0, 'to': END})]),   # your track, kept light under the voice
   cast=dict(you=dict(costume='jumpsuit', num='9-14', hat='beanie', mood='neutral', hair='#3a2618'),
             res0=jump(0, '9-03', hat='none', hair='#2a1a10'), res1=jump(0, '9-07', hat='cap', hair='#6a4a2a'), res2=jump(0, '9-10', hat='none', hair='#c9a35a'),
             res3=jump(0, '9-17', hat='none', hair='#1a1a1a', facial='moustache'), res4=jump(0, '9-18', hat='cap', hair='#8a5a3a'), res5=jump(0, '9-21', hat='none', hair='#5a3a2a'),

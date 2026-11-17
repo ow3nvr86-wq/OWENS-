@@ -21,22 +21,14 @@
  "grade": "brightness(1.02) saturate(1.08) contrast(1.06)",
  "thumbnail_cue": 54.964999999999996,
  "music": {
-  "level_db": -18,
+  "level_db": -25,
   "segments": [
    {
-    "style": "dread",
-    "bpm": 64,
-    "fadeIn": 1.0,
-    "fadeOut": 1.2,
+    "file": "music/six_forty_seven.mp3",
+    "offset": 0.0,
+    "fadeIn": 0.8,
+    "fadeOut": 1.5,
     "from": 0.0,
-    "to": 52.214999999999996
-   },
-   {
-    "style": "reveal",
-    "bpm": 60,
-    "fadeIn": 0.05,
-    "fadeOut": 0.8,
-    "from": 54.615,
     "to": 60.524
    }
   ]
