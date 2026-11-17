@@ -1,733 +1,733 @@
 {
- "duration": 50.322,
+ "duration": 52.506,
  "fps": 30,
- "frames": 1510,
+ "frames": 1575,
  "words": [
   {
    "word": "Never",
    "line": 0,
    "start": 0.0,
-   "end": 0.36
+   "end": 0.38
   },
   {
    "word": "open",
    "line": 0,
-   "start": 0.36,
-   "end": 0.78
+   "start": 0.38,
+   "end": 0.72
   },
   {
    "word": "the",
    "line": 0,
-   "start": 0.78,
-   "end": 0.94
+   "start": 0.72,
+   "end": 0.9
   },
   {
    "word": "empty",
    "line": 0,
-   "start": 0.94,
-   "end": 1.3
+   "start": 0.9,
+   "end": 1.2
   },
   {
    "word": "apartment",
    "line": 0,
-   "start": 1.3,
-   "end": 1.84
+   "start": 1.2,
+   "end": 1.58
   },
   {
    "word": "next",
    "line": 0,
-   "start": 1.84,
-   "end": 2.3
+   "start": 1.58,
+   "end": 1.9
   },
   {
    "word": "to",
    "line": 0,
-   "start": 2.3,
-   "end": 2.56
+   "start": 1.9,
+   "end": 2.16
   },
   {
    "word": "yours.",
    "line": 0,
-   "start": 2.56,
-   "end": 3.34
+   "start": 2.16,
+   "end": 3.1
   },
   {
    "word": "Two",
    "line": 1,
-   "start": 3.428,
-   "end": 3.54
+   "start": 3.174,
+   "end": 3.32
   },
   {
    "word": "nights",
    "line": 1,
-   "start": 3.54,
-   "end": 3.72
+   "start": 3.32,
+   "end": 3.52
   },
   {
    "word": "ago,",
    "line": 1,
-   "start": 3.72,
-   "end": 4.44
+   "start": 3.52,
+   "end": 4.16
   },
   {
    "word": "the",
    "line": 1,
-   "start": 4.386,
-   "end": 4.46
+   "start": 4.157,
+   "end": 4.24
   },
   {
    "word": "Tower",
    "line": 1,
-   "start": 4.46,
-   "end": 4.72
+   "start": 4.24,
+   "end": 4.52
   },
   {
    "word": "counted",
    "line": 1,
-   "start": 4.72,
-   "end": 5.14
+   "start": 4.52,
+   "end": 4.9
   },
   {
    "word": "two",
    "line": 1,
-   "start": 5.14,
-   "end": 5.544
+   "start": 4.9,
+   "end": 5.288
   },
   {
    "word": "hundred",
    "line": 1,
-   "start": 5.544,
-   "end": 5.948
+   "start": 5.288,
+   "end": 5.676
   },
   {
    "word": "seventy-one.",
    "line": 1,
-   "start": 6.352,
-   "end": 7.16
+   "start": 6.064,
+   "end": 6.84
   },
   {
    "word": "Tonight,",
    "line": 1,
-   "start": 6.93,
-   "end": 7.38
+   "start": 6.87,
+   "end": 7.5
   },
   {
    "word": "you",
    "line": 1,
-   "start": 7.38,
-   "end": 7.58
+   "start": 7.62,
+   "end": 7.74
   },
   {
    "word": "knock.",
    "line": 1,
-   "start": 7.58,
-   "end": 8.24
+   "start": 7.74,
+   "end": 8.7
   },
   {
    "word": "Nobody",
    "line": 2,
-   "start": 8.288,
-   "end": 8.58
+   "start": 8.645,
+   "end": 8.92
   },
   {
    "word": "answers.",
    "line": 2,
-   "start": 8.58,
-   "end": 9.46
+   "start": 8.92,
+   "end": 10.02
   },
   {
    "word": "But",
    "line": 2,
-   "start": 9.626,
-   "end": 9.7
+   "start": 10.068,
+   "end": 10.16
   },
   {
    "word": "the",
    "line": 2,
-   "start": 9.7,
-   "end": 9.82
+   "start": 10.16,
+   "end": 10.28
   },
   {
    "word": "door",
    "line": 2,
-   "start": 9.82,
-   "end": 10.08
+   "start": 10.28,
+   "end": 10.52
   },
   {
    "word": "isn't",
    "line": 2,
-   "start": 10.08,
-   "end": 10.42
+   "start": 10.52,
+   "end": 10.76
   },
   {
    "word": "locked.",
    "line": 2,
-   "start": 10.42,
-   "end": 11.3
+   "start": 10.76,
+   "end": 11.74
   },
   {
    "word": "Inside...",
    "line": 3,
-   "start": 11.246,
-   "end": 12.06
+   "start": 11.831,
+   "end": 12.62
   },
   {
    "word": "it's",
    "line": 3,
-   "start": 12.06,
-   "end": 12.12
+   "start": 12.882,
+   "end": 13.048
   },
   {
    "word": "your",
    "line": 3,
-   "start": 12.12,
-   "end": 12.2
+   "start": 13.048,
+   "end": 13.188
   },
   {
    "word": "apartment.",
    "line": 3,
-   "start": 12.2,
-   "end": 12.92
+   "start": 13.188,
+   "end": 14.088
   },
   {
    "word": "Same",
    "line": 3,
-   "start": 13.075,
-   "end": 13.328
+   "start": 14.121,
+   "end": 14.428
   },
   {
    "word": "lamp.",
    "line": 3,
-   "start": 13.328,
-   "end": 14.068
+   "start": 14.428,
+   "end": 15.208
   },
   {
    "word": "Same",
    "line": 3,
-   "start": 13.945,
-   "end": 14.188
+   "start": 15.089,
+   "end": 15.368
   },
   {
    "word": "bed.",
    "line": 3,
-   "start": 14.188,
-   "end": 15.068
+   "start": 15.368,
+   "end": 16.068
   },
   {
    "word": "Same",
    "line": 3,
-   "start": 14.905,
-   "end": 15.168
+   "start": 16.07,
+   "end": 16.328
   },
   {
    "word": "clock,",
    "line": 3,
-   "start": 15.168,
-   "end": 15.548
+   "start": 16.328,
+   "end": 16.728
   },
   {
    "word": "stopped",
    "line": 3,
-   "start": 15.548,
-   "end": 15.868
+   "start": 16.962,
+   "end": 17.208
   },
   {
    "word": "at",
    "line": 3,
-   "start": 15.868,
-   "end": 16.088
+   "start": 17.208,
+   "end": 17.448
   },
   {
    "word": "ten",
    "line": 3,
-   "start": 16.088,
-   "end": 16.308
+   "start": 17.448,
+   "end": 17.688
   },
   {
    "word": "fifteen.",
    "line": 3,
-   "start": 16.308,
-   "end": 17.148
+   "start": 17.688,
+   "end": 18.668
   },
   {
    "word": "And",
    "line": 4,
-   "start": 17.248,
-   "end": 17.348
+   "start": 18.748,
+   "end": 18.848
   },
   {
    "word": "on",
    "line": 4,
-   "start": 17.348,
-   "end": 17.468
+   "start": 18.848,
+   "end": 18.988
   },
   {
    "word": "the",
    "line": 4,
-   "start": 17.468,
-   "end": 17.588
+   "start": 18.988,
+   "end": 19.128
   },
   {
    "word": "bed,",
    "line": 4,
-   "start": 17.588,
-   "end": 18.108
+   "start": 19.128,
+   "end": 19.768
   },
   {
    "word": "a",
    "line": 4,
-   "start": 18.108,
-   "end": 18.168
+   "start": 19.841,
+   "end": 19.988
   },
   {
    "word": "jumpsuit.",
    "line": 4,
-   "start": 18.168,
-   "end": 19.268
+   "start": 19.988,
+   "end": 20.868
   },
   {
    "word": "Folded.",
    "line": 4,
-   "start": 18.965,
-   "end": 19.768
+   "start": 20.965,
+   "end": 21.948
   },
   {
    "word": "Number",
    "line": 4,
-   "start": 19.735,
-   "end": 19.888
+   "start": 21.841,
+   "end": 22.108
   },
   {
    "word": "nine-fourteen.",
    "line": 4,
-   "start": 19.888,
-   "end": 21.108
+   "start": 22.108,
+   "end": 23.868
   },
   {
    "word": "Your",
    "line": 5,
-   "start": 21.219,
-   "end": 21.408
+   "start": 23.739,
+   "end": 23.948
   },
   {
    "word": "number.",
    "line": 5,
-   "start": 21.408,
-   "end": 22.168
+   "start": 23.948,
+   "end": 24.788
   },
   {
    "word": "Then",
    "line": 6,
-   "start": 22.344,
-   "end": 22.448
+   "start": 24.796,
+   "end": 25.008
   },
   {
    "word": "the",
    "line": 6,
-   "start": 22.448,
-   "end": 22.608
+   "start": 25.008,
+   "end": 25.168
   },
   {
    "word": "speakers",
    "line": 6,
-   "start": 22.608,
-   "end": 22.968
+   "start": 25.168,
+   "end": 25.548
   },
   {
    "word": "crackle:",
    "line": 6,
-   "start": 22.968,
-   "end": 24.088
+   "start": 25.548,
+   "end": 26.308
   },
   {
    "word": "\"Doors",
    "line": 6,
-   "start": 24.088,
-   "end": 24.088
+   "start": 26.321,
+   "end": 26.781
   },
   {
    "word": "sealing.",
    "line": 6,
-   "start": 24.088,
-   "end": 25.068
+   "start": 26.781,
+   "end": 27.681
   },
   {
    "word": "Return",
    "line": 6,
-   "start": 24.992,
-   "end": 25.268
+   "start": 27.651,
+   "end": 27.921
   },
   {
    "word": "to",
    "line": 6,
-   "start": 25.268,
-   "end": 25.508
+   "start": 27.921,
+   "end": 28.181
   },
   {
    "word": "your",
    "line": 6,
-   "start": 25.508,
-   "end": 25.688
+   "start": 28.181,
+   "end": 28.321
   },
   {
    "word": "floor.\"",
    "line": 6,
-   "start": 25.688,
-   "end": 26.288
+   "start": 28.321,
+   "end": 29.161
   },
   {
    "word": "You",
    "line": 7,
-   "start": 26.314,
-   "end": 26.574
+   "start": 29.161,
+   "end": 29.301
   },
   {
    "word": "run",
    "line": 7,
-   "start": 26.574,
-   "end": 26.734
+   "start": 29.301,
+   "end": 29.501
   },
   {
    "word": "back",
    "line": 7,
-   "start": 26.734,
-   "end": 27.014
+   "start": 29.501,
+   "end": 29.741
   },
   {
    "word": "to",
    "line": 7,
-   "start": 27.014,
-   "end": 27.194
+   "start": 29.741,
+   "end": 29.901
   },
   {
    "word": "your",
    "line": 7,
-   "start": 27.194,
-   "end": 27.354
+   "start": 29.901,
+   "end": 30.021
   },
   {
    "word": "door.",
    "line": 7,
-   "start": 27.354,
-   "end": 27.894
+   "start": 30.021,
+   "end": 30.681
   },
   {
    "word": "It's",
    "line": 7,
-   "start": 27.963,
-   "end": 28.134
+   "start": 30.699,
+   "end": 30.881
   },
   {
    "word": "locked.",
    "line": 7,
-   "start": 28.134,
-   "end": 28.814
+   "start": 30.881,
+   "end": 31.681
   },
   {
    "word": "From",
    "line": 7,
-   "start": 28.786,
-   "end": 28.894
+   "start": 31.624,
+   "end": 31.781
   },
   {
    "word": "the",
    "line": 7,
-   "start": 28.894,
-   "end": 29.034
+   "start": 31.781,
+   "end": 31.961
   },
   {
    "word": "inside.",
    "line": 7,
-   "start": 29.034,
-   "end": 30.074
+   "start": 31.961,
+   "end": 33.021
   },
   {
    "word": "Through",
    "line": 8,
-   "start": 30.112,
-   "end": 30.254
+   "start": 33.02,
+   "end": 33.161
   },
   {
    "word": "the",
    "line": 8,
-   "start": 30.254,
-   "end": 30.414
+   "start": 33.161,
+   "end": 33.301
   },
   {
    "word": "little",
    "line": 8,
-   "start": 30.414,
-   "end": 30.634
+   "start": 33.301,
+   "end": 33.501
   },
   {
    "word": "window,",
    "line": 8,
-   "start": 30.634,
-   "end": 31.554
+   "start": 33.501,
+   "end": 34.241
   },
   {
    "word": "someone's",
    "line": 8,
-   "start": 31.442,
-   "end": 31.914
+   "start": 34.241,
+   "end": 34.641
   },
   {
    "word": "standing",
    "line": 8,
-   "start": 31.914,
-   "end": 32.214
+   "start": 34.641,
+   "end": 35.001
   },
   {
    "word": "in",
    "line": 8,
-   "start": 32.214,
-   "end": 32.594
+   "start": 35.001,
+   "end": 35.261
   },
   {
    "word": "your",
    "line": 8,
-   "start": 32.594,
-   "end": 32.774
+   "start": 35.261,
+   "end": 35.381
   },
   {
    "word": "apartment.",
    "line": 8,
-   "start": 32.774,
-   "end": 33.814
+   "start": 35.381,
+   "end": 36.341
   },
   {
    "word": "Wearing",
    "line": 9,
-   "start": 33.815,
-   "end": 34.114
+   "start": 36.347,
+   "end": 36.561
   },
   {
    "word": "your",
    "line": 9,
-   "start": 34.114,
-   "end": 34.394
+   "start": 36.561,
+   "end": 36.821
   },
   {
    "word": "beanie.",
    "line": 9,
-   "start": 34.394,
-   "end": 35.054
+   "start": 36.821,
+   "end": 37.641
   },
   {
    "word": "Smiling.",
    "line": 9,
-   "start": 35.044,
-   "end": 36.074
+   "start": 37.603,
+   "end": 38.461
   },
   {
    "word": "The",
    "line": 10,
-   "start": 36.072,
-   "end": 36.154
+   "start": 38.743,
+   "end": 38.844
   },
   {
    "word": "shutters",
    "line": 10,
-   "start": 36.154,
-   "end": 36.534
+   "start": 38.844,
+   "end": 39.184
   },
   {
    "word": "slam.",
    "line": 10,
-   "start": 36.534,
-   "end": 37.334
+   "start": 39.184,
+   "end": 40.044
   },
   {
    "word": "The",
    "line": 10,
-   "start": 37.344,
-   "end": 37.414
+   "start": 40.039,
+   "end": 40.144
   },
   {
    "word": "lights",
    "line": 10,
-   "start": 37.414,
-   "end": 37.674
+   "start": 40.144,
+   "end": 40.364
   },
   {
    "word": "die.",
    "line": 10,
-   "start": 37.674,
-   "end": 38.274
+   "start": 40.364,
+   "end": 41.104
   },
   {
    "word": "And",
    "line": 10,
-   "start": 38.42,
-   "end": 38.494
+   "start": 41.185,
+   "end": 41.284
   },
   {
    "word": "the",
    "line": 10,
-   "start": 38.494,
-   "end": 38.614
+   "start": 41.284,
+   "end": 41.404
   },
   {
    "word": "cold",
    "line": 10,
-   "start": 38.614,
-   "end": 38.874
+   "start": 41.404,
+   "end": 41.744
   },
   {
    "word": "gets",
    "line": 10,
-   "start": 38.874,
-   "end": 39.134
+   "start": 41.744,
+   "end": 42.004
   },
   {
    "word": "in.",
    "line": 10,
-   "start": 39.134,
-   "end": 39.734
+   "start": 42.004,
+   "end": 42.944
   },
   {
    "word": "Six",
    "line": 11,
-   "start": 39.932,
-   "end": 40.212
+   "start": 43.006,
+   "end": 43.384
   },
   {
    "word": "a.m.",
    "line": 11,
-   "start": 40.212,
-   "end": 41.119
+   "start": 43.384,
+   "end": 44.264
   },
   {
    "word": "The",
    "line": 11,
-   "start": 41.116,
-   "end": 41.199
+   "start": 44.257,
+   "end": 44.344
   },
   {
    "word": "Tower",
    "line": 11,
-   "start": 41.199,
-   "end": 41.499
+   "start": 44.344,
+   "end": 44.604
   },
   {
    "word": "counts.",
    "line": 11,
-   "start": 41.499,
-   "end": 42.439
+   "start": 44.604,
+   "end": 45.544
   },
   {
    "word": "Two",
    "line": 12,
-   "start": 42.468,
-   "end": 42.844
+   "start": 45.508,
+   "end": 45.939
   },
   {
    "word": "hundred",
    "line": 12,
-   "start": 42.844,
-   "end": 43.249
+   "start": 45.939,
+   "end": 46.334
   },
   {
    "word": "seventy.",
    "line": 12,
-   "start": 43.654,
-   "end": 44.059
+   "start": 46.729,
+   "end": 47.124
   },
   {
    "word": "Everyone's",
    "line": 13,
-   "start": 44.089,
-   "end": 44.679
+   "start": 47.138,
+   "end": 47.624
   },
   {
    "word": "home.",
    "line": 13,
-   "start": 44.679,
-   "end": 45.499
+   "start": 47.624,
+   "end": 48.264
   },
   {
    "word": "So",
    "line": 14,
-   "start": 45.532,
-   "end": 45.679
+   "start": 48.307,
+   "end": 48.564
   },
   {
    "word": "why",
    "line": 14,
-   "start": 45.679,
-   "end": 45.959
+   "start": 48.564,
+   "end": 49.004
   },
   {
    "word": "are",
    "line": 14,
-   "start": 45.959,
-   "end": 46.139
+   "start": 49.004,
+   "end": 49.144
   },
   {
    "word": "you",
    "line": 14,
-   "start": 46.139,
-   "end": 46.279
+   "start": 49.144,
+   "end": 49.264
   },
   {
    "word": "standing",
    "line": 14,
-   "start": 46.279,
-   "end": 46.619
+   "start": 49.264,
+   "end": 49.604
   },
   {
    "word": "in",
    "line": 14,
-   "start": 46.619,
-   "end": 46.919
+   "start": 49.604,
+   "end": 49.844
   },
   {
    "word": "the",
    "line": 14,
-   "start": 46.919,
-   "end": 47.059
+   "start": 49.844,
+   "end": 49.984
   },
   {
    "word": "snow...",
    "line": 14,
-   "start": 47.059,
-   "end": 47.899
+   "start": 49.984,
+   "end": 50.644
   },
   {
    "word": "looking",
    "line": 14,
-   "start": 47.895,
-   "end": 48.099
+   "start": 50.776,
+   "end": 51.022
   },
   {
    "word": "up",
    "line": 14,
-   "start": 48.099,
-   "end": 48.279
+   "start": 51.022,
+   "end": 51.222
   },
   {
    "word": "at",
    "line": 14,
-   "start": 48.279,
-   "end": 48.439
+   "start": 51.222,
+   "end": 51.362
   },
   {
    "word": "your",
    "line": 14,
-   "start": 48.439,
-   "end": 48.579
+   "start": 51.362,
+   "end": 51.482
   },
   {
    "word": "own",
    "line": 14,
-   "start": 48.579,
-   "end": 48.819
+   "start": 51.482,
+   "end": 51.762
   },
   {
    "word": "window?",
    "line": 14,
-   "start": 48.819,
-   "end": 50.299
+   "start": 51.762,
+   "end": 52.482
   }
  ]
 }
