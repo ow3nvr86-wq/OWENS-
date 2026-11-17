@@ -142,7 +142,10 @@ renderShotSeq = (function (orig) {
       let clipY = null; if (ch.clipDoor) { const d = S.meta.door[Math.min(S.meta.door.length - 1, Math.round(x))]; clipY = seqProject(cam, [d[0], d[1], d[2] + 1.02])[1]; }
       const nf = ch.nearFade, na = nf ? clamp((st.depth - nf[0]) / (nf[1] - nf[0]), 0, 1) : 1;   // fade out as the camera flies through them
       if (na <= 0.01) continue;
-      const drawCh = (gg) => { if (clipY != null) { gg.beginPath(); gg.rect(-W, -H, W * 3, clipY + H); gg.clip(); } st._def = def; drawCharacter(gg, def, st); if (st._post) st._post(gg); };
+      const quad = ch.clipQuad ? ch.clipQuad.map(P => seqProject(cam, P)) : null;          // seen only through a window (world-space quad)
+      if (quad && quad.some(q => q[3] <= 0.06)) continue;
+      const drawCh = (gg) => { if (clipY != null) { gg.beginPath(); gg.rect(-W, -H, W * 3, clipY + H); gg.clip(); }
+        if (quad) { gg.beginPath(); quad.forEach((q, k) => k ? gg.lineTo(q[0], q[1]) : gg.moveTo(q[0], q[1])); gg.closePath(); gg.clip(); } st._def = def; drawCharacter(gg, def, st); if (st._post) st._post(gg); };
       items.push({ d: st.depth, occ: ch.occlude, draw: na >= 0.99 ? () => drawCh(g) : () => {
         const oc = NEARBUF || (NEARBUF = Object.assign(document.createElement('canvas'), { width: W, height: H })), og = oc.getContext('2d');
         og.setTransform(1, 0, 0, 1, 0, 0); og.clearRect(0, 0, W, H); og.setTransform(g.getTransform()); og.save(); drawCh(og); og.restore();

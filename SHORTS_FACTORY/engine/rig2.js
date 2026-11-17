@@ -67,6 +67,8 @@ const POSES2 = {
     const handsRC = [[-92 * (1 - a) + 190 * a - 8, -318], [92 * (1 - a) + 190 * a + 8, -318]];
     return { armL: 0.5, armR: -0.5, elL: 0, elR: 0, feet: [[0, 0], [0, 0]], feetRC, hipRC: -293, handsRC, worldFrame: true, bodyRot: 0.42 * a }; },
   wave: (t) => ({ armL: -0.15, armR: 2.6 + Math.sin(t * 10) * 0.35, elL: 0.1, elR: 0.3 }),
+  knock: (t) => ({ armL: -0.15, armR: 1.8 + Math.max(0, Math.sin(t * 13)) * 0.28, elL: 0.1, elR: -1.25 }),               // knuckles on a door
+  rattle: (t) => ({ armL: 0.55, armR: 1.15 + Math.sin(t * 31) * 0.14, elL: -0.5, elR: -0.3, bodyRot: Math.sin(t * 29) * 0.035 }),   // yanking a locked handle
   facepalm: (t) => ({ armL: -0.15, armR: 2.75, elL: 0.1, elR: -2.3 }),
 };
 

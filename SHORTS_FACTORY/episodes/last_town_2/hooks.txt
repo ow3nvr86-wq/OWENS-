@@ -1,0 +1,5 @@
+Hook options (first line of the voiceover). Default is 1.
+1. Never open the empty apartment next to yours.
+2. Last time, the Tower counted one too many.
+3. Someone moved in next door. Tonight, you knock.
+4. The new neighbor has your number.
