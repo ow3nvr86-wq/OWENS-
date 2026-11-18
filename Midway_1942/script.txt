@@ -1,0 +1,51 @@
+THE BATTLE OF MIDWAY (4-7 JUNE 1942) - SCRIPT
+Target 34-40 s, about 100 spoken words (numbers written as spoken). One continuous map shot over the Pacific.
+
+HOOK OPTIONS
+  A. "Six months after Pearl Harbor, Japan's navy looked unstoppable. Then, in a few minutes, it lost three aircraft carriers."   <- CHOSEN
+  B. "In 1942, American codebreakers learned where Japan would strike next. They were told it was a trap for them."
+  C. "On June fourth, 1942, the Pacific war turned on one question: where are the Japanese carriers?"
+
+SCRIPT (copy-paste block for the narrator)
+------------------------------------------------------------
+Six months after Pearl Harbor, Japan's navy looked unstoppable.
+
+Then, in a few minutes, it lost three aircraft carriers.
+
+Japan planned a trap at Midway, a tiny island in the Pacific. But American codebreakers had read its secret messages.
+
+On June fourth, nineteen forty-two, the two fleets met.
+
+American torpedo planes attacked first, and were nearly wiped out.
+
+But they pulled Japan's fighters down to the waves. Then dive bombers came out of the clouds.
+
+Three Japanese carriers were hit, and burning, within minutes.
+
+A fourth fought on, but it was sunk too.
+
+Japan never recovered its edge. The tide of the Pacific war had turned.
+------------------------------------------------------------
+SAY IT AS: "nineteen forty-two", "June fourth".
+
+FACT NOTES (what is solid, and what was softened)
+- Japan's carriers Akagi, Kaga and Soryu were fatally hit by US dive bombers on 4 June; Hiryu was found and sunk later
+  (NHHC, navy.mil). Four Japanese fleet carriers were lost; the US lost the carrier Yorktown.
+- US torpedo squadrons suffered terrible losses (Torpedo 8: one aircraft survived of 15) and their attacks drew
+  Japanese fighters low, leaving the dive bombers unopposed (Defense Media Network; Warfare History Network).
+- Station HYPO (Joseph Rochefort) read Japanese naval messages and identified "AF" as Midway. The "water shortage"
+  message test is a famous story; historian Craig Symonds says it was meant to convince Washington, not how Rochefort
+  learned the target (History.com). The script therefore says only that codebreakers read Japan's messages.
+- Exact minute-by-minute times (the "five minutes" of the dive-bomb strike) were not confirmed in the sources checked,
+  so the script says "within minutes".
+- Death tolls were NOT confirmed in the sources checked (the commonly quoted 3,057 Japanese and 307 American dead need a
+  source), so no numbers of dead are narrated.
+- "Japan never recovered its edge": a widely shared historians' view that Midway was the turning point; hedged as such.
+
+ANIMATION PLAN (one continuous shot over a real Pacific map, same engine as WW2)
+- Hook: Japan's 1942 empire in red across the Pacific; Pearl Harbor flash; a counter "6 MONTHS".
+- Midway: the camera pulls to a tiny dot in the middle of the ocean; Japanese fleet arrows from the west.
+- Codebreakers: a decoded-message overlay over Hawaii; a blue arrow converging on Midway.
+- June 4: two fleets meet; torpedo planes sweep in and fall; the dive bombers drop from above.
+- Three red carrier icons burn; the fourth flares and sinks; the red front pulls back.
+- End: the map shifts from red to blue westward; title card.
