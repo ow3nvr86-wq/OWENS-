@@ -273,3 +273,54 @@ FX2.flicker = function (g, fx, s, t) {                      // the lights stutte
 FX2.darken = function (g, fx, s, t) {                       // a keyed black wash (fade the end to black)
   const a = keyAmt(fx.keys, t); if (a > 0.01) { g.fillStyle = `rgba(0,0,0,${a})`; g.fillRect(0, 0, W, H); }
 };
+// ---- falling-through-the-Earth readouts (original designs) ----
+// gauge: {type:'gauge', at, untilAt, tau:[{at, v}] (physical seconds), T: half-period s, R: km, fixAt, fixText, fixNote}
+FX2.gauge = function (g, fx, s, t) {
+  if (t < fx.t0 || (fx.until && t > fx.until + 0.4)) return;
+  const K = fx.keys || []; let tau = K.length ? K[0].v : 0;
+  for (let i = 0; i < K.length; i++) { if (t >= K[i].t) tau = K[i].v; else { if (i) tau = lerp(K[i - 1].v, K[i].v, clamp((t - K[i - 1].t) / (K[i].t - K[i - 1].t))); break; } }
+  const T = fx.T || 2532, R = fx.R || 6371, ph = Math.PI * clamp(tau / T), dist = R * (1 - Math.cos(ph)), spd = R * Math.PI / T * Math.sin(ph);
+  const a = Math.min(clamp((t - fx.t0) / 0.3), fx.until ? clamp((fx.until + 0.4 - t) / 0.4) : 1);
+  const mm = Math.floor(tau / 60), ss = Math.floor(tau % 60), timeTxt = `${mm}:${String(ss).padStart(2, '0')}`;
+  const distTxt = dist < 100 ? dist.toFixed(dist < 10 ? 1 : 0) : Math.round(dist).toLocaleString('en-US');
+  const tiles = [['TIME', timeTxt, 'min'], ['FALLEN', distTxt, 'km'], ['SPEED', spd.toFixed(1), 'km/s']];
+  const y = H * (fx.y ?? 0.075), tw = 300, th = 150, gap = 22, x0 = W / 2 - (tw * 3 + gap * 2) / 2;
+  g.save(); g.globalAlpha = a;
+  tiles.forEach(([lab, val, unit], i) => {
+    const x = x0 + i * (tw + gap);
+    g.beginPath(); g.roundRect(x, y, tw, th, 22); g.fillStyle = 'rgba(12,10,16,0.78)'; g.fill(); g.lineWidth = 4; g.strokeStyle = 'rgba(255,200,90,0.55)'; g.stroke();
+    g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = '#ffc95a'; g.font = '800 30px Poppins'; g.fillText(lab, x + tw / 2, y + 32);
+    let v = val, fixed = fx.fixAt != null && t > fx.fixT && i === 0;
+    g.fillStyle = '#ffffff'; g.font = '800 60px Poppins'; g.fillText(v, x + tw / 2, y + 86);
+    if (fixed) { const k = clamp((t - fx.fixT) / 0.25), w = g.measureText(v).width; g.beginPath(); g.moveTo(x + tw / 2 - w / 2 - 8, y + 88); g.lineTo(x + tw / 2 - w / 2 - 8 + (w + 16) * k, y + 84); g.lineWidth = 9; g.strokeStyle = '#ff3b2f'; g.stroke(); }
+    g.fillStyle = 'rgba(255,255,255,0.7)'; g.font = '700 24px Poppins'; g.fillText(unit, x + tw / 2, y + 128);
+  });
+  if (fx.fixAt != null && t > fx.fixT + 0.15) {                   // the correction under the TIME tile
+    const k = popScale(t, fx.fixT + 0.15, 0.35), x = x0 + tw / 2; g.save(); g.translate(x + 40, y + th + 70); g.scale(k, k); g.rotate(-0.04);
+    g.beginPath(); g.roundRect(-170, -52, 340, 104, 18); g.fillStyle = '#ff3b2f'; g.fill(); g.lineWidth = 5; g.strokeStyle = '#fff'; g.stroke();
+    g.fillStyle = '#fff'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = '800 52px Poppins'; g.fillText(fx.fixText || '38:11', 0, -8);
+    g.font = '700 22px Poppins'; g.fillText(fx.fixNote || 'REAL EARTH', 0, 32); g.restore();
+  }
+  g.restore();
+};
+// callout: a pop-in label card {type:'callout', at, dur, x, y, text, sub, col, size, rot}
+FX2.callout = function (g, fx, s, t) {
+  const d = fx.dur || 2; if (t < fx.t0 || t > fx.t0 + d) return; const k = popScale(t, fx.t0, 0.32), out = clamp((fx.t0 + d - t) / 0.25);
+  g.save(); g.globalAlpha = out; g.translate((fx.x ?? 0.5) * W, (fx.y ?? 0.3) * H); g.scale(k, k); g.rotate(fx.rot ?? -0.03);
+  const sz = fx.size || 64; g.font = `800 ${sz}px Poppins`; const w1 = g.measureText(fx.text).width; g.font = `700 ${Math.round(sz * 0.42)}px Poppins`; const w2 = fx.sub ? g.measureText(fx.sub).width : 0;
+  const w = Math.max(w1, w2) + 70, h = sz * 1.25 + (fx.sub ? sz * 0.6 : 0);
+  g.beginPath(); g.roundRect(-w / 2, -h / 2, w, h, 20); g.fillStyle = fx.col || '#16141c'; g.fill(); g.lineWidth = 6; g.strokeStyle = fx.edge || '#ffc95a'; g.stroke();
+  g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = fx.ink || '#ffffff'; g.font = `800 ${sz}px Poppins`; g.fillText(fx.text, 0, fx.sub ? -sz * 0.28 : 3);
+  if (fx.sub) { g.fillStyle = fx.subInk || '#ffc95a'; g.font = `700 ${Math.round(sz * 0.42)}px Poppins`; g.fillText(fx.sub, 0, sz * 0.5); }
+  g.restore();
+};
+// gravity: a round badge with an arrow; keys [{at, a}] (radians, 0 = down)
+FX2.gravity = function (g, fx, s, t) {
+  if (t < fx.t0 || (fx.until && t > fx.until + 0.3)) return; const K = fx.keys || []; let ang = 0;
+  for (let i = 0; i < K.length; i++) { if (t >= K[i].t) ang = K[i].a; else { if (i) ang = lerp(K[i - 1].a, K[i].a, ease(clamp((t - K[i - 1].t) / (K[i].t - K[i - 1].t)))); break; } }
+  const a = Math.min(clamp((t - fx.t0) / 0.3), fx.until ? clamp((fx.until + 0.3 - t) / 0.3) : 1), x = (fx.x ?? 0.86) * W, y = (fx.y ?? 0.34) * H, r = 74;
+  g.save(); g.globalAlpha = a; g.translate(x, y);
+  g.beginPath(); g.arc(0, 0, r, 0, 7); g.fillStyle = 'rgba(12,10,16,0.78)'; g.fill(); g.lineWidth = 5; g.strokeStyle = '#ffc95a'; g.stroke();
+  g.save(); g.rotate(ang); g.beginPath(); g.moveTo(-9, -40); g.lineTo(9, -40); g.lineTo(9, 10); g.lineTo(28, 10); g.lineTo(0, 46); g.lineTo(-28, 10); g.lineTo(-9, 10); g.closePath(); g.fillStyle = '#ffffff'; g.fill(); g.restore();
+  g.fillStyle = '#ffc95a'; g.font = '800 26px Poppins'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('GRAVITY', 0, r + 30); g.restore();
+};

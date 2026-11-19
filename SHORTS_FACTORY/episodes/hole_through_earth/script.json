@@ -1,0 +1,555 @@
+{
+ "title": "What If You Fell Into a Hole Through the Earth?",
+ "fps": 60,
+ "tail": 1.2,
+ "charStyle": "rc",
+ "sprites": "props",
+ "features": {
+  "depth": true,
+  "motionBlur": true,
+  "rigV2": true,
+  "lipSync": true,
+  "crowdFX": true
+ },
+ "motion_blur": {
+  "samples": 8,
+  "shutter": 0.5
+ },
+ "caption_y": 0.765,
+ "caption_case": "lower",
+ "caption_size": 78,
+ "grade": "brightness(1.02) saturate(1.08) contrast(1.06)",
+ "thumbnail_cue": 5.44,
+ "music": {
+  "level_db": -24,
+  "segments": [
+   {
+    "style": "chill",
+    "bpm": 104,
+    "fadeIn": 0.6,
+    "fadeOut": 1.5,
+    "from": 0.0,
+    "to": 50.911
+   }
+  ]
+ },
+ "cast": {
+  "you": {
+   "costume": "hoodie_green",
+   "mood": "neutral",
+   "hair": "#3a2618",
+   "hat": "beanie"
+  }
+ },
+ "scenes": [
+  {
+   "cue": "Jump",
+   "bgseq": {
+    "dir": "oneshot"
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "you",
+     "cast": "you",
+     "track": "hero",
+     "autoGait": false,
+     "rollTrack": true,
+     "mood": "neutral",
+     "lookAt": "camera",
+     "nearFade": [
+      0.7,
+      1.5
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "cue": 0.0
+      },
+      {
+       "action": "wave",
+       "cue": 0.33
+      },
+      {
+       "action": "idle",
+       "lookAt": "left",
+       "cue": 2.56
+      },
+      {
+       "action": "idle",
+       "mood": "neutral",
+       "lookAt": "camera",
+       "cue": 7.76
+      },
+      {
+       "action": "jump",
+       "mood": "shocked",
+       "cue": 8.07
+      },
+      {
+       "action": "skydive",
+       "mood": "scared",
+       "cue": 8.9
+      },
+      {
+       "action": "float",
+       "mood": "neutral",
+       "cue": 11.28
+      },
+      {
+       "action": "skydive",
+       "mood": "worried",
+       "cue": 18.526
+      },
+      {
+       "action": "float",
+       "mood": "shocked",
+       "cue": 20.676
+      },
+      {
+       "mood": "scared",
+       "cue": 23.536
+      },
+      {
+       "action": "fall",
+       "cue": 26.111
+      },
+      {
+       "action": "float",
+       "mood": "worried",
+       "cue": 27.11
+      },
+      {
+       "action": "float",
+       "mood": "neutral",
+       "cue": 29.811
+      },
+      {
+       "action": "cheer",
+       "mood": "shocked",
+       "cue": 38.711
+      },
+      {
+       "action": "float",
+       "mood": "neutral",
+       "cue": 39.711
+      },
+      {
+       "mood": "worried",
+       "cue": 40.785
+      },
+      {
+       "action": "fall",
+       "mood": "scared",
+       "cue": 42.005
+      },
+      {
+       "action": "skydive",
+       "mood": "worried",
+       "cue": 44.585
+      },
+      {
+       "action": "float",
+       "mood": "worried",
+       "cue": 47.085
+      },
+      {
+       "mood": "neutral",
+       "lookAt": "camera",
+       "cue": 48.856
+      }
+     ]
+    }
+   ],
+   "fx": [
+    {
+     "type": "callout",
+     "at": 2.76,
+     "dur": 1.0,
+     "x": 0.5,
+     "y": 0.12,
+     "text": "42 MINUTES",
+     "size": 70
+    },
+    {
+     "type": "callout",
+     "at": 4.44,
+     "dur": 1.8,
+     "x": 0.5,
+     "y": 0.16,
+     "text": "12,742 KM",
+     "sub": "STRAIGHT THROUGH THE MIDDLE",
+     "size": 66
+    },
+    {
+     "type": "callout",
+     "at": 6.3790000000000004,
+     "dur": 1.0,
+     "x": 0.5,
+     "y": 0.16,
+     "text": "NO AIR",
+     "size": 72,
+     "edge": "#5ad1ff"
+    },
+    {
+     "type": "flash",
+     "at": 3.9,
+     "dur": 0.4,
+     "amount": 1.0
+    },
+    {
+     "type": "flash",
+     "at": 7.68,
+     "dur": 0.4,
+     "amount": 1.0
+    },
+    {
+     "type": "gauge",
+     "at": 8.27,
+     "untilAt": 36.565000000000005,
+     "y": 0.06,
+     "keys": [
+      {
+       "at": 8.27,
+       "v": 0
+      },
+      {
+       "at": 11.28,
+       "v": 14
+      },
+      {
+       "at": 13.176,
+       "v": 30
+      },
+      {
+       "at": 16.953,
+       "v": 49.6
+      },
+      {
+       "at": 18.526,
+       "v": 300
+      },
+      {
+       "at": 20.676,
+       "v": 1266
+      },
+      {
+       "at": 26.561,
+       "v": 1268
+      },
+      {
+       "at": 29.811,
+       "v": 2532
+      }
+     ],
+     "T": 2532,
+     "R": 6371,
+     "fixAt": 33.901,
+     "fixText": "38:11",
+     "fixNote": "REAL EARTH"
+    },
+    {
+     "type": "gravity",
+     "at": 8.9,
+     "untilAt": 30.411,
+     "x": 0.86,
+     "y": 0.27,
+     "keys": [
+      {
+       "at": 26.111,
+       "a": 0.0
+      },
+      {
+       "at": 26.911,
+       "a": 3.14159
+      }
+     ]
+    },
+    {
+     "type": "callout",
+     "at": 21.486,
+     "dur": 2.0,
+     "x": 0.5,
+     "y": 0.205,
+     "text": "~5,200-5,400\u00b0C",
+     "sub": "THE SUN'S SURFACE IS ~5,500\u00b0C",
+     "size": 58,
+     "col": "#3a0d06",
+     "edge": "#ff7a2a"
+    },
+    {
+     "type": "callout",
+     "at": 23.436,
+     "dur": 1.4,
+     "x": 0.5,
+     "y": 0.205,
+     "text": "7.9 KM/S",
+     "sub": "ABOUT 28,000 KM/H",
+     "size": 70
+    },
+    {
+     "type": "callout",
+     "at": 39.451,
+     "dur": 1.5,
+     "x": 0.5,
+     "y": 0.2,
+     "text": "INDIAN OCEAN",
+     "sub": "OPPOSITE MOST OF THE US",
+     "size": 66,
+     "edge": "#5ad1ff"
+    },
+    {
+     "type": "callout",
+     "at": 43.004,
+     "dur": 1.2,
+     "x": 0.5,
+     "y": 0.2,
+     "text": "FOREVER",
+     "sub": "84 MINUTES THERE AND BACK",
+     "size": 72
+    },
+    {
+     "type": "callout",
+     "at": 45.955000000000005,
+     "dur": 2.2,
+     "x": 0.5,
+     "y": 0.2,
+     "text": "STUCK IN THE CENTER",
+     "sub": "AIR SLOWS YOU DOWN EVERY TRIP",
+     "size": 56,
+     "edge": "#5ad1ff"
+    },
+    {
+     "type": "speedlines",
+     "at": 18.926,
+     "dur": 1.8,
+     "x": 0.5,
+     "y": 0.6
+    },
+    {
+     "type": "speedlines",
+     "at": 26.611,
+     "dur": 1.2,
+     "x": 0.5,
+     "y": 0.45
+    },
+    {
+     "type": "speedlines",
+     "at": 44.785000000000004,
+     "dur": 1.6,
+     "x": 0.5,
+     "y": 0.6
+    },
+    {
+     "type": "blast",
+     "at": 20.676,
+     "world": [
+      0,
+      0,
+      -900
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 10,
+     "hidden": true
+    },
+    {
+     "type": "darken",
+     "keys": [
+      {
+       "at": 50.411,
+       "a": 0.0
+      },
+      {
+       "at": 50.861000000000004,
+       "a": 1.0
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "wind",
+     "at": 0.0,
+     "dur": 3.6,
+     "gain": 0.25
+    },
+    {
+     "type": "pop",
+     "at": 0.48,
+     "gain": 0.5
+    },
+    {
+     "type": "ting",
+     "at": 2.86,
+     "gain": 0.35
+    },
+    {
+     "type": "whoosh",
+     "at": 3.5100000000000002,
+     "dur": 0.6,
+     "gain": 0.9
+    },
+    {
+     "type": "boom",
+     "at": 3.98,
+     "gain": 0.45
+    },
+    {
+     "type": "ting",
+     "at": 4.54,
+     "gain": 0.3
+    },
+    {
+     "type": "pop",
+     "at": 6.429,
+     "gain": 0.5
+    },
+    {
+     "type": "whoosh",
+     "at": 7.44,
+     "dur": 0.5,
+     "gain": 0.8
+    },
+    {
+     "type": "boing",
+     "at": 8.12,
+     "gain": 0.4
+    },
+    {
+     "type": "wind",
+     "at": 8.6,
+     "dur": 4.5,
+     "gain": 0.5
+    },
+    {
+     "type": "whoosh",
+     "at": 13.176,
+     "dur": 0.5,
+     "gain": 0.5
+    },
+    {
+     "type": "ting",
+     "at": 16.953,
+     "gain": 0.45
+    },
+    {
+     "type": "whoosh",
+     "at": 18.826,
+     "dur": 1.4,
+     "gain": 0.9
+    },
+    {
+     "type": "gust",
+     "at": 19.126,
+     "dur": 2.2,
+     "gain": 0.8
+    },
+    {
+     "type": "crash",
+     "at": 20.676,
+     "gain": 0.55
+    },
+    {
+     "type": "crackle",
+     "at": 20.875999999999998,
+     "dur": 4.6,
+     "gain": 0.55
+    },
+    {
+     "type": "hum",
+     "at": 20.676,
+     "dur": 5.5,
+     "gain": 0.3
+    },
+    {
+     "type": "beep",
+     "at": 23.536,
+     "gain": 0.5
+    },
+    {
+     "type": "spawn",
+     "at": 26.111,
+     "dur": 1.0,
+     "gain": 0.5
+    },
+    {
+     "type": "whoosh",
+     "at": 26.611,
+     "dur": 1.2,
+     "gain": 0.9
+    },
+    {
+     "type": "wind",
+     "at": 27.11,
+     "dur": 3.0,
+     "gain": 0.4
+    },
+    {
+     "type": "pop",
+     "at": 29.811,
+     "gain": 0.6
+    },
+    {
+     "type": "wind",
+     "at": 31.091,
+     "dur": 9.0,
+     "gain": 0.2
+    },
+    {
+     "type": "scratch",
+     "at": 33.901,
+     "dur": 0.4,
+     "gain": 0.5
+    },
+    {
+     "type": "ting",
+     "at": 34.151,
+     "gain": 0.4
+    },
+    {
+     "type": "boing",
+     "at": 38.811,
+     "gain": 0.5
+    },
+    {
+     "type": "whoosh",
+     "at": 42.005,
+     "dur": 0.8,
+     "gain": 0.8
+    },
+    {
+     "type": "whoosh",
+     "at": 44.685,
+     "dur": 1.6,
+     "gain": 0.9
+    },
+    {
+     "type": "gust",
+     "at": 44.585,
+     "dur": 2.6,
+     "gain": 0.9
+    },
+    {
+     "type": "hum",
+     "at": 46.005,
+     "dur": 4.5,
+     "gain": 0.3
+    },
+    {
+     "type": "crackle",
+     "at": 47.085,
+     "dur": 3.0,
+     "gain": 0.35
+    },
+    {
+     "type": "pop",
+     "at": 48.856,
+     "gain": 0.4
+    }
+   ]
+  }
+ ]
+}
