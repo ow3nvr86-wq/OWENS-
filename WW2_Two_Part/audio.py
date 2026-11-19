@@ -986,6 +986,103 @@ def build_part2():
     return mus, sfx
 
 
+def build_part3():
+    mus = np.zeros((2, N))
+    sfx = np.zeros((2, N))
+    E = EV
+    BEAT = 60 / 100.0
+    lvl = [(0, 0.7), (E['then'], 0.85), (E['planned'], 0.9), (E['american'], 0.35), (E['june'], 0.9), (E['torpedo'], 1.0), (E['dive'] - 0.3, 0.4),
+           (E['dive'], 1.0), (E['hit'] + 1.5, 0.9), (E['never'], 0.5), (E['tide'], 0.8), (DUR - 1.0, 0.6), (DUR, 0.0)]
+    t, k = 0.0, 0
+    while t < DUR - 0.8:
+        lv = env(t, lvl)
+        b = k % 8
+        if lv > 0.2 and (b in (0, 4) or (b == 6 and t > E['june']) or (b in (3, 7) and t > E['torpedo'])):
+            place(mus, war_drum(k, 52 if b == 0 else 62), t, (0.9 if b == 0 else 0.55) * lv)
+        if lv > 0.2:
+            place(mus, tick(k) * (1.0 if b % 2 == 0 else 0.5), t, 0.2 * lv, pan=0.3 if k % 2 else -0.3)
+        t += BEAT / 2
+        k += 1
+    cue(0.0, 'Music: the same pulse as the other parts (100 BPM drums and clock over a drone)', 'music')
+    for a_, b_, f, g in ((0.0, E['american'], 73.42, 0.34), (E['american'], E['june'], 55.0, 0.3), (E['june'], E['never'], 82.41, 0.4), (E['never'], DUR, 110.0, 0.36)):
+        d = b_ - a_
+        place(mus, drone(f, d, int(a_ * 10) + 5, 420) * env(tt(d), [(0, 0), (0.3, 1), (d - 0.3, 1), (d, 0)]), a_, g)
+    for tm, notes, g in ((E['pearl'], [73.42, 110.0, 146.83], 0.4), (E['planned'], [82.41, 123.47, 164.81], 0.4), (E['june'], [73.42, 110.0, 146.83, 220.0], 0.45),
+                         (E['hit'], [82.41, 123.47, 164.81, 246.94], 0.5), (E['tide'], [110.0, 164.81, 220.0, 277.18], 0.5)):
+        place(mus, brass(notes, 1.6, int(tm * 7)), tm, g)
+        cue(tm, 'Low brass', 'music')
+    place(mus, choir([220.0, 277.18, 329.63], DUR - E['never'], 6) * 0.7, E['never'], 0.2)
+    cue(E['never'], 'A rising choir as the map turns', 'music')
+
+    def hit(tm, what, g=0.8):
+        place(sfx, stamp_hit(int(tm * 13)), tm, g)
+        cue(tm, what, 'sfx')
+
+    place(sfx, boom(2.0, 60, 30, 1), 0.0, 0.6)
+    place(sfx, whoosh(0.9, 2, 300, 2500, up=False), 0.0, 0.4)
+    hit(E['pearl'] - 0.05, '"DEC 7, 1941"', 0.7)
+    for j in range(3):
+        place(sfx, cannon(10 + j), E['harbor'] + 0.1 * j, 0.7 - 0.1 * j)
+    cue(E['harbor'], 'Pearl Harbor: explosions', 'sfx')
+    place(sfx, whoosh(1.0, 3, 250, 3500), E['then'] - 0.1, 0.6)
+    hit(E['three'], '"3 CARRIERS" slams in', 0.9)
+    place(sfx, boom(2.4, 55, 26, 4), E['three'], 0.7)
+    dfr = E['planned'] - E['three']
+    place(sfx, fire(int(dfr * SR), 5) * env(tt(dfr), [(0, 0), (0.3, 1), (dfr - 0.4, 1), (dfr, 0)]), E['three'], 0.45)
+    cue(E['three'], 'Fire crackle over the preview of the burning carriers', 'sfx')
+    place(sfx, whoosh(1.1, 6, 250, 3500), E['planned'] - 0.15, 0.7)
+    for j in range(3):
+        place(sfx, whoosh(0.6, 20 + j, 500, 3500), E['planned'] + 0.3 + j * 0.2, 0.4, pan=(j - 1) * 0.6)
+    hit(E['trap'], '"AMBUSH AT MIDWAY ATOLL"', 0.7)
+    place(sfx, blip(30, 700), E['midway'], 0.5)
+    # codebreakers: a radio static bed with Morse-like clicks that resolve into a chime
+    dc = E['june'] - E['american'] + 0.2
+    place(sfx, bandpass(noise(int(dc * SR), 40), 1200, 5000) * env(tt(dc), [(0, 0), (0.3, 1), (dc - 0.5, 0.5), (dc, 0)]) * 0.35, E['american'] - 0.1, 0.5)
+    r = np.random.default_rng(41)
+    tm = E['codebreakers']
+    while tm < E['messages'] + 0.2:
+        place(sfx, blip(int(tm * 100), 1000 + 200 * r.integers(0, 3)) * 0.7, tm, 0.35)
+        tm += 0.07 + 0.09 * r.random()
+    place(sfx, bell(660.0, 2.0), E['messages'] + 0.3, 0.4)
+    cue(E['codebreakers'], 'Radio static and Morse-like clicks; a chime when the message resolves', 'sfx')
+    hit(E['june'], '"JUNE 4, 1942"', 0.8)
+    place(sfx, whoosh(0.9, 7, 250, 3500, up=False), E['june'] - 0.1, 0.6)
+    de = E['pulled'] - E['june']
+    place(sfx, engine(int(de * SR), 8, 1900, 1.0) * env(tt(de), [(0, 0), (0.6, 1), (de - 0.3, 1), (de, 0)]), E['june'], 0.3)
+    cue(E['june'], 'Aero engines approaching', 'sfx')
+    hit(E['torpedo'], '"US TORPEDO PLANES"', 0.5)
+    for j in range(9):
+        place(sfx, cannon(50 + j), E['wiped'] + 0.05 + 0.07 * j, 0.55, pan=(j % 3 - 1) * 0.5)
+        place(sfx, gun(60 + j), E['attacked'] + 0.2 + 0.3 * (j % 4), 0.25, pan=(j % 3 - 1) * 0.6)
+    cue(E['wiped'], '"wiped out": the torpedo planes go down', 'sfx')
+    place(sfx, whoosh(0.8, 9, 400, 3500, up=False), E['pulled'], 0.6)
+    place(sfx, riser(E['dive'] - E['pulled'], 10), E['pulled'], 0.3)
+    hit(E['dive'], '"US DIVE BOMBERS"', 0.6)
+    ds = E['hit'] - E['dive']
+    for j in range(5):
+        wh = sweep_bp(noise(int(ds * SR * 0.9), 70 + j), lambda s_: 4200 - 3000 * min(1, s_ / (ds * 0.9)), q=8) * env(tt(ds * 0.9), [(0, 0), (0.3, 1), (ds * 0.9, 1)])
+        place(sfx, norm(wh), E['dive'] + 0.15 * j, 0.25, pan=(j - 2) * 0.35)
+    cue(E['dive'], 'Dive-bomber sirens, a falling whistle', 'sfx')
+    for j, tm in enumerate([E['hit'] + 0.05 * i for i in range(6)]):
+        place(sfx, cannon(80 + j), tm, 0.9 - 0.08 * j)
+    place(sfx, boom(3.2, 60, 24, 90), E['hit'], 1.0)
+    place(sfx, stone_crack(91, 1.0), E['hit'], 0.5)
+    cue(E['hit'], '"hit": a chain of explosions, a heavy boom', 'sfx')
+    dfn = E['never'] - E['hit']
+    place(sfx, fire(int(dfn * SR), 92) * env(tt(dfn), [(0, 0), (0.3, 1), (dfn - 0.5, 1), (dfn, 0)]), E['hit'] + 0.3, 0.5)
+    place(sfx, siren(2.5, 93, 500, 800, 1.1) * 0.5, E['fourth'] - 0.2, 0.15)
+    for j in range(3):
+        place(sfx, cannon(95 + j), E['sunk'] + 0.1 * j, 0.55)
+    place(sfx, boom(2.8, 50, 22, 98), E['sunk'], 0.9)
+    cue(E['sunk'], '"sunk": the fourth carrier goes down; a slow bubbling rumble', 'sfx')
+    place(sfx, whoosh(1.6, 99, 250, 3000), E['never'] - 0.1, 0.6)
+    hit(E['tide'], '"TURNING POINT"', 0.9)
+    place(sfx, reverb(np.pad(bell(98.0, 4.0), (0, SR)), 2.6, 100, mix=0.4), E['tide'], 0.5)
+    place(sfx, sparkle(2.0, 101, 24), E['tide'] + 0.2, 0.3)
+    cue(E['tide'], 'A single low bell as the tide turns', 'sfx')
+    return mus, sfx
+
+
 def read_wav(path):
     with wave.open(path) as w:
         a = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768

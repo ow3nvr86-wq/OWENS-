@@ -1,0 +1,30 @@
+THE BATTLE OF MIDWAY - SOUND DESIGN TIMELINE
+
+Narration: the supplied voiceover (pauses over 0.4 s shortened; nothing else changed).
+Music and effects are synthesised in audio.py with numpy: no samples or third-party audio.
+Mix: voice on top; music about 20% of the voice level and ducked while it speaks; -14 LUFS, true peak -1.5 dB.
+
+CUES (seconds, layer, description)
+    0.00  music  Music: the same pulse as the other parts (100 BPM drums and clock over a drone)
+    0.91  sfx    "DEC 7, 1941"
+    0.96  music  Low brass
+    1.24  sfx    Pearl Harbor: explosions
+    5.36  sfx    "3 CARRIERS" slams in
+    5.36  sfx    Fire crackle over the preview of the burning carriers
+    7.34  music  Low brass
+    7.80  sfx    "AMBUSH AT MIDWAY ATOLL"
+   11.36  sfx    Radio static and Morse-like clicks; a chime when the message resolves
+   14.29  sfx    "JUNE 4, 1942"
+   14.29  sfx    Aero engines approaching
+   14.29  music  Low brass
+   17.95  sfx    "US TORPEDO PLANES"
+   20.54  sfx    "wiped out": the torpedo planes go down
+   24.48  sfx    "US DIVE BOMBERS"
+   24.48  sfx    Dive-bomber sirens, a falling whistle
+   28.02  sfx    "hit": a chain of explosions, a heavy boom
+   28.02  music  Low brass
+   31.82  sfx    "sunk": the fourth carrier goes down; a slow bubbling rumble
+   33.04  music  A rising choir as the map turns
+   35.22  sfx    "TURNING POINT"
+   35.22  sfx    A single low bell as the tide turns
+   35.22  music  Low brass

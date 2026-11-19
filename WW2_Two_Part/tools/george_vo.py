@@ -13,7 +13,20 @@ import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SR = 48000
-LINES = {'part2': [
+LINES = {'part3': [
+    ("Six months after Pearl Harbor, Japan's navy looked unstoppable.", 0.38),
+    ("Then, in a few minutes, it lost three aircraft carriers.", 0.5),
+    ("Japan planned a trap at Midway, a tiny island in the Pacific.", 0.3),
+    ("But American codebreakers had read its secret messages.", 0.45),
+    ("On June fourth, nineteen forty-two, the two fleets met.", 0.45),
+    ("American torpedo planes attacked first, and were nearly wiped out.", 0.4),
+    ("But they pulled Japan's fighters down to the waves.", 0.3),
+    ("Then dive bombers came out of the clouds.", 0.45),
+    ("Three Japanese carriers were hit, and burning, within minutes.", 0.4),
+    ("A fourth fought on, but it was sunk too.", 0.5),
+    ("Japan never recovered its edge.", 0.3),
+    ("The tide of the Pacific war had turned.", 0.0),
+], 'part2': [
     ("Part two.", 0.30),
     ("Hitler's empire looked unstoppable.", 0.28),
     ("Then, in one frozen city, it began to break.", 0.38),

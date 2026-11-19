@@ -1,0 +1,155 @@
+{
+ "title": "The Battle of Midway",
+ "duration": 38.5,
+ "events": {
+  "six": 0.109,
+  "pearl": 0.96,
+  "harbor": 1.24,
+  "unstoppable": 2.76,
+  "then": 3.902,
+  "minutes": 4.554,
+  "three": 5.356,
+  "carriers": 6.04,
+  "planned": 7.34,
+  "trap": 7.8,
+  "midway": 8.16,
+  "tiny": 8.92,
+  "island": 9.142,
+  "pacific": 10.077,
+  "american": 10.947,
+  "codebreakers": 11.361,
+  "secret": 12.764,
+  "messages": 13.12,
+  "june": 14.288,
+  "y1942": 15.074,
+  "fleets": 16.568,
+  "met": 16.886,
+  "torpedo": 17.951,
+  "planes": 18.317,
+  "attacked": 18.78,
+  "wiped": 20.542,
+  "out": 20.812,
+  "pulled": 21.753,
+  "fighters": 22.437,
+  "waves": 23.485,
+  "dive": 24.482,
+  "bombers": 24.704,
+  "clouds": 26.0,
+  "three2": 26.703,
+  "hit": 28.023,
+  "burning": 28.6,
+  "minutes2": 29.48,
+  "fourth": 30.32,
+  "fought": 30.638,
+  "sunk": 31.821,
+  "never": 33.04,
+  "recovered": 33.58,
+  "edge": 34.28,
+  "tide": 35.222,
+  "war": 36.11,
+  "turned": 36.64,
+  "voice_end": 36.96
+ },
+ "titles": [
+  {
+   "start": 0.9099999999999999,
+   "end": 3.842,
+   "style": "date",
+   "text": "DEC 7, 1941",
+   "y": 0.185
+  },
+  {
+   "start": 1.51,
+   "end": 3.842,
+   "style": "plate",
+   "text": "6 MONTHS LATER",
+   "y": 0.247
+  },
+  {
+   "start": 5.356,
+   "end": 7.28,
+   "style": "big",
+   "text": "3 CARRIERS|LOST IN MINUTES",
+   "y": 0.21
+  },
+  {
+   "start": 7.34,
+   "end": 10.886999999999999,
+   "style": "date",
+   "text": "JAPAN'S PLAN",
+   "y": 0.185
+  },
+  {
+   "start": 7.8,
+   "end": 10.886999999999999,
+   "style": "plate",
+   "text": "AN AMBUSH AT MIDWAY ATOLL",
+   "y": 0.247
+  },
+  {
+   "start": 11.361,
+   "end": 14.228,
+   "style": "date",
+   "text": "US NAVY CODEBREAKERS",
+   "y": 0.185
+  },
+  {
+   "start": 12.764,
+   "end": 14.228,
+   "style": "plateb",
+   "text": "STATION HYPO, HAWAII",
+   "y": 0.247
+  },
+  {
+   "start": 14.288,
+   "end": 17.891000000000002,
+   "style": "date",
+   "text": "JUNE 4, 1942",
+   "y": 0.185
+  },
+  {
+   "start": 17.951,
+   "end": 24.422,
+   "style": "plateb",
+   "text": "US TORPEDO PLANES",
+   "y": 0.185
+  },
+  {
+   "start": 24.482,
+   "end": 27.973,
+   "style": "plateb",
+   "text": "US DIVE BOMBERS",
+   "y": 0.185
+  },
+  {
+   "start": 28.023,
+   "end": 30.27,
+   "style": "plate",
+   "text": "AKAGI  -  KAGA  -  SORYU",
+   "y": 0.185
+  },
+  {
+   "start": 31.721,
+   "end": 32.99,
+   "style": "plate",
+   "text": "HIRYU SUNK",
+   "y": 0.185
+  },
+  {
+   "start": 35.222,
+   "end": 38.5,
+   "style": "big",
+   "text": "TURNING POINT|BATTLE OF MIDWAY, JUNE 1942",
+   "y": 0.215
+  }
+ ],
+ "scenes": [
+  {
+   "id": 1,
+   "key": "main",
+   "name": "One continuous map shot",
+   "start": 0.0,
+   "end": 38.5
+  }
+ ]
+}
