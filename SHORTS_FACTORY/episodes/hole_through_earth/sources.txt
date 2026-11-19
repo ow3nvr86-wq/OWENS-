@@ -1,0 +1,15 @@
+WHAT IF YOU FELL INTO A HOLE THROUGH THE EARTH? -- fact check (each claim in 2+ sources)
+Thought experiment: frictionless, airless tunnel; heat and pressure ignored (said in the script: "No air, no heat").
+
+42 minutes (uniform-density Earth): Klotz 2015, Am. J. Phys. 83, 231 (arXiv:1308.1342): "42 minutes 12 seconds"; Wikipedia "Gravity train": 2530 s, ~42.2 min; Cooper 1966, Am. J. Phys. 34, 68.
+~38 minutes (real density, PREM): Klotz 2015: "38 minutes 11 seconds"; phys.org (Mar 2015) on the same paper; Wikipedia "Gravity train": "reduced from 42 to 38 minutes".
+"About twenty minutes" to the centre: half of 38-42 min (19-21 min) -- both models covered by "about".
+Weightless the whole way: the faller is in free fall for the whole trip (standard mechanics; Klotz r(t) = R cos(sqrt(g/R) t)).
+Nearly 8 km/s at the centre: Klotz: "The peak velocity at the center of the Earth is near 8 km/s"; sqrt(gR) = sqrt(9.81 x 6.371e6 m) = 7.9 km/s.
+Speed zero on arrival, oscillates forever: Wikipedia "Gravity train" ("oscillate back and forth forever"); Klotz (simple harmonic motion, 84 min full period).
+Deepest hole 12 km: Kola Superdeep Borehole, 12,262 m (Wikipedia; WorldAtlas; Mental Floss). 12.262 / 12,742 km Earth diameter = 0.096% -> "not even a tenth of a percent".
+Under a minute to 12 km: t = sqrt(2 x 12,262 / 9.8) = 50 s.
+Centre about as hot as the Sun's surface: inner core ~5,200 C (National Geographic Education), ~5,430 C (Wikipedia "Inner core"), Live Science; Sun's photosphere ~5,500 C. Estimates are indirect -> "about as hot".
+US -> Indian Ocean: Wikipedia "Antipodes" (most land has ocean at its antipode); antipode-finder.com "Antipode of USA"; geographyrealm.com. "Most of the US" because Hawaii/Alaska differ.
+With air you end up stuck at the centre: drag turns the fall into a damped oscillation that settles at the centre (Science News on Concannon & Giordano 2016, arXiv:1606.01852, drag slows you toward the core; standard damped-oscillator result).
+CUT: Coriolis "you'd hit the wall" (sources disagree / Klotz says rotation adds only ~4 s); Robert Hooke origin (Wikipedia flags it as uncited).
