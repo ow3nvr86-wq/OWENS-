@@ -96,7 +96,7 @@ fx = [
   dict(type='speedlines', at=b['crawls'] - 0.35, dur=1.4, x=0.5, y=0.5),
   dict(type='rain', keys=[dict(at=b['takes'] - 0.6, a=0.0), dict(at=b['takes'] - 0.25, a=1.0), dict(at=b['flashC'] - 0.01, a=1.0), dict(at=b['flashC'], a=0.0)]),
 ] + [dict(type='lightning', at=t0, x=[0.25, 0.7, 0.35, 0.62, 0.45][k], len=0.5) for k, t0 in enumerate(BOLTS)] + [
-  dict(type='cash', at=b['money'] - 0.45, dur=2.0, x=0.5, y=0.45, count=36),
+  dict(type='cash', at=b['money'] - 0.45, dur=1.5, x=0.5, y=0.5, count=36),
   dict(type='callout', at=b['money'] - 0.4, dur=1.4, x=0.5, y=0.17, text='OVER $370,000', sub="THE WARDEN'S DIRTY MONEY", size=66),
   dict(type='newspaper', at=b['mails'] + 0.05, dur=1.9, x=0.5, y=0.3, paper='THE DAILY NEWS', head='WARDEN EXPOSED', sub="SECRET BOOKS REVEAL HIS CRIMES"),
   dict(type='flash', at=b['flashC'] - 0.1, dur=0.45, amount=1.0),
