@@ -1,0 +1,1367 @@
+{
+ "title": "Movies in a Minute: The Shawshank Redemption",
+ "fps": 60,
+ "tail": 1.2,
+ "charStyle": "rc",
+ "sprites": "props",
+ "features": {
+  "depth": true,
+  "motionBlur": true,
+  "rigV2": true,
+  "lipSync": true,
+  "crowdFX": true
+ },
+ "motion_blur": {
+  "samples": 8,
+  "shutter": 0.5
+ },
+ "caption_y": 0.765,
+ "caption_case": "lower",
+ "caption_size": 78,
+ "grade": "brightness(1.02) saturate(1.1) contrast(1.06)",
+ "thumbnail_cue": 43.023,
+ "music": {
+  "level_db": -24,
+  "segments": [
+   {
+    "style": "chill",
+    "bpm": 96,
+    "fadeIn": 0.6,
+    "fadeOut": 0.4,
+    "from": 0.0,
+    "to": 29.150000000000002
+   },
+   {
+    "style": "dread",
+    "bpm": 80,
+    "fadeIn": 0.3,
+    "fadeOut": 0.3,
+    "from": 29.150000000000002,
+    "to": 42.773
+   },
+   {
+    "style": "chase",
+    "bpm": 132,
+    "fadeIn": 0.2,
+    "fadeOut": 0.4,
+    "from": 42.773,
+    "to": 54.689
+   },
+   {
+    "style": "reveal",
+    "bpm": 96,
+    "fadeIn": 0.3,
+    "fadeOut": 1.5,
+    "from": 54.689,
+    "to": 62.849000000000004
+   }
+  ]
+ },
+ "cast": {
+  "andy": {
+   "costume": "inmate",
+   "num": "437",
+   "mood": "neutral",
+   "hair": "#4a3426"
+  },
+  "andy_suit": {
+   "costume": "suit_grey",
+   "mood": "neutral",
+   "hair": "#4a3426",
+   "hat": "fedora"
+  },
+  "andy_beach": {
+   "costume": "beach",
+   "mood": "neutral",
+   "hair": "#4a3426",
+   "hat": "straw_hat"
+  },
+  "arr1": {
+   "costume": "coat_tan",
+   "mood": "neutral",
+   "hair": "#2a2420",
+   "hat": "flat_cap"
+  },
+  "arr2": {
+   "costume": "suit_dark",
+   "mood": "neutral",
+   "hair": "#7a5a3a",
+   "hat": "fedora"
+  },
+  "red": {
+   "costume": "inmate",
+   "num": "237",
+   "mood": "neutral",
+   "hair": "#8a4a2a"
+  },
+  "red_free": {
+   "costume": "coat_tan",
+   "mood": "neutral",
+   "hair": "#8a4a2a",
+   "hat": "fedora"
+  },
+  "warden": {
+   "costume": "suit_dark",
+   "mood": "smug",
+   "hair": "#9a9aa2"
+  },
+  "guard": {
+   "costume": "guard",
+   "mood": "angry",
+   "hat": "guard_cap"
+  },
+  "guard2": {
+   "costume": "guard",
+   "mood": "neutral",
+   "hat": "guard_cap"
+  },
+  "tommy": {
+   "costume": "inmate",
+   "num": "602",
+   "mood": "neutral",
+   "hair": "#d8b45a"
+  },
+  "inm1": {
+   "costume": "inmate",
+   "num": "118",
+   "hair": "#2a2420"
+  },
+  "inm2": {
+   "costume": "inmate",
+   "num": "351",
+   "hair": "#6a4a2a"
+  },
+  "inm3": {
+   "costume": "inmate",
+   "num": "509",
+   "hair": "#1d1a18"
+  },
+  "inm4": {
+   "costume": "inmate",
+   "num": "774",
+   "hair": "#a07a4a"
+  }
+ },
+ "scenes": [
+  {
+   "cue": "He",
+   "bgseq": {
+    "dir": "oneshot"
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "andy",
+     "cast": "andy",
+     "track": "andy",
+     "autoGait": true,
+     "rollTrack": true,
+     "mood": "sad",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "sad",
+       "lookAt": "camera",
+       "cue": 0.0
+      },
+      {
+       "mood": "determined",
+       "lookAt": "right",
+       "cue": 4.443
+      },
+      {
+       "mood": "worried",
+       "lookAt": "left",
+       "cue": 14.577
+      },
+      {
+       "action": "talk",
+       "mood": "neutral",
+       "lookAt": "left",
+       "cue": 18.397
+      },
+      {
+       "action": "idle",
+       "prop": "rockhammer",
+       "mood": "happy",
+       "cue": 20.007
+      },
+      {
+       "prop": "poster",
+       "mood": "smug",
+       "cue": 21.967
+      },
+      {
+       "prop": "",
+       "mood": "neutral",
+       "lookAt": "right",
+       "cue": 22.403
+      },
+      {
+       "prop": "papers",
+       "mood": "happy",
+       "cue": 24.197
+      },
+      {
+       "prop": "book",
+       "mood": "happy",
+       "cue": 26.197
+      },
+      {
+       "prop": "papers",
+       "mood": "worried",
+       "cue": 27.817
+      },
+      {
+       "prop": "",
+       "action": "idle",
+       "mood": "neutral",
+       "lookAt": "right",
+       "cue": 29.2
+      },
+      {
+       "mood": "shocked",
+       "cue": 31.133
+      },
+      {
+       "action": "sit",
+       "mood": "happy",
+       "lookAt": "right",
+       "cue": 33.233
+      },
+      {
+       "action": "skydive",
+       "mood": "determined",
+       "lookAt": "camera",
+       "cue": 47.968
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "lookAt": "up",
+       "cue": 50.329
+      }
+     ]
+    },
+    {
+     "id": "andy_suit",
+     "cast": "andy_suit",
+     "track": "andy_suit",
+     "autoGait": true,
+     "mood": "worried",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "sad",
+       "lookAt": "camera",
+       "cue": 12.857
+      }
+     ]
+    },
+    {
+     "id": "arr1",
+     "cast": "arr1",
+     "track": "arr1",
+     "autoGait": true,
+     "mood": "sad",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ]
+    },
+    {
+     "id": "arr2",
+     "cast": "arr2",
+     "track": "arr2",
+     "autoGait": true,
+     "mood": "worried",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ]
+    },
+    {
+     "id": "red",
+     "cast": "red",
+     "track": "red",
+     "autoGait": true,
+     "mood": "smug",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "hold",
+       "prop": "rockhammer",
+       "cue": 19.157
+      },
+      {
+       "action": "idle",
+       "prop": "",
+       "cue": 20.007
+      },
+      {
+       "action": "hold",
+       "prop": "poster",
+       "cue": 20.497
+      },
+      {
+       "action": "idle",
+       "prop": "",
+       "cue": 21.967
+      },
+      {
+       "action": "sit",
+       "mood": "neutral",
+       "lookAt": "left",
+       "cue": 33.233
+      },
+      {
+       "mood": "happy",
+       "cue": 35.813
+      }
+     ]
+    },
+    {
+     "id": "red_free",
+     "cast": "red_free",
+     "track": "red_free",
+     "autoGait": true,
+     "mood": "neutral",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "happy",
+       "cue": 55.778
+      },
+      {
+       "mood": "worried",
+       "lookAt": "right",
+       "cue": 58.298
+      },
+      {
+       "mood": "happy",
+       "cue": 58.798
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "cue": 59.418
+      }
+     ]
+    },
+    {
+     "id": "andy_beach",
+     "cast": "andy_beach",
+     "track": "andy_beach",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "hold",
+       "prop": "sander",
+       "cue": 0.0
+      },
+      {
+       "action": "idle",
+       "prop": "",
+       "mood": "shocked",
+       "cue": 58.498
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "cue": 59.418
+      }
+     ]
+    },
+    {
+     "id": "warden",
+     "cast": "warden",
+     "track": "warden",
+     "autoGait": true,
+     "mood": "smug",
+     "lookAt": "left",
+     "nearFade": [
+      0.6,
+      1.3
+     ],
+     "keys": [
+      {
+       "action": "hold",
+       "prop": "papers",
+       "cue": 27.117
+      },
+      {
+       "action": "idle",
+       "prop": "",
+       "cue": 29.35
+      },
+      {
+       "mood": "angry",
+       "lookAt": "left",
+       "cue": 32.493
+      },
+      {
+       "mood": "angry",
+       "lookAt": "right",
+       "prop": "rock",
+       "cue": 39.673
+      },
+      {
+       "action": "punch",
+       "cue": 41.263
+      },
+      {
+       "prop": "",
+       "cue": 41.423
+      },
+      {
+       "action": "idle",
+       "mood": "shocked",
+       "cue": 42.873
+      }
+     ]
+    },
+    {
+     "id": "guard1",
+     "cast": "guard",
+     "track": "guard1",
+     "autoGait": true,
+     "mood": "angry",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "hold",
+       "prop": "rifle",
+       "cue": 0.0
+      },
+      {
+       "action": "idle",
+       "prop": "",
+       "mood": "happy",
+       "lookAt": "right",
+       "cue": 22.403
+      },
+      {
+       "action": "aim",
+       "prop": "rifle",
+       "mood": "angry",
+       "lookAt": "left",
+       "cue": 31.493
+      },
+      {
+       "action": "idle",
+       "prop": "",
+       "mood": "neutral",
+       "lookAt": "right",
+       "cue": 36.801
+      },
+      {
+       "mood": "shocked",
+       "cue": 39.093
+      }
+     ]
+    },
+    {
+     "id": "guard2",
+     "cast": "guard2",
+     "track": "guard2",
+     "autoGait": true,
+     "mood": "happy",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "neutral",
+       "cue": 36.801
+      },
+      {
+       "mood": "shocked",
+       "lookAt": "right",
+       "cue": 39.093
+      }
+     ]
+    },
+    {
+     "id": "tommy",
+     "cast": "tommy",
+     "track": "tommy",
+     "autoGait": false,
+     "mood": "worried",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "talk",
+       "cue": 30.133
+      },
+      {
+       "action": "idle",
+       "mood": "scared",
+       "cue": 31.733
+      }
+     ]
+    },
+    {
+     "id": "inm1",
+     "cast": "inm1",
+     "track": "inm1",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "sad",
+       "cue": 36.801
+      },
+      {
+       "mood": "shocked",
+       "lookAt": "camera",
+       "cue": 39.093
+      }
+     ]
+    },
+    {
+     "id": "inm2",
+     "cast": "inm2",
+     "track": "inm2",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "sad",
+       "cue": 36.801
+      },
+      {
+       "mood": "shocked",
+       "lookAt": "camera",
+       "cue": 39.193
+      }
+     ]
+    },
+    {
+     "id": "inm3",
+     "cast": "inm3",
+     "track": "inm3",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "sad",
+       "cue": 36.801
+      },
+      {
+       "mood": "shocked",
+       "lookAt": "camera",
+       "cue": 39.293
+      }
+     ]
+    },
+    {
+     "id": "inm4",
+     "cast": "inm4",
+     "track": "inm4",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "sad",
+       "cue": 36.801
+      },
+      {
+       "mood": "shocked",
+       "lookAt": "camera",
+       "cue": 39.393
+      }
+     ]
+    }
+   ],
+   "fx": [
+    {
+     "type": "callout",
+     "at": 0.35,
+     "dur": 1.9,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "19 YEARS",
+     "sub": "FOR A MURDER HE DIDN'T COMMIT",
+     "size": 74
+    },
+    {
+     "type": "flash",
+     "at": 4.963,
+     "dur": 0.35,
+     "amount": 0.85
+    },
+    {
+     "type": "callout",
+     "at": 6.6000000000000005,
+     "dur": 0.9,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "EMPTY",
+     "size": 80,
+     "edge": "#ff5a4a"
+    },
+    {
+     "type": "callout",
+     "at": 7.7010000000000005,
+     "dur": 1.4,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "1947",
+     "sub": "PORTLAND, MAINE",
+     "size": 84
+    },
+    {
+     "type": "callout",
+     "at": 9.200000000000001,
+     "dur": 1.9,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "TWO LIFE SENTENCES",
+     "sub": "WIFE AND HER LOVER",
+     "size": 60,
+     "edge": "#ff5a4a"
+    },
+    {
+     "type": "callout",
+     "at": 13.007,
+     "dur": 1.1,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "INNOCENT",
+     "size": 76,
+     "edge": "#6ad17a"
+    },
+    {
+     "type": "speedlines",
+     "at": 14.277,
+     "dur": 1.6,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "tag",
+     "at": 15.317,
+     "untilAt": 18.796999999999997,
+     "of": "red",
+     "text": "RED",
+     "bg": "#ff7a5a"
+    },
+    {
+     "type": "tag",
+     "at": 18.096999999999998,
+     "untilAt": 19.257,
+     "of": "andy",
+     "text": "ANDY"
+    },
+    {
+     "type": "callout",
+     "at": 19.407,
+     "dur": 1.0,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "ROCK HAMMER",
+     "size": 64
+    },
+    {
+     "type": "callout",
+     "at": 21.117,
+     "dur": 1.0,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "MOVIE-STAR POSTER",
+     "size": 56
+    },
+    {
+     "type": "years",
+     "at": 22.503,
+     "untilAt": 29.0,
+     "x": 0.5,
+     "y": 0.13,
+     "keys": [
+      {
+       "at": 22.603,
+       "n": 1949
+      },
+      {
+       "at": 28.75,
+       "n": 1965
+      }
+     ],
+     "label": "YEARS PASS",
+     "size": 84
+    },
+    {
+     "type": "callout",
+     "at": 24.497,
+     "dur": 1.2,
+     "x": 0.5,
+     "y": 0.27,
+     "text": "THE GUARDS' TAXES",
+     "size": 44,
+     "edge": "#9ad0ff"
+    },
+    {
+     "type": "callout",
+     "at": 25.947,
+     "dur": 1.0,
+     "x": 0.5,
+     "y": 0.27,
+     "text": "PRISON LIBRARY",
+     "size": 44,
+     "edge": "#9ad0ff"
+    },
+    {
+     "type": "callout",
+     "at": 27.067,
+     "dur": 1.3,
+     "x": 0.5,
+     "y": 0.27,
+     "text": "WARDEN'S DIRTY MONEY",
+     "size": 44,
+     "edge": "#9ad0ff"
+    },
+    {
+     "type": "tag",
+     "at": 28.117,
+     "untilAt": 28.950000000000003,
+     "of": "warden",
+     "text": "THE WARDEN",
+     "bg": "#d8d8e0"
+    },
+    {
+     "type": "tag",
+     "at": 30.032999999999998,
+     "untilAt": 31.993000000000002,
+     "of": "tommy",
+     "text": "NEW INMATE",
+     "bg": "#9ad0ff"
+    },
+    {
+     "type": "callout",
+     "at": 30.983,
+     "dur": 1.3,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "HE KNOWS THE REAL KILLER",
+     "size": 46,
+     "edge": "#ff5a4a"
+    },
+    {
+     "type": "flash",
+     "at": 33.212999999999994,
+     "dur": 0.4,
+     "amount": 1.0
+    },
+    {
+     "type": "blast",
+     "at": 33.233,
+     "world": [
+      -10.5,
+      -59.0,
+      9.0
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 14,
+     "hidden": true
+    },
+    {
+     "type": "callout",
+     "at": 35.663000000000004,
+     "dur": 1.6,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "ZIHUATANEJO, MEXICO",
+     "sub": "A TOWN ON THE PACIFIC",
+     "size": 56,
+     "edge": "#5ad1ff"
+    },
+    {
+     "type": "speedlines",
+     "at": 33.382999999999996,
+     "dur": 0.9,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "callout",
+     "at": 38.943000000000005,
+     "dur": 1.0,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "GONE",
+     "size": 96,
+     "edge": "#ff5a4a"
+    },
+    {
+     "type": "speedlines",
+     "at": 41.212999999999994,
+     "dur": 1.3,
+     "x": 0.5,
+     "y": 0.45
+    },
+    {
+     "type": "impactframe",
+     "at": 42.773,
+     "dur": 0.12
+    },
+    {
+     "type": "blast",
+     "at": 42.773,
+     "world": [
+      0.0,
+      2.8,
+      1.45
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 12,
+     "hidden": true
+    },
+    {
+     "type": "years",
+     "at": 46.186,
+     "untilAt": 48.418000000000006,
+     "x": 0.5,
+     "y": 0.13,
+     "keys": [
+      {
+       "at": 46.286,
+       "n": 0
+      },
+      {
+       "at": 47.686,
+       "n": 19
+      }
+     ],
+     "label": "YEARS OF DIGGING",
+     "size": 90
+    },
+    {
+     "type": "speedlines",
+     "at": 48.368,
+     "dur": 1.4,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "rain",
+     "keys": [
+      {
+       "at": 49.829,
+       "a": 0.0
+      },
+      {
+       "at": 50.179,
+       "a": 1.0
+      },
+      {
+       "at": 54.679,
+       "a": 1.0
+      },
+      {
+       "at": 54.689,
+       "a": 0.0
+      }
+     ]
+    },
+    {
+     "type": "lightning",
+     "at": 50.379000000000005,
+     "x": 0.25,
+     "len": 0.5
+    },
+    {
+     "type": "lightning",
+     "at": 52.038000000000004,
+     "x": 0.7,
+     "len": 0.5
+    },
+    {
+     "type": "lightning",
+     "at": 52.698,
+     "x": 0.35,
+     "len": 0.5
+    },
+    {
+     "type": "lightning",
+     "at": 54.178,
+     "x": 0.62,
+     "len": 0.5
+    },
+    {
+     "type": "lightning",
+     "at": 54.489,
+     "x": 0.45,
+     "len": 0.5
+    },
+    {
+     "type": "cash",
+     "at": 50.988,
+     "dur": 2.0,
+     "x": 0.5,
+     "y": 0.45,
+     "count": 36
+    },
+    {
+     "type": "callout",
+     "at": 51.038000000000004,
+     "dur": 1.4,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "OVER $370,000",
+     "sub": "THE WARDEN'S DIRTY MONEY",
+     "size": 66
+    },
+    {
+     "type": "newspaper",
+     "at": 52.248,
+     "dur": 1.9,
+     "x": 0.5,
+     "y": 0.3,
+     "paper": "THE DAILY NEWS",
+     "head": "WARDEN EXPOSED",
+     "sub": "SECRET BOOKS REVEAL HIS CRIMES"
+    },
+    {
+     "type": "flash",
+     "at": 54.589,
+     "dur": 0.45,
+     "amount": 1.0
+    },
+    {
+     "type": "callout",
+     "at": 55.678,
+     "dur": 1.5,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "40 YEARS",
+     "sub": "RED IS FREE",
+     "size": 84,
+     "edge": "#6ad17a"
+    },
+    {
+     "type": "flash",
+     "at": 58.19799999999999,
+     "dur": 0.45,
+     "amount": 1.0
+    },
+    {
+     "type": "callout",
+     "at": 58.698,
+     "dur": 1.4,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "ZIHUATANEJO",
+     "size": 70,
+     "edge": "#5ad1ff"
+    },
+    {
+     "type": "darken",
+     "keys": [
+      {
+       "at": 62.349000000000004,
+       "a": 0.0
+      },
+      {
+       "at": 62.79900000000001,
+       "a": 1.0
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "hum",
+     "at": 0.0,
+     "dur": 4.6,
+     "gain": 0.25
+    },
+    {
+     "type": "sting",
+     "at": 0.35,
+     "gain": 0.5
+    },
+    {
+     "type": "whoosh",
+     "at": 4.9430000000000005,
+     "dur": 0.5,
+     "gain": 0.7
+    },
+    {
+     "type": "ting",
+     "at": 6.7,
+     "gain": 0.4
+    },
+    {
+     "type": "whoosh",
+     "at": 7.9510000000000005,
+     "dur": 1.4,
+     "gain": 0.9
+    },
+    {
+     "type": "gust",
+     "at": 8.551,
+     "dur": 1.6,
+     "gain": 0.6
+    },
+    {
+     "type": "slam",
+     "at": 9.3,
+     "gain": 0.6
+    },
+    {
+     "type": "ting",
+     "at": 13.057,
+     "gain": 0.4
+    },
+    {
+     "type": "whoosh",
+     "at": 14.277,
+     "dur": 1.6,
+     "gain": 0.9
+    },
+    {
+     "type": "pop",
+     "at": 15.317,
+     "gain": 0.5
+    },
+    {
+     "type": "pop",
+     "at": 19.457,
+     "gain": 0.5
+    },
+    {
+     "type": "pop",
+     "at": 21.117,
+     "gain": 0.5
+    },
+    {
+     "type": "counter",
+     "at": 22.603,
+     "dur": 6.4,
+     "gain": 0.35
+    },
+    {
+     "type": "whoosh",
+     "at": 22.603,
+     "dur": 1.0,
+     "gain": 0.6
+    },
+    {
+     "type": "hum",
+     "at": 29.35,
+     "dur": 4.0,
+     "gain": 0.3
+    },
+    {
+     "type": "sting",
+     "at": 31.033,
+     "gain": 0.45
+    },
+    {
+     "type": "boom",
+     "at": 33.233,
+     "gain": 0.75
+    },
+    {
+     "type": "slam",
+     "at": 33.253,
+     "gain": 0.5
+    },
+    {
+     "type": "whoosh",
+     "at": 33.382999999999996,
+     "dur": 0.9,
+     "gain": 0.7
+    },
+    {
+     "type": "ting",
+     "at": 35.813,
+     "gain": 0.35
+    },
+    {
+     "type": "whoosh",
+     "at": 36.901,
+     "dur": 1.0,
+     "gain": 0.7
+    },
+    {
+     "type": "alarm",
+     "at": 37.673,
+     "dur": 1.0,
+     "gain": 0.3
+    },
+    {
+     "type": "creak",
+     "at": 38.493,
+     "dur": 0.7,
+     "gain": 0.6
+    },
+    {
+     "type": "sting",
+     "at": 39.093,
+     "gain": 0.55
+    },
+    {
+     "type": "scratch",
+     "at": 40.073,
+     "dur": 0.4,
+     "gain": 0.4
+    },
+    {
+     "type": "whoosh",
+     "at": 41.263,
+     "dur": 1.0,
+     "gain": 0.8
+    },
+    {
+     "type": "crash",
+     "at": 42.773,
+     "gain": 0.7
+    },
+    {
+     "type": "slam",
+     "at": 42.773,
+     "gain": 0.5
+    },
+    {
+     "type": "creak",
+     "at": 44.386,
+     "dur": 1.2,
+     "gain": 0.5
+    },
+    {
+     "type": "hum",
+     "at": 45.398,
+     "dur": 3.2,
+     "gain": 0.35
+    },
+    {
+     "type": "counter",
+     "at": 46.286,
+     "dur": 1.4,
+     "gain": 0.35
+    },
+    {
+     "type": "scramble",
+     "at": 48.318000000000005,
+     "dur": 1.6,
+     "gain": 0.6
+    },
+    {
+     "type": "whoosh",
+     "at": 48.368,
+     "dur": 1.2,
+     "gain": 0.9
+    },
+    {
+     "type": "wind",
+     "at": 50.029,
+     "dur": 4.6,
+     "gain": 0.6
+    },
+    {
+     "type": "gust",
+     "at": 50.429,
+     "dur": 4.0,
+     "gain": 0.5
+    },
+    {
+     "type": "boom",
+     "at": 50.379000000000005,
+     "gain": 0.6
+    },
+    {
+     "type": "boom",
+     "at": 52.038000000000004,
+     "gain": 0.5499999999999999
+    },
+    {
+     "type": "boom",
+     "at": 52.698,
+     "gain": 0.5
+    },
+    {
+     "type": "boom",
+     "at": 54.178,
+     "gain": 0.44999999999999996
+    },
+    {
+     "type": "boom",
+     "at": 54.489,
+     "gain": 0.39999999999999997
+    },
+    {
+     "type": "tada",
+     "at": 51.038000000000004,
+     "gain": 0.45
+    },
+    {
+     "type": "whoosh",
+     "at": 52.248,
+     "dur": 0.6,
+     "gain": 0.6
+    },
+    {
+     "type": "slam",
+     "at": 52.748,
+     "gain": 0.5
+    },
+    {
+     "type": "creak",
+     "at": 54.809,
+     "dur": 1.0,
+     "gain": 0.5
+    },
+    {
+     "type": "ting",
+     "at": 55.778,
+     "gain": 0.4
+    },
+    {
+     "type": "whoosh",
+     "at": 58.19799999999999,
+     "dur": 0.6,
+     "gain": 0.6
+    },
+    {
+     "type": "pop",
+     "at": 58.698,
+     "gain": 0.45
+    },
+    {
+     "type": "tada",
+     "at": 59.418,
+     "gain": 0.5
+    },
+    {
+     "type": "pop",
+     "at": 60.38,
+     "gain": 0.35
+    }
+   ],
+   "charTint": [
+    {
+     "at": 0.0,
+     "col": "#16244c",
+     "a": 0.32
+    },
+    {
+     "at": 5.043,
+     "col": "#ffb070",
+     "a": 0.1
+    },
+    {
+     "at": 9.151,
+     "col": "#ffd9a0",
+     "a": 0.05
+    },
+    {
+     "at": 14.876999999999999,
+     "col": "#ffb060",
+     "a": 0.1
+    },
+    {
+     "at": 23.003,
+     "col": "#ffc890",
+     "a": 0.08
+    },
+    {
+     "at": 29.150000000000002,
+     "col": "#14204a",
+     "a": 0.42
+    },
+    {
+     "at": 33.233,
+     "col": "#6a7080",
+     "a": 0.12
+    },
+    {
+     "at": 37.673,
+     "col": "#ffb070",
+     "a": 0.12
+    },
+    {
+     "at": 47.918000000000006,
+     "col": "#2f5a2a",
+     "a": 0.3
+    },
+    {
+     "at": 50.429,
+     "col": "#1a2448",
+     "a": 0.38
+    },
+    {
+     "at": 54.689,
+     "col": "#ffe8c0",
+     "a": 0.04
+    },
+    {
+     "at": 58.297999999999995,
+     "col": "#ff9a50",
+     "a": 0.16
+    }
+   ]
+  }
+ ]
+}

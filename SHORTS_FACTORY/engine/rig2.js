@@ -30,6 +30,15 @@ Object.assign(HATS, {
     g.beginPath(); g.moveTo(-R * 0.9, -R * 0.5); g.lineTo(-R * 1.35, -R * 0.2); g.lineTo(-R * 1.2, -R * 0.62); g.closePath(); fo(g, '#2f6fc0'); },
   hood_leafy(g, R) { g.beginPath(); g.moveTo(-R * 1.05, R * 0.2); g.quadraticCurveTo(-R * 1.15, -R * 1.35, 0, -R * 1.35); g.quadraticCurveTo(R * 1.15, -R * 1.35, R * 1.05, R * 0.2); g.quadraticCurveTo(R * 0.8, -R * 0.75, 0, -R * 0.82); g.quadraticCurveTo(-R * 0.8, -R * 0.75, -R * 1.05, R * 0.2); g.closePath(); fo(g, '#4f6b2e');
     for (let i = 0; i < 9; i++) { const a = -2.6 + i * 0.32; g.beginPath(); g.ellipse(Math.cos(a) * R * 1.12, Math.sin(a) * R * 1.12 - R * 0.15, R * 0.2, R * 0.08, a, 0, 7); fo(g, i % 2 ? '#6f8a3a' : '#3f5525', 4); } },
+  guard_cap(g, R) { g.beginPath(); g.moveTo(-R * 1.0, -R * 0.55); g.lineTo(-R * 1.12, -R * 1.2); g.quadraticCurveTo(0, -R * 1.5, R * 1.12, -R * 1.2); g.lineTo(R * 1.0, -R * 0.55); g.closePath(); fo(g, '#3e4a5e');
+    g.beginPath(); g.rect(-R * 1.0, -R * 0.72, R * 2.0, R * 0.2); fo(g, '#15181e'); g.beginPath(); g.moveTo(-R * 0.9, -R * 0.55); g.quadraticCurveTo(0, -R * 0.2, R * 0.9, -R * 0.55); g.closePath(); fo(g, '#15181e');
+    g.beginPath(); g.arc(0, -R * 1.0, R * 0.15, 0, 7); fo(g, '#c9b06a', 4); },
+  fedora(g, R) { g.beginPath(); g.ellipse(0, -R * 0.62, R * 1.45, R * 0.2, 0, 0, 7); fo(g, '#2a2420');
+    g.beginPath(); g.moveTo(-R * 0.72, -R * 0.66); g.lineTo(-R * 0.62, -R * 1.42); g.quadraticCurveTo(0, -R * 1.2, R * 0.62, -R * 1.42); g.lineTo(R * 0.72, -R * 0.66); g.closePath(); fo(g, '#3a322b');
+    g.beginPath(); g.rect(-R * 0.72, -R * 0.86, R * 1.44, R * 0.17); fo(g, '#1b1714'); },
+  straw_hat(g, R) { g.beginPath(); g.ellipse(0, -R * 0.6, R * 1.6, R * 0.22, 0, 0, 7); fo(g, '#e2c37a');
+    g.beginPath(); g.moveTo(-R * 0.7, -R * 0.64); g.quadraticCurveTo(-R * 0.66, -R * 1.35, 0, -R * 1.35); g.quadraticCurveTo(R * 0.66, -R * 1.35, R * 0.7, -R * 0.64); g.closePath(); fo(g, '#ecd08c');
+    g.beginPath(); g.rect(-R * 0.7, -R * 0.82, R * 1.4, R * 0.14); fo(g, '#9a3a2a'); },
   police_cap(g, R) { g.beginPath(); g.moveTo(-R * 1.0, -R * 0.55); g.lineTo(-R * 1.12, -R * 1.2); g.quadraticCurveTo(0, -R * 1.5, R * 1.12, -R * 1.2); g.lineTo(R * 1.0, -R * 0.55); g.closePath(); fo(g, '#26345e');
     g.beginPath(); g.rect(-R * 1.0, -R * 0.72, R * 2.0, R * 0.2); fo(g, '#111318'); g.beginPath(); g.moveTo(-R * 0.9, -R * 0.55); g.quadraticCurveTo(0, -R * 0.2, R * 0.9, -R * 0.55); g.closePath(); fo(g, '#111318');
     g.beginPath(); g.arc(0, -R * 1.0, R * 0.17, 0, 7); fo(g, '#e6c75a', 4); },

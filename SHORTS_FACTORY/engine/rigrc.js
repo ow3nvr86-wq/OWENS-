@@ -32,6 +32,12 @@ const RC_COSTUMES = {
   mail: { body: '#8db3da', detail: 'mail', pants: '#2b3a5c' },
   jumpsuit: { body: '#7f868d', detail: 'jumpsuit', pants: '#636a72' },
   jumpsuit_snow: { body: '#8a9198', detail: 'jumpsuit', pants: '#6a7178', snow: true },
+  inmate: { body: '#7f9cc4', detail: 'inmate', pants: '#2f4366' },                 // 1940s-60s prison blues: chambray shirt, denim
+  suit_grey: { body: '#5d5f66', detail: 'suit', pants: '#46484f', tie: '#7a2a2a' },
+  suit_dark: { body: '#2c2e36', detail: 'suit', pants: '#24262c', tie: '#8a7a3a' },
+  guard: { body: '#3e4a5e', detail: 'police', pants: '#2c3444' },
+  coat_tan: { body: '#a98a5c', detail: 'suit', pants: '#4a4237', tie: '#3a3a44' },
+  beach: { body: '#f2efe4', detail: 'tee', pants: '#c9b48a' },
 };
 function rcTorso(g, cos, w, h, t) {
   const x = -w / 2, y = -h, r = w * 0.48;
@@ -102,6 +108,23 @@ function rcTorso(g, cos, w, h, t) {
     g.fillStyle = shade(cos.body, -0.25); g.fillRect(x, y + h - 26, w, 18);
     stitch([[x + 8, y + h * 0.5], [x + 8, y + h - 30]]); stitch([[x + w - 8, y + h * 0.5], [x + w - 8, y + h - 30]]);
     if (cos.snow) for (let k = 0; k < 26; k++) { g.beginPath(); g.arc(x + hash(k * 4.1) * w, y + hash(k * 7.3) * h * 0.7, 3 + hash(k * 2.2) * 6, 0, 7); g.fillStyle = 'rgba(255,255,255,0.85)'; g.fill(); }
+  } else if (cos.detail === 'inmate') {                                     // chambray work shirt: collar, placket, chest pocket, number patch
+    g.beginPath(); g.moveTo(-w * 0.36, y); g.lineTo(-4, y + 34); g.lineTo(-w * 0.05, y); g.closePath(); g.fillStyle = dark; g.fill();
+    g.beginPath(); g.moveTo(w * 0.36, y); g.lineTo(4, y + 34); g.lineTo(w * 0.05, y); g.closePath(); g.fill();
+    g.beginPath(); g.moveTo(0, y + 30); g.lineTo(0, y + h - 8); g.lineWidth = 3; g.strokeStyle = dark; g.stroke();
+    for (let k = 0; k < 4; k++) { g.beginPath(); g.arc(5, y + 52 + k * 32, 3.5, 0, 7); g.fillStyle = '#e9eef6'; g.fill(); }
+    g.beginPath(); g.roundRect(-w * 0.4, y + h * 0.24, 34, 30, 3); g.fillStyle = shade(cos.body, -0.1); g.fill(); g.lineWidth = 2.5; g.strokeStyle = dark; g.stroke();
+    g.beginPath(); g.roundRect(w * 0.08, y + h * 0.24, 42, 22, 3); g.fillStyle = '#f1ece0'; g.fill(); g.lineWidth = 2; g.strokeStyle = dark; g.stroke();
+    g.fillStyle = '#2a2a30'; g.font = '700 15px Poppins'; g.textAlign = 'left'; g.textBaseline = 'middle'; g.fillText(cos.num || '000', w * 0.08 + 4, y + h * 0.24 + 12);
+    for (let k = 0; k < 9; k++) { g.fillStyle = 'rgba(255,255,255,0.07)'; g.fillRect(x, y + k * h / 9, w, 3); }
+    stitch([[x + 8, y + h - 12], [x + w - 8, y + h - 12]]);
+  } else if (cos.detail === 'suit') {                                      // jacket with lapels, white shirt and a tie
+    g.beginPath(); g.moveTo(-w * 0.3, y); g.lineTo(0, y + h * 0.5); g.lineTo(w * 0.3, y); g.closePath(); g.fillStyle = '#f1eee6'; g.fill();
+    g.beginPath(); g.moveTo(-7, y + 8); g.lineTo(7, y + 8); g.lineTo(9, y + h * 0.42); g.lineTo(0, y + h * 0.5); g.lineTo(-9, y + h * 0.42); g.closePath(); g.fillStyle = cos.tie || '#7a2a2a'; g.fill();
+    for (const sx of [-1, 1]) { g.beginPath(); g.moveTo(sx * w * 0.3, y); g.lineTo(sx * w * 0.08, y + h * 0.55); g.lineTo(sx * w * 0.46, y + h * 0.2); g.closePath(); g.fillStyle = dark; g.fill(); }
+    for (let k = 0; k < 2; k++) { g.beginPath(); g.arc(-6, y + h * (0.64 + k * 0.14), 4, 0, 7); g.fillStyle = dark; g.fill(); }
+    g.beginPath(); g.moveTo(w * 0.14, y + h * 0.3); g.lineTo(w * 0.4, y + h * 0.28); g.lineWidth = 3; g.strokeStyle = dark; g.stroke();
+    g.fillStyle = '#f1eee6'; g.fillRect(w * 0.18, y + h * 0.25, 14, 6);
   } else if (cos.detail === 'vest') {
     g.fillStyle = '#2b2b33'; g.fillRect(-w * 0.16, y, w * 0.32, h);
     for (let k = 0; k < 4; k++) { g.beginPath(); g.roundRect(-w * 0.44 + (k % 2) * w * 0.6, y + h * (0.3 + Math.floor(k / 2) * 0.28), w * 0.28, h * 0.18, 6); g.fillStyle = dark; g.fill(); }

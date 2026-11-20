@@ -1,0 +1,1003 @@
+{
+ "duration": 61.649,
+ "fps": 30,
+ "frames": 1849,
+ "words": [
+  {
+   "word": "He",
+   "line": 0,
+   "start": 0.0,
+   "end": 0.18
+  },
+  {
+   "word": "spent",
+   "line": 0,
+   "start": 0.18,
+   "end": 0.42
+  },
+  {
+   "word": "nineteen",
+   "line": 0,
+   "start": 0.42,
+   "end": 1.02
+  },
+  {
+   "word": "years",
+   "line": 0,
+   "start": 1.02,
+   "end": 1.56
+  },
+  {
+   "word": "in",
+   "line": 0,
+   "start": 1.56,
+   "end": 1.8
+  },
+  {
+   "word": "prison",
+   "line": 0,
+   "start": 1.8,
+   "end": 2.1
+  },
+  {
+   "word": "for",
+   "line": 0,
+   "start": 2.1,
+   "end": 2.44
+  },
+  {
+   "word": "a",
+   "line": 0,
+   "start": 2.44,
+   "end": 2.6
+  },
+  {
+   "word": "murder",
+   "line": 0,
+   "start": 2.6,
+   "end": 2.82
+  },
+  {
+   "word": "he",
+   "line": 0,
+   "start": 2.82,
+   "end": 3.1
+  },
+  {
+   "word": "didn't",
+   "line": 0,
+   "start": 3.1,
+   "end": 3.54
+  },
+  {
+   "word": "commit.",
+   "line": 0,
+   "start": 3.54,
+   "end": 4.46
+  },
+  {
+   "word": "Then",
+   "line": 0,
+   "start": 4.543,
+   "end": 4.96
+  },
+  {
+   "word": "one",
+   "line": 0,
+   "start": 4.96,
+   "end": 5.24
+  },
+  {
+   "word": "morning,",
+   "line": 0,
+   "start": 5.24,
+   "end": 5.9
+  },
+  {
+   "word": "his",
+   "line": 0,
+   "start": 6.055,
+   "end": 6.14
+  },
+  {
+   "word": "cell",
+   "line": 0,
+   "start": 6.14,
+   "end": 6.46
+  },
+  {
+   "word": "was",
+   "line": 0,
+   "start": 6.46,
+   "end": 6.7
+  },
+  {
+   "word": "empty.",
+   "line": 0,
+   "start": 6.7,
+   "end": 7.82
+  },
+  {
+   "word": "1947.",
+   "line": 1,
+   "start": 7.751,
+   "end": 7.82
+  },
+  {
+   "word": "Banker",
+   "line": 1,
+   "start": 7.801,
+   "end": 8.24
+  },
+  {
+   "word": "Andy",
+   "line": 1,
+   "start": 8.24,
+   "end": 8.54
+  },
+  {
+   "word": "Dufresne",
+   "line": 1,
+   "start": 8.54,
+   "end": 9.14
+  },
+  {
+   "word": "gets",
+   "line": 1,
+   "start": 9.14,
+   "end": 9.3
+  },
+  {
+   "word": "two",
+   "line": 1,
+   "start": 9.3,
+   "end": 9.7
+  },
+  {
+   "word": "life",
+   "line": 1,
+   "start": 9.7,
+   "end": 9.98
+  },
+  {
+   "word": "sentences",
+   "line": 1,
+   "start": 9.98,
+   "end": 10.42
+  },
+  {
+   "word": "for",
+   "line": 1,
+   "start": 10.42,
+   "end": 10.76
+  },
+  {
+   "word": "killing",
+   "line": 1,
+   "start": 10.76,
+   "end": 11.02
+  },
+  {
+   "word": "his",
+   "line": 1,
+   "start": 11.02,
+   "end": 11.26
+  },
+  {
+   "word": "wife",
+   "line": 1,
+   "start": 11.26,
+   "end": 11.56
+  },
+  {
+   "word": "and",
+   "line": 1,
+   "start": 11.56,
+   "end": 11.9
+  },
+  {
+   "word": "her",
+   "line": 1,
+   "start": 11.9,
+   "end": 12.06
+  },
+  {
+   "word": "lover.",
+   "line": 1,
+   "start": 12.06,
+   "end": 12.64
+  },
+  {
+   "word": "He's",
+   "line": 1,
+   "start": 12.863,
+   "end": 13.057
+  },
+  {
+   "word": "innocent.",
+   "line": 1,
+   "start": 13.057,
+   "end": 14.177
+  },
+  {
+   "word": "In",
+   "line": 2,
+   "start": 14.125,
+   "end": 14.277
+  },
+  {
+   "word": "Shawshank,",
+   "line": 2,
+   "start": 14.277,
+   "end": 15.057
+  },
+  {
+   "word": "he",
+   "line": 2,
+   "start": 15.057,
+   "end": 15.117
+  },
+  {
+   "word": "befriends",
+   "line": 2,
+   "start": 15.117,
+   "end": 15.477
+  },
+  {
+   "word": "Red,",
+   "line": 2,
+   "start": 15.477,
+   "end": 15.857
+  },
+  {
+   "word": "who",
+   "line": 2,
+   "start": 15.857,
+   "end": 16.157
+  },
+  {
+   "word": "can",
+   "line": 2,
+   "start": 16.157,
+   "end": 16.317
+  },
+  {
+   "word": "smuggle",
+   "line": 2,
+   "start": 16.317,
+   "end": 16.777
+  },
+  {
+   "word": "in",
+   "line": 2,
+   "start": 16.777,
+   "end": 16.957
+  },
+  {
+   "word": "anything.",
+   "line": 2,
+   "start": 16.957,
+   "end": 18.097
+  },
+  {
+   "word": "Andy",
+   "line": 2,
+   "start": 18.143,
+   "end": 18.397
+  },
+  {
+   "word": "asks",
+   "line": 2,
+   "start": 18.397,
+   "end": 18.717
+  },
+  {
+   "word": "for",
+   "line": 2,
+   "start": 18.717,
+   "end": 18.977
+  },
+  {
+   "word": "a",
+   "line": 2,
+   "start": 18.977,
+   "end": 19.097
+  },
+  {
+   "word": "tiny",
+   "line": 2,
+   "start": 19.097,
+   "end": 19.457
+  },
+  {
+   "word": "rock",
+   "line": 2,
+   "start": 19.457,
+   "end": 19.777
+  },
+  {
+   "word": "hammer,",
+   "line": 2,
+   "start": 19.777,
+   "end": 20.077
+  },
+  {
+   "word": "and",
+   "line": 2,
+   "start": 20.384,
+   "end": 20.497
+  },
+  {
+   "word": "later,",
+   "line": 2,
+   "start": 20.497,
+   "end": 20.837
+  },
+  {
+   "word": "a",
+   "line": 2,
+   "start": 20.837,
+   "end": 21.137
+  },
+  {
+   "word": "movie-star",
+   "line": 2,
+   "start": 21.137,
+   "end": 21.617
+  },
+  {
+   "word": "poster.",
+   "line": 2,
+   "start": 21.617,
+   "end": 22.557
+  },
+  {
+   "word": "Years",
+   "line": 3,
+   "start": 22.603,
+   "end": 22.937
+  },
+  {
+   "word": "pass.",
+   "line": 3,
+   "start": 22.937,
+   "end": 23.837
+  },
+  {
+   "word": "He",
+   "line": 3,
+   "start": 23.856,
+   "end": 23.937
+  },
+  {
+   "word": "does",
+   "line": 3,
+   "start": 23.937,
+   "end": 24.097
+  },
+  {
+   "word": "the",
+   "line": 3,
+   "start": 24.097,
+   "end": 24.297
+  },
+  {
+   "word": "guards'",
+   "line": 3,
+   "start": 24.297,
+   "end": 24.597
+  },
+  {
+   "word": "taxes,",
+   "line": 3,
+   "start": 24.597,
+   "end": 25.477
+  },
+  {
+   "word": "runs",
+   "line": 3,
+   "start": 25.477,
+   "end": 25.557
+  },
+  {
+   "word": "the",
+   "line": 3,
+   "start": 25.557,
+   "end": 25.777
+  },
+  {
+   "word": "prison",
+   "line": 3,
+   "start": 25.777,
+   "end": 25.997
+  },
+  {
+   "word": "library,",
+   "line": 3,
+   "start": 25.997,
+   "end": 26.857
+  },
+  {
+   "word": "and",
+   "line": 3,
+   "start": 26.857,
+   "end": 27.117
+  },
+  {
+   "word": "launders",
+   "line": 3,
+   "start": 27.117,
+   "end": 27.497
+  },
+  {
+   "word": "money",
+   "line": 3,
+   "start": 27.497,
+   "end": 27.777
+  },
+  {
+   "word": "for",
+   "line": 3,
+   "start": 27.777,
+   "end": 28.037
+  },
+  {
+   "word": "the",
+   "line": 3,
+   "start": 28.037,
+   "end": 28.197
+  },
+  {
+   "word": "crooked",
+   "line": 3,
+   "start": 28.197,
+   "end": 28.417
+  },
+  {
+   "word": "warden.",
+   "line": 3,
+   "start": 28.417,
+   "end": 29.097
+  },
+  {
+   "word": "Then",
+   "line": 4,
+   "start": 29.35,
+   "end": 29.693
+  },
+  {
+   "word": "a",
+   "line": 4,
+   "start": 29.693,
+   "end": 29.813
+  },
+  {
+   "word": "new",
+   "line": 4,
+   "start": 29.813,
+   "end": 30.133
+  },
+  {
+   "word": "inmate",
+   "line": 4,
+   "start": 30.133,
+   "end": 30.473
+  },
+  {
+   "word": "knows",
+   "line": 4,
+   "start": 30.473,
+   "end": 30.753
+  },
+  {
+   "word": "who",
+   "line": 4,
+   "start": 30.753,
+   "end": 31.033
+  },
+  {
+   "word": "really",
+   "line": 4,
+   "start": 31.033,
+   "end": 31.393
+  },
+  {
+   "word": "did",
+   "line": 4,
+   "start": 31.393,
+   "end": 31.713
+  },
+  {
+   "word": "it.",
+   "line": 4,
+   "start": 31.713,
+   "end": 32.313
+  },
+  {
+   "word": "The",
+   "line": 4,
+   "start": 32.345,
+   "end": 32.493
+  },
+  {
+   "word": "warden",
+   "line": 4,
+   "start": 32.493,
+   "end": 32.773
+  },
+  {
+   "word": "has",
+   "line": 4,
+   "start": 32.773,
+   "end": 33.073
+  },
+  {
+   "word": "him",
+   "line": 4,
+   "start": 33.073,
+   "end": 33.233
+  },
+  {
+   "word": "killed.",
+   "line": 4,
+   "start": 33.233,
+   "end": 34.193
+  },
+  {
+   "word": "Andy",
+   "line": 5,
+   "start": 34.175,
+   "end": 34.433
+  },
+  {
+   "word": "tells",
+   "line": 5,
+   "start": 34.433,
+   "end": 34.713
+  },
+  {
+   "word": "Red",
+   "line": 5,
+   "start": 34.713,
+   "end": 34.993
+  },
+  {
+   "word": "about",
+   "line": 5,
+   "start": 34.993,
+   "end": 35.273
+  },
+  {
+   "word": "a",
+   "line": 5,
+   "start": 35.273,
+   "end": 35.413
+  },
+  {
+   "word": "beach",
+   "line": 5,
+   "start": 35.413,
+   "end": 35.593
+  },
+  {
+   "word": "in",
+   "line": 5,
+   "start": 35.593,
+   "end": 35.813
+  },
+  {
+   "word": "Mexico.",
+   "line": 5,
+   "start": 35.813,
+   "end": 36.813
+  },
+  {
+   "word": "Next",
+   "line": 5,
+   "start": 36.801,
+   "end": 37.013
+  },
+  {
+   "word": "morning,",
+   "line": 5,
+   "start": 37.013,
+   "end": 37.713
+  },
+  {
+   "word": "roll",
+   "line": 5,
+   "start": 37.673,
+   "end": 37.873
+  },
+  {
+   "word": "call.",
+   "line": 5,
+   "start": 37.873,
+   "end": 38.653
+  },
+  {
+   "word": "Andy's",
+   "line": 5,
+   "start": 38.645,
+   "end": 39.093
+  },
+  {
+   "word": "gone.",
+   "line": 5,
+   "start": 39.093,
+   "end": 39.933
+  },
+  {
+   "word": "The",
+   "line": 6,
+   "start": 39.936,
+   "end": 40.073
+  },
+  {
+   "word": "furious",
+   "line": 6,
+   "start": 40.073,
+   "end": 40.533
+  },
+  {
+   "word": "warden",
+   "line": 6,
+   "start": 40.533,
+   "end": 40.913
+  },
+  {
+   "word": "throws",
+   "line": 6,
+   "start": 40.913,
+   "end": 41.253
+  },
+  {
+   "word": "a",
+   "line": 6,
+   "start": 41.253,
+   "end": 41.473
+  },
+  {
+   "word": "rock",
+   "line": 6,
+   "start": 41.473,
+   "end": 41.733
+  },
+  {
+   "word": "at",
+   "line": 6,
+   "start": 41.733,
+   "end": 41.913
+  },
+  {
+   "word": "the",
+   "line": 6,
+   "start": 41.913,
+   "end": 42.033
+  },
+  {
+   "word": "poster,",
+   "line": 6,
+   "start": 42.033,
+   "end": 42.373
+  },
+  {
+   "word": "and",
+   "line": 6,
+   "start": 42.373,
+   "end": 42.653
+  },
+  {
+   "word": "it",
+   "line": 6,
+   "start": 42.653,
+   "end": 42.773
+  },
+  {
+   "word": "rips",
+   "line": 6,
+   "start": 42.773,
+   "end": 43.033
+  },
+  {
+   "word": "straight",
+   "line": 6,
+   "start": 43.033,
+   "end": 43.493
+  },
+  {
+   "word": "through.",
+   "line": 6,
+   "start": 43.493,
+   "end": 44.173
+  },
+  {
+   "word": "Behind",
+   "line": 6,
+   "start": 44.386,
+   "end": 44.678
+  },
+  {
+   "word": "it:",
+   "line": 6,
+   "start": 44.678,
+   "end": 45.118
+  },
+  {
+   "word": "a",
+   "line": 6,
+   "start": 45.118,
+   "end": 45.398
+  },
+  {
+   "word": "tunnel.",
+   "line": 6,
+   "start": 45.398,
+   "end": 46.398
+  },
+  {
+   "word": "Nineteen",
+   "line": 7,
+   "start": 46.286,
+   "end": 46.998
+  },
+  {
+   "word": "years",
+   "line": 7,
+   "start": 46.998,
+   "end": 47.498
+  },
+  {
+   "word": "of",
+   "line": 7,
+   "start": 47.498,
+   "end": 47.778
+  },
+  {
+   "word": "digging.",
+   "line": 7,
+   "start": 47.778,
+   "end": 48.578
+  },
+  {
+   "word": "He",
+   "line": 7,
+   "start": 48.654,
+   "end": 48.718
+  },
+  {
+   "word": "crawls",
+   "line": 7,
+   "start": 48.718,
+   "end": 49.118
+  },
+  {
+   "word": "out",
+   "line": 7,
+   "start": 49.118,
+   "end": 49.258
+  },
+  {
+   "word": "through",
+   "line": 7,
+   "start": 49.258,
+   "end": 49.458
+  },
+  {
+   "word": "a",
+   "line": 7,
+   "start": 49.458,
+   "end": 49.598
+  },
+  {
+   "word": "sewer",
+   "line": 7,
+   "start": 49.598,
+   "end": 49.778
+  },
+  {
+   "word": "pipe,",
+   "line": 7,
+   "start": 49.778,
+   "end": 50.458
+  },
+  {
+   "word": "takes",
+   "line": 7,
+   "start": 50.429,
+   "end": 50.598
+  },
+  {
+   "word": "the",
+   "line": 7,
+   "start": 50.598,
+   "end": 50.818
+  },
+  {
+   "word": "warden's",
+   "line": 7,
+   "start": 50.918,
+   "end": 51.258
+  },
+  {
+   "word": "dirty",
+   "line": 7,
+   "start": 51.258,
+   "end": 51.438
+  },
+  {
+   "word": "money,",
+   "line": 7,
+   "start": 51.438,
+   "end": 52.058
+  },
+  {
+   "word": "and",
+   "line": 7,
+   "start": 52.058,
+   "end": 52.198
+  },
+  {
+   "word": "mails",
+   "line": 7,
+   "start": 52.198,
+   "end": 52.478
+  },
+  {
+   "word": "his",
+   "line": 7,
+   "start": 52.478,
+   "end": 52.718
+  },
+  {
+   "word": "secret",
+   "line": 7,
+   "start": 52.718,
+   "end": 53.058
+  },
+  {
+   "word": "books",
+   "line": 7,
+   "start": 53.058,
+   "end": 53.398
+  },
+  {
+   "word": "to",
+   "line": 7,
+   "start": 53.398,
+   "end": 53.638
+  },
+  {
+   "word": "the",
+   "line": 7,
+   "start": 53.638,
+   "end": 53.778
+  },
+  {
+   "word": "newspaper.",
+   "line": 7,
+   "start": 53.778,
+   "end": 54.858
+  },
+  {
+   "word": "Red",
+   "line": 8,
+   "start": 54.809,
+   "end": 54.998
+  },
+  {
+   "word": "gets",
+   "line": 8,
+   "start": 54.998,
+   "end": 55.218
+  },
+  {
+   "word": "out",
+   "line": 8,
+   "start": 55.218,
+   "end": 55.478
+  },
+  {
+   "word": "after",
+   "line": 8,
+   "start": 55.478,
+   "end": 55.778
+  },
+  {
+   "word": "forty",
+   "line": 8,
+   "start": 55.778,
+   "end": 56.198
+  },
+  {
+   "word": "years,",
+   "line": 8,
+   "start": 56.198,
+   "end": 57.058
+  },
+  {
+   "word": "follows",
+   "line": 8,
+   "start": 57.045,
+   "end": 57.358
+  },
+  {
+   "word": "Andy's",
+   "line": 8,
+   "start": 57.358,
+   "end": 57.818
+  },
+  {
+   "word": "clues,",
+   "line": 8,
+   "start": 57.818,
+   "end": 58.378
+  },
+  {
+   "word": "and",
+   "line": 8,
+   "start": 58.378,
+   "end": 58.498
+  },
+  {
+   "word": "finds",
+   "line": 8,
+   "start": 58.498,
+   "end": 58.858
+  },
+  {
+   "word": "him",
+   "line": 8,
+   "start": 58.858,
+   "end": 59.058
+  },
+  {
+   "word": "on",
+   "line": 8,
+   "start": 59.058,
+   "end": 59.238
+  },
+  {
+   "word": "that",
+   "line": 8,
+   "start": 59.238,
+   "end": 59.418
+  },
+  {
+   "word": "beach.",
+   "line": 8,
+   "start": 59.418,
+   "end": 60.158
+  },
+  {
+   "word": "Would",
+   "line": 9,
+   "start": 60.38,
+   "end": 60.482
+  },
+  {
+   "word": "you",
+   "line": 9,
+   "start": 60.482,
+   "end": 60.642
+  },
+  {
+   "word": "have",
+   "line": 9,
+   "start": 60.642,
+   "end": 60.782
+  },
+  {
+   "word": "kept",
+   "line": 9,
+   "start": 60.782,
+   "end": 60.962
+  },
+  {
+   "word": "digging?",
+   "line": 9,
+   "start": 60.962,
+   "end": 61.622
+  }
+ ]
+}

@@ -118,6 +118,16 @@ function seqActorState(ch, s, t, S, x, cam) {
   return st;
 }
 let NEARBUF = null;
+// scene.charTint: [{at, col, a}] -> the 2D cast is tinted to sit in the 3D light (night blue, dawn amber); blends over 0.35 s
+function charTintAt(s, t, ch) {
+  if (ch.noTint) return null; const K = s.charTint; if (!K || !K.length) return null;
+  let i = -1; for (let k = 0; k < K.length; k++) if (t >= K[k].at) i = k; if (i < 0) return null;
+  const cur = K[i], prev = K[i - 1], u = prev ? clamp((t - cur.at) / 0.35) : 1;
+  const hex = c => [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)];
+  const ca = hex(cur.col), pa = prev ? hex(prev.col) : ca, a = prev ? lerp(prev.a, cur.a, u) : cur.a;
+  if (a <= 0.01) return null; const c = ca.map((v, k) => Math.round(lerp(pa[k], v, u)));
+  return { a, col: `rgb(${c[0]},${c[1]},${c[2]})` };
+}
 // replace the character pass of renderShotSeq with the track-aware one (also handles the car-door clip)
 renderShotSeq = (function (orig) {
   return function (g, i, t) {
@@ -146,9 +156,11 @@ renderShotSeq = (function (orig) {
       if (quad && quad.some(q => q[3] <= 0.06)) continue;
       const drawCh = (gg) => { if (clipY != null) { gg.beginPath(); gg.rect(-W, -H, W * 3, clipY + H); gg.clip(); }
         if (quad) { gg.beginPath(); quad.forEach((q, k) => k ? gg.lineTo(q[0], q[1]) : gg.moveTo(q[0], q[1])); gg.closePath(); gg.clip(); } st._def = def; drawCharacter(gg, def, st); if (st._post) st._post(gg); };
-      items.push({ d: st.depth, occ: ch.occlude, draw: na >= 0.99 ? () => drawCh(g) : () => {
+      const tint = charTintAt(s, t, ch);
+      items.push({ d: st.depth, occ: ch.occlude, draw: na >= 0.99 && !tint ? () => drawCh(g) : () => {
         const oc = NEARBUF || (NEARBUF = Object.assign(document.createElement('canvas'), { width: W, height: H })), og = oc.getContext('2d');
         og.setTransform(1, 0, 0, 1, 0, 0); og.clearRect(0, 0, W, H); og.setTransform(g.getTransform()); og.save(); drawCh(og); og.restore();
+        if (tint) { og.save(); og.setTransform(1, 0, 0, 1, 0, 0); og.globalCompositeOperation = 'source-atop'; og.globalAlpha = tint.a; og.fillStyle = tint.col; og.fillRect(0, 0, W, H); og.restore(); }
         g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = na; g.drawImage(oc, 0, 0); g.restore(); } });
     }
     items.sort((a, b) => b.d - a.d);
@@ -323,4 +335,62 @@ FX2.gravity = function (g, fx, s, t) {
   g.beginPath(); g.arc(0, 0, r, 0, 7); g.fillStyle = 'rgba(12,10,16,0.78)'; g.fill(); g.lineWidth = 5; g.strokeStyle = '#ffc95a'; g.stroke();
   g.save(); g.rotate(ang); g.beginPath(); g.moveTo(-9, -40); g.lineTo(9, -40); g.lineTo(9, 10); g.lineTo(28, 10); g.lineTo(0, 46); g.lineTo(-28, 10); g.lineTo(-9, 10); g.closePath(); g.fillStyle = '#ffffff'; g.fill(); g.restore();
   g.fillStyle = '#ffc95a'; g.font = '800 26px Poppins'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('GRAVITY', 0, r + 30); g.restore();
+};
+
+// ---- Movies in a Minute effects ----
+// rain: slanted streaks in three depth layers + splashes, amount keyed {keys:[{at,a}]}
+FX2.rain = function (g, fx, s, t) {
+  const a = keyAmt(fx.keys, t); if (a <= 0.01) return; const sl = fx.slant ?? 0.18;
+  g.save(); g.lineCap = 'round';
+  for (let k = 0; k < 420; k++) {
+    const layer = k % 3, len = [26, 46, 80][layer], sp = [1500, 2100, 2900][layer], sd = hash(k * 7.13);
+    const y = ((hash(k * 5.9) * (H + 200) + t * sp) % (H + 200)) - 100, x = ((hash(k * 3.7) * (W + 300) + y * sl) % (W + 300)) - 150;
+    g.beginPath(); g.moveTo(x, y); g.lineTo(x + len * sl, y + len); g.lineWidth = [1.6, 2.4, 3.6][layer]; g.strokeStyle = `rgba(200,215,240,${(0.18 + 0.16 * layer) * a})`; g.stroke();
+  }
+  g.fillStyle = `rgba(20,30,50,${0.16 * a})`; g.fillRect(0, 0, W, H); g.restore();
+};
+// years: a big flipping year/number card {at, untilAt, x, y, keys:[{at, n}], label, sub}
+FX2.years = function (g, fx, s, t) {
+  if (t < fx.t0 || (fx.until && t > fx.until + 0.3)) return; const K = fx.keys || []; let n = K.length ? K[0].n : 0, tick = 0;
+  for (let i = 0; i < K.length; i++) { if (t >= K[i].t) n = K[i].n; else { if (i) { const u = clamp((t - K[i - 1].t) / (K[i].t - K[i - 1].t)); n = Math.round(lerp(K[i - 1].n, K[i].n, ease(u))); tick = u > 0 && u < 1 ? 1 : 0; } break; } }
+  const a = Math.min(clamp((t - fx.t0) / 0.25), fx.until ? clamp((fx.until + 0.3 - t) / 0.3) : 1), k = popScale(t, fx.t0, 0.32);
+  g.save(); g.globalAlpha = a; g.translate((fx.x ?? 0.5) * W, (fx.y ?? 0.15) * H); g.scale(k, k); g.rotate(fx.rot ?? -0.03);
+  const sz = fx.size || 96; g.font = `800 ${sz}px Poppins`; const txt = (fx.prefix || '') + String(n) + (fx.suffix || ''); const w = Math.max(g.measureText(txt).width, 200) + 70, h = sz * 1.25 + (fx.label ? sz * 0.42 : 0);
+  g.beginPath(); g.roundRect(-w / 2, -h / 2, w, h, 22); g.fillStyle = fx.col || '#16141c'; g.fill(); g.lineWidth = 6; g.strokeStyle = fx.edge || '#ffc95a'; g.stroke();
+  g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = '#ffffff'; g.font = `800 ${sz}px Poppins`;
+  g.save(); if (tick) g.translate(0, Math.sin(t * 40) * 2); g.fillText(txt, 0, fx.label ? -sz * 0.18 : 4); g.restore();
+  if (fx.label) { g.fillStyle = fx.subInk || '#ffc95a'; g.font = `700 ${Math.round(sz * 0.34)}px Poppins`; g.fillText(fx.label, 0, sz * 0.5); }
+  g.restore();
+};
+// cash: bills bursting up and fluttering down {at, dur, x, y, count}
+FX2.cash = function (g, fx, s, t) {
+  const u = t - fx.t0, d = fx.dur || 2.2; if (u < 0 || u > d) return; const n = fx.count || 34, x0 = (fx.x ?? 0.5) * W, y0 = (fx.y ?? 0.55) * H;
+  const fade = clamp((d - u) / 0.4);
+  for (let k = 0; k < n; k++) {
+    const a = hash(k * 2.7) * Math.PI * 2, v = 600 + hash(k * 5.1) * 900, vx = Math.cos(a) * v * 0.7, vy = -Math.abs(Math.sin(a)) * v - 300;
+    const tt = Math.min(u, 0.6), x = x0 + vx * tt + Math.sin(u * 4 + k) * 60 * Math.max(0, u - 0.6), y = y0 + vy * tt + 900 * tt * tt + Math.max(0, u - 0.6) * 260;
+    g.save(); g.globalAlpha = fade; g.translate(x, y); g.rotate(u * (3 + hash(k) * 5) + k); g.scale(1, 0.4 + 0.6 * Math.abs(Math.cos(u * 6 + k)));
+    g.beginPath(); g.roundRect(-46, -22, 92, 44, 5); g.fillStyle = '#7fb26a'; g.fill(); g.lineWidth = 4; g.strokeStyle = '#1d1719'; g.stroke();
+    g.beginPath(); g.ellipse(0, 0, 13, 15, 0, 0, 7); g.fillStyle = '#5a8a4a'; g.fill(); g.fillStyle = '#e6f2d8'; g.font = '800 22px Poppins'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('$', 0, 1);
+    g.restore();
+  }
+};
+// newspaper: a front page spinning in and slamming flat {at, dur, x, y, head, sub}
+FX2.newspaper = function (g, fx, s, t) {
+  const u = t - fx.t0, d = fx.dur || 2.0; if (u < 0 || u > d) return; const k = ease(clamp(u / 0.55)), out = clamp((d - u) / 0.3);
+  g.save(); g.globalAlpha = out; g.translate((fx.x ?? 0.5) * W, (fx.y ?? 0.3) * H); g.rotate((1 - k) * 6.6 - 0.05); g.scale(0.15 + 0.85 * k + 0.06 * Math.sin(Math.PI * clamp((u - 0.55) / 0.2)), 0.15 + 0.85 * k);
+  const w = 640, h = 440; g.beginPath(); g.rect(-w / 2, -h / 2, w, h); g.fillStyle = '#f2ecdc'; g.fill(); g.lineWidth = 7; g.strokeStyle = '#1d1719'; g.stroke();
+  g.fillStyle = '#1d1719'; g.font = '800 40px Poppins'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(fx.paper || 'THE DAILY NEWS', 0, -h / 2 + 44);
+  g.fillRect(-w / 2 + 24, -h / 2 + 74, w - 48, 5);
+  g.font = '800 68px Poppins'; g.fillText(fx.head || 'EXPOSED!', 0, -h / 2 + 140); g.font = '700 30px Poppins'; g.fillStyle = '#7a2a22'; g.fillText(fx.sub || '', 0, -h / 2 + 200);
+  g.fillStyle = '#b9b2a2'; for (let r = 0; r < 6; r++) { g.fillRect(-w / 2 + 30, -h / 2 + 240 + r * 28, w * 0.42, 9); g.fillRect(w * 0.04, -h / 2 + 240 + r * 28, w * 0.42, 9); }
+  g.restore();
+};
+// lightning: a jagged bolt + white wash {at}
+FX2.lightning = function (g, fx, s, t) {
+  const u = t - fx.t0; if (u < 0 || u > 0.5) return; const a = u < 0.08 ? 1 : u < 0.14 ? 0.3 : u < 0.22 ? 0.9 : Math.max(0, 1 - (u - 0.22) / 0.28);
+  g.save(); g.fillStyle = `rgba(230,236,255,${0.55 * a})`; g.fillRect(0, 0, W, H);
+  let x = (fx.x ?? 0.3) * W, y = 0; g.beginPath(); g.moveTo(x, y);
+  for (let k = 0; k < 12; k++) { x += (hash(k * 9.1 + fx.t0) - 0.5) * 160; y += (fx.len || 0.45) * H / 12; g.lineTo(x, y); }
+  g.lineWidth = 9; g.strokeStyle = `rgba(255,255,255,${a})`; g.shadowColor = '#bcd0ff'; g.shadowBlur = 40; g.stroke(); g.restore();
 };

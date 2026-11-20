@@ -105,6 +105,27 @@ function drawHandProp(g, prop, hands, t, st) {
     inkRect(g, -12, -24, 104, 24, '#33353d', 5); g.fillStyle = '#5a5d68'; g.fillRect(-6, -20, 92, 5);
   } else if (prop === 'hoprock') {
     g.translate(hx, hy - 20); g.scale(0.55, 0.55); PROPS.hoprock(g, { seed: 3, size: 1 }, null, t);
+  } else if (prop === 'rockhammer') {                 // a small rock hammer: wooden handle, steel head with a pick
+    g.translate(hx, hy); g.rotate(Math.PI / 2 - ha);
+    inkRect(g, -6, -8, 12, 70, '#9a6a3a', 4.5); g.fillStyle = 'rgba(255,255,255,0.25)'; g.fillRect(-3, -4, 3, 60);
+    g.beginPath(); g.moveTo(-34, -22); g.lineTo(18, -24); g.lineTo(30, -16); g.lineTo(18, -8); g.lineTo(-34, -10); g.closePath(); g.fillStyle = '#6f7682'; g.fill(); g.lineWidth = 4.5; g.strokeStyle = C.ink; g.stroke();
+    g.fillStyle = '#aab2be'; g.fillRect(-30, -20, 40, 4);
+  } else if (prop === 'poster') {                     // a rolled-up poster tied with string
+    g.translate(hx, hy); g.rotate(Math.PI / 2 - ha + 0.3);
+    inkRect(g, -14, -70, 28, 150, '#efe2c4', 4.5); g.fillStyle = '#d9c39a'; g.fillRect(-14, -70, 8, 150);
+    g.beginPath(); g.ellipse(0, -70, 14, 6, 0, 0, 7); g.fillStyle = '#f7eedb'; g.fill(); g.lineWidth = 3; g.strokeStyle = C.ink; g.stroke();
+    g.fillStyle = '#b4372c'; g.fillRect(-14, -10, 28, 5); g.fillRect(-14, 30, 28, 5);
+  } else if (prop === 'rock') {                       // a fist-sized stone
+    g.translate(hx, hy - 6); g.beginPath(); g.moveTo(-22, 4); g.lineTo(-14, -16); g.lineTo(10, -20); g.lineTo(24, -2); g.lineTo(12, 16); g.lineTo(-14, 14); g.closePath();
+    g.fillStyle = '#8a8478'; g.fill(); g.lineWidth = 4.5; g.strokeStyle = C.ink; g.stroke(); g.fillStyle = 'rgba(255,255,255,0.25)'; g.beginPath(); g.ellipse(-4, -8, 9, 4, -0.3, 0, 7); g.fill();
+  } else if (prop === 'papers') {                     // a stack of tax papers / ledger
+    g.translate(hx, hy); g.rotate(-0.2); inkRect(g, -36, -48, 72, 52, '#f4f0e4', 4); g.fillStyle = '#9aa0ac'; for (let k = 0; k < 5; k++) g.fillRect(-28, -40 + k * 9, 50 - (k % 2) * 14, 3);
+  } else if (prop === 'book') {
+    g.translate(hx, hy); g.rotate(-0.15); inkRect(g, -30, -44, 60, 44, '#7a2e26', 4); g.fillStyle = '#e8d9a8'; g.fillRect(-26, -40, 6, 36);
+  } else if (prop === 'sander') {                     // a sanding block
+    g.translate(hx, hy); inkRect(g, -28, -10, 56, 22, '#b88a52', 4); g.fillStyle = '#d9c29a'; g.fillRect(-28, 8, 56, 6);
+  } else if (prop === 'rifle') {
+    g.translate(hx, hy); g.rotate(Math.PI / 2 - ha); inkRect(g, -30, -16, 70, 18, '#6a4424', 4.5); inkRect(g, 30, -14, 170, 10, '#2c2d33', 4.5);
   }
   g.restore();
 }
