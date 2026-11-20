@@ -1,0 +1,30 @@
+THE CUBAN MISSILE CRISIS - SOUND DESIGN TIMELINE
+
+Narration: the supplied voiceover (pauses over 0.4 s shortened; nothing else changed).
+Music and effects are synthesised in audio.py with numpy: no samples or third-party audio.
+Mix: voice on top; music about 20% of the voice level and ducked while it speaks; -14 LUFS, true peak -1.5 dB.
+
+CUES (seconds, layer, description)
+    0.00  music  Music: a slow, tense pulse (92 BPM) like a clock; it drops out under the sea
+    2.72  sfx    The U-2 flies over Cuba; camera shutters click
+    3.12  sfx    "found": the missile sites appear
+    3.12  music  Low brass
+    5.14  sfx    "90 MILES"
+    6.00  sfx    The range ring sweeps out to Washington
+    6.99  sfx    "OCT 22, 1962"
+    6.99  music  Low brass
+   11.15  sfx    "quarantine": the line of ships forms (a blip for each)
+   13.36  sfx    Ship horns and engines; a siren
+   15.64  sfx    Sonar pings, muffled
+   15.64  music  Under the sea: a sub drone and a heartbeat, no drums
+   18.53  sfx    "NUCLEAR TORPEDO"
+   22.20  sfx    A slow ticking, then silence on "refusing to let it fire"
+   25.53  sfx    "OCT 28, 1962"
+   25.53  music  Low brass
+   27.41  music  A quiet major chord as the missiles are withdrawn
+   27.85  sfx    The missiles leave: a long soft whoosh
+   31.45  sfx    "A SECRET DEAL"
+   31.65  sfx    A padlock click
+   36.98  sfx    "13 DAYS ON THE BRINK"
+   36.98  sfx    A low boom and a single bell
+   36.98  music  Low brass
