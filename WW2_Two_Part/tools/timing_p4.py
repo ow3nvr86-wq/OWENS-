@@ -41,7 +41,7 @@ def main():
     titles = [
         dict(start=E['oct1'], end=E['ninety'] - 0.05, style='date', text='OCTOBER 1962', y=Y),
         dict(start=E['spy'], end=E['ninety'] - 0.05, style='plateb', text='U-2 SPY PLANE', y=Y + 0.062),
-        dict(start=E['ninety'], end=E['oct2'] - 0.05, style='big', text='90 MILES|FROM FLORIDA', y=Y + 0.025),
+        dict(start=E['ninety'], end=E['florida'] + 0.35, style='big', text='90 MILES|FROM FLORIDA', y=Y + 0.025),
         dict(start=E['oct2'], end=E['ships'] - 0.05, style='date', text='OCT 22, 1962', y=Y),
         dict(start=E['announced'], end=E['ships'] - 0.05, style='plateb', text='US NAVAL QUARANTINE', y=Y + 0.062),
         dict(start=E['ships'], end=E['beneath'] - 0.06, style='plate', text='SOVIET SHIPS HEAD FOR CUBA', y=Y),
