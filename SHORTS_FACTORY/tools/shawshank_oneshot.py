@@ -163,9 +163,9 @@ SEG_A = [
     (b['flashC'], (0.8, 61.5, 0.8), (0.0, 48.0, -0.8), 22),
 ]
 SEG_B = [
-    (b['flashC'], (1.7, -63.0, 1.6), (0.6, -59.2, 1.25), 24),
-    (b['forty'] + 0.4, (2.0, -66.6, 1.8), (0.6, -61.8, 1.3), 24),
-    (b['follows'] + 0.5, (2.6, -70.5, 2.6), (0.6, -64.5, 1.5), 24),
+    (b['flashC'], (5.2, -68.5, 2.0), (0.5, -60.0, 2.9), 20),
+    (b['forty'] + 0.4, (4.4, -70.0, 1.9), (0.6, -62.5, 2.0), 21),
+    (b['follows'] + 0.5, (3.0, -72.0, 2.4), (0.6, -65.0, 1.5), 22),
     (b['flashD'], (1.4, -74.0, 4.4), (0.4, -90.0, 2.5), 24),
 ]
 SEG_C = [
@@ -202,7 +202,7 @@ bpy.ops.wm.read_factory_settings(use_empty=True); ISL._T.clear()
 sc = bpy.context.scene
 sc.render.engine = 'CYCLES'; sc.cycles.device = 'CPU'; sc.cycles.samples = SPP; sc.cycles.use_denoising = True; sc.cycles.max_bounces = 4
 sc.render.resolution_x, sc.render.resolution_y = int(1080 * SCALE), int(1920 * SCALE)
-sc.view_settings.view_transform = 'AgX'; sc.view_settings.look = 'AgX - Medium High Contrast'; sc.view_settings.exposure = 0.0
+sc.view_settings.view_transform = 'AgX'; sc.view_settings.look = 'AgX - Punchy'; sc.view_settings.exposure = 0.0
 sc.render.image_settings.file_format = 'JPEG'; sc.render.image_settings.quality = 92; sc.render.fps = FPS
 sc.cycles.light_sampling_threshold = 0.03; sc.render.use_motion_blur = True; sc.render.motion_blur_shutter = 0.45
 sc.cycles.caustics_reflective = False; sc.cycles.caustics_refractive = False; sc.cycles.blur_glossy = 1.0
@@ -219,7 +219,7 @@ def kf(owner, path, f, v, interp=None):
 w = bpy.data.worlds.new('sky'); sc.world = w; w.use_nodes = True; nt = w.node_tree; bg = nt.nodes['Background']; L = nt.links.new
 sky = nt.nodes.new('ShaderNodeTexSky'); sky.sky_type = 'NISHITA'; sky.sun_disc = False; sky.altitude = 100; sky.air_density = 1.2; sky.dust_density = 1.6
 ov = nt.nodes.new('ShaderNodeMix'); ov.data_type = 'RGBA'; L(sky.outputs['Color'], ov.inputs[6]); ov.inputs[7].default_value = (0.42, 0.45, 0.5, 1)
-nb = nt.nodes.new('ShaderNodeMix'); nb.data_type = 'RGBA'; L(ov.outputs[2], nb.inputs[6]); nb.inputs[7].default_value = (0.012, 0.022, 0.06, 1)
+nb = nt.nodes.new('ShaderNodeMix'); nb.data_type = 'RGBA'; L(ov.outputs[2], nb.inputs[6]); nb.inputs[7].default_value = (0.02, 0.035, 0.09, 1)
 L(nb.outputs[2], bg.inputs['Color'])
 bpy.ops.object.light_add(type='SUN'); sun = bpy.context.object; sun.data.angle = math.radians(1.5)
 bpy.ops.object.light_add(type='SUN'); moon = bpy.context.object; moon.data.angle = math.radians(4); moon.data.color = (0.55, 0.65, 1.0); moon.rotation_euler = (math.radians(62), 0, math.radians(15))
@@ -227,28 +227,28 @@ bpy.ops.object.light_add(type='SUN'); bolt = bpy.context.object; bolt.data.angle
 
 # time of day: (t, elevation deg, azimuth deg [0 = from the south, i.e. light travelling +y], overcast, night, sky strength, sun energy, moon energy)
 LIGHTKEYS = [
-    (0.0, -12, 0, 0, 1.0, 0.3, 0.0, 0.5),
-    (b['vanish'] - 0.01, -12, 0, 0, 1.0, 0.3, 0.0, 0.5),
-    (b['vanish'], 11, -8, 0, 0.0, 0.9, 3.2, 0.0),
-    (b['y1947'] + 0.6, 11, -8, 0, 0.0, 0.9, 3.2, 0.0),
-    (b['y1947'] + 1.6, 30, 150, 0, 0.0, 1.0, 3.6, 0.0),
-    (b['shawshank'] - 0.1, 30, 150, 0, 0.0, 1.0, 3.6, 0.0),
-    (b['befriends'] + 0.4, 18, 30, 0, 0.0, 1.0, 3.6, 0.0),
-    (b['years'], 18, 30, 0, 0.0, 1.0, 3.6, 0.0),
-    (b['warden'] - 0.2, 30, 140, 0, 0.0, 1.0, 3.6, 0.0),
+    (0.0, -12, 0, 0, 1.0, 0.5, 0.0, 0.5),
+    (b['vanish'] - 0.01, -12, 0, 0, 1.0, 0.5, 0.0, 0.5),
+    (b['vanish'], 11, -8, 0, 0.0, 0.216, 4.2, 0.0),
+    (b['y1947'] + 0.6, 11, -8, 0, 0.0, 0.216, 4.2, 0.0),
+    (b['y1947'] + 1.6, 30, 150, 0, 0.0, 0.24, 3.6, 0.0),
+    (b['shawshank'] - 0.1, 30, 150, 0, 0.0, 0.24, 3.6, 0.0),
+    (b['befriends'] + 0.4, 18, 30, 0, 0.0, 0.24, 3.6, 0.0),
+    (b['years'], 18, 30, 0, 0.0, 0.24, 3.6, 0.0),
+    (b['warden'] - 0.2, 30, 140, 0, 0.0, 0.24, 3.6, 0.0),
     (b['then2'] - 0.2, -4, 160, 0, 0.6, 0.5, 0.0, 0.2),
-    (b['then2'] + 0.3, -12, 160, 0, 1.0, 0.3, 0.0, 0.45),
-    (b['shot'] - 0.01, -12, 160, 0, 1.0, 0.3, 0.0, 0.45),
-    (b['shot'], 34, -30, 0.85, 0.0, 0.8, 1.1, 0.0),
-    (b['next'], 34, -30, 0.85, 0.0, 0.8, 1.1, 0.0),
-    (b['roll'], 9, -6, 0.0, 0.0, 0.9, 3.4, 0.0),
-    (b['behind'], 9, -6, 0.0, 0.0, 0.9, 3.4, 0.0),
-    (b['crawls'], -12, 0, 1.0, 1.0, 0.4, 0.0, 0.35),
-    (b['flashC'] - 0.01, -12, 0, 1.0, 1.0, 0.4, 0.0, 0.35),
-    (b['flashC'], 40, -25, 0.0, 0.0, 1.0, 3.8, 0.0),
-    (b['flashD'] - 0.01, 40, -25, 0.0, 0.0, 1.0, 3.8, 0.0),
-    (b['flashD'], 6, 165, 0.0, 0.0, 1.0, 3.4, 0.0),
-    (DUR, 4, 165, 0.0, 0.0, 1.0, 3.2, 0.0),
+    (b['then2'] + 0.3, -12, 160, 0, 1.0, 0.5, 0.0, 0.45),
+    (b['shot'] - 0.01, -12, 160, 0, 1.0, 0.5, 0.0, 0.45),
+    (b['shot'], 34, -30, 0.85, 0.0, 0.192, 1.1, 0.0),
+    (b['next'], 34, -30, 0.85, 0.0, 0.192, 1.1, 0.0),
+    (b['roll'], 9, -6, 0.0, 0.0, 0.216, 4.2, 0.0),
+    (b['behind'], 9, -6, 0.0, 0.0, 0.216, 4.2, 0.0),
+    (b['crawls'], -12, 0, 1.0, 1.0, 0.5, 0.0, 1.4),
+    (b['flashC'] - 0.01, -12, 0, 1.0, 1.0, 0.5, 0.0, 1.4),
+    (b['flashC'], 40, -25, 0.0, 0.0, 0.24, 3.8, 0.0),
+    (b['flashD'] - 0.01, 40, -25, 0.0, 0.0, 0.24, 3.8, 0.0),
+    (b['flashD'], 6, 165, 0.0, 0.0, 0.24, 3.4, 0.0),
+    (DUR, 4, 165, 0.0, 0.0, 0.24, 3.2, 0.0),
 ]
 JUMPS = [b['vanish'], b['shot'], b['flashC'], b['flashD']]
 def light_at(t):
@@ -267,12 +267,12 @@ def bolt_at(t):
     return e
 
 # ---- materials
-stone = m_noise('stone', (0.36, 0.34, 0.31), (0.5, 0.47, 0.42), 2.5, 0.92, 0.25)
+stone = m_noise('stone', (0.34, 0.28, 0.22), (0.5, 0.42, 0.33), 2.5, 0.92, 0.25)
 stone2 = m_noise('stoneDark', (0.25, 0.24, 0.23), (0.37, 0.35, 0.32), 3.0, 0.92, 0.2)
 plaster = m_noise('plaster', (0.55, 0.57, 0.52), (0.66, 0.67, 0.61), 4.0, 0.9, 0.08)
-cellwall = m_noise('cellWall', (0.47, 0.5, 0.44), (0.58, 0.6, 0.53), 5.0, 0.88, 0.1)
+cellwall = m_noise('cellWall', (0.36, 0.42, 0.36), (0.48, 0.53, 0.44), 5.0, 0.88, 0.1)
 floorc = m_noise('floorConcrete', (0.3, 0.3, 0.29), (0.4, 0.39, 0.37), 3.0, 0.7, 0.08)
-dirt = m_noise('yardDirt', (0.36, 0.3, 0.22), (0.47, 0.41, 0.31), 1.2, 0.95, 0.15)
+dirt = m_noise('yardDirt', (0.26, 0.19, 0.12), (0.4, 0.3, 0.19), 1.2, 0.95, 0.15)
 grass = m_noise('grass', (0.15, 0.28, 0.08), (0.27, 0.42, 0.13), 0.6, 0.9, 0.0)
 iron = m_plain('iron', (0.06, 0.065, 0.07), 0.38, 0.85); rust = m_plain('rust', (0.22, 0.1, 0.05), 0.7, 0.3)
 wood = m_noise('wood', (0.3, 0.18, 0.09), (0.42, 0.27, 0.14), 6, 0.6, 0.05); woodL = m_plain('woodLight', (0.55, 0.38, 0.22), 0.55)
@@ -471,7 +471,7 @@ with group('rock'):
         rk.location = p; rk.rotation_euler = (t * 9, t * 6, 0); rk.keyframe_insert('location', frame=f); rk.keyframe_insert('rotation_euler', frame=f)
 
 # ---- the tunnel (from the poster down to the sewer pipe) and the pipe
-tunm = m_noise('tunnelRock', (0.24, 0.2, 0.16), (0.42, 0.36, 0.28), 3.5, 0.95, 0.6)
+tunm = m_noise('tunnelRock', (0.13, 0.1, 0.08), (0.3, 0.24, 0.18), 3.5, 0.95, 0.6)
 cd_ = bpy.data.curves.new('tunnelPath', 'CURVE'); cd_.dimensions = '3D'; sp = cd_.splines.new('POLY'); sp.points.add(len(TUN) - 1)
 for k, p in enumerate(TUN): sp.points[k].co = (*p, 1)
 sp.use_smooth = True; cd_.bevel_depth = 0.46; cd_.bevel_resolution = 6; cd_.use_fill_caps = False
@@ -482,7 +482,7 @@ md2 = tob.modifiers.new('disp', 'DISPLACE'); tx_ = bpy.data.textures.new('tunTex
 tob.data.materials.append(tunm); bpy.ops.object.mode_set(mode='EDIT'); bpy.ops.mesh.select_all(action='SELECT'); bpy.ops.mesh.flip_normals(); bpy.ops.object.mode_set(mode='OBJECT')
 for o in tob.data.polygons: o.use_smooth = True
 SETS['prison'].append(tob)
-chalk = m_emis('chalk', (0.95, 0.92, 0.8), 0.6)
+chalk = m_emis('chalk', (0.95, 0.92, 0.8), 2.5)
 for k in range(14):                                                         # tally marks scratched on the tunnel wall
     y = 3.9 + (k // 5) * 0.55 + (k % 5) * 0.07; z = 1.45 - (y - 3.9) * 0.35
     o = box((0.4, y, z), (0.01, 0.012, 0.18), chalk, (0.0, 0.0, 0.0)); o.rotation_euler = (0.25 if k % 5 == 4 else 0, 0, 0)
@@ -490,7 +490,7 @@ for k in range(14):                                                         # ta
     SETS['prison'].append(o)
 for (y, z) in [(4.0, 1.25), (7.2, -0.6), (10.4, -3.4)]:                    # lanterns
     o = ball((0.3, y, z), 0.05, m_emis('lantern', (1.0, 0.6, 0.25), 18), 2); SETS['prison'].append(o)
-    bpy.ops.object.light_add(type='POINT', location=(0.2, y, z)); l = bpy.context.object; l.data.energy = 9; l.data.color = (1.0, 0.6, 0.3); l.data.shadow_soft_size = 0.05; SETS['prison'].append(l)
+    bpy.ops.object.light_add(type='POINT', location=(0.2, y, z)); l = bpy.context.object; l.data.energy = 30; l.data.color = (1.0, 0.6, 0.3); l.data.shadow_soft_size = 0.05; SETS['prison'].append(l)
 pipem = bpy.data.materials.new('pipe'); pipem.use_nodes = True; pn = pipem.node_tree.nodes; pb = pn['Principled BSDF']; PL = pipem.node_tree.links.new
 bk = pn.new('ShaderNodeTexBrick'); bk.inputs['Scale'].default_value = 3.0; bk.inputs['Color1'].default_value = (0.2, 0.22, 0.16, 1); bk.inputs['Color2'].default_value = (0.15, 0.18, 0.12, 1); bk.inputs['Mortar'].default_value = (0.06, 0.07, 0.05, 1)
 gco = pn.new('ShaderNodeTexCoord'); PL(gco.outputs['Object'], bk.inputs['Vector']); PL(bk.outputs['Color'], pb.inputs['Base Color'])
@@ -515,6 +515,9 @@ for v in dg.data.vertices:
 dg.data.materials.append(mud); bpy.ops.object.shade_smooth(); SETS['prison'].append(dg)
 water = bpy.data.materials.new('creek'); water.use_nodes = True; wb = water.node_tree.nodes['Principled BSDF']; wb.inputs['Base Color'].default_value = (0.03, 0.05, 0.06, 1); wb.inputs['Roughness'].default_value = 0.05
 o = box((0, 75.0, CREEK), (6.0, 50.0, 0.02), water); SETS['prison'].append(o)
+bpy.ops.object.light_add(type='POINT', location=(1.8, 55.8, -3.2)); stf = bpy.context.object; stf.data.energy = 500; stf.data.shadow_soft_size = 1.5; stf.data.color = (0.55, 0.68, 1.0); SETS['prison'].append(stf)
+bpy.ops.object.light_add(type='POINT', location=(-3.0, 62.0, 1.0)); stf2 = bpy.context.object; stf2.data.energy = 900; stf2.data.shadow_soft_size = 3; stf2.data.color = (0.5, 0.6, 1.0); SETS['prison'].append(stf2)
+bpy.ops.object.light_add(type='POINT', location=(0.0, 47.5, PZP + 0.3)); pfl = bpy.context.object; pfl.data.energy = 40; pfl.data.color = (0.6, 0.9, 0.5); SETS['prison'].append(pfl)
 for k in range(40):                                                         # dead trees on the field
     x = random.choice([-1, 1]) * random.uniform(9, 40); y = random.uniform(52, 110)
     o = cyl((x, y, 2.5), 0.18, 5.0, m_plain('deadTree', (0.1, 0.08, 0.07), 0.9), v=6); SETS['prison'].append(o)
@@ -528,15 +531,15 @@ SETS['prison'] += [o for o in bpy.data.objects if o.name.startswith(('cone', 'cy
 
 # searchlight beams (night only): a soft additive cone + a real spot light, sweeping
 beam_m = bpy.data.materials.new('beam'); beam_m.use_nodes = True; bn = beam_m.node_tree.nodes; out_ = bn['Material Output']
-bn.remove(bn['Principled BSDF']); em = bn.new('ShaderNodeEmission'); em.inputs['Color'].default_value = (0.9, 0.93, 1.0, 1); em.inputs['Strength'].default_value = 0.5
+bn.remove(bn['Principled BSDF']); em = bn.new('ShaderNodeEmission'); em.inputs['Color'].default_value = (0.9, 0.93, 1.0, 1); em.inputs['Strength'].default_value = 0.05
 tr = bn.new('ShaderNodeBsdfTransparent'); ad = bn.new('ShaderNodeAddShader'); beam_m.node_tree.links.new(em.outputs[0], ad.inputs[0]); beam_m.node_tree.links.new(tr.outputs[0], ad.inputs[1]); beam_m.node_tree.links.new(ad.outputs[0], out_.inputs['Surface'])
 BEAMS = []
 with group('beams'):
     for k, (x, y) in enumerate([TOWERS[0], TOWERS[4], TOWERS[1]]):
         bpy.ops.object.empty_add(location=(x, y + 1.0, 14.8)); piv = bpy.context.object
         bpy.ops.mesh.primitive_cone_add(radius1=3.2, radius2=0.0, depth=40, vertices=24, end_fill_type='NOTHING', location=(0, 0, -20)); bc = bpy.context.object; bc.parent = piv; bc.location = (0, 0, -20)
-        bc.data.materials.append(beam_m); bc.visible_shadow = False
-        bpy.ops.object.light_add(type='SPOT', location=(0, 0, 0)); sl = bpy.context.object; sl.parent = piv; sl.location = (0, 0, 0); sl.data.energy = 9000; sl.data.spot_size = math.radians(9); sl.data.color = (0.9, 0.93, 1.0); sl.data.shadow_soft_size = 0.2
+        bc.data.materials.append(beam_m); bc.visible_shadow = False; bc.hide_render = True; bc.scale = (0.001, 0.001, 0.001)
+        bpy.ops.object.light_add(type='SPOT', location=(0, 0, 0)); sl = bpy.context.object; sl.parent = piv; sl.location = (0, 0, 0); sl.data.energy = 2500; sl.data.spot_size = math.radians(9); sl.data.color = (0.9, 0.93, 1.0); sl.data.shadow_soft_size = 0.2
         BEAMS.append((piv, k))
 
 # ================================================================== THE BEACH =======================================
