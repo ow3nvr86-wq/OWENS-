@@ -1,0 +1,171 @@
+{
+ "title": "The Cuban Missile Crisis",
+ "duration": 40.5,
+ "events": {
+  "oct1": 0.237,
+  "y1962": 0.651,
+  "spy": 2.522,
+  "plane": 2.76,
+  "found": 3.12,
+  "soviet": 3.46,
+  "missiles": 3.92,
+  "cuba": 4.6,
+  "ninety": 5.138,
+  "miles": 5.4,
+  "florida": 6.0,
+  "oct2": 6.991,
+  "d22": 7.357,
+  "kennedy": 8.678,
+  "television": 9.392,
+  "announced": 10.341,
+  "quarantine": 11.151,
+  "cuba2": 12.202,
+  "ships": 13.36,
+  "sailing": 14.129,
+  "line": 15.035,
+  "beneath": 15.636,
+  "submarine": 17.06,
+  "carried": 17.56,
+  "nuclear": 18.16,
+  "torpedo": 18.526,
+  "hunting": 20.341,
+  "officer": 21.244,
+  "vasili": 21.85,
+  "arkhipov": 22.2,
+  "credited": 23.126,
+  "refusing": 23.762,
+  "fire": 24.68,
+  "oct3": 25.533,
+  "d28": 26.629,
+  "khrushchev": 26.899,
+  "agreed": 27.409,
+  "remove": 27.853,
+  "missiles2": 28.345,
+  "invade": 30.06,
+  "cuba3": 30.4,
+  "secret": 31.453,
+  "deal": 31.771,
+  "turkey": 34.72,
+  "historians": 35.756,
+  "closest": 36.975,
+  "nuclear2": 38.34,
+  "war": 38.706,
+  "voice_end": 39.02
+ },
+ "titles": [
+  {
+   "start": 0.237,
+   "end": 5.088,
+   "style": "date",
+   "text": "OCTOBER 1962",
+   "y": 0.185
+  },
+  {
+   "start": 2.522,
+   "end": 5.088,
+   "style": "plateb",
+   "text": "U-2 SPY PLANE",
+   "y": 0.247
+  },
+  {
+   "start": 5.138,
+   "end": 6.941,
+   "style": "big",
+   "text": "90 MILES|FROM FLORIDA",
+   "y": 0.21
+  },
+  {
+   "start": 6.991,
+   "end": 13.309999999999999,
+   "style": "date",
+   "text": "OCT 22, 1962",
+   "y": 0.185
+  },
+  {
+   "start": 10.341,
+   "end": 13.309999999999999,
+   "style": "plateb",
+   "text": "US NAVAL QUARANTINE",
+   "y": 0.247
+  },
+  {
+   "start": 13.36,
+   "end": 15.575999999999999,
+   "style": "plate",
+   "text": "SOVIET SHIPS HEAD FOR CUBA",
+   "y": 0.185
+  },
+  {
+   "start": 15.636,
+   "end": 21.184,
+   "style": "date",
+   "text": "SOVIET SUBMARINE B-59",
+   "y": 0.185
+  },
+  {
+   "start": 18.526,
+   "end": 21.184,
+   "style": "plate",
+   "text": "NUCLEAR TORPEDO ON BOARD",
+   "y": 0.247
+  },
+  {
+   "start": 21.244,
+   "end": 25.473000000000003,
+   "style": "date",
+   "text": "VASILI ARKHIPOV",
+   "y": 0.185
+  },
+  {
+   "start": 23.126,
+   "end": 25.473000000000003,
+   "style": "plate",
+   "text": "CREDITED WITH STOPPING A LAUNCH",
+   "y": 0.247
+  },
+  {
+   "start": 25.533,
+   "end": 31.393,
+   "style": "date",
+   "text": "OCT 28, 1962",
+   "y": 0.185
+  },
+  {
+   "start": 26.899,
+   "end": 31.393,
+   "style": "plateb",
+   "text": "MISSILES TO BE REMOVED",
+   "y": 0.247
+  },
+  {
+   "start": 31.453,
+   "end": 35.696,
+   "style": "date",
+   "text": "A SECRET DEAL",
+   "y": 0.185
+  },
+  {
+   "start": 34.72,
+   "end": 35.696,
+   "style": "plate",
+   "text": "US MISSILES LEAVE TURKEY, 1963",
+   "y": 0.247
+  },
+  {
+   "start": 36.975,
+   "end": 40.5,
+   "style": "big",
+   "text": "13 DAYS|ON THE BRINK",
+   "y": 0.215
+  }
+ ],
+ "scenes": [
+  {
+   "id": 1,
+   "key": "main",
+   "name": "One continuous map shot",
+   "start": 0.0,
+   "end": 40.5
+  }
+ ]
+}

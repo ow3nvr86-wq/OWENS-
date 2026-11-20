@@ -13,7 +13,16 @@ import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SR = 48000
-LINES = {'part3': [
+LINES = {'part4': [
+    ("In October, nineteen sixty-two, an American spy plane found Soviet missiles in Cuba, ninety miles from Florida.", 0.5),
+    ("On October twenty-second, President Kennedy went on television, and announced a naval quarantine around Cuba.", 0.45),
+    ("Soviet ships were sailing towards the line.", 0.4),
+    ("Beneath the waves, a Soviet submarine carried a nuclear torpedo, and American ships were hunting it.", 0.4),
+    ("Its officer, Vasili Arkhipov, is credited with refusing to let it fire.", 0.5),
+    ("On October twenty-eighth, Khrushchev agreed to remove the missiles, if America promised not to invade Cuba.", 0.45),
+    ("In a secret deal, America also agreed to remove its missiles from Turkey.", 0.4),
+    ("Many historians call it the closest the world has come to nuclear war.", 0.0),
+], 'part3': [
     ("Six months after Pearl Harbor, Japan's navy looked unstoppable.", 0.38),
     ("Then, in a few minutes, it lost three aircraft carriers.", 0.5),
     ("Japan planned a trap at Midway, a tiny island in the Pacific.", 0.3),

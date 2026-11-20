@@ -1083,6 +1083,95 @@ def build_part3():
     return mus, sfx
 
 
+def build_part4():
+    mus = np.zeros((2, N))
+    sfx = np.zeros((2, N))
+    E = EV
+    BEAT = 60 / 92.0
+    quiet0, quiet1 = E['beneath'], E['oct3']
+    lvl = [(0, 0.65), (E['found'], 0.85), (E['oct2'], 0.9), (E['ships'], 0.9), (quiet0 - 0.3, 0.45), (quiet0, 0.15), (quiet1 - 0.4, 0.15), (quiet1, 0.7),
+           (E['secret'], 0.5), (E['closest'], 0.8), (DUR - 1.0, 0.5), (DUR, 0.0)]
+    t, k = 0.0, 0
+    while t < DUR - 0.8:
+        lv = env(t, lvl)
+        b = k % 8
+        if lv > 0.2:
+            if b in (0, 4) or (b == 6 and t > E['oct2']):
+                place(mus, war_drum(k, 50 if b == 0 else 60), t, (0.9 if b == 0 else 0.5) * lv)
+            place(mus, tick(k) * (1.0 if b % 2 == 0 else 0.5), t, 0.2 * lv, pan=0.3 if k % 2 else -0.3)
+        t += BEAT / 2
+        k += 1
+    cue(0.0, 'Music: a slow, tense pulse (92 BPM) like a clock; it drops out under the sea', 'music')
+    for a_, b_, f, g in ((0.0, quiet0, 55.0, 0.34), (quiet1, DUR, 65.41, 0.36)):
+        d = b_ - a_
+        place(mus, drone(f, d, int(a_ * 10) + 8, 420) * env(tt(d), [(0, 0), (0.3, 1), (d - 0.3, 1), (d, 0)]), a_, g)
+    dq = quiet1 - quiet0
+    place(mus, drone(36.71, dq, 91, 150) * env(tt(dq), [(0, 0), (0.6, 1), (dq - 0.4, 1), (dq, 0)]), quiet0, 0.55)
+    for i in range(int(dq / 1.1)):
+        place(mus, heartbeat(i), quiet0 + 0.5 + i * 1.1, 0.5)
+    cue(quiet0, 'Under the sea: a sub drone and a heartbeat, no drums', 'music')
+    for tm, notes, g in ((E['found'], [55.0, 82.41, 110.0], 0.45), (E['oct2'], [61.74, 92.5, 123.47], 0.45), (E['oct3'], [65.41, 98.0, 130.81, 196.0], 0.5),
+                         (E['closest'], [55.0, 82.41, 110.0, 164.81], 0.5)):
+        place(mus, brass(notes, 1.7, int(tm * 7)), tm, g)
+        cue(tm, 'Low brass', 'music')
+    place(mus, choir([196.0, 246.94, 293.66], DUR - E['agreed'], 6) * 0.7, E['agreed'], 0.18)
+    cue(E['agreed'], 'A quiet major chord as the missiles are withdrawn', 'music')
+
+    def hit(tm, what, g=0.8):
+        place(sfx, stamp_hit(int(tm * 13)), tm, g)
+        cue(tm, what, 'sfx')
+
+    place(sfx, boom(2.0, 60, 30, 1), 0.0, 0.6)
+    place(sfx, whoosh(0.9, 2, 300, 2500, up=False), 0.0, 0.35)
+    de = E['found'] - E['spy'] + 0.6
+    place(sfx, engine(int(de * SR), 3, 1500, 1.0) * env(tt(de), [(0, 0), (0.5, 1), (de - 0.4, 1), (de, 0)]), E['spy'] - 0.3, 0.3)
+    for j in range(3):
+        place(sfx, tick(100 + j) * 1.4, E['found'] - 0.4 + 0.18 * j, 0.7)
+        place(sfx, whoosh(0.2, 110 + j, 2000, 6000), E['found'] - 0.4 + 0.18 * j, 0.3)
+    cue(E['found'] - 0.4, 'The U-2 flies over Cuba; camera shutters click', 'sfx')
+    place(sfx, boom(2.4, 55, 26, 4), E['found'], 0.9)
+    hit(E['found'], '"found": the missile sites appear', 0.8)
+    hit(E['ninety'], '"90 MILES"', 0.9)
+    place(sfx, riser(E['florida'] - E['ninety'] + 0.5, 5), E['ninety'], 0.3)
+    place(sfx, boom(1.8, 50, 24, 6), E['florida'] + 0.1, 0.5)
+    cue(E['florida'], 'The range ring sweeps out to Washington', 'sfx')
+    place(sfx, whoosh(1.0, 7, 250, 3500), E['oct2'] - 0.1, 0.6)
+    hit(E['oct2'], '"OCT 22, 1962"', 0.8)
+    place(sfx, reverb(np.pad(bell(98.0, 4.0), (0, SR)), 2.4, 8, mix=0.4), E['announced'], 0.4)
+    for i in range(9):
+        place(sfx, blip(20 + i, 520 + 40 * (i % 5)), E['quarantine'] + 0.08 * i, 0.3, pan=(i - 4) / 6)
+    cue(E['quarantine'], '"quarantine": the line of ships forms (a blip for each)', 'sfx')
+    dr = E['beneath'] - E['ships']
+    place(sfx, engine(int((dr + 0.5) * SR), 30, 1300, 1.0) * env(tt(dr + 0.5), [(0, 0), (0.6, 1), (dr, 1), (dr + 0.5, 0)]), E['ships'] - 0.1, 0.3)
+    place(sfx, siren(2.0, 31, 500, 750, 1.0) * 0.5, E['sailing'], 0.12)
+    cue(E['ships'], 'Ship horns and engines; a siren', 'sfx')
+    # under the sea: sonar pings
+    for j in range(6):
+        place(sfx, reverb(np.pad(blip(40 + j, 800) * 1.0, (0, SR // 2)), 2.0, 40 + j, mix=0.5), E['beneath'] + 0.6 + j * 1.15, 0.5)
+    cue(E['beneath'], 'Sonar pings, muffled', 'sfx')
+    hit(E['torpedo'], '"NUCLEAR TORPEDO"', 0.8)
+    place(sfx, boom(2.6, 40, 20, 50), E['torpedo'], 0.6)
+    for j in range(4):
+        place(sfx, tick(60 + j), E['arkhipov'] + 0.2 + j * 0.45, 0.5)
+    cue(E['arkhipov'], 'A slow ticking, then silence on "refusing to let it fire"', 'sfx')
+    place(sfx, reverb(np.pad(bell(130.0, 4.0), (0, SR)), 3.0, 51, mix=0.5), E['fire'], 0.6)
+    place(sfx, whoosh(1.2, 52, 250, 3500), E['oct3'] - 0.2, 0.6)
+    hit(E['oct3'], '"OCT 28, 1962"', 0.8)
+    place(sfx, sparkle(1.5, 53, 24), E['agreed'], 0.3)
+    place(sfx, whoosh(1.4, 54, 300, 3000), E['remove'], 0.4)
+    cue(E['remove'], 'The missiles leave: a long soft whoosh', 'sfx')
+    hit(E['secret'], '"A SECRET DEAL"', 0.7)
+    place(sfx, stone_crack(55, 0.6), E['secret'] + 0.2, 0.4)
+    place(sfx, clang(56), E['secret'] + 0.6, 0.4)
+    cue(E['secret'] + 0.2, 'A padlock click', 'sfx')
+    place(sfx, whoosh(0.9, 57, 300, 3000, up=False), E['closest'] - 0.2, 0.5)
+    place(sfx, boom(3.0, 50, 22, 58), E['closest'], 1.0)
+    hit(E['closest'], '"13 DAYS ON THE BRINK"', 0.9)
+    place(sfx, reverb(np.pad(bell(98.0, 5.0), (0, SR)), 3.0, 59, mix=0.4), E['closest'] + 0.1, 0.5)
+    cue(E['closest'], 'A low boom and a single bell', 'sfx')
+    return mus, sfx
+
+
 def read_wav(path):
     with wave.open(path) as w:
         a = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768

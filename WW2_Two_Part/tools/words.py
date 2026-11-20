@@ -14,7 +14,7 @@ import wave
 import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CANON = {'4th': 'fourth', 'first': '1st', 'seventh': '7th', 'sixth': '6th', '6': 'six', '3': 'three', '20': 'twenty', '2': 'two', '70': 'seventy',
+CANON = {'22nd': 'twentysecond', '28th': 'twentyeighth', '90': 'ninety', '4th': 'fourth', 'first': '1st', 'seventh': '7th', 'sixth': '6th', '6': 'six', '3': 'three', '20': 'twenty', '2': 'two', '70': 'seventy',
          '85': 'eightyfive', 'nineteen': '19'}
 
 

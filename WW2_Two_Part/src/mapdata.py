@@ -6,10 +6,12 @@ import cairo
 import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-_D = json.load(open(os.path.join(ROOT, 'assets', 'map', 'ww2_map.json')))
+_MAPFILE = 'cuba_map.json' if os.environ.get('WW2_PART') == 'part4' else 'ww2_map.json'
+_D = json.load(open(os.path.join(ROOT, 'assets', 'map', _MAPFILE)))
 K, LON0, LAT0, CLAT = (_D['proj'][k] for k in ('K', 'LON0', 'LAT0', 'CLAT'))
 R = {n: [[np.asarray(r, np.float32) for r in poly] for poly in polys] for n, polys in _D['regions'].items()}
 LINES = {n: np.asarray(v, np.float32) for n, v in _D['lines'].items()}
+
 BBOX = {}
 for _n, _polys in R.items():
     _a = np.vstack([r for p in _polys for r in p])
