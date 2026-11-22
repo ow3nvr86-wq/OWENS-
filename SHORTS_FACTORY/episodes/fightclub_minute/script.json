@@ -1,0 +1,2278 @@
+{
+ "title": "Movies in a Minute: Fight Club",
+ "fps": 60,
+ "tail": 1.2,
+ "charStyle": "rc",
+ "sprites": "props",
+ "features": {
+  "depth": true,
+  "motionBlur": true,
+  "rigV2": true,
+  "lipSync": true,
+  "crowdFX": true
+ },
+ "motion_blur": {
+  "samples": 8,
+  "shutter": 0.5
+ },
+ "caption_y": 0.765,
+ "caption_case": "lower",
+ "caption_size": 78,
+ "grade": "brightness(1.04) saturate(1.12) contrast(1.06)",
+ "thumbnail_cue": 46.678000000000004,
+ "music": {
+  "level_db": -24,
+  "segments": [
+   {
+    "style": "dread",
+    "bpm": 80,
+    "fadeIn": 0.6,
+    "fadeOut": 0.4,
+    "from": 0.0,
+    "to": 7.782
+   },
+   {
+    "style": "chill",
+    "bpm": 96,
+    "fadeIn": 0.3,
+    "fadeOut": 0.3,
+    "from": 7.782,
+    "to": 20.426
+   },
+   {
+    "style": "chase",
+    "bpm": 132,
+    "fadeIn": 0.2,
+    "fadeOut": 0.4,
+    "from": 20.426,
+    "to": 40.730000000000004
+   },
+   {
+    "style": "dread",
+    "bpm": 80,
+    "fadeIn": 0.3,
+    "fadeOut": 0.4,
+    "from": 40.730000000000004,
+    "to": 51.67
+   },
+   {
+    "style": "reveal",
+    "bpm": 96,
+    "fadeIn": 0.3,
+    "fadeOut": 1.5,
+    "from": 51.67,
+    "to": 60.656000000000006
+   }
+  ]
+ },
+ "cast": {
+  "narr": {
+   "costume": "office_shirt",
+   "mood": "neutral",
+   "hair": "#4a3022"
+  },
+  "narr_b": {
+   "costume": "office_shirt",
+   "mood": "neutral",
+   "hair": "#4a3022",
+   "bandage": true
+  },
+  "tyler": {
+   "costume": "leather_red",
+   "mood": "smug",
+   "hair": "#c99a3a",
+   "shades": "#6a2a1a"
+  },
+  "bob": {
+   "costume": "tee_grey",
+   "mood": "sad",
+   "hair": "#3a2a20",
+   "facial": "beard"
+  },
+  "marla": {
+   "costume": "coat_black",
+   "mood": "smug",
+   "hair": "#1d1416",
+   "hairLong": "#1d1416"
+  },
+  "sg1": {
+   "costume": "tee_blue",
+   "hair": "#6a4a2a"
+  },
+  "sg2": {
+   "costume": "flannel_red",
+   "hair": "#a07a4a"
+  },
+  "pat1": {
+   "costume": "tee_white",
+   "hair": "#2a2420"
+  },
+  "pat2": {
+   "costume": "vest_orange",
+   "hair": "#7a5a3a"
+  },
+  "f1": {
+   "costume": "tee_white",
+   "hair": "#2a2420"
+  },
+  "f2": {
+   "costume": "tee_black",
+   "hair": "#8a5a2a"
+  },
+  "cop": {
+   "costume": "police",
+   "hat": "police_cap"
+  },
+  "c0": {
+   "costume": "tee_white",
+   "hair": "#2a2420"
+  },
+  "c1": {
+   "costume": "flannel_red",
+   "hair": "#6a4a2a"
+  },
+  "c2": {
+   "costume": "tee_blue",
+   "hair": "#1d1a18"
+  },
+  "c3": {
+   "costume": "tee_black",
+   "hair": "#a07a4a"
+  },
+  "c4": {
+   "costume": "tee_grey",
+   "hair": "#3a2a20"
+  },
+  "c5": {
+   "costume": "jacket_purple",
+   "hair": "#d8b45a"
+  },
+  "c6": {
+   "costume": "vest_orange",
+   "hair": "#5a3a26"
+  },
+  "c7": {
+   "costume": "tee_red",
+   "hair": "#2a2420"
+  },
+  "m0": {
+   "costume": "tee_black",
+   "mood": "determined"
+  },
+  "m1": {
+   "costume": "tee_black",
+   "mood": "determined"
+  },
+  "m2": {
+   "costume": "tee_black",
+   "mood": "determined"
+  },
+  "m3": {
+   "costume": "tee_black",
+   "mood": "determined"
+  }
+ },
+ "scenes": [
+  {
+   "cue": "His",
+   "bgseq": {
+    "dir": "oneshot"
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "narr",
+     "cast": "narr",
+     "track": "narr",
+     "autoGait": true,
+     "mood": "worried",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "worried",
+       "lookAt": "right",
+       "cue": 0.0
+      },
+      {
+       "mood": "sad",
+       "lookAt": "camera",
+       "cue": 2.392
+      },
+      {
+       "mood": "shocked",
+       "lookAt": "right",
+       "cue": 4.63
+      },
+      {
+       "action": "sit",
+       "mood": "sad",
+       "lookAt": "camera",
+       "cue": 5.08
+      },
+      {
+       "action": "sit",
+       "mood": "sad",
+       "lookAt": "left",
+       "cue": 8.032
+      },
+      {
+       "mood": "happy",
+       "lookAt": "camera",
+       "cue": 12.12
+      },
+      {
+       "mood": "shocked",
+       "lookAt": "right",
+       "cue": 13.688
+      },
+      {
+       "mood": "angry",
+       "cue": 15.798
+      },
+      {
+       "action": "sit",
+       "mood": "neutral",
+       "lookAt": "right",
+       "cue": 16.398
+      },
+      {
+       "mood": "worried",
+       "cue": 18.218
+      },
+      {
+       "action": "hold",
+       "prop": "phone",
+       "mood": "shocked",
+       "lookAt": "camera",
+       "cue": 20.526
+      },
+      {
+       "action": "idle",
+       "prop": "",
+       "mood": "worried",
+       "lookAt": "left",
+       "cue": 23.128
+      },
+      {
+       "mood": "neutral",
+       "lookAt": "left",
+       "cue": 24.518
+      },
+      {
+       "mood": "shocked",
+       "cue": 25.718
+      },
+      {
+       "action": "punch",
+       "mood": "determined",
+       "cue": 26.468
+      },
+      {
+       "action": "idle",
+       "mood": "happy",
+       "cue": 26.868
+      },
+      {
+       "mood": "shocked",
+       "cue": 27.761
+      },
+      {
+       "action": "punch",
+       "mood": "angry",
+       "cue": 27.911
+      },
+      {
+       "action": "idle",
+       "cue": 27.981
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "lookAt": "left",
+       "cue": 28.231
+      },
+      {
+       "action": "idle",
+       "mood": "smug",
+       "lookAt": "left",
+       "cue": 30.625
+      },
+      {
+       "action": "hold",
+       "prop": "soap",
+       "mood": "neutral",
+       "lookAt": "right",
+       "cue": 33.051
+      },
+      {
+       "mood": "worried",
+       "cue": 36.811
+      },
+      {
+       "action": "idle",
+       "prop": "",
+       "mood": "worried",
+       "lookAt": "camera",
+       "cue": 42.89
+      },
+      {
+       "mood": "shocked",
+       "lookAt": "right",
+       "cue": 44.77
+      },
+      {
+       "mood": "scared",
+       "cue": 46.328
+      },
+      {
+       "mood": "determined",
+       "cue": 47.49
+      }
+     ]
+    },
+    {
+     "id": "narr_b",
+     "cast": "narr_b",
+     "track": "narr_b",
+     "autoGait": false,
+     "mood": "determined",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "shocked",
+       "lookAt": "camera",
+       "cue": 49.43
+      },
+      {
+       "mood": "neutral",
+       "lookAt": "right",
+       "cue": 50.347
+      },
+      {
+       "mood": "shocked",
+       "lookAt": "camera",
+       "cue": 51.77
+      },
+      {
+       "mood": "neutral",
+       "lookAt": "right",
+       "cue": 53.615
+      },
+      {
+       "mood": "sad",
+       "lookAt": "camera",
+       "cue": 55.775
+      }
+     ]
+    },
+    {
+     "id": "tyler",
+     "cast": "tyler",
+     "track": "tyler",
+     "autoGait": false,
+     "mood": "smug",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "smug",
+       "lookAt": "left",
+       "cue": 0.0
+      },
+      {
+       "lookAt": "camera",
+       "cue": 2.392
+      },
+      {
+       "action": "sit",
+       "mood": "smug",
+       "lookAt": "left",
+       "cue": 16.398
+      },
+      {
+       "action": "talk",
+       "cue": 18.018
+      },
+      {
+       "action": "hold",
+       "prop": "soap",
+       "mood": "happy",
+       "cue": 19.248
+      },
+      {
+       "action": "idle",
+       "prop": "",
+       "cue": 20.426
+      },
+      {
+       "action": "idle",
+       "mood": "smug",
+       "lookAt": "right",
+       "cue": 23.518
+      },
+      {
+       "action": "talk",
+       "cue": 25.418
+      },
+      {
+       "action": "idle",
+       "cue": 26.468
+      },
+      {
+       "mood": "shocked",
+       "cue": 26.668
+      },
+      {
+       "action": "punch",
+       "mood": "happy",
+       "cue": 27.461
+      },
+      {
+       "action": "idle",
+       "cue": 27.811
+      },
+      {
+       "action": "talk",
+       "mood": "determined",
+       "lookAt": "camera",
+       "cue": 28.231
+      },
+      {
+       "action": "idle",
+       "mood": "smug",
+       "cue": 32.311
+      },
+      {
+       "action": "build",
+       "mood": "happy",
+       "lookAt": "left",
+       "cue": 33.051
+      },
+      {
+       "action": "hold",
+       "prop": "soap",
+       "cue": 35.151
+      },
+      {
+       "action": "idle",
+       "prop": "",
+       "cue": 37.753
+      },
+      {
+       "action": "idle",
+       "mood": "smug",
+       "lookAt": "left",
+       "cue": 44.72
+      },
+      {
+       "mood": "creepy",
+       "lookAt": "camera",
+       "cue": 46.328
+      },
+      {
+       "mood": "smug",
+       "lookAt": "left",
+       "cue": 47.49
+      },
+      {
+       "mood": "shocked",
+       "cue": 49.43
+      }
+     ]
+    },
+    {
+     "id": "bob",
+     "cast": "bob",
+     "track": "bob",
+     "autoGait": false,
+     "rollTrack": true,
+     "mood": "sad",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "sit",
+       "mood": "sad",
+       "lookAt": "right",
+       "cue": 0.0
+      },
+      {
+       "mood": "happy",
+       "cue": 12.12
+      },
+      {
+       "mood": "worried",
+       "lookAt": "right",
+       "cue": 13.738
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "lookAt": "right",
+       "cue": 28.231
+      },
+      {
+       "action": "idle",
+       "mood": "determined",
+       "lookAt": "right",
+       "cue": 39.353
+      },
+      {
+       "mood": "scared",
+       "cue": 41.03
+      },
+      {
+       "action": "fall",
+       "mood": "shocked",
+       "cue": 41.43
+      },
+      {
+       "action": "idle",
+       "mood": "sad",
+       "cue": 41.88
+      }
+     ]
+    },
+    {
+     "id": "marla",
+     "cast": "marla",
+     "track": "marla",
+     "autoGait": true,
+     "mood": "smug",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "smug",
+       "lookAt": "left",
+       "cue": 13.138
+      },
+      {
+       "mood": "smug",
+       "lookAt": "camera",
+       "cue": 14.918
+      },
+      {
+       "mood": "happy",
+       "lookAt": "left",
+       "cue": 15.798
+      },
+      {
+       "mood": "neutral",
+       "lookAt": "left",
+       "cue": 52.765
+      },
+      {
+       "mood": "worried",
+       "lookAt": "camera",
+       "cue": 54.195
+      }
+     ]
+    },
+    {
+     "id": "sg1",
+     "cast": "sg1",
+     "track": "sg1",
+     "autoGait": false,
+     "mood": "sad",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "sit",
+       "cue": 0.0
+      },
+      {
+       "lookAt": "right",
+       "mood": "worried",
+       "cue": 13.738
+      }
+     ]
+    },
+    {
+     "id": "sg2",
+     "cast": "sg2",
+     "track": "sg2",
+     "autoGait": false,
+     "mood": "sad",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "sit",
+       "cue": 0.0
+      },
+      {
+       "mood": "neutral",
+       "cue": 12.12
+      }
+     ]
+    },
+    {
+     "id": "pat1",
+     "cast": "pat1",
+     "track": "pat1",
+     "autoGait": true,
+     "mood": "shocked",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "cue": 27.631
+      }
+     ]
+    },
+    {
+     "id": "pat2",
+     "cast": "pat2",
+     "track": "pat2",
+     "autoGait": true,
+     "mood": "shocked",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "cue": 27.731
+      }
+     ]
+    },
+    {
+     "id": "cop",
+     "cast": "cop",
+     "track": "cop",
+     "autoGait": false,
+     "mood": "angry",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "aim",
+       "prop": "pistol",
+       "mood": "angry",
+       "lookAt": "left",
+       "cue": 0.0
+      },
+      {
+       "mood": "shocked",
+       "cue": 41.73
+      }
+     ]
+    },
+    {
+     "id": "f1",
+     "cast": "f1",
+     "track": "f1",
+     "autoGait": false,
+     "mood": "angry",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "punch",
+       "mood": "angry",
+       "cue": 28.481
+      },
+      {
+       "action": "idle",
+       "mood": "shocked",
+       "cue": 28.901
+      },
+      {
+       "action": "punch",
+       "mood": "angry",
+       "cue": 29.321
+      },
+      {
+       "action": "idle",
+       "mood": "shocked",
+       "cue": 29.741
+      },
+      {
+       "action": "punch",
+       "mood": "angry",
+       "cue": 30.161
+      },
+      {
+       "action": "idle",
+       "mood": "shocked",
+       "cue": 30.581
+      },
+      {
+       "action": "punch",
+       "mood": "angry",
+       "cue": 31.001
+      },
+      {
+       "action": "idle",
+       "mood": "shocked",
+       "cue": 31.421
+      },
+      {
+       "action": "punch",
+       "mood": "angry",
+       "cue": 31.841
+      },
+      {
+       "action": "idle",
+       "mood": "shocked",
+       "cue": 32.261
+      }
+     ]
+    },
+    {
+     "id": "f2",
+     "cast": "f2",
+     "track": "f2",
+     "autoGait": false,
+     "mood": "angry",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "shocked",
+       "cue": 28.481
+      },
+      {
+       "action": "punch",
+       "mood": "angry",
+       "cue": 28.901
+      },
+      {
+       "action": "idle",
+       "mood": "shocked",
+       "cue": 29.321
+      },
+      {
+       "action": "punch",
+       "mood": "angry",
+       "cue": 29.741
+      },
+      {
+       "action": "idle",
+       "mood": "shocked",
+       "cue": 30.161
+      },
+      {
+       "action": "punch",
+       "mood": "angry",
+       "cue": 30.581
+      },
+      {
+       "action": "idle",
+       "mood": "shocked",
+       "cue": 31.001
+      },
+      {
+       "action": "punch",
+       "mood": "angry",
+       "cue": 31.421
+      },
+      {
+       "action": "idle",
+       "mood": "shocked",
+       "cue": 31.841
+      },
+      {
+       "action": "punch",
+       "mood": "angry",
+       "cue": 32.261
+      }
+     ]
+    },
+    {
+     "id": "c0",
+     "cast": "c0",
+     "track": "c0",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "neutral",
+       "cue": 0.0
+      },
+      {
+       "mood": "worried",
+       "cue": 4.38
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "cue": 28.231
+      },
+      {
+       "action": "idle",
+       "mood": "determined",
+       "lookAt": "camera",
+       "cue": 30.625
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "lookAt": "right",
+       "cue": 32.411
+      }
+     ]
+    },
+    {
+     "id": "c1",
+     "cast": "c1",
+     "track": "c1",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "neutral",
+       "cue": 0.0
+      },
+      {
+       "mood": "worried",
+       "cue": 4.48
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "cue": 28.311
+      },
+      {
+       "action": "idle",
+       "mood": "determined",
+       "lookAt": "camera",
+       "cue": 30.675
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "lookAt": "right",
+       "cue": 32.471
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "cast": "c2",
+     "track": "c2",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "neutral",
+       "cue": 0.0
+      },
+      {
+       "mood": "worried",
+       "cue": 4.58
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "cue": 28.391
+      },
+      {
+       "action": "idle",
+       "mood": "determined",
+       "lookAt": "camera",
+       "cue": 30.725
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "lookAt": "right",
+       "cue": 32.531
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "cast": "c3",
+     "track": "c3",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "neutral",
+       "cue": 0.0
+      },
+      {
+       "mood": "worried",
+       "cue": 4.68
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "cue": 28.471
+      },
+      {
+       "action": "idle",
+       "mood": "determined",
+       "lookAt": "camera",
+       "cue": 30.775
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "lookAt": "left",
+       "cue": 32.591
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "cast": "c4",
+     "track": "c4",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "neutral",
+       "cue": 0.0
+      },
+      {
+       "mood": "worried",
+       "cue": 4.78
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "cue": 28.551
+      },
+      {
+       "action": "idle",
+       "mood": "determined",
+       "lookAt": "camera",
+       "cue": 30.825
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "lookAt": "left",
+       "cue": 32.651
+      }
+     ]
+    },
+    {
+     "id": "c5",
+     "cast": "c5",
+     "track": "c5",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "neutral",
+       "cue": 0.0
+      },
+      {
+       "mood": "worried",
+       "cue": 4.88
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "cue": 28.631
+      },
+      {
+       "action": "idle",
+       "mood": "determined",
+       "lookAt": "camera",
+       "cue": 30.875
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "lookAt": "left",
+       "cue": 32.711
+      }
+     ]
+    },
+    {
+     "id": "c6",
+     "cast": "c6",
+     "track": "c6",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "neutral",
+       "cue": 0.0
+      },
+      {
+       "mood": "worried",
+       "cue": 4.98
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "cue": 28.711
+      },
+      {
+       "action": "idle",
+       "mood": "determined",
+       "lookAt": "camera",
+       "cue": 30.925
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "lookAt": "right",
+       "cue": 32.771
+      }
+     ]
+    },
+    {
+     "id": "c7",
+     "cast": "c7",
+     "track": "c7",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "neutral",
+       "cue": 0.0
+      },
+      {
+       "mood": "worried",
+       "cue": 5.08
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "cue": 28.791
+      },
+      {
+       "action": "idle",
+       "mood": "determined",
+       "lookAt": "camera",
+       "cue": 30.975
+      },
+      {
+       "action": "cheer",
+       "mood": "happy",
+       "lookAt": "left",
+       "cue": 32.831
+      }
+     ]
+    },
+    {
+     "id": "m0",
+     "cast": "m0",
+     "track": "m0",
+     "autoGait": true,
+     "mood": "determined",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "angry",
+       "cue": 39.47
+      }
+     ]
+    },
+    {
+     "id": "m1",
+     "cast": "m1",
+     "track": "m1",
+     "autoGait": true,
+     "mood": "determined",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "angry",
+       "cue": 39.52
+      }
+     ]
+    },
+    {
+     "id": "m2",
+     "cast": "m2",
+     "track": "m2",
+     "autoGait": true,
+     "mood": "determined",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "angry",
+       "cue": 39.57
+      }
+     ]
+    },
+    {
+     "id": "m3",
+     "cast": "m3",
+     "track": "m3",
+     "autoGait": true,
+     "mood": "determined",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "angry",
+       "cue": 39.62
+      }
+     ]
+    },
+    {
+     "id": "m4",
+     "cast": "m0",
+     "track": "m4",
+     "autoGait": true,
+     "mood": "determined",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "angry",
+       "cue": 39.67
+      }
+     ]
+    },
+    {
+     "id": "m5",
+     "cast": "m1",
+     "track": "m5",
+     "autoGait": true,
+     "mood": "determined",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "angry",
+       "cue": 39.72
+      }
+     ]
+    },
+    {
+     "id": "m6",
+     "cast": "m2",
+     "track": "m6",
+     "autoGait": true,
+     "mood": "determined",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "angry",
+       "cue": 39.77
+      }
+     ]
+    },
+    {
+     "id": "m7",
+     "cast": "m3",
+     "track": "m7",
+     "autoGait": true,
+     "mood": "determined",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "angry",
+       "cue": 39.82
+      }
+     ]
+    },
+    {
+     "id": "m8",
+     "cast": "m0",
+     "track": "m8",
+     "autoGait": true,
+     "mood": "determined",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "angry",
+       "cue": 39.87
+      }
+     ]
+    },
+    {
+     "id": "m9",
+     "cast": "m1",
+     "track": "m9",
+     "autoGait": true,
+     "mood": "determined",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "angry",
+       "cue": 39.92
+      }
+     ]
+    },
+    {
+     "id": "m10",
+     "cast": "m2",
+     "track": "m10",
+     "autoGait": true,
+     "mood": "determined",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "angry",
+       "cue": 39.97
+      }
+     ]
+    },
+    {
+     "id": "m11",
+     "cast": "m3",
+     "track": "m11",
+     "autoGait": true,
+     "mood": "determined",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "angry",
+       "cue": 40.02
+      }
+     ]
+    }
+   ],
+   "fx": [
+    {
+     "type": "tag",
+     "at": 0.35,
+     "untilAt": 4.18,
+     "of": "tyler",
+     "text": "HIS BEST FRIEND",
+     "bg": "#ff7a5a"
+    },
+    {
+     "type": "callout",
+     "at": 1.25,
+     "dur": 1.0,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "FIGHT CLUB",
+     "sub": "(1999)",
+     "size": 84
+    },
+    {
+     "type": "callout",
+     "at": 4.03,
+     "dur": 1.1,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "DOESN'T EXIST",
+     "size": 74,
+     "edge": "#ff5a4a"
+    },
+    {
+     "type": "flicker",
+     "at": 4.38,
+     "dur": 0.5
+    },
+    {
+     "type": "speedlines",
+     "at": 4.88,
+     "dur": 1.0,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "callout",
+     "at": 6.46,
+     "dur": 1.1,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "INSOMNIA",
+     "size": 80,
+     "edge": "#9adfb0"
+    },
+    {
+     "type": "callout",
+     "at": 8.79,
+     "dur": 2.4,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "SUPPORT GROUPS",
+     "sub": "FOR DISEASES HE DOESN'T HAVE",
+     "size": 66
+    },
+    {
+     "type": "tag",
+     "at": 9.44,
+     "untilAt": 11.58,
+     "of": "bob",
+     "text": "BOB",
+     "bg": "#9ad0ff"
+    },
+    {
+     "type": "bubble",
+     "at": 12.12,
+     "dur": 1.0,
+     "of": "narr",
+     "text": "Zzz",
+     "size": 58
+    },
+    {
+     "type": "tag",
+     "at": 13.688,
+     "untilAt": 16.098,
+     "of": "marla",
+     "text": "MARLA",
+     "bg": "#ff9ad0"
+    },
+    {
+     "type": "callout",
+     "at": 14.818,
+     "dur": 0.95,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "ANOTHER FAKER",
+     "size": 66,
+     "edge": "#ff5a4a"
+    },
+    {
+     "type": "speedlines",
+     "at": 16.348,
+     "dur": 1.3,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "tag",
+     "at": 17.968,
+     "untilAt": 19.898,
+     "of": "tyler",
+     "text": "TYLER DURDEN",
+     "bg": "#ff7a5a"
+    },
+    {
+     "type": "callout",
+     "at": 19.298,
+     "dur": 1.2,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "SOAP SALESMAN",
+     "size": 64,
+     "edge": "#ff9ad0"
+    },
+    {
+     "type": "speedlines",
+     "at": 20.276,
+     "dur": 0.9,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "flash",
+     "at": 21.487999999999996,
+     "dur": 0.35,
+     "amount": 0.8
+    },
+    {
+     "type": "blast",
+     "at": 21.517999999999997,
+     "world": [
+      24.0,
+      5.5,
+      28.5
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 16,
+     "hidden": true
+    },
+    {
+     "type": "bubble",
+     "at": 25.468,
+     "dur": 1.0,
+     "of": "tyler",
+     "text": "HIT ME.",
+     "size": 54
+    },
+    {
+     "type": "impactframe",
+     "at": 26.618000000000002,
+     "dur": 0.1
+    },
+    {
+     "type": "blast",
+     "at": 26.618000000000002,
+     "world": [
+      12.4,
+      -3.5,
+      1.5
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 9,
+     "hidden": true
+    },
+    {
+     "type": "impactframe",
+     "at": 27.711000000000002,
+     "dur": 0.1
+    },
+    {
+     "type": "blast",
+     "at": 27.711000000000002,
+     "world": [
+      13.0,
+      -3.6,
+      1.5
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 9,
+     "hidden": true
+    },
+    {
+     "type": "speedlines",
+     "at": 28.031000000000002,
+     "dur": 1.2,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "callout",
+     "at": 29.551,
+     "dur": 0.95,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "FIGHT CLUB",
+     "sub": "A BAR BASEMENT",
+     "size": 78
+    },
+    {
+     "type": "callout",
+     "at": 30.575,
+     "dur": 1.9,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "RULE #1",
+     "sub": "YOU DON'T TALK ABOUT IT",
+     "size": 84,
+     "edge": "#ff5a4a"
+    },
+    {
+     "type": "blast",
+     "at": 28.601000000000003,
+     "world": [
+      -0.35,
+      0.45,
+      -2.6
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 5,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 29.861000000000004,
+     "world": [
+      -0.35,
+      0.45,
+      -2.6
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 5,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 31.121000000000002,
+     "world": [
+      -0.35,
+      0.45,
+      -2.6
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 5,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 32.381,
+     "world": [
+      -0.35,
+      0.45,
+      -2.6
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 5,
+     "hidden": true
+    },
+    {
+     "type": "speedlines",
+     "at": 32.951,
+     "dur": 1.0,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "callout",
+     "at": 35.051,
+     "dur": 2.0,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "SOAP",
+     "sub": "FROM STOLEN LIPOSUCTION FAT",
+     "size": 88,
+     "edge": "#ff9ad0"
+    },
+    {
+     "type": "callout",
+     "at": 39.42,
+     "dur": 1.5,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "PROJECT MAYHEM",
+     "size": 70,
+     "edge": "#ff3a2a"
+    },
+    {
+     "type": "sirenglow",
+     "at": 39.353,
+     "until": 43.690000000000005,
+     "amount": 0.26
+    },
+    {
+     "type": "flash",
+     "at": 41.41,
+     "dur": 0.2,
+     "amount": 0.55
+    },
+    {
+     "type": "blast",
+     "at": 41.43,
+     "world": [
+      72.2,
+      -9.4,
+      1.2
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 10,
+     "hidden": true
+    },
+    {
+     "type": "tag",
+     "at": 41.98,
+     "untilAt": 42.99,
+     "of": "bob",
+     "text": "BOB",
+     "bg": "#9ad0ff"
+    },
+    {
+     "type": "speedlines",
+     "at": 42.89,
+     "dur": 1.3,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "callout",
+     "at": 45.46,
+     "dur": 0.8,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "THE TRUTH",
+     "size": 76
+    },
+    {
+     "type": "flicker",
+     "at": 46.278000000000006,
+     "dur": 0.7
+    },
+    {
+     "type": "callout",
+     "at": 46.278000000000006,
+     "dur": 1.15,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "HE IS TYLER",
+     "size": 84,
+     "edge": "#ff3a2a"
+    },
+    {
+     "type": "flash",
+     "at": 49.41,
+     "dur": 0.45,
+     "amount": 1.0
+    },
+    {
+     "type": "blast",
+     "at": 49.43,
+     "world": [
+      85.1,
+      9.1,
+      59.6
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 12,
+     "hidden": true
+    },
+    {
+     "type": "callout",
+     "at": 50.147,
+     "dur": 1.1,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "TYLER'S GONE",
+     "size": 76
+    },
+    {
+     "type": "blast",
+     "at": 51.79,
+     "world": [
+      86.0,
+      30.0,
+      60.0
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 5,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 52.11,
+     "world": [
+      86.0,
+      30.0,
+      60.0
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 5,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 52.43,
+     "world": [
+      86.0,
+      30.0,
+      60.0
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 5,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 52.75,
+     "world": [
+      86.0,
+      30.0,
+      60.0
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 5,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 53.07,
+     "world": [
+      86.0,
+      30.0,
+      60.0
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 5,
+     "hidden": true
+    },
+    {
+     "type": "tag",
+     "at": 53.415,
+     "untilAt": 55.275,
+     "of": "marla",
+     "text": "MARLA",
+     "bg": "#ff9ad0"
+    },
+    {
+     "type": "callout",
+     "at": 55.375,
+     "dur": 1.9,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "CREDIT CARD TOWERS",
+     "sub": "ERASING THE DEBT RECORDS",
+     "size": 56,
+     "edge": "#ff8a3a"
+    },
+    {
+     "type": "darken",
+     "keys": [
+      {
+       "at": 60.156000000000006,
+       "a": 0.0
+      },
+      {
+       "at": 60.60600000000001,
+       "a": 1.0
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "hum",
+     "at": 0.0,
+     "dur": 4.6,
+     "gain": 0.3
+    },
+    {
+     "type": "sting",
+     "at": 1.3,
+     "gain": 0.45
+    },
+    {
+     "type": "glitch",
+     "at": 4.43,
+     "dur": 0.6,
+     "gain": 0.6
+    },
+    {
+     "type": "whoosh",
+     "at": 4.83,
+     "dur": 1.0,
+     "gain": 0.8
+    },
+    {
+     "type": "hum",
+     "at": 5.4,
+     "dur": 2.3,
+     "gain": 0.25
+    },
+    {
+     "type": "ting",
+     "at": 6.96,
+     "gain": 0.3
+    },
+    {
+     "type": "whoosh",
+     "at": 7.982,
+     "dur": 0.8,
+     "gain": 0.7
+    },
+    {
+     "type": "pop",
+     "at": 8.84,
+     "gain": 0.4
+    },
+    {
+     "type": "pop",
+     "at": 12.12,
+     "gain": 0.35
+    },
+    {
+     "type": "creak",
+     "at": 13.088000000000001,
+     "dur": 0.7,
+     "gain": 0.5
+    },
+    {
+     "type": "sting",
+     "at": 14.918,
+     "gain": 0.4
+    },
+    {
+     "type": "whoosh",
+     "at": 16.248,
+     "dur": 1.4,
+     "gain": 0.9
+    },
+    {
+     "type": "wind",
+     "at": 16.398,
+     "dur": 1.2,
+     "gain": 0.5
+    },
+    {
+     "type": "engine",
+     "at": 17.398,
+     "dur": 3.4,
+     "gain": 0.3
+    },
+    {
+     "type": "pop",
+     "at": 18.258,
+     "gain": 0.35
+    },
+    {
+     "type": "pop",
+     "at": 19.398,
+     "gain": 0.4
+    },
+    {
+     "type": "whoosh",
+     "at": 20.226,
+     "dur": 1.0,
+     "gain": 0.9
+    },
+    {
+     "type": "boom",
+     "at": 21.517999999999997,
+     "gain": 0.9
+    },
+    {
+     "type": "crash",
+     "at": 21.557999999999996,
+     "gain": 0.6
+    },
+    {
+     "type": "crackle",
+     "at": 21.917999999999996,
+     "dur": 6.0,
+     "gain": 0.35
+    },
+    {
+     "type": "beep",
+     "at": 22.678,
+     "gain": 0.25
+    },
+    {
+     "type": "pop",
+     "at": 25.518,
+     "gain": 0.35
+    },
+    {
+     "type": "punch",
+     "at": 26.618000000000002,
+     "gain": 0.85
+    },
+    {
+     "type": "punch",
+     "at": 27.711000000000002,
+     "gain": 0.85
+    },
+    {
+     "type": "whoosh",
+     "at": 28.031000000000002,
+     "dur": 1.2,
+     "gain": 0.8
+    },
+    {
+     "type": "hum",
+     "at": 29.651,
+     "dur": 3.0,
+     "gain": 0.25
+    },
+    {
+     "type": "sting",
+     "at": 30.625,
+     "gain": 0.45
+    },
+    {
+     "type": "punch",
+     "at": 28.601000000000003,
+     "gain": 0.45
+    },
+    {
+     "type": "punch",
+     "at": 29.021000000000004,
+     "gain": 0.45
+    },
+    {
+     "type": "punch",
+     "at": 29.441000000000003,
+     "gain": 0.45
+    },
+    {
+     "type": "punch",
+     "at": 29.861000000000004,
+     "gain": 0.45
+    },
+    {
+     "type": "punch",
+     "at": 30.281000000000002,
+     "gain": 0.45
+    },
+    {
+     "type": "punch",
+     "at": 30.701000000000004,
+     "gain": 0.45
+    },
+    {
+     "type": "punch",
+     "at": 31.121000000000002,
+     "gain": 0.45
+    },
+    {
+     "type": "punch",
+     "at": 31.541000000000004,
+     "gain": 0.45
+    },
+    {
+     "type": "punch",
+     "at": 31.961000000000002,
+     "gain": 0.45
+    },
+    {
+     "type": "punch",
+     "at": 32.381,
+     "gain": 0.45
+    },
+    {
+     "type": "whoosh",
+     "at": 32.951,
+     "dur": 1.0,
+     "gain": 0.8
+    },
+    {
+     "type": "creak",
+     "at": 33.451,
+     "dur": 1.0,
+     "gain": 0.45
+    },
+    {
+     "type": "pop",
+     "at": 35.151,
+     "gain": 0.4
+    },
+    {
+     "type": "march",
+     "at": 37.953,
+     "dur": 2.8,
+     "gain": 0.5
+    },
+    {
+     "type": "sting",
+     "at": 39.47,
+     "gain": 0.5
+    },
+    {
+     "type": "siren",
+     "at": 40.730000000000004,
+     "dur": 2.6,
+     "gain": 0.35
+    },
+    {
+     "type": "boom",
+     "at": 41.43,
+     "dur": 0.6,
+     "gain": 0.6
+    },
+    {
+     "type": "slam",
+     "at": 41.44,
+     "gain": 0.35
+    },
+    {
+     "type": "whoosh",
+     "at": 42.89,
+     "dur": 1.2,
+     "gain": 0.8
+    },
+    {
+     "type": "hum",
+     "at": 44.77,
+     "dur": 2.6,
+     "gain": 0.3
+    },
+    {
+     "type": "sting",
+     "at": 45.51,
+     "gain": 0.4
+    },
+    {
+     "type": "glitch",
+     "at": 46.278000000000006,
+     "dur": 0.7,
+     "gain": 0.7
+    },
+    {
+     "type": "boom",
+     "at": 49.43,
+     "dur": 0.8,
+     "gain": 0.7
+    },
+    {
+     "type": "slam",
+     "at": 49.44,
+     "gain": 0.45
+    },
+    {
+     "type": "ting",
+     "at": 50.247,
+     "gain": 0.3
+    },
+    {
+     "type": "boom",
+     "at": 51.79,
+     "gain": 0.75
+    },
+    {
+     "type": "boom",
+     "at": 52.11,
+     "gain": 0.69
+    },
+    {
+     "type": "boom",
+     "at": 52.43,
+     "gain": 0.63
+    },
+    {
+     "type": "boom",
+     "at": 52.75,
+     "gain": 0.5700000000000001
+    },
+    {
+     "type": "boom",
+     "at": 53.07,
+     "gain": 0.51
+    },
+    {
+     "type": "crash",
+     "at": 55.574999999999996,
+     "dur": 1.6,
+     "gain": 0.7
+    },
+    {
+     "type": "crash",
+     "at": 56.275,
+     "dur": 1.6,
+     "gain": 0.55
+    },
+    {
+     "type": "gust",
+     "at": 55.775,
+     "dur": 3.2,
+     "gain": 0.5
+    },
+    {
+     "type": "pop",
+     "at": 57.084,
+     "gain": 0.3
+    }
+   ],
+   "charTint": [
+    {
+     "at": 0.0,
+     "col": "#ffb060",
+     "a": 0.12
+    },
+    {
+     "at": 5.08,
+     "col": "#9adfb0",
+     "a": 0.14
+    },
+    {
+     "at": 8.032,
+     "col": "#ffc890",
+     "a": 0.07
+    },
+    {
+     "at": 16.398,
+     "col": "#ffd9a8",
+     "a": 0.06
+    },
+    {
+     "at": 20.526,
+     "col": "#ff8a40",
+     "a": 0.12
+    },
+    {
+     "at": 23.817999999999998,
+     "col": "#ff9a4a",
+     "a": 0.14
+    },
+    {
+     "at": 28.231,
+     "col": "#ffb060",
+     "a": 0.12
+    },
+    {
+     "at": 33.051,
+     "col": "#ff9ac0",
+     "a": 0.1
+    },
+    {
+     "at": 37.553,
+     "col": "#1c2a4a",
+     "a": 0.3
+    },
+    {
+     "at": 40.830000000000005,
+     "col": "#30306a",
+     "a": 0.28
+    },
+    {
+     "at": 42.89,
+     "col": "#1c2848",
+     "a": 0.3
+    },
+    {
+     "at": 51.79,
+     "col": "#ff8a50",
+     "a": 0.16
+    }
+   ]
+  }
+ ]
+}

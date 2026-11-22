@@ -122,6 +122,12 @@ function drawHandProp(g, prop, hands, t, st) {
     g.translate(hx, hy); g.rotate(-0.2); inkRect(g, -36, -48, 72, 52, '#f4f0e4', 4); g.fillStyle = '#9aa0ac'; for (let k = 0; k < 5; k++) g.fillRect(-28, -40 + k * 9, 50 - (k % 2) * 14, 3);
   } else if (prop === 'book') {
     g.translate(hx, hy); g.rotate(-0.15); inkRect(g, -30, -44, 60, 44, '#7a2e26', 4); g.fillStyle = '#e8d9a8'; g.fillRect(-26, -40, 6, 36);
+  } else if (prop === 'soap') {                       // a pink bar of soap
+    g.translate(hx, hy - 6); g.rotate(-0.12); g.beginPath(); g.roundRect(-30, -22, 60, 30, 10); g.fillStyle = '#f2a0b8'; g.fill(); g.lineWidth = 4.5; g.strokeStyle = C.ink; g.stroke();
+    g.fillStyle = 'rgba(255,255,255,0.55)'; g.fillRect(-20, -16, 26, 5); g.fillStyle = '#c86a88'; g.font = '700 13px Poppins'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('SOAP', 0, -6);
+  } else if (prop === 'phone') {                      // a payphone receiver on a coiled cord
+    g.translate(hx, hy); g.rotate(Math.PI / 2 - ha - 0.6); inkRect(g, -9, -40, 18, 80, '#2a2b30', 4.5);
+    for (const yy of [-46, 46]) { g.beginPath(); g.ellipse(0, yy, 16, 11, 0, 0, 7); g.fillStyle = '#2a2b30'; g.fill(); g.lineWidth = 4.5; g.strokeStyle = C.ink; g.stroke(); }
   } else if (prop === 'sander') {                     // a sanding block
     g.translate(hx, hy); inkRect(g, -28, -10, 56, 22, '#b88a52', 4); g.fillStyle = '#d9c29a'; g.fillRect(-28, 8, 56, 6);
   } else if (prop === 'rifle') {

@@ -38,6 +38,11 @@ const RC_COSTUMES = {
   guard: { body: '#3e4a5e', detail: 'police', pants: '#2c3444' },
   coat_tan: { body: '#a98a5c', detail: 'suit', pants: '#4a4237', tie: '#3a3a44' },
   beach: { body: '#f2efe4', detail: 'tee', pants: '#c9b48a' },
+  office_shirt: { body: '#e9e6dc', detail: 'shirt', pants: '#3a3d46', tie: '#3c4a6a' },       // white office shirt, dark tie
+  leather_red: { body: '#8e2a22', detail: 'leather', pants: '#2a2622' },                       // red leather jacket over a print shirt
+  coat_black: { body: '#2b2630', detail: 'coat', pants: '#1c1a20' },                            // long dark coat, fur-ish collar
+  tee_black: { body: '#25252b', detail: 'tee', pants: '#1c1c22' },
+  tee_grey: { body: '#8a8a90', detail: 'tee', pants: '#3a3d46' },
 };
 function rcTorso(g, cos, w, h, t) {
   const x = -w / 2, y = -h, r = w * 0.48;
@@ -125,6 +130,24 @@ function rcTorso(g, cos, w, h, t) {
     for (let k = 0; k < 2; k++) { g.beginPath(); g.arc(-6, y + h * (0.64 + k * 0.14), 4, 0, 7); g.fillStyle = dark; g.fill(); }
     g.beginPath(); g.moveTo(w * 0.14, y + h * 0.3); g.lineTo(w * 0.4, y + h * 0.28); g.lineWidth = 3; g.strokeStyle = dark; g.stroke();
     g.fillStyle = '#f1eee6'; g.fillRect(w * 0.18, y + h * 0.25, 14, 6);
+  } else if (cos.detail === 'shirt') {                                     // office shirt: collar, placket, tie, pocket with a pen
+    g.beginPath(); g.moveTo(-w * 0.34, y); g.lineTo(-6, y + 28); g.lineTo(-w * 0.04, y); g.closePath(); g.fillStyle = dark; g.fill();
+    g.beginPath(); g.moveTo(w * 0.34, y); g.lineTo(6, y + 28); g.lineTo(w * 0.04, y); g.closePath(); g.fill();
+    g.beginPath(); g.moveTo(-7, y + 8); g.lineTo(7, y + 8); g.lineTo(10, y + h * 0.5); g.lineTo(0, y + h * 0.58); g.lineTo(-10, y + h * 0.5); g.closePath(); g.fillStyle = cos.tie || '#3c4a6a'; g.fill();
+    g.lineWidth = 2.5; g.strokeStyle = shade(cos.tie || '#3c4a6a', -0.35); g.stroke();
+    g.beginPath(); g.roundRect(w * 0.12, y + h * 0.26, 32, 28, 3); g.lineWidth = 2.5; g.strokeStyle = dark; g.stroke(); g.fillStyle = '#2a3a7a'; g.fillRect(w * 0.12 + 20, y + h * 0.26 - 10, 5, 22);
+    g.fillStyle = 'rgba(0,0,0,0.12)'; g.fillRect(x, y + h - 24, w, 3); g.fillStyle = '#2a2a30'; g.fillRect(x, y + h - 18, w, 14);
+  } else if (cos.detail === 'leather') {                                   // open leather jacket, loud print shirt underneath
+    g.beginPath(); g.moveTo(-w * 0.22, y); g.lineTo(w * 0.22, y); g.lineTo(w * 0.16, y + h); g.lineTo(-w * 0.16, y + h); g.closePath(); g.fillStyle = '#e0a23a'; g.fill();
+    for (let k = 0; k < 9; k++) { g.beginPath(); g.arc(-w * 0.12 + (k % 3) * w * 0.12, y + 30 + Math.floor(k / 3) * 52, 8, 0, 7); g.fillStyle = k % 2 ? '#c8402a' : '#2a6a8a'; g.fill(); }
+    for (const sx of [-1, 1]) { g.beginPath(); g.moveTo(sx * w * 0.2, y); g.lineTo(sx * w * 0.12, y + h * 0.42); g.lineTo(sx * w * 0.5, y + h * 0.16); g.lineTo(sx * w * 0.42, y); g.closePath(); g.fillStyle = dark; g.fill(); }
+    for (const sx of [-1, 1]) { g.fillStyle = 'rgba(255,255,255,0.22)'; g.fillRect(sx < 0 ? x + 10 : x + w - 22, y + 20, 8, h * 0.7); }
+    g.fillStyle = dark; g.fillRect(x, y + h - 20, w, 16);
+  } else if (cos.detail === 'coat') {                                      // long dark coat, ragged collar, belt
+    g.beginPath(); g.ellipse(0, y + 10, w * 0.5, 26, 0, 0, Math.PI); g.fillStyle = '#4a4048'; g.fill();
+    for (let k = 0; k < 10; k++) { g.beginPath(); g.moveTo(-w * 0.48 + k * w * 0.1, y + 14); g.lineTo(-w * 0.44 + k * w * 0.1, y + 34); g.lineWidth = 3; g.strokeStyle = '#5c5058'; g.stroke(); }
+    g.beginPath(); g.moveTo(0, y + 30); g.lineTo(0, y + h); g.lineWidth = 3; g.strokeStyle = dark; g.stroke();
+    g.fillStyle = dark; g.fillRect(x, y + h * 0.55, w, 12); g.beginPath(); g.roundRect(-12, y + h * 0.55 - 3, 24, 18, 3); g.fillStyle = '#8a7a6a'; g.fill();
   } else if (cos.detail === 'vest') {
     g.fillStyle = '#2b2b33'; g.fillRect(-w * 0.16, y, w * 0.32, h);
     for (let k = 0; k < 4; k++) { g.beginPath(); g.roundRect(-w * 0.44 + (k % 2) * w * 0.6, y + h * (0.3 + Math.floor(k / 2) * 0.28), w * 0.28, h * 0.18, 6); g.fillStyle = dark; g.fill(); }
@@ -179,6 +202,8 @@ function rcFace(g, R, s) {
   else { g.beginPath(); g.ellipse(mx, my, R * 0.05, R * 0.035, 0, 0, 7); g.fillStyle = '#3a1418'; g.fill(); }
 }
 function rcHead(g, R, def, st, face) {
+  if (def.hairLong) { g.beginPath(); g.moveTo(-R * 1.02, -R * 0.2); g.quadraticCurveTo(-R * 1.35, R * 0.9, -R * 0.9, R * 1.45); g.lineTo(R * 0.9, R * 1.45); g.quadraticCurveTo(R * 1.35, R * 0.9, R * 1.02, -R * 0.2);
+    g.quadraticCurveTo(0, -R * 1.45, -R * 1.02, -R * 0.2); g.closePath(); g.fillStyle = def.hairLong; g.fill(); g.lineWidth = 6.5; g.strokeStyle = RC.ink; g.stroke(); }
   // shaded white head + hand-drawn outline
   const gr = g.createRadialGradient(-R * 0.38, -R * 0.42, R * 0.2, -R * 0.1, -R * 0.1, R * 1.2); gr.addColorStop(0, '#ffffff'); gr.addColorStop(0.62, '#fbfbfd'); gr.addColorStop(1, '#c9c9d6');
   g.beginPath(); g.ellipse(0, 0, R * 1.03, R, 0, 0, 7); g.fillStyle = gr; g.fill();
@@ -187,6 +212,13 @@ function rcHead(g, R, def, st, face) {
     for (let k = 0; k < 7; k++) { g.beginPath(); g.moveTo(-R * 0.8 + k * R * 0.25, -R * 0.62); g.quadraticCurveTo(-R * 0.7 + k * R * 0.25, -R * 0.85, -R * 0.55 + k * R * 0.25, -R * 0.95); g.lineWidth = 3; g.strokeStyle = shade(def.hair, 0.25); g.stroke(); }
     g.restore(); g.beginPath(); g.ellipse(0, 0, R * 1.03, R, 0, 0, 7); g.lineWidth = 6.5; g.strokeStyle = RC.ink; g.stroke(); }
   rcFace(g, R, face);
+  if (def.bandage) { g.save(); g.translate(Math.sin((st.yaw || 0) * 0.8) * R + R * 0.42, R * 0.3); g.rotate(-0.35);
+    g.beginPath(); g.roundRect(-R * 0.26, -R * 0.15, R * 0.52, R * 0.3, R * 0.06); g.fillStyle = '#f4efe2'; g.fill(); g.lineWidth = 4; g.strokeStyle = RC.ink; g.stroke();
+    g.beginPath(); g.arc(0, 0, R * 0.07, 0, 7); g.fillStyle = '#c84a3a'; g.fill(); g.restore(); }
+  if (def.shades) { const yaw = st.yaw || 0; g.save(); g.translate(Math.sin(yaw * 0.8) * R * 0.9, -R * 0.08 + (st.pitch || 0) * R * 0.25);
+    for (const sx of [-1, 1]) { g.beginPath(); g.roundRect(sx * R * 0.36 - R * 0.27, -R * 0.15, R * 0.54, R * 0.32, R * 0.12); g.fillStyle = def.shades === true ? '#3a2018' : def.shades; g.fill(); g.lineWidth = 4.5; g.strokeStyle = RC.ink; g.stroke();
+      g.beginPath(); g.moveTo(sx * R * 0.36 - R * 0.16, -R * 0.08); g.lineTo(sx * R * 0.36 - R * 0.02, -R * 0.08); g.lineWidth = 3; g.strokeStyle = 'rgba(255,255,255,0.55)'; g.stroke(); }
+    g.beginPath(); g.moveTo(-R * 0.1, -R * 0.05); g.lineTo(R * 0.1, -R * 0.05); g.lineWidth = 4.5; g.strokeStyle = RC.ink; g.stroke(); g.restore(); }
   if (def.facial) { const yaw = st.yaw || 0; g.save(); g.translate(Math.sin(yaw * 0.8) * R, R * 0.06 + (st.pitch || 0) * R * 0.28); g.scale(Math.max(0.3, Math.cos(yaw * 0.8)) * 0.85, 0.85); facialHair(g, R, def.facial); g.restore(); }
 }
 
