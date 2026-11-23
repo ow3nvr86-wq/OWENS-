@@ -19,7 +19,7 @@
  "caption_case": "lower",
  "caption_size": 78,
  "grade": "brightness(1.04) saturate(1.12) contrast(1.06)",
- "thumbnail_cue": 46.678000000000004,
+ "thumbnail_cue": 48.555,
  "music": {
   "level_db": -24,
   "segments": [
@@ -29,39 +29,39 @@
     "fadeIn": 0.6,
     "fadeOut": 0.4,
     "from": 0.0,
-    "to": 7.782
+    "to": 8.131
    },
    {
     "style": "chill",
     "bpm": 96,
     "fadeIn": 0.3,
     "fadeOut": 0.3,
-    "from": 7.782,
-    "to": 20.426
+    "from": 8.131,
+    "to": 20.967
    },
    {
     "style": "chase",
     "bpm": 132,
     "fadeIn": 0.2,
     "fadeOut": 0.4,
-    "from": 20.426,
-    "to": 40.730000000000004
+    "from": 20.967,
+    "to": 42.955
    },
    {
     "style": "dread",
     "bpm": 80,
     "fadeIn": 0.3,
     "fadeOut": 0.4,
-    "from": 40.730000000000004,
-    "to": 51.67
+    "from": 42.955,
+    "to": 54.085
    },
    {
     "style": "reveal",
     "bpm": 96,
     "fadeIn": 0.3,
     "fadeOut": 1.5,
-    "from": 51.67,
-    "to": 60.656000000000006
+    "from": 54.085,
+    "to": 61.386
    }
   ]
  },
@@ -176,7 +176,7 @@
   {
    "cue": "His",
    "bgseq": {
-    "dir": "oneshot"
+    "dir": "oneshot_alex"
    },
    "transition": "cut",
    "characters": [
@@ -201,137 +201,137 @@
       {
        "mood": "sad",
        "lookAt": "camera",
-       "cue": 2.392
+       "cue": 2.466
       },
       {
        "mood": "shocked",
        "lookAt": "right",
-       "cue": 4.63
+       "cue": 4.79
       },
       {
        "action": "sit",
        "mood": "sad",
        "lookAt": "camera",
-       "cue": 5.08
+       "cue": 5.24
       },
       {
        "action": "sit",
        "mood": "sad",
        "lookAt": "left",
-       "cue": 8.032
+       "cue": 8.381
       },
       {
        "mood": "happy",
        "lookAt": "camera",
-       "cue": 12.12
+       "cue": 12.7
       },
       {
        "mood": "shocked",
        "lookAt": "right",
-       "cue": 13.688
+       "cue": 14.251
       },
       {
        "mood": "angry",
-       "cue": 15.798
+       "cue": 16.381
       },
       {
        "action": "sit",
        "mood": "neutral",
        "lookAt": "right",
-       "cue": 16.398
+       "cue": 16.981
       },
       {
        "mood": "worried",
-       "cue": 18.218
+       "cue": 18.941
       },
       {
        "action": "hold",
        "prop": "phone",
        "mood": "shocked",
        "lookAt": "camera",
-       "cue": 20.526
+       "cue": 21.067
       },
       {
        "action": "idle",
        "prop": "",
        "mood": "worried",
        "lookAt": "left",
-       "cue": 23.128
+       "cue": 24.051
       },
       {
        "mood": "neutral",
        "lookAt": "left",
-       "cue": 24.518
+       "cue": 25.441
       },
       {
        "mood": "shocked",
-       "cue": 25.718
+       "cue": 26.721
       },
       {
        "action": "punch",
        "mood": "determined",
-       "cue": 26.468
+       "cue": 27.471
       },
       {
        "action": "idle",
        "mood": "happy",
-       "cue": 26.868
+       "cue": 27.871
       },
       {
        "mood": "shocked",
-       "cue": 27.761
+       "cue": 28.701
       },
       {
        "action": "punch",
        "mood": "angry",
-       "cue": 27.911
+       "cue": 28.851
       },
       {
        "action": "idle",
-       "cue": 27.981
+       "cue": 29.182
       },
       {
        "action": "cheer",
        "mood": "happy",
        "lookAt": "left",
-       "cue": 28.231
+       "cue": 29.432
       },
       {
        "action": "idle",
        "mood": "smug",
        "lookAt": "left",
-       "cue": 30.625
+       "cue": 31.924
       },
       {
        "action": "hold",
        "prop": "soap",
        "mood": "neutral",
        "lookAt": "right",
-       "cue": 33.051
+       "cue": 34.891
       },
       {
        "mood": "worried",
-       "cue": 36.811
+       "cue": 38.631
       },
       {
        "action": "idle",
        "prop": "",
        "mood": "worried",
        "lookAt": "camera",
-       "cue": 42.89
+       "cue": 44.815
       },
       {
        "mood": "shocked",
        "lookAt": "right",
-       "cue": 44.77
+       "cue": 46.695
       },
       {
        "mood": "scared",
-       "cue": 46.328
+       "cue": 48.205
       },
       {
        "mood": "determined",
-       "cue": 47.49
+       "cue": 49.955
       }
      ]
     },
@@ -351,27 +351,27 @@
        "action": "idle",
        "mood": "shocked",
        "lookAt": "camera",
-       "cue": 49.43
+       "cue": 51.935
       },
       {
        "mood": "neutral",
        "lookAt": "right",
-       "cue": 50.347
+       "cue": 52.808
       },
       {
        "mood": "shocked",
        "lookAt": "camera",
-       "cue": 51.77
+       "cue": 54.185
       },
       {
        "mood": "neutral",
        "lookAt": "right",
-       "cue": 53.615
+       "cue": 56.005
       },
       {
        "mood": "sad",
        "lookAt": "camera",
-       "cue": 55.775
+       "cue": 57.505
       }
      ]
     },
@@ -395,102 +395,102 @@
       },
       {
        "lookAt": "camera",
-       "cue": 2.392
+       "cue": 2.466
       },
       {
        "action": "sit",
        "mood": "smug",
        "lookAt": "left",
-       "cue": 16.398
+       "cue": 16.981
       },
       {
        "action": "talk",
-       "cue": 18.018
+       "cue": 18.741
       },
       {
        "action": "hold",
        "prop": "soap",
        "mood": "happy",
-       "cue": 19.248
+       "cue": 20.031
       },
       {
        "action": "idle",
        "prop": "",
-       "cue": 20.426
+       "cue": 20.967
       },
       {
        "action": "idle",
        "mood": "smug",
        "lookAt": "right",
-       "cue": 23.518
+       "cue": 24.441
       },
       {
        "action": "talk",
-       "cue": 25.418
+       "cue": 26.421
       },
       {
        "action": "idle",
-       "cue": 26.468
+       "cue": 27.471
       },
       {
        "mood": "shocked",
-       "cue": 26.668
+       "cue": 27.671
       },
       {
        "action": "punch",
        "mood": "happy",
-       "cue": 27.461
+       "cue": 28.401
       },
       {
        "action": "idle",
-       "cue": 27.811
+       "cue": 28.751
       },
       {
        "action": "talk",
        "mood": "determined",
        "lookAt": "camera",
-       "cue": 28.231
+       "cue": 29.432
       },
       {
        "action": "idle",
        "mood": "smug",
-       "cue": 32.311
+       "cue": 33.971
       },
       {
        "action": "build",
        "mood": "happy",
        "lookAt": "left",
-       "cue": 33.051
+       "cue": 34.891
       },
       {
        "action": "hold",
        "prop": "soap",
-       "cue": 35.151
+       "cue": 36.971
       },
       {
        "action": "idle",
        "prop": "",
-       "cue": 37.753
+       "cue": 39.358
       },
       {
        "action": "idle",
        "mood": "smug",
        "lookAt": "left",
-       "cue": 44.72
+       "cue": 46.645
       },
       {
        "mood": "creepy",
        "lookAt": "camera",
-       "cue": 46.328
+       "cue": 48.205
       },
       {
        "mood": "smug",
        "lookAt": "left",
-       "cue": 47.49
+       "cue": 49.955
       },
       {
        "mood": "shocked",
-       "cue": 49.43
+       "cue": 51.935
       }
      ]
     },
@@ -515,38 +515,38 @@
       },
       {
        "mood": "happy",
-       "cue": 12.12
+       "cue": 12.7
       },
       {
        "mood": "worried",
        "lookAt": "right",
-       "cue": 13.738
+       "cue": 14.301
       },
       {
        "action": "cheer",
        "mood": "happy",
        "lookAt": "right",
-       "cue": 28.231
+       "cue": 29.432
       },
       {
        "action": "idle",
        "mood": "determined",
        "lookAt": "right",
-       "cue": 39.353
+       "cue": 40.958
       },
       {
        "mood": "scared",
-       "cue": 41.03
+       "cue": 43.255
       },
       {
        "action": "fall",
        "mood": "shocked",
-       "cue": 41.43
+       "cue": 43.675
       },
       {
        "action": "idle",
        "mood": "sad",
-       "cue": 41.88
+       "cue": 44.125
       }
      ]
     },
@@ -566,27 +566,27 @@
        "action": "idle",
        "mood": "smug",
        "lookAt": "left",
-       "cue": 13.138
+       "cue": 13.701
       },
       {
        "mood": "smug",
        "lookAt": "camera",
-       "cue": 14.918
+       "cue": 15.581
       },
       {
        "mood": "happy",
        "lookAt": "left",
-       "cue": 15.798
+       "cue": 16.381
       },
       {
        "mood": "neutral",
        "lookAt": "left",
-       "cue": 52.765
+       "cue": 55.155
       },
       {
        "mood": "worried",
        "lookAt": "camera",
-       "cue": 54.195
+       "cue": 56.485
       }
      ]
     },
@@ -609,7 +609,7 @@
       {
        "lookAt": "right",
        "mood": "worried",
-       "cue": 13.738
+       "cue": 14.301
       }
      ]
     },
@@ -631,7 +631,7 @@
       },
       {
        "mood": "neutral",
-       "cue": 12.12
+       "cue": 12.7
       }
      ]
     },
@@ -650,7 +650,7 @@
       {
        "action": "cheer",
        "mood": "happy",
-       "cue": 27.631
+       "cue": 28.832
       }
      ]
     },
@@ -669,7 +669,7 @@
       {
        "action": "cheer",
        "mood": "happy",
-       "cue": 27.731
+       "cue": 28.932
       }
      ]
     },
@@ -694,7 +694,7 @@
       },
       {
        "mood": "shocked",
-       "cue": 41.73
+       "cue": 43.975
       }
      ]
     },
@@ -713,52 +713,57 @@
       {
        "action": "punch",
        "mood": "angry",
-       "cue": 28.481
+       "cue": 29.682
       },
       {
        "action": "idle",
        "mood": "shocked",
-       "cue": 28.901
+       "cue": 30.102
       },
       {
        "action": "punch",
        "mood": "angry",
-       "cue": 29.321
+       "cue": 30.522
       },
       {
        "action": "idle",
        "mood": "shocked",
-       "cue": 29.741
+       "cue": 30.942
       },
       {
        "action": "punch",
        "mood": "angry",
-       "cue": 30.161
+       "cue": 31.362
       },
       {
        "action": "idle",
        "mood": "shocked",
-       "cue": 30.581
+       "cue": 31.782
       },
       {
        "action": "punch",
        "mood": "angry",
-       "cue": 31.001
+       "cue": 32.202
       },
       {
        "action": "idle",
        "mood": "shocked",
-       "cue": 31.421
+       "cue": 32.622
       },
       {
        "action": "punch",
        "mood": "angry",
-       "cue": 31.841
+       "cue": 33.042
       },
       {
        "action": "idle",
        "mood": "shocked",
-       "cue": 32.261
+       "cue": 33.462
+      },
+      {
+       "action": "punch",
+       "mood": "angry",
+       "cue": 33.882
       }
      ]
     },
@@ -777,52 +782,57 @@
       {
        "action": "idle",
        "mood": "shocked",
-       "cue": 28.481
+       "cue": 29.682
       },
       {
        "action": "punch",
        "mood": "angry",
-       "cue": 28.901
+       "cue": 30.102
       },
       {
        "action": "idle",
        "mood": "shocked",
-       "cue": 29.321
+       "cue": 30.522
       },
       {
        "action": "punch",
        "mood": "angry",
-       "cue": 29.741
+       "cue": 30.942
       },
       {
        "action": "idle",
        "mood": "shocked",
-       "cue": 30.161
+       "cue": 31.362
       },
       {
        "action": "punch",
        "mood": "angry",
-       "cue": 30.581
+       "cue": 31.782
       },
       {
        "action": "idle",
        "mood": "shocked",
-       "cue": 31.001
+       "cue": 32.202
       },
       {
        "action": "punch",
        "mood": "angry",
-       "cue": 31.421
+       "cue": 32.622
       },
       {
        "action": "idle",
        "mood": "shocked",
-       "cue": 31.841
+       "cue": 33.042
       },
       {
        "action": "punch",
        "mood": "angry",
-       "cue": 32.261
+       "cue": 33.462
+      },
+      {
+       "action": "idle",
+       "mood": "shocked",
+       "cue": 33.882
       }
      ]
     },
@@ -845,24 +855,24 @@
       },
       {
        "mood": "worried",
-       "cue": 4.38
+       "cue": 4.54
       },
       {
        "action": "cheer",
        "mood": "happy",
-       "cue": 28.231
+       "cue": 29.432
       },
       {
        "action": "idle",
        "mood": "determined",
        "lookAt": "camera",
-       "cue": 30.625
+       "cue": 31.924
       },
       {
        "action": "cheer",
        "mood": "happy",
        "lookAt": "right",
-       "cue": 32.411
+       "cue": 34.071
       }
      ]
     },
@@ -885,24 +895,24 @@
       },
       {
        "mood": "worried",
-       "cue": 4.48
+       "cue": 4.64
       },
       {
        "action": "cheer",
        "mood": "happy",
-       "cue": 28.311
+       "cue": 29.512
       },
       {
        "action": "idle",
        "mood": "determined",
        "lookAt": "camera",
-       "cue": 30.675
+       "cue": 31.974
       },
       {
        "action": "cheer",
        "mood": "happy",
        "lookAt": "right",
-       "cue": 32.471
+       "cue": 34.131
       }
      ]
     },
@@ -925,24 +935,24 @@
       },
       {
        "mood": "worried",
-       "cue": 4.58
+       "cue": 4.74
       },
       {
        "action": "cheer",
        "mood": "happy",
-       "cue": 28.391
+       "cue": 29.592
       },
       {
        "action": "idle",
        "mood": "determined",
        "lookAt": "camera",
-       "cue": 30.725
+       "cue": 32.024
       },
       {
        "action": "cheer",
        "mood": "happy",
        "lookAt": "right",
-       "cue": 32.531
+       "cue": 34.191
       }
      ]
     },
@@ -965,24 +975,24 @@
       },
       {
        "mood": "worried",
-       "cue": 4.68
+       "cue": 4.84
       },
       {
        "action": "cheer",
        "mood": "happy",
-       "cue": 28.471
+       "cue": 29.672
       },
       {
        "action": "idle",
        "mood": "determined",
        "lookAt": "camera",
-       "cue": 30.775
+       "cue": 32.074
       },
       {
        "action": "cheer",
        "mood": "happy",
        "lookAt": "left",
-       "cue": 32.591
+       "cue": 34.251
       }
      ]
     },
@@ -1005,24 +1015,24 @@
       },
       {
        "mood": "worried",
-       "cue": 4.78
+       "cue": 4.94
       },
       {
        "action": "cheer",
        "mood": "happy",
-       "cue": 28.551
+       "cue": 29.752
       },
       {
        "action": "idle",
        "mood": "determined",
        "lookAt": "camera",
-       "cue": 30.825
+       "cue": 32.124
       },
       {
        "action": "cheer",
        "mood": "happy",
        "lookAt": "left",
-       "cue": 32.651
+       "cue": 34.311
       }
      ]
     },
@@ -1045,24 +1055,24 @@
       },
       {
        "mood": "worried",
-       "cue": 4.88
+       "cue": 5.04
       },
       {
        "action": "cheer",
        "mood": "happy",
-       "cue": 28.631
+       "cue": 29.832
       },
       {
        "action": "idle",
        "mood": "determined",
        "lookAt": "camera",
-       "cue": 30.875
+       "cue": 32.174
       },
       {
        "action": "cheer",
        "mood": "happy",
        "lookAt": "left",
-       "cue": 32.711
+       "cue": 34.371
       }
      ]
     },
@@ -1085,24 +1095,24 @@
       },
       {
        "mood": "worried",
-       "cue": 4.98
+       "cue": 5.14
       },
       {
        "action": "cheer",
        "mood": "happy",
-       "cue": 28.711
+       "cue": 29.912
       },
       {
        "action": "idle",
        "mood": "determined",
        "lookAt": "camera",
-       "cue": 30.925
+       "cue": 32.224
       },
       {
        "action": "cheer",
        "mood": "happy",
        "lookAt": "right",
-       "cue": 32.771
+       "cue": 34.431
       }
      ]
     },
@@ -1125,24 +1135,24 @@
       },
       {
        "mood": "worried",
-       "cue": 5.08
+       "cue": 5.24
       },
       {
        "action": "cheer",
        "mood": "happy",
-       "cue": 28.791
+       "cue": 29.992
       },
       {
        "action": "idle",
        "mood": "determined",
        "lookAt": "camera",
-       "cue": 30.975
+       "cue": 32.274
       },
       {
        "action": "cheer",
        "mood": "happy",
        "lookAt": "left",
-       "cue": 32.831
+       "cue": 34.491
       }
      ]
     },
@@ -1160,7 +1170,7 @@
      "keys": [
       {
        "mood": "angry",
-       "cue": 39.47
+       "cue": 41.355
       }
      ]
     },
@@ -1178,7 +1188,7 @@
      "keys": [
       {
        "mood": "angry",
-       "cue": 39.52
+       "cue": 41.405
       }
      ]
     },
@@ -1196,7 +1206,7 @@
      "keys": [
       {
        "mood": "angry",
-       "cue": 39.57
+       "cue": 41.455
       }
      ]
     },
@@ -1214,7 +1224,7 @@
      "keys": [
       {
        "mood": "angry",
-       "cue": 39.62
+       "cue": 41.505
       }
      ]
     },
@@ -1232,7 +1242,7 @@
      "keys": [
       {
        "mood": "angry",
-       "cue": 39.67
+       "cue": 41.555
       }
      ]
     },
@@ -1250,7 +1260,7 @@
      "keys": [
       {
        "mood": "angry",
-       "cue": 39.72
+       "cue": 41.605
       }
      ]
     },
@@ -1268,7 +1278,7 @@
      "keys": [
       {
        "mood": "angry",
-       "cue": 39.77
+       "cue": 41.655
       }
      ]
     },
@@ -1286,7 +1296,7 @@
      "keys": [
       {
        "mood": "angry",
-       "cue": 39.82
+       "cue": 41.705
       }
      ]
     },
@@ -1304,7 +1314,7 @@
      "keys": [
       {
        "mood": "angry",
-       "cue": 39.87
+       "cue": 41.755
       }
      ]
     },
@@ -1322,7 +1332,7 @@
      "keys": [
       {
        "mood": "angry",
-       "cue": 39.92
+       "cue": 41.805
       }
      ]
     },
@@ -1340,7 +1350,7 @@
      "keys": [
       {
        "mood": "angry",
-       "cue": 39.97
+       "cue": 41.855
       }
      ]
     },
@@ -1358,7 +1368,7 @@
      "keys": [
       {
        "mood": "angry",
-       "cue": 40.02
+       "cue": 41.905
       }
      ]
     }
@@ -1367,7 +1377,7 @@
     {
      "type": "tag",
      "at": 0.35,
-     "untilAt": 4.18,
+     "untilAt": 4.34,
      "of": "tyler",
      "text": "HIS BEST FRIEND",
      "bg": "#ff7a5a"
@@ -1384,7 +1394,7 @@
     },
     {
      "type": "callout",
-     "at": 4.03,
+     "at": 4.19,
      "dur": 1.1,
      "x": 0.5,
      "y": 0.17,
@@ -1394,19 +1404,19 @@
     },
     {
      "type": "flicker",
-     "at": 4.38,
+     "at": 4.54,
      "dur": 0.5
     },
     {
      "type": "speedlines",
-     "at": 4.88,
+     "at": 5.04,
      "dur": 1.0,
      "x": 0.5,
      "y": 0.5
     },
     {
      "type": "callout",
-     "at": 6.46,
+     "at": 6.94,
      "dur": 1.1,
      "x": 0.5,
      "y": 0.17,
@@ -1416,7 +1426,7 @@
     },
     {
      "type": "callout",
-     "at": 8.79,
+     "at": 9.41,
      "dur": 2.4,
      "x": 0.5,
      "y": 0.17,
@@ -1426,15 +1436,15 @@
     },
     {
      "type": "tag",
-     "at": 9.44,
-     "untilAt": 11.58,
+     "at": 10.06,
+     "untilAt": 12.0,
      "of": "bob",
      "text": "BOB",
      "bg": "#9ad0ff"
     },
     {
      "type": "bubble",
-     "at": 12.12,
+     "at": 12.7,
      "dur": 1.0,
      "of": "narr",
      "text": "Zzz",
@@ -1442,15 +1452,15 @@
     },
     {
      "type": "tag",
-     "at": 13.688,
-     "untilAt": 16.098,
+     "at": 14.251,
+     "untilAt": 16.681,
      "of": "marla",
      "text": "MARLA",
      "bg": "#ff9ad0"
     },
     {
      "type": "callout",
-     "at": 14.818,
+     "at": 15.481,
      "dur": 0.95,
      "x": 0.5,
      "y": 0.17,
@@ -1460,22 +1470,22 @@
     },
     {
      "type": "speedlines",
-     "at": 16.348,
+     "at": 16.931,
      "dur": 1.3,
      "x": 0.5,
      "y": 0.5
     },
     {
      "type": "tag",
-     "at": 17.968,
-     "untilAt": 19.898,
+     "at": 18.691,
+     "untilAt": 20.681,
      "of": "tyler",
      "text": "TYLER DURDEN",
      "bg": "#ff7a5a"
     },
     {
      "type": "callout",
-     "at": 19.298,
+     "at": 20.081,
      "dur": 1.2,
      "x": 0.5,
      "y": 0.17,
@@ -1485,20 +1495,20 @@
     },
     {
      "type": "speedlines",
-     "at": 20.276,
+     "at": 20.817,
      "dur": 0.9,
      "x": 0.5,
      "y": 0.5
     },
     {
      "type": "flash",
-     "at": 21.487999999999996,
+     "at": 22.330999999999996,
      "dur": 0.35,
      "amount": 0.8
     },
     {
      "type": "blast",
-     "at": 21.517999999999997,
+     "at": 22.360999999999997,
      "world": [
       24.0,
       5.5,
@@ -1513,7 +1523,7 @@
     },
     {
      "type": "bubble",
-     "at": 25.468,
+     "at": 26.471,
      "dur": 1.0,
      "of": "tyler",
      "text": "HIT ME.",
@@ -1521,12 +1531,12 @@
     },
     {
      "type": "impactframe",
-     "at": 26.618000000000002,
+     "at": 27.621000000000002,
      "dur": 0.1
     },
     {
      "type": "blast",
-     "at": 26.618000000000002,
+     "at": 27.621000000000002,
      "world": [
       12.4,
       -3.5,
@@ -1541,12 +1551,12 @@
     },
     {
      "type": "impactframe",
-     "at": 27.711000000000002,
+     "at": 28.651,
      "dur": 0.1
     },
     {
      "type": "blast",
-     "at": 27.711000000000002,
+     "at": 28.651,
      "world": [
       13.0,
       -3.6,
@@ -1561,14 +1571,14 @@
     },
     {
      "type": "speedlines",
-     "at": 28.031000000000002,
+     "at": 29.232000000000003,
      "dur": 1.2,
      "x": 0.5,
      "y": 0.5
     },
     {
      "type": "callout",
-     "at": 29.551,
+     "at": 30.930999999999997,
      "dur": 0.95,
      "x": 0.5,
      "y": 0.17,
@@ -1578,7 +1588,7 @@
     },
     {
      "type": "callout",
-     "at": 30.575,
+     "at": 31.874,
      "dur": 1.9,
      "x": 0.5,
      "y": 0.17,
@@ -1589,7 +1599,7 @@
     },
     {
      "type": "blast",
-     "at": 28.601000000000003,
+     "at": 29.802000000000003,
      "world": [
       -0.35,
       0.45,
@@ -1604,7 +1614,7 @@
     },
     {
      "type": "blast",
-     "at": 29.861000000000004,
+     "at": 31.062000000000005,
      "world": [
       -0.35,
       0.45,
@@ -1619,7 +1629,7 @@
     },
     {
      "type": "blast",
-     "at": 31.121000000000002,
+     "at": 32.322,
      "world": [
       -0.35,
       0.45,
@@ -1634,7 +1644,7 @@
     },
     {
      "type": "blast",
-     "at": 32.381,
+     "at": 33.582,
      "world": [
       -0.35,
       0.45,
@@ -1649,14 +1659,14 @@
     },
     {
      "type": "speedlines",
-     "at": 32.951,
+     "at": 34.791000000000004,
      "dur": 1.0,
      "x": 0.5,
      "y": 0.5
     },
     {
      "type": "callout",
-     "at": 35.051,
+     "at": 36.870999999999995,
      "dur": 2.0,
      "x": 0.5,
      "y": 0.17,
@@ -1667,7 +1677,7 @@
     },
     {
      "type": "callout",
-     "at": 39.42,
+     "at": 41.305,
      "dur": 1.5,
      "x": 0.5,
      "y": 0.17,
@@ -1677,19 +1687,19 @@
     },
     {
      "type": "sirenglow",
-     "at": 39.353,
-     "until": 43.690000000000005,
+     "at": 40.958,
+     "until": 45.615,
      "amount": 0.26
     },
     {
      "type": "flash",
-     "at": 41.41,
+     "at": 43.655,
      "dur": 0.2,
      "amount": 0.55
     },
     {
      "type": "blast",
-     "at": 41.43,
+     "at": 43.675000000000004,
      "world": [
       72.2,
       -9.4,
@@ -1704,22 +1714,22 @@
     },
     {
      "type": "tag",
-     "at": 41.98,
-     "untilAt": 42.99,
+     "at": 44.045,
+     "untilAt": 44.915,
      "of": "bob",
      "text": "BOB",
      "bg": "#9ad0ff"
     },
     {
      "type": "speedlines",
-     "at": 42.89,
+     "at": 44.815,
      "dur": 1.3,
      "x": 0.5,
      "y": 0.5
     },
     {
      "type": "callout",
-     "at": 45.46,
+     "at": 47.345000000000006,
      "dur": 0.8,
      "x": 0.5,
      "y": 0.17,
@@ -1728,12 +1738,12 @@
     },
     {
      "type": "flicker",
-     "at": 46.278000000000006,
+     "at": 48.155,
      "dur": 0.7
     },
     {
      "type": "callout",
-     "at": 46.278000000000006,
+     "at": 48.155,
      "dur": 1.15,
      "x": 0.5,
      "y": 0.17,
@@ -1743,13 +1753,13 @@
     },
     {
      "type": "flash",
-     "at": 49.41,
+     "at": 51.91499999999999,
      "dur": 0.45,
      "amount": 1.0
     },
     {
      "type": "blast",
-     "at": 49.43,
+     "at": 51.934999999999995,
      "world": [
       85.1,
       9.1,
@@ -1764,7 +1774,7 @@
     },
     {
      "type": "callout",
-     "at": 50.147,
+     "at": 52.608,
      "dur": 1.1,
      "x": 0.5,
      "y": 0.17,
@@ -1773,7 +1783,7 @@
     },
     {
      "type": "blast",
-     "at": 51.79,
+     "at": 54.205,
      "world": [
       86.0,
       30.0,
@@ -1788,7 +1798,7 @@
     },
     {
      "type": "blast",
-     "at": 52.11,
+     "at": 54.525,
      "world": [
       86.0,
       30.0,
@@ -1803,7 +1813,7 @@
     },
     {
      "type": "blast",
-     "at": 52.43,
+     "at": 54.845,
      "world": [
       86.0,
       30.0,
@@ -1818,7 +1828,7 @@
     },
     {
      "type": "blast",
-     "at": 52.75,
+     "at": 55.165,
      "world": [
       86.0,
       30.0,
@@ -1833,7 +1843,7 @@
     },
     {
      "type": "blast",
-     "at": 53.07,
+     "at": 55.485,
      "world": [
       86.0,
       30.0,
@@ -1848,15 +1858,15 @@
     },
     {
      "type": "tag",
-     "at": 53.415,
-     "untilAt": 55.275,
+     "at": 55.805,
+     "untilAt": 57.005,
      "of": "marla",
      "text": "MARLA",
      "bg": "#ff9ad0"
     },
     {
      "type": "callout",
-     "at": 55.375,
+     "at": 57.105000000000004,
      "dur": 1.9,
      "x": 0.5,
      "y": 0.17,
@@ -1869,11 +1879,11 @@
      "type": "darken",
      "keys": [
       {
-       "at": 60.156000000000006,
+       "at": 60.886,
        "a": 0.0
       },
       {
-       "at": 60.60600000000001,
+       "at": 61.336000000000006,
        "a": 1.0
       }
      ]
@@ -1893,321 +1903,326 @@
     },
     {
      "type": "glitch",
-     "at": 4.43,
+     "at": 4.59,
      "dur": 0.6,
      "gain": 0.6
     },
     {
      "type": "whoosh",
-     "at": 4.83,
+     "at": 4.99,
      "dur": 1.0,
      "gain": 0.8
     },
     {
      "type": "hum",
-     "at": 5.4,
+     "at": 5.94,
      "dur": 2.3,
      "gain": 0.25
     },
     {
      "type": "ting",
-     "at": 6.96,
+     "at": 7.44,
      "gain": 0.3
     },
     {
      "type": "whoosh",
-     "at": 7.982,
+     "at": 8.331,
      "dur": 0.8,
      "gain": 0.7
     },
     {
      "type": "pop",
-     "at": 8.84,
+     "at": 9.46,
      "gain": 0.4
     },
     {
      "type": "pop",
-     "at": 12.12,
+     "at": 12.7,
      "gain": 0.35
     },
     {
      "type": "creak",
-     "at": 13.088000000000001,
+     "at": 13.651,
      "dur": 0.7,
      "gain": 0.5
     },
     {
      "type": "sting",
-     "at": 14.918,
+     "at": 15.581,
      "gain": 0.4
     },
     {
      "type": "whoosh",
-     "at": 16.248,
+     "at": 16.831,
      "dur": 1.4,
      "gain": 0.9
     },
     {
      "type": "wind",
-     "at": 16.398,
+     "at": 16.981,
      "dur": 1.2,
      "gain": 0.5
     },
     {
      "type": "engine",
-     "at": 17.398,
+     "at": 17.981,
      "dur": 3.4,
      "gain": 0.3
     },
     {
      "type": "pop",
-     "at": 18.258,
+     "at": 18.961,
      "gain": 0.35
     },
     {
      "type": "pop",
-     "at": 19.398,
+     "at": 20.181,
      "gain": 0.4
     },
     {
      "type": "whoosh",
-     "at": 20.226,
+     "at": 20.767,
      "dur": 1.0,
      "gain": 0.9
     },
     {
      "type": "boom",
-     "at": 21.517999999999997,
+     "at": 22.360999999999997,
      "gain": 0.9
     },
     {
      "type": "crash",
-     "at": 21.557999999999996,
+     "at": 22.400999999999996,
      "gain": 0.6
     },
     {
      "type": "crackle",
-     "at": 21.917999999999996,
+     "at": 22.760999999999996,
      "dur": 6.0,
      "gain": 0.35
     },
     {
      "type": "beep",
-     "at": 22.678,
+     "at": 23.601,
      "gain": 0.25
     },
     {
      "type": "pop",
-     "at": 25.518,
+     "at": 26.521,
      "gain": 0.35
     },
     {
      "type": "punch",
-     "at": 26.618000000000002,
+     "at": 27.621000000000002,
      "gain": 0.85
     },
     {
      "type": "punch",
-     "at": 27.711000000000002,
+     "at": 28.651,
      "gain": 0.85
     },
     {
      "type": "whoosh",
-     "at": 28.031000000000002,
+     "at": 29.232000000000003,
      "dur": 1.2,
      "gain": 0.8
     },
     {
      "type": "hum",
-     "at": 29.651,
+     "at": 31.031,
      "dur": 3.0,
      "gain": 0.25
     },
     {
      "type": "sting",
-     "at": 30.625,
+     "at": 31.924,
      "gain": 0.45
     },
     {
      "type": "punch",
-     "at": 28.601000000000003,
+     "at": 29.802000000000003,
      "gain": 0.45
     },
     {
      "type": "punch",
-     "at": 29.021000000000004,
+     "at": 30.222000000000005,
      "gain": 0.45
     },
     {
      "type": "punch",
-     "at": 29.441000000000003,
+     "at": 30.642000000000003,
      "gain": 0.45
     },
     {
      "type": "punch",
-     "at": 29.861000000000004,
+     "at": 31.062000000000005,
      "gain": 0.45
     },
     {
      "type": "punch",
-     "at": 30.281000000000002,
+     "at": 31.482000000000003,
      "gain": 0.45
     },
     {
      "type": "punch",
-     "at": 30.701000000000004,
+     "at": 31.902000000000005,
      "gain": 0.45
     },
     {
      "type": "punch",
-     "at": 31.121000000000002,
+     "at": 32.322,
      "gain": 0.45
     },
     {
      "type": "punch",
-     "at": 31.541000000000004,
+     "at": 32.742,
      "gain": 0.45
     },
     {
      "type": "punch",
-     "at": 31.961000000000002,
+     "at": 33.162,
      "gain": 0.45
     },
     {
      "type": "punch",
-     "at": 32.381,
+     "at": 33.582,
+     "gain": 0.45
+    },
+    {
+     "type": "punch",
+     "at": 34.002,
      "gain": 0.45
     },
     {
      "type": "whoosh",
-     "at": 32.951,
+     "at": 34.791000000000004,
      "dur": 1.0,
      "gain": 0.8
     },
     {
      "type": "creak",
-     "at": 33.451,
+     "at": 35.271,
      "dur": 1.0,
      "gain": 0.45
     },
     {
      "type": "pop",
-     "at": 35.151,
+     "at": 36.971,
      "gain": 0.4
     },
     {
      "type": "march",
-     "at": 37.953,
+     "at": 39.558,
      "dur": 2.8,
      "gain": 0.5
     },
     {
      "type": "sting",
-     "at": 39.47,
+     "at": 41.355,
      "gain": 0.5
     },
     {
      "type": "siren",
-     "at": 40.730000000000004,
+     "at": 42.955,
      "dur": 2.6,
      "gain": 0.35
     },
     {
      "type": "boom",
-     "at": 41.43,
+     "at": 43.675000000000004,
      "dur": 0.6,
      "gain": 0.6
     },
     {
      "type": "slam",
-     "at": 41.44,
+     "at": 43.685,
      "gain": 0.35
     },
     {
      "type": "whoosh",
-     "at": 42.89,
+     "at": 44.815,
      "dur": 1.2,
      "gain": 0.8
     },
     {
      "type": "hum",
-     "at": 44.77,
+     "at": 46.695,
      "dur": 2.6,
      "gain": 0.3
     },
     {
      "type": "sting",
-     "at": 45.51,
+     "at": 47.395,
      "gain": 0.4
     },
     {
      "type": "glitch",
-     "at": 46.278000000000006,
+     "at": 48.155,
      "dur": 0.7,
      "gain": 0.7
     },
     {
      "type": "boom",
-     "at": 49.43,
+     "at": 51.934999999999995,
      "dur": 0.8,
      "gain": 0.7
     },
     {
      "type": "slam",
-     "at": 49.44,
+     "at": 51.94499999999999,
      "gain": 0.45
     },
     {
      "type": "ting",
-     "at": 50.247,
+     "at": 52.708,
      "gain": 0.3
     },
     {
      "type": "boom",
-     "at": 51.79,
+     "at": 54.205,
      "gain": 0.75
     },
     {
      "type": "boom",
-     "at": 52.11,
+     "at": 54.525,
      "gain": 0.69
     },
     {
      "type": "boom",
-     "at": 52.43,
+     "at": 54.845,
      "gain": 0.63
     },
     {
      "type": "boom",
-     "at": 52.75,
+     "at": 55.165,
      "gain": 0.5700000000000001
     },
     {
      "type": "boom",
-     "at": 53.07,
+     "at": 55.485,
      "gain": 0.51
     },
     {
      "type": "crash",
-     "at": 55.574999999999996,
+     "at": 57.305,
      "dur": 1.6,
      "gain": 0.7
     },
     {
      "type": "crash",
-     "at": 56.275,
+     "at": 58.005,
      "dur": 1.6,
      "gain": 0.55
     },
     {
      "type": "gust",
-     "at": 55.775,
+     "at": 57.505,
      "dur": 3.2,
      "gain": 0.5
     },
     {
      "type": "pop",
-     "at": 57.084,
+     "at": 58.943,
      "gain": 0.3
     }
    ],
@@ -2218,57 +2233,57 @@
      "a": 0.12
     },
     {
-     "at": 5.08,
+     "at": 5.24,
      "col": "#9adfb0",
      "a": 0.14
     },
     {
-     "at": 8.032,
+     "at": 8.381,
      "col": "#ffc890",
      "a": 0.07
     },
     {
-     "at": 16.398,
+     "at": 16.981,
      "col": "#ffd9a8",
      "a": 0.06
     },
     {
-     "at": 20.526,
+     "at": 21.067,
      "col": "#ff8a40",
      "a": 0.12
     },
     {
-     "at": 23.817999999999998,
+     "at": 24.741,
      "col": "#ff9a4a",
      "a": 0.14
     },
     {
-     "at": 28.231,
+     "at": 29.432000000000002,
      "col": "#ffb060",
      "a": 0.12
     },
     {
-     "at": 33.051,
+     "at": 34.891000000000005,
      "col": "#ff9ac0",
      "a": 0.1
     },
     {
-     "at": 37.553,
+     "at": 39.157999999999994,
      "col": "#1c2a4a",
      "a": 0.3
     },
     {
-     "at": 40.830000000000005,
+     "at": 43.055,
      "col": "#30306a",
      "a": 0.28
     },
     {
-     "at": 42.89,
+     "at": 44.815,
      "col": "#1c2848",
      "a": 0.3
     },
     {
-     "at": 51.79,
+     "at": 54.205,
      "col": "#ff8a50",
      "a": 0.16
     }

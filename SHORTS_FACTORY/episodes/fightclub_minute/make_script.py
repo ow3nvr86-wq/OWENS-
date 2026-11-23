@@ -173,5 +173,5 @@ S_ = dict(title='Movies in a Minute: Fight Club', fps=60, tail=1.2, charStyle='r
             cop=dict(costume='police', hat='police_cap'),
             **{'c%d' % k: dict(costume=CROWD[k], hair=['#2a2420', '#6a4a2a', '#1d1a18', '#a07a4a', '#3a2a20', '#d8b45a', '#5a3a26', '#2a2420'][k]) for k in range(8)},
             **{'m%d' % k: dict(costume='tee_black', mood='determined') for k in range(4)}),
-  scenes=[dict(cue='His', bgseq=dict(dir='oneshot'), transition='cut', characters=chars, fx=fx, sfx=sfx, charTint=tint)])
+  scenes=[dict(cue='His', bgseq=dict(dir='oneshot_alex'), transition='cut', characters=chars, fx=fx, sfx=sfx, charTint=tint)])
 json.dump(S_, open(P, 'w'), indent=1); print('1 scene,', len(chars), 'characters,', len(fx), 'fx,', len(sfx), 'sfx; end', round(END, 2))

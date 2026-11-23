@@ -19,12 +19,13 @@ if (spec === 'all') frames = [...Array(N).keys()];
 else for (const part of spec.split(',')) { if (part.includes('-')) { const [a, c] = part.split('-').map(Number); for (let f = a; f <= c; f++) frames.push(f); } else frames.push(Number(part)); }
 frames = frames.filter(f => !(process.env.RESUME && fs.existsSync(path.join(out, `f${String(f).padStart(5, '0')}.jpg`))));
 const workers = Math.max(1, Number(process.env.WORKERS || 3));
+const JPEG_Q = Number(process.env.JPEG_Q || 0.94);             // lower (e.g. 0.88) when disk is tight
 const pages = [first]; for (let k = 1; k < workers; k++) pages.push(await open());
 const t0 = Date.now(); let done = 0;
 await Promise.all(pages.map(async (p, k) => {
   for (let j = k; j < frames.length; j += workers) {
     const f = frames[j]; const file = path.join(out, `f${String(f).padStart(5, '0')}.jpg`);
-    const data = await p.evaluate(fr => window.exportFrame ? window.exportFrame(fr) : (window.renderFrame(fr), document.getElementById("c").toDataURL("image/jpeg", 0.94)), f);
+    const data = await p.evaluate(([fr, q]) => window.exportFrame ? window.exportFrame(fr, q) : (window.renderFrame(fr), document.getElementById("c").toDataURL("image/jpeg", q)), [f, JPEG_Q]);
     fs.writeFileSync(file + '.tmp', Buffer.from(data.split(',')[1], 'base64')); fs.renameSync(file + '.tmp', file);
     if (++done % 100 === 0) console.log(`${done}/${frames.length} frames, ${((Date.now() - t0) / done).toFixed(0)} ms/frame`);
   }

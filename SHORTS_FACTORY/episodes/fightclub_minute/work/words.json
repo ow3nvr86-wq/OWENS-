@@ -1,1033 +1,1033 @@
 {
- "duration": 59.456,
+ "duration": 60.186,
  "fps": 30,
- "frames": 1784,
+ "frames": 1806,
  "words": [
   {
    "word": "His",
    "line": 0,
    "start": 0.0,
-   "end": 0.26
+   "end": 0.22
   },
   {
    "word": "best",
    "line": 0,
-   "start": 0.26,
-   "end": 0.54
+   "start": 0.22,
+   "end": 0.52
   },
   {
    "word": "friend",
    "line": 0,
-   "start": 0.54,
-   "end": 0.82
+   "start": 0.52,
+   "end": 0.84
   },
   {
    "word": "started",
    "line": 0,
-   "start": 0.82,
+   "start": 0.84,
    "end": 1.3
   },
   {
    "word": "Fight",
    "line": 0,
    "start": 1.3,
-   "end": 1.62
+   "end": 1.58
   },
   {
    "word": "Club.",
    "line": 0,
-   "start": 1.62,
-   "end": 2.44
+   "start": 1.58,
+   "end": 2.52
   },
   {
    "word": "Problem",
    "line": 0,
-   "start": 2.392,
-   "end": 2.54
+   "start": 2.466,
+   "end": 2.64
   },
   {
    "word": "is,",
    "line": 0,
-   "start": 2.54,
-   "end": 3.32
+   "start": 2.64,
+   "end": 3.38
   },
   {
    "word": "his",
    "line": 0,
-   "start": 3.335,
-   "end": 3.44
+   "start": 3.38,
+   "end": 3.54
   },
   {
    "word": "best",
    "line": 0,
-   "start": 3.44,
-   "end": 3.76
+   "start": 3.54,
+   "end": 3.86
   },
   {
    "word": "friend",
    "line": 0,
-   "start": 3.76,
-   "end": 4.06
+   "start": 3.86,
+   "end": 4.16
   },
   {
    "word": "doesn't",
    "line": 0,
-   "start": 4.06,
-   "end": 4.38
+   "start": 4.16,
+   "end": 4.54
   },
   {
    "word": "exist.",
    "line": 0,
-   "start": 4.38,
-   "end": 5.24
+   "start": 4.54,
+   "end": 5.72
   },
   {
    "word": "A",
    "line": 1,
-   "start": 5.301,
-   "end": 5.4
+   "start": 5.791,
+   "end": 5.94
   },
   {
    "word": "lonely",
    "line": 1,
-   "start": 5.4,
-   "end": 5.64
+   "start": 5.94,
+   "end": 6.2
   },
   {
    "word": "office",
    "line": 1,
-   "start": 5.64,
-   "end": 6.1
+   "start": 6.2,
+   "end": 6.62
   },
   {
    "word": "worker",
    "line": 1,
-   "start": 6.1,
-   "end": 6.48
+   "start": 6.62,
+   "end": 6.98
   },
   {
    "word": "can't",
    "line": 1,
-   "start": 6.48,
-   "end": 6.96
+   "start": 6.98,
+   "end": 7.44
   },
   {
    "word": "sleep.",
    "line": 1,
-   "start": 6.96,
-   "end": 7.7
+   "start": 7.44,
+   "end": 8.12
   },
   {
    "word": "So",
    "line": 1,
-   "start": 7.782,
-   "end": 7.9
+   "start": 8.131,
+   "end": 8.34
   },
   {
    "word": "he",
    "line": 1,
-   "start": 7.9,
-   "end": 8.02
+   "start": 8.34,
+   "end": 8.62
   },
   {
    "word": "fakes",
    "line": 1,
-   "start": 8.02,
-   "end": 8.26
+   "start": 8.62,
+   "end": 8.88
   },
   {
    "word": "his",
    "line": 1,
-   "start": 8.26,
-   "end": 8.42
+   "start": 8.88,
+   "end": 9.04
   },
   {
    "word": "way",
    "line": 1,
-   "start": 8.42,
-   "end": 8.64
+   "start": 9.04,
+   "end": 9.24
   },
   {
    "word": "into",
    "line": 1,
-   "start": 8.64,
-   "end": 8.84
+   "start": 9.24,
+   "end": 9.46
   },
   {
    "word": "support",
    "line": 1,
-   "start": 8.84,
-   "end": 9.26
+   "start": 9.46,
+   "end": 9.86
   },
   {
    "word": "groups",
    "line": 1,
-   "start": 9.26,
-   "end": 9.56
+   "start": 9.86,
+   "end": 10.14
   },
   {
    "word": "for",
    "line": 1,
-   "start": 9.56,
-   "end": 9.8
+   "start": 10.16,
+   "end": 10.38
   },
   {
    "word": "diseases",
    "line": 1,
-   "start": 9.8,
-   "end": 10.18
+   "start": 10.38,
+   "end": 10.7
   },
   {
    "word": "he",
    "line": 1,
-   "start": 10.18,
-   "end": 10.58
+   "start": 10.7,
+   "end": 11.04
   },
   {
    "word": "doesn't",
    "line": 1,
-   "start": 10.58,
-   "end": 10.9
+   "start": 11.04,
+   "end": 11.38
   },
   {
    "word": "have,",
    "line": 1,
-   "start": 10.9,
-   "end": 11.22
+   "start": 11.38,
+   "end": 11.8
   },
   {
    "word": "and",
    "line": 1,
-   "start": 11.58,
-   "end": 11.68
+   "start": 11.8,
+   "end": 12.1
   },
   {
    "word": "finally",
    "line": 1,
-   "start": 11.68,
-   "end": 12.12
+   "start": 12.1,
+   "end": 12.7
   },
   {
    "word": "sleeps.",
    "line": 1,
-   "start": 12.12,
-   "end": 12.96
+   "start": 12.7,
+   "end": 13.52
   },
   {
    "word": "Until",
    "line": 1,
-   "start": 13.193,
-   "end": 13.438
+   "start": 13.73,
+   "end": 14.001
   },
   {
    "word": "Marla",
    "line": 1,
-   "start": 13.438,
-   "end": 13.718
+   "start": 14.001,
+   "end": 14.421
   },
   {
    "word": "shows",
    "line": 1,
-   "start": 13.718,
-   "end": 13.998
+   "start": 14.421,
+   "end": 14.641
   },
   {
    "word": "up,",
    "line": 1,
-   "start": 13.998,
-   "end": 14.678
+   "start": 14.641,
+   "end": 15.361
   },
   {
    "word": "another",
    "line": 1,
-   "start": 14.629,
-   "end": 14.918
+   "start": 15.17,
+   "end": 15.581
   },
   {
    "word": "faker,",
    "line": 1,
-   "start": 14.918,
-   "end": 15.578
+   "start": 15.581,
+   "end": 16.281
   },
   {
    "word": "and",
    "line": 1,
-   "start": 15.68,
-   "end": 15.798
+   "start": 16.281,
+   "end": 16.381
   },
   {
    "word": "ruins",
    "line": 1,
-   "start": 15.798,
-   "end": 16.098
+   "start": 16.381,
+   "end": 16.721
   },
   {
    "word": "it.",
    "line": 1,
-   "start": 16.098,
-   "end": 16.798
+   "start": 16.721,
+   "end": 17.521
   },
   {
    "word": "On",
    "line": 2,
-   "start": 16.842,
-   "end": 16.898
+   "start": 17.617,
+   "end": 17.721
   },
   {
    "word": "a",
    "line": 2,
-   "start": 16.898,
-   "end": 17.018
+   "start": 17.721,
+   "end": 17.861
   },
   {
    "word": "business",
    "line": 2,
-   "start": 17.018,
-   "end": 17.258
+   "start": 17.861,
+   "end": 18.141
   },
   {
    "word": "flight,",
    "line": 2,
-   "start": 17.258,
-   "end": 17.998
+   "start": 18.141,
+   "end": 18.681
   },
   {
    "word": "he",
    "line": 2,
-   "start": 17.949,
-   "end": 18.018
+   "start": 18.681,
+   "end": 18.741
   },
   {
    "word": "meets",
    "line": 2,
-   "start": 18.018,
-   "end": 18.258
+   "start": 18.741,
+   "end": 18.961
   },
   {
    "word": "Tyler",
    "line": 2,
-   "start": 18.258,
-   "end": 18.618
+   "start": 18.961,
+   "end": 19.401
   },
   {
    "word": "Durden,",
    "line": 2,
-   "start": 18.618,
-   "end": 19.238
+   "start": 19.401,
+   "end": 20.021
   },
   {
    "word": "a",
    "line": 2,
-   "start": 19.238,
-   "end": 19.398
+   "start": 20.057,
+   "end": 20.181
   },
   {
    "word": "soap",
    "line": 2,
-   "start": 19.398,
-   "end": 19.618
+   "start": 20.181,
+   "end": 20.421
   },
   {
    "word": "salesman.",
    "line": 2,
-   "start": 19.618,
-   "end": 20.618
+   "start": 20.421,
+   "end": 21.221
   },
   {
    "word": "Then",
    "line": 2,
-   "start": 20.726,
-   "end": 20.838
+   "start": 21.267,
+   "end": 21.641
   },
   {
    "word": "his",
    "line": 2,
-   "start": 20.838,
-   "end": 20.998
+   "start": 21.641,
+   "end": 21.821
   },
   {
    "word": "apartment",
    "line": 2,
-   "start": 20.998,
-   "end": 21.438
+   "start": 21.821,
+   "end": 22.281
   },
   {
    "word": "explodes.",
    "line": 2,
-   "start": 21.438,
-   "end": 22.538
+   "start": 22.281,
+   "end": 23.441
   },
   {
    "word": "He",
    "line": 2,
-   "start": 22.6,
-   "end": 22.678
+   "start": 23.535,
+   "end": 23.601
   },
   {
    "word": "calls",
    "line": 2,
-   "start": 22.678,
-   "end": 22.938
+   "start": 23.601,
+   "end": 23.881
   },
   {
    "word": "Tyler.",
    "line": 2,
-   "start": 22.938,
-   "end": 23.898
+   "start": 23.881,
+   "end": 24.761
   },
   {
    "word": "At",
    "line": 2,
-   "start": 23.918,
-   "end": 23.998
+   "start": 24.805,
+   "end": 24.921
   },
   {
    "word": "a",
    "line": 2,
-   "start": 23.998,
-   "end": 24.118
+   "start": 24.921,
+   "end": 25.041
   },
   {
    "word": "bar,",
    "line": 2,
-   "start": 24.118,
-   "end": 24.738
+   "start": 25.041,
+   "end": 25.561
   },
   {
    "word": "Tyler",
    "line": 2,
-   "start": 24.606,
-   "end": 24.778
+   "start": 25.561,
+   "end": 25.781
   },
   {
    "word": "asks",
    "line": 2,
-   "start": 24.778,
-   "end": 25.198
+   "start": 25.781,
+   "end": 26.141
   },
   {
    "word": "him",
    "line": 2,
-   "start": 25.198,
-   "end": 25.378
+   "start": 26.141,
+   "end": 26.361
   },
   {
    "word": "to",
    "line": 2,
-   "start": 25.378,
-   "end": 25.518
+   "start": 26.361,
+   "end": 26.521
   },
   {
    "word": "hit",
    "line": 2,
-   "start": 25.518,
-   "end": 25.678
+   "start": 26.521,
+   "end": 26.701
   },
   {
    "word": "him",
    "line": 2,
-   "start": 25.678,
-   "end": 25.858
+   "start": 26.701,
+   "end": 26.821
   },
   {
    "word": "as",
    "line": 2,
-   "start": 25.858,
-   "end": 26.038
+   "start": 26.821,
+   "end": 26.941
   },
   {
    "word": "hard",
    "line": 2,
-   "start": 26.038,
-   "end": 26.298
+   "start": 26.941,
+   "end": 27.241
   },
   {
    "word": "as",
    "line": 2,
-   "start": 26.298,
-   "end": 26.458
+   "start": 27.241,
+   "end": 27.381
   },
   {
    "word": "he",
    "line": 2,
-   "start": 26.458,
-   "end": 26.558
+   "start": 27.381,
+   "end": 27.501
   },
   {
    "word": "can.",
    "line": 2,
-   "start": 26.558,
-   "end": 27.118
+   "start": 27.501,
+   "end": 28.061
   },
   {
    "word": "They",
    "line": 3,
-   "start": 27.31,
-   "end": 27.411
+   "start": 28.22,
+   "end": 28.351
   },
   {
    "word": "fight.",
    "line": 3,
-   "start": 27.411,
-   "end": 27.931
+   "start": 28.351,
+   "end": 29.271
   },
   {
    "word": "Soon",
    "line": 3,
-   "start": 27.931,
-   "end": 28.191
+   "start": 29.132,
+   "end": 29.411
   },
   {
    "word": "it's",
    "line": 3,
-   "start": 28.191,
-   "end": 28.431
+   "start": 29.411,
+   "end": 29.711
   },
   {
    "word": "a",
    "line": 3,
-   "start": 28.431,
-   "end": 28.571
+   "start": 29.711,
+   "end": 29.831
   },
   {
    "word": "secret",
    "line": 3,
-   "start": 28.571,
-   "end": 28.851
+   "start": 29.831,
+   "end": 30.151
   },
   {
    "word": "club",
    "line": 3,
-   "start": 28.851,
-   "end": 29.191
+   "start": 30.151,
+   "end": 30.471
   },
   {
    "word": "in",
    "line": 3,
-   "start": 29.191,
-   "end": 29.371
+   "start": 30.471,
+   "end": 30.671
   },
   {
    "word": "a",
    "line": 3,
-   "start": 29.371,
-   "end": 29.491
+   "start": 30.671,
+   "end": 30.831
   },
   {
    "word": "bar",
    "line": 3,
-   "start": 29.491,
-   "end": 29.651
+   "start": 30.831,
+   "end": 31.031
   },
   {
    "word": "basement.",
    "line": 3,
-   "start": 29.651,
-   "end": 30.751
+   "start": 31.031,
+   "end": 32.031
   },
   {
    "word": "Rule",
    "line": 3,
-   "start": 30.625,
-   "end": 30.831
+   "start": 31.924,
+   "end": 32.131
   },
   {
    "word": "one:",
    "line": 3,
-   "start": 30.831,
-   "end": 31.451
+   "start": 32.131,
+   "end": 32.771
   },
   {
    "word": "you",
    "line": 3,
-   "start": 31.451,
-   "end": 31.511
+   "start": 32.771,
+   "end": 32.971
   },
   {
    "word": "don't",
    "line": 3,
-   "start": 31.511,
-   "end": 31.711
+   "start": 32.971,
+   "end": 33.371
   },
   {
    "word": "talk",
    "line": 3,
-   "start": 31.711,
-   "end": 31.871
+   "start": 33.371,
+   "end": 33.571
   },
   {
    "word": "about",
    "line": 3,
-   "start": 31.871,
-   "end": 32.131
+   "start": 33.571,
+   "end": 33.871
   },
   {
    "word": "it.",
    "line": 3,
-   "start": 32.131,
-   "end": 32.671
+   "start": 33.871,
+   "end": 34.451
   },
   {
    "word": "They",
    "line": 4,
-   "start": 32.77,
-   "end": 32.851
+   "start": 34.577,
+   "end": 34.691
   },
   {
    "word": "move",
    "line": 4,
-   "start": 32.851,
-   "end": 33.031
+   "start": 34.691,
+   "end": 34.871
   },
   {
    "word": "into",
    "line": 4,
-   "start": 33.031,
-   "end": 33.271
+   "start": 34.871,
+   "end": 35.111
   },
   {
    "word": "a",
    "line": 4,
-   "start": 33.271,
-   "end": 33.451
+   "start": 35.111,
+   "end": 35.271
   },
   {
    "word": "crumbling",
    "line": 4,
-   "start": 33.451,
-   "end": 33.751
+   "start": 35.271,
+   "end": 35.611
   },
   {
    "word": "house,",
    "line": 4,
-   "start": 33.751,
-   "end": 34.571
+   "start": 35.611,
+   "end": 36.031
   },
   {
    "word": "and",
    "line": 4,
-   "start": 34.502,
-   "end": 34.631
+   "start": 36.031,
+   "end": 36.431
   },
   {
    "word": "Tyler",
    "line": 4,
-   "start": 34.631,
-   "end": 34.851
+   "start": 36.431,
+   "end": 36.711
   },
   {
    "word": "makes",
    "line": 4,
-   "start": 34.851,
-   "end": 35.151
+   "start": 36.711,
+   "end": 36.971
   },
   {
    "word": "soap",
    "line": 4,
-   "start": 35.151,
-   "end": 35.451
+   "start": 36.971,
+   "end": 37.291
   },
   {
    "word": "from",
    "line": 4,
-   "start": 35.451,
-   "end": 35.711
+   "start": 37.291,
+   "end": 37.551
   },
   {
    "word": "stolen",
    "line": 4,
-   "start": 35.711,
-   "end": 36.131
+   "start": 37.551,
+   "end": 37.911
   },
   {
    "word": "liposuction",
    "line": 4,
-   "start": 36.131,
-   "end": 36.811
+   "start": 37.911,
+   "end": 38.631
   },
   {
    "word": "fat.",
    "line": 4,
-   "start": 36.811,
-   "end": 37.651
+   "start": 38.631,
+   "end": 39.371
   },
   {
    "word": "Then",
    "line": 4,
-   "start": 37.753,
-   "end": 37.891
+   "start": 39.358,
+   "end": 39.631
   },
   {
    "word": "the",
    "line": 4,
-   "start": 37.891,
-   "end": 38.091
+   "start": 39.631,
+   "end": 39.851
   },
   {
    "word": "club",
    "line": 4,
-   "start": 38.091,
-   "end": 38.251
+   "start": 39.851,
+   "end": 40.111
   },
   {
    "word": "becomes",
    "line": 4,
-   "start": 38.251,
-   "end": 38.651
+   "start": 40.111,
+   "end": 40.491
   },
   {
    "word": "an",
    "line": 4,
-   "start": 38.651,
-   "end": 38.871
+   "start": 40.491,
+   "end": 40.691
   },
   {
    "word": "army:",
    "line": 4,
-   "start": 38.871,
-   "end": 39.451
+   "start": 40.691,
+   "end": 41.331
   },
   {
    "word": "Project",
    "line": 4,
-   "start": 39.47,
-   "end": 39.99
+   "start": 41.355,
+   "end": 41.955
   },
   {
    "word": "Mayhem.",
    "line": 4,
-   "start": 39.99,
-   "end": 40.97
+   "start": 41.955,
+   "end": 43.055
   },
   {
    "word": "When",
    "line": 5,
-   "start": 40.937,
-   "end": 41.01
+   "start": 43.126,
+   "end": 43.215
   },
   {
    "word": "the",
    "line": 5,
-   "start": 41.01,
-   "end": 41.13
+   "start": 43.215,
+   "end": 43.355
   },
   {
    "word": "police",
    "line": 5,
-   "start": 41.13,
-   "end": 41.37
+   "start": 43.355,
+   "end": 43.615
   },
   {
    "word": "kill",
    "line": 5,
-   "start": 41.37,
-   "end": 41.73
+   "start": 43.615,
+   "end": 43.875
   },
   {
    "word": "his",
    "line": 5,
-   "start": 41.73,
-   "end": 41.91
+   "start": 43.875,
+   "end": 44.055
   },
   {
    "word": "friend",
    "line": 5,
-   "start": 41.91,
-   "end": 42.23
+   "start": 44.055,
+   "end": 44.295
   },
   {
    "word": "Bob,",
    "line": 5,
-   "start": 42.23,
-   "end": 42.97
+   "start": 44.295,
+   "end": 44.895
   },
   {
    "word": "he",
    "line": 5,
-   "start": 42.922,
-   "end": 42.99
+   "start": 44.895,
+   "end": 44.955
   },
   {
    "word": "tries",
    "line": 5,
-   "start": 42.99,
-   "end": 43.23
+   "start": 44.955,
+   "end": 45.195
   },
   {
    "word": "to",
    "line": 5,
-   "start": 43.23,
-   "end": 43.49
+   "start": 45.195,
+   "end": 45.415
   },
   {
    "word": "shut",
    "line": 5,
-   "start": 43.49,
-   "end": 43.67
+   "start": 45.415,
+   "end": 45.615
   },
   {
    "word": "it",
    "line": 5,
-   "start": 43.67,
-   "end": 43.79
+   "start": 45.615,
+   "end": 45.755
   },
   {
    "word": "all",
    "line": 5,
-   "start": 43.79,
-   "end": 44.05
+   "start": 45.755,
+   "end": 46.015
   },
   {
    "word": "down,",
    "line": 5,
-   "start": 44.05,
-   "end": 44.37
+   "start": 46.015,
+   "end": 46.335
   },
   {
    "word": "and",
    "line": 5,
-   "start": 44.696,
-   "end": 44.77
+   "start": 46.615,
+   "end": 46.695
   },
   {
    "word": "discovers",
    "line": 5,
-   "start": 44.77,
-   "end": 45.17
+   "start": 46.695,
+   "end": 47.075
   },
   {
    "word": "the",
    "line": 5,
-   "start": 45.31,
-   "end": 45.51
+   "start": 47.075,
+   "end": 47.395
   },
   {
    "word": "truth.",
    "line": 5,
-   "start": 45.51,
-   "end": 46.27
+   "start": 47.395,
+   "end": 48.175
   },
   {
    "word": "He",
    "line": 5,
-   "start": 46.328,
-   "end": 46.39
+   "start": 48.205,
+   "end": 48.435
   },
   {
    "word": "is",
    "line": 5,
-   "start": 46.39,
-   "end": 46.59
+   "start": 48.435,
+   "end": 48.895
   },
   {
    "word": "Tyler.",
    "line": 5,
-   "start": 46.59,
-   "end": 47.29
+   "start": 48.895,
+   "end": 49.735
   },
   {
    "word": "To",
    "line": 6,
-   "start": 47.405,
-   "end": 47.49
+   "start": 49.852,
+   "end": 49.955
   },
   {
    "word": "stop",
    "line": 6,
-   "start": 47.49,
-   "end": 47.73
+   "start": 49.955,
+   "end": 50.255
   },
   {
    "word": "him,",
    "line": 6,
-   "start": 47.73,
-   "end": 48.07
+   "start": 50.255,
+   "end": 50.675
   },
   {
    "word": "he",
    "line": 6,
-   "start": 48.07,
-   "end": 48.19
+   "start": 50.654,
+   "end": 50.755
   },
   {
    "word": "shoots",
    "line": 6,
-   "start": 48.19,
-   "end": 48.39
+   "start": 50.755,
+   "end": 51.035
   },
   {
    "word": "himself",
    "line": 6,
-   "start": 48.39,
-   "end": 48.83
+   "start": 51.035,
+   "end": 51.395
   },
   {
    "word": "through",
    "line": 6,
-   "start": 48.83,
-   "end": 49.13
+   "start": 51.395,
+   "end": 51.655
   },
   {
    "word": "the",
    "line": 6,
-   "start": 49.13,
-   "end": 49.31
+   "start": 51.655,
+   "end": 51.815
   },
   {
    "word": "cheek.",
    "line": 6,
-   "start": 49.31,
-   "end": 50.25
+   "start": 51.815,
+   "end": 52.675
   },
   {
    "word": "Tyler's",
    "line": 6,
-   "start": 50.147,
-   "end": 50.63
+   "start": 52.608,
+   "end": 53.055
   },
   {
    "word": "gone.",
    "line": 6,
-   "start": 50.63,
-   "end": 51.33
+   "start": 53.055,
+   "end": 53.635
   },
   {
    "word": "But",
    "line": 6,
-   "start": 51.462,
-   "end": 51.53
+   "start": 53.838,
+   "end": 53.925
   },
   {
    "word": "the",
    "line": 6,
-   "start": 51.53,
-   "end": 51.67
+   "start": 53.925,
+   "end": 54.085
   },
   {
    "word": "bombs",
    "line": 6,
-   "start": 51.67,
-   "end": 51.93
+   "start": 54.085,
+   "end": 54.365
   },
   {
    "word": "still",
    "line": 6,
-   "start": 51.93,
-   "end": 52.27
+   "start": 54.365,
+   "end": 54.745
   },
   {
    "word": "go",
    "line": 6,
-   "start": 52.27,
-   "end": 52.49
+   "start": 54.745,
+   "end": 54.965
   },
   {
    "word": "off,",
    "line": 6,
-   "start": 52.49,
-   "end": 52.97
+   "start": 54.965,
+   "end": 55.545
   },
   {
    "word": "and",
    "line": 6,
-   "start": 53.131,
-   "end": 53.215
+   "start": 55.545,
+   "end": 55.585
   },
   {
    "word": "he",
    "line": 6,
-   "start": 53.215,
-   "end": 53.315
+   "start": 55.585,
+   "end": 55.705
   },
   {
    "word": "holds",
    "line": 6,
-   "start": 53.315,
-   "end": 53.655
+   "start": 55.705,
+   "end": 56.025
   },
   {
    "word": "Marla's",
    "line": 6,
-   "start": 53.655,
-   "end": 54.195
+   "start": 56.025,
+   "end": 56.485
   },
   {
    "word": "hand",
    "line": 6,
-   "start": 54.195,
-   "end": 54.515
+   "start": 56.485,
+   "end": 56.705
   },
   {
    "word": "as",
    "line": 6,
-   "start": 54.515,
-   "end": 54.915
+   "start": 56.705,
+   "end": 56.865
   },
   {
    "word": "the",
    "line": 6,
-   "start": 54.915,
-   "end": 55.075
+   "start": 56.865,
+   "end": 57.065
   },
   {
    "word": "credit",
    "line": 6,
-   "start": 55.075,
-   "end": 55.335
+   "start": 57.065,
+   "end": 57.245
   },
   {
    "word": "card",
    "line": 6,
-   "start": 55.335,
-   "end": 55.775
+   "start": 57.245,
+   "end": 57.505
   },
   {
    "word": "towers",
    "line": 6,
-   "start": 55.775,
-   "end": 56.215
+   "start": 57.505,
+   "end": 57.945
   },
   {
    "word": "fall.",
    "line": 6,
-   "start": 56.215,
-   "end": 57.095
+   "start": 57.945,
+   "end": 58.865
   },
   {
    "word": "Would",
    "line": 7,
-   "start": 57.084,
-   "end": 57.175
+   "start": 58.943,
+   "end": 59.065
   },
   {
    "word": "you",
    "line": 7,
-   "start": 57.175,
-   "end": 57.335
+   "start": 59.065,
+   "end": 59.225
   },
   {
    "word": "have",
    "line": 7,
-   "start": 57.335,
-   "end": 57.495
+   "start": 59.225,
+   "end": 59.325
   },
   {
    "word": "figured",
    "line": 7,
-   "start": 57.495,
-   "end": 57.755
+   "start": 59.325,
+   "end": 59.505
   },
   {
    "word": "it",
    "line": 7,
-   "start": 57.755,
-   "end": 58.015
+   "start": 59.505,
+   "end": 59.745
   },
   {
    "word": "out?",
    "line": 7,
-   "start": 58.015,
-   "end": 59.435
+   "start": 59.745,
+   "end": 60.165
   }
  ]
 }
