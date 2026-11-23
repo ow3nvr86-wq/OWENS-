@@ -303,6 +303,11 @@ kbd {
 .wp.false { background: var(--bad); border-color: var(--bad); color: var(--surface); }
 .wp.missed { border: 2.5px dashed var(--accent); background: var(--accent-soft); color: var(--ink); }
 
+/* Inner clock */
+.clock-face { font: 700 clamp(56px, 13vw, 96px)/1 var(--f-mono); font-variant-numeric: tabular-nums; min-height: 1.1em; }
+.clock-face.hidden-time { color: var(--muted); }
+.clock-btn { min-width: 220px; padding-block: 16px; font-size: 18px; }
+
 /* Keep track */
 .track { display: grid; gap: 14px; width: 100%; text-align: left; }
 .track-row { display: grid; gap: 6px; }
@@ -619,6 +624,12 @@ kbd {
       how: 'Words from three groups, such as animals, fruit and colours, appear one at a time. <b>Keep only the latest word from each group</b> in mind, replacing the old one each time a new one comes. At the end, pick the last word shown in each group. Two rounds.',
       keys: 'Pick one word per group, then press Check.', run: runTrack
     },
+    clock: {
+      name: 'Inner Clock', trains: 'Focused timing', time: '~45 s', unit: 's off', higher: false,
+      glyph: '?.?? s', mono: true,
+      how: 'You are given a number of seconds. Press Start, and the timer runs for two seconds and then <b>hides</b>. Press Stop when you think exactly that many seconds have passed. Three rounds; your score is how far off you were on average, so lower is better.',
+      keys: 'Space or the button starts and stops.', run: runClock
+    },
     anagram: {
       name: 'Unscramble', trains: 'Verbal fluency', time: '60 s', unit: 'words', higher: true,
       glyph: 'TKCORE',
@@ -644,7 +655,7 @@ kbd {
     quick: { name: 'Quick primer', meta: '4 drills · about 4 min', ids: ['stroop', 'math', 'schulte', 'breathe'] }
   };
 
-  const fmtScore = (id, s) => id === 'schulte' ? Number(s).toFixed(1) : String(s);
+  const fmtScore = (id, s) => id === 'schulte' ? Number(s).toFixed(1) : id === 'clock' ? Number(s).toFixed(2) : String(s);
 
   // ---------- home ----------
   function renderHome() {
@@ -1545,6 +1556,72 @@ kbd {
     };
 
     round();
+  }
+
+  // ---------- 5i. Inner clock ----------
+  // Estimate a short interval with the clock hidden after the first two seconds. Score = mean error in seconds.
+  function runClock(arena, done) {
+    const TARGETS = shuffle([[5, 6], [8, 9], [11, 13]].map(([a, b]) => randInt(a, b)));
+    const VISIBLE = 2000;
+    arena.innerHTML = `<div class="play">
+      <p class="eyebrow" id="kt"></p>
+      <div class="clock-face" id="kf" aria-live="off">0.00</div>
+      <button class="btn primary clock-btn" id="kb" type="button">Start <kbd>Space</kbd></button>
+      <p class="hint" id="kh" aria-live="polite"></p>
+    </div>`;
+    const face = $('#kf', arena), btn = $('#kb', arena), hint = $('#kh', arena), title = $('#kt', arena);
+    let r = 0, running = false, waiting = false, t0 = 0, tick = null;
+    const errs = [];
+    timerLabel.textContent = 'Round';
+    hudScore('—');
+
+    const setup = () => {
+      hudTimer(`${r + 1}/${TARGETS.length}`);
+      title.textContent = `Round ${r + 1} of ${TARGETS.length}`;
+      face.textContent = '0.00';
+      face.classList.remove('hidden-time');
+      btn.innerHTML = 'Start <kbd>Space</kbd>';
+      hint.innerHTML = `Stop at exactly <b>${TARGETS[r]} seconds</b>.`;
+      waiting = false;
+    };
+    const press = () => {
+      if (waiting) return;
+      if (!running) {
+        running = true;
+        t0 = performance.now();
+        btn.innerHTML = 'Stop <kbd>Space</kbd>';
+        hint.innerHTML = `Stop at <b>${TARGETS[r]} s</b>. The clock hides after two seconds.`;
+        tick = every(() => {
+          const ms = performance.now() - t0;
+          if (ms < VISIBLE) face.textContent = (ms / 1000).toFixed(2);
+          else if (!face.classList.contains('hidden-time')) { face.textContent = '?.??'; face.classList.add('hidden-time'); }
+        }, 30);
+        return;
+      }
+      running = false;
+      waiting = true;
+      clearInterval(tick);
+      const secs = (performance.now() - t0) / 1000, off = secs - TARGETS[r];
+      errs.push(Math.abs(off));
+      face.classList.remove('hidden-time');
+      face.textContent = secs.toFixed(2);
+      flash(face, Math.abs(off) < 0.5);
+      hint.textContent = Math.abs(off) < 0.05 ? 'Spot on.' : `${Math.abs(off).toFixed(2)} s ${off < 0 ? 'early' : 'late'}.`;
+      const avg = errs.reduce((a, b) => a + b, 0) / errs.length;
+      hudScore(`${avg.toFixed(2)} s`);
+      r++;
+      if (r >= TARGETS.length) {
+        later(() => done({
+          score: Math.round(avg * 100) / 100,
+          detail: `Off by ${errs.map(e => e.toFixed(2)).join(', ')} s. Counting "one-and, two-and" under your breath keeps the beat steady.`
+        }), 1600);
+        return;
+      }
+      later(setup, 1600);
+    };
+    btn.addEventListener('click', press);
+    onKey(e => { if (e.key === ' ') { e.preventDefault(); press(); } });
+    setup();
   }
 
   // ---------- 6. Anagrams ----------
