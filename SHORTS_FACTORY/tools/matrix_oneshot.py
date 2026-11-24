@@ -286,7 +286,7 @@ concrete = m_noise('concrete', (0.2, 0.21, 0.19), (0.32, 0.32, 0.29), 3.0, 0.85,
 concD = m_noise('concreteDark', (0.12, 0.12, 0.12), (0.2, 0.2, 0.19), 2.5, 0.9, 0.2)
 iron = m_plain('iron', (0.05, 0.05, 0.055), 0.4, 0.8); woodD = m_noise('woodDark', (0.14, 0.08, 0.05), (0.24, 0.15, 0.09), 5, 0.7, 0.05)
 mercury = m_emis('mercury', (0.8, 1.0, 0.85), 16.0); fluor = m_emis('fluor', (0.86, 1.0, 0.92), 9.0); paper = m_plain('paper', (0.85, 0.84, 0.78), 0.8)
-grey = m_plain('greyPlastic', (0.35, 0.36, 0.38), 0.5); screenG = m_emis('screenGreen', (0.3, 1.0, 0.45), 3.5, (0.02, 0.05, 0.03))
+grey = m_plain('greyPlastic', (0.35, 0.36, 0.38), 0.5); screenG = m_emis('screenGreen', (0.3, 1.0, 0.45), 7.0, (0.02, 0.05, 0.03))
 leather = m_plain('redLeather', (0.32, 0.04, 0.03), 0.35); brass = m_plain('brass', (0.55, 0.4, 0.15), 0.3, 0.9)
 wallpaper = m_noise('wallpaper', (0.16, 0.12, 0.08), (0.24, 0.18, 0.11), 9.0, 0.9, 0.1)
 bulbW = m_emis('bulbWarm', (1.0, 0.72, 0.4), 14.0); black = m_plain('carBlack', (0.02, 0.02, 0.022), 0.2, 0.5)
@@ -324,7 +324,7 @@ box((12.5, -3.4, OFZ + 0.74), (2.2, 0.8, 0.05), grey); box((12.5, -3.4, OFZ + 0.
 box((12.5, -3.55, OFZ + 1.05), (0.6, 0.06, 0.42), m_plain('monitorBack', (0.1, 0.1, 0.11), 0.5))
 for k in range(4): box((11.6 + k * 0.08, -3.3, OFZ + 0.78 + k * 0.02), (0.32, 0.42, 0.02), paper)
 box((12.5, 5.52, OFZ + 2.5), (1.6, 0.06, 0.6), m_plain('clockBack', (0.03, 0.03, 0.03), 0.4))
-text('9:00 AM', (12.5, 5.47, OFZ + 2.5), 0.36, m_emis('clockRed', (1.0, 0.15, 0.1), 10), rot=(math.pi / 2, 0, math.pi), ext=0.005)
+text('9:00 AM', (12.5, 5.47, OFZ + 2.5), 0.36, m_emis('clockRed', (1.0, 0.15, 0.1), 10), rot=(math.pi / 2, 0, 0), ext=0.005)
 point((12.5, -7.5, OFZ + 2.2), 120, (0.9, 1.0, 0.95), 1.5)
 
 # ================================================================== APARTMENT (by night: three green screens) =======
@@ -336,7 +336,7 @@ span(22.4, 31.6, -5.6, 3.6, APZ - 0.2, APZ + 0.012, m_plain('aptFloor', (0.12, 0
 for (x0, x1, y0, y1, z0, z1) in [(22.4, 22.5, -5.6, 3.6, APZ, APZ + 3.0), (31.5, 31.6, -5.6, 3.6, APZ, APZ + 3.0), (22.4, 31.6, 3.5, 3.6, APZ, APZ + 3.0), (22.4, 31.6, -5.6, 3.6, APZ + 2.9, APZ + 3.0)]:
     span(x0, x1, y0, y1, z0, z1, m_plain('aptWall', (0.13, 0.14, 0.15), 0.9), 'liner')
 box((23.6, 0.0, APZ + 0.74), (1.4, 3.6, 0.06), woodD); box((23.6, 0.0, APZ + 0.36), (1.3, 3.4, 0.72), m_plain('deskBody', (0.12, 0.11, 0.1), 0.7))
-for (y, rz) in [(-1.15, 0.35), (0.0, 0.0), (1.15, -0.35)]:
+for (y, rz) in [(-1.25, -0.75), (0.0, -0.55), (1.2, -0.3)]:
     mon = box((23.45, y, APZ + 1.12), (0.08, 0.95, 0.58), m_plain('monitorCase', (0.05, 0.05, 0.06), 0.5), (0, 0, rz))
     box((23.5 + 0.0, y, APZ + 1.12), (0.04, 0.88, 0.52), screenG, (0, 0, rz))
 for k in range(6): cyl((23.2 + 0.05 * k, -1.6 + 0.6 * k, APZ + 0.3), 0.015, 0.6, iron, (0.3, 0.2 * k, 0), 6)
@@ -408,6 +408,7 @@ def unit_mesh():                                            # one tower level: s
     bpy.ops.object.select_all(action='DESELECT')
     for o in objs: o.select_set(True)
     bpy.context.view_layer.objects.active = objs[0]; bpy.ops.object.join(); u = bpy.context.object
+    bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)   # origin at the spine, no inherited pod scale
     am = u.modifiers.new('arr', 'ARRAY'); am.count = 24; am.use_relative_offset = False; am.use_constant_offset = True; am.constant_offset_displace = (0, 0, 3.2)
     bpy.ops.object.modifier_apply(modifier='arr'); return u
 tower = unit_mesh(); tower.name = 'rw_tower'; tower.location = (44.0, 4.2, POD[2] - 3.2 * 17)     # level 17 is his pod's level
@@ -598,7 +599,7 @@ def wrap_code(m):
         return mm.outputs[0]
     lines = None
     for ax in ('X', 'Y', 'Z'):
-        f_ = mth('ABSOLUTE', mth('SUBTRACT', mth('FRACT', mth('DIVIDE', sp_.outputs[ax], 0.8)), 0.5), 0.0)
+        f_ = mth('ABSOLUTE', mth('SUBTRACT', mth('FRACT', mth('DIVIDE', mth('ADD', sp_.outputs[ax], 0.137), 0.8)), 0.5), 0.0)
         l_ = mth('GREATER_THAN', f_, 0.465); lines = l_ if lines is None else mth('MAXIMUM', lines, c=l_)
     em = nn.new('ShaderNodeEmission'); em.inputs['Color'].default_value = (0.25, 1.0, 0.42, 1); Lk(mth('ADD', mth('MULTIPLY', lines, 4.0), 0.03), em.inputs['Strength'])
     mx = nn.new('ShaderNodeMixShader'); Lk(gi.outputs[0], mx.inputs[0]); Lk(src, mx.inputs[1]); Lk(em.outputs[0], mx.inputs[2]); Lk(mx.outputs[0], out.inputs['Surface'])
