@@ -128,6 +128,13 @@ function drawHandProp(g, prop, hands, t, st) {
   } else if (prop === 'phone') {                      // a payphone receiver on a coiled cord
     g.translate(hx, hy); g.rotate(Math.PI / 2 - ha - 0.6); inkRect(g, -9, -40, 18, 80, '#2a2b30', 4.5);
     for (const yy of [-46, 46]) { g.beginPath(); g.ellipse(0, yy, 16, 11, 0, 0, 7); g.fillStyle = '#2a2b30'; g.fill(); g.lineWidth = 4.5; g.strokeStyle = C.ink; g.stroke(); }
+  } else if (prop === 'pills') {                     // two pills on an open palm: red and blue
+    g.translate(hx, hy - 8);
+    for (const [px, col] of [[-16, '#d8282c'], [16, '#2a5ad8']]) { g.save(); g.translate(px, 0); g.rotate(px < 0 ? -0.5 : 0.5); g.beginPath(); g.roundRect(-14, -7, 28, 14, 7); g.fillStyle = col; g.fill(); g.lineWidth = 4; g.strokeStyle = C.ink; g.stroke();
+      g.fillStyle = 'rgba(255,255,255,0.5)'; g.fillRect(-8, -4, 10, 3); g.restore(); }
+  } else if (prop === 'pill_red' || prop === 'pill_blue') {
+    g.translate(hx, hy - 8); g.rotate(-0.4); g.beginPath(); g.roundRect(-15, -7, 30, 14, 7); g.fillStyle = prop === 'pill_red' ? '#d8282c' : '#2a5ad8'; g.fill(); g.lineWidth = 4; g.strokeStyle = C.ink; g.stroke();
+    g.fillStyle = 'rgba(255,255,255,0.5)'; g.fillRect(-9, -4, 10, 3);
   } else if (prop === 'sander') {                     // a sanding block
     g.translate(hx, hy); inkRect(g, -28, -10, 56, 22, '#b88a52', 4); g.fillStyle = '#d9c29a'; g.fillRect(-28, 8, 56, 6);
   } else if (prop === 'rifle') {

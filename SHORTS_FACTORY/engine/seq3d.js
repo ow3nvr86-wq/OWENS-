@@ -349,6 +349,23 @@ FX2.rain = function (g, fx, s, t) {
   }
   g.fillStyle = `rgba(20,30,50,${0.16 * a})`; g.fillRect(0, 0, W, H); g.restore();
 };
+// coderain: falling columns of green digits (generic 0/1 + hex, an original design), amount keyed {keys:[{at,a}]}
+FX2.coderain = function (g, fx, s, t) {
+  const a = keyAmt(fx.keys, t); if (a <= 0.01) return; const cols = fx.cols || 34, cw = W / cols, CH = '0123456789ABCDEF01';
+  g.save(); g.textAlign = 'center'; g.textBaseline = 'middle';
+  for (let c = 0; c < cols; c++) {
+    const sp = 380 + hash(c * 3.1) * 520, len = 8 + Math.floor(hash(c * 7.7) * 14), sz = cw * (0.72 + hash(c * 1.9) * 0.3), head = ((hash(c * 5.3) * (H + 900) + t * sp) % (H + len * sz + 300)) - 150;
+    g.font = `700 ${Math.round(sz)}px monospace`;
+    for (let k = 0; k < len; k++) {
+      const y = head - k * sz; if (y < -sz || y > H + sz) continue;
+      const ch = CH[Math.floor(hash(c * 13.1 + k * 3.7 + Math.floor(t * 9 + k)) * CH.length)];
+      g.fillStyle = k === 0 ? `rgba(225,255,230,${0.95 * a})` : `rgba(60,255,110,${(1 - k / len) * 0.8 * a})`;
+      if (k === 0) { g.shadowColor = '#7dff9a'; g.shadowBlur = 18; } else g.shadowBlur = 0;
+      g.fillText(ch, (c + 0.5) * cw, y);
+    }
+  }
+  g.restore();
+};
 // years: a big flipping year/number card {at, untilAt, x, y, keys:[{at, n}], label, sub}
 FX2.years = function (g, fx, s, t) {
   if (t < fx.t0 || (fx.until && t > fx.until + 0.3)) return; const K = fx.keys || []; let n = K.length ? K[0].n : 0, tick = 0;

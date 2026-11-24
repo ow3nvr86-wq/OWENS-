@@ -43,6 +43,11 @@ const RC_COSTUMES = {
   coat_black: { body: '#2b2630', detail: 'coat', pants: '#1c1a20' },                            // long dark coat, fur-ish collar
   tee_black: { body: '#25252b', detail: 'tee', pants: '#1c1c22' },
   tee_grey: { body: '#8a8a90', detail: 'tee', pants: '#3a3d46' },
+  hoodie_grey: { body: '#6f7480', detail: 'hoodie', pants: '#2a2c33' },                         // Movies in a Minute: The Matrix (original designs)
+  coat_wine: { body: '#6a2434', detail: 'coat', pants: '#24161c' },
+  jacket_teal: { body: '#1f6a70', detail: 'jacket', pants: '#1c2228' },
+  cardigan_rose: { body: '#c07a86', detail: 'jacket', pants: '#5a4a52' },
+  sweater_crew: { body: '#7a6a58', detail: 'flannel', pants: '#3a3630' },
 };
 function rcTorso(g, cos, w, h, t) {
   const x = -w / 2, y = -h, r = w * 0.48;

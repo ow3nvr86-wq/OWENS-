@@ -1,0 +1,1009 @@
+{
+ "duration": 57.626,
+ "fps": 30,
+ "frames": 1729,
+ "words": [
+  {
+   "word": "Everything",
+   "line": 0,
+   "start": 0.0,
+   "end": 0.42
+  },
+  {
+   "word": "he",
+   "line": 0,
+   "start": 0.42,
+   "end": 0.7
+  },
+  {
+   "word": "ever",
+   "line": 0,
+   "start": 0.7,
+   "end": 1.0
+  },
+  {
+   "word": "saw",
+   "line": 0,
+   "start": 1.0,
+   "end": 1.4
+  },
+  {
+   "word": "was",
+   "line": 0,
+   "start": 1.4,
+   "end": 1.66
+  },
+  {
+   "word": "a",
+   "line": 0,
+   "start": 1.66,
+   "end": 1.82
+  },
+  {
+   "word": "computer",
+   "line": 0,
+   "start": 1.82,
+   "end": 2.16
+  },
+  {
+   "word": "program.",
+   "line": 0,
+   "start": 2.16,
+   "end": 2.7
+  },
+  {
+   "word": "And",
+   "line": 0,
+   "start": 3.162,
+   "end": 3.3
+  },
+  {
+   "word": "he",
+   "line": 0,
+   "start": 3.3,
+   "end": 3.48
+  },
+  {
+   "word": "chose",
+   "line": 0,
+   "start": 3.48,
+   "end": 3.76
+  },
+  {
+   "word": "to",
+   "line": 0,
+   "start": 3.76,
+   "end": 4.06
+  },
+  {
+   "word": "find",
+   "line": 0,
+   "start": 4.06,
+   "end": 4.3
+  },
+  {
+   "word": "out.",
+   "line": 0,
+   "start": 4.3,
+   "end": 4.82
+  },
+  {
+   "word": "Thomas",
+   "line": 1,
+   "start": 5.147,
+   "end": 5.42
+  },
+  {
+   "word": "Anderson",
+   "line": 1,
+   "start": 5.42,
+   "end": 5.84
+  },
+  {
+   "word": "writes",
+   "line": 1,
+   "start": 5.84,
+   "end": 6.22
+  },
+  {
+   "word": "code",
+   "line": 1,
+   "start": 6.22,
+   "end": 6.56
+  },
+  {
+   "word": "by",
+   "line": 1,
+   "start": 6.56,
+   "end": 6.78
+  },
+  {
+   "word": "day",
+   "line": 1,
+   "start": 6.78,
+   "end": 7.1
+  },
+  {
+   "word": "and",
+   "line": 1,
+   "start": 7.1,
+   "end": 7.4
+  },
+  {
+   "word": "hacks",
+   "line": 1,
+   "start": 7.4,
+   "end": 7.74
+  },
+  {
+   "word": "by",
+   "line": 1,
+   "start": 7.74,
+   "end": 8.04
+  },
+  {
+   "word": "night,",
+   "line": 1,
+   "start": 8.04,
+   "end": 8.38
+  },
+  {
+   "word": "as",
+   "line": 1,
+   "start": 8.594,
+   "end": 8.8
+  },
+  {
+   "word": "Neo.",
+   "line": 1,
+   "start": 8.8,
+   "end": 9.18
+  },
+  {
+   "word": "A",
+   "line": 1,
+   "start": 9.664,
+   "end": 9.74
+  },
+  {
+   "word": "stranger",
+   "line": 1,
+   "start": 9.74,
+   "end": 10.0
+  },
+  {
+   "word": "named",
+   "line": 1,
+   "start": 10.0,
+   "end": 10.44
+  },
+  {
+   "word": "Morpheus",
+   "line": 1,
+   "start": 10.44,
+   "end": 10.96
+  },
+  {
+   "word": "offers",
+   "line": 1,
+   "start": 10.96,
+   "end": 11.3
+  },
+  {
+   "word": "him",
+   "line": 1,
+   "start": 11.3,
+   "end": 11.54
+  },
+  {
+   "word": "two",
+   "line": 1,
+   "start": 11.54,
+   "end": 11.86
+  },
+  {
+   "word": "pills.",
+   "line": 1,
+   "start": 11.86,
+   "end": 12.18
+  },
+  {
+   "word": "Blue:",
+   "line": 1,
+   "start": 12.762,
+   "end": 13.418
+  },
+  {
+   "word": "go",
+   "line": 1,
+   "start": 13.418,
+   "end": 13.658
+  },
+  {
+   "word": "back",
+   "line": 1,
+   "start": 13.658,
+   "end": 13.858
+  },
+  {
+   "word": "to",
+   "line": 1,
+   "start": 13.858,
+   "end": 14.018
+  },
+  {
+   "word": "his",
+   "line": 1,
+   "start": 14.018,
+   "end": 14.158
+  },
+  {
+   "word": "normal",
+   "line": 1,
+   "start": 14.158,
+   "end": 14.438
+  },
+  {
+   "word": "life.",
+   "line": 1,
+   "start": 14.438,
+   "end": 15.338
+  },
+  {
+   "word": "Red:",
+   "line": 1,
+   "start": 15.319,
+   "end": 16.158
+  },
+  {
+   "word": "learn",
+   "line": 1,
+   "start": 16.158,
+   "end": 16.278
+  },
+  {
+   "word": "the",
+   "line": 1,
+   "start": 16.278,
+   "end": 16.518
+  },
+  {
+   "word": "truth.",
+   "line": 1,
+   "start": 16.518,
+   "end": 17.338
+  },
+  {
+   "word": "He",
+   "line": 1,
+   "start": 17.377,
+   "end": 17.498
+  },
+  {
+   "word": "takes",
+   "line": 1,
+   "start": 17.498,
+   "end": 17.718
+  },
+  {
+   "word": "the",
+   "line": 1,
+   "start": 17.718,
+   "end": 17.958
+  },
+  {
+   "word": "red.",
+   "line": 1,
+   "start": 17.958,
+   "end": 18.658
+  },
+  {
+   "word": "He",
+   "line": 2,
+   "start": 18.682,
+   "end": 18.818
+  },
+  {
+   "word": "wakes",
+   "line": 2,
+   "start": 18.818,
+   "end": 19.018
+  },
+  {
+   "word": "in",
+   "line": 2,
+   "start": 19.018,
+   "end": 19.258
+  },
+  {
+   "word": "a",
+   "line": 2,
+   "start": 19.258,
+   "end": 19.398
+  },
+  {
+   "word": "pod",
+   "line": 2,
+   "start": 19.398,
+   "end": 19.658
+  },
+  {
+   "word": "of",
+   "line": 2,
+   "start": 19.658,
+   "end": 19.918
+  },
+  {
+   "word": "goo,",
+   "line": 2,
+   "start": 19.918,
+   "end": 20.558
+  },
+  {
+   "word": "one",
+   "line": 2,
+   "start": 20.558,
+   "end": 20.678
+  },
+  {
+   "word": "of",
+   "line": 2,
+   "start": 20.678,
+   "end": 20.838
+  },
+  {
+   "word": "countless",
+   "line": 2,
+   "start": 20.838,
+   "end": 21.198
+  },
+  {
+   "word": "humans",
+   "line": 2,
+   "start": 21.198,
+   "end": 21.658
+  },
+  {
+   "word": "the",
+   "line": 2,
+   "start": 21.658,
+   "end": 21.878
+  },
+  {
+   "word": "machines",
+   "line": 2,
+   "start": 21.878,
+   "end": 22.198
+  },
+  {
+   "word": "farm",
+   "line": 2,
+   "start": 22.198,
+   "end": 22.618
+  },
+  {
+   "word": "for",
+   "line": 2,
+   "start": 22.618,
+   "end": 22.898
+  },
+  {
+   "word": "energy,",
+   "line": 2,
+   "start": 22.898,
+   "end": 23.578
+  },
+  {
+   "word": "while",
+   "line": 2,
+   "start": 23.573,
+   "end": 23.698
+  },
+  {
+   "word": "their",
+   "line": 2,
+   "start": 23.698,
+   "end": 23.838
+  },
+  {
+   "word": "minds",
+   "line": 2,
+   "start": 23.838,
+   "end": 24.238
+  },
+  {
+   "word": "live",
+   "line": 2,
+   "start": 24.238,
+   "end": 24.478
+  },
+  {
+   "word": "in",
+   "line": 2,
+   "start": 24.478,
+   "end": 24.598
+  },
+  {
+   "word": "a",
+   "line": 2,
+   "start": 24.598,
+   "end": 24.718
+  },
+  {
+   "word": "fake",
+   "line": 2,
+   "start": 24.718,
+   "end": 24.958
+  },
+  {
+   "word": "world:",
+   "line": 2,
+   "start": 24.958,
+   "end": 25.638
+  },
+  {
+   "word": "the",
+   "line": 2,
+   "start": 25.652,
+   "end": 25.932
+  },
+  {
+   "word": "Matrix.",
+   "line": 2,
+   "start": 25.932,
+   "end": 26.972
+  },
+  {
+   "word": "On",
+   "line": 3,
+   "start": 27.04,
+   "end": 27.172
+  },
+  {
+   "word": "Morpheus's",
+   "line": 3,
+   "start": 27.172,
+   "end": 27.792
+  },
+  {
+   "word": "ship,",
+   "line": 3,
+   "start": 27.792,
+   "end": 28.412
+  },
+  {
+   "word": "Neo",
+   "line": 3,
+   "start": 28.412,
+   "end": 28.472
+  },
+  {
+   "word": "learns",
+   "line": 3,
+   "start": 28.472,
+   "end": 28.832
+  },
+  {
+   "word": "kung",
+   "line": 3,
+   "start": 28.832,
+   "end": 29.092
+  },
+  {
+   "word": "fu",
+   "line": 3,
+   "start": 29.092,
+   "end": 29.392
+  },
+  {
+   "word": "by",
+   "line": 3,
+   "start": 29.392,
+   "end": 29.652
+  },
+  {
+   "word": "having",
+   "line": 3,
+   "start": 29.652,
+   "end": 29.892
+  },
+  {
+   "word": "it",
+   "line": 3,
+   "start": 29.892,
+   "end": 30.052
+  },
+  {
+   "word": "uploaded",
+   "line": 3,
+   "start": 30.052,
+   "end": 30.452
+  },
+  {
+   "word": "into",
+   "line": 3,
+   "start": 30.452,
+   "end": 30.792
+  },
+  {
+   "word": "his",
+   "line": 3,
+   "start": 30.792,
+   "end": 30.992
+  },
+  {
+   "word": "brain.",
+   "line": 3,
+   "start": 30.992,
+   "end": 31.792
+  },
+  {
+   "word": "Morpheus",
+   "line": 3,
+   "start": 31.836,
+   "end": 32.252
+  },
+  {
+   "word": "believes",
+   "line": 3,
+   "start": 32.252,
+   "end": 32.632
+  },
+  {
+   "word": "he's",
+   "line": 3,
+   "start": 32.632,
+   "end": 33.092
+  },
+  {
+   "word": "the",
+   "line": 3,
+   "start": 33.092,
+   "end": 33.292
+  },
+  {
+   "word": "One.",
+   "line": 3,
+   "start": 33.292,
+   "end": 33.872
+  },
+  {
+   "word": "But",
+   "line": 3,
+   "start": 34.014,
+   "end": 34.092
+  },
+  {
+   "word": "the",
+   "line": 3,
+   "start": 34.092,
+   "end": 34.272
+  },
+  {
+   "word": "Oracle",
+   "line": 3,
+   "start": 34.272,
+   "end": 34.632
+  },
+  {
+   "word": "hints",
+   "line": 3,
+   "start": 34.632,
+   "end": 34.912
+  },
+  {
+   "word": "he",
+   "line": 3,
+   "start": 34.912,
+   "end": 35.192
+  },
+  {
+   "word": "isn't.",
+   "line": 3,
+   "start": 35.192,
+   "end": 35.992
+  },
+  {
+   "word": "Then",
+   "line": 4,
+   "start": 36.005,
+   "end": 36.532
+  },
+  {
+   "word": "crewman",
+   "line": 4,
+   "start": 36.532,
+   "end": 36.732
+  },
+  {
+   "word": "Cypher",
+   "line": 4,
+   "start": 36.732,
+   "end": 37.032
+  },
+  {
+   "word": "sells",
+   "line": 4,
+   "start": 37.032,
+   "end": 37.452
+  },
+  {
+   "word": "them",
+   "line": 4,
+   "start": 37.452,
+   "end": 37.672
+  },
+  {
+   "word": "out",
+   "line": 4,
+   "start": 37.672,
+   "end": 37.812
+  },
+  {
+   "word": "to",
+   "line": 4,
+   "start": 37.812,
+   "end": 37.952
+  },
+  {
+   "word": "the",
+   "line": 4,
+   "start": 37.952,
+   "end": 38.072
+  },
+  {
+   "word": "Agents,",
+   "line": 4,
+   "start": 38.072,
+   "end": 38.432
+  },
+  {
+   "word": "for",
+   "line": 4,
+   "start": 38.432,
+   "end": 38.772
+  },
+  {
+   "word": "a",
+   "line": 4,
+   "start": 38.772,
+   "end": 38.892
+  },
+  {
+   "word": "comfortable",
+   "line": 4,
+   "start": 38.892,
+   "end": 39.212
+  },
+  {
+   "word": "life",
+   "line": 4,
+   "start": 39.212,
+   "end": 39.652
+  },
+  {
+   "word": "back",
+   "line": 4,
+   "start": 39.652,
+   "end": 39.912
+  },
+  {
+   "word": "inside.",
+   "line": 4,
+   "start": 39.912,
+   "end": 40.672
+  },
+  {
+   "word": "Morpheus",
+   "line": 4,
+   "start": 40.865,
+   "end": 41.262
+  },
+  {
+   "word": "is",
+   "line": 4,
+   "start": 41.262,
+   "end": 41.482
+  },
+  {
+   "word": "captured,",
+   "line": 4,
+   "start": 41.482,
+   "end": 42.362
+  },
+  {
+   "word": "so",
+   "line": 4,
+   "start": 42.362,
+   "end": 42.362
+  },
+  {
+   "word": "Neo",
+   "line": 4,
+   "start": 42.362,
+   "end": 42.582
+  },
+  {
+   "word": "and",
+   "line": 4,
+   "start": 42.582,
+   "end": 42.782
+  },
+  {
+   "word": "Trinity",
+   "line": 4,
+   "start": 42.782,
+   "end": 43.102
+  },
+  {
+   "word": "storm",
+   "line": 4,
+   "start": 43.102,
+   "end": 43.502
+  },
+  {
+   "word": "the",
+   "line": 4,
+   "start": 43.502,
+   "end": 43.722
+  },
+  {
+   "word": "building",
+   "line": 4,
+   "start": 43.722,
+   "end": 43.942
+  },
+  {
+   "word": "to",
+   "line": 4,
+   "start": 43.942,
+   "end": 44.222
+  },
+  {
+   "word": "save",
+   "line": 4,
+   "start": 44.222,
+   "end": 44.442
+  },
+  {
+   "word": "him.",
+   "line": 4,
+   "start": 44.442,
+   "end": 45.082
+  },
+  {
+   "word": "Agent",
+   "line": 5,
+   "start": 45.04,
+   "end": 45.302
+  },
+  {
+   "word": "Smith",
+   "line": 5,
+   "start": 45.302,
+   "end": 45.682
+  },
+  {
+   "word": "shoots",
+   "line": 5,
+   "start": 45.682,
+   "end": 46.082
+  },
+  {
+   "word": "Neo",
+   "line": 5,
+   "start": 46.082,
+   "end": 46.502
+  },
+  {
+   "word": "dead.",
+   "line": 5,
+   "start": 46.502,
+   "end": 47.222
+  },
+  {
+   "word": "But",
+   "line": 5,
+   "start": 47.227,
+   "end": 47.322
+  },
+  {
+   "word": "Trinity",
+   "line": 5,
+   "start": 47.322,
+   "end": 47.662
+  },
+  {
+   "word": "tells",
+   "line": 5,
+   "start": 47.662,
+   "end": 47.922
+  },
+  {
+   "word": "him",
+   "line": 5,
+   "start": 47.922,
+   "end": 48.162
+  },
+  {
+   "word": "she",
+   "line": 5,
+   "start": 48.162,
+   "end": 48.282
+  },
+  {
+   "word": "loves",
+   "line": 5,
+   "start": 48.282,
+   "end": 48.542
+  },
+  {
+   "word": "him,",
+   "line": 5,
+   "start": 48.542,
+   "end": 49.042
+  },
+  {
+   "word": "and",
+   "line": 5,
+   "start": 48.998,
+   "end": 49.082
+  },
+  {
+   "word": "he",
+   "line": 5,
+   "start": 49.082,
+   "end": 49.222
+  },
+  {
+   "word": "wakes",
+   "line": 5,
+   "start": 49.222,
+   "end": 49.422
+  },
+  {
+   "word": "up.",
+   "line": 5,
+   "start": 49.422,
+   "end": 50.102
+  },
+  {
+   "word": "Now",
+   "line": 5,
+   "start": 50.105,
+   "end": 50.402
+  },
+  {
+   "word": "he",
+   "line": 5,
+   "start": 50.402,
+   "end": 50.602
+  },
+  {
+   "word": "sees",
+   "line": 5,
+   "start": 50.602,
+   "end": 50.802
+  },
+  {
+   "word": "the",
+   "line": 5,
+   "start": 50.802,
+   "end": 51.022
+  },
+  {
+   "word": "Matrix",
+   "line": 5,
+   "start": 51.022,
+   "end": 51.262
+  },
+  {
+   "word": "as",
+   "line": 5,
+   "start": 51.262,
+   "end": 51.582
+  },
+  {
+   "word": "code,",
+   "line": 5,
+   "start": 51.582,
+   "end": 52.542
+  },
+  {
+   "word": "stops",
+   "line": 5,
+   "start": 52.542,
+   "end": 52.542
+  },
+  {
+   "word": "bullets",
+   "line": 5,
+   "start": 52.542,
+   "end": 52.902
+  },
+  {
+   "word": "in",
+   "line": 5,
+   "start": 52.902,
+   "end": 53.122
+  },
+  {
+   "word": "mid-air,",
+   "line": 5,
+   "start": 53.122,
+   "end": 53.902
+  },
+  {
+   "word": "and",
+   "line": 5,
+   "start": 53.902,
+   "end": 53.922
+  },
+  {
+   "word": "destroys",
+   "line": 5,
+   "start": 53.922,
+   "end": 54.382
+  },
+  {
+   "word": "Smith",
+   "line": 5,
+   "start": 54.382,
+   "end": 54.822
+  },
+  {
+   "word": "from",
+   "line": 5,
+   "start": 54.822,
+   "end": 55.042
+  },
+  {
+   "word": "the",
+   "line": 5,
+   "start": 55.042,
+   "end": 55.202
+  },
+  {
+   "word": "inside.",
+   "line": 5,
+   "start": 55.202,
+   "end": 56.042
+  },
+  {
+   "word": "Would",
+   "line": 6,
+   "start": 56.279,
+   "end": 56.383
+  },
+  {
+   "word": "you",
+   "line": 6,
+   "start": 56.383,
+   "end": 56.563
+  },
+  {
+   "word": "take",
+   "line": 6,
+   "start": 56.563,
+   "end": 56.743
+  },
+  {
+   "word": "the",
+   "line": 6,
+   "start": 56.743,
+   "end": 56.923
+  },
+  {
+   "word": "red",
+   "line": 6,
+   "start": 56.923,
+   "end": 57.083
+  },
+  {
+   "word": "pill?",
+   "line": 6,
+   "start": 57.083,
+   "end": 57.603
+  }
+ ]
+}

@@ -1,0 +1,1710 @@
+{
+ "title": "Movies in a Minute: The Matrix",
+ "fps": 60,
+ "tail": 1.2,
+ "charStyle": "rc",
+ "sprites": "props",
+ "features": {
+  "depth": true,
+  "motionBlur": true,
+  "rigV2": true,
+  "lipSync": true,
+  "crowdFX": true
+ },
+ "motion_blur": {
+  "samples": 8,
+  "shutter": 0.5
+ },
+ "caption_y": 0.765,
+ "caption_case": "lower",
+ "caption_size": 78,
+ "grade": "brightness(1.04) saturate(1.1) contrast(1.06)",
+ "thumbnail_cue": 15.919,
+ "music": {
+  "level_db": -24,
+  "segments": [
+   {
+    "style": "dread",
+    "bpm": 84,
+    "fadeIn": 0.6,
+    "fadeOut": 0.4,
+    "from": 0.0,
+    "to": 18.078
+   },
+   {
+    "style": "dread",
+    "bpm": 72,
+    "fadeIn": 0.3,
+    "fadeOut": 0.4,
+    "from": 18.078,
+    "to": 27.192
+   },
+   {
+    "style": "chill",
+    "bpm": 96,
+    "fadeIn": 0.3,
+    "fadeOut": 0.3,
+    "from": 27.192,
+    "to": 36.005
+   },
+   {
+    "style": "dread",
+    "bpm": 84,
+    "fadeIn": 0.3,
+    "fadeOut": 0.3,
+    "from": 36.005,
+    "to": 42.802
+   },
+   {
+    "style": "chase",
+    "bpm": 136,
+    "fadeIn": 0.2,
+    "fadeOut": 0.4,
+    "from": 42.802,
+    "to": 50.602
+   },
+   {
+    "style": "reveal",
+    "bpm": 96,
+    "fadeIn": 0.3,
+    "fadeOut": 1.5,
+    "from": 50.602,
+    "to": 58.826
+   }
+  ]
+ },
+ "cast": {
+  "neo": {
+   "costume": "hoodie_grey",
+   "mood": "neutral",
+   "hair": "#2a2420"
+  },
+  "mentor": {
+   "costume": "coat_wine",
+   "mood": "smug",
+   "hair": "#8a847c",
+   "facial": "beard"
+  },
+  "trinity": {
+   "costume": "jacket_teal",
+   "mood": "neutral",
+   "hair": "#6a2a1a",
+   "hairLong": "#6a2a1a"
+  },
+  "oracle": {
+   "costume": "cardigan_rose",
+   "mood": "happy",
+   "hair": "#d8d2c8"
+  },
+  "cypher": {
+   "costume": "sweater_crew",
+   "mood": "smug",
+   "hair": "#7a5a3a",
+   "facial": "beard"
+  },
+  "smith": {
+   "costume": "suit_grey",
+   "mood": "smug",
+   "hair": "#3a3026"
+  },
+  "agent2": {
+   "costume": "suit_grey",
+   "mood": "angry",
+   "hair": "#2a2420"
+  },
+  "guard1": {
+   "costume": "police",
+   "hat": "police_cap"
+  },
+  "guard2": {
+   "costume": "police",
+   "hat": "police_cap"
+  },
+  "cow1": {
+   "costume": "office_shirt",
+   "hair": "#6a4a2a"
+  },
+  "cow2": {
+   "costume": "tee_blue",
+   "hair": "#a07a4a"
+  },
+  "walker1": {
+   "costume": "tee_white",
+   "hair": "#2a2420"
+  },
+  "walker2": {
+   "costume": "flannel_red",
+   "hair": "#d8b45a"
+  }
+ },
+ "scenes": [
+  {
+   "cue": "Everything",
+   "bgseq": {
+    "dir": "oneshot"
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "neo",
+     "cast": "neo",
+     "track": "neo",
+     "autoGait": true,
+     "rollTrack": true,
+     "mood": "neutral",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "neutral",
+       "lookAt": "camera",
+       "cue": 0.0
+      },
+      {
+       "mood": "shocked",
+       "cue": 1.82
+      },
+      {
+       "mood": "determined",
+       "lookAt": "right",
+       "cue": 3.48
+      },
+      {
+       "action": "sit",
+       "mood": "sad",
+       "lookAt": "camera",
+       "cue": 4.66
+      },
+      {
+       "mood": "neutral",
+       "lookAt": "down",
+       "cue": 6.78
+      },
+      {
+       "action": "sit",
+       "mood": "determined",
+       "lookAt": "left",
+       "cue": 7.48
+      },
+      {
+       "mood": "smug",
+       "lookAt": "camera",
+       "cue": 8.8
+      },
+      {
+       "lookAt": "left",
+       "cue": 9.3
+      },
+      {
+       "action": "sit",
+       "mood": "worried",
+       "lookAt": "left",
+       "cue": 9.6
+      },
+      {
+       "mood": "neutral",
+       "cue": 12.762
+      },
+      {
+       "mood": "determined",
+       "cue": 15.319
+      },
+      {
+       "action": "hold",
+       "prop": "pill_red",
+       "mood": "determined",
+       "lookAt": "camera",
+       "cue": 17.498
+      },
+      {
+       "action": "idle",
+       "prop": "",
+       "mood": "shocked",
+       "cue": 18.008
+      },
+      {
+       "action": "idle",
+       "mood": "shocked",
+       "lookAt": "camera",
+       "cue": 18.468
+      },
+      {
+       "mood": "scared",
+       "lookAt": "left",
+       "cue": 20.838
+      },
+      {
+       "mood": "scared",
+       "lookAt": "camera",
+       "cue": 22.898
+      },
+      {
+       "action": "sit",
+       "mood": "neutral",
+       "lookAt": "camera",
+       "cue": 26.892
+      },
+      {
+       "mood": "shocked",
+       "cue": 28.932
+      },
+      {
+       "mood": "happy",
+       "cue": 30.992
+      },
+      {
+       "mood": "worried",
+       "lookAt": "right",
+       "cue": 31.836
+      },
+      {
+       "mood": "shocked",
+       "lookAt": "camera",
+       "cue": 33.292
+      },
+      {
+       "action": "idle",
+       "mood": "worried",
+       "lookAt": "left",
+       "cue": 33.522
+      },
+      {
+       "mood": "sad",
+       "lookAt": "camera",
+       "cue": 35.192
+      },
+      {
+       "action": "aim",
+       "prop": "pistol",
+       "mood": "determined",
+       "lookAt": "right",
+       "cue": 42.082
+      },
+      {
+       "action": "idle",
+       "prop": "",
+       "mood": "determined",
+       "lookAt": "left",
+       "cue": 44.522
+      },
+      {
+       "action": "fall",
+       "mood": "shocked",
+       "cue": 45.782
+      },
+      {
+       "action": "idle",
+       "mood": "determined",
+       "lookAt": "left",
+       "cue": 49.222
+      },
+      {
+       "mood": "smug",
+       "cue": 50.602
+      },
+      {
+       "action": "present",
+       "mood": "determined",
+       "cue": 52.542
+      },
+      {
+       "action": "run",
+       "mood": "angry",
+       "cue": 53.942
+      },
+      {
+       "action": "idle",
+       "mood": "smug",
+       "lookAt": "camera",
+       "cue": 55.352
+      },
+      {
+       "action": "present",
+       "prop": "pills",
+       "mood": "smug",
+       "lookAt": "camera",
+       "cue": 56.279
+      }
+     ]
+    },
+    {
+     "id": "mentor",
+     "cast": "mentor",
+     "track": "mentor",
+     "autoGait": true,
+     "mood": "smug",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "sit",
+       "mood": "smug",
+       "lookAt": "right",
+       "cue": 9.6
+      },
+      {
+       "action": "present",
+       "prop": "pills",
+       "mood": "determined",
+       "cue": 11.76
+      },
+      {
+       "action": "sit",
+       "prop": "",
+       "mood": "smug",
+       "cue": 17.598
+      },
+      {
+       "action": "idle",
+       "mood": "smug",
+       "lookAt": "left",
+       "cue": 26.892
+      },
+      {
+       "action": "talk",
+       "mood": "happy",
+       "cue": 31.836
+      },
+      {
+       "action": "idle",
+       "mood": "determined",
+       "cue": 33.292
+      },
+      {
+       "action": "idle",
+       "mood": "angry",
+       "lookAt": "left",
+       "cue": 40.732
+      }
+     ]
+    },
+    {
+     "id": "trinity",
+     "cast": "trinity",
+     "track": "trinity",
+     "autoGait": true,
+     "mood": "neutral",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "neutral",
+       "lookAt": "right",
+       "cue": 26.892
+      },
+      {
+       "mood": "happy",
+       "cue": 33.292
+      },
+      {
+       "action": "aim",
+       "prop": "pistol",
+       "mood": "determined",
+       "lookAt": "right",
+       "cue": 42.082
+      }
+     ]
+    },
+    {
+     "id": "oracle",
+     "cast": "oracle",
+     "track": "oracle",
+     "autoGait": false,
+     "mood": "happy",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "happy",
+       "lookAt": "right",
+       "cue": 33.522
+      },
+      {
+       "action": "talk",
+       "cue": 34.272
+      },
+      {
+       "action": "idle",
+       "mood": "smug",
+       "cue": 35.192
+      }
+     ]
+    },
+    {
+     "id": "cypher",
+     "cast": "cypher",
+     "track": "cypher",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "neutral",
+       "lookAt": "left",
+       "cue": 26.892
+      },
+      {
+       "action": "sit",
+       "mood": "smug",
+       "lookAt": "right",
+       "cue": 35.955
+      },
+      {
+       "mood": "happy",
+       "cue": 38.892
+      }
+     ]
+    },
+    {
+     "id": "smith",
+     "cast": "smith",
+     "track": "smith",
+     "autoGait": true,
+     "mood": "smug",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "sit",
+       "mood": "smug",
+       "lookAt": "left",
+       "cue": 35.955
+      },
+      {
+       "action": "talk",
+       "cue": 38.072
+      },
+      {
+       "action": "sit",
+       "cue": 39.912
+      },
+      {
+       "action": "idle",
+       "mood": "angry",
+       "lookAt": "left",
+       "cue": 40.732
+      },
+      {
+       "action": "aim",
+       "prop": "pistol",
+       "mood": "angry",
+       "lookAt": "right",
+       "cue": 44.522
+      },
+      {
+       "mood": "shocked",
+       "cue": 53.922
+      },
+      {
+       "mood": "scared",
+       "cue": 54.382
+      }
+     ]
+    },
+    {
+     "id": "agent2",
+     "cast": "agent2",
+     "track": "agent2",
+     "autoGait": true,
+     "mood": "angry",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "angry",
+       "lookAt": "right",
+       "cue": 40.732
+      }
+     ]
+    },
+    {
+     "id": "guard1",
+     "cast": "guard1",
+     "track": "guard1",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "neutral",
+       "cue": 42.082
+      },
+      {
+       "action": "flail",
+       "mood": "scared",
+       "cue": 43.302
+      }
+     ]
+    },
+    {
+     "id": "guard2",
+     "cast": "guard2",
+     "track": "guard2",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "idle",
+       "mood": "neutral",
+       "cue": 42.082
+      },
+      {
+       "action": "flail",
+       "mood": "scared",
+       "cue": 43.402
+      }
+     ]
+    },
+    {
+     "id": "cow1",
+     "cast": "cow1",
+     "track": "cow1",
+     "autoGait": false,
+     "mood": "sad",
+     "lookAt": "camera",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "sit",
+       "mood": "sad",
+       "cue": 4.66
+      }
+     ]
+    },
+    {
+     "id": "cow2",
+     "cast": "cow2",
+     "track": "cow2",
+     "autoGait": false,
+     "mood": "neutral",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "action": "sit",
+       "mood": "neutral",
+       "cue": 4.66
+      }
+     ]
+    },
+    {
+     "id": "walker1",
+     "cast": "walker1",
+     "track": "walker1",
+     "autoGait": true,
+     "mood": "neutral",
+     "lookAt": "right",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "shocked",
+       "cue": 1.82
+      }
+     ]
+    },
+    {
+     "id": "walker2",
+     "cast": "walker2",
+     "track": "walker2",
+     "autoGait": true,
+     "mood": "neutral",
+     "lookAt": "left",
+     "nearFade": [
+      0.45,
+      1.1
+     ],
+     "keys": [
+      {
+       "mood": "shocked",
+       "cue": 1.82
+      }
+     ]
+    }
+   ],
+   "fx": [
+    {
+     "type": "rain",
+     "keys": [
+      {
+       "at": 0.0,
+       "a": 0.55
+      },
+      {
+       "at": 10.44,
+       "a": 0.55
+      },
+      {
+       "at": 10.74,
+       "a": 0.0
+      },
+      {
+       "at": 40.882,
+       "a": 0.0
+      },
+      {
+       "at": 41.182,
+       "a": 0.5
+      },
+      {
+       "at": 44.822,
+       "a": 0.5
+      },
+      {
+       "at": 45.222,
+       "a": 0.0
+      }
+     ]
+    },
+    {
+     "type": "coderain",
+     "keys": [
+      {
+       "at": 1.77,
+       "a": 0.0
+      },
+      {
+       "at": 2.31,
+       "a": 0.85
+      },
+      {
+       "at": 3.13,
+       "a": 0.85
+      },
+      {
+       "at": 3.48,
+       "a": 0.0
+      },
+      {
+       "at": 50.501999999999995,
+       "a": 0.0
+      },
+      {
+       "at": 51.001999999999995,
+       "a": 0.4
+      },
+      {
+       "at": 55.251999999999995,
+       "a": 0.4
+      },
+      {
+       "at": 55.55199999999999,
+       "a": 0.75
+      },
+      {
+       "at": 58.826,
+       "a": 0.6
+      }
+     ]
+    },
+    {
+     "type": "callout",
+     "at": 0.25,
+     "dur": 1.4,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "THE MATRIX",
+     "sub": "(1999)",
+     "size": 84,
+     "edge": "#5aff7a"
+    },
+    {
+     "type": "flicker",
+     "at": 1.72,
+     "dur": 0.4
+    },
+    {
+     "type": "flicker",
+     "at": 3.08,
+     "dur": 0.4
+    },
+    {
+     "type": "speedlines",
+     "at": 4.109999999999999,
+     "dur": 0.9,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "tag",
+     "at": 5.147,
+     "untilAt": 7.28,
+     "of": "neo",
+     "text": "THOMAS ANDERSON",
+     "bg": "#9adfb0"
+    },
+    {
+     "type": "callout",
+     "at": 6.12,
+     "dur": 1.2,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "PROGRAMMER",
+     "sub": "BY DAY",
+     "size": 72,
+     "edge": "#cfe8ff"
+    },
+    {
+     "type": "callout",
+     "at": 7.3500000000000005,
+     "dur": 1.3,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "HACKER",
+     "sub": "BY NIGHT",
+     "size": 80,
+     "edge": "#5aff7a"
+    },
+    {
+     "type": "tag",
+     "at": 8.75,
+     "untilAt": 9.600000000000001,
+     "of": "neo",
+     "text": "NEO",
+     "bg": "#5aff7a"
+    },
+    {
+     "type": "speedlines",
+     "at": 9.55,
+     "dur": 1.0,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "tag",
+     "at": 10.44,
+     "untilAt": 12.16,
+     "of": "mentor",
+     "text": "MORPHEUS",
+     "bg": "#ff9a8a"
+    },
+    {
+     "type": "callout",
+     "at": 12.712,
+     "dur": 2.4,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "BLUE PILL",
+     "sub": "BACK TO NORMAL LIFE",
+     "size": 80,
+     "edge": "#4a8aff",
+     "subInk": "#9ac0ff"
+    },
+    {
+     "type": "callout",
+     "at": 15.269,
+     "dur": 2.1,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "RED PILL",
+     "sub": "THE TRUTH",
+     "size": 86,
+     "edge": "#ff3a3a",
+     "subInk": "#ff9a9a"
+    },
+    {
+     "type": "flash",
+     "at": 18.058,
+     "dur": 0.7,
+     "amount": 1.0
+    },
+    {
+     "type": "speedlines",
+     "at": 18.078,
+     "dur": 0.7,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "callout",
+     "at": 18.968,
+     "dur": 1.4,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "THE REAL WORLD",
+     "size": 70,
+     "edge": "#ff6a8a"
+    },
+    {
+     "type": "callout",
+     "at": 22.498,
+     "dur": 1.4,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "FARMED FOR ENERGY",
+     "size": 60,
+     "edge": "#ff6a8a"
+    },
+    {
+     "type": "callout",
+     "at": 24.618,
+     "dur": 2.2,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "THE MATRIX",
+     "sub": "A SIMULATED WORLD",
+     "size": 80,
+     "edge": "#5aff7a"
+    },
+    {
+     "type": "speedlines",
+     "at": 26.631999999999998,
+     "dur": 1.2,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "tag",
+     "at": 28.192,
+     "untilAt": 29.032,
+     "of": "trinity",
+     "text": "TRINITY",
+     "bg": "#7ad8e0"
+    },
+    {
+     "type": "callout",
+     "at": 28.832,
+     "dur": 2.0,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "KUNG FU",
+     "sub": "UPLOADED TO HIS BRAIN",
+     "size": 82,
+     "edge": "#5aff7a"
+    },
+    {
+     "type": "callout",
+     "at": 33.192,
+     "dur": 0.9,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "THE ONE?",
+     "size": 86,
+     "edge": "#ffc95a"
+    },
+    {
+     "type": "flicker",
+     "at": 33.592,
+     "dur": 0.6
+    },
+    {
+     "type": "flash",
+     "at": 33.742000000000004,
+     "dur": 0.35,
+     "amount": 0.6
+    },
+    {
+     "type": "tag",
+     "at": 34.172,
+     "untilAt": 35.692,
+     "of": "oracle",
+     "text": "THE ORACLE",
+     "bg": "#ffc95a"
+    },
+    {
+     "type": "callout",
+     "at": 35.092,
+     "dur": 0.95,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "NOT THE ONE?",
+     "size": 74,
+     "edge": "#ff5a4a"
+    },
+    {
+     "type": "tag",
+     "at": 36.632,
+     "untilAt": 38.372,
+     "of": "cypher",
+     "text": "CYPHER",
+     "bg": "#d8b45a"
+    },
+    {
+     "type": "tag",
+     "at": 38.072,
+     "untilAt": 38.792,
+     "of": "smith",
+     "text": "AGENT",
+     "bg": "#9a9aa8"
+    },
+    {
+     "type": "callout",
+     "at": 38.792,
+     "dur": 2.0,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "THE DEAL",
+     "sub": "A COMFORTABLE LIFE, BACK INSIDE",
+     "size": 78,
+     "edge": "#ff5a4a"
+    },
+    {
+     "type": "callout",
+     "at": 41.382,
+     "dur": 1.0,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "CAPTURED",
+     "size": 80,
+     "edge": "#ff5a4a"
+    },
+    {
+     "type": "tag",
+     "at": 41.182,
+     "untilAt": 42.282,
+     "of": "mentor",
+     "text": "MORPHEUS",
+     "bg": "#ff9a8a"
+    },
+    {
+     "type": "tag",
+     "at": 42.782,
+     "untilAt": 44.222,
+     "of": "trinity",
+     "text": "TRINITY",
+     "bg": "#7ad8e0"
+    },
+    {
+     "type": "impactframe",
+     "at": 43.251999999999995,
+     "dur": 0.06
+    },
+    {
+     "type": "impactframe",
+     "at": 43.91199999999999,
+     "dur": 0.06
+    },
+    {
+     "type": "impactframe",
+     "at": 44.571999999999996,
+     "dur": 0.06
+    },
+    {
+     "type": "blast",
+     "at": 43.251999999999995,
+     "world": [
+      139.4,
+      -2.0,
+      1.4
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 4,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 43.471999999999994,
+     "world": [
+      139.4,
+      -2.0,
+      1.4
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 4,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 43.69199999999999,
+     "world": [
+      139.4,
+      -2.0,
+      1.4
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 4,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 43.91199999999999,
+     "world": [
+      139.4,
+      -2.0,
+      1.4
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 4,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 44.132,
+     "world": [
+      139.4,
+      -2.0,
+      1.4
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 4,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 44.352,
+     "world": [
+      139.4,
+      -2.0,
+      1.4
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 4,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 44.571999999999996,
+     "world": [
+      139.4,
+      -2.0,
+      1.4
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 4,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 44.791999999999994,
+     "world": [
+      139.4,
+      -2.0,
+      1.4
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 4,
+     "hidden": true
+    },
+    {
+     "type": "tag",
+     "at": 45.202,
+     "untilAt": 46.502,
+     "of": "smith",
+     "text": "AGENT SMITH",
+     "bg": "#9a9aa8"
+    },
+    {
+     "type": "impactframe",
+     "at": 45.782000000000004,
+     "dur": 0.08
+    },
+    {
+     "type": "blast",
+     "at": 45.782000000000004,
+     "world": [
+      166.6,
+      -0.6,
+      1.35
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 7,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 45.902,
+     "world": [
+      166.6,
+      -0.6,
+      1.35
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 7,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 46.022000000000006,
+     "world": [
+      166.6,
+      -0.6,
+      1.35
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 7,
+     "hidden": true
+    },
+    {
+     "type": "blast",
+     "at": 46.142,
+     "world": [
+      166.6,
+      -0.6,
+      1.35
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 7,
+     "hidden": true
+    },
+    {
+     "type": "bubble",
+     "at": 47.931999999999995,
+     "dur": 1.3,
+     "of": "neo",
+     "text": "\u2665",
+     "size": 70
+    },
+    {
+     "type": "flash",
+     "at": 49.202,
+     "dur": 0.3,
+     "amount": 0.45
+    },
+    {
+     "type": "callout",
+     "at": 51.332,
+     "dur": 1.2,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "HE SEES THE CODE",
+     "size": 64,
+     "edge": "#5aff7a"
+    },
+    {
+     "type": "impactframe",
+     "at": 52.711999999999996,
+     "dur": 0.06
+    },
+    {
+     "type": "speedlines",
+     "at": 53.942,
+     "dur": 0.5,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "flash",
+     "at": 55.221999999999994,
+     "dur": 0.6,
+     "amount": 1.0
+    },
+    {
+     "type": "blast",
+     "at": 55.251999999999995,
+     "world": [
+      166.9,
+      -0.45,
+      1.2
+     ],
+     "r": 1,
+     "only": [
+      "nobody"
+     ],
+     "shake": 14,
+     "hidden": true
+    },
+    {
+     "type": "callout",
+     "at": 56.229000000000006,
+     "dur": 2.3,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "RED PILL",
+     "sub": "OR BLUE?",
+     "size": 86,
+     "edge": "#ff3a3a",
+     "subInk": "#9ac0ff"
+    },
+    {
+     "type": "darken",
+     "keys": [
+      {
+       "at": 58.326,
+       "a": 0.0
+      },
+      {
+       "at": 58.776,
+       "a": 1.0
+      }
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "type": "hum",
+     "at": 0.0,
+     "dur": 3.4,
+     "gain": 0.3
+    },
+    {
+     "type": "sting",
+     "at": 0.3,
+     "gain": 0.4
+    },
+    {
+     "type": "glitch",
+     "at": 1.72,
+     "dur": 0.5,
+     "gain": 0.7
+    },
+    {
+     "type": "glitch",
+     "at": 3.08,
+     "dur": 0.4,
+     "gain": 0.6
+    },
+    {
+     "type": "whoosh",
+     "at": 4.06,
+     "dur": 0.9,
+     "gain": 0.8
+    },
+    {
+     "type": "beep",
+     "at": 6.22,
+     "gain": 0.25
+    },
+    {
+     "type": "whoosh",
+     "at": 7.33,
+     "dur": 0.8,
+     "gain": 0.7
+    },
+    {
+     "type": "beep",
+     "at": 7.6000000000000005,
+     "gain": 0.25
+    },
+    {
+     "type": "beep",
+     "at": 8.34,
+     "gain": 0.22
+    },
+    {
+     "type": "whoosh",
+     "at": 9.5,
+     "dur": 1.0,
+     "gain": 0.8
+    },
+    {
+     "type": "wind",
+     "at": 9.34,
+     "dur": 2.0,
+     "gain": 0.35
+    },
+    {
+     "type": "creak",
+     "at": 10.44,
+     "dur": 0.8,
+     "gain": 0.4
+    },
+    {
+     "type": "ting",
+     "at": 11.959999999999999,
+     "gain": 0.35
+    },
+    {
+     "type": "pop",
+     "at": 12.762,
+     "gain": 0.35
+    },
+    {
+     "type": "sting",
+     "at": 15.319,
+     "gain": 0.45
+    },
+    {
+     "type": "gulp",
+     "at": 17.958,
+     "gain": 0.6
+    },
+    {
+     "type": "whoosh",
+     "at": 18.078,
+     "dur": 0.9,
+     "gain": 1.0
+    },
+    {
+     "type": "glitch",
+     "at": 18.178,
+     "dur": 0.5,
+     "gain": 0.6
+    },
+    {
+     "type": "hum",
+     "at": 18.818,
+     "dur": 7.5,
+     "gain": 0.3
+    },
+    {
+     "type": "engine",
+     "at": 21.478,
+     "dur": 3.0,
+     "gain": 0.35
+    },
+    {
+     "type": "charge",
+     "at": 22.798,
+     "dur": 0.8,
+     "gain": 0.4
+    },
+    {
+     "type": "sting",
+     "at": 24.718,
+     "gain": 0.4
+    },
+    {
+     "type": "whoosh",
+     "at": 26.532,
+     "dur": 1.4,
+     "gain": 0.9
+    },
+    {
+     "type": "hum",
+     "at": 27.792,
+     "dur": 5.5,
+     "gain": 0.25
+    },
+    {
+     "type": "charge",
+     "at": 28.732,
+     "dur": 1.6,
+     "gain": 0.5
+    },
+    {
+     "type": "beep",
+     "at": 30.552,
+     "gain": 0.3
+    },
+    {
+     "type": "sting",
+     "at": 33.292,
+     "gain": 0.4
+    },
+    {
+     "type": "glitch",
+     "at": 33.592,
+     "dur": 0.6,
+     "gain": 0.6
+    },
+    {
+     "type": "whoosh",
+     "at": 33.642,
+     "dur": 0.9,
+     "gain": 0.9
+    },
+    {
+     "type": "ting",
+     "at": 34.272,
+     "gain": 0.3
+    },
+    {
+     "type": "pop",
+     "at": 35.192,
+     "gain": 0.3
+    },
+    {
+     "type": "whoosh",
+     "at": 36.205000000000005,
+     "dur": 0.7,
+     "gain": 0.6
+    },
+    {
+     "type": "sting",
+     "at": 38.892,
+     "gain": 0.4
+    },
+    {
+     "type": "slam",
+     "at": 41.482,
+     "gain": 0.45
+    },
+    {
+     "type": "cuffs",
+     "at": 41.782,
+     "gain": 0.4
+    },
+    {
+     "type": "whoosh",
+     "at": 42.581999999999994,
+     "dur": 0.9,
+     "gain": 0.8
+    },
+    {
+     "type": "punch",
+     "at": 43.251999999999995,
+     "gain": 0.35
+    },
+    {
+     "type": "punch",
+     "at": 43.471999999999994,
+     "gain": 0.35
+    },
+    {
+     "type": "punch",
+     "at": 43.69199999999999,
+     "gain": 0.35
+    },
+    {
+     "type": "punch",
+     "at": 43.91199999999999,
+     "gain": 0.35
+    },
+    {
+     "type": "punch",
+     "at": 44.132,
+     "gain": 0.35
+    },
+    {
+     "type": "punch",
+     "at": 44.352,
+     "gain": 0.35
+    },
+    {
+     "type": "punch",
+     "at": 44.571999999999996,
+     "gain": 0.35
+    },
+    {
+     "type": "punch",
+     "at": 44.791999999999994,
+     "gain": 0.35
+    },
+    {
+     "type": "whoosh",
+     "at": 44.622,
+     "dur": 0.9,
+     "gain": 0.8
+    },
+    {
+     "type": "hum",
+     "at": 45.302,
+     "dur": 4.5,
+     "gain": 0.2
+    },
+    {
+     "type": "punch",
+     "at": 45.782000000000004,
+     "gain": 0.55
+    },
+    {
+     "type": "punch",
+     "at": 45.902,
+     "gain": 0.55
+    },
+    {
+     "type": "punch",
+     "at": 46.022000000000006,
+     "gain": 0.55
+    },
+    {
+     "type": "punch",
+     "at": 46.142,
+     "gain": 0.55
+    },
+    {
+     "type": "slam",
+     "at": 46.132000000000005,
+     "gain": 0.5
+    },
+    {
+     "type": "pop",
+     "at": 48.282,
+     "gain": 0.35
+    },
+    {
+     "type": "charge",
+     "at": 49.022,
+     "dur": 0.7,
+     "gain": 0.5
+    },
+    {
+     "type": "glitch",
+     "at": 50.501999999999995,
+     "dur": 0.6,
+     "gain": 0.6
+    },
+    {
+     "type": "hum",
+     "at": 50.602,
+     "dur": 6.0,
+     "gain": 0.3
+    },
+    {
+     "type": "ting",
+     "at": 52.492000000000004,
+     "gain": 0.3
+    },
+    {
+     "type": "ting",
+     "at": 52.592000000000006,
+     "gain": 0.3
+    },
+    {
+     "type": "ting",
+     "at": 52.69200000000001,
+     "gain": 0.3
+    },
+    {
+     "type": "ting",
+     "at": 52.792,
+     "gain": 0.3
+    },
+    {
+     "type": "whoosh",
+     "at": 53.942,
+     "dur": 0.6,
+     "gain": 0.9
+    },
+    {
+     "type": "boom",
+     "at": 55.251999999999995,
+     "gain": 0.9
+    },
+    {
+     "type": "crash",
+     "at": 55.30199999999999,
+     "gain": 0.5
+    },
+    {
+     "type": "sting",
+     "at": 56.279,
+     "gain": 0.45
+    }
+   ],
+   "charTint": [
+    {
+     "at": 0.0,
+     "col": "#7dff9a",
+     "a": 0.1
+    },
+    {
+     "at": 4.659999999999999,
+     "col": "#e8fff0",
+     "a": 0.05
+    },
+    {
+     "at": 7.48,
+     "col": "#5aff7a",
+     "a": 0.16
+    },
+    {
+     "at": 9.600000000000001,
+     "col": "#ffb070",
+     "a": 0.12
+    },
+    {
+     "at": 18.468,
+     "col": "#ff5a8a",
+     "a": 0.2
+    },
+    {
+     "at": 26.892000000000003,
+     "col": "#7ab0ff",
+     "a": 0.14
+    },
+    {
+     "at": 33.522,
+     "col": "#ffc070",
+     "a": 0.1
+    },
+    {
+     "at": 35.955000000000005,
+     "col": "#ff7050",
+     "a": 0.14
+    },
+    {
+     "at": 40.732,
+     "col": "#9adfb0",
+     "a": 0.14
+    },
+    {
+     "at": 42.082,
+     "col": "#e0ffe8",
+     "a": 0.06
+    },
+    {
+     "at": 44.522,
+     "col": "#ffb070",
+     "a": 0.12
+    },
+    {
+     "at": 50.602,
+     "col": "#5aff7a",
+     "a": 0.22
+    }
+   ]
+  }
+ ]
+}
