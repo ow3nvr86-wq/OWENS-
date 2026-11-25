@@ -154,9 +154,9 @@ SEG_A = [
     (b['limbo1'] - 0.2, (96.0, -34.0, ZLB + 9.0), (110.0, 6.0, ZLB + 10.0), 20),  # limbo: a sunset sea
     (b['limbo1'] + 0.5, (96.0, -30.0, ZLB + 7.0), (110.0, 6.0, ZLB + 9.0), 20),
     (b['dead'] - 0.1, (98.2, -12.6, ZLB + 2.0), (98.6, 0.0, ZLB + 1.4), 21),     # the beach house
-    (b['mal1'] + 0.2, (98.6, -11.2, ZLB + 1.8), (99.0, 0.0, ZLB + 1.3), 22),
-    (b['planted1'], (98.4, -9.6, ZLB + 1.6), (98.6, 0.0, ZLB + 1.1), 23),
-    (b['real'] + 0.2, (98.4, -9.0, ZLB + 1.5), (98.6, 0.0, ZLB + 1.1), 24),
+    (b['mal1'] + 0.2, (98.6, -12.6, ZLB + 2.2), (99.0, 0.0, ZLB + 1.6), 20),
+    (b['planted1'], (98.4, -10.6, ZLB + 1.7), (98.5, 0.0, ZLB + 1.0), 21),
+    (b['real'] + 0.2, (98.4, -9.8, ZLB + 1.55), (98.5, 0.0, ZLB + 1.0), 22),
     (b['killed'] + 0.4, (97.0, -11.0, ZLB + 2.6), (112.0, 4.0, ZLB + 6.0), 20),  # away, out to sea
     (b['mal2'] - 0.15, (103.0, -5.0, ZL3 + 2.6), (105.0, 6.0, ZL3 + 1.3), 21),   # up: the fortress courtyard
     (b['fischer2'] + 0.25, (105.0, -4.2, ZL3 + 2.0), (105.0, 6.0, ZL3 + 1.2), 22),
@@ -212,7 +212,7 @@ sc.render.resolution_x, sc.render.resolution_y = int(1080 * SCALE), int(1920 * S
 sc.view_settings.view_transform = 'Standard'; sc.view_settings.look = 'None'; sc.view_settings.exposure = 0.0
 sc.render.image_settings.file_format = 'JPEG'; sc.render.image_settings.quality = 92; sc.render.fps = FPS
 sc.render.use_motion_blur = True; sc.render.motion_blur_shutter = 0.4
-F2.outlines(sc, thickness=2.0, col=(0.09, 0.06, 0.12))
+F2.outlines(sc, thickness=2.6, col=(0.09, 0.06, 0.12))
 fs_ = sc.view_layers[0].freestyle_settings; fs_.crease_angle = math.radians(140)
 
 def kf(owner, path, f, v): setattr(owner, path, v); owner.keyframe_insert(path, frame=f)
