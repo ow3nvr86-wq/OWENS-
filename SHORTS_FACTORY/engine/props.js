@@ -135,6 +135,13 @@ function drawHandProp(g, prop, hands, t, st) {
   } else if (prop === 'pill_red' || prop === 'pill_blue') {
     g.translate(hx, hy - 8); g.rotate(-0.4); g.beginPath(); g.roundRect(-15, -7, 30, 14, 7); g.fillStyle = prop === 'pill_red' ? '#d8282c' : '#2a5ad8'; g.fill(); g.lineWidth = 4; g.strokeStyle = C.ink; g.stroke();
     g.fillStyle = 'rgba(255,255,255,0.5)'; g.fillRect(-9, -4, 10, 3);
+  } else if (prop === 'top') {                       // a small spinning top (metal, pointed)
+    g.translate(hx, hy - 10); g.beginPath(); g.moveTo(-16, -4); g.quadraticCurveTo(0, -16, 16, -4); g.lineTo(0, 16); g.closePath(); g.fillStyle = '#b8c2cc'; g.fill(); g.lineWidth = 4; g.strokeStyle = C.ink; g.stroke();
+    g.beginPath(); g.rect(-3, -18, 6, 10); g.fillStyle = '#8a949e'; g.fill(); g.stroke(); g.fillStyle = 'rgba(255,255,255,0.6)'; g.fillRect(-10, -6, 8, 3);
+  } else if (prop === 'idea') {                      // a glowing idea: a little lit bulb with a halo
+    g.translate(hx, hy - 22); const hg = g.createRadialGradient(0, 0, 4, 0, 0, 34); hg.addColorStop(0, 'rgba(255,240,140,0.9)'); hg.addColorStop(1, 'rgba(255,220,90,0)');
+    g.fillStyle = hg; g.beginPath(); g.arc(0, 0, 34, 0, 7); g.fill();
+    g.beginPath(); g.arc(0, -2, 14, 0, 7); g.fillStyle = '#ffe873'; g.fill(); g.lineWidth = 4; g.strokeStyle = C.ink; g.stroke(); inkRect(g, -7, 11, 14, 9, '#9aa2aa', 3.5);
   } else if (prop === 'sander') {                     // a sanding block
     g.translate(hx, hy); inkRect(g, -28, -10, 56, 22, '#b88a52', 4); g.fillStyle = '#d9c29a'; g.fillRect(-28, 8, 56, 6);
   } else if (prop === 'rifle') {

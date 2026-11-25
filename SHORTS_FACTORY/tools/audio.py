@@ -207,10 +207,14 @@ def glitch(d=0.7): t = t_(d); x = np.sign(np.sin(2 * np.pi * (180 + 900 * rng.ra
 def creak(d=1.4): t = t_(d); f = 160 + 60 * np.sin(2 * np.pi * 0.7 * t) + 25 * np.sin(2 * np.pi * 9 * t); return bp(np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)), 300, 2400) * env(len(t), 0.1, 0.3) * 0.5
 def hum(d=4.0): t = t_(d); return (np.sin(2 * np.pi * 120 * t) + 0.3 * np.sin(2 * np.pi * 240 * t)) * 0.2 * env(len(t), 0.3, 0.3)
 def gust(d=2.5): t = t_(d); return lp(noise(d), 500) * np.sin(np.pi * np.clip(t / d, 0, 1)) ** 2
+def rumble(d=2.0): t = t_(d); return lp(noise(d), 120, 3) * 2.2 * env(len(t), 0.15, 0.8)
+def spin(d=3.0):                         # a small metal top whirring on a table: a thin tone with a fast flutter that slows
+    t = t_(d); f = 760 - 60 * t / max(d, 0.1); ph = 2 * np.pi * np.cumsum(f) / SR; fl = 0.6 + 0.4 * np.sin(2 * np.pi * (22 - 6 * t / max(d, 0.1)) * t)
+    return (np.sin(ph) * 0.25 + bp(noise(d), 2500, 6000) * 0.08) * fl * env(len(t), 0.05, 0.6)
 SFX = dict(whoosh=whoosh, boing=boing, knock=knock, ting=ting, gulp=gulp, tada=tada, sting=sting, fuse=fuse, volley=volley, boom=boom,
            charge=charge, scramble=scramble, sneeze=sneeze, drums=drums, march=march_steps, pop=pop,
            siren=siren, engine=engine, skid=skid, punch=punch, scratch=scratch, spawn=spawn, crash=crash, cuffs=cuffs,
-           wind=wind, crackle=crackle, alarm=alarm, slam=slam, slams=slams, lock=locks, beep=beep, counter=counter, glitch=glitch, creak=creak, hum=hum, gust=gust)
+           wind=wind, crackle=crackle, alarm=alarm, slam=slam, slams=slams, lock=locks, beep=beep, counter=counter, glitch=glitch, creak=creak, hum=hum, gust=gust, rumble=rumble, spin=spin)
 
 M = S.get('music', {})
 if M.get('segments'):                                                    # several cues: [{style, bpm, from, to, gain}] (seconds), short fades

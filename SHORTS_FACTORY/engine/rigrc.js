@@ -48,6 +48,14 @@ const RC_COSTUMES = {
   jacket_teal: { body: '#1f6a70', detail: 'jacket', pants: '#1c2228' },
   cardigan_rose: { body: '#c07a86', detail: 'jacket', pants: '#5a4a52' },
   sweater_crew: { body: '#7a6a58', detail: 'flannel', pants: '#3a3630' },
+  suit_navy: { body: '#2f4a8a', detail: 'suit', pants: '#22304f', tie: '#e0a030' },                // Movies in a Minute: Inception (original designs)
+  suit_cream: { body: '#e8dcc2', detail: 'suit', pants: '#b8a684', tie: '#c03a3a' },
+  suit_plum: { body: '#6a3a7a', detail: 'suit', pants: '#3a2244', tie: '#f0c040' },
+  jacket_mustard: { body: '#e2a83a', detail: 'jacket', pants: '#3a4a6a' },
+  shirt_coral: { body: '#e0674a', detail: 'flannel', pants: '#5a4a3a' },
+  vest_teal: { body: '#2aa79a', detail: 'vest', pants: '#3a3a44' },
+  coat_cream: { body: '#f0e4d2', detail: 'coat', pants: '#c9b8a0' },
+  pyjama_blue: { body: '#9ab8e0', detail: 'shirt', pants: '#7a98c4', tie: '#9ab8e0' },
 };
 function rcTorso(g, cos, w, h, t) {
   const x = -w / 2, y = -h, r = w * 0.48;
