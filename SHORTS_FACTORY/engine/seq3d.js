@@ -176,9 +176,10 @@ FX2.tag = function (g, fx, s, t) {                         // a floating tag ove
   const A = ACT[fx.of]; if (!A || t < fx.t0 || (fx.until && t > fx.until)) return; const k = popScale(t, fx.t0, 0.35);
   g.save(); g.translate(A.x, A.y - A.h * 1.12 + Math.sin(t * 3) * 6); g.scale(k, k);
   g.font = '800 64px Poppins'; g.textAlign = 'center'; g.textBaseline = 'middle'; const w = g.measureText(fx.text).width + 44;
-  g.beginPath(); g.roundRect(-w / 2, -42, w, 84, 22); g.fillStyle = fx.bg || '#ffd23a'; g.fill(); g.lineWidth = 7; g.strokeStyle = '#1d1719'; g.stroke();
+  const kk = Math.max(k, 0.05), m = 30 / kk, dx = Math.min(Math.max(0, (m + w / 2) - A.x / kk), (W / kk - m - w / 2) - A.x / kk);   // keep the bubble on screen, pointer stays on the actor
+  g.beginPath(); g.roundRect(dx - w / 2, -42, w, 84, 22); g.fillStyle = fx.bg || '#ffd23a'; g.fill(); g.lineWidth = 7; g.strokeStyle = '#1d1719'; g.stroke();
   g.beginPath(); g.moveTo(-14, 40); g.lineTo(0, 64); g.lineTo(14, 40); g.closePath(); g.fillStyle = fx.bg || '#ffd23a'; g.fill(); g.stroke();
-  g.fillStyle = '#1d1719'; g.fillText(fx.text, 0, 4); g.restore();
+  g.fillStyle = '#1d1719'; g.fillText(fx.text, dx, 4); g.restore();
 };
 FX2.spawn = function (g, fx, s, t) {                       // a player spawning in: a light column and rings
   const u = t - fx.t0; if (u < -0.2 || u > 1.6) return; const x = fx.x * W, y = fx.y * H, k = Math.max(0, 1 - Math.max(0, u - 0.6));

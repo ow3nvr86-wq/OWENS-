@@ -556,7 +556,7 @@ box((118.0, 11.0, LROOF + 1.0), (1.8, 1.8, 2.0), toon('waterTank', '#38c6b8'))
 span(138, 160, -6, 10, ZLB - 1, CASZ, toon('rocks', '#c8865a'), 'hallRock')
 span(140, 158, -4, 9, CASZ, CASZ + 0.08, toon('hallFloor', '#b8563a', 'checker', '#d86a4a', scale=0.6), 'hallFloor')
 span(140, 158, 8.8, 9.0, CASZ, CASZ + 6.0, toon('hallScreen', '#fff3d8', 'stripes', '#f0dcb8', scale=1.2), 'hallBack')
-span(139.6, 158.4, -4.4, 9.4, CASZ + 6.0, CASZ + 6.6, toon('hallRoof', '#d84a4a'), 'hallRoof')
+keyhide(span(139.6, 158.4, -4.4, 9.4, CASZ + 6.0, CASZ + 6.6, toon('hallRoof', '#d84a4a'), 'hallRoof'), None, b['old'] + 0.3)   # gone before the kick rises through it
 for x in (140.4, 144.6, 153.4, 157.6): cyl((x, -3.6, CASZ + 3.0), 0.3, 6.0, toon('pillar', '#e84a4a'), v=12)
 box((148.6, 3.0, CASZ + 0.72), (6.0, 1.4, 0.08), WOODD); box((148.6, 3.0, CASZ + 0.35), (5.6, 1.2, 0.7), toon('tableBody', '#6a3a2a'))
 for x in (146.0, 148.6, 151.2): box((x, 3.0, CASZ + 0.82), (0.5, 0.3, 0.12), GOLD)
