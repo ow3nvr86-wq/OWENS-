@@ -215,6 +215,8 @@ def ark_z(t): u = max(0.0, t - b['ark0']); return 0.5 * ARK_A * u * u
 
 # ------------------------------------------------------------------ the camera (t, position, look-at, lens) --------
 A_ = lambda *v: tuple(v)
+def LPOS(t): y, z, _ = LANDER.get(F(t), (0.0, -0.6, 0.0)); return M + Vector((0.0, y, z + 0.6))
+def LK(t, off, look, lens=20): L_ = LPOS(t); return (t, tuple(L_ + Vector(off)), tuple(L_ + Vector(look)), lens)
 def r_(base, x, y, z): return tuple(base + Vector((x, y, z)))
 SEG_A = [
     (0.0, (0.55, -1.4, 1.05), (0.45, 2.7, 0.9), 32),                         # the porch: father and daughter
@@ -254,9 +256,9 @@ SEG_A = [
     (b['earth2'], r_(M, -3.0, -12.0, 3.0), r_(M, 0.0, 70.0, 16.0), 22),     # the "mountains" are a wave
     (b['giant'] + 0.2, r_(M, -1.0, -17.0, 4.0), r_(M, 0.0, 45.0, 30.0), 18),
     (b['kills'], r_(M, 10.0, -15.0, 5.0), r_(M, 3.0, 8.0, 8.0), 20),
-    (b['hit'] + 0.4, r_(M, 14.0, -36.0, 26.0), r_(M, 0.0, -10.0, 34.0), 20),
-    (b['lift'], r_(M, 16.0, -56.0, 30.0), r_(M, 0.0, -30.0, 40.0), 20),
-    (b['mann0'] - 0.017, r_(M, 14.0, -70.0, 60.0), r_(M, 0.0, -30.0, 75.0), 20),
+    LK(b['hit'] - 0.1, (16.0, -22.0, 6.0), (0.0, 4.0, 1.0)), LK(b['hit'] + 0.5, (18.0, -26.0, 8.0), (0.0, 0.0, 0.0)),
+    LK(b['lift'], (18.0, -28.0, 6.0), (0.0, 0.0, 2.0)), LK(b['lift'] + 0.7, (16.0, -30.0, 0.0), (0.0, 0.0, 4.0)),
+    LK(b['mann0'] - 0.017, (14.0, -30.0, -4.0), (0.0, 0.0, 6.0)),
     (b['mann0'], r_(N, -10.0, -26.0, 14.0), r_(N, 0.0, 10.0, 6.0), 20),     # (flash) Mann's ice planet
     (b['mann'] + 0.1, r_(N, -3.0, -6.4, 2.1), r_(N, -0.9, 0.0, 1.5), 28),
     (b['faked'] + 0.1, r_(N, -1.6, -2.7, 1.85), r_(N, -0.7, 0.0, 1.3), 32),
@@ -280,8 +282,8 @@ SEG_A += [
     (b['ghost2'] - 0.2, r_(T, -7.2, -1.6, 2.1), r_(T, -3.2, 0.0, 1.2), 27),
     (b['push'] + 0.7, r_(T, -6.6, -1.2, 2.0), r_(T, -2.4, 0.2, 0.6), 27),
     (b['watch0'] - 0.017, r_(T, -6.4, -1.1, 2.0), r_(T, -2.2, 0.2, 0.5), 27),
-    (b['watch0'], (-4.95, 7.72, 4.7), (-5.62, 8.06, 4.37), 40),                # (flash) the watch on the shelf
-    (b['morse'] - 0.1, (-5.02, 7.8, 4.66), (-5.62, 8.06, 4.37), 46),
+    (b['watch0'], (-4.65, 8.08, 4.76), (-5.62, 8.06, 4.37), 42),                # (flash) the watch on the shelf
+    (b['morse'] - 0.1, (-4.75, 8.07, 4.72), (-5.62, 8.06, 4.37), 48),
     (b['murph3'] - 0.1, (-2.6, 6.7, 4.7), (-4.8, 7.9, 4.3), 26),             # Murph has it
     (b['gravity'], (-2.0, 6.5, 4.8), (-4.6, 7.9, 4.4), 24),
     (b['humanity2'], (-3.0, 5.4, 5.0), (-3.0, -4.0, 6.0), 22),              # out of the window: the ark rises
@@ -295,8 +297,8 @@ SEG_A += [
     (b['old'], r_(I, -0.6, -1.4, 1.75), r_(I, -0.9, 3.2, 0.95), 30),
     (b['sends'] + 0.2, r_(I, 0.4, -2.6, 1.8), r_(I, 0.0, 3.0, 1.1), 26),
     (b['brand2'] + 0.3, r_(I, 0.2, -6.0, 2.6), r_(I, 0.0, 4.0, 3.0), 22),
-    (b['would'] + 0.6, r_(I, 0.0, -18.0, 12.0), r_(I, 0.0, 20.0, 40.0), 20),  # back: the world curving up overhead
-    (DUR, r_(I, 0.0, -40.0, 34.0), r_(I, 0.0, 40.0, 100.0), 18),
+    (b['would'] + 0.6, r_(I, -8.0, -14.0, 9.0), r_(I, 30.0, 0.0, 28.0), 20),  # back: the world curving up all round
+    (DUR, r_(I, -60.0, -6.0, 50.0), r_(I, 120.0, 0.0, 60.0), 16),
 ]
 SEG_A.sort(key=lambda k: k[0])
 assert all(a[0] < c[0] for a, c in zip(SEG_A, SEG_A[1:])), 'camera keys out of order'
@@ -377,6 +379,10 @@ def toon(name, col, pattern=None, col2=None, scale=1.0, cell=(3.0, 3.4), lit=0.3
         elif pattern == 'dots':
             vo = n.new('ShaderNodeTexVoronoi'); vo.inputs['Scale'].default_value = scale; Lk(src, vo.inputs['Vector'])
             col_sock = mixc(math_('LESS_THAN', vo.outputs['Distance'], None, vc=0.22), base, c2)
+        elif pattern == 'zbands':                       # contour bands by height (shows the shape of a swell)
+            zp = n.new('ShaderNodeSeparateXYZ'); Lk(geo.outputs['Position'], zp.inputs[0])
+            f_ = math_('FRACT', math_('MULTIPLY', zp.outputs['Z'], None, vc=scale))
+            col_sock = mixc(math_('MULTIPLY', math_('GREATER_THAN', f_, None, vc=0.5), math_('GREATER_THAN', zp.outputs['Z'], None, vc=0.6)), base, c2)
         elif pattern == 'windows':                      # a grid of windows on building sides, some lit
             wp = n.new('ShaderNodeSeparateXYZ'); Lk(geo.outputs['Position'], wp.inputs[0]); sn = n.new('ShaderNodeSeparateXYZ'); Lk(geo.outputs['Normal'], sn.inputs[0])
             u = math_('DIVIDE', math_('ADD', wp.outputs['X'], wp.outputs['Y']), None, vc=cell[0]); v = math_('DIVIDE', wp.outputs['Z'], None, vc=cell[1])
@@ -474,6 +480,11 @@ def annulus(name, center, r0, r1, m, n=96):
     for i in range(n):
         j = (i + 1) % n; fs.append((2 * i, 2 * i + 1, 2 * j + 1, 2 * j))
     me.from_pydata(vs, [], fs); o = bpy.data.objects.new(name, me); sc.collection.objects.link(o); o.location = tuple(center); me.materials.append(m); return o
+def setpts(me, co):                                    # replace a point cloud's points (count may change)
+    co = np.asarray(co, np.float32).reshape(-1, 3)
+    if len(me.vertices) != len(co): me.clear_geometry(); me.vertices.add(len(co))
+    if len(co): me.vertices.foreach_set('co', co.ravel())
+    me.update()
 def src_ball(name, m, sub=1):
     bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=sub, radius=1.0, location=(0, 0, -2000)); o = bpy.context.object; o.name = name; o.data.materials.append(m)
     for pl in o.data.polygons: pl.use_smooth = True
@@ -539,7 +550,9 @@ scatter('cornAlive', alive, stalk, [random.uniform(0.8, 1.15) for _ in alive], r
 scatter('cornDead', blight, dead, [random.uniform(0.7, 1.05) for _ in blight], rot=(0.5, 0.5, 6.283))
 for k in range(40):                                        # distant farms and hills
     a = random.uniform(0, 2 * math.pi); r = random.uniform(300, 900)
-    ball((r * math.cos(a), r * math.sin(a), -20), random.uniform(60, 140), T_('#c9a26e'), scale=(1, 1, 0.35))
+    hx, hy, hr = r * math.cos(a), r * math.sin(a), random.uniform(60, 140)
+    if math.hypot(hx - BASE.x, hy - 40) < hr + 90: continue                  # keep the base's valley clear
+    ball((hx, hy, -20), hr, T_('#c9a26e'), scale=(1, 1, 0.35))
 # the dust storm (a gravity current: front speed U = 0.7 sqrt(g' H), head rolling)
 HSTORM, GP = 220.0, 0.06 * g0; U_ST = 0.7 * math.sqrt(GP * HSTORM); NP = 420
 puff_src = src_ball('puffSrc', T_('#b88a5a', ao=False), 2)
@@ -550,7 +563,9 @@ def storm_upd(f):
     body = pa[:, 2] > 0.45
     x = np.where(body, xf + 40 + pa[:, 2] * 260, xf + HSTORM * 0.35 * (1 + np.cos(ph)) * 0.6)
     z = np.where(body, pa[:, 0] * HSTORM * 0.9, HSTORM * 0.35 * (1 + np.sin(ph)))
-    co = np.stack([x, pa[:, 1], z], 1).astype(np.float32).ravel(); storm.data.vertices.foreach_set('co', co); storm.data.update()
+    co = np.stack([x, pa[:, 1], z], 1).astype(np.float32)
+    if t > b['finds'] + 0.3: co = co[:0]                 # gone once the camera leaves the farm (no geometry at all)
+    setpts(storm.data, co)
 UPD.append(storm_upd); storm_upd(0)
 print('storm front speed %.1f m/s' % U_ST, flush=True)
 FARM = since(m0)
@@ -585,7 +600,8 @@ grain = src_ball('grainSrc', T_('#a8804e', ao=False), 1)
 grain.data.transform(Matrix.Scale(0.011, 4)); dust = scatter('roomDust', np.zeros((0, 3)), grain, None, rot=(0, 0, 0)); nomb(dust); INK_SKIP.append(dust)
 def dust_upd(f):                                       # only grains that exist (no stacked points: keeps the ink pass cheap)
     t = f / FPS; me = dust.data
-    q = dust_p[min(f, NF - 1)] if (D_T0 <= t < b['space'] + 0.2) else np.zeros((0, 3), np.float32)
+    on = (D_T0 <= t < b['leads'] + 0.1) or (b['murph2'] - 0.12 <= t < b['space'] + 0.2)
+    q = dust_p[min(f, NF - 1)] if on else np.zeros((0, 3), np.float32)
     q = q[q[:, 2] > -100]
     me.clear_geometry(); me.vertices.add(len(q))
     if len(q): me.vertices.foreach_set('co', q.astype(np.float32).ravel())
@@ -644,9 +660,11 @@ for o in watch_parts + [sh_]:
 # ================================================================== C: THE SECRET NASA BASE ==========================
 m3 = mark()
 HILL = T_('#b8a070'); CONC = T_('#c8ccd4'); STEEL = T_('#8a94a4'); DARKM = T_('#3a3e4a')
-ball(tuple(BASE + Vector((0, 80, -25))), 60, HILL, sub=3, scale=(2.2, 1.0, 0.9))
-hg = solid(BASE.x - 22, BASE.x + 22, -2.0, 46.0, 0.0, 32.0, CONC, 'hangar'); cutbox(hg, BASE.x - 20, BASE.x + 20, -0.5, 44.0, 0.2, 30.0)
-cutbox(hg, BASE.x - 10, BASE.x + 10, -3.0, 0.5, 0.2, 18.0)
+ball(tuple(BASE + Vector((0, 112, -25))), 60, HILL, sub=3, scale=(2.2, 1.0, 0.9))
+X0, X1 = BASE.x - 22, BASE.x + 22                       # the hangar shell from slabs: back, sides, roof, front around the door
+slab(X0, X1, 44.0, 46.0, 0.0, 32.0, CONC, 'hangarBack'); slab(X0, X0 + 2, -2.0, 46.0, 0.0, 32.0, CONC, 'hangarL'); slab(X1 - 2, X1, -2.0, 46.0, 0.0, 32.0, CONC, 'hangarR')
+slab(X0, X1, -2.0, 46.0, 30.0, 32.0, CONC, 'hangarRoof'); slab(X0, BASE.x - 10, -2.0, -0.5, 0.0, 30.0, CONC, 'hangarF1'); slab(BASE.x + 10, X1, -2.0, -0.5, 0.0, 30.0, CONC, 'hangarF2')
+slab(BASE.x - 10, BASE.x + 10, -2.0, -0.5, 18.0, 30.0, CONC, 'hangarF3')
 slab(BASE.x - 20, BASE.x + 20, 0.0, 44.0, 0.0, 0.2, T_('#9aa2ae', pattern='checker', col2='#aab2be', scale=0.25), 'hangarFloor')
 for x in range(-18, 19, 6): slab(BASE.x + x - 0.3, BASE.x + x + 0.3, 43.0, 43.6, 0.0, 30.0, STEEL)
 for z in (8, 16, 24): slab(BASE.x - 20, BASE.x + 20, 43.4, 43.8, z, z + 0.4, T_('#ffd23a'))
@@ -726,7 +744,9 @@ GX, GY = np.meshgrid(gx, gy); vtx = np.stack([GX.ravel() + M.x, GY.ravel() + M.y
 faces = [(j * nx + i, j * nx + i + 1, (j + 1) * nx + i + 1, (j + 1) * nx + i) for j in range(ny - 1) for i in range(nx - 1)]
 wme = bpy.data.meshes.new('wave'); wme.from_pydata([tuple(v_) for v_ in vtx], [], faces)
 for pl in wme.polygons: pl.use_smooth = True
-water = bpy.data.objects.new('waterMiller', wme); sc.collection.objects.link(water); wme.materials.append(T_('#3ab0c0', ao=False)); nomb(water); INK_SKIP.append(water)
+water = bpy.data.objects.new('waterMiller', wme); sc.collection.objects.link(water); wme.materials.append(T_('#3ab0c0', pattern='zbands', col2='#5ccad6', scale=0.33, ao=False)); nomb(water); INK_SKIP.append(water)
+foam = cyl(tuple(M), 0.9, 300, FL('#f4fbff', 1.3), rot=(0, math.pi / 2, 0)); foam.name = 'foamCrest'; INK_SKIP.append(foam)
+bake_obj(foam, F(b['miller0']), F(b['mann0']), lambda t: ((M.x, M.y + cW * (b['hit'] - t) - 2.0, AW + 0.2), (0, math.pi / 2, 0)))
 INK_SKIP.append(disc(M, 1450, T_('#46bccb', ao=False), 'seaMiller', z=-0.05))
 def wave_upd(f):
     t = f / FPS
@@ -780,7 +800,7 @@ tab = bpy.data.objects.new('tablet', None); sc.collection.objects.link(tab)
 tb1 = box((0, 0, 0), (0.32, 0.02, 0.22), T_('#2a2c34')); tb1.parent = tab
 scr_ok = box((0, -0.012, 0), (0.28, 0.005, 0.18), FL('#5af0a0', 1.2)); scr_ok.parent = tab
 scr_bad = box((0, -0.014, 0), (0.28, 0.005, 0.18), FL('#ff4a3a', 1.4)); scr_bad.parent = tab
-hold(scr_ok, F(b['mann0']), F(b['data1'])); hold(scr_bad, F(b['data1']) + 1, F(b['garg0']))
+hold(scr_ok, F(b['mann0']), F(b['data1'])); hold(scr_bad, F(b['data1']) + 1, F(b['tries']))
 MANNOBJ = since(m7)
 
 # ================================================================== G: GARGANTUA =====================================
@@ -854,10 +874,10 @@ NA = 90; aa = RNG.uniform(0, 2 * math.pi, NA); ar = RNG.uniform(20, 40, NA)
 apuff = scatter('arkDust', np.zeros((NA, 3)), puff_src, RNG.uniform(8, 18, NA), rot=(6.283, 6.283, 6.283)); nomb(apuff)
 def ark_dust_upd(f):
     t = f / FPS; u = t - b['ark0']
-    if u < 0 or t > b['sta0'] + 0.1: co = np.full((NA, 3), -900.0)
+    if u < 0 or t > b['sta0'] + 0.1: co = np.zeros((0, 3))
     else:
         r = ar + 120 * (1 - np.exp(-0.8 * u)); co = np.stack([140 + r * np.cos(aa), 120 + r * np.sin(aa), np.full(NA, 6.0)], 1)
-    apuff.data.vertices.foreach_set('co', co.astype(np.float32).ravel()); apuff.data.update()
+    setpts(apuff.data, co)
 UPD.append(ark_dust_upd)
 ARKOBJ = since(m10)
 
@@ -976,19 +996,19 @@ span_bake('murphK', b['murph2'] - 0.09, b['goes'] + 0.55, lambda t: dict(loc=(-4
 # ---- Professor Brand at the base
 span_bake('brandP', b['leads'] + 0.4, b['murph2'] - 0.11, lambda t: dict(loc=(BASE.x - 1.6, 10.6, 0.2), yaw=face(0.8, 0.6), pose=bl(t, b['wormhole'] - 0.3, 0.4, P_(), P_(POINT))))
 # ---- Miller's planet: Cooper at the hatch, Brand at the wreck runs back, Doyle swept by the wave
-span_bake('cooperS', b['miller0'] - 0.05, b['hit'] - 0.05, lambda t: dict(loc=tuple(M + Vector((1.2, -2.6, -0.35))), yaw=face(-0.4, -1.0),
+span_bake('cooperS', b['miller0'] - 0.05, b['hit'] - 0.6, lambda t: dict(loc=tuple(M + Vector((1.2, -2.6, float(eta(-2.6, t)) - 0.35))), yaw=face(-0.4, -1.0),
                                                                         pose=bl(t, b['earth2'], 0.4, P_(), P_(WAVE)) if t > b['earth2'] else P_()))
 def amelia_M(t):
     p0 = tuple(M + Vector((-8.0, 16.0, -0.35))); p1 = tuple(M + Vector((-0.6, -2.4, -0.35)))
-    if t < b['giant']: return dict(loc=p0, yaw=face(0.3, 1.0), pose=P_(dict(chest=(0.5,), shL=(0.9, 0.1), shR=(0.9, 0.1), elL=(0.8,), elR=(0.8,))))
-    pos, yaw, pose, mv = gait(t, b['giant'], b['hit'] - 0.1, p0, p1, stride=1.8); pose.update(TP.walk_pose(math.dist(p0, p1) * clamp((t - b['giant']) / (b['hit'] - 0.1 - b['giant'])) / 1.8 * math.pi, 1.0, run=1.0))
-    return dict(loc=pos, yaw=yaw, pose=pose)
-span_bake('amelia', b['miller0'] - 0.05, b['hit'] - 0.1, amelia_M)
+    if t < b['giant']: return dict(loc=add(p0, (0, 0, float(eta(16.0, t)))), yaw=face(0.3, 1.0), pose=P_(dict(chest=(0.5,), shL=(0.9, 0.1), shR=(0.9, 0.1), elL=(0.8,), elR=(0.8,))))
+    pos, yaw, pose, mv = gait(t, b['giant'], b['hit'] - 0.6, p0, p1, stride=1.8); pose.update(TP.walk_pose(math.dist(p0, p1) * clamp((t - b['giant']) / (b['hit'] - 0.6 - b['giant'])) / 1.8 * math.pi, 1.0, run=1.0))
+    return dict(loc=(pos[0], pos[1], pos[2] + float(eta(pos[1] - M.y, t))), yaw=yaw, pose=pose)
+span_bake('amelia', b['miller0'] - 0.05, b['hit'] - 0.6, amelia_M)
 def doyle_M(t):
     f = F(t); y, z, sl = DOYLE.get(f, (7.0, -0.25, 0.0))
     if t < b['hit'] - 0.35:
-        return dict(loc=tuple(M + Vector((4.0, 7.0, -0.35))), yaw=face(-0.3, -1.0), pose=P_(POINT) if t > b['earth2'] else P_())
-    u = t - (b['hit'] - 0.35); return dict(loc=tuple(M + Vector((4.0, y, z - 0.6))), yaw=face(-0.3, -1.0) + 0.8 * u, roll=(-2.4 * u, 0.6 * u),
+        return dict(loc=tuple(M + Vector((4.0, y, z - 0.1))), yaw=face(-0.3, -1.0), pose=P_(POINT) if t > b['earth2'] else P_())
+    u = t - (b['hit'] - 0.35); return dict(loc=tuple(M + Vector((4.0, y, z - 0.1))), yaw=face(-0.3, -1.0) + 0.8 * u, roll=(-2.4 * u, 0.6 * u),
                                            pose=P_(dict(shL=(1.6, 1.2), shR=(1.4, 1.4), hpL=(0.6,), knL=(-1.0,), hpR=(-0.3,))))
 span_bake('doyle', b['miller0'] - 0.05, b['lift'] + 0.6, doyle_M)
 # ---- Mann's planet: the tablet, the shove, the fall
@@ -1026,7 +1046,8 @@ span_bake('murphO', b['room0'] - 0.05, DUR, murphO_I)
 finish_vis()
 TP_PROPS = []
 # props held: the watch in Cooper's hand before it is set on the bed (simply placed), the tablet in Mann's hand
-tab.parent = P['mann'].ha[1]; tab.location = (0.0, -0.08, -0.12); tab.rotation_euler = (1.2, 0, 0)
+tab.location = tuple(N + Vector((-0.42, -0.28, 1.22))); tab.rotation_euler = (0.25, 0, -0.35)
+for o_ in (tb1,): hold(o_, F(b['mann0']), F(b['tries']))
 
 # actor tracks for the compositor's tags (feet position + visibility per frame)
 def track_of(name, size=1.0):
@@ -1078,6 +1099,11 @@ bpy.ops.object.camera_add(location=SEG_A[0][1]); cam = bpy.context.object; cam.d
 tgt = bpy.data.objects.new('camTarget', None); sc.collection.objects.link(tgt)
 tc_ = cam.constraints.new('TRACK_TO'); tc_.target = tgt; tc_.track_axis = 'TRACK_NEGATIVE_Z'; tc_.up_axis = 'UP_Y'
 fr = list(range(NF)); CP = [cam_at(f / FPS) for f in fr]
+for i_ in fr:                                          # ride above the swell on Miller's planet
+    t = i_ / FPS
+    if b['miller0'] <= t < b['mann0']:
+        p_, l_, ln_ = CP[i_]; e_ = float(eta(p_.y - M.y, t))
+        if p_.z < e_ + 2.5: d_ = e_ + 2.5 - p_.z; CP[i_] = (p_ + Vector((0, 0, d_)), l_ + Vector((0, 0, d_ * 0.8)), ln_)
 for i in range(3):
     TP.keys(cam, 'location', i, fr, [c_[0][i] for c_ in CP]); TP.keys(tgt, 'location', i, fr, [c_[1][i] for c_ in CP])
 TP.keys(cam.data, 'lens', 0, fr, [c_[2] for c_ in CP])
@@ -1108,6 +1134,7 @@ if '--diag' in argv:
         k = (inst.parent.original.name if inst.is_instance and inst.parent else ob.original.name)
         n = len(ob.data.polygons); stat[k] = stat.get(k, 0) + n
     for k, n in sorted(stat.items(), key=lambda x: -x[1])[:25]: print('DIAG', k, n)
+    for nm in ('dustStorm', 'tess', 'skyMiller', 'cooper.skull', 'hangarBack'): print('DIAGHIDE', nm, bpy.data.objects[nm].hide_render if nm in bpy.data.objects else None)
     print('DIAG total', sum(stat.values())); raise SystemExit
 
 LIST = [int(v_) for v_ in arg('--list', '').split(',') if v_]
