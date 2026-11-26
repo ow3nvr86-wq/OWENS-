@@ -582,11 +582,14 @@ ROOMOBJ = since(m1)
 ROOM = coll('ROOM'); move(ROOMOBJ, ROOM); ROOM.instance_offset = tuple(TB_OFF)
 # the dust stripes: grains from the simulation (points + tiny instanced balls)
 grain = src_ball('grainSrc', T_('#a8804e', ao=False), 1)
-dust = scatter('roomDust', np.zeros((ND, 3)), grain, np.full(ND, 0.011), rot=(0, 0, 0)); nomb(dust); INK_SKIP.append(dust)
-def dust_upd(f):
-    t = f / FPS
-    q = dust_p[min(f, NF - 1)] if (D_T0 <= t < b['space'] + 0.2) else np.full((ND, 3), -500.0, np.float32)
-    dust.data.vertices.foreach_set('co', q.astype(np.float32).ravel()); dust.data.update()
+grain.data.transform(Matrix.Scale(0.011, 4)); dust = scatter('roomDust', np.zeros((0, 3)), grain, None, rot=(0, 0, 0)); nomb(dust); INK_SKIP.append(dust)
+def dust_upd(f):                                       # only grains that exist (no stacked points: keeps the ink pass cheap)
+    t = f / FPS; me = dust.data
+    q = dust_p[min(f, NF - 1)] if (D_T0 <= t < b['space'] + 0.2) else np.zeros((0, 3), np.float32)
+    q = q[q[:, 2] > -100]
+    me.clear_geometry(); me.vertices.add(len(q))
+    if len(q): me.vertices.foreach_set('co', q.astype(np.float32).ravel())
+    me.update()
 UPD.append(dust_upd)
 # the ghost book (falls at "ghost", stays on the floor until the scene ends), the watch
 gb = slab(-0.13, 0.13, -0.035, 0.035, -0.2, 0.2, T_('#d04a3a'), 'ghostBook')
@@ -1041,14 +1044,16 @@ def region(objs, windows):
         for a_, c_ in windows:
             o.hide_render = False; o.keyframe_insert('hide_render', frame=max(0, F(a_))); o.hide_render = True; o.keyframe_insert('hide_render', frame=min(NF + 1, F(c_) + 1))
 TAIL = DUR + 1
-region([o for o in FARM if o not in ROOMOBJ], [(0, b['space'] + 0.05), (b['watch0'] - 0.05, b['sta0'] + 0.05)])
+region([o for o in FARM if o not in ROOMOBJ and o is not storm], [(0, b['space'] + 0.05), (b['watch0'] - 0.05, b['sta0'] + 0.05)])
 region(BASEOBJ, [(b['leads'] - 0.1, b['murph2'])])
 region(SPACEOBJ, [(b['space'] - 0.05, b['miller0'] + 0.05), (b['sta0'] - 0.05, b['room0'] + 0.05)])
 region(MILLEROBJ, [(b['miller0'] - 0.05, b['mann0'] + 0.05)])
 region(MANNOBJ, [(b['mann0'] - 0.05, b['garg0'] + 0.05)])
 region(GARGOBJ, [(b['garg0'] - 0.05, b['tes0'] + 0.05)])
 region(TESSOBJ, [(b['tes0'] - 0.05, b['watch0'] + 0.05)])
-region(ARK_PARTS + [apuff], [(b['ark0'] - 0.6, b['sta0'] + 0.05)])
+region(ARK_PARTS, [(b['ark0'] - 0.6, b['sta0'] + 0.05)]); region([apuff], [(b['ark0'] + 0.02, b['sta0'] + 0.05)])
+region([storm], [(0, b['finds'] + 0.2)])
+region([dust], [(D_T0, b['leads'] + 0.05), (b['murph2'] - 0.1, b['space'] - 0.2)])
 region(INSIDEOBJ, [(b['room0'] - 0.05, TAIL)])
 fs_.use_culling = True
 
@@ -1090,6 +1095,21 @@ json.dump(dict(fps=FPS, frames=NF, track=track, actors=actors, vis=vis, roll=rol
 print('tracks written', NF, flush=True)
 
 sc.frame_start, sc.frame_end = START, END; sc.render.use_persistent_data = True
+if '--noink' in argv: sc.render.use_freestyle = False
+if '--drop' in argv:                                   # debugging: remove objects whose names start with these prefixes
+    for pre in arg('--drop', '').split(','):
+        for ob in [o for o in bpy.data.objects if o.name.startswith(pre)]: bpy.data.objects.remove(ob)
+if '--diag' in argv:
+    f = arg('--diag', 0); sc.frame_set(f); dg = bpy.context.evaluated_depsgraph_get(); stat = {}
+    for inst in dg.object_instances:
+        ob = inst.object
+        if ob.type != 'MESH': continue
+        if ob.original.hide_render: continue
+        k = (inst.parent.original.name if inst.is_instance and inst.parent else ob.original.name)
+        n = len(ob.data.polygons); stat[k] = stat.get(k, 0) + n
+    for k, n in sorted(stat.items(), key=lambda x: -x[1])[:25]: print('DIAG', k, n)
+    print('DIAG total', sum(stat.values())); raise SystemExit
+
 LIST = [int(v_) for v_ in arg('--list', '').split(',') if v_]
 if LIST:
     for f in LIST: sc.frame_set(f); on_frame(sc); sc.render.filepath = os.path.join(OUT, 'f%04d.jpg' % f); bpy.ops.render.render(write_still=True)
