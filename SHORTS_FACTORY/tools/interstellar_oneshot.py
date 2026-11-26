@@ -908,6 +908,7 @@ slab(I.x - 1.4, I.x + 0.3, I.y + 2.62, I.y + 3.88, I.z + 0.65, I.z + 0.78, T_('#
 ball(tuple(I + Vector((-1.7, 3.25, 0.82))), 0.26, T_('#ffffff'), scale=(0.7, 1.4, 0.4))
 slab(I.x + 1.4, I.x + 2.0, I.y + 3.0, I.y + 3.6, I.z, I.z + 0.8, T_('#9aa0aa')); ball(tuple(I + Vector((1.7, 3.3, 1.2))), 0.25, T_('#e04a6a'))     # flowers
 slab(I.x - 1.0, I.x + 1.0, I.y + 5.75, I.y + 5.8, I.z + 1.0, I.z + 2.4, FL('#bfe6ff', 1.0))                                         # a window
+slab(I.x - 1.15, I.x + 0.38, I.y + 2.8, I.y + 3.7, I.z + 0.7, I.z + 0.98, T_('#a8d0f0', pattern='checker', col2='#d8ecfa', scale=2.0), 'blanket')   # tucked over her legs
 INSIDEOBJ = since(m11)
 
 # ================================================================== THE CAST (3D) ====================================
@@ -1041,7 +1042,7 @@ span_bake('murphA', b['watch0'] + 0.4, b['sta0'] - 0.02, murphA_A)
 def murphO_I(t):
     pose = P_(dict(shR=(0.15, 0.1),))
     if t > b['sends'] - 0.2: pose = bl(t, b['sends'] - 0.2, 0.4, pose, P_(dict(shR=(1.1, 0.3), elR=(0.4,))))
-    return dict(loc=tuple(I + Vector((-0.25, 3.25, 0.8))), yaw=math.pi / 2, roll=(-(math.pi / 2 - 0.25), 0.0), pose=pose)
+    return dict(loc=tuple(I + Vector((-0.25, 3.25, 0.7))), yaw=math.pi / 2, roll=(-(math.pi / 2 - 0.2), 0.0), pose=pose)
 span_bake('murphO', b['room0'] - 0.05, DUR, murphO_I)
 finish_vis()
 TP_PROPS = []
