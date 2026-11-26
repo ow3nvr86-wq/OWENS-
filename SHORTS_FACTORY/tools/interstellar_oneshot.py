@@ -1033,10 +1033,10 @@ def cooper_T(t):
     return dict(loc=tuple(p_), yaw=face(1, 0.05) + 0.03 * u, roll=(0.08 * math.sin(0.7 * u), 0.05 * u), pose=pose)
 span_bake('cooperS', b['tes0'], b['watch0'] - 0.02, cooper_T)
 # ---- Murph as an adult in her old room
-def murphA_A(t):
-    if t < b['murph3']: return dict(loc=(-4.6, 7.9, RZ), yaw=face(-1, 0.05), pose=P_(dict(shR=(0.9, 0.1), elR=(1.2,), chest=(0.1,))))
-    if t < b['humanity2']: return dict(loc=(-4.6, 7.9, RZ), yaw=face(-1, -1.0 * ease((t - b['murph3']) / 0.4)), pose=bl(t, b['cracks'], 0.3, P_(), P_(FIST)))
-    return dict(loc=(-4.6, 7.9, RZ), yaw=face(-1, -1.0), pose=P_(FIST))
+def murphA_A(t):                                       # beside the shelf, clear of the camera's pull-back from the watch
+    if t < b['murph3']: return dict(loc=(-4.6, 7.35, RZ), yaw=face(-1, 0.6), pose=P_(dict(shR=(0.9, 0.1), elR=(1.2,), chest=(0.1,))))
+    if t < b['humanity2']: return dict(loc=(-4.6, 7.35, RZ), yaw=face(-1, 0.6 - 1.6 * ease((t - b['murph3']) / 0.4)), pose=bl(t, b['cracks'], 0.3, P_(), P_(FIST)))
+    return dict(loc=(-4.6, 7.35, RZ), yaw=face(-1, -1.0), pose=P_(FIST))
 span_bake('murphA', b['watch0'] + 0.4, b['sta0'] - 0.02, murphA_A)
 # ---- Murph, old, in bed (lying on her back, head toward -x)
 def murphO_I(t):
