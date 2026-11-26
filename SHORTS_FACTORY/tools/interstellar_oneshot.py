@@ -101,7 +101,7 @@ g0 = 9.81
 # ---- dust grains through Murph's window: gravity, drag toward the room air, and the anomaly's sideways pull ---------
 BITS = [1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1]            # stripe present (1) or gap (0): the binary code on the floor
 STRIPE_X = [-5.1 + i * 0.36 for i in range(len(BITS))]
-ND = 900; D_T0, D_T1 = b['finds'] - 0.3, b['murphs1'] + 0.6
+ND = 3600; D_T0, D_T1 = b['finds'] - 0.3, b['murphs1'] + 0.6
 dust_p = np.zeros((NF, ND, 3), np.float32); dust_p[:] = (0, 0, -500)
 p = np.stack([RNG.uniform(-4.1, -1.9, ND), RNG.uniform(5.7, 6.1, ND), RNG.uniform(4.1, 5.4, ND)], 1)
 v = np.stack([RNG.normal(0, 0.15, ND), RNG.uniform(1.4, 2.6, ND), RNG.normal(0, 0.1, ND)], 1)
@@ -144,7 +144,7 @@ BOOK1 = book_fall(b['ghost1'] - 0.1, (-5.63, 8.06, RZ + 1.15), 1.1, RZ)
 TB_OFF = Vector((-3.0, 8.5, RZ))           # room-local origin used by the tesseract copies
 
 # ---- Miller's wave (KdV solitary wave) and what floats on it -------------------------------------------------------
-gM = 1.3 * g0; hW, AW = 60.0, 46.0; cW = math.sqrt(gM * (hW + AW)); LW = math.sqrt(4 * hW ** 3 / (3 * AW))
+gM = 1.3 * g0; hW, AW = 28.0, 21.0; cW = math.sqrt(gM * (hW + AW)); LW = math.sqrt(4 * hW ** 3 / (3 * AW))
 def eta(y, t): return AW / np.cosh((y - cW * (b['hit'] - t)) / LW) ** 2               # crest moves toward -y
 def uW(y, t): e = eta(y, t); return -cW * e / (hW + e)                                  # water velocity (toward -y)
 print('wave: c = %.1f m/s, L = %.0f m' % (cW, LW), flush=True)
@@ -217,19 +217,19 @@ def ark_z(t): u = max(0.0, t - b['ark0']); return 0.5 * ARK_A * u * u
 A_ = lambda *v: tuple(v)
 def r_(base, x, y, z): return tuple(base + Vector((x, y, z)))
 SEG_A = [
-    (0.0, (0.9, -2.3, 1.15), (0.6, 2.8, 0.95), 30),                         # the porch: father and daughter
-    (b['daughter1'], (0.6, -3.2, 1.3), (1.4, 2.6, 1.05), 28),
+    (0.0, (0.55, -1.4, 1.05), (0.45, 2.7, 0.9), 32),                         # the porch: father and daughter
+    (b['daughter1'], (0.5, -2.2, 1.2), (1.0, 2.6, 1.0), 30),
     (b['promised'], (-0.5, -5.6, 1.9), (3.4, 0.6, 1.2), 26),
     (b['back'], (-2.0, -8.4, 3.0), (5.4, 0.0, 1.4), 24),
     (b['dying'], (-5.0, -14.0, 9.0), (20.0, 20.0, 8.0), 22),                 # up: the dusty farm
     (b['storms'] + 0.2, (2.0, -16.0, 14.0), (120.0, 30.0, 40.0), 20),       # the dust storm rolling in
     (b['crops'], (16.0, -9.0, 3.2), (30.0, 14.0, 0.6), 22),                 # down over the dead corn
-    (b['cooper1'] + 0.1, (8.2, -8.0, 2.0), (10.6, -1.2, 1.35), 26),          # Cooper by the truck
-    (b['pilot'], (9.4, -6.2, 1.9), (10.8, -1.0, 1.45), 30),
+    (b['cooper1'] + 0.1, (14.6, -7.6, 2.0), (11.2, -1.4, 1.35), 26),         # Cooper by the truck
+    (b['pilot'], (13.6, -5.8, 1.9), (11.5, -1.3, 1.45), 30),
     (b['finds'] + 0.15, (-3.0, -2.0, 5.0), (-3.0, 8.0, 4.5), 24),           # to Murph's window
     (b['code1'] + 0.15, (-3.0, 5.6, 4.8), (-3.0, 10.0, 3.9), 22),           # through it
-    (b['dust2'] + 0.2, (-1.1, 6.6, 5.4), (-3.2, 8.4, 3.3), 20),             # dust settling in stripes
-    (b['room'], (-1.2, 6.7, 5.2), (-3.4, 8.6, 3.3), 21),
+    (b['dust2'] + 0.2, (-0.7, 10.2, 5.5), (-3.0, 7.6, 3.3), 20),            # dust settling in stripes
+    (b['room'], (-0.8, 10.0, 5.3), (-3.1, 7.6, 3.3), 21),
     (b['calls'], (-1.8, 6.9, 4.7), (-5.5, 8.2, 4.3), 22),                   # the bookshelf: "a ghost"
     (b['ghost1'] + 0.5, (-2.0, 6.9, 4.5), (-5.4, 8.2, 3.8), 22),
     (b['leads'] - 0.05, (-3.0, 5.4, 4.8), (-3.0, -4.0, 4.0), 22),            # back out of the window
@@ -238,15 +238,16 @@ SEG_A = [
     (b['base'] + 0.2, (400.0, 0.0, 6.0), (400.0, 26.0, 13.0), 20),          # inside the hangar: the rocket
     (b['wormhole'] - 0.1, (401.2, 5.4, 2.7), (400.0, 12.0, 1.7), 26),       # the holo model
     (b['saturn1'] + 0.2, (400.5, 9.3, 2.15), (400.0, 12.0, 1.95), 32),
-    (b['murph2'] - 0.12, (400.4, 10.2, 2.05), (400.0, 12.0, 1.95), 34),
-    (b['murph2'] - 0.08, (-1.6, 7.0, 4.9), (-4.4, 9.6, 3.9), 24),           # (flash) back in Murph's room
-    (b['stay'] + 0.2, (-1.9, 7.4, 4.6), (-4.2, 9.5, 3.9), 26),
-    (b['watch1'] + 0.1, (-2.3, 7.6, 4.5), (-3.4, 9.3, 3.9), 28),
+    (b['murph2'] - 0.097, (400.4, 10.2, 2.05), (400.0, 12.0, 1.95), 34),
+    (b['murph2'] - 0.08, (-1.2, 7.0, 4.7), (-3.9, 9.3, 3.9), 24),           # (flash) back in Murph's room
+    (b['stay'] + 0.2, (-1.3, 7.2, 4.6), (-3.9, 9.3, 3.9), 26),
+    (b['watch1'] + 0.1, (-1.5, 7.3, 4.5), (-3.6, 9.0, 3.9), 28),
     (b['goes'] + 0.15, (-2.6, 6.4, 4.8), (-0.4, 9.6, 4.0), 24),
     (b['space'] - 0.25, (-3.0, 3.0, 9.0), (-3.0, 20.0, 400.0), 22),          # up into the sky
-    (b['space'] - 0.02, (-3.0, 3.0, 400.0), (-3.0, 20.0, 1400.0), 20),
+    (b['space'] - 0.017, (-3.0, 3.0, 400.0), (-3.0, 20.0, 1400.0), 20),
     (b['space'], r_(S, 6.0, 140.0, 4.0), tuple(WH), 22),                      # space: the Endurance at the wormhole
-    (b['miller0'] - 0.08, r_(S, 0.0, 268.0, 8.0), tuple(WH), 24),
+    (b['miller0'] - 0.10, r_(S, 0.0, 262.0, 8.0), tuple(WH), 24),
+    (b['miller0'] - 0.017, r_(S, 0.0, 286.0, 9.0), tuple(WH), 26),
     (b['miller0'], r_(M, -6.0, -24.0, 5.0), r_(M, 6.0, 120.0, 24.0), 20),    # (flash) Miller's planet
     (b['hour'], r_(M, 2.5, -9.5, 2.3), r_(M, 0.4, 3.0, 1.6), 26),
     (b['years1'], r_(M, 1.5, -7.5, 2.0), r_(M, 0.6, 3.0, 1.5), 28),
@@ -255,14 +256,14 @@ SEG_A = [
     (b['kills'], r_(M, 10.0, -15.0, 5.0), r_(M, 3.0, 8.0, 8.0), 20),
     (b['hit'] + 0.4, r_(M, 14.0, -36.0, 26.0), r_(M, 0.0, -10.0, 34.0), 20),
     (b['lift'], r_(M, 16.0, -56.0, 30.0), r_(M, 0.0, -30.0, 40.0), 20),
-    (b['mann0'] - 0.06, r_(M, 14.0, -70.0, 60.0), r_(M, 0.0, -30.0, 75.0), 20),
+    (b['mann0'] - 0.017, r_(M, 14.0, -70.0, 60.0), r_(M, 0.0, -30.0, 75.0), 20),
     (b['mann0'], r_(N, -10.0, -26.0, 14.0), r_(N, 0.0, 10.0, 6.0), 20),     # (flash) Mann's ice planet
     (b['mann'] + 0.1, r_(N, -3.0, -6.4, 2.1), r_(N, -0.9, 0.0, 1.5), 28),
     (b['faked'] + 0.1, r_(N, -1.6, -2.7, 1.85), r_(N, -0.7, 0.0, 1.3), 32),
     (b['rescued'], r_(N, -1.4, -2.6, 1.8), r_(N, -0.6, 0.0, 1.3), 34),
     (b['tries'], r_(N, 0.2, -6.4, 2.0), r_(N, 0.2, 0.0, 1.1), 26),
     (b['cooper3'] + 0.3, r_(N, 1.6, -5.2, 1.6), r_(N, 1.4, 0.0, 0.6), 26),
-    (b['garg0'] - 0.06, r_(N, 2.0, -5.0, 1.6), r_(N, 1.6, 0.0, 0.5), 26),
+    (b['garg0'] - 0.017, r_(N, 2.0, -5.0, 1.6), r_(N, 1.6, 0.0, 0.5), 26),
     (b['garg0'], r_(G, -250.0, -205.0, 52.0), r_(G, -40.0, 10.0, 0.0), 18),  # (flash) Gargantua
     (b['cooper4'], r_(G, -216.0, -176.0, 36.0), r_(G, -150.0, -100.0, 20.0), 24),
 ]
@@ -272,24 +273,24 @@ def chase(t, back=16.0, up=5.0, lens=22):           # a key behind the ranger, l
 SEG_A += [chase(b['sep'] + 0.35, 18.0, 6.0, 24), chase(b['falls'] + 0.2, 22.0, 6.0, 22), chase(b['hole'], 24.0, 7.0, 20),
           chase(b['brand1'] - 0.1, 22.0, 6.0, 20), chase(b['make'], 16.0, 4.0, 22)]
 SEG_A += [
-    (b['tes0'] - 0.07, tuple(G + (Vector(ranger_at(b['make'])) - G) * 0.6), tuple(G), 26),   # into the black
+    (b['tes0'] - 0.017, tuple(G + (Vector(ranger_at(b['make'])) - G) * 0.6), tuple(G), 26),   # into the black
     (b['tes0'], r_(T, -34.0, -26.0, 12.0), r_(T, 0.0, 10.0, 0.0), 18),     # (flash) the tesseract
     (b['murphs2'], r_(T, -14.0, -11.0, 4.0), r_(T, -3.0, 1.0, 1.0), 20),
     (b['time'] - 0.2, r_(T, -8.6, -3.6, 2.4), r_(T, -3.6, -0.2, 1.3), 24),
     (b['ghost2'] - 0.2, r_(T, -7.2, -1.6, 2.1), r_(T, -3.2, 0.0, 1.2), 27),
     (b['push'] + 0.7, r_(T, -6.6, -1.2, 2.0), r_(T, -2.4, 0.2, 0.6), 27),
-    (b['watch0'] - 0.06, r_(T, -6.4, -1.1, 2.0), r_(T, -2.2, 0.2, 0.5), 27),
+    (b['watch0'] - 0.017, r_(T, -6.4, -1.1, 2.0), r_(T, -2.2, 0.2, 0.5), 27),
     (b['watch0'], (-4.95, 7.72, 4.7), (-5.62, 8.06, 4.37), 40),                # (flash) the watch on the shelf
     (b['morse'] - 0.1, (-5.02, 7.8, 4.66), (-5.62, 8.06, 4.37), 46),
     (b['murph3'] - 0.1, (-2.6, 6.7, 4.7), (-4.8, 7.9, 4.3), 26),             # Murph has it
     (b['gravity'], (-2.0, 6.5, 4.8), (-4.6, 7.9, 4.4), 24),
     (b['humanity2'], (-3.0, 5.4, 5.0), (-3.0, -4.0, 6.0), 22),              # out of the window: the ark rises
     (b['leaves'] + 0.2, (-10.0, -24.0, 14.0), (140.0, 120.0, 60.0), 20),
-    (b['sta0'] - 0.06, (-12.0, -30.0, 18.0), (140.0, 120.0, 110.0), 20),
+    (b['sta0'] - 0.017, (-12.0, -30.0, 18.0), (140.0, 120.0, 110.0), 20),
     (b['sta0'], r_(STA, -160.0, -230.0, 40.0), tuple(STA), 22),              # (flash) the station by Saturn
     (b['station'] + 0.1, r_(STA, -120.0, -170.0, 30.0), tuple(STA + Vector((0, 120, -40))), 22),
     (b['saturn2'] + 0.3, r_(STA, -100.0, -150.0, 26.0), tuple(SAT * 0.4 + STA * 0.6), 20),
-    (b['room0'] - 0.06, r_(STA, -90.0, -140.0, 25.0), tuple(SAT * 0.4 + STA * 0.6), 20),
+    (b['room0'] - 0.017, r_(STA, -90.0, -140.0, 25.0), tuple(SAT * 0.4 + STA * 0.6), 20),
     (b['room0'], r_(I, 0.4, -5.6, 2.0), r_(I, -0.3, 2.8, 1.0), 24),        # (flash) inside: old Murph
     (b['old'], r_(I, -0.6, -1.4, 1.75), r_(I, -0.9, 3.2, 0.95), 30),
     (b['sends'] + 0.2, r_(I, 0.4, -2.6, 1.8), r_(I, 0.0, 3.0, 1.1), 26),
@@ -581,7 +582,7 @@ ROOMOBJ = since(m1)
 ROOM = coll('ROOM'); move(ROOMOBJ, ROOM); ROOM.instance_offset = tuple(TB_OFF)
 # the dust stripes: grains from the simulation (points + tiny instanced balls)
 grain = src_ball('grainSrc', T_('#a8804e', ao=False), 1)
-dust = scatter('roomDust', np.zeros((ND, 3)), grain, np.full(ND, 0.016), rot=(0, 0, 0)); nomb(dust); INK_SKIP.append(dust)
+dust = scatter('roomDust', np.zeros((ND, 3)), grain, np.full(ND, 0.011), rot=(0, 0, 0)); nomb(dust); INK_SKIP.append(dust)
 def dust_upd(f):
     t = f / FPS
     q = dust_p[min(f, NF - 1)] if (D_T0 <= t < b['space'] + 0.2) else np.full((ND, 3), -500.0, np.float32)
@@ -640,7 +641,7 @@ for o in watch_parts + [sh_]:
 # ================================================================== C: THE SECRET NASA BASE ==========================
 m3 = mark()
 HILL = T_('#b8a070'); CONC = T_('#c8ccd4'); STEEL = T_('#8a94a4'); DARKM = T_('#3a3e4a')
-ball(tuple(BASE + Vector((0, 40, -30))), 90, HILL, sub=3, scale=(1.6, 1.0, 0.75))
+ball(tuple(BASE + Vector((0, 80, -25))), 60, HILL, sub=3, scale=(2.2, 1.0, 0.9))
 hg = solid(BASE.x - 22, BASE.x + 22, -2.0, 46.0, 0.0, 32.0, CONC, 'hangar'); cutbox(hg, BASE.x - 20, BASE.x + 20, -0.5, 44.0, 0.2, 30.0)
 cutbox(hg, BASE.x - 10, BASE.x + 10, -3.0, 0.5, 0.2, 18.0)
 slab(BASE.x - 20, BASE.x + 20, 0.0, 44.0, 0.0, 0.2, T_('#9aa2ae', pattern='checker', col2='#aab2be', scale=0.25), 'hangarFloor')
@@ -658,7 +659,7 @@ for (x, y) in ((4.6, 28.9), (6.9, 28.9), (4.6, 31.1), (6.9, 31.1)): cyl((BASE.x 
 # the holo table: Saturn with Keplerian rings and the wormhole orbiting
 cyl((BASE.x, 12, 0.5), 1.6, 1.0, STEEL); cyl((BASE.x, 12, 1.02), 1.5, 0.04, FL('#7ae8ff', 1.2))
 HOLO = FL('#9af0ff', 1.6); HOLO2 = FL('#ffe08a', 1.6)
-holo_sat = ball((BASE.x, 12, 1.95), 0.42, FL('#ffd8a0', 1.3))
+holo_sat = ball((BASE.x, 12, 1.95), 0.42, FL('#ffd8a0', 1.3), sub=3)
 rings_h = []
 for r0 in (0.6, 0.72, 0.84):
     bpy.ops.mesh.primitive_torus_add(major_radius=r0, minor_radius=0.025, location=(BASE.x, 12, 1.95), rotation=(0.45, 0, 0)); rg = bpy.context.object; rg.data.materials.append(HOLO); rings_h.append(rg)
@@ -842,6 +843,7 @@ for (z0, z1, r, c) in ((0, 60, 26, '#eeeae2'), (60, 90, 22, '#c8ccd4'), (90, 110
 o = cone((0, 0, 118), 16, 16, T_('#c8ccd4')); o.parent = ark
 fl_ = cone((0, 0, -22), 20, 44, FL('#ffd27a', 2.6), rot=(math.pi, 0, 0)); fl_.parent = ark; INK_SKIP.append(fl_)
 bake_obj(ark, F(b['ark0']) - 30, F(b['sta0']) + 2, lambda t: ((140.0, 120.0, 8.0 + ark_z(t)), (0, 0, 0)))
+ARK_PARTS = [ark] + [c_ for c_ in bpy.data.objects if c_.parent == ark]
 hold(fl_, F(b['ark0']), F(b['sta0']))
 for o in [ark] + [c_ for c_ in bpy.data.objects if c_.parent == ark]: pass
 # its dust cloud spreads out along the ground (puffs slowed by drag: r(t) = r_inf (1 - exp(-k t)))
@@ -920,9 +922,9 @@ def finish_vis():
     for name in P:
         if name not in SPANS:
             for o in P[name].parts: o.hide_render = True
-KNEEL = dict(hpL=(1.3,), knL=(-1.9,), anL=(0.6,), hpR=(0.2,), knR=(-1.5,), anR=(1.3,), chest=(0.15,), shL=(0.5, 0.3), shR=(0.9, 0.2), elL=(0.8,), elR=(0.6,))
+KNEEL = dict(hpL=(1.4,), knL=(-1.45,), anL=(0.1,), hpR=(-0.1,), knR=(-1.6,), anR=(0.9,), chest=(0.1,), shL=(0.2, 0.15), shR=(0.2, 0.15), elL=(0.4,), elR=(0.4,))
 SIT = dict(hpL=(1.5,), hpR=(1.5,), knL=(-1.5,), knR=(-1.5,), shL=(0.2, 0.15), shR=(0.2, 0.15), elL=(0.6,), elR=(0.6,))
-HUG = dict(shL=(1.2, -0.3), shR=(1.2, -0.3), elL=(1.2,), elR=(1.2,))
+HUG = dict(shL=(0.95, -0.15), shR=(0.95, -0.15), elL=(0.9,), elR=(0.9,))
 WAVE = dict(shR=(0.3, 2.6), elR=(0.6,))
 POINT = dict(shR=(1.5, 0.1), elR=(0.05,))
 HANDS_HIPS = dict(shL=(0.0, 0.5), shR=(0.0, 0.5), elL=(-1.6,), elR=(-1.6,))
@@ -935,7 +937,7 @@ def P_(*ds):
 def bl(t, t0, dur, a, c): return TP.blend(a, c, ease((t - t0) / dur))
 
 # ---- Cooper (farm clothes): porch hug, walk to the truck, by the truck, in Murph's room, the base, then the station
-CP_PORCH = (1.15, 2.55, 0.0); CP_TRUCK = (10.9, -0.9, 0.0)
+CP_PORCH = (0.8, 2.6, 0.0); CP_TRUCK = (11.6, -1.4, 0.0)
 def cooper_A(t):
     if t < b['leave'] + 0.1:
         return dict(loc=CP_PORCH, yaw=face(-1, 0.1), pose=P_(KNEEL, HUG))
@@ -952,15 +954,15 @@ span_bake('cooper', b['finds'] + 0.31, b['leads'] + 0.2, lambda t: dict(loc=(-2.
                                                                     pose=P_(KNEEL) if t < b['calls'] - 0.2 else bl(t, b['calls'] - 0.2, 0.4, P_(KNEEL), P_())))
 span_bake('cooper', b['leads'] + 0.4, b['murph2'] - 0.11, lambda t: dict(loc=(BASE.x + 1.9, 10.2, 0.2), yaw=face(-0.6, 1.0), pose=P_()))
 def cooper_go(t):
-    if t < b['watch1'] - 0.3: return dict(loc=(-2.4, 8.6, RZ), yaw=face(-1, 0.6), pose=P_())
-    if t < b['goes']: return dict(loc=(-2.4, 8.6, RZ), yaw=face(-1, 0.6), pose=bl(t, b['watch1'] - 0.3, 0.4, P_(), P_(dict(shR=(1.2, 0.1), elR=(0.4,)))))
-    pos, yaw, pose, mv = gait(t, b['goes'], b['goes'] + 1.2, (-2.4, 8.6, RZ), (-0.2, 9.6, RZ)); return dict(loc=pos, yaw=yaw, pose=pose)
+    if t < b['watch1'] - 0.3: return dict(loc=(-3.0, 7.8, RZ), yaw=face(-1.6, 1.4), pose=P_())
+    if t < b['goes']: return dict(loc=(-3.0, 7.8, RZ), yaw=face(-1.6, 1.4), pose=bl(t, b['watch1'] - 0.3, 0.4, P_(), P_(dict(shR=(1.2, 0.1), elR=(0.4,)))))
+    pos, yaw, pose, mv = gait(t, b['goes'], b['goes'] + 1.4, (-3.0, 7.8, RZ), (-0.2, 9.6, RZ)); return dict(loc=pos, yaw=yaw, pose=pose)
 span_bake('cooper', b['murph2'] - 0.09, b['goes'] + 0.55, cooper_go)
 span_bake('cooper', b['room0'] - 0.05, DUR, lambda t: (lambda g_: dict(loc=g_[0], yaw=g_[1] if t < b['old'] else face(-1, 0.3),
           pose=g_[2] if t < b['old'] else (bl(t, b['find'], 0.4, P_(), P_(dict(chest=(0.2,), neck=(0.3,)))) if t < b['brand2'] + 0.4 else P_())))(
           gait(t, b['room0'], b['old'] - 0.05, (I.x + 2.6, I.y + 0.6, I.z), (I.x + 0.6, I.y + 2.2, I.z))))
 # ---- Murph as a child
-MK_PORCH = (0.05, 2.75, 0.0)
+MK_PORCH = (0.1, 2.7, 0.0)
 def murph_A(t):
     if t < b['leave'] + 0.2: return dict(loc=MK_PORCH, yaw=face(1, -0.1), pose=P_(HUG))
     return dict(loc=MK_PORCH, yaw=face(1, -0.6), pose=bl(t, b['promised'], 0.4, P_(), P_(WAVE)) if t > b['promised'] else P_())
@@ -1029,9 +1031,30 @@ def track_of(name, size=1.0):
     return root, sp
 ACTORS = ['cooper', 'murphK', 'brandP', 'amelia', 'doyle', 'mann', 'cooperS', 'murphA', 'murphO']
 
+# ------------------------------------------------------------------ each set renders only while it is on screen ------
+def region(objs, windows):
+    for o in objs:
+        if o.name not in bpy.data.objects or o.hide_render: continue
+        ad_ = o.animation_data
+        if ad_ and ad_.action and ad_.action.fcurves.find('hide_render'): continue
+        o.hide_render = True; o.keyframe_insert('hide_render', frame=0)
+        for a_, c_ in windows:
+            o.hide_render = False; o.keyframe_insert('hide_render', frame=max(0, F(a_))); o.hide_render = True; o.keyframe_insert('hide_render', frame=min(NF + 1, F(c_) + 1))
+TAIL = DUR + 1
+region([o for o in FARM if o not in ROOMOBJ], [(0, b['space'] + 0.05), (b['watch0'] - 0.05, b['sta0'] + 0.05)])
+region(BASEOBJ, [(b['leads'] - 0.1, b['murph2'])])
+region(SPACEOBJ, [(b['space'] - 0.05, b['miller0'] + 0.05), (b['sta0'] - 0.05, b['room0'] + 0.05)])
+region(MILLEROBJ, [(b['miller0'] - 0.05, b['mann0'] + 0.05)])
+region(MANNOBJ, [(b['mann0'] - 0.05, b['garg0'] + 0.05)])
+region(GARGOBJ, [(b['garg0'] - 0.05, b['tes0'] + 0.05)])
+region(TESSOBJ, [(b['tes0'] - 0.05, b['watch0'] + 0.05)])
+region(ARK_PARTS + [apuff], [(b['ark0'] - 0.6, b['sta0'] + 0.05)])
+region(INSIDEOBJ, [(b['room0'] - 0.05, TAIL)])
+fs_.use_culling = True
+
 # ------------------------------------------------------------------ inking rules ----------------------------------
 for ob in list(bpy.data.objects):
-    if ob.type == 'MESH' and (ob.name.startswith(('sky', 'sea', 'ground', 'water', 'ice', 'stars', 'roomDust', 'arkDust', 'dustStorm'))): INK_SKIP.append(ob)
+    if ob.type == 'MESH' and (ob.name.startswith(('sky', 'sea', 'ground', 'water', 'ice', 'stars', 'roomDust', 'arkDust', 'dustStorm', 'corn'))): INK_SKIP.append(ob)
 noink = bpy.data.collections.new('noink'); sc.collection.children.link(noink)
 for ob in set(INK_SKIP):
     if ob.name in ROOM.objects: continue
