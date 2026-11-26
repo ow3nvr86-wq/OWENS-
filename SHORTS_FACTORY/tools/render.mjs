@@ -7,7 +7,7 @@ const [ep, spec = 'all', outArg] = process.argv.slice(2);
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const out = outArg || path.join(ep, 'work', 'frames'); fs.mkdirSync(out, { recursive: true });
 const { server, port } = await serve(root);
-const b = await chromium.launch({ args: ['--disable-gpu'] });
+const b = await chromium.launch({ args: ['--disable-gpu', '--disk-cache-size=1', '--media-cache-size=1'] });
 const open = async () => { const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
   p.on('console', m => { if (m.type() === 'error') console.log('[page]', m.text()); }); p.on('pageerror', e => console.log('[pageerror]', e.message));
   await p.goto(`http://127.0.0.1:${port}/engine/index.html?ep=${ep}&mode=${process.env.MODE || 'final'}&debug=${process.env.DEBUG || ''}`); await p.waitForFunction('window.ready === true || window.loadError', null, { timeout: 120000 });
