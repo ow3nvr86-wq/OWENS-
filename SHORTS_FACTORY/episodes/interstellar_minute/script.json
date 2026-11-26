@@ -1,0 +1,919 @@
+{
+ "title": "Movies in a Minute: Interstellar",
+ "fps": 60,
+ "tail": 1.2,
+ "charStyle": "rc",
+ "sprites": "props",
+ "features": {
+  "depth": true,
+  "motionBlur": true,
+  "rigV2": true,
+  "lipSync": true,
+  "crowdFX": true
+ },
+ "motion_blur": {
+  "samples": 8,
+  "shutter": 0.5
+ },
+ "caption_y": 0.765,
+ "caption_case": "lower",
+ "caption_size": 78,
+ "grade": "brightness(1.02) saturate(1.06) contrast(1.04)",
+ "thumbnail_cue": 27.737999999999996,
+ "music": {
+  "level_db": -24,
+  "segments": [
+   {
+    "style": "cosmic",
+    "bpm": 72,
+    "fadeIn": 0.8,
+    "fadeOut": 0.4,
+    "from": 0.0,
+    "to": 26.309
+   },
+   {
+    "style": "dread",
+    "bpm": 76,
+    "fadeIn": 0.3,
+    "fadeOut": 0.4,
+    "from": 26.309,
+    "to": 35.77
+   },
+   {
+    "style": "cosmic",
+    "bpm": 72,
+    "fadeIn": 0.4,
+    "fadeOut": 0.3,
+    "from": 35.77,
+    "to": 46.455
+   },
+   {
+    "style": "reveal",
+    "bpm": 90,
+    "fadeIn": 0.2,
+    "fadeOut": 0.4,
+    "from": 46.455,
+    "to": 49.09
+   },
+   {
+    "style": "cosmic",
+    "bpm": 80,
+    "fadeIn": 0.4,
+    "fadeOut": 1.5,
+    "from": 49.09,
+    "to": 59.599000000000004
+   }
+  ]
+ },
+ "cast": {
+  "cobb": {
+   "costume": "suit_navy",
+   "mood": "neutral",
+   "hair": "#4a3426"
+  }
+ },
+ "scenes": [
+  {
+   "cue": "To",
+   "bgseq": {
+    "dir": "oneshot"
+   },
+   "transition": "cut",
+   "characters": [
+    {
+     "id": "cooper",
+     "cast": "cobb",
+     "track": "cooper",
+     "ghost": true,
+     "size": 1.0
+    },
+    {
+     "id": "murphK",
+     "cast": "cobb",
+     "track": "murphK",
+     "ghost": true,
+     "size": 0.72
+    },
+    {
+     "id": "brandP",
+     "cast": "cobb",
+     "track": "brandP",
+     "ghost": true,
+     "size": 0.97
+    },
+    {
+     "id": "amelia",
+     "cast": "cobb",
+     "track": "amelia",
+     "ghost": true,
+     "size": 0.94
+    },
+    {
+     "id": "doyle",
+     "cast": "cobb",
+     "track": "doyle",
+     "ghost": true,
+     "size": 1.0
+    },
+    {
+     "id": "mann",
+     "cast": "cobb",
+     "track": "mann",
+     "ghost": true,
+     "size": 1.0
+    },
+    {
+     "id": "cooperS",
+     "cast": "cobb",
+     "track": "cooperS",
+     "ghost": true,
+     "size": 1.0
+    },
+    {
+     "id": "murphA",
+     "cast": "cobb",
+     "track": "murphA",
+     "ghost": true,
+     "size": 0.94
+    },
+    {
+     "id": "murphO",
+     "cast": "cobb",
+     "track": "murphO",
+     "ghost": true,
+     "size": 0.4
+    },
+    {
+     "id": "murphOH",
+     "cast": "cobb",
+     "track": "murphOH",
+     "ghost": true,
+     "size": 0.2
+    }
+   ],
+   "fx": [
+    {
+     "type": "callout",
+     "at": 0.2,
+     "dur": 1.7,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "INTERSTELLAR",
+     "sub": "(2014)",
+     "size": 80,
+     "edge": "#8ac8ff"
+    },
+    {
+     "type": "tag",
+     "at": 1.3599999999999999,
+     "untilAt": 3.06,
+     "of": "murphK",
+     "text": "MURPH",
+     "bg": "#a8e07a"
+    },
+    {
+     "type": "tag",
+     "at": 3.06,
+     "untilAt": 4.513,
+     "of": "cooper",
+     "text": "COOPER",
+     "bg": "#8ab4ff"
+    },
+    {
+     "type": "callout",
+     "at": 5.220000000000001,
+     "dur": 1.0,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "EARTH IS DYING",
+     "size": 78,
+     "edge": "#ffb86a"
+    },
+    {
+     "type": "callout",
+     "at": 6.3100000000000005,
+     "dur": 1.7,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "DUST STORMS",
+     "sub": "FAILING CROPS",
+     "size": 80,
+     "edge": "#e0a060"
+    },
+    {
+     "type": "speedlines",
+     "at": 7.83,
+     "dur": 0.6,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "tag",
+     "at": 8.28,
+     "untilAt": 10.38,
+     "of": "cooper",
+     "text": "COOPER",
+     "bg": "#8ab4ff"
+    },
+    {
+     "type": "callout",
+     "at": 9.309999999999999,
+     "dur": 1.1,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "EX-NASA PILOT",
+     "sub": "NOW A FARMER",
+     "size": 76,
+     "edge": "#7ac8ff"
+    },
+    {
+     "type": "speedlines",
+     "at": 10.48,
+     "dur": 0.7,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "callout",
+     "at": 10.91,
+     "dur": 1.6,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "A CODE IN THE DUST",
+     "size": 70,
+     "edge": "#ffc23a"
+    },
+    {
+     "type": "tag",
+     "at": 12.200000000000001,
+     "untilAt": 13.629,
+     "of": "murphK",
+     "text": "MURPH",
+     "bg": "#a8e07a"
+    },
+    {
+     "type": "callout",
+     "at": 14.269,
+     "dur": 0.9,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "\"A GHOST\"",
+     "size": 84,
+     "edge": "#c8a0ff"
+    },
+    {
+     "type": "speedlines",
+     "at": 15.279,
+     "dur": 1.2,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "callout",
+     "at": 15.799,
+     "dur": 1.3,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "SECRET NASA BASE",
+     "size": 74,
+     "edge": "#7ac8ff"
+    },
+    {
+     "type": "tag",
+     "at": 16.829,
+     "untilAt": 17.309,
+     "of": "brandP",
+     "text": "PROF. BRAND",
+     "bg": "#e0e0e8"
+    },
+    {
+     "type": "callout",
+     "at": 17.459,
+     "dur": 1.5,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "A WORMHOLE",
+     "sub": "NEAR SATURN",
+     "size": 80,
+     "edge": "#c8a0ff"
+    },
+    {
+     "type": "callout",
+     "at": 20.049,
+     "dur": 1.0,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "\"STAY\"",
+     "size": 96,
+     "edge": "#a8e07a"
+    },
+    {
+     "type": "callout",
+     "at": 21.448999999999998,
+     "dur": 1.0,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "HIS WATCH",
+     "size": 80,
+     "edge": "#ffc23a"
+    },
+    {
+     "type": "speedlines",
+     "at": 22.369,
+     "dur": 0.9,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "callout",
+     "at": 23.108,
+     "dur": 1.2,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "MILLER'S PLANET",
+     "size": 74,
+     "edge": "#7ae8f0"
+    },
+    {
+     "type": "callout",
+     "at": 24.259,
+     "dur": 2.3,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "1 HOUR HERE",
+     "sub": "= 7 YEARS ON EARTH",
+     "size": 80,
+     "edge": "#ffc23a"
+    },
+    {
+     "type": "tag",
+     "at": 26.109,
+     "untilAt": 27.108,
+     "of": "doyle",
+     "text": "DOYLE",
+     "bg": "#ffd8a8"
+    },
+    {
+     "type": "callout",
+     "at": 27.108,
+     "dur": 1.2,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "A GIANT WAVE",
+     "size": 80,
+     "edge": "#7ae8f0"
+    },
+    {
+     "type": "tag",
+     "at": 27.358,
+     "untilAt": 27.857999999999997,
+     "of": "amelia",
+     "text": "BRAND",
+     "bg": "#c8d8ff"
+    },
+    {
+     "type": "impactframe",
+     "at": 28.337999999999997,
+     "dur": 0.06
+    },
+    {
+     "type": "callout",
+     "at": 29.048,
+     "dur": 1.5,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "23 YEARS",
+     "sub": "GONE",
+     "size": 96,
+     "edge": "#ff8a7a"
+    },
+    {
+     "type": "tag",
+     "at": 31.598,
+     "untilAt": 32.288000000000004,
+     "of": "mann",
+     "text": "DR. MANN",
+     "bg": "#ffe08a"
+    },
+    {
+     "type": "callout",
+     "at": 32.388000000000005,
+     "dur": 1.5,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "FAKED DATA",
+     "sub": "TO GET RESCUED",
+     "size": 80,
+     "edge": "#ff6a5a"
+    },
+    {
+     "type": "impactframe",
+     "at": 34.278,
+     "dur": 0.06
+    },
+    {
+     "type": "callout",
+     "at": 35.898,
+     "dur": 1.0,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "LOW ON FUEL",
+     "size": 80,
+     "edge": "#ff8a5a"
+    },
+    {
+     "type": "callout",
+     "at": 38.488,
+     "dur": 1.9,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "GARGANTUA",
+     "sub": "A BLACK HOLE",
+     "size": 84,
+     "edge": "#ffc23a"
+    },
+    {
+     "type": "speedlines",
+     "at": 40.738,
+     "dur": 0.6,
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "type": "callout",
+     "at": 42.538,
+     "dur": 1.6,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "EVERY MOMENT",
+     "sub": "OF MURPH'S ROOM",
+     "size": 76,
+     "edge": "#ffcc5a"
+    },
+    {
+     "type": "callout",
+     "at": 45.245,
+     "dur": 0.95,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "HE WAS THE GHOST",
+     "size": 72,
+     "edge": "#c8a0ff"
+    },
+    {
+     "type": "callout",
+     "at": 48.074999999999996,
+     "dur": 0.9,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "MORSE CODE",
+     "sub": ". - - .",
+     "size": 80,
+     "edge": "#ffc23a"
+    },
+    {
+     "type": "tag",
+     "at": 48.89,
+     "untilAt": 49.695,
+     "of": "murphA",
+     "text": "MURPH",
+     "bg": "#ffb89a"
+    },
+    {
+     "type": "callout",
+     "at": 49.745000000000005,
+     "dur": 1.1,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "GRAVITY: SOLVED",
+     "size": 74,
+     "edge": "#7aff9a"
+    },
+    {
+     "type": "callout",
+     "at": 53.135,
+     "dur": 1.3,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "A STATION",
+     "sub": "BY SATURN",
+     "size": 80,
+     "edge": "#8ac8ff"
+    },
+    {
+     "type": "tag",
+     "at": 54.975,
+     "untilAt": 55.835,
+     "of": "murphOH",
+     "text": "MURPH",
+     "bg": "#ffb89a"
+    },
+    {
+     "type": "callout",
+     "at": 56.495,
+     "dur": 0.9,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "FIND BRAND",
+     "size": 82,
+     "edge": "#c8d8ff"
+    },
+    {
+     "type": "callout",
+     "at": 57.425000000000004,
+     "dur": 2.1240000000000023,
+     "x": 0.5,
+     "y": 0.17,
+     "text": "WOULD YOU",
+     "sub": "HAVE STAYED?",
+     "size": 86,
+     "edge": "#a8e07a"
+    },
+    {
+     "type": "darken",
+     "keys": [
+      {
+       "at": 59.149,
+       "a": 0.0
+      },
+      {
+       "at": 59.54900000000001,
+       "a": 1.0
+      }
+     ]
+    },
+    {
+     "type": "flash",
+     "at": 18.945,
+     "dur": 0.32,
+     "amount": 0.95
+    },
+    {
+     "type": "flash",
+     "at": 22.769,
+     "dur": 0.32,
+     "amount": 0.95
+    },
+    {
+     "type": "flash",
+     "at": 22.928,
+     "dur": 0.32,
+     "amount": 0.95
+    },
+    {
+     "type": "flash",
+     "at": 30.637999999999998,
+     "dur": 0.32,
+     "amount": 0.95
+    },
+    {
+     "type": "flash",
+     "at": 35.620000000000005,
+     "dur": 0.32,
+     "amount": 0.95
+    },
+    {
+     "type": "flash",
+     "at": 41.128,
+     "dur": 0.32,
+     "amount": 0.95
+    },
+    {
+     "type": "flash",
+     "at": 46.184999999999995,
+     "dur": 0.32,
+     "amount": 0.95
+    },
+    {
+     "type": "flash",
+     "at": 52.160000000000004,
+     "dur": 0.32,
+     "amount": 0.95
+    },
+    {
+     "type": "flash",
+     "at": 53.992000000000004,
+     "dur": 0.32,
+     "amount": 0.95
+    }
+   ],
+   "sfx": [
+    {
+     "type": "sting",
+     "at": 0.25,
+     "gain": 0.35
+    },
+    {
+     "type": "wind",
+     "at": 4.813,
+     "dur": 3.2,
+     "gain": 0.5
+    },
+    {
+     "type": "rumble",
+     "at": 6.16,
+     "dur": 2.0,
+     "gain": 0.5
+    },
+    {
+     "type": "whoosh",
+     "at": 7.779999999999999,
+     "dur": 0.7,
+     "gain": 0.6
+    },
+    {
+     "type": "whoosh",
+     "at": 10.48,
+     "dur": 0.8,
+     "gain": 0.7
+    },
+    {
+     "type": "gust",
+     "at": 10.96,
+     "dur": 1.6,
+     "gain": 0.35
+    },
+    {
+     "type": "ting",
+     "at": 11.16,
+     "gain": 0.3
+    },
+    {
+     "type": "knock",
+     "at": 14.719,
+     "gain": 0.6
+    },
+    {
+     "type": "whoosh",
+     "at": 15.329,
+     "dur": 1.1,
+     "gain": 0.8
+    },
+    {
+     "type": "hum",
+     "at": 16.529,
+     "dur": 2.4,
+     "gain": 0.3
+    },
+    {
+     "type": "charge",
+     "at": 17.209,
+     "dur": 0.9,
+     "gain": 0.3
+    },
+    {
+     "type": "whoosh",
+     "at": 18.985,
+     "dur": 0.5,
+     "gain": 0.7
+    },
+    {
+     "type": "ting",
+     "at": 21.549,
+     "gain": 0.35
+    },
+    {
+     "type": "whoosh",
+     "at": 22.468999999999998,
+     "dur": 0.7,
+     "gain": 0.9
+    },
+    {
+     "type": "boom",
+     "at": 22.968,
+     "gain": 0.5
+    },
+    {
+     "type": "whoosh",
+     "at": 22.768,
+     "dur": 0.5,
+     "gain": 0.9
+    },
+    {
+     "type": "tick",
+     "at": 24.409,
+     "gain": 0.6
+    },
+    {
+     "type": "tick",
+     "at": 24.909,
+     "gain": 0.6
+    },
+    {
+     "type": "tick",
+     "at": 25.229,
+     "gain": 0.6
+    },
+    {
+     "type": "tick",
+     "at": 25.729,
+     "gain": 0.6
+    },
+    {
+     "type": "rumble",
+     "at": 26.309,
+     "dur": 2.6,
+     "gain": 0.6
+    },
+    {
+     "type": "crash",
+     "at": 28.337999999999997,
+     "gain": 0.6
+    },
+    {
+     "type": "rumble",
+     "at": 28.337999999999997,
+     "dur": 1.4,
+     "gain": 0.8
+    },
+    {
+     "type": "engine",
+     "at": 29.448,
+     "dur": 1.3,
+     "gain": 0.45
+    },
+    {
+     "type": "whoosh",
+     "at": 30.528,
+     "dur": 0.5,
+     "gain": 0.8
+    },
+    {
+     "type": "wind",
+     "at": 30.708,
+     "dur": 3.4,
+     "gain": 0.35
+    },
+    {
+     "type": "beep",
+     "at": 32.958,
+     "gain": 0.3
+    },
+    {
+     "type": "punch",
+     "at": 34.278,
+     "gain": 0.6
+    },
+    {
+     "type": "slam",
+     "at": 35.028,
+     "gain": 0.5
+    },
+    {
+     "type": "whoosh",
+     "at": 35.510000000000005,
+     "dur": 0.5,
+     "gain": 0.8
+    },
+    {
+     "type": "hum",
+     "at": 35.690000000000005,
+     "dur": 5.4,
+     "gain": 0.35
+    },
+    {
+     "type": "beep",
+     "at": 36.198,
+     "gain": 0.25
+    },
+    {
+     "type": "crackle",
+     "at": 36.968,
+     "dur": 0.3,
+     "gain": 0.4
+    },
+    {
+     "type": "whoosh",
+     "at": 37.758,
+     "dur": 1.2,
+     "gain": 0.6
+    },
+    {
+     "type": "rumble",
+     "at": 38.778,
+     "dur": 2.2,
+     "gain": 0.5
+    },
+    {
+     "type": "whoosh",
+     "at": 40.838,
+     "dur": 0.6,
+     "gain": 0.9
+    },
+    {
+     "type": "boom",
+     "at": 41.168,
+     "gain": 0.45
+    },
+    {
+     "type": "hum",
+     "at": 41.198,
+     "dur": 4.8,
+     "gain": 0.3
+    },
+    {
+     "type": "knock",
+     "at": 45.544999999999995,
+     "gain": 0.5
+    },
+    {
+     "type": "ting",
+     "at": 45.495,
+     "gain": 0.3
+    },
+    {
+     "type": "tick",
+     "at": 46.404999999999994,
+     "gain": 0.9
+    },
+    {
+     "type": "tick",
+     "at": 46.824999999999996,
+     "gain": 0.7
+    },
+    {
+     "type": "tick",
+     "at": 47.245,
+     "gain": 0.7
+    },
+    {
+     "type": "tick",
+     "at": 47.66499999999999,
+     "gain": 0.9
+    },
+    {
+     "type": "tick",
+     "at": 48.084999999999994,
+     "gain": 0.7
+    },
+    {
+     "type": "tick",
+     "at": 48.504999999999995,
+     "gain": 0.7
+    },
+    {
+     "type": "sting",
+     "at": 49.795,
+     "gain": 0.45
+    },
+    {
+     "type": "rumble",
+     "at": 48.99000000000001,
+     "dur": 3.2,
+     "gain": 0.6
+    },
+    {
+     "type": "engine",
+     "at": 50.575,
+     "dur": 1.6,
+     "gain": 0.5
+    },
+    {
+     "type": "whoosh",
+     "at": 52.050000000000004,
+     "dur": 0.5,
+     "gain": 0.8
+    },
+    {
+     "type": "hum",
+     "at": 52.230000000000004,
+     "dur": 1.8,
+     "gain": 0.3
+    },
+    {
+     "type": "whoosh",
+     "at": 53.932,
+     "dur": 0.4,
+     "gain": 0.6
+    },
+    {
+     "type": "beep",
+     "at": 55.375,
+     "gain": 0.18
+    },
+    {
+     "type": "beep",
+     "at": 56.375,
+     "gain": 0.18
+    },
+    {
+     "type": "beep",
+     "at": 57.375,
+     "gain": 0.18
+    },
+    {
+     "type": "sting",
+     "at": 57.475,
+     "gain": 0.4
+    }
+   ],
+   "charTint": [
+    {
+     "at": 0.0,
+     "col": "#ffe0c0",
+     "a": 0.05
+    }
+   ]
+  }
+ ]
+}

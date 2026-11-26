@@ -23,7 +23,7 @@ FLASH = [b['murph2'] - 0.1, b['space'] - 0.01, b['miller0'] - 0.04, b['mann0'] -
 
 # 3D actors: tracks only, for the tags (nothing is drawn by the compositor)
 chars = [dict(id=k, cast='cobb', track=k, ghost=True, size=sz) for k, sz in
-         (('cooper', 1.0), ('murphK', 0.72), ('brandP', 0.97), ('amelia', 0.94), ('doyle', 1.0), ('mann', 1.0), ('cooperS', 1.0), ('murphA', 0.94), ('murphO', 0.4))]
+         (('cooper', 1.0), ('murphK', 0.72), ('brandP', 0.97), ('amelia', 0.94), ('doyle', 1.0), ('mann', 1.0), ('cooperS', 1.0), ('murphA', 0.94), ('murphO', 0.4), ('murphOH', 0.2))]
 
 GOLD = '#ffc23a'
 fx = [
@@ -65,7 +65,7 @@ fx = [
   dict(type='tag', at=b['murph3'] - 0.2, untilAt=b['gravity'] - 0.1, of='murphA', text='MURPH', bg='#ffb89a'),
   dict(type='callout', at=b['gravity'] - 0.05, dur=1.1, x=0.5, y=0.17, text='GRAVITY: SOLVED', size=74, edge='#7aff9a'),
   dict(type='callout', at=b['station'] - 0.1, dur=1.3, x=0.5, y=0.17, text='A STATION', sub='BY SATURN', size=80, edge='#8ac8ff'),
-  dict(type='tag', at=b['old'] - 0.1, untilAt=b['sends'] - 0.1, of='murphO', text='MURPH', bg='#ffb89a'),
+  dict(type='tag', at=b['old'] - 0.1, untilAt=b['sends'] - 0.1, of='murphOH', text='MURPH', bg='#ffb89a'),
   dict(type='callout', at=b['find'] - 0.1, dur=0.9, x=0.5, y=0.17, text='FIND BRAND', size=82, edge='#c8d8ff'),
   dict(type='callout', at=b['would'] - 0.05, dur=END - b['would'], x=0.5, y=0.17, text='WOULD YOU', sub='HAVE STAYED?', size=86, edge='#a8e07a'),
   dict(type='darken', keys=[dict(at=END - 0.45, a=0.0), dict(at=END - 0.05, a=1.0)]),
@@ -103,4 +103,8 @@ S_ = dict(title='Movies in a Minute: Interstellar', fps=60, tail=1.2, charStyle=
                                      dict(style='cosmic', bpm=80, fadeIn=0.4, fadeOut=1.5, **{'from': b['murph3'], 'to': END})]),
   cast=dict(cobb=dict(costume='suit_navy', mood='neutral', hair='#4a3426')),
   scenes=[dict(cue='To', bgseq=dict(dir='oneshot'), transition='cut', characters=chars, fx=fx, sfx=[s for s in sfx if s.get('gain', 1) > 0], charTint=tint)])
+# old Murph lies in bed: her root is at her feet, so the tag follows a track at her head instead
+CJ = os.path.join(HERE, 'oneshot', 'camera.json'); cj = json.load(open(CJ))
+cj['actors']['murphOH'] = [[x_ - 1.5, y_, z_ + 0.3] for x_, y_, z_ in cj['actors']['murphO']]; cj['vis']['murphOH'] = cj['vis']['murphO']
+json.dump(cj, open(CJ, 'w'))
 json.dump(S_, open(P, 'w'), indent=1, ensure_ascii=False); print('1 scene,', len(chars), 'ghost actors,', len(fx), 'fx,', len(sfx), 'sfx; end', round(END, 2))
