@@ -137,7 +137,20 @@ def music_reveal(dur, bpm):
     out = np.zeros(int(dur * SR)); t = t_(dur)
     out += np.sin(2 * np.pi * mtof(88) * t) * 0.05 * env(len(t), 0.5, 0.5); put(out, boom(1.8), 0, 0.6)
     out += lp(noise(dur), 120) * 0.12 * env(len(t), 0.2, 0.6); return out
-MUSIC = dict(march=music_march, bouncy=music_bouncy, chill=music_chill, chase=music_chase, dread=music_dread, reveal=music_reveal)
+def organ(f, d):                                          # an organ-ish additive tone (soft attack, long body)
+    t = t_(d); x = sum(np.sin(2 * np.pi * f * h * t) / h ** 1.3 for h in (1, 2, 3, 4, 6)); return x * env(len(t), min(0.25, d * 0.3), min(0.6, d * 0.4))
+def music_cosmic(dur, bpm):
+    """space and time: slow organ chords, a soft repeating eighth-note figure, a quiet clock tick on the beat"""
+    out = np.zeros(int(dur * SR)); beat = 60 / bpm
+    CH = [(45, 57, 60, 64), (41, 57, 60, 65), (48, 55, 60, 64), (43, 55, 59, 62)]          # Am  F  C  G
+    for b in range(int(dur / beat)):
+        tb = b * beat; ch = CH[(b // 8) % 4]
+        if b % 8 == 0:
+            for n in ch: put(out, lp(organ(mtof(n), beat * 8.2), 2600), tb, 0.1 if n > 50 else 0.16)
+        for k in range(2): put(out, lp(organ(mtof(ch[1 + (b * 2 + k) % 3] + 12), beat * 0.45), 3200), tb + k * beat / 2, 0.035)
+        put(out, hp(noise(0.012), 3000) * env(int(0.012 * SR), 0.001, 0.008), tb, 0.12)
+    return out
+MUSIC = dict(march=music_march, bouncy=music_bouncy, chill=music_chill, chase=music_chase, dread=music_dread, reveal=music_reveal, cosmic=music_cosmic)
 
 # ---------------- SFX ----------------
 def whoosh(d=0.3): t = t_(d); n = noise(d); return (lp(n, 1500) * 0.7 + hp(n, 600) * 0.3) * np.sin(np.pi * np.clip(t / d, 0, 1)) ** 2
@@ -211,10 +224,11 @@ def rumble(d=2.0): t = t_(d); return lp(noise(d), 120, 3) * 2.2 * env(len(t), 0.
 def spin(d=3.0):                         # a small metal top whirring on a table: a thin tone with a fast flutter that slows
     t = t_(d); f = 760 - 60 * t / max(d, 0.1); ph = 2 * np.pi * np.cumsum(f) / SR; fl = 0.6 + 0.4 * np.sin(2 * np.pi * (22 - 6 * t / max(d, 0.1)) * t)
     return (np.sin(ph) * 0.25 + bp(noise(d), 2500, 6000) * 0.08) * fl * env(len(t), 0.05, 0.6)
+def tick(d=0.05): return hp(noise(0.03), 2500) * env(int(0.03 * SR), 0.001, 0.02) + np.sin(2 * np.pi * 2400 * t_(0.03)) * np.exp(-t_(0.03) * 120) * 0.4
 SFX = dict(whoosh=whoosh, boing=boing, knock=knock, ting=ting, gulp=gulp, tada=tada, sting=sting, fuse=fuse, volley=volley, boom=boom,
            charge=charge, scramble=scramble, sneeze=sneeze, drums=drums, march=march_steps, pop=pop,
            siren=siren, engine=engine, skid=skid, punch=punch, scratch=scratch, spawn=spawn, crash=crash, cuffs=cuffs,
-           wind=wind, crackle=crackle, alarm=alarm, slam=slam, slams=slams, lock=locks, beep=beep, counter=counter, glitch=glitch, creak=creak, hum=hum, gust=gust, rumble=rumble, spin=spin)
+           wind=wind, crackle=crackle, alarm=alarm, slam=slam, slams=slams, lock=locks, beep=beep, counter=counter, glitch=glitch, creak=creak, hum=hum, gust=gust, rumble=rumble, spin=spin, tick=tick)
 
 M = S.get('music', {})
 if M.get('segments'):                                                    # several cues: [{style, bpm, from, to, gain}] (seconds), short fades

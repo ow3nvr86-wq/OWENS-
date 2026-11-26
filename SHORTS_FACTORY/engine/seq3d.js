@@ -79,7 +79,7 @@ FX2.impactframe = function (g, fx, s, t) {                // 2-3 frames of high-
 };
 
 // ---- actors that follow tracks exported by the Blender shot (camera.json "actors"/"vis") ----
-// character {track: 'hero', autoGait: true, clipDoor: true, size: 1.2}: position per frame from the track, walk/run
+// character {track: 'hero', autoGait: true, clipDoor: true, size: 1.2, ghost: true (rendered in 3D; only tags follow it)}: position per frame from the track, walk/run
 // chosen from its speed, facing from its screen motion, feet planted from the distance it has covered.
 const ACT = {};                                             // last screen position of each actor (for tags, look-ats)
 function trackAt(S, name, x) {
@@ -147,6 +147,7 @@ renderShotSeq = (function (orig) {
     const items = []; for (const k in ACT) delete ACT[k];
     for (const ch of s.characters || []) {
       let st = seqActorState(ch, s, t, S, x, cam); if (!st) continue;
+      if (ch.ghost) continue;                                // a 3D-rendered actor: track only (tags, bubbles), nothing drawn
       if (FEAT.crowdFX) st = crowdReact(st, s, t, 150);
       const def = Object.assign({ seed: ch.id.length }, CAST()[ch.cast || ch.id]);
       let clipY = null; if (ch.clipDoor) { const d = S.meta.door[Math.min(S.meta.door.length - 1, Math.round(x))]; clipY = seqProject(cam, [d[0], d[1], d[2] + 1.02])[1]; }
