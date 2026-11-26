@@ -291,7 +291,7 @@ SEG_A += [
     (b['sta0'] - 0.017, (-12.0, -30.0, 18.0), (140.0, 120.0, 110.0), 20),
     (b['sta0'], r_(STA, -160.0, -230.0, 40.0), tuple(STA), 22),              # (flash) the station by Saturn
     (b['station'] + 0.1, r_(STA, -120.0, -170.0, 30.0), tuple(STA + Vector((0, 120, -40))), 22),
-    (b['saturn2'] + 0.3, r_(STA, -100.0, -150.0, 26.0), tuple(SAT * 0.4 + STA * 0.6), 20),
+    (b['saturn2'] + 0.1, r_(STA, -100.0, -150.0, 26.0), tuple(SAT * 0.4 + STA * 0.6), 20),
     (b['room0'] - 0.017, r_(STA, -90.0, -140.0, 25.0), tuple(SAT * 0.4 + STA * 0.6), 20),
     (b['room0'], r_(I, 0.4, -5.6, 2.0), r_(I, -0.3, 2.8, 1.0), 24),        # (flash) inside: old Murph
     (b['old'], r_(I, -0.6, -1.4, 1.75), r_(I, -0.9, 3.2, 0.95), 30),
@@ -600,7 +600,7 @@ grain = src_ball('grainSrc', T_('#a8804e', ao=False), 1)
 grain.data.transform(Matrix.Scale(0.011, 4)); dust = scatter('roomDust', np.zeros((0, 3)), grain, None, rot=(0, 0, 0)); nomb(dust); INK_SKIP.append(dust)
 def dust_upd(f):                                       # only grains that exist (no stacked points: keeps the ink pass cheap)
     t = f / FPS; me = dust.data
-    on = (D_T0 <= t < b['leads'] + 0.1) or (b['murph2'] - 0.12 <= t < b['space'] + 0.2)
+    on = (D_T0 <= t < b['leads'] + 0.1) or (b['murph2'] - 0.075 <= t < b['space'] + 0.2)   # from the first frame after the cut back to the room
     q = dust_p[min(f, NF - 1)] if on else np.zeros((0, 3), np.float32)
     q = q[q[:, 2] > -100]
     me.clear_geometry(); me.vertices.add(len(q))
@@ -1074,7 +1074,7 @@ region(GARGOBJ, [(b['garg0'] - 0.05, b['tes0'] + 0.05)])
 region(TESSOBJ, [(b['tes0'] - 0.05, b['watch0'] + 0.05)])
 region(ARK_PARTS, [(b['ark0'] - 0.6, b['sta0'] + 0.05)]); region([apuff], [(b['ark0'] + 0.02, b['sta0'] + 0.05)])
 region([storm], [(0, b['finds'] + 0.2)])
-region([dust], [(D_T0, b['leads'] + 0.05), (b['murph2'] - 0.1, b['space'] - 0.2)])
+region([dust], [(D_T0, b['leads'] + 0.05), (b['murph2'] - 0.075, b['space'] - 0.2)])
 region(INSIDEOBJ, [(b['room0'] - 0.05, TAIL)])
 fs_.use_culling = True
 
